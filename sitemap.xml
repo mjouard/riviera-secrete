@@ -101,11 +101,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/chapelle-rosaire-vence.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://riviera-secrete.netlify.app/lieux/biot-village-verrier.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

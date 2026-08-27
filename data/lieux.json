@@ -234,119 +234,6 @@
     ]
   },
   {
-    "slug": "chapelle-rosaire-vence",
-    "nom": "La Chapelle du Rosaire",
-    "commune": "Vence",
-    "regionSlug": "arriere-pays",
-    "regionLabel": "L'arrière-pays : villages perchés & gorges",
-    "lat": 43.7278,
-    "lng": 7.1178,
-    "description": "Une petite chapelle entièrement conçue par Henri Matisse à la fin de sa vie, qu'il considérait comme son chef-d'œuvre malgré sa simplicité apparente.",
-    "ogImage": "https://picsum.photos/seed/chapellerosaire/1200/800",
-    "heroImage": "https://picsum.photos/seed/chapellerosaire/1200/800",
-    "heroAlt": "Chapelle du Rosaire dessinée par Henri Matisse à Vence",
-    "heroSlides": null,
-    "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7278°N, 7.1178°E"
-      },
-      {
-        "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année, matin pour la lumière"
-      },
-      {
-        "label": "⏱️ Durée :",
-        "valeur": "45 min"
-      },
-      {
-        "label": "🥾 Niveau :",
-        "valeur": "Facile"
-      }
-    ],
-    "description1": "Une petite chapelle entièrement conçue par Henri Matisse à la fin de sa vie, qu'il considérait comme son chef-d'œuvre malgré sa simplicité apparente.",
-    "description2": "Vitraux bleu, vert et jaune, céramiques murales en noir et blanc : tout, du mobilier aux vêtements liturgiques, a été dessiné par l'artiste. La lumière qui traverse les vitraux change complètement l'atmosphère du lieu selon l'heure de la visite.",
-    "tips": [
-      {
-        "label": "Accès",
-        "texte": "En périphérie de Vence, parking sur place."
-      },
-      {
-        "label": "Horaires",
-        "texte": "Ouverture limitée à certains jours et créneaux, à vérifier avant de venir."
-      },
-      {
-        "label": "Silence",
-        "texte": "Lieu de culte actif, visite dans le calme demandée."
-      }
-    ],
-    "activites": [
-      {
-        "id": "chapelle-du-rosaire-matisse",
-        "nom": "Chapelle du Rosaire (Matisse)",
-        "badge": "payant",
-        "duree": "1h",
-        "prix": "7 € / adulte",
-        "url": "https://www.chapellematisse.com/",
-        "image": "https://picsum.photos/seed/chapelle-matisse/200/200",
-        "alt": "Chapelle du Rosaire (Matisse)",
-        "linkText": "Réserver →"
-      },
-      {
-        "id": "vieille-ville-de-vence",
-        "nom": "Vieille ville de Vence",
-        "badge": "gratuit",
-        "duree": "1h30",
-        "prix": "Accès libre",
-        "url": "https://www.vence.fr/tourisme",
-        "image": "https://picsum.photos/seed/vieille-ville-vence/200/200",
-        "alt": "Vieille ville de Vence",
-        "linkText": "En savoir plus →"
-      },
-      {
-        "id": "randonnee-baous-de-vence",
-        "nom": "Randonnée Baous de Vence",
-        "badge": "gratuit",
-        "duree": "2h–3h",
-        "prix": "Accès libre",
-        "url": "https://www.visorando.com/randonnee-vence.html",
-        "image": "https://picsum.photos/seed/baous-vence-randonnee/200/200",
-        "alt": "Randonnée Baous de Vence",
-        "linkText": "En savoir plus →"
-      }
-    ],
-    "related": [
-      {
-        "href": "peillon-village.html",
-        "img": "https://picsum.photos/seed/peillon/500/375",
-        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
-        "stamp": "43.76°N<br>7.37°E",
-        "region": "Peillon",
-        "titre": "Peillon, village suspendu",
-        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
-      },
-      {
-        "href": "peille-village.html",
-        "img": "https://picsum.photos/seed/peille/500/375",
-        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
-        "stamp": "43.75°N<br>7.41°E",
-        "region": "Peille",
-        "titre": "Peille, village de l'arrière-pays",
-        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
-      },
-      {
-        "href": "gourdon-village.html",
-        "img": "https://picsum.photos/seed/gourdon/500/375",
-        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
-        "stamp": "43.72°N<br>6.98°E",
-        "region": "Gourdon",
-        "titre": "Gourdon, le nid d'aigle",
-        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
-      }
-    ],
-    "badges": []
-  },
-  {
     "slug": "citadelle-saint-tropez",
     "nom": "La Citadelle de Saint-Tropez",
     "commune": "Saint-Tropez",
@@ -2387,6 +2274,39 @@
         "image": "https://picsum.photos/seed/galeries-art-vence/200/200",
         "alt": "Ateliers d'artistes — galeries",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "chapelle-du-rosaire-matisse",
+        "nom": "Chapelle du Rosaire (Matisse)",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "7 € / adulte",
+        "url": "https://www.chapellematisse.com/",
+        "image": "https://picsum.photos/seed/chapelle-matisse/200/200",
+        "alt": "Chapelle du Rosaire (Matisse)",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "vieille-ville-de-vence",
+        "nom": "Vieille ville de Vence",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.vence.fr/tourisme",
+        "image": "https://picsum.photos/seed/vieille-ville-vence/200/200",
+        "alt": "Vieille ville de Vence",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-baous-de-vence",
+        "nom": "Randonnée Baous de Vence",
+        "badge": "gratuit",
+        "duree": "2h–3h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-vence.html",
+        "image": "https://picsum.photos/seed/baous-vence-randonnee/200/200",
+        "alt": "Randonnée Baous de Vence",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -2419,7 +2339,8 @@
       }
     ],
     "badges": [
-      "restaurant"
+      "restaurant",
+      "randonnee"
     ]
   },
   {

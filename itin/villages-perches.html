@@ -83,7 +83,7 @@
   <div class="detail-hero">
     <img src="https://picsum.photos/seed/itin-villages/1200/800" alt="Villages perchés de l'arrière-pays niçois" loading="eager">
     <div class="detail-hero-caption">
-      <span class="card-region">6 étapes · Journée complète</span>
+      <span class="card-region">5 étapes · Journée complète</span>
       <h1>La route des villages perchés</h1>
     </div>
   </div>
@@ -93,7 +93,7 @@
   <div class="meta-bar">
     <span class="meta-pill">🗓️ <strong>Journée complète, coucher de soleil à Gourdon</strong></span>
     <span class="meta-pill">🚗 <strong>En voiture, routes sinueuses de montagne</strong></span>
-    <span class="meta-pill">📍 <strong>6 étapes</strong></span>
+    <span class="meta-pill">📍 <strong>5 étapes</strong></span>
   </div>
   <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.</p>
 
@@ -112,34 +112,21 @@
           <span class="itin-stop-commune">Saint-Paul-de-Vence</span>
           <div class="lieu-badges">
             <span class="lieu-badge">🍽️ Restaurant</span>
+            <span class="lieu-badge">🥾 Randonnée</span>
           </div>
-          <p>Remparts et galeries d'art avant l'affluence de la mi-journée.</p>
+          <p>Remparts, galeries et la Chapelle du Rosaire de Matisse, avant l'affluence de la mi-journée.</p>
           <div class="stop-acts">
             <a class="stop-act stop-act--free" href="https://www.saint-pauldevence.com/" target="_blank" rel="noopener">Remparts &amp; galeries · Libre</a>
-          </div>
-        </div>
-      </li>
-      <li class="itin-transit" aria-hidden="true">
-        <span class="transit-arrow">↓</span>
-        <span class="transit-info">🚗 10 min — D2 direction Vence</span>
-      </li>
-      <li class="itin-stop">
-        <span class="itin-time">11:00</span>
-        <div class="itin-stop-body">
-          <a href="../lieux/chapelle-rosaire-vence.html" class="itin-stop-name">La Chapelle du Rosaire</a>
-          <span class="itin-stop-commune">Vence</span>
-          <p>La lumière du matin traverse le mieux les vitraux de Matisse.</p>
-          <div class="stop-acts">
             <a class="stop-act stop-act--paid" href="https://www.chapellematisse.com/" target="_blank" rel="noopener">Chapelle Matisse · 7 € · 1 h</a>
           </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
         <span class="transit-arrow">↓</span>
-        <span class="transit-info">🚗 15 min — D2210 direction Tourrettes</span>
+        <span class="transit-info">🚗 20 min — D2 puis D2210 via Vence, direction Tourrettes</span>
       </li>
       <li class="itin-stop">
-        <span class="itin-time">12:30</span>
+        <span class="itin-time">11:30</span>
         <div class="itin-stop-body">
           <a href="../lieux/tourrettes-sur-loup.html" class="itin-stop-name">Tourrettes-sur-Loup, la cité des violettes</a>
           <span class="itin-stop-commune">Tourrettes-sur-Loup</span>
@@ -337,11 +324,10 @@
   (function() {
     const STOPS = [
       { n:1, name:"Saint-Paul-de-Vence", lat:43.697, lng:7.1214 },
-      { n:2, name:"La Chapelle du Rosaire", lat:43.7278, lng:7.1178 },
-      { n:3, name:"Tourrettes-sur-Loup, la cité des violettes", lat:43.7194, lng:7.0472 },
-      { n:4, name:"Pont du Loup et son viaduc", lat:43.7186, lng:6.9967 },
-      { n:5, name:"Les gorges du Loup et la cascade de Courmes", lat:43.7311, lng:6.9825 },
-      { n:6, name:"Gourdon, le nid d'aigle", lat:43.7154, lng:6.9764 }
+      { n:2, name:"Tourrettes-sur-Loup, la cité des violettes", lat:43.7194, lng:7.0472 },
+      { n:3, name:"Pont du Loup et son viaduc", lat:43.7186, lng:6.9967 },
+      { n:4, name:"Les gorges du Loup et la cascade de Courmes", lat:43.7311, lng:6.9825 },
+      { n:5, name:"Gourdon, le nid d'aigle", lat:43.7154, lng:6.9764 }
     ];
     const map = L.map('map-itin-villages-perches', { scrollWheelZoom: false, zoomControl: false });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

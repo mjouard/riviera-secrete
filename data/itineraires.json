@@ -156,7 +156,7 @@
         "href": "villages-perches.html",
         "img": "https://picsum.photos/seed/itin-villages/600/338",
         "alt": "La route des villages perchés",
-        "badge": "6 étapes",
+        "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
@@ -306,7 +306,7 @@
         "href": "villages-perches.html",
         "img": "https://picsum.photos/seed/itin-villages/600/338",
         "alt": "La route des villages perchés",
-        "badge": "6 étapes",
+        "badge": "5 étapes",
         "titre": "La route des villages perchés"
       }
     ]
@@ -443,7 +443,7 @@
         "href": "villages-perches.html",
         "img": "https://picsum.photos/seed/itin-villages/600/338",
         "alt": "La route des villages perchés",
-        "badge": "6 étapes",
+        "badge": "5 étapes",
         "titre": "La route des villages perchés"
       }
     ]
@@ -686,7 +686,7 @@
         "href": "villages-perches.html",
         "img": "https://picsum.photos/seed/itin-villages/600/338",
         "alt": "La route des villages perchés",
-        "badge": "6 étapes",
+        "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
@@ -850,7 +850,7 @@
         "href": "villages-perches.html",
         "img": "https://picsum.photos/seed/itin-villages/600/338",
         "alt": "La route des villages perchés",
-        "badge": "6 étapes",
+        "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
@@ -866,7 +866,7 @@
     "slug": "villages-perches",
     "titre": "La route des villages perchés",
     "description": "Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.",
-    "badge": "6 étapes · Journée complète",
+    "badge": "5 étapes · Journée complète",
     "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-villages/1200/800\" alt=\"Villages perchés de l'arrière-pays niçois\" loading=\"eager\">",
     "metaPills": [
       {
@@ -879,7 +879,7 @@
       },
       {
         "label": "📍",
-        "valeur": "6 étapes"
+        "valeur": "5 étapes"
       }
     ],
     "intro": "Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.",
@@ -905,43 +905,29 @@
         "lieuSlug": "saint-paul-de-vence",
         "nom": "Saint-Paul-de-Vence",
         "commune": "Saint-Paul-de-Vence",
-        "desc": "Remparts et galeries d'art avant l'affluence de la mi-journée.",
+        "desc": "Remparts, galeries et la Chapelle du Rosaire de Matisse, avant l'affluence de la mi-journée.",
         "activites": [
           {
             "label": "Remparts &amp; galeries · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "saint-paul-de-vence",
             "activiteId": "balade-sur-les-remparts"
-          }
-        ]
-      },
-      {
-        "type": "transit",
-        "desc": "🚗 10 min — D2 direction Vence"
-      },
-      {
-        "type": "stop",
-        "heure": "11:00",
-        "lieuSlug": "chapelle-rosaire-vence",
-        "nom": "La Chapelle du Rosaire",
-        "commune": "Vence",
-        "desc": "La lumière du matin traverse le mieux les vitraux de Matisse.",
-        "activites": [
+          },
           {
             "label": "Chapelle Matisse · 7 € · 1 h",
             "cls": "stop-act--paid",
-            "lieuSlug": "chapelle-rosaire-vence",
+            "lieuSlug": "saint-paul-de-vence",
             "activiteId": "chapelle-du-rosaire-matisse"
           }
         ]
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — D2210 direction Tourrettes"
+        "desc": "🚗 20 min — D2 puis D2210 via Vence, direction Tourrettes"
       },
       {
         "type": "stop",
-        "heure": "12:30",
+        "heure": "11:30",
         "lieuSlug": "tourrettes-sur-loup",
         "nom": "Tourrettes-sur-Loup, la cité des violettes",
         "commune": "Tourrettes-sur-Loup",
@@ -1037,7 +1023,7 @@
         "extraSpans": [
           "Mardi &amp; jeudi"
         ],
-        "lieuSlug": "chapelle-rosaire-vence",
+        "lieuSlug": "saint-paul-de-vence",
         "activiteId": "chapelle-du-rosaire-matisse"
       },
       {
