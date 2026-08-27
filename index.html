@@ -84,16 +84,16 @@
   .map-dot{ width:20px; height:20px; border-radius:50%; border:2.5px solid rgba(255,255,255,0.88); box-shadow:0 2px 10px rgba(0,0,0,0.6); cursor:pointer; transition:transform 0.15s ease; }
   .leaflet-interactive:hover .map-dot{ transform:scale(1.35); }
 
-  .map-card-popup .leaflet-popup-content-wrapper{ background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:0; box-shadow:0 10px 36px rgba(0,0,0,0.7); overflow:hidden; width:272px; }
-  .map-card-popup .leaflet-popup-tip-container{ display:none; }
-  .map-card-popup .leaflet-popup-content{ margin:0; width:auto !important; }
-  .map-card-img{ width:100%; height:158px; object-fit:cover; display:block; }
-  .map-card-body{ padding:12px 14px 14px; }
-  .popup-region{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
-  .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.02rem; margin-bottom:6px; display:block; }
-  .popup-intro{ font-size:0.82rem; color:var(--text-muted); margin:0 0 10px; line-height:1.45; }
-  .popup-link{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.03em; color:var(--terracotta); text-decoration:none; font-weight:500; }
-  .popup-link:hover{ text-decoration:underline; }
+  .map-info-card{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%) translateY(10px); width:min(300px,calc(100% - 40px)); background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 40px rgba(0,0,0,0.65); overflow:hidden; z-index:1000; opacity:0; pointer-events:none; transition:opacity 0.18s ease,transform 0.18s ease; }
+  .map-info-card.is-open{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+  .map-info-close{ position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:50%; background:rgba(12,17,22,0.75); border:none; color:#fff; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px); }
+  .map-info-img{ width:100%; height:140px; object-fit:cover; display:block; }
+  .map-info-body{ padding:12px 14px 14px; }
+  .map-info-region{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:3px; }
+  .map-info-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; margin-bottom:6px; }
+  .map-info-intro{ font-size:0.82rem; color:var(--text-muted); margin:0 0 10px; line-height:1.45; }
+  .map-info-link{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.03em; color:var(--terracotta); text-decoration:none; font-weight:500; }
+  .map-info-link:hover{ text-decoration:underline; }
 
 
   .itin-preview{ padding:50px 0 20px; }
@@ -752,6 +752,39 @@
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
 
+    const infoCard = document.createElement('div');
+    infoCard.className = 'map-info-card';
+    infoCard.innerHTML =
+      '<button class="map-info-close" aria-label="Fermer">×</button>' +
+      '<img class="map-info-img" src="" alt="" loading="lazy">' +
+      '<div class="map-info-body">' +
+        '<span class="map-info-region"></span>' +
+        '<span class="map-info-name"></span>' +
+        '<p class="map-info-intro"></p>' +
+        '<a class="map-info-link" href="">Voir la fiche →</a>' +
+      '</div>';
+    document.getElementById('map-home').appendChild(infoCard);
+    L.DomEvent.disableClickPropagation(infoCard);
+    L.DomEvent.disableScrollPropagation(infoCard);
+
+    let closeTimer;
+    function showCard(s) {
+      clearTimeout(closeTimer);
+      const slug = s.url.replace('lieux/', '').replace('.html', '');
+      infoCard.querySelector('.map-info-img').src = s.img || 'https://picsum.photos/seed/' + slug + '/530/310';
+      infoCard.querySelector('.map-info-img').alt = s.name;
+      infoCard.querySelector('.map-info-region').textContent = s.commune;
+      infoCard.querySelector('.map-info-name').textContent = s.name;
+      infoCard.querySelector('.map-info-intro').textContent = s.intro;
+      infoCard.querySelector('.map-info-link').href = s.url;
+      infoCard.classList.add('is-open');
+    }
+    function hideCard() { infoCard.classList.remove('is-open'); }
+    infoCard.querySelector('.map-info-close').addEventListener('click', hideCard);
+    infoCard.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    infoCard.addEventListener('mouseleave', () => { closeTimer = setTimeout(hideCard, 500); });
+    map.on('click', hideCard);
+
     const groups = {};
     SPOTS_MAP_HOME.forEach(s => {
       const icon = L.divIcon({
@@ -760,28 +793,9 @@
         iconSize: [20, 20], iconAnchor: [10, 10],
       });
       const marker = L.marker([s.lat, s.lng], { icon });
-      const slug = s.url.replace('lieux/', '').replace('.html', '');
-      const cardContent =
-        `<img class="map-card-img" src="${s.img || 'https://picsum.photos/seed/' + slug + '/530/310'}" alt="${s.name}" loading="lazy">` +
-        `<div class="map-card-body">` +
-        `<span class="popup-region">${s.commune}</span>` +
-        `<span class="popup-name">${s.name}</span>` +
-        `<p class="popup-intro">${s.intro}</p>` +
-        `<a class="popup-link" href="${s.url}">Voir la fiche →</a>` +
-        `</div>`;
-      marker.bindPopup(cardContent, { maxWidth:272, closeButton:false, className:'map-card-popup', autoPan:false, offset:L.point(0, -2) });
-      let closeTimer;
-      marker.on('mouseover', function() { clearTimeout(closeTimer); this.openPopup(); });
-      marker.on('mouseout', function() {
-        const self = this;
-        closeTimer = setTimeout(() => self.closePopup(), 500);
-      });
-      marker.on('popupopen', function() {
-        const el = this.getPopup().getElement();
-        el.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-        el.addEventListener('mouseleave', () => { closeTimer = setTimeout(() => marker.closePopup(), 500); });
-      });
-      marker.on('click', function() { clearTimeout(closeTimer); map.panTo(this.getLatLng()); this.openPopup(); });
+      marker.on('mouseover', function() { clearTimeout(closeTimer); showCard(s); });
+      marker.on('mouseout', function() { closeTimer = setTimeout(hideCard, 500); });
+      marker.on('click', function() { map.panTo(this.getLatLng()); showCard(s); });
       if (!groups[s.region]) groups[s.region] = L.layerGroup();
       groups[s.region].addLayer(marker);
     });
