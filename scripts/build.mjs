@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { renderLieu } from './render/lieu.mjs';
 import { renderItin } from './render/itin.mjs';
+import { buildSpotsMapHome } from './render/home-map.mjs';
 
 const ROOT = join(import.meta.dirname, '..');
 const lieux = JSON.parse(readFileSync(join(ROOT, 'data', 'lieux.json'), 'utf8'));
@@ -19,4 +20,14 @@ for (const itin of itineraires) {
   writeFileSync(join(ROOT, 'itin', `${itin.slug}.html`), renderItin(itin, lieuBySlug));
 }
 
-console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires régénérées.`);
+// index.html stays hand-authored HTML; only its SPOTS_MAP_HOME data array is generated.
+const indexPath = join(ROOT, 'index.html');
+const indexHtml = readFileSync(indexPath, 'utf8');
+if (!/const SPOTS_MAP_HOME = \[.*?\];/s.test(indexHtml)) throw new Error('SPOTS_MAP_HOME marker not found in index.html');
+const newIndexHtml = indexHtml.replace(
+  /const SPOTS_MAP_HOME = \[.*?\];/s,
+  `const SPOTS_MAP_HOME = ${JSON.stringify(buildSpotsMapHome(lieux))};`
+);
+writeFileSync(indexPath, newIndexHtml);
+
+console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires régénérées, index.html map data à jour.`);

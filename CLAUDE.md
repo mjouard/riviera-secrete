@@ -66,10 +66,10 @@ The reverse move has happened three times now: `sentier-nietzsche-eze` and
 `chapelle-rosaire-vence` (demoted onto `saint-paul-de-vence` — its nearest lieu, not same
 commune but the previous/adjacent stop in the `villages-perches` itinerary; all 3 of its
 activités moved over, and its `randonnee` badge — Baous de Vence hike — followed with them).
-None were really independent destinations. **This is not automated** — `index.html` (see
-"Known gap" below) needs hand-editing in the same pass every time (card grid, `SPOTS_MAP_HOME`,
-the lieu-count copy/counts, JSON-LD `ItemList`), along with `sitemap.xml` and
-`ROADMAP.md`'s placeholder-image count. If the demoted lieu was
+None were really independent destinations. **This is not automated** — running the build
+takes care of `SPOTS_MAP_HOME` now, but `index.html`'s card grid, lieu-count copy/counts, and
+JSON-LD `ItemList` (see "Known gap" below) still need hand-editing every time, along with
+`sitemap.xml` and `ROADMAP.md`'s placeholder-image count. If the demoted lieu was
 also a standalone stop in an itinéraire (as the chapel was), that stop has to be merged into
 the adjacent one — pills moved over, transit/timing adjusted — rather than just repointed,
 and any `itin-suggest`/`itin-preview` card elsewhere quoting that itinéraire's old étape
@@ -99,11 +99,19 @@ live in `scripts/render/lieu.mjs` and are imported into `scripts/render/itin.mjs
 (`renderBadgePills`) so an itinéraire stop shows the referenced lieu's own badges — same
 single-source rule as everything else here, no per-itinéraire badge data.
 
-**Known gap, not yet covered by this data model:** `index.html` embeds its own independent
-copy of every lieu's name/commune/lat/lng/intro/thumbnail as an inline JS array
-(`SPOTS_MAP_HOME`) plus a JSON-LD `ItemList`. This is not generated from `data/lieux.json` —
-editing a lieu's name or coordinates in the JSON does **not** propagate there; it still needs
-manual updates in sync until this is folded into the build.
+**`index.html`'s homepage map is generated, the rest of the page isn't.** `build.mjs` calls
+`scripts/render/home-map.mjs`'s `buildSpotsMapHome(lieux)` and regex-replaces the
+`const SPOTS_MAP_HOME = [...]` literal in `index.html` in place — same `name`/`commune`/
+`lat`/`lng` used everywhere else, `color` derived from `regionSlug` (small enum in
+`home-map.mjs`, keep in sync with the filter-button dot colors hand-authored in
+`index.html`'s HTML), `img` from each lieu's `thumbImage`, `intro` a 100-char truncation of
+`description` computed at build time (not stored). If the regex marker ever doesn't match
+(e.g. someone hand-edits the array's shape), `build.mjs` throws rather than silently no-op'ing.
+
+**Known gap, not yet covered by this data model:** the JSON-LD `ItemList` in `index.html`'s
+`<head>` and the region-grouped card grid (name/commune/thumb/description-snippet/stamp per
+lieu, in `#lieux`) are still hand-typed duplicates of lieu facts, unlike the map now. Editing
+a lieu's name or coordinates in the JSON does **not** propagate to either of those yet.
 
 ## Site structure (2026-08-27)
 

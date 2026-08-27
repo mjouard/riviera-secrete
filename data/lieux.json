@@ -113,7 +113,8 @@
     "badges": [
       "randonnee",
       "vtt"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/biot-village-verrier/530/310"
   },
   {
     "slug": "calanques-esterel-theoule",
@@ -231,7 +232,8 @@
       "randonnee",
       "plongee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/calanques-esterel-theoule/530/310"
   },
   {
     "slug": "citadelle-saint-tropez",
@@ -347,7 +349,8 @@
     "badges": [
       "randonnee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/citadelle-saint-tropez/530/310"
   },
   {
     "slug": "colline-du-chateau-nice",
@@ -463,7 +466,8 @@
     "badges": [
       "plage",
       "randonnee"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/colline-du-chateau-nice/530/310"
   },
   {
     "slug": "cours-saleya-vieux-nice",
@@ -578,7 +582,8 @@
     ],
     "badges": [
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/cours-saleya-vieux-nice/530/310"
   },
   {
     "slug": "eze-village",
@@ -706,7 +711,8 @@
       "randonnee",
       "vtt",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "assets/images/lieux/eze-village/thumb.jpg"
   },
   {
     "slug": "gassin-plus-beau-village",
@@ -823,7 +829,8 @@
       "randonnee",
       "vtt",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/gassin-plus-beau-village/530/310"
   },
   {
     "slug": "gorges-du-loup-cascade-courmes",
@@ -940,7 +947,8 @@
       "randonnee",
       "vtt",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/gorges-du-loup-cascade-courmes/530/310"
   },
   {
     "slug": "gourdon-village",
@@ -1045,7 +1053,8 @@
     "badges": [
       "randonnee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/gourdon-village/530/310"
   },
   {
     "slug": "haut-de-cagnes",
@@ -1160,7 +1169,8 @@
     ],
     "badges": [
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/haut-de-cagnes/530/310"
   },
   {
     "slug": "iles-de-lerins",
@@ -1278,7 +1288,8 @@
       "randonnee",
       "plongee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/iles-de-lerins/530/310"
   },
   {
     "slug": "jardin-exotique-monaco",
@@ -1384,7 +1395,8 @@
     ],
     "badges": [
       "restaurant"
-    ]
+    ],
+    "thumbImage": "assets/images/lieux/jardin-exotique-monaco/thumb.jpg"
   },
   {
     "slug": "peille-village",
@@ -1501,7 +1513,8 @@
       "randonnee",
       "vtt",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/peille-village/530/310"
   },
   {
     "slug": "peillon-village",
@@ -1628,7 +1641,8 @@
     "badges": [
       "randonnee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/peillon-village/530/310"
   },
   {
     "slug": "pic-cap-roux-esterel",
@@ -1744,7 +1758,8 @@
     "badges": [
       "randonnee",
       "vtt"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/pic-cap-roux-esterel/530/310"
   },
   {
     "slug": "pinede-gould-juan-les-pins",
@@ -1860,7 +1875,8 @@
     "badges": [
       "plage",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/pinede-gould-juan-les-pins/530/310"
   },
   {
     "slug": "pont-du-loup",
@@ -1976,7 +1992,8 @@
     "badges": [
       "randonnee",
       "vtt"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/pont-du-loup/530/310"
   },
   {
     "slug": "roquebrune-cap-martin-village",
@@ -2073,7 +2090,8 @@
       "randonnee",
       "plage",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg"
   },
   {
     "slug": "rue-obscure-villefranche",
@@ -2192,7 +2210,8 @@
       "plage",
       "plongee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "assets/images/lieux/rue-obscure-villefranche/thumb.jpg"
   },
   {
     "slug": "saint-paul-de-vence",
@@ -2341,7 +2360,8 @@
     "badges": [
       "restaurant",
       "randonnee"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/saint-paul-de-vence/530/310"
   },
   {
     "slug": "sentier-cap-antibes",
@@ -2458,7 +2478,8 @@
       "randonnee",
       "plage",
       "plongee"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/sentier-cap-antibes/530/310"
   },
   {
     "slug": "sentier-cap-ferrat",
@@ -2567,7 +2588,8 @@
       "plage",
       "plongee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/sentier-cap-ferrat/530/310"
   },
   {
     "slug": "sentier-corbusier-cap-martin",
@@ -2662,7 +2684,8 @@
     ],
     "badges": [
       "randonnee"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/sentier-corbusier-cap-martin/530/310"
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -2779,7 +2802,8 @@
       "randonnee",
       "vtt",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/tourrettes-sur-loup/530/310"
   },
   {
     "slug": "trophee-auguste-la-turbie",
@@ -2886,7 +2910,8 @@
     "badges": [
       "randonnee",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg"
   },
   {
     "slug": "vieille-ville-grasse",
@@ -3001,7 +3026,8 @@
     ],
     "badges": [
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieille-ville-grasse/530/310"
   },
   {
     "slug": "villa-kerylos",
@@ -3097,6 +3123,7 @@
     "badges": [
       "plage",
       "restaurant"
-    ]
+    ],
+    "thumbImage": "https://picsum.photos/seed/villa-kerylos/530/310"
   }
 ]
