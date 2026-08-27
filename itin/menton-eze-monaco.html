@@ -26,6 +26,11 @@
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
 .lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
 .lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+.map-links{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.map-link{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; text-decoration:none; transition:border-color 0.15s, opacity 0.15s; }
+.map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
+.itin-open-map{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.02em; padding:8px 16px; border-radius:2px; border:1px solid rgba(232,163,61,0.4); background:rgba(232,163,61,0.08); color:var(--terracotta); display:inline-flex; align-items:center; gap:7px; text-decoration:none; margin:14px 0; transition:border-color 0.15s, background 0.15s; }
+.itin-open-map:hover{ border-color:var(--terracotta); background:rgba(232,163,61,0.14); }
 .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
 .leaflet-popup-tip{ background:var(--surface); }
 .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
@@ -103,6 +108,7 @@
     <span class="meta-pill">🚗 <strong>En voiture, prévoir du stationnement payant à chaque étape</strong></span>
     <span class="meta-pill">📍 <strong>6 étapes</strong></span>
   </div>
+  <a class="itin-open-map" href="https://www.google.com/maps/dir/?api=1&origin=43.7647%2C7.4967&destination=43.7042%2C7.3103&waypoints=43.7378%2C7.4014%7C43.6579%2C7.3616%7C43.7326%2C7.413%7C43.689%2C7.33" target="_blank" rel="noopener">🗺️ Ouvrir l'itinéraire complet dans Google Maps</a>
   <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Deux jours de l'est vers l'ouest : Grande Corniche et villages perchés le premier jour, nuit à Monaco, Cap Ferrat et Villefranche au rythme du deuxième.</p>
 
   <div class="itin-strip">
@@ -128,6 +134,11 @@
             <a class="stop-act stop-act--paid" href="https://www.roquebrune-cap-martin.fr/patrimoine/" target="_blank" rel="noopener">Château médiéval · 5 € · 1 h</a>
             <a class="stop-act stop-act--free" href="https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/" target="_blank" rel="noopener">Sentier Le Corbusier · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.7647,7.4967" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.7647,7.4967&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.7647,7.4967&q=Le%20village%20de%20Roquebrune-Cap-Martin" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -147,6 +158,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--paid" href="https://www.la-turbie.fr/monument/" target="_blank" rel="noopener">Trophée d'Auguste · 7 € · 1 h</a>
             <a class="stop-act stop-act--free" href="https://www.la-turbie.fr/" target="_blank" rel="noopener">Panorama Monaco · Libre</a>
+          </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.7378,7.4014" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.7378,7.4014&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.7378,7.4014&q=Le%20Troph%C3%A9e%20d'Auguste" target="_blank" rel="noopener">📍 Plans</a>
           </div>
         </div>
       </li>
@@ -169,6 +185,11 @@
             <a class="stop-act stop-act--paid" href="https://jardinexotique-eze.fr/" target="_blank" rel="noopener">Jardin exotique · 8–10 € · 45 min</a>
             <a class="stop-act stop-act--free" href="https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/" target="_blank" rel="noopener">Chemin Nietzsche · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.6579,7.3616" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.6579,7.3616&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.6579,7.3616&q=%C3%88ze%2C%20le%20village%20perch%C3%A9" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -187,6 +208,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--paid" href="https://www.oceano.mc/" target="_blank" rel="noopener">Musée Océanographique · 18 € · 2 h</a>
             <a class="stop-act stop-act--paid" href="https://www.jardin-exotique.mc/" target="_blank" rel="noopener">Jardin exotique Monaco · 8 €</a>
+          </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.7326,7.413" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.7326,7.413&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.7326,7.413&q=Le%20Jardin%20exotique%20de%20Monaco" target="_blank" rel="noopener">📍 Plans</a>
           </div>
         </div>
       </li>
@@ -214,6 +240,11 @@
             <a class="stop-act stop-act--paid" href="https://www.villa-ephrussi.com/" target="_blank" rel="noopener">Villa & jardins · 18 € · 1 h 30</a>
             <a class="stop-act stop-act--paid" href="https://www.villa-kerylos.com/" target="_blank" rel="noopener">Villa Kerylos · 14 €</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.689,7.33" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.689,7.33&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.689,7.33&q=Sentier%20du%20littoral%20du%20Cap%20Ferrat" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -234,6 +265,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--paid" href="https://www.getyourguide.com/villefranche-sur-mer-l96796/" target="_blank" rel="noopener">Kayak de mer · 35–50 € · 2 h</a>
             <a class="stop-act stop-act--free" href="https://www.citadellesaintelme.com/" target="_blank" rel="noopener">Citadelle Saint-Elme · Libre</a>
+          </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.7042,7.3103" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.7042,7.3103&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.7042,7.3103&q=La%20Rue%20Obscure" target="_blank" rel="noopener">📍 Plans</a>
           </div>
         </div>
       </li>

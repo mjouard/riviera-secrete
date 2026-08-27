@@ -3,11 +3,28 @@
 // price/durée/url/image itself — it only keeps a lieuSlug+activiteId pointer and its
 // own display copy (pill label, booking card name) on top of the lieu's data. A stop's
 // badges are the referenced lieu's own `badges[]` — never duplicated here either.
-import { renderBadgePills } from './lieu.mjs';
+import { renderBadgePills, renderMapLinks } from './lieu.mjs';
 
 function findActivite(lieuBySlug, lieuSlug, activiteId) {
   const lieu = lieuBySlug.get(lieuSlug);
   return lieu?.activites.find(a => a.id === activiteId);
+}
+
+// Google Maps is the only one of the three with an official multi-stop directions URL
+// (Waze/Apple Maps only support one destination — see per-stop map-links instead). Built
+// from the referenced lieux' own lat/lng, in stop order; sleep markers have no coordinates
+// of their own and are skipped.
+function buildGoogleMapsRouteUrl(items, lieuBySlug) {
+  const coords = items
+    .filter(i => i.type === 'stop')
+    .map(i => lieuBySlug.get(i.lieuSlug))
+    .map(l => `${l.lat},${l.lng}`);
+  const origin = coords[0];
+  const destination = coords[coords.length - 1];
+  const waypoints = coords.slice(1, -1);
+  const params = new URLSearchParams({ api: '1', origin, destination });
+  if (waypoints.length) params.set('waypoints', waypoints.join('|'));
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
 }
 
 function renderMetaPills(metaPills) {
@@ -41,12 +58,13 @@ function renderItem(lieuBySlug, item, itinSlug) {
     ? `\n          <div class="stop-acts">\n${item.activites.map(a => renderStopAct(lieuBySlug, a)).join('\n')}\n          </div>` : '';
   const badgePills = renderBadgePills(lieu.badges, '            ');
   const badges = badgePills ? `\n          <div class="lieu-badges">\n${badgePills}\n          </div>` : '';
+  const mapLinks = `\n          <div class="map-links">\n${renderMapLinks(lieu.lat, lieu.lng, lieu.nom, '            ')}\n          </div>`;
   return `      <li class="itin-stop">
         <span class="itin-time">${item.heure}</span>
         <div class="itin-stop-body">
           <a href="../lieux/${lieu.slug}.html?itin=${itinSlug}" class="itin-stop-name">${item.nom}</a>
           <span class="itin-stop-commune">${item.commune}</span>${badges}
-          <p>${item.desc}</p>${acts}
+          <p>${item.desc}</p>${acts}${mapLinks}
         </div>
       </li>`;
 }
@@ -133,6 +151,11 @@ export function renderItin(itin, lieuBySlug) {
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
 .lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
 .lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+.map-links{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.map-link{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; text-decoration:none; transition:border-color 0.15s, opacity 0.15s; }
+.map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
+.itin-open-map{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.02em; padding:8px 16px; border-radius:2px; border:1px solid rgba(232,163,61,0.4); background:rgba(232,163,61,0.08); color:var(--terracotta); display:inline-flex; align-items:center; gap:7px; text-decoration:none; margin:14px 0; transition:border-color 0.15s, background 0.15s; }
+.itin-open-map:hover{ border-color:var(--terracotta); background:rgba(232,163,61,0.14); }
 .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
 .leaflet-popup-tip{ background:var(--surface); }
 .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
@@ -201,6 +224,7 @@ export function renderItin(itin, lieuBySlug) {
   <div class="meta-bar">
 ${renderMetaPills(metaPills)}
   </div>
+  <a class="itin-open-map" href="${buildGoogleMapsRouteUrl(items, lieuBySlug)}" target="_blank" rel="noopener">🗺️ Ouvrir l'itinéraire complet dans Google Maps</a>
   <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">${intro}</p>
 
   <div class="itin-strip">

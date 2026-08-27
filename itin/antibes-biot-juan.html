@@ -26,6 +26,11 @@
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
 .lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
 .lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+.map-links{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.map-link{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; text-decoration:none; transition:border-color 0.15s, opacity 0.15s; }
+.map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
+.itin-open-map{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.02em; padding:8px 16px; border-radius:2px; border:1px solid rgba(232,163,61,0.4); background:rgba(232,163,61,0.08); color:var(--terracotta); display:inline-flex; align-items:center; gap:7px; text-decoration:none; margin:14px 0; transition:border-color 0.15s, background 0.15s; }
+.itin-open-map:hover{ border-color:var(--terracotta); background:rgba(232,163,61,0.14); }
 .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
 .leaflet-popup-tip{ background:var(--surface); }
 .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
@@ -93,6 +98,7 @@
     <span class="meta-pill">🚗 <strong>Marche pour le sentier, voiture pour Biot et Cagnes</strong></span>
     <span class="meta-pill">📍 <strong>4 étapes</strong></span>
   </div>
+  <a class="itin-open-map" href="https://www.google.com/maps/dir/?api=1&origin=43.5461%2C7.1256&destination=43.6656%2C7.1486&waypoints=43.5686%2C7.1067%7C43.6289%2C7.0967" target="_blank" rel="noopener">🗺️ Ouvrir l'itinéraire complet dans Google Maps</a>
   <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Sentier côtier, sieste à l'ombre des pins et verre soufflé — une journée qui alterne mer et artisanat.</p>
 
   <div class="itin-strip">
@@ -117,6 +123,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--free" href="https://www.antibesjuanlespins.com/sentier-littoral" target="_blank" rel="noopener">Sentier Tirepoil · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.5461,7.1256" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.5461,7.1256&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.5461,7.1256&q=Le%20sentier%20du%20littoral%20du%20Cap%20d'Antibes" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -137,6 +148,11 @@
             <a class="stop-act stop-act--free" href="../lieux/pinede-gould-juan-les-pins.html" target="_blank" rel="noopener">Plage &amp; pins · Libre</a>
             <a class="stop-act stop-act--paid" href="https://www.getyourguide.com/juan-les-pins-l97018/" target="_blank" rel="noopener">Paddle / SUP · 15–20 € · 1 h</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.5686,7.1067" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.5686,7.1067&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.5686,7.1067&q=La%20pin%C3%A8de%20Gould" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -156,6 +172,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--free" href="https://www.verreriebiot.com/" target="_blank" rel="noopener">Verrerie Biot · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.6289,7.0967" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.6289,7.0967&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.6289,7.0967&q=Biot%2C%20le%20village%20des%20verriers" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -173,6 +194,11 @@
           <p>Fin de journée au château-musée Grimaldi, vue sur la baie de Cagnes.</p>
           <div class="stop-acts">
             <a class="stop-act stop-act--paid" href="https://www.musees-nationaux-alpesmaritimes.fr/renoir" target="_blank" rel="noopener">Musée Renoir · 9 € · 1 h</a>
+          </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.6656,7.1486" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.6656,7.1486&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.6656,7.1486&q=Le%20Haut-de-Cagnes" target="_blank" rel="noopener">📍 Plans</a>
           </div>
         </div>
       </li>

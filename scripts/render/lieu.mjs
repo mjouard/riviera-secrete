@@ -28,15 +28,17 @@ function renderBadges(badges) {
   return `\n  <div class="lieu-badges">\n${pills}\n  </div>\n`;
 }
 
-// "Ouvrir dans" — built from the lieu's own lat/lng, nothing hand-typed per lieu.
-function renderMapLinks(lat, lng, nom) {
+// "Ouvrir dans" — built from a lieu's own lat/lng, nothing hand-typed per lieu. Shared by
+// lieu.mjs (own page, under the mini-map) and itin.mjs (one per stop — Waze/Plans have no
+// official multi-stop URL scheme, so each stop links to its own point, not the whole trip).
+export function renderMapLinks(lat, lng, nom, indent = '        ') {
   const coords = `${lat},${lng}`;
   const links = [
     { label: 'Google Maps', icon: '🗺️', url: `https://www.google.com/maps/search/?api=1&query=${coords}` },
     { label: 'Waze', icon: '🚗', url: `https://waze.com/ul?ll=${coords}&navigate=yes` },
     { label: 'Plans', icon: '📍', url: `https://maps.apple.com/?ll=${coords}&q=${encodeURIComponent(nom)}` },
   ];
-  return links.map(l => `        <a class="map-link" href="${l.url}" target="_blank" rel="noopener">${l.icon} ${l.label}</a>`).join('\n');
+  return links.map(l => `${indent}<a class="map-link" href="${l.url}" target="_blank" rel="noopener">${l.icon} ${l.label}</a>`).join('\n');
 }
 
 function renderMetaPills(metaPills) {

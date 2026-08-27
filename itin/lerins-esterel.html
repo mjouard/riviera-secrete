@@ -26,6 +26,11 @@
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
 .lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
 .lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+.map-links{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.map-link{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; text-decoration:none; transition:border-color 0.15s, opacity 0.15s; }
+.map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
+.itin-open-map{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.02em; padding:8px 16px; border-radius:2px; border:1px solid rgba(232,163,61,0.4); background:rgba(232,163,61,0.08); color:var(--terracotta); display:inline-flex; align-items:center; gap:7px; text-decoration:none; margin:14px 0; transition:border-color 0.15s, background 0.15s; }
+.itin-open-map:hover{ border-color:var(--terracotta); background:rgba(232,163,61,0.14); }
 .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
 .leaflet-popup-tip{ background:var(--surface); }
 .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
@@ -93,6 +98,7 @@
     <span class="meta-pill">⛵ <strong>Bateau le matin, voiture puis marche l'après-midi</strong></span>
     <span class="meta-pill">📍 <strong>3 étapes</strong></span>
   </div>
+  <a class="itin-open-map" href="https://www.google.com/maps/dir/?api=1&origin=43.515%2C7.048&destination=43.4956%2C6.9364&waypoints=43.4394%2C6.8825" target="_blank" rel="noopener">🗺️ Ouvrir l'itinéraire complet dans Google Maps</a>
   <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Une matinée au large de Cannes, un après-midi sur les roches rouges du massif volcanique le plus photogénique de la Riviera.</p>
 
   <div class="itin-strip">
@@ -118,6 +124,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--free" href="https://www.abbayedelerins.com/" target="_blank" rel="noopener">Abbaye Saint-Honorat · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.515,7.048" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.515,7.048&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.515,7.048&q=Les%20%C3%AEles%20de%20L%C3%A9rins" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -137,6 +148,11 @@
           <div class="stop-acts">
             <a class="stop-act stop-act--free" href="https://www.esterel-cote-azur.com/randonnee" target="_blank" rel="noopener">Randonnée Cap Roux · Libre</a>
           </div>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.4394,6.8825" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.4394,6.8825&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.4394,6.8825&q=Le%20Pic%20du%20Cap%20Roux" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
       <li class="itin-transit" aria-hidden="true">
@@ -155,6 +171,11 @@
             <span class="lieu-badge">🍽️ Restaurant</span>
           </div>
           <p>Fin d'après-midi les pieds dans l'eau, entre les roches rouges.</p>
+          <div class="map-links">
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.4956,6.9364" target="_blank" rel="noopener">🗺️ Google Maps</a>
+            <a class="map-link" href="https://waze.com/ul?ll=43.4956,6.9364&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+            <a class="map-link" href="https://maps.apple.com/?ll=43.4956,6.9364&q=Les%20calanques%20de%20l'Est%C3%A9rel" target="_blank" rel="noopener">📍 Plans</a>
+          </div>
         </div>
       </li>
     </ol>

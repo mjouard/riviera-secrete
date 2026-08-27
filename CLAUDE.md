@@ -174,9 +174,20 @@ philosophy for itineraries, etc.).
 - Every lieu page carries a Leaflet mini-map and a `TouristAttraction` JSON-LD block; every
   itinéraire page carries a full Leaflet route map — both driven by lat/lng already present
   in `data/lieux.json`.
-- Every lieu page also has a "Google Maps / Waze / Plans" link row (`renderMapLinks` in
-  `scripts/render/lieu.mjs`, right under the mini-map) built from the same `lat`/`lng` — no
-  per-lieu URL is ever stored, all three are constructed from coordinates at render time.
+- Every lieu page also has a "Google Maps / Waze / Plans" link row (`renderMapLinks`,
+  exported from `scripts/render/lieu.mjs`, right under the mini-map) built from the same
+  `lat`/`lng` — no per-lieu URL is ever stored, all three are constructed from coordinates at
+  render time. Itinéraire stops reuse the exact same `renderMapLinks`, one row per stop —
+  **not** one combined multi-stop button for the whole trip: Google Maps supports a real
+  multi-waypoint route via URL, but Waze and Apple Maps have no official multi-stop URL
+  scheme (only "navigate to one point"), so a single "open the itinéraire" button couldn't
+  honestly work the same way on all three. Per-stop links sidestep that; itinéraire pages
+  additionally carry one `.itin-open-map` button (`buildGoogleMapsRouteUrl` in
+  `scripts/render/itin.mjs`, right under the meta-bar) that opens the *whole trip* as a
+  Google Maps multi-stop route — origin/destination/waypoints built from the `stop` items'
+  lieux in order, sleep markers skipped (they carry no coordinates of their own). Google
+  Maps only; don't add a matching Waze/Plans button next to it; that's the whole reason the
+  per-stop links exist instead.
 - Hero images: most lieux still use `picsum.photos` placeholders rather than real photos
   (tracked in `ROADMAP.md`); a lieu with real photography sets `heroSlides` (int) so
   `main.js`'s carousel picks up `hero.jpg`, `hero-2.jpg`, … from
