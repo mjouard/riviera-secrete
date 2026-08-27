@@ -1893,10 +1893,10 @@
     "lat": 43.6289,
     "lng": 7.0967,
     "description": "Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bulles caractéristiques piégées dans le verre soufflé.",
-    "ogImage": "https://picsum.photos/seed/biot/1200/800",
-    "heroImage": "https://picsum.photos/seed/biot/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/biot-village-verrier/hero.jpg",
+    "heroImage": "../assets/images/lieux/biot-village-verrier/hero.jpg",
     "heroAlt": "Ruelles fleuries du village de Biot, connu pour son verre soufflé",
-    "heroSlides": null,
+    "heroSlides": 2,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1995,7 +1995,7 @@
       "randonnee",
       "vtt"
     ],
-    "thumbImage": "https://picsum.photos/seed/biot/500/375"
+    "thumbImage": "assets/images/lieux/biot-village-verrier/thumb.jpg"
   },
   {
     "slug": "haut-de-cagnes",
