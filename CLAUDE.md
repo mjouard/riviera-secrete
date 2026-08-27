@@ -196,10 +196,18 @@ philosophy for itineraries, etc.).
   Maps only; don't add a matching Waze/Plans button next to it; that's the whole reason the
   per-stop links exist instead.
 - Hero images: most lieux still use `picsum.photos` placeholders rather than real photos
-  (tracked in `ROADMAP.md`); a lieu with real photography sets `heroSlides` (int) so
-  `main.js`'s carousel picks up `hero.jpg`, `hero-2.jpg`, … from
-  `assets/images/lieux/<slug>/`. An itinéraire hero can instead carry a literal
-  `data-carousel-srcs` attribute listing multiple lieu hero images — stored verbatim as
-  `heroImgTag` in `data/itineraires.json` rather than modeled as structured data.
+  (22/27, tracked in `ROADMAP.md` — the user wants to pick/supply these themselves, don't
+  autonomously source photos for this; see `/add-activities`-adjacent note in memory). A
+  lieu with real photography sets `heroSlides` (int) so `main.js`'s carousel picks up
+  `hero.jpg`, `hero-2.jpg`, … from `assets/images/lieux/<slug>/`. An itinéraire hero can
+  instead carry a literal `data-carousel-srcs` attribute listing multiple lieu hero images —
+  stored verbatim as `heroImgTag` in `data/itineraires.json` rather than modeled as
+  structured data. `assets/images/lieux/` folder names don't always match a *current* lieu
+  slug: `villa-ephrussi-rothschild/` is real photography kept from when that was still its
+  own lieu (see the demotion history above) — `sentier-cap-ferrat`'s `Villa Ephrussi de
+  Rothschild` activité and the `menton-eze-monaco` itinéraire's hero carousel/booking card
+  still reference it directly, so don't delete it even though no lieu owns that slug
+  anymore. Demoted lieux that never had real photos get their folder deleted (only ever held
+  the placeholder readme) — check for real files first if this comes up again.
 - `<title>` tags use a bare `&`; everything else (h1, breadcrumbs, alt text) uses `&amp;` —
   the render templates already handle this split, don't "fix" one to match the other.
