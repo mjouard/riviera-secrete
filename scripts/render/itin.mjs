@@ -174,8 +174,6 @@ export function renderItin(itin, lieuBySlug) {
   <div class="wrap">
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
-      <a href="../carte.html">Carte</a>
-      <a href="../itineraires.html">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
     </nav>
   </div>
@@ -184,7 +182,6 @@ export function renderItin(itin, lieuBySlug) {
 <div class="wrap breadcrumb">
   <ol>
     <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../itineraires.html">Itinéraires</a></li>
     <li>${titre}</li>
   </ol>
 </div>

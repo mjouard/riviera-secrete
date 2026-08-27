@@ -67,8 +67,6 @@
   .map-section-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
   .map-section-head h2{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin-bottom:5px; }
   .map-section-head p{ color:var(--text-muted); font-size:0.9rem; margin:0; }
-  .map-fullscreen-link{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--terracotta); text-decoration:none; white-space:nowrap; flex-shrink:0; }
-  .map-fullscreen-link:hover{ text-decoration:underline; }
   .map-filters{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
   .map-filter{ font-family:'IBM Plex Mono',monospace; font-size:0.69rem; letter-spacing:0.04em; padding:5px 12px 5px 10px; border-radius:2px; background:transparent; cursor:pointer; display:flex; align-items:center; gap:7px; border:1px solid var(--line); color:var(--text); transition:opacity 0.15s,border-color 0.15s; white-space:nowrap; }
   .map-filter-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; transition:opacity 0.15s; }
@@ -96,8 +94,6 @@
   .itin-preview{ padding:50px 0 20px; }
   .itin-preview .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:24px; }
   .itin-preview h2{ font-size:clamp(1.4rem,2.8vw,1.9rem); }
-  .itin-preview-all{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--terracotta); text-decoration:none; }
-  .itin-preview-all:hover{ text-decoration:underline; }
   .itin-preview-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; padding-bottom:20px; }
   .itin-preview-card{
     display:block; background:var(--surface); border:1px solid var(--line); border-radius:3px;
@@ -142,7 +138,6 @@
     <a class="logo" href="index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
       <a href="#carte">Carte</a>
-      <a href="itineraires.html">Itinéraires</a>
       <a href="#lieux">Lieux</a>
     </nav>
   </div>
@@ -155,8 +150,7 @@
     <p class="eyebrow">Que faire &amp; que voir · Côte d'Azur</p>
     <h1>Les recoins méconnus <em>de la Côte d'Azur.</em></h1>
     <p>Villages perchés, sentiers côtiers, gorges sauvages et îles au large — des lieux à découvrir autrement, de Menton à Saint-Tropez, à travers des itinéraires prêts à suivre.</p>
-    <a class="btn" href="itineraires.html">Les itinéraires</a>
-    <a class="btn" href="#carte" style="background:transparent;border:1.5px solid var(--terracotta);color:var(--terracotta);margin-left:10px;">Explorer la carte</a>
+    <a class="btn" href="#carte">Explorer la carte</a>
   </div>
 </section>
 
@@ -174,7 +168,6 @@
         <h2>La carte des 27 lieux</h2>
         <p>Clique sur un marqueur pour ouvrir la fiche. Filtre par zone :</p>
       </div>
-      <a class="map-fullscreen-link" href="carte.html">Plein écran →</a>
     </div>
     <div class="map-filters">
       <button class="map-filter is-active" data-region="menton-monaco" data-map="home">
@@ -201,7 +194,6 @@
   <div class="wrap">
     <div class="section-head">
       <h2>6 itinéraires prêts à suivre</h2>
-      <a class="itin-preview-all" href="itineraires.html">Voir tous les itinéraires →</a>
     </div>
     <div class="itin-preview-grid">
       <a class="itin-preview-card" href="itin/menton-eze-monaco.html">

@@ -169,8 +169,6 @@ export function renderLieu(lieu) {
   <div class="wrap">
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
-      <a href="../carte.html">Carte</a>
-      <a href="../itineraires.html">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
     </nav>
   </div>

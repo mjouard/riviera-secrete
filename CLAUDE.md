@@ -66,10 +66,10 @@ The reverse move has happened three times now: `sentier-nietzsche-eze` and
 `chapelle-rosaire-vence` (demoted onto `saint-paul-de-vence` — its nearest lieu, not same
 commune but the previous/adjacent stop in the `villages-perches` itinerary; all 3 of its
 activités moved over, and its `randonnee` badge — Baous de Vence hike — followed with them).
-None were really independent destinations. **This is not automated** — index.html and
-carte.html (see "Known gap" below) need hand-editing in the same pass every time (card
-grids, `SPOTS_MAP_HOME`/`SPOTS_MAP_FULL`, the lieu-count copy/counts, JSON-LD `ItemList`),
-along with `sitemap.xml` and `ROADMAP.md`'s placeholder-image count. If the demoted lieu was
+None were really independent destinations. **This is not automated** — `index.html` (see
+"Known gap" below) needs hand-editing in the same pass every time (card grid, `SPOTS_MAP_HOME`,
+the lieu-count copy/counts, JSON-LD `ItemList`), along with `sitemap.xml` and
+`ROADMAP.md`'s placeholder-image count. If the demoted lieu was
 also a standalone stop in an itinéraire (as the chapel was), that stop has to be merged into
 the adjacent one — pills moved over, transit/timing adjusted — rather than just repointed,
 and any `itin-suggest`/`itin-preview` card elsewhere quoting that itinéraire's old étape
@@ -99,12 +99,24 @@ live in `scripts/render/lieu.mjs` and are imported into `scripts/render/itin.mjs
 (`renderBadgePills`) so an itinéraire stop shows the referenced lieu's own badges — same
 single-source rule as everything else here, no per-itinéraire badge data.
 
-**Known gap, not yet covered by this data model:** `index.html` and `carte.html` each embed
-their own independent copy of every lieu's name/commune/lat/lng/intro/thumbnail as inline
-JS arrays (`SPOTS_MAP_HOME`, `SPOTS_MAP_FULL`) plus a JSON-LD `ItemList`. These are not
-generated from `data/lieux.json` — editing a lieu's name or coordinates in the JSON does
-**not** propagate there; those two files still need manual updates in sync until this is
-folded into the build.
+**Known gap, not yet covered by this data model:** `index.html` embeds its own independent
+copy of every lieu's name/commune/lat/lng/intro/thumbnail as an inline JS array
+(`SPOTS_MAP_HOME`) plus a JSON-LD `ItemList`. This is not generated from `data/lieux.json` —
+editing a lieu's name or coordinates in the JSON does **not** propagate there; it still needs
+manual updates in sync until this is folded into the build.
+
+## Site structure (2026-08-27)
+
+There is no standalone full-screen map page or itinéraires hub page anymore — both were
+removed as redundant intermediates (`index.html` already embeds the full interactive map at
+`#carte` and the full itinéraire grid in its `itin-preview` section, each already linking
+straight to `lieux/*.html`/`itin/*.html`). Don't recreate `carte.html` or `itineraires.html`,
+and don't add nav links back to them. Site nav is now just: `index.html` has "Carte" (→
+`#carte` on itself) and "Lieux" (→ `#lieux` on itself); every other page (`lieux/*.html`,
+`itin/*.html`, `credits.html`) has only "Lieux" (→ `../index.html#lieux` or
+`index.html#lieux`) — there's no page-specific "Carte" equivalent to link to from a subpage,
+so it was dropped rather than repointed. Itinéraire page breadcrumbs go straight
+`Accueil → [titre]`, no middle "Itinéraires" crumb.
 
 ## Custom skills
 
