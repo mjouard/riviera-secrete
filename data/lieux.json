@@ -109,7 +109,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "calanques-esterel-theoule",
@@ -221,7 +222,8 @@
         "titre": "Les îles de Lérins",
         "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "chapelle-rosaire-vence",
@@ -333,7 +335,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "citadelle-saint-tropez",
@@ -445,7 +448,8 @@
         "titre": "La Rue Obscure",
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "colline-du-chateau-nice",
@@ -557,7 +561,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "cours-saleya-vieux-nice",
@@ -669,7 +674,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "eze-village",
@@ -792,6 +798,11 @@
         "titre": "Le village de Roquebrune-Cap-Martin",
         "blurb": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un …"
       }
+    ],
+    "badges": [
+      "randonnee",
+      "vtt",
+      "restaurant"
     ]
   },
   {
@@ -904,7 +915,8 @@
         "titre": "La Rue Obscure",
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "gorges-du-loup-cascade-courmes",
@@ -1016,7 +1028,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "gourdon-village",
@@ -1117,7 +1130,8 @@
         "titre": "Les gorges du Loup et la cascade de Courmes",
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "haut-de-cagnes",
@@ -1229,7 +1243,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "iles-de-lerins",
@@ -1341,7 +1356,8 @@
         "titre": "Le Pic du Cap Roux",
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "jardin-exotique-monaco",
@@ -1444,7 +1460,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "peille-village",
@@ -1556,7 +1573,8 @@
         "titre": "Les gorges du Loup et la cascade de Courmes",
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "peillon-village",
@@ -1679,7 +1697,8 @@
         "titre": "Les gorges du Loup et la cascade de Courmes",
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "pic-cap-roux-esterel",
@@ -1791,7 +1810,8 @@
         "titre": "Les îles de Lérins",
         "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "pinede-gould-juan-les-pins",
@@ -1903,7 +1923,8 @@
         "titre": "Le Pic du Cap Roux",
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "pont-du-loup",
@@ -2015,7 +2036,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "roquebrune-cap-martin-village",
@@ -2107,7 +2129,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "rue-obscure-villefranche",
@@ -2221,7 +2244,8 @@
         "titre": "Villa Kerylos",
         "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "saint-paul-de-vence",
@@ -2333,7 +2357,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "sentier-cap-antibes",
@@ -2445,7 +2470,8 @@
         "titre": "Le Pic du Cap Roux",
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "sentier-cap-ferrat",
@@ -2548,7 +2574,8 @@
         "titre": "Villa Kerylos",
         "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "sentier-corbusier-cap-martin",
@@ -2640,7 +2667,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -2752,7 +2780,8 @@
         "titre": "Gourdon, le nid d'aigle",
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "trophee-auguste-la-turbie",
@@ -2855,7 +2884,8 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "vieille-ville-grasse",
@@ -2967,7 +2997,8 @@
         "titre": "La Rue Obscure",
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
-    ]
+    ],
+    "badges": []
   },
   {
     "slug": "villa-kerylos",
@@ -3059,6 +3090,7 @@
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
-    ]
+    ],
+    "badges": []
   }
 ]

@@ -2,6 +2,32 @@
 // The lieu owns its activités — this template is the only place lieu+activité
 // facts turn into markup; itin.mjs reads the same objects instead of re-typing them.
 
+// Badges are generic tags ("can you do X here?"), unlike activités which are unique
+// to one lieu (e.g. "Le Jardin exotique" only exists at eze-village). A lieu only lists
+// the badges that actually apply — this is not a fixed checklist rendered as on/off.
+export const BADGE_DEFS = {
+  plage: { icon: '🏖️', label: 'Plage' },
+  randonnee: { icon: '🥾', label: 'Randonnée' },
+  vtt: { icon: '🚵', label: 'VTT' },
+  plongee: { icon: '🤿', label: 'Plongée' },
+  restaurant: { icon: '🍽️', label: 'Restaurant' },
+};
+
+export function renderBadgePills(badges, indent = '    ') {
+  if (!badges || badges.length === 0) return '';
+  return badges.map(id => {
+    const def = BADGE_DEFS[id];
+    if (!def) throw new Error(`badge inconnu: ${id}`);
+    return `${indent}<span class="lieu-badge">${def.icon} ${def.label}</span>`;
+  }).join('\n');
+}
+
+function renderBadges(badges) {
+  const pills = renderBadgePills(badges);
+  if (!pills) return '';
+  return `\n  <div class="lieu-badges">\n${pills}\n  </div>\n`;
+}
+
 function renderMetaPills(metaPills) {
   return metaPills.map(p => `    <span class="meta-pill">${p.label} <strong>${p.valeur}</strong></span>`).join('\n');
 }
@@ -48,7 +74,7 @@ export function renderLieu(lieu) {
   const {
     slug, nom, commune, regionSlug, regionLabel, lat, lng,
     description, ogImage, heroImage, heroAlt, heroSlides,
-    metaPills, description1, description2, tips, activites, related,
+    metaPills, description1, description2, tips, activites, related, badges,
   } = lieu;
 
   const ogTitle = `${nom} — ${commune}`;
@@ -129,6 +155,12 @@ export function renderLieu(lieu) {
   }
   .popup-link:hover{ text-decoration:underline; }
 
+  .lieu-badges{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .lieu-badge{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+    padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
+    display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+  }
 </style>
 </head>
 <body>
@@ -162,7 +194,7 @@ export function renderLieu(lieu) {
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap">${renderBadges(badges)}
   <div class="meta-bar">
 ${renderMetaPills(metaPills)}
   </div>

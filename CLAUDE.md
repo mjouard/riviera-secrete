@@ -70,6 +70,23 @@ and carte.html (see "Known gap" below) had to be hand-edited in the same pass (c
 with `sitemap.xml` and `ROADMAP.md`'s placeholder-image count. If a lieu ever needs
 demoting again, expect the same manual sweep.
 
+**Badges vs activités.** A lieu also has `badges: string[]` — generic tags from a fixed
+vocabulary (`BADGE_DEFS` in `scripts/render/lieu.mjs`: `plage`, `randonnee`, `vtt`,
+`plongee`, `restaurant`) declaring what's *practicable* at that lieu, as opposed to
+`activites[]` which are unique, bookable things that exist at exactly one lieu ("Le Jardin
+exotique" only exists at `eze-village`). Every lieu has the `badges` field (empty array if
+none apply yet); only `eze-village` is currently populated
+(`["randonnee","vtt","restaurant"]`), as a first example — the other 27 are still `[]` and
+need the same research-then-populate treatment. A badge means the activity is practicable
+*at that specific lieu's location*, not just somewhere in the same commune: `eze-village` is
+the perched village at ~400m, so it does **not** carry `plage` or `plongee` even though the
+Èze commune has a beach and diving nearby — those are down at Èze-sur-Mer, a different
+physical place. Don't add a badge from memory/assumption; verify it's actually practicable
+at that lieu (WebSearch when uncertain) before adding it. `BADGE_DEFS` and the pill renderer
+live in `scripts/render/lieu.mjs` and are imported into `scripts/render/itin.mjs`
+(`renderBadgePills`) so an itinéraire stop shows the referenced lieu's own badges — same
+single-source rule as everything else here, no per-itinéraire badge data.
+
 **Known gap, not yet covered by this data model:** `index.html` and `carte.html` each embed
 their own independent copy of every lieu's name/commune/lat/lng/intro/thumbnail as inline
 JS arrays (`SPOTS_MAP_HOME`, `SPOTS_MAP_FULL`) plus a JSON-LD `ItemList`. These are not

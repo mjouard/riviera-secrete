@@ -73,6 +73,12 @@
   }
   .popup-link:hover{ text-decoration:underline; }
 
+  .lieu-badges{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .lieu-badge{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+    padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
+    display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+  }
 </style>
 </head>
 <body>
@@ -107,6 +113,12 @@
 </div>
 
 <div class="wrap">
+  <div class="lieu-badges">
+    <span class="lieu-badge">🥾 Randonnée</span>
+    <span class="lieu-badge">🚵 VTT</span>
+    <span class="lieu-badge">🍽️ Restaurant</span>
+  </div>
+
   <div class="meta-bar">
     <span class="meta-pill">📍 <strong>43.6579°N, 7.3616°E</strong></span>
     <span class="meta-pill">🗓️ Meilleure saison : <strong>Toute l'année, tôt le matin pour éviter la foule</strong></span>

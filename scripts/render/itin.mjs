@@ -1,7 +1,9 @@
 // Renders itin/<slug>.html from an itinéraire object (data/itineraires.json) plus
 // the lieux it references (data/lieux.json). An itinéraire never stores an activité's
 // price/durée/url/image itself — it only keeps a lieuSlug+activiteId pointer and its
-// own display copy (pill label, booking card name) on top of the lieu's data.
+// own display copy (pill label, booking card name) on top of the lieu's data. A stop's
+// badges are the referenced lieu's own `badges[]` — never duplicated here either.
+import { renderBadgePills } from './lieu.mjs';
 
 function findActivite(lieuBySlug, lieuSlug, activiteId) {
   const lieu = lieuBySlug.get(lieuSlug);
@@ -37,11 +39,13 @@ function renderItem(lieuBySlug, item) {
   const lieu = lieuBySlug.get(item.lieuSlug);
   const acts = item.activites.length
     ? `\n          <div class="stop-acts">\n${item.activites.map(a => renderStopAct(lieuBySlug, a)).join('\n')}\n          </div>` : '';
+  const badgePills = renderBadgePills(lieu.badges, '            ');
+  const badges = badgePills ? `\n          <div class="lieu-badges">\n${badgePills}\n          </div>` : '';
   return `      <li class="itin-stop">
         <span class="itin-time">${item.heure}</span>
         <div class="itin-stop-body">
           <a href="../lieux/${lieu.slug}.html" class="itin-stop-name">${item.nom}</a>
-          <span class="itin-stop-commune">${item.commune}</span>
+          <span class="itin-stop-commune">${item.commune}</span>${badges}
           <p>${item.desc}</p>${acts}
         </div>
       </li>`;
@@ -127,6 +131,8 @@ export function renderItin(itin, lieuBySlug) {
 .itin-stop-name:hover{ color:var(--terracotta); }
 .itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
+.lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
+.lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
 .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
 .leaflet-popup-tip{ background:var(--surface); }
 .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
