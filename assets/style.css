@@ -317,6 +317,139 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 footer{ border-top:1px solid var(--line); padding:40px 0; }
 footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
 footer p{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--text-muted); }
+
+/* ---------- BUTTON (secondary) ---------- */
+.btn-secondary{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'IBM Plex Mono', monospace; font-size:0.8rem; letter-spacing:0.03em;
+  text-decoration:none; color:var(--text); background:transparent; font-weight:500;
+  padding:10px 18px; border-radius:2px; border:1px solid var(--line);
+  cursor:pointer; transition:border-color .15s, color .15s;
+}
+.btn-secondary:hover{ border-color:var(--terracotta); color:var(--terracotta); }
+
+/* ---------- ITINERARY BUILDER (creer-itineraire.html) ---------- */
+.builder-hero{ position:relative; padding:70px 0 40px; border-bottom:1px solid var(--line); }
+.builder-hero h1{ font-size:clamp(2rem, 4.4vw, 3.1rem); margin-bottom:16px; }
+.builder-hero p{ font-size:1.02rem; color:var(--text-muted); max-width:56ch; }
+
+.builder-picker{ padding:44px 0 60px; }
+.builder-picker h2{ font-size:1.15rem; margin:32px 0 14px; }
+.builder-picker h2:first-of-type{ margin-top:0; }
+.builder-picker-hint{ color:var(--text-muted); font-size:0.88rem; margin-bottom:16px; }
+
+.builder-duree{ display:flex; flex-wrap:wrap; gap:10px; }
+.builder-duree label{
+  font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+  border:1px solid var(--line); border-radius:2px; padding:10px 16px;
+  cursor:pointer; display:flex; align-items:center; gap:8px; transition:border-color .15s, color .15s;
+}
+.builder-duree label:has(input:checked){ border-color:var(--terracotta); color:var(--terracotta); background:rgba(232,163,61,0.08); }
+.builder-duree input{ accent-color:var(--terracotta); }
+
+.builder-zones{ display:flex; flex-direction:column; gap:8px; }
+.builder-zone{ border:1px solid var(--line); border-radius:3px; background:var(--surface); }
+.builder-zone summary{
+  list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+  padding:14px 16px; gap:16px;
+}
+.builder-zone summary::-webkit-details-marker{ display:none; }
+.builder-zone-check-wrap{ display:flex; align-items:center; gap:10px; font-weight:500; }
+.builder-zone-check-wrap input{ accent-color:var(--terracotta); width:16px; height:16px; }
+.builder-zone-meta{ display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.builder-zone-count{ font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--text-muted); }
+.builder-zone-icon{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--text-muted); }
+.builder-zone-lieux{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:2px 16px;
+  padding:0 16px 16px 42px;
+}
+.builder-lieu-check{ display:flex; align-items:center; gap:9px; padding:6px 0; font-size:0.88rem; cursor:pointer; }
+.builder-lieu-check input{ accent-color:var(--terracotta); width:15px; height:15px; flex-shrink:0; }
+
+.builder-empty-note{ color:var(--terracotta); font-size:0.88rem; margin:16px 0; }
+
+.builder-results{ padding:44px 0 70px; }
+.builder-results-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:6px; }
+.builder-results-head h2{ font-size:1.5rem; margin-top:10px; }
+.builder-excluded-note{ color:var(--text-muted); font-size:0.85rem; background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:10px 14px; margin:14px 0; }
+.builder-save-banner{ color:#74c48a; font-size:0.9rem; margin:14px 0; }
+.builder-save-banner a{ color:var(--terracotta); text-decoration:underline; text-underline-offset:2px; }
+.builder-drag-hint{ color:var(--text-muted); font-size:0.82rem; margin:14px 0 20px; }
+
+.builder-body{ display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:start; }
+.builder-days{ display:flex; flex-direction:column; gap:28px; }
+.builder-day h3{ font-size:1rem; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.builder-day-count{ font-size:0.72rem; color:var(--text-muted); font-weight:400; }
+.builder-day-stops{ list-style:none; margin:0; padding:0; min-height:12px; display:flex; flex-direction:column; gap:10px; }
+.builder-day-empty{ color:var(--text-muted); font-size:0.85rem; font-style:italic; padding:10px 0; }
+
+.builder-stop-card{
+  display:grid; grid-template-columns:16px 74px 1fr 30px; gap:12px;
+  border:1px solid var(--line); border-radius:3px; background:var(--surface);
+  padding:12px; align-items:start; cursor:grab;
+}
+.builder-stop-card.dragging{ opacity:0.4; }
+.builder-stop-drag{ color:var(--text-muted); padding-top:4px; text-align:center; }
+.builder-stop-media{ aspect-ratio:4/3; border-radius:2px; overflow:hidden; }
+.builder-stop-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+.builder-stop-body{ min-width:0; }
+.builder-stop-name{ font-family:'Fraunces',serif; font-weight:600; font-size:0.98rem; text-decoration:none; color:var(--text); display:inline-block; }
+.builder-stop-name:hover{ color:var(--terracotta); }
+.builder-stop-commune{ font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
+.builder-stop-duree{ font-size:0.72rem; color:var(--text-muted); display:block; margin:6px 0; }
+.builder-stop-remove{
+  background:none; border:1px solid var(--line); border-radius:2px; color:var(--text-muted);
+  cursor:pointer; width:26px; height:26px; font-size:0.8rem; transition:border-color .15s, color .15s;
+}
+.builder-stop-remove:hover{ border-color:var(--terracotta); color:var(--terracotta); }
+@media (max-width:600px){ .builder-stop-card{ grid-template-columns:16px 60px 1fr 26px; } }
+
+/* ---------- SAVE MODAL ---------- */
+.modal{ position:fixed; inset:0; z-index:100; background:rgba(12,17,22,0.72); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px; }
+.modal[hidden]{ display:none; }
+.modal-box{ background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; width:min(420px, 100%); }
+.modal-box h3{ font-size:1.1rem; margin-bottom:14px; }
+.modal-box input{
+  width:100%; font-family:'Inter',sans-serif; font-size:0.95rem; color:var(--text);
+  background:var(--bg); border:1px solid var(--line); border-radius:2px; padding:10px 12px; margin-bottom:18px;
+}
+.modal-box input:focus{ outline:none; border-color:var(--terracotta); }
+.modal-actions{ display:flex; justify-content:flex-end; gap:10px; }
+
+/* ---------- MES ITINERAIRES (mes-itineraires.html) ---------- */
+.mes-itin-hero{ padding:70px 0 40px; border-bottom:1px solid var(--line); }
+.mes-itin-hero h1{ font-size:clamp(2rem, 4.4vw, 3.1rem); margin-bottom:16px; }
+.mes-itin-hero p{ font-size:1.02rem; color:var(--text-muted); max-width:56ch; }
+.mes-itin-list{ padding:44px 0 80px; }
+.mes-itin-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+.mes-itin-grid[hidden]{ display:none; }
+.mes-itin-card{
+  border:1px solid var(--line); border-radius:3px; background:var(--surface);
+  padding:18px 20px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+}
+.mes-itin-card h3{ font-size:1.05rem; margin-bottom:8px; }
+.mes-itin-meta{ display:flex; gap:12px; flex-wrap:wrap; font-size:0.75rem; color:var(--text-muted); }
+.mes-itin-actions{ display:flex; gap:8px; flex-shrink:0; }
+.mes-itin-delete{
+  font-family:'IBM Plex Mono', monospace; font-size:0.8rem; background:none; cursor:pointer;
+  color:var(--text-muted); border:1px solid var(--line); border-radius:2px; padding:10px 14px;
+  transition:border-color .15s, color .15s;
+}
+.mes-itin-delete:hover{ border-color:#e06c5f; color:#e06c5f; }
+.mes-itin-empty{ text-align:center; padding:40px 0; color:var(--text-muted); }
+.mes-itin-empty p{ margin-bottom:18px; }
+
+@media (max-width:900px){
+  .builder-body{ grid-template-columns:1fr; }
+  #builder-map{ height:280px; order:-1; position:static; }
+  .mes-itin-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:700px){
+  .builder-zone-lieux{ grid-template-columns:1fr; padding-left:20px; }
+  .builder-stop-card{ grid-template-columns:16px 1fr 26px; }
+  .builder-stop-media{ display:none; }
+  .mes-itin-card{ flex-direction:column; align-items:flex-start; }
+}
 footer a{ color:var(--text-muted); }
 footer a:hover{ color:var(--terracotta); }
 

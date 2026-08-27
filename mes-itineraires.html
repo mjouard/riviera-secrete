@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes itinéraires — Riviera Secrète</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://riviera-secrete.netlify.app/mes-itineraires.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="index.html#itineraires">Itinéraires</a>
+      <a href="index.html#lieux">Lieux</a>
+      <a href="creer-itineraire.html">Créer un itinéraire</a>
+      <a href="mes-itineraires.html">Mes itinéraires</a>
+    </nav>
+  </div>
+</header>
+
+<section class="mes-itin-hero">
+  <div class="wrap">
+    <span class="eyebrow">Sur mesure</span>
+    <h1>Mes <em>itinéraires.</em></h1>
+    <p>Les itinéraires que tu as composés et sauvegardés — gardés uniquement dans ton navigateur.</p>
+  </div>
+</section>
+
+<section class="mes-itin-list">
+  <div class="wrap">
+    <div class="mes-itin-grid" id="mes-itineraires-grid" hidden></div>
+    <div class="mes-itin-empty" id="mes-itineraires-empty" hidden>
+      <p>Aucun itinéraire sauvegardé pour l'instant.</p>
+      <a class="btn" href="creer-itineraire.html">Créer un itinéraire</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="assets/itineraire-data.js"></script>
+<script src="assets/itineraire-liste.js"></script>
+</body>
+</html>

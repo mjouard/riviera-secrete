@@ -13,7 +13,11 @@
 
 ## Features différenciantes
 
-- [ ] Mode "itinéraire à la carte" — cocher des lieux sur la carte, générer un ordre de visite
+- [x] Créateur d'itinéraire à la volée — durée + zones/lieux au choix, génération auto,
+      sauvegarde en localStorage (`creer-itineraire.html` / `mes-itineraires.html`)
+- [ ] Créateur d'itinéraire : rendu complet façon `itin/*.html` (blocs transit estimés,
+      marqueurs sommeil pour 2-3 jours, cartes "à réserver" pour les activités payantes) —
+      la version actuelle est volontairement allégée (liste par jour + carte + liens Maps)
 - [ ] PWA — manifest + service worker pour usage hors ligne sur le terrain
 
 ## SEO / technique

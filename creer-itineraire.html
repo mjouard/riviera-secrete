@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crée ton itinéraire — Riviera Secrète</title>
+<meta name="description" content="Compose ton propre itinéraire sur la Côte d'Azur : choisis une durée, sélectionne des zones ou des lieux, et laisse l'algorithme construire un parcours réaliste.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://riviera-secrete.netlify.app/creer-itineraire.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+  .leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
+  .leaflet-popup-tip{ background:var(--surface); }
+  .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
+  .itin-map{ width:100%; height:420px; border-radius:3px; border:1px solid var(--line); position:sticky; top:88px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="index.html#itineraires">Itinéraires</a>
+      <a href="index.html#lieux">Lieux</a>
+      <a href="creer-itineraire.html">Créer un itinéraire</a>
+      <a href="mes-itineraires.html">Mes itinéraires</a>
+    </nav>
+  </div>
+</header>
+
+<section class="builder-hero">
+  <div class="wrap">
+    <span class="eyebrow">Sur mesure</span>
+    <h1>Crée ton <em>itinéraire.</em></h1>
+    <p>Choisis une durée, coche des zones ou affine lieu par lieu — l'algorithme construit un parcours réaliste selon le temps disponible. Rien n'est sauvegardé tant que tu ne le décides pas.</p>
+  </div>
+</section>
+
+<section class="builder-picker" id="picker">
+  <div class="wrap">
+    <h2>1. Combien de temps ?</h2>
+    <div class="builder-duree" role="radiogroup" aria-label="Durée du séjour">
+      <label><input type="radio" name="duree" value="demi-journee"> Demi-journée</label>
+      <label><input type="radio" name="duree" value="journee" checked> Journée</label>
+      <label><input type="radio" name="duree" value="2-jours"> 2 jours</label>
+      <label><input type="radio" name="duree" value="3-jours"> 3 jours</label>
+    </div>
+
+    <h2>2. Quelles zones (ou quels lieux) ?</h2>
+    <p class="builder-picker-hint">Coche une zone entière, ou déplie-la pour choisir des lieux précis.</p>
+    <div class="builder-zones" id="builder-zones"></div>
+
+    <p class="builder-empty-note" id="picker-empty-note" hidden>Sélectionne au moins une zone ou un lieu avant de générer l'itinéraire.</p>
+    <button class="btn" id="btn-generate">Générer mon itinéraire</button>
+  </div>
+</section>
+
+<section class="builder-results" id="results" hidden>
+  <div class="wrap">
+    <div class="builder-results-head">
+      <div>
+        <button class="btn-secondary" id="btn-back-picker">← Modifier la sélection</button>
+        <h2>Ton itinéraire</h2>
+      </div>
+      <div class="builder-results-actions">
+        <button class="btn" id="btn-save">💾 Sauvegarder</button>
+      </div>
+    </div>
+    <p class="builder-excluded-note" id="excluded-note" hidden></p>
+    <p class="builder-save-banner" id="save-banner" hidden>Sauvegardé ✓ — <a href="mes-itineraires.html">voir mes itinéraires →</a></p>
+    <p class="builder-drag-hint">Glisse un lieu pour le réordonner ou changer de jour. Le ✕ le retire.</p>
+
+    <div class="builder-body">
+      <div class="builder-days" id="builder-days"></div>
+      <div id="builder-map" class="itin-map" role="application" aria-label="Carte de l'itinéraire personnalisé"></div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="save-modal" hidden>
+  <div class="modal-box">
+    <h3>Nom de l'itinéraire</h3>
+    <input type="text" id="save-name-input" placeholder="Ex. Week-end villages perchés" maxlength="80">
+    <div class="modal-actions">
+      <button class="btn-secondary" id="save-cancel">Annuler</button>
+      <button class="btn" id="save-confirm">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/itineraire-data.js"></script>
+<script src="assets/itineraire-builder.js"></script>
+</body>
+</html>

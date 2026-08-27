@@ -4,7 +4,8 @@
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Jouard\\\\Documents\\\\FrenchRiviera\\\\RivieraSecrete\" -Recurse -File)",
       "Bash(Select-Object FullName)",
       "Bash(ConvertTo-Csv -NoTypeInformation)",
-      "Bash(powershell -Command ' *)"
+      "Bash(powershell -Command ' *)",
+      "Bash(node scripts/build.mjs)"
     ]
   }
 }
