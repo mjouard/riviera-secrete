@@ -66,10 +66,10 @@ The reverse move has happened three times now: `sentier-nietzsche-eze` and
 `chapelle-rosaire-vence` (demoted onto `saint-paul-de-vence` — its nearest lieu, not same
 commune but the previous/adjacent stop in the `villages-perches` itinerary; all 3 of its
 activités moved over, and its `randonnee` badge — Baous de Vence hike — followed with them).
-None were really independent destinations. **This is not automated** — running the build
-takes care of `SPOTS_MAP_HOME` now, but `index.html`'s card grid, lieu-count copy/counts, and
-JSON-LD `ItemList` (see "Known gap" below) still need hand-editing every time, along with
-`sitemap.xml` and `ROADMAP.md`'s placeholder-image count. If the demoted lieu was
+None were really independent destinations. **This is only partly automated** — running the
+build regenerates `index.html`'s map, card grid, and JSON-LD `ItemList` (see below) from
+whatever's in `data/lieux.json`, but `sitemap.xml` and `ROADMAP.md`'s placeholder-image count
+still need hand-editing every time a lieu is added/removed/demoted. If the demoted lieu was
 also a standalone stop in an itinéraire (as the chapel was), that stop has to be merged into
 the adjacent one — pills moved over, transit/timing adjusted — rather than just repointed,
 and any `itin-suggest`/`itin-preview` card elsewhere quoting that itinéraire's old étape
@@ -99,19 +99,40 @@ live in `scripts/render/lieu.mjs` and are imported into `scripts/render/itin.mjs
 (`renderBadgePills`) so an itinéraire stop shows the referenced lieu's own badges — same
 single-source rule as everything else here, no per-itinéraire badge data.
 
-**`index.html`'s homepage map is generated, the rest of the page isn't.** `build.mjs` calls
-`scripts/render/home-map.mjs`'s `buildSpotsMapHome(lieux)` and regex-replaces the
-`const SPOTS_MAP_HOME = [...]` literal in `index.html` in place — same `name`/`commune`/
-`lat`/`lng` used everywhere else, `color` derived from `regionSlug` (small enum in
-`home-map.mjs`, keep in sync with the filter-button dot colors hand-authored in
-`index.html`'s HTML), `img` from each lieu's `thumbImage`, `intro` a 100-char truncation of
-`description` computed at build time (not stored). If the regex marker ever doesn't match
-(e.g. someone hand-edits the array's shape), `build.mjs` throws rather than silently no-op'ing.
+**`index.html` is hand-authored HTML with three generated blocks injected in place** by
+`build.mjs`, each via its own regex-replace guarded to throw (not silently no-op) if the
+marker it expects isn't found:
+- The homepage map's `const SPOTS_MAP_HOME = [...]` — from `scripts/render/home-map.mjs`'s
+  `buildSpotsMapHome(lieux)`.
+- The JSON-LD `"itemListElement": [...]` in `<head>` — from `home-lieux.mjs`'s
+  `buildItemList(lieux)`.
+- The five `<section class="region-section">…</section>` blocks under `#lieux` — from
+  `home-lieux.mjs`'s `buildRegionSectionsHtml(lieux)`, one call per region in
+  `REGION_ORDER` (`menton-monaco, nice, arriere-pays, antibes-cannes, golfe-st-tropez`).
 
-**Known gap, not yet covered by this data model:** the JSON-LD `ItemList` in `index.html`'s
-`<head>` and the region-grouped card grid (name/commune/thumb/description-snippet/stamp per
-lieu, in `#lieux`) are still hand-typed duplicates of lieu facts, unlike the map now. Editing
-a lieu's name or coordinates in the JSON does **not** propagate to either of those yet.
+**`data/lieux.json`'s array order is the canonical display order** (grouped by region,
+sequenced within each region) — this is what both the card grid and the JSON-LD `ItemList`
+render in, and what the `region-count` per section is computed from (`lieux.length` after
+filtering to that `regionSlug`, not a stored number). Insert a new lieu at the position you
+want it to appear, not just anywhere.
+
+Every lieu also has `thumbImage` — a dedicated small-format image (real `thumb.jpg` where a
+lieu has real photography, otherwise a `picsum.photos/…/500/375` placeholder) distinct from
+`heroImage` (used for the lieu page's own detail-hero, `1200×800`/carousel). Both the map
+popup and every grid card use `thumbImage`; card `alt` text reuses `heroAlt` (verified
+identical for all 27 before switching over — if a future lieu's grid alt should read
+differently from its hero alt, that'll need a real `cardAlt` field, there isn't one yet). The
+grid's `<p>` blurb is a 95-char truncation of `description` (100 for the map's popup `intro`)
+computed at build time, not stored — two different lengths for two different card sizes, same
+source text.
+
+`color` per card badge/dot is derived from `regionSlug` via a small 5-entry enum in
+`home-map.mjs` — keep it in sync with the filter-button dot colors hand-authored in
+`index.html`'s own HTML/CSS if either ever changes.
+
+No known gap left in `index.html` itself. Two more places still hardcode "27" and would need
+updating if the lieu count changes again: `sitemap.xml` (one `<url>` block per lieu) and
+`ROADMAP.md`'s placeholder-image tally.
 
 ## Site structure (2026-08-27)
 

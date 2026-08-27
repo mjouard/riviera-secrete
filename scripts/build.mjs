@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { renderLieu } from './render/lieu.mjs';
 import { renderItin } from './render/itin.mjs';
 import { buildSpotsMapHome } from './render/home-map.mjs';
+import { buildItemList, buildRegionSectionsHtml } from './render/home-lieux.mjs';
 
 const ROOT = join(import.meta.dirname, '..');
 const lieux = JSON.parse(readFileSync(join(ROOT, 'data', 'lieux.json'), 'utf8'));
@@ -20,14 +21,40 @@ for (const itin of itineraires) {
   writeFileSync(join(ROOT, 'itin', `${itin.slug}.html`), renderItin(itin, lieuBySlug));
 }
 
-// index.html stays hand-authored HTML; only its SPOTS_MAP_HOME data array is generated.
-const indexPath = join(ROOT, 'index.html');
-const indexHtml = readFileSync(indexPath, 'utf8');
-if (!/const SPOTS_MAP_HOME = \[.*?\];/s.test(indexHtml)) throw new Error('SPOTS_MAP_HOME marker not found in index.html');
-const newIndexHtml = indexHtml.replace(
-  /const SPOTS_MAP_HOME = \[.*?\];/s,
-  `const SPOTS_MAP_HOME = ${JSON.stringify(buildSpotsMapHome(lieux))};`
-);
-writeFileSync(indexPath, newIndexHtml);
+// index.html stays hand-authored HTML; only three data-derived blocks are generated
+// in place: the homepage map, the JSON-LD ItemList, and the region-grouped card grid.
+function injectOrThrow(html, pattern, replacement, label) {
+  if (!pattern.test(html)) throw new Error(`${label} marker not found in index.html`);
+  return html.replace(pattern, replacement);
+}
 
-console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires régénérées, index.html map data à jour.`);
+const indexPath = join(ROOT, 'index.html');
+let indexHtml = readFileSync(indexPath, 'utf8');
+
+indexHtml = injectOrThrow(
+  indexHtml,
+  /const SPOTS_MAP_HOME = \[.*?\];/s,
+  `const SPOTS_MAP_HOME = ${JSON.stringify(buildSpotsMapHome(lieux))};`,
+  'SPOTS_MAP_HOME',
+);
+
+const itemListLines = buildItemList(lieux)
+  .map((item, i, arr) => `    ${JSON.stringify(item)}${i < arr.length - 1 ? ',' : ''}`)
+  .join('\n');
+indexHtml = injectOrThrow(
+  indexHtml,
+  /"itemListElement": \[.*?\]/s,
+  `"itemListElement": [\n${itemListLines}\n  ]`,
+  'JSON-LD itemListElement',
+);
+
+indexHtml = injectOrThrow(
+  indexHtml,
+  /  <section class="region-section" id="menton-monaco">[\s\S]*?<\/section>\n<\/div>\n\n<footer>/,
+  `${buildRegionSectionsHtml(lieux)}\n</div>\n\n<footer>`,
+  'region sections (#lieux)',
+);
+
+writeFileSync(indexPath, indexHtml);
+
+console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires régénérées, index.html à jour.`);
