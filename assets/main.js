@@ -1,3 +1,22 @@
+// Menu mobile (hamburger) — replie/déplie la nav sous le header en dessous de 700px.
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.nav-toggle').forEach((btn) => {
+    const nav = btn.closest('header')?.querySelector('nav');
+    if (!nav) return;
+    const close = () => {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = '☰';
+    };
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? '✕' : '☰';
+    });
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  });
+});
+
 // Apparition douce des cartes au scroll
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.card');

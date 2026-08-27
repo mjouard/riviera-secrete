@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
           .join('\n');
         return `<details class="builder-zone" data-region="${regionSlug}">
           <summary>
-            <span class="builder-zone-check-wrap">
-              <input type="checkbox" class="zone-checkbox" data-region="${regionSlug}" aria-label="Sélectionner toute la zone ${regionLabel}">
+            <label class="builder-zone-check-wrap">
+              <input type="checkbox" class="zone-checkbox" data-region="${regionSlug}">
               <span>${regionLabel}</span>
-            </span>
+            </label>
             <span class="builder-zone-meta"><span class="builder-zone-count">${regionLieux.length} lieux</span><span class="builder-zone-icon">Affiner ▾</span></span>
           </summary>
           <div class="builder-zone-lieux">
@@ -90,9 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .join('\n');
 
-    // Empêche le clic sur la case zone de (dé)plier le <details>.
+    // Empêche le clic sur le label "zone entière" (case ou texte) de (dé)plier le <details>.
+    zonesEl.querySelectorAll('.builder-zone-check-wrap').forEach((label) => {
+      label.addEventListener('click', (e) => e.stopPropagation());
+    });
     zonesEl.querySelectorAll('.zone-checkbox').forEach((cb) => {
-      cb.addEventListener('click', (e) => e.stopPropagation());
       cb.addEventListener('change', () => {
         const region = cb.dataset.region;
         zonesEl
@@ -166,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     daysEl.innerHTML = currentDays
       .map((day, dayIndex) => {
         const stopsHtml = day.length
-          ? day.map((l) => renderStopCard(l, dayIndex)).join('\n')
+          ? day.map((l, stopIndex) => renderStopCard(l, dayIndex, stopIndex, day.length)).join('\n')
           : '';
         return `<div class="builder-day">
           <h3>Jour ${dayIndex + 1} <span class="builder-day-count mono">${day.length} lieu${day.length > 1 ? 'x' : ''}</span></h3>
@@ -183,10 +185,36 @@ document.addEventListener('DOMContentLoaded', () => {
         syncFromDom();
       });
     });
+    daysEl.querySelectorAll('.builder-stop-move').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.builder-stop-card');
+        moveStop(Number(card.dataset.dayIndex), Number(card.dataset.stopIndex), btn.dataset.dir === 'up' ? -1 : 1);
+      });
+    });
     updateMap();
   }
 
-  function renderStopCard(l, dayIndex) {
+  // Chemin de réordonnancement robuste sur tactile et au clavier — le drag-and-drop natif
+  // (dragstart/dragover) ne se déclenche pas au toucher sur la plupart des navigateurs
+  // mobiles (Safari iOS ne le supporte pas du tout).
+  function moveStop(dayIndex, stopIndex, direction) {
+    const day = currentDays[dayIndex];
+    const targetIndex = stopIndex + direction;
+    if (targetIndex >= 0 && targetIndex < day.length) {
+      [day[stopIndex], day[targetIndex]] = [day[targetIndex], day[stopIndex]];
+    } else if (direction === -1 && dayIndex > 0) {
+      const [item] = day.splice(stopIndex, 1);
+      currentDays[dayIndex - 1].push(item);
+    } else if (direction === 1 && dayIndex < currentDays.length - 1) {
+      const [item] = day.splice(stopIndex, 1);
+      currentDays[dayIndex + 1].unshift(item);
+    } else {
+      return;
+    }
+    renderDays();
+  }
+
+  function renderStopCard(l, dayIndex, stopIndex, dayLength) {
     const badgePills = (l.badges || [])
       .map((id) => {
         const def = D.BADGE_DEFS[id];
@@ -199,7 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .join('');
     const minutes = D.parseVisitMinutes(l);
     const dureeLabel = minutes >= 60 ? `~${(minutes / 60).toFixed(minutes % 60 ? 1 : 0)} h` : `~${minutes} min`;
-    return `<li class="builder-stop-card" draggable="true" data-slug="${l.slug}" data-day-index="${dayIndex}">
+    const isFirstOverall = dayIndex === 0 && stopIndex === 0;
+    const isLastOverall = dayIndex === currentDays.length - 1 && stopIndex === dayLength - 1;
+    return `<li class="builder-stop-card" draggable="true" data-slug="${l.slug}" data-day-index="${dayIndex}" data-stop-index="${stopIndex}">
       <div class="builder-stop-drag" aria-hidden="true">⠿</div>
       <div class="builder-stop-media"><img src="${l.thumbImage}" alt="" loading="lazy"></div>
       <div class="builder-stop-body">
@@ -209,7 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="builder-stop-duree mono">⏱ ${dureeLabel}</span>
         <div class="map-links">${mapLinksHtml}</div>
       </div>
-      <button class="builder-stop-remove" aria-label="Retirer ${l.nom}" title="Retirer">✕</button>
+      <div class="builder-stop-actions">
+        <button class="builder-stop-move" data-dir="up" aria-label="Monter ${l.nom}" title="Monter"${isFirstOverall ? ' disabled' : ''}>▲</button>
+        <button class="builder-stop-remove" aria-label="Retirer ${l.nom}" title="Retirer">✕</button>
+        <button class="builder-stop-move" data-dir="down" aria-label="Descendre ${l.nom}" title="Descendre"${isLastOverall ? ' disabled' : ''}>▼</button>
+      </div>
     </li>`;
   }
 
@@ -252,12 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .map((card) => lieuBySlug.get(card.dataset.slug))
         .filter(Boolean)
     );
-    daysEl.querySelectorAll('.builder-day').forEach((dayEl, i) => {
-      const count = currentDays[i].length;
-      dayEl.querySelector('.builder-day-count').textContent = `${count} lieu${count > 1 ? 'x' : ''}`;
-      dayEl.querySelector('.builder-day-empty').hidden = count > 0;
-    });
-    updateMap();
+    // Re-render entièrement (pas seulement les compteurs) pour que data-stop-index et les
+    // états disabled des boutons ▲/▼ restent corrects après un drag ou un retrait.
+    renderDays();
   }
 
   function ensureMap() {

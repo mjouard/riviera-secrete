@@ -89,7 +89,7 @@
   }
   .map-info-card.is-open{ transform:translateX(0); }
   .map-info-handle{ display:none; }
-  .map-info-close{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; background:rgba(12,17,22,0.75); border:none; color:#fff; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px); flex-shrink:0; }
+  .map-info-close{ position:absolute; top:8px; right:8px; width:40px; height:40px; border-radius:50%; background:rgba(12,17,22,0.75); border:none; color:#fff; font-size:1.05rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px); flex-shrink:0; }
   .map-info-img{ width:100%; height:180px; object-fit:cover; display:block; flex-shrink:0; }
   .map-info-body{ padding:16px 18px 20px; }
   .map-info-region{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
@@ -146,7 +146,7 @@
   .hero-carousel{ position:absolute; inset:0; z-index:0; overflow:hidden; }
   .hero-slide{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:0; transition:opacity 1.5s ease; will-change:opacity; }
   .hero-slide.is-active{ opacity:1; }
-  .hero-overlay{ position:absolute; inset:0; z-index:1; background:linear-gradient(160deg, rgba(12,17,22,0.68) 0%, rgba(12,17,22,0.38) 50%, rgba(12,17,22,0.72) 100%); }
+  .hero-overlay{ position:absolute; inset:0; z-index:1; background:linear-gradient(160deg, rgba(12,17,22,0.72) 0%, rgba(12,17,22,0.52) 50%, rgba(12,17,22,0.78) 100%); }
   .hero .wrap{ position:relative; z-index:2; }
   @media (max-width:600px){ .hero{ min-height:420px; } }
 
@@ -174,6 +174,7 @@
       <a href="#lieux">Lieux</a>
       <a href="mes-itineraires.html">Mes itinéraires</a>
     </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </header>
 

@@ -174,21 +174,6 @@ export function renderLieu(lieu, itinTitles = {}) {
   }
   .popup-link:hover{ text-decoration:underline; }
 
-  .lieu-badges{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
-  .lieu-badge{
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
-    padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
-    display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
-  }
-
-  .map-links{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
-  .map-link{
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
-    padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta);
-    display:inline-flex; align-items:center; gap:5px; white-space:nowrap; text-decoration:none;
-    transition:border-color 0.15s, opacity 0.15s;
-  }
-  .map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
 </style>
 </head>
 <body>
@@ -201,6 +186,7 @@ export function renderLieu(lieu, itinTitles = {}) {
       <a href="../index.html#lieux">Lieux</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
     </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </header>
 

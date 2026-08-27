@@ -40,7 +40,7 @@ header{
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
-header .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+header .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; position:relative; }
 header a.logo{ text-decoration:none; }
 .logo{ font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600; }
 .logo em{ font-style:italic; color:var(--terracotta); font-weight:500; }
@@ -53,6 +53,11 @@ nav a{
   transition:border-color .15s, color .15s;
 }
 nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,255,0.22); }
+.nav-toggle{
+  display:none; background:none; border:1px solid var(--line); border-radius:2px;
+  color:var(--text); width:40px; height:40px; font-size:1.15rem; line-height:1;
+  cursor:pointer; align-items:center; justify-content:center; flex-shrink:0;
+}
 
 /* ---------- HERO ---------- */
 .hero{ position:relative; padding:100px 0 70px; overflow:hidden; }
@@ -207,6 +212,26 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 }
 .meta-pill strong{ color:var(--text); font-weight:500; }
 
+/* ---------- BADGES & MAP LINKS (fiches lieu, cartes d'étape du créateur) ---------- */
+/* Les pages itin/*.html gardent leur propre variante plus compacte, définie dans le
+   <style> inline de scripts/render/itin.mjs (contexte imbriqué dans une liste d'étapes) —
+   celle-ci est la version "standalone" utilisée sur les fiches lieu et par
+   assets/itineraire-builder.js sur creer-itineraire.html. */
+.lieu-badges{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.lieu-badge{
+  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+  padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
+  display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+}
+.map-links{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.map-link{
+  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+  padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta);
+  display:inline-flex; align-items:center; gap:5px; white-space:nowrap; text-decoration:none;
+  transition:border-color 0.15s, opacity 0.15s;
+}
+.map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
+
 /* ---------- ARTICLE ---------- */
 .article{ padding:46px 0 20px; display:grid; grid-template-columns:2fr 1fr; gap:52px; }
 .article-body p{ font-size:1.02rem; color:var(--text-muted); margin-bottom:20px; max-width:62ch; }
@@ -284,10 +309,24 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
   .hero{ padding:70px 0 50px; }
   .detail-hero{ height:42vh; min-height:240px; }
   .detail-hero-caption{ padding:16px 20px; }
-  nav a{ font-size:0.65rem; padding:4px 9px; }
 
-  /* Carousel */
-  .carousel-btn{ width:36px; height:36px; font-size:1.3rem; }
+  /* Menu mobile : la rangée de pastilles ne tient plus à côté du logo en dessous de
+     700px (elle le force sur 2 lignes, qui déborde alors du header de 60px) — remplacée
+     par un bouton hamburger qui déplie les liens en pleine largeur sous le header. */
+  .nav-toggle{ display:flex; }
+  header nav{
+    display:none; position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--bg); border-bottom:1px solid var(--line);
+    padding:8px 16px 16px;
+  }
+  header nav.is-open{ display:flex; }
+  nav a{ width:100%; box-sizing:border-box; text-align:left; padding:12px 14px; font-size:0.8rem; }
+
+  /* Carousel — flèches remontées près du haut du hero plutôt que centrées verticalement :
+     à cette largeur le titre peut passer sur 3 lignes et pousser la légende (bas-ancrée)
+     assez haut pour chevaucher des flèches qui resteraient à 50%. */
+  .carousel-btn{ width:36px; height:36px; font-size:1.3rem; top:16px; transform:none; }
   .carousel-prev{ left:8px; }
   .carousel-next{ right:8px; }
   .carousel-dots{ bottom:12px; right:14px; }
@@ -388,7 +427,7 @@ footer p{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(-
 .builder-day-empty{ color:var(--text-muted); font-size:0.85rem; font-style:italic; padding:10px 0; }
 
 .builder-stop-card{
-  display:grid; grid-template-columns:16px 74px 1fr 30px; gap:12px;
+  display:grid; grid-template-columns:16px 74px 1fr 34px; gap:12px;
   border:1px solid var(--line); border-radius:3px; background:var(--surface);
   padding:12px; align-items:start; cursor:grab;
 }
@@ -401,12 +440,19 @@ footer p{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(-
 .builder-stop-name:hover{ color:var(--terracotta); }
 .builder-stop-commune{ font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
 .builder-stop-duree{ font-size:0.72rem; color:var(--text-muted); display:block; margin:6px 0; }
-.builder-stop-remove{
+/* Boutons monter/descendre/retirer — chemin robuste sur tactile et au clavier, le
+   drag-and-drop natif (dragstart/dragover) ne se déclenche pas au toucher sur la plupart
+   des navigateurs mobiles (Safari iOS ne le supporte pas du tout). */
+.builder-stop-actions{ display:flex; flex-direction:column; gap:5px; align-items:center; }
+.builder-stop-move, .builder-stop-remove{
   background:none; border:1px solid var(--line); border-radius:2px; color:var(--text-muted);
-  cursor:pointer; width:26px; height:26px; font-size:0.8rem; transition:border-color .15s, color .15s;
+  cursor:pointer; width:32px; height:32px; font-size:0.78rem; transition:border-color .15s, color .15s;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:0;
 }
-.builder-stop-remove:hover{ border-color:var(--terracotta); color:var(--terracotta); }
-@media (max-width:600px){ .builder-stop-card{ grid-template-columns:16px 60px 1fr 26px; } }
+.builder-stop-move:hover, .builder-stop-remove:hover{ border-color:var(--terracotta); color:var(--terracotta); }
+.builder-stop-move:disabled{ opacity:0.25; cursor:default; }
+.builder-stop-move:disabled:hover{ border-color:var(--line); color:var(--text-muted); }
+@media (max-width:600px){ .builder-stop-card{ grid-template-columns:16px 60px 1fr 32px; } }
 
 /* ---------- SAVE MODAL ---------- */
 .modal{ position:fixed; inset:0; z-index:100; background:rgba(12,17,22,0.72); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px; }
@@ -450,7 +496,7 @@ footer p{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(-
 }
 @media (max-width:700px){
   .builder-zone-lieux{ grid-template-columns:1fr; padding-left:20px; }
-  .builder-stop-card{ grid-template-columns:16px 1fr 26px; }
+  .builder-stop-card{ grid-template-columns:16px 1fr 32px; }
   .builder-stop-media{ display:none; }
   .mes-itin-card{ flex-direction:column; align-items:flex-start; }
 }
