@@ -56,6 +56,14 @@ Si des infos manquent, demande-les avant de coder.
   URL existe déjà dans un autre lieu, vérifier avec l'utilisateur si c'est la même activité
   (dans ce cas ne rien ajouter, l'itinéraire pourra la référencer directement) ou une
   coïncidence
+- **Un lieu ne doit jamais apparaître comme "activité" d'un autre lieu.** Si l'activité que
+  tu t'apprêtes à ajouter EST en fait un des 30 autres lieux du site (même village, même
+  sentier, même monument avec sa propre fiche dans `lieux/`) — pas une visite ponctuelle
+  DANS ce lieu — ne l'ajoute pas à `activites`. Ajoute plutôt ce lieu au tableau `related`
+  du lieu courant (voir les autres entrées de `related` pour le format de la card). C'était
+  la source du plus gros lot de doublons trouvés dans ce dataset (ex: "Villa Ephrussi de
+  Rothschild" ou "Village médiéval de Roquebrune" listés comme simples activités d'un lieu
+  voisin, alors qu'ils ont chacun leur propre fiche).
 
 ## Vérification finale
 

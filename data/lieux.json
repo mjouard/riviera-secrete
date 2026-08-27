@@ -731,17 +731,6 @@
         "linkText": "Réserver →"
       },
       {
-        "id": "chemin-de-nietzsche",
-        "nom": "Chemin de Nietzsche",
-        "badge": "gratuit",
-        "duree": "1 h 15 – 1 h 45 (montée)",
-        "prix": "Accès libre",
-        "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
-        "image": "../assets/images/lieux/eze-village/act-2.jpg",
-        "alt": "Chemin de Nietzsche à Èze",
-        "linkText": "En savoir plus →"
-      },
-      {
         "id": "atelier-de-creation-de-parfum",
         "nom": "Atelier de création de parfum",
         "badge": "payant",
@@ -762,18 +751,20 @@
         "image": "../assets/images/lieux/eze-village/act-4.jpeg",
         "alt": "Location de bateau en Méditerranée",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "chemin-de-nietzsche",
+        "nom": "Chemin de Nietzsche",
+        "badge": "gratuit",
+        "duree": "1h15–1h45",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
+        "image": "https://picsum.photos/seed/nietzsche-sentier/200/200",
+        "alt": "Randonnée chemin de Nietzsche",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
-      {
-        "href": "rue-obscure-villefranche.html",
-        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
-        "stamp": "43.70°N<br>7.31°E",
-        "region": "Villefranche-sur-Mer",
-        "titre": "La Rue Obscure",
-        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
-      },
       {
         "href": "sentier-cap-ferrat.html",
         "img": "https://picsum.photos/seed/capferrat/500/375",
@@ -784,13 +775,22 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       },
       {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+        "href": "trophee-auguste-la-turbie.html",
+        "img": "assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
+        "alt": "Trophée d'Auguste, monument romain à La Turbie surplombant Monaco",
+        "stamp": "43.74°N<br>7.40°E",
+        "region": "La Turbie",
+        "titre": "Le Trophée d'Auguste",
+        "blurb": "Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpi…"
+      },
+      {
+        "href": "roquebrune-cap-martin-village.html",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
+        "alt": "Village médiéval perché de Roquebrune-Cap-Martin",
+        "stamp": "43.76°N<br>7.50°E",
+        "region": "Roquebrune-Cap-Martin",
+        "titre": "Le village de Roquebrune-Cap-Martin",
+        "blurb": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un …"
       }
     ]
   },
@@ -1087,17 +1087,6 @@
         "image": "https://picsum.photos/seed/chateau-gourdon/200/200",
         "alt": "Château-musée de Gourdon",
         "linkText": "Réserver →"
-      },
-      {
-        "id": "randonnee-gorges-du-loup",
-        "nom": "Randonnée gorges du Loup",
-        "badge": "gratuit",
-        "duree": "2h–3h",
-        "prix": "Accès libre",
-        "url": "https://www.visorando.com/randonnee-gorges-du-loup.html",
-        "image": "https://picsum.photos/seed/gorges-loup-randonnee/200/200",
-        "alt": "Randonnée gorges du Loup",
-        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -1454,15 +1443,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       }
     ]
   },
@@ -2097,17 +2077,6 @@
         "linkText": "Réserver →"
       },
       {
-        "id": "sentier-le-corbusier",
-        "nom": "Sentier Le Corbusier",
-        "badge": "gratuit",
-        "duree": "2h",
-        "prix": "Accès libre",
-        "url": "https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/",
-        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-2.jpg",
-        "alt": "Sentier Le Corbusier",
-        "linkText": "En savoir plus →"
-      },
-      {
         "id": "randonnee-village-cotier",
         "nom": "Randonnée village côtier",
         "badge": "gratuit",
@@ -2121,13 +2090,13 @@
     ],
     "related": [
       {
-        "href": "rue-obscure-villefranche.html",
-        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
-        "stamp": "43.70°N<br>7.31°E",
-        "region": "Villefranche-sur-Mer",
-        "titre": "La Rue Obscure",
-        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+        "href": "sentier-corbusier-cap-martin.html",
+        "img": "https://picsum.photos/seed/corbusier/500/375",
+        "alt": "Sentier littoral du Corbusier au Cap Martin",
+        "stamp": "43.76°N<br>7.50°E",
+        "region": "Cap Martin",
+        "titre": "Le sentier Le Corbusier",
+        "blurb": "Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de v…"
       },
       {
         "href": "sentier-cap-ferrat.html",
@@ -2137,15 +2106,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       }
     ]
   },
@@ -2251,15 +2211,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       },
       {
         "href": "villa-kerylos.html",
@@ -2556,17 +2507,6 @@
         "linkText": "En savoir plus →"
       },
       {
-        "id": "villa-ephrussi-de-rothschild",
-        "nom": "Villa Ephrussi de Rothschild",
-        "badge": "payant",
-        "duree": "1h30",
-        "prix": "18 € / adulte",
-        "url": "https://www.villa-ephrussi.com/",
-        "image": "https://picsum.photos/seed/villa-ephrussi/200/200",
-        "alt": "Villa Ephrussi de Rothschild",
-        "linkText": "Réserver →"
-      },
-      {
         "id": "location-de-velos",
         "nom": "Location de vélos",
         "badge": "payant",
@@ -2575,6 +2515,17 @@
         "url": "https://www.getyourguide.com/saint-jean-cap-ferrat-l97002/",
         "image": "https://picsum.photos/seed/velo-cap-ferrat/200/200",
         "alt": "Location de vélos",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "villa-ephrussi-de-rothschild",
+        "nom": "Villa Ephrussi de Rothschild",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "18 € / adulte",
+        "url": "https://www.villa-ephrussi.com/",
+        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-1.jpg",
+        "alt": "Visite villa & jardins",
         "linkText": "Réserver →"
       }
     ],
@@ -2587,15 +2538,6 @@
         "region": "Villefranche-sur-Mer",
         "titre": "La Rue Obscure",
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       },
       {
         "href": "villa-kerylos.html",
@@ -2677,28 +2619,17 @@
         "image": "https://picsum.photos/seed/cabanon-corbusier/200/200",
         "alt": "Cabanon Le Corbusier (visite guidée)",
         "linkText": "Réserver →"
-      },
-      {
-        "id": "village-medieval-de-roquebrune",
-        "nom": "Village médiéval de Roquebrune",
-        "badge": "payant",
-        "duree": "1h",
-        "prix": "5 € / adulte",
-        "url": "https://www.roquebrune-cap-martin.fr/patrimoine/",
-        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-1.jpg",
-        "alt": "Village médiéval de Roquebrune",
-        "linkText": "Réserver →"
       }
     ],
     "related": [
       {
-        "href": "rue-obscure-villefranche.html",
-        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
-        "stamp": "43.70°N<br>7.31°E",
-        "region": "Villefranche-sur-Mer",
-        "titre": "La Rue Obscure",
-        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+        "href": "roquebrune-cap-martin-village.html",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
+        "alt": "Village médiéval perché de Roquebrune-Cap-Martin",
+        "stamp": "43.76°N<br>7.50°E",
+        "region": "Roquebrune-Cap-Martin",
+        "titre": "Le village de Roquebrune-Cap-Martin",
+        "blurb": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un …"
       },
       {
         "href": "sentier-cap-ferrat.html",
@@ -2708,127 +2639,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
-      }
-    ]
-  },
-  {
-    "slug": "sentier-nietzsche-eze",
-    "nom": "Le sentier Nietzsche",
-    "commune": "Èze",
-    "regionSlug": "menton-monaco",
-    "regionLabel": "Menton, Monaco & la frontière",
-    "lat": 43.6664,
-    "lng": 7.356,
-    "description": "Le chemin escarpé que Friedrich Nietzsche empruntait chaque jour pour rejoindre le village d'Èze, et où il aurait conçu une partie d'Ainsi parlait Zarathoustra.",
-    "ogImage": "https://picsum.photos/seed/sentiernietzsche/1200/800",
-    "heroImage": "https://picsum.photos/seed/sentiernietzsche/1200/800",
-    "heroAlt": "Sentier Nietzsche reliant Èze bord de mer au village perché d'Èze",
-    "heroSlides": null,
-    "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.6664°N, 7.356°E"
-      },
-      {
-        "label": "🗓️ Meilleure saison :",
-        "valeur": "Automne / hiver / printemps (éviter la chaleur estivale)"
-      },
-      {
-        "label": "⏱️ Durée :",
-        "valeur": "45 min à 1 h à la montée"
-      },
-      {
-        "label": "🥾 Niveau :",
-        "valeur": "Modéré, pentu et parfois glissant"
-      }
-    ],
-    "description1": "Le chemin escarpé que Friedrich Nietzsche empruntait chaque jour pour rejoindre le village d'Èze, et où il aurait conçu une partie d'Ainsi parlait Zarathoustra.",
-    "description2": "Le sentier grimpe environ 400 mètres de dénivelé à travers une végétation méditerranéenne dense, entre pins et euphorbes, avec des échappées régulières sur la mer. Physique mais court, il permet d'arriver au village par un autre chemin que les cars de tourisme.",
-    "tips": [
-      {
-        "label": "Accès",
-        "texte": "Départ depuis la gare d'Èze-sur-Mer, arrivée dans le village perché."
-      },
-      {
-        "label": "Eau",
-        "texte": "Pas de point d'eau sur le parcours, à prévoir."
-      },
-      {
-        "label": "Chaussures",
-        "texte": "De marche impérativement, le sentier est caillouteux."
-      }
-    ],
-    "activites": [
-      {
-        "id": "randonnee-chemin-de-nietzsche",
-        "nom": "Randonnée chemin de Nietzsche",
-        "badge": "gratuit",
-        "duree": "1h15–1h45",
-        "prix": "Accès libre",
-        "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
-        "image": "https://picsum.photos/seed/nietzsche-sentier/200/200",
-        "alt": "Randonnée chemin de Nietzsche",
-        "linkText": "En savoir plus →"
-      },
-      {
-        "id": "jardin-exotique-d-eze",
-        "nom": "Jardin exotique d'Èze",
-        "badge": "payant",
-        "duree": "45min–1h15",
-        "prix": "8–10 € / adulte",
-        "url": "https://jardinexotique-eze.fr/",
-        "image": "https://picsum.photos/seed/jardin-exotique-eze/200/200",
-        "alt": "Jardin exotique d'Èze",
-        "linkText": "Réserver →"
-      },
-      {
-        "id": "village-medieval-d-eze",
-        "nom": "Village médiéval d'Èze",
-        "badge": "gratuit",
-        "duree": "1h30",
-        "prix": "Accès libre",
-        "url": "https://www.eze-tourisme.com/",
-        "image": "https://picsum.photos/seed/eze-village-medieval/200/200",
-        "alt": "Village médiéval d'Èze",
-        "linkText": "En savoir plus →"
-      }
-    ],
-    "related": [
-      {
-        "href": "rue-obscure-villefranche.html",
-        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
-        "stamp": "43.70°N<br>7.31°E",
-        "region": "Villefranche-sur-Mer",
-        "titre": "La Rue Obscure",
-        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
-      },
-      {
-        "href": "sentier-cap-ferrat.html",
-        "img": "https://picsum.photos/seed/capferrat/500/375",
-        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Sentier du littoral du Cap Ferrat",
-        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       }
     ]
   },
@@ -3044,15 +2854,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       }
     ]
   },
@@ -3169,118 +2970,6 @@
     ]
   },
   {
-    "slug": "villa-ephrussi-rothschild",
-    "nom": "Villa Ephrussi de Rothschild",
-    "commune": "Saint-Jean-Cap-Ferrat",
-    "regionSlug": "menton-monaco",
-    "regionLabel": "Menton, Monaco & la frontière",
-    "lat": 43.6883,
-    "lng": 7.3306,
-    "description": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du style florentin au jardin japonais.",
-    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/villa-ephrussi-rothschild/hero.jpg",
-    "heroImage": "../assets/images/lieux/villa-ephrussi-rothschild/hero.jpg",
-    "heroAlt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-    "heroSlides": 4,
-    "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.6883°N, 7.3306°E"
-      },
-      {
-        "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps (jardins en fleurs)"
-      },
-      {
-        "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h"
-      },
-      {
-        "label": "🥾 Niveau :",
-        "valeur": "Facile, accessible à tous"
-      }
-    ],
-    "description1": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du style florentin au jardin japonais.",
-    "description2": "Construite au début du XXe siècle par la baronne Béatrice Ephrussi de Rothschild, elle offre une vue à 360° sur les deux baies qui encadrent la presqu'île. Les jardins, redessinés comme le pont d'un paquebot, restent l'un des ensembles paysagers les plus photographiés de la Côte d'Azur.",
-    "tips": [
-      {
-        "label": "Accès",
-        "texte": "Parking payant sur place, à l'entrée de la presqu'île."
-      },
-      {
-        "label": "Billetterie",
-        "texte": "Site payant, billets sur place ou en ligne."
-      },
-      {
-        "label": "Musique",
-        "texte": "Les fontaines du jardin français s'animent en musique à heures fixes."
-      }
-    ],
-    "activites": [
-      {
-        "id": "visite-villa-amp-jardins",
-        "nom": "Visite villa &amp; jardins",
-        "badge": "payant",
-        "duree": "1h30",
-        "prix": "18 € / adulte",
-        "url": "https://www.villa-ephrussi.com/",
-        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-1.jpg",
-        "alt": "Visite villa & jardins",
-        "linkText": "Réserver →"
-      },
-      {
-        "id": "randonnee-sentier-du-cap-ferrat",
-        "nom": "Randonnée sentier du Cap Ferrat",
-        "badge": "gratuit",
-        "duree": "3h",
-        "prix": "Accès libre",
-        "url": "https://www.saintjeancapferrat-tourisme.fr/randonnee",
-        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-2.jpg",
-        "alt": "Randonnée sentier du Cap Ferrat",
-        "linkText": "En savoir plus →"
-      },
-      {
-        "id": "villa-kerylos",
-        "nom": "Villa Kerylos",
-        "badge": "payant",
-        "duree": "1h",
-        "prix": "14 € / adulte",
-        "url": "https://www.villa-kerylos.com/",
-        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-3.jpg",
-        "alt": "Villa Kerylos",
-        "linkText": "Réserver →"
-      }
-    ],
-    "related": [
-      {
-        "href": "rue-obscure-villefranche.html",
-        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
-        "stamp": "43.70°N<br>7.31°E",
-        "region": "Villefranche-sur-Mer",
-        "titre": "La Rue Obscure",
-        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
-      },
-      {
-        "href": "sentier-cap-ferrat.html",
-        "img": "https://picsum.photos/seed/capferrat/500/375",
-        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Sentier du littoral du Cap Ferrat",
-        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-kerylos.html",
-        "img": "https://picsum.photos/seed/kerylos/500/375",
-        "alt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
-        "stamp": "43.71°N<br>7.33°E",
-        "region": "Beaulieu-sur-Mer",
-        "titre": "Villa Kerylos",
-        "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
-      }
-    ]
-  },
-  {
     "slug": "villa-kerylos",
     "nom": "Villa Kerylos",
     "commune": "Beaulieu-sur-Mer",
@@ -3349,17 +3038,6 @@
         "image": "https://picsum.photos/seed/promenade-bord-mer/200/200",
         "alt": "Promenade Gustave Eiffel",
         "linkText": "En savoir plus →"
-      },
-      {
-        "id": "villa-ephrussi-de-rothschild",
-        "nom": "Villa Ephrussi de Rothschild",
-        "badge": "payant",
-        "duree": "1h30",
-        "prix": "18 € / adulte",
-        "url": "https://www.villa-ephrussi.com/",
-        "image": "https://picsum.photos/seed/villa-ephrussi-cap/200/200",
-        "alt": "Villa Ephrussi de Rothschild",
-        "linkText": "Réserver →"
       }
     ],
     "related": [
@@ -3380,15 +3058,6 @@
         "region": "Saint-Jean-Cap-Ferrat",
         "titre": "Sentier du littoral du Cap Ferrat",
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
-      },
-      {
-        "href": "villa-ephrussi-rothschild.html",
-        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
-        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
-        "stamp": "43.69°N<br>7.33°E",
-        "region": "Saint-Jean-Cap-Ferrat",
-        "titre": "Villa Ephrussi de Rothschild",
-        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
       }
     ]
   }

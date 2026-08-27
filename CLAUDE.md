@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Riviera Secrète — a static site (no framework, no server) listing 30 lesser-known spots
+Riviera Secrète — a static site (no framework, no server) listing 28 lesser-known spots
 ("lieux") on the French Riviera (Menton → Saint-Tropez), grouped into 6 day-trip
 itineraries ("itinéraires"). Deployed to Netlify (`riviera-secrete.netlify.app`), French
 content throughout.
@@ -28,7 +28,7 @@ The object hierarchy is: **Itinéraire → Lieux → Activités**, where a Lieu 
 place (village, trail, monument…) and owns its Activités. This is real in the data, not
 just conceptual:
 
-- **`data/lieux.json`** — source of truth for the 30 lieux. Each lieu owns an `activites[]`
+- **`data/lieux.json`** — source of truth for the 28 lieux. Each lieu owns an `activites[]`
   array (`id`, `nom`, `badge` (`gratuit`/`payant`), `duree`, `prix`, `url`, `image`, `alt`,
   `linkText`). Price/duration/url/image for a given activité exist **only here**.
 - **`data/itineraires.json`** — the 6 itinéraires. Each `stop` item references a lieu by
@@ -52,6 +52,23 @@ A lieu's `related` cards (other lieux to discover) and an itinéraire's `suggest
 (other itinéraires) are stored as raw extracted snapshots, **not** cross-referenced against
 each other's live data — that duplication was intentionally left alone (lower stakes, lower
 risk) when the data model above was introduced.
+
+**A lieu must never appear as an "activité" of another lieu.** If something in a lieu's
+`activites[]` is itself one of the 28 lieux (own slug, own page) rather than a bookable
+visit/tour *inside* that lieu, it belongs in `related[]`, not `activites[]`. This was the
+single largest source of duplicated/drifting data found in the original dataset (e.g. "Villa
+Ephrussi de Rothschild" and "Village médiéval de Roquebrune" were each listed as a plain
+"activité" of a neighboring lieu, instead of being cross-linked as the lieux they are) — see
+`/add-activities`' rules for the check to run before adding a new activité.
+
+The reverse move also happened once: `sentier-nietzsche-eze` and `villa-ephrussi-rothschild`
+were originally two of the 30 lieux, but neither was really an independent destination —
+each was demoted to a single activité (on `eze-village` and `sentier-cap-ferrat`
+respectively) and its own `lieux/*.html` page deleted. **This is not automated** — index.html
+and carte.html (see "Known gap" below) had to be hand-edited in the same pass (card grids,
+`SPOTS_MAP_HOME`/`SPOTS_MAP_FULL`, the "28 lieux" copy/counts, JSON-LD `ItemList`), along
+with `sitemap.xml` and `ROADMAP.md`'s placeholder-image count. If a lieu ever needs
+demoting again, expect the same manual sweep.
 
 **Known gap, not yet covered by this data model:** `index.html` and `carte.html` each embed
 their own independent copy of every lieu's name/commune/lat/lng/intro/thumbnail as inline

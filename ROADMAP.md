@@ -2,12 +2,12 @@
 
 ## Priorité contenu
 
-- [ ] Finir les vraies images — 24/30 lieux ont encore des placeholders picsum.photos
+- [ ] Finir les vraies images — 23/28 lieux ont encore des placeholders picsum.photos
 - [ ] Lien "Ouvrir dans Google Maps / Waze" sur chaque fiche lieu
 
 ## Features UX
 
-- [ ] Filtres sur la grille des 30 lieux (par type : sentier, village, monument, île…)
+- [ ] Filtres sur la grille des 28 lieux (par type : sentier, village, monument, île…)
 - [ ] Favoris en localStorage — épingler des lieux sans compte ni backend
 - [ ] Bouton de partage natif (`navigator.share`) sur les fiches lieu
 

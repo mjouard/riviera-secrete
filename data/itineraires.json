@@ -502,7 +502,7 @@
           {
             "label": "Sentier Le Corbusier · Libre",
             "cls": "stop-act--free",
-            "lieuSlug": "roquebrune-cap-martin-village",
+            "lieuSlug": "sentier-corbusier-cap-martin",
             "activiteId": "sentier-le-corbusier"
           }
         ]
@@ -594,10 +594,10 @@
       {
         "type": "stop",
         "heure": "09:30",
-        "lieuSlug": "villa-ephrussi-rothschild",
-        "nom": "Villa Ephrussi de Rothschild",
+        "lieuSlug": "sentier-cap-ferrat",
+        "nom": "Sentier du littoral du Cap Ferrat",
         "commune": "Saint-Jean-Cap-Ferrat",
-        "desc": "Arriver à l'ouverture pour les jardins sans la foule — neuf jardins thématiques et vue sur les deux baies.",
+        "desc": "Balade matinale sur le sentier du littoral, puis les jardins de la Villa Ephrussi à l'ouverture, sans la foule.",
         "activites": [
           {
             "label": "Villa & jardins · 18 € · 1 h 30",
@@ -608,8 +608,8 @@
           {
             "label": "Villa Kerylos · 14 €",
             "cls": "stop-act--paid",
-            "lieuSlug": "villa-ephrussi-rothschild",
-            "activiteId": "villa-kerylos"
+            "lieuSlug": "villa-kerylos",
+            "activiteId": "visite-villa-kerylos"
           }
         ]
       },
