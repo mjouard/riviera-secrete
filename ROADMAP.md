@@ -3,7 +3,7 @@
 ## Priorité contenu
 
 - [ ] Finir les vraies images — 22/27 lieux ont encore des placeholders picsum.photos
-- [ ] Lien "Ouvrir dans Google Maps / Waze" sur chaque fiche lieu
+- [x] Lien "Ouvrir dans Google Maps / Waze / Plans" sur chaque fiche lieu
 
 ## Features UX
 

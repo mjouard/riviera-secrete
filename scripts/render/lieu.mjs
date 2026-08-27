@@ -28,6 +28,17 @@ function renderBadges(badges) {
   return `\n  <div class="lieu-badges">\n${pills}\n  </div>\n`;
 }
 
+// "Ouvrir dans" — built from the lieu's own lat/lng, nothing hand-typed per lieu.
+function renderMapLinks(lat, lng, nom) {
+  const coords = `${lat},${lng}`;
+  const links = [
+    { label: 'Google Maps', icon: '🗺️', url: `https://www.google.com/maps/search/?api=1&query=${coords}` },
+    { label: 'Waze', icon: '🚗', url: `https://waze.com/ul?ll=${coords}&navigate=yes` },
+    { label: 'Plans', icon: '📍', url: `https://maps.apple.com/?ll=${coords}&q=${encodeURIComponent(nom)}` },
+  ];
+  return links.map(l => `        <a class="map-link" href="${l.url}" target="_blank" rel="noopener">${l.icon} ${l.label}</a>`).join('\n');
+}
+
 function renderMetaPills(metaPills) {
   return metaPills.map(p => `    <span class="meta-pill">${p.label} <strong>${p.valeur}</strong></span>`).join('\n');
 }
@@ -161,6 +172,15 @@ export function renderLieu(lieu, itinTitles = {}) {
     padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
     display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
   }
+
+  .map-links{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .map-link{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+    padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta);
+    display:inline-flex; align-items:center; gap:5px; white-space:nowrap; text-decoration:none;
+    transition:border-color 0.15s, opacity 0.15s;
+  }
+  .map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
 </style>
 </head>
 <body>
@@ -205,6 +225,9 @@ ${renderMetaPills(metaPills)}
     </div>
     <aside class="tips">
       <div id="mini-map-${slug}" class="mini-map" role="application" aria-label="Localisation de ${nom}"></div>
+      <div class="map-links">
+${renderMapLinks(lat, lng, nom)}
+      </div>
       <h2>Bon à savoir</h2>
       <ul>
 ${renderTips(tips)}

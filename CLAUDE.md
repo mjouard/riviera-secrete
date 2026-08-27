@@ -174,6 +174,9 @@ philosophy for itineraries, etc.).
 - Every lieu page carries a Leaflet mini-map and a `TouristAttraction` JSON-LD block; every
   itinéraire page carries a full Leaflet route map — both driven by lat/lng already present
   in `data/lieux.json`.
+- Every lieu page also has a "Google Maps / Waze / Plans" link row (`renderMapLinks` in
+  `scripts/render/lieu.mjs`, right under the mini-map) built from the same `lat`/`lng` — no
+  per-lieu URL is ever stored, all three are constructed from coordinates at render time.
 - Hero images: most lieux still use `picsum.photos` placeholders rather than real photos
   (tracked in `ROADMAP.md`); a lieu with real photography sets `heroSlides` (int) so
   `main.js`'s carousel picks up `hero.jpg`, `hero-2.jpg`, … from

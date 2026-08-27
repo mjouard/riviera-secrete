@@ -79,6 +79,15 @@
     padding:4px 11px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
     display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
   }
+
+  .map-links{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .map-link{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
+    padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--terracotta);
+    display:inline-flex; align-items:center; gap:5px; white-space:nowrap; text-decoration:none;
+    transition:border-color 0.15s, opacity 0.15s;
+  }
+  .map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
 </style>
 </head>
 <body>
@@ -132,6 +141,11 @@
     </div>
     <aside class="tips">
       <div id="mini-map-sentier-cap-antibes" class="mini-map" role="application" aria-label="Localisation de Le sentier du littoral du Cap d'Antibes"></div>
+      <div class="map-links">
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.5461,7.1256" target="_blank" rel="noopener">🗺️ Google Maps</a>
+        <a class="map-link" href="https://waze.com/ul?ll=43.5461,7.1256&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+        <a class="map-link" href="https://maps.apple.com/?ll=43.5461,7.1256&q=Le%20sentier%20du%20littoral%20du%20Cap%20d'Antibes" target="_blank" rel="noopener">📍 Plans</a>
+      </div>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Accès</strong>Départs possibles depuis la plage de la Garoupe ou le boulevard du littoral.</li>
