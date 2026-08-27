@@ -14,10 +14,6 @@
     "heroSlides": 2,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7042°N, 7.3103°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -134,10 +130,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.689°N, 7.33°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / automne"
       },
@@ -244,10 +236,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7089°N, 7.3308°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -340,10 +328,6 @@
     "heroAlt": "Village perché d'Èze surplombant la Méditerranée",
     "heroSlides": 3,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.6579°N, 7.3616°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année, tôt le matin pour éviter la foule"
@@ -470,10 +454,6 @@
     "heroSlides": 4,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7378°N, 7.4014°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -578,10 +558,6 @@
     "heroSlides": 4,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7326°N, 7.413°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -676,18 +652,14 @@
     "commune": "Roquebrune-Cap-Martin",
     "regionSlug": "menton-monaco",
     "regionLabel": "Menton, Monaco & la frontière",
-    "lat": 43.7647,
-    "lng": 7.4967,
+    "lat": 43.7612,
+    "lng": 7.452,
     "description": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des plus anciens châteaux de France encore debout.",
     "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/roquebrune-cap-martin-village/hero.jpg",
     "heroImage": "../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg\" data-slides=\"5",
     "heroAlt": "Village médiéval perché de Roquebrune-Cap-Martin",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7647°N, 7.4967°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
@@ -783,10 +755,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7622°N, 7.5027°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / automne"
       },
@@ -878,10 +846,6 @@
     "heroAlt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.6959°N, 7.2795°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année, coucher de soleil recommandé"
@@ -996,10 +960,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.6953°N, 7.2764°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année, matin pour le marché"
       },
@@ -1103,18 +1063,14 @@
     "commune": "Peillon",
     "regionSlug": "arriere-pays",
     "regionLabel": "L'arrière-pays : villages perchés & gorges",
-    "lat": 43.7581,
-    "lng": 7.3697,
+    "lat": 43.7786,
+    "lng": 7.3828,
     "description": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît régulièrement dans des campagnes publicitaires sans que personne ne le reconnaisse.",
     "ogImage": "https://picsum.photos/seed/peillon/1200/800",
     "heroImage": "https://picsum.photos/seed/peillon/1200/800",
     "heroAlt": "Village médiéval de Peillon perché sur son piton rocheux",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7581°N, 7.3697°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
@@ -1231,18 +1187,14 @@
     "commune": "Peille",
     "regionSlug": "arriere-pays",
     "regionLabel": "L'arrière-pays : villages perchés & gorges",
-    "lat": 43.7472,
-    "lng": 7.4056,
+    "lat": 43.8031,
+    "lng": 7.4025,
     "description": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchevêtrement de ruelles voûtées et de passages couverts.",
     "ogImage": "https://picsum.photos/seed/peille/1200/800",
     "heroImage": "https://picsum.photos/seed/peille/1200/800",
     "heroAlt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7472°N, 7.4056°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / automne"
@@ -1358,10 +1310,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7154°N, 6.9764°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année, éviter les jours de mistral"
       },
@@ -1463,10 +1411,6 @@
     "heroAlt": "Cascade de Courmes dans les gorges du Loup",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7311°N, 6.9825°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps (débit maximal)"
@@ -1582,10 +1526,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.7186°N, 6.9967°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -1698,10 +1638,6 @@
     "heroAlt": "Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.7194°N, 7.0472°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Février-mars (floraison des violettes)"
@@ -1816,10 +1752,6 @@
     "heroAlt": "Village fortifié de Saint-Paul-de-Vence, cité des artistes",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.697°N, 7.1214°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
@@ -1967,10 +1899,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.6289°N, 7.0967°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -2084,10 +2012,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.6656°N, 7.1486°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -2199,10 +2123,6 @@
     "heroAlt": "Sentier du littoral du Cap d'Antibes longeant la mer",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.5461°N, 7.1256°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / automne"
@@ -2318,10 +2238,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.5686°N, 7.1067°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Été (festival) ou toute l'année pour la tranquillité"
       },
@@ -2434,10 +2350,6 @@
     "heroAlt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.515°N, 7.048°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / été"
@@ -2554,10 +2466,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.4394°N, 6.8825°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Automne à printemps, éviter la chaleur estivale (risque incendie)"
       },
@@ -2670,10 +2578,6 @@
     "heroAlt": "Calanques rouges de l'Estérel à Théoule-sur-Mer",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.4956°N, 6.9364°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Printemps / automne"
@@ -2790,10 +2694,6 @@
     "heroSlides": null,
     "metaPills": [
       {
-        "label": "📍",
-        "valeur": "43.6584°N, 6.9228°E"
-      },
-      {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
       },
@@ -2905,10 +2805,6 @@
     "heroAlt": "Citadelle de Saint-Tropez dominant le golfe",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.2731°N, 6.6425°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"
@@ -3022,10 +2918,6 @@
     "heroAlt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
     "heroSlides": null,
     "metaPills": [
-      {
-        "label": "📍",
-        "valeur": "43.2258°N, 6.5836°E"
-      },
       {
         "label": "🗓️ Meilleure saison :",
         "valeur": "Toute l'année"

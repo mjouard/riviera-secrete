@@ -28,9 +28,16 @@ The object hierarchy is: **Itinéraire → Lieux → Activités**, where a Lieu 
 place (village, trail, monument…) and owns its Activités. This is real in the data, not
 just conceptual:
 
-- **`data/lieux.json`** — source of truth for the 27 lieux. Each lieu owns an `activites[]`
-  array (`id`, `nom`, `badge` (`gratuit`/`payant`), `duree`, `prix`, `url`, `image`, `alt`,
-  `linkText`). Price/duration/url/image for a given activité exist **only here**.
+- **`data/lieux.json`** — source of truth for the 27 lieux, including `lat`/`lng`
+  (WebSearch-verified against real-world coordinates, 2026-08-27 — 3 were found off by
+  2–6km and corrected: `peille-village`, `peillon-village`,
+  `roquebrune-cap-martin-village`; if you ever add a lieu, verify its coordinates the same
+  way rather than eyeballing a map). Each lieu also owns an `activites[]` array (`id`,
+  `nom`, `badge` (`gratuit`/`payant`), `duree`, `prix`, `url`, `image`, `alt`, `linkText`).
+  Price/duration/url/image for a given activité exist **only here**. `metaPills` holds only
+  the saison/durée/niveau pills — the 📍 coordinates pill is never stored, always computed
+  from `lat`/`lng` at render time (`renderMetaPills` in `scripts/render/lieu.mjs`), so a
+  coordinate fix can't leave a stale duplicate displayed anywhere.
 - **`data/itineraires.json`** — the 6 itinéraires. Each `stop` item references a lieu by
   `lieuSlug`; its pills and the "à réserver" booking cards reference an activité by
   `{ lieuSlug, activiteId }` — never by copying its price/duration/url/image. Only a

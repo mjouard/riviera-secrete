@@ -41,8 +41,14 @@ export function renderMapLinks(lat, lng, nom, indent = '        ') {
   return links.map(l => `${indent}<a class="map-link" href="${l.url}" target="_blank" rel="noopener">${l.icon} ${l.label}</a>`).join('\n');
 }
 
-function renderMetaPills(metaPills) {
-  return metaPills.map(p => `    <span class="meta-pill">${p.label} <strong>${p.valeur}</strong></span>`).join('\n');
+// The 📍 coordinates pill is always first and computed from lat/lng — data/lieux.json's
+// metaPills only holds the other three (saison/durée/niveau), so a coordinate fix can't
+// leave a stale duplicate string on display anywhere.
+function renderMetaPills(metaPills, lat, lng) {
+  const coordPill = { label: '📍', valeur: `${lat}°N, ${lng}°E` };
+  return [coordPill, ...metaPills]
+    .map(p => `    <span class="meta-pill">${p.label} <strong>${p.valeur}</strong></span>`)
+    .join('\n');
 }
 
 function renderTips(tips) {
@@ -217,7 +223,7 @@ export function renderLieu(lieu, itinTitles = {}) {
 
 <div class="wrap">${renderBadges(badges)}
   <div class="meta-bar">
-${renderMetaPills(metaPills)}
+${renderMetaPills(metaPills, lat, lng)}
   </div>
 
   <div class="article">
