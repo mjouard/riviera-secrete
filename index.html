@@ -73,22 +73,42 @@
   .map-filter.is-active{ border-color:rgba(255,255,255,0.2); }
   .map-filter:not(.is-active){ opacity:0.3; }
   .map-filter:hover:not(.is-active){ opacity:0.6; }
-  #map-home{ width:100%; height:min(60vh,600px); min-height:380px; border-radius:3px; border:1px solid var(--line); }
+  #map-home{ width:100%; height:min(60vh,600px); min-height:380px; border-radius:3px; border:1px solid var(--line); overflow:hidden; }
 
   .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
   .map-dot{ width:20px; height:20px; border-radius:50%; border:2.5px solid rgba(255,255,255,0.88); box-shadow:0 2px 10px rgba(0,0,0,0.6); cursor:pointer; transition:transform 0.15s ease; }
   .leaflet-interactive:hover .map-dot{ transform:scale(1.35); }
 
-  .map-info-card{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%) translateY(10px); width:min(300px,calc(100% - 40px)); background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 40px rgba(0,0,0,0.65); overflow:hidden; z-index:1000; opacity:0; pointer-events:none; transition:opacity 0.18s ease,transform 0.18s ease; }
-  .map-info-card.is-open{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
-  .map-info-close{ position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:50%; background:rgba(12,17,22,0.75); border:none; color:#fff; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px); }
-  .map-info-img{ width:100%; height:140px; object-fit:cover; display:block; }
-  .map-info-body{ padding:12px 14px 14px; }
-  .map-info-region{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:3px; }
-  .map-info-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; margin-bottom:6px; }
-  .map-info-intro{ font-size:0.82rem; color:var(--text-muted); margin:0 0 10px; line-height:1.45; }
-  .map-info-link{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.03em; color:var(--terracotta); text-decoration:none; font-weight:500; }
+  /* Panneau (desktop) / bottom-sheet (mobile) affiché au clic sur un marqueur */
+  .map-info-card{
+    position:absolute; top:0; right:0; height:100%; width:min(340px,42%);
+    background:var(--surface); border-left:1px solid var(--line);
+    box-shadow:-10px 0 36px rgba(0,0,0,0.5);
+    z-index:1000; transform:translateX(100%); transition:transform 0.28s ease;
+    display:flex; flex-direction:column; overflow-y:auto;
+  }
+  .map-info-card.is-open{ transform:translateX(0); }
+  .map-info-handle{ display:none; }
+  .map-info-close{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; background:rgba(12,17,22,0.75); border:none; color:#fff; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px); flex-shrink:0; }
+  .map-info-img{ width:100%; height:180px; object-fit:cover; display:block; flex-shrink:0; }
+  .map-info-body{ padding:16px 18px 20px; }
+  .map-info-region{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
+  .map-info-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; display:block; margin-bottom:8px; }
+  .map-info-intro{ font-size:0.86rem; color:var(--text-muted); margin:0 0 12px; line-height:1.5; }
+  .map-info-link{ font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.03em; color:var(--terracotta); text-decoration:none; font-weight:500; }
   .map-info-link:hover{ text-decoration:underline; }
+
+  @media (max-width:700px){
+    .map-info-card{
+      top:auto; left:0; right:0; bottom:0; height:auto; max-height:82%; width:100%;
+      border-left:none; border-top:1px solid var(--line);
+      border-radius:16px 16px 0 0; box-shadow:0 -10px 36px rgba(0,0,0,0.55);
+      transform:translateY(100%);
+    }
+    .map-info-card.is-open{ transform:translateY(0); }
+    .map-info-handle{ display:block; width:36px; height:4px; border-radius:2px; background:var(--line); margin:10px auto 0; flex-shrink:0; touch-action:none; }
+    .map-info-img{ height:160px; }
+  }
 
 
   .itin-preview{ padding:50px 0 20px; }
@@ -731,6 +751,7 @@
     const infoCard = document.createElement('div');
     infoCard.className = 'map-info-card';
     infoCard.innerHTML =
+      '<div class="map-info-handle"></div>' +
       '<button class="map-info-close" aria-label="Fermer">×</button>' +
       '<img class="map-info-img" src="" alt="" loading="lazy">' +
       '<div class="map-info-body">' +
@@ -743,9 +764,7 @@
     L.DomEvent.disableClickPropagation(infoCard);
     L.DomEvent.disableScrollPropagation(infoCard);
 
-    let closeTimer;
     function showCard(s) {
-      clearTimeout(closeTimer);
       infoCard.querySelector('.map-info-img').src = s.img;
       infoCard.querySelector('.map-info-img').alt = s.name;
       infoCard.querySelector('.map-info-region').textContent = s.commune;
@@ -756,9 +775,25 @@
     }
     function hideCard() { infoCard.classList.remove('is-open'); }
     infoCard.querySelector('.map-info-close').addEventListener('click', hideCard);
-    infoCard.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-    infoCard.addEventListener('mouseleave', () => { closeTimer = setTimeout(hideCard, 500); });
     map.on('click', hideCard);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCard(); });
+
+    // Bottom-sheet mobile : glisser la poignée vers le bas pour fermer.
+    const handle = infoCard.querySelector('.map-info-handle');
+    let dragStartY = null;
+    handle.addEventListener('touchstart', (e) => { dragStartY = e.touches[0].clientY; }, { passive: true });
+    handle.addEventListener('touchmove', (e) => {
+      if (dragStartY === null) return;
+      const dy = e.touches[0].clientY - dragStartY;
+      if (dy > 0) infoCard.style.transform = `translateY(${dy}px)`;
+    }, { passive: true });
+    handle.addEventListener('touchend', (e) => {
+      if (dragStartY === null) return;
+      const dy = e.changedTouches[0].clientY - dragStartY;
+      infoCard.style.transform = '';
+      if (dy > 60) hideCard();
+      dragStartY = null;
+    });
 
     const groups = {};
     SPOTS_MAP_HOME.forEach(s => {
@@ -768,8 +803,6 @@
         iconSize: [20, 20], iconAnchor: [10, 10],
       });
       const marker = L.marker([s.lat, s.lng], { icon });
-      marker.on('mouseover', function() { clearTimeout(closeTimer); showCard(s); });
-      marker.on('mouseout', function() { closeTimer = setTimeout(hideCard, 500); });
       marker.on('click', function() { map.panTo(this.getLatLng()); showCard(s); });
       if (!groups[s.region]) groups[s.region] = L.layerGroup();
       groups[s.region].addLayer(marker);

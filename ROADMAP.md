@@ -19,10 +19,9 @@
       et par durée)
 - [ ] Favoris en localStorage — épingler des lieux sans compte ni backend
 - [ ] Bouton de partage natif (`navigator.share`) sur les fiches lieu
-- [ ] Carte homepage : remplacer la mini-fiche au survol par un vrai panneau au clic sur
-      un marqueur — panneau latéral en desktop, bottom-sheet en mobile (le survol ne
-      fonctionne pas bien au doigt) ; à coupler avec le bouton "Ajouter à mon itinéraire"
-      ci-dessous
+- [x] Carte homepage : remplacer la mini-fiche au survol par un vrai panneau au clic sur
+      un marqueur — panneau latéral en desktop, bottom-sheet en mobile avec poignée de
+      glissement pour fermer (fermeture aussi via ✕, clic en dehors, ou Échap)
 
 ## Features différenciantes
 
