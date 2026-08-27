@@ -1,10 +1,17 @@
-# Ajouter des activités à une page lieu
+# Ajouter des activités à un lieu
 
-Ajoute une section "Activités" à une page lieu de Riviera Secrète, juste avant la section `<section class="related">`.
+Ajoute des activités à un lieu de Riviera Secrète.
+
+**Source de vérité : `data/lieux.json`.** Ne jamais éditer `lieux/*.html` à la main — ces
+fichiers sont générés par `node scripts/build.mjs` à partir des données. Toute édition
+HTML directe sera écrasée au prochain build, et casse la règle du site : un lieu possède
+ses activités, chaque fait (prix, durée, url, image) n'existe qu'à un seul endroit — dans
+`data/lieux.json`. Les itinéraires (`data/itineraires.json`) référencent ces activités par
+`{ lieuSlug, activiteId }`, jamais en recopiant leurs prix/durées.
 
 ## Ce que tu dois recevoir de l'utilisateur
 
-- Le fichier cible (ex: `lieux/eze-village.html`)
+- Le lieu cible (slug, ex: `eze-village` — repérable via `data/lieux.json`)
 - La liste des activités, chacune avec :
   - Nom de l'activité
   - Type : `gratuit` ou `payant`
@@ -15,57 +22,44 @@ Ajoute une section "Activités" à une page lieu de Riviera Secrète, juste avan
 
 Si des infos manquent, demande-les avant de coder.
 
-## CSS déjà disponible dans `assets/style.css`
+## Étapes
 
-Toutes les classes sont définies, ne pas les réécrire :
-`.activities`, `.activities h2`, `.activities-grid`, `.activity-card`, `.activity-thumb`, `.activity-content`, `.activity-header`, `.activity-name`, `.activity-badge`, `.activity-badge.gratuit`, `.activity-badge.payant`, `.activity-meta`, `.activity-link`, `.activity-link.free`
+1. Ouvrir `data/lieux.json`, trouver l'objet dont `slug` correspond au lieu cible.
+2. Ajouter un objet à son tableau `activites` :
 
-## Structure HTML à insérer
-
-Trouver le lieu dans le fichier pour le titre de la section (ex: "Activités à Èze").
-Insérer **avant** `<section class="related">` :
-
-```html
-<section class="activities">
-  <div class="wrap">
-    <h2>Activités à [NOM_DU_LIEU]</h2>
-    <div class="activities-grid">
-
-      <!-- Répéter ce bloc pour chaque activité -->
-      <div class="activity-card">
-        <div class="activity-thumb">
-          <img src="https://picsum.photos/seed/[SEED]/200/200" alt="[ALT]" loading="lazy">
-        </div>
-        <div class="activity-content">
-          <div class="activity-header">
-            <span class="activity-name">[NOM]</span>
-            <span class="activity-badge [gratuit|payant]">[Gratuit|Payant]</span>
-          </div>
-          <div class="activity-meta">
-            <span>⏱ [DURÉE]</span>
-            <span>💶 [PRIX]</span>
-          </div>
-          <a class="activity-link [free si gratuit]" href="[URL]" target="_blank" rel="noopener">[Réserver →|En savoir plus →]</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+```json
+{
+  "id": "kebab-case-du-nom",
+  "nom": "[NOM]",
+  "badge": "gratuit|payant",
+  "duree": "[DURÉE]",
+  "prix": "[PRIX]",
+  "url": "[URL]",
+  "image": "https://picsum.photos/seed/[SEED]/200/200",
+  "alt": "[ALT]",
+  "linkText": "Réserver →|En savoir plus →"
+}
 ```
+
+3. Lancer `node scripts/build.mjs` (ou `npm run build`) pour régénérer `lieux/<slug>.html`
+   et tous les `itin/*.html` qui pourraient référencer une de ses activités.
 
 ## Règles
 
-- Badge `gratuit` → classe CSS `gratuit` + lien avec classe `free` + texte "En savoir plus →"
-- Badge `payant` → classe CSS `payant` + lien sans classe `free` + texte "Réserver →"
-- Si le prix est "Accès libre" ou "Gratuit" → afficher quand même la ligne `💶 Accès libre`
-- Seed picsum : utiliser un nom descriptif en kebab-case (ex: `jardin-eze`, `bateau-mer`, `sentier-forêt`)
-- Alt text : description courte en français de la photo
-- Utiliser l'outil `Edit` avec `old_string` = `<section class="related">` et `new_string` = la section activités + `<section class="related">`
+- `id` : kebab-case dérivé du nom, doit être unique dans le tableau `activites` de ce lieu
+  (c'est la clé que les itinéraires utiliseront pour pointer vers cette activité)
+- `badge: "gratuit"` → `linkText: "En savoir plus →"` ; `badge: "payant"` → `linkText: "Réserver →"`
+- Si le prix est "Accès libre" ou "Gratuit" → mettre quand même `"prix": "Accès libre"`
+- Seed picsum : nom descriptif en kebab-case (ex: `jardin-eze`, `bateau-mer`, `sentier-forêt`)
+- `alt` : description courte en français de la photo
+- Ne jamais dupliquer une activité qui existe déjà ailleurs sous une URL identique — si une
+  URL existe déjà dans un autre lieu, vérifier avec l'utilisateur si c'est la même activité
+  (dans ce cas ne rien ajouter, l'itinéraire pourra la référencer directement) ou une
+  coïncidence
 
 ## Vérification finale
 
-Après l'édition, confirmer que :
-1. La section apparaît bien avant `.related`
-2. Chaque card a ses 4 éléments : thumb, header, meta, link
+Après édition du JSON et build :
+1. `git diff lieux/<slug>.html` ne montre que l'ajout attendu
+2. Aucun autre fichier `lieux/*.html` ou `itin/*.html` n'a bougé de façon inattendue
 3. Les URLs sont exactement celles fournies par l'utilisateur (pas raccourcies)

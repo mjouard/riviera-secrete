@@ -1,0 +1,1084 @@
+[
+  {
+    "slug": "antibes-biot-juan",
+    "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+    "description": "Sentier côtier, sieste à l'ombre des pins et verre soufflé — une journée qui alterne mer et artisanat.",
+    "badge": "4 étapes · Journée",
+    "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-antibes/1200/800\" alt=\"La côte d'Antibes et le Cap d'Antibes\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "Journée, trajets courts entre chaque étape"
+      },
+      {
+        "label": "🚗",
+        "valeur": "Marche pour le sentier, voiture pour Biot et Cagnes"
+      },
+      {
+        "label": "📍",
+        "valeur": "4 étapes"
+      }
+    ],
+    "intro": "Sentier côtier, sieste à l'ombre des pins et verre soufflé — une journée qui alterne mer et artisanat.",
+    "strip": [
+      {
+        "src": "https://picsum.photos/seed/sentier-cap-antibes/600/400",
+        "alt": "Le sentier du littoral du Cap d'Antibes"
+      },
+      {
+        "src": "https://picsum.photos/seed/pinede-gould-juan-les-pins/600/400",
+        "alt": "La pinède Gould"
+      },
+      {
+        "src": "https://picsum.photos/seed/biot-village-verrier/600/400",
+        "alt": "Biot, le village des verriers"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire Antibes, Biot &amp; la pinède de Juan-les-Pins",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "09:00",
+        "lieuSlug": "sentier-cap-antibes",
+        "nom": "Le sentier du littoral du Cap d'Antibes",
+        "commune": "Antibes",
+        "desc": "Une bonne partie du sentier du littoral avant la chaleur de la mi-journée.",
+        "activites": [
+          {
+            "label": "Sentier Tirepoil · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "sentier-cap-antibes",
+            "activiteId": "sentier-du-littoral-tirepoil"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — D2559, bord de mer Juan-les-Pins"
+      },
+      {
+        "type": "stop",
+        "heure": "12:00",
+        "lieuSlug": "pinede-gould-juan-les-pins",
+        "nom": "La pinède Gould",
+        "commune": "Juan-les-Pins",
+        "desc": "Pique-nique à l'ombre, pieds presque dans le sable.",
+        "activites": [
+          {
+            "label": "Plage &amp; pins · Libre",
+            "cls": "stop-act--free",
+            "url": "../lieux/pinede-gould-juan-les-pins.html"
+          },
+          {
+            "label": "Paddle / SUP · 15–20 € · 1 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "pinede-gould-juan-les-pins",
+            "activiteId": "location-paddle-sup"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — montée vers le village de Biot"
+      },
+      {
+        "type": "stop",
+        "heure": "14:30",
+        "lieuSlug": "biot-village-verrier",
+        "nom": "Biot, le village des verriers",
+        "commune": "Biot",
+        "desc": "Démonstration de soufflage de verre et flânerie dans les ruelles.",
+        "activites": [
+          {
+            "label": "Verrerie Biot · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "biot-village-verrier",
+            "activiteId": "verrerie-de-biot-demonstration"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — D18 puis D6007"
+      },
+      {
+        "type": "stop",
+        "heure": "16:30",
+        "lieuSlug": "haut-de-cagnes",
+        "nom": "Le Haut-de-Cagnes",
+        "commune": "Cagnes-sur-Mer",
+        "desc": "Fin de journée au château-musée Grimaldi, vue sur la baie de Cagnes.",
+        "activites": [
+          {
+            "label": "Musée Renoir · 9 € · 1 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "haut-de-cagnes",
+            "activiteId": "musee-renoir"
+          }
+        ]
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Antibes",
+        "nomLabel": "Musée Picasso",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "sentier-cap-antibes",
+        "activiteId": "musee-picasso-d-antibes"
+      },
+      {
+        "lieuLabel": "Biot",
+        "nomLabel": "Atelier soufflage de verre",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "biot-village-verrier",
+        "activiteId": "atelier-soufflage-de-verre"
+      },
+      {
+        "lieuLabel": "Cagnes-sur-Mer",
+        "nomLabel": "Château-musée Grimaldi",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "haut-de-cagnes",
+        "activiteId": "chateau-musee-grimaldi"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "lerins-esterel.html",
+        "img": "https://picsum.photos/seed/itin-lerins/600/338",
+        "alt": "Îles de Lérins &amp; Estérel sauvage",
+        "badge": "3 étapes",
+        "titre": "Îles de Lérins &amp; Estérel sauvage"
+      },
+      {
+        "href": "villages-perches.html",
+        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "alt": "La route des villages perchés",
+        "badge": "6 étapes",
+        "titre": "La route des villages perchés"
+      },
+      {
+        "href": "nice-peillon-peille.html",
+        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "badge": "4 étapes",
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+      }
+    ]
+  },
+  {
+    "slug": "grasse-saint-tropez",
+    "titre": "Grasse et la presqu'île de Saint-Tropez",
+    "description": "Les parfumeries de Grasse le matin, un plus beau village de France et la citadelle du golfe l'après-midi.",
+    "badge": "3 étapes · Journée",
+    "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-grasse/1200/800\" alt=\"Grasse et le golfe de Saint-Tropez\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "Journée, environ 1 h de route entre Grasse et le golfe"
+      },
+      {
+        "label": "🚗",
+        "valeur": "En voiture"
+      },
+      {
+        "label": "📍",
+        "valeur": "3 étapes"
+      }
+    ],
+    "intro": "Les parfumeries de Grasse le matin, un plus beau village de France et la citadelle du golfe l'après-midi.",
+    "strip": [
+      {
+        "src": "https://picsum.photos/seed/vieille-ville-grasse/600/400",
+        "alt": "La vieille ville de Grasse"
+      },
+      {
+        "src": "https://picsum.photos/seed/gassin-plus-beau-village/600/400",
+        "alt": "Gassin, plus beau village de France"
+      },
+      {
+        "src": "https://picsum.photos/seed/citadelle-saint-tropez/600/400",
+        "alt": "La Citadelle de Saint-Tropez"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire Grasse et la presqu'île de Saint-Tropez",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "09:30",
+        "lieuSlug": "vieille-ville-grasse",
+        "nom": "La vieille ville de Grasse",
+        "commune": "Grasse",
+        "desc": "Ruelles en escalier et visite gratuite d'un atelier de parfumerie historique.",
+        "activites": [
+          {
+            "label": "Parfumerie Fragonard · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "vieille-ville-grasse",
+            "activiteId": "visite-parfumerie-fragonard"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 60 min — A8 puis D98a, traversée du golfe de Saint-Tropez"
+      },
+      {
+        "type": "stop",
+        "heure": "13:00",
+        "lieuSlug": "gassin-plus-beau-village",
+        "nom": "Gassin, plus beau village de France",
+        "commune": "Gassin",
+        "desc": "Déjeuner sur place, puis le point de vue des Barri sur tout le golfe.",
+        "activites": [
+          {
+            "label": "Panorama des Barri · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "gassin-plus-beau-village",
+            "activiteId": "randonnee-panorama-des-barri"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — D559, descente vers Saint-Tropez"
+      },
+      {
+        "type": "stop",
+        "heure": "15:30",
+        "lieuSlug": "citadelle-saint-tropez",
+        "nom": "La Citadelle de Saint-Tropez",
+        "commune": "Saint-Tropez",
+        "desc": "Fin de journée dans les remparts, loin de l'agitation du port.",
+        "activites": [
+          {
+            "label": "Balade au port · Libre",
+            "cls": "stop-act--free",
+            "url": "../lieux/citadelle-saint-tropez.html"
+          }
+        ]
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Grasse",
+        "nomLabel": "Atelier création de parfum",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "vieille-ville-grasse",
+        "activiteId": "atelier-creation-de-parfum"
+      },
+      {
+        "lieuLabel": "Gassin",
+        "nomLabel": "Dégustation de vins provençaux",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "gassin-plus-beau-village",
+        "activiteId": "degustation-vins-du-golfe"
+      },
+      {
+        "lieuLabel": "Saint-Tropez",
+        "nomLabel": "Citadelle &amp; musée naval",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "citadelle-saint-tropez",
+        "activiteId": "citadelle-amp-musee-naval"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "menton-eze-monaco.html",
+        "img": "https://picsum.photos/seed/itin-menton/600/338",
+        "alt": "Menton, Èze &amp; Monaco : la route des classiques",
+        "badge": "6 étapes",
+        "titre": "Menton, Èze &amp; Monaco : la route des classiques"
+      },
+      {
+        "href": "nice-peillon-peille.html",
+        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "badge": "4 étapes",
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+      },
+      {
+        "href": "villages-perches.html",
+        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "alt": "La route des villages perchés",
+        "badge": "6 étapes",
+        "titre": "La route des villages perchés"
+      }
+    ]
+  },
+  {
+    "slug": "lerins-esterel",
+    "titre": "Îles de Lérins &amp; Estérel sauvage",
+    "description": "Une matinée au large de Cannes, un après-midi sur les roches rouges du massif volcanique le plus photogénique de la Riviera.",
+    "badge": "3 étapes · Journée complète",
+    "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-lerins/1200/800\" alt=\"Les îles de Lérins et le massif de l'Estérel\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "Journée complète, vérifier les horaires de navette avant de partir"
+      },
+      {
+        "label": "⛵",
+        "valeur": "Bateau le matin, voiture puis marche l'après-midi"
+      },
+      {
+        "label": "📍",
+        "valeur": "3 étapes"
+      }
+    ],
+    "intro": "Une matinée au large de Cannes, un après-midi sur les roches rouges du massif volcanique le plus photogénique de la Riviera.",
+    "strip": [
+      {
+        "src": "https://picsum.photos/seed/iles-de-lerins/600/400",
+        "alt": "Les îles de Lérins"
+      },
+      {
+        "src": "https://picsum.photos/seed/pic-cap-roux-esterel/600/400",
+        "alt": "Le Pic du Cap Roux"
+      },
+      {
+        "src": "https://picsum.photos/seed/calanques-esterel-theoule/600/400",
+        "alt": "Les calanques de l'Estérel"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire Îles de Lérins &amp; Estérel sauvage",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "09:00",
+        "lieuSlug": "iles-de-lerins",
+        "nom": "Les îles de Lérins",
+        "commune": "Cannes",
+        "desc": "Traversée en bateau depuis Cannes, matinée sur Sainte-Marguerite ou Saint-Honorat.",
+        "activites": [
+          {
+            "label": "Abbaye Saint-Honorat · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "iles-de-lerins",
+            "activiteId": "abbaye-de-lerins-saint-honorat"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "⛵ retour navette 30 min + 🚗 45 min — A8 puis D559 Estérel"
+      },
+      {
+        "type": "stop",
+        "heure": "14:00",
+        "lieuSlug": "pic-cap-roux-esterel",
+        "nom": "Le Pic du Cap Roux",
+        "commune": "Massif de l'Estérel",
+        "desc": "Montée courte mais soutenue pour le panorama sur tout le massif.",
+        "activites": [
+          {
+            "label": "Randonnée Cap Roux · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "pic-cap-roux-esterel",
+            "activiteId": "randonnee-pic-du-cap-roux"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 20 min — descente vers Théoule-sur-Mer"
+      },
+      {
+        "type": "stop",
+        "heure": "16:30",
+        "lieuSlug": "calanques-esterel-theoule",
+        "nom": "Les calanques de l'Estérel",
+        "commune": "Théoule-sur-Mer",
+        "desc": "Fin d'après-midi les pieds dans l'eau, entre les roches rouges.",
+        "activites": []
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Cannes",
+        "nomLabel": "Traversée Cannes – Lérins",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "iles-de-lerins",
+        "activiteId": "traversee-en-bateau-depuis-cannes"
+      },
+      {
+        "lieuLabel": "Théoule-sur-Mer",
+        "nomLabel": "Kayak de mer en calanque",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "calanques-esterel-theoule",
+        "activiteId": "kayak-de-mer-calanques"
+      },
+      {
+        "lieuLabel": "Théoule-sur-Mer",
+        "nomLabel": "Snorkeling guidé en Estérel",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "calanques-esterel-theoule",
+        "activiteId": "snorkeling-calanques-rouges"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "grasse-saint-tropez.html",
+        "img": "https://picsum.photos/seed/itin-grasse/600/338",
+        "alt": "Grasse et la presqu'île de Saint-Tropez",
+        "badge": "3 étapes",
+        "titre": "Grasse et la presqu'île de Saint-Tropez"
+      },
+      {
+        "href": "antibes-biot-juan.html",
+        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "badge": "4 étapes",
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+      },
+      {
+        "href": "villages-perches.html",
+        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "alt": "La route des villages perchés",
+        "badge": "6 étapes",
+        "titre": "La route des villages perchés"
+      }
+    ]
+  },
+  {
+    "slug": "menton-eze-monaco",
+    "titre": "Menton, Èze &amp; Monaco : la route des classiques",
+    "description": "Deux jours entre villages perchés, panoramas et villas Belle Époque : Grande Corniche, Monaco, Cap Ferrat et Villefranche-sur-Mer.",
+    "badge": "6 étapes · 2 jours",
+    "heroImgTag": "<img src=\"../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg\"\n         data-carousel-srcs=\"../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg,\n                             ../assets/images/lieux/trophee-auguste-la-turbie/hero.jpg,\n                             ../assets/images/lieux/eze-village/hero.jpg,\n                             ../assets/images/lieux/jardin-exotique-monaco/hero.jpg,\n                             ../assets/images/lieux/villa-ephrussi-rothschild/hero.jpg,\n                             ../assets/images/lieux/rue-obscure-villefranche/hero.jpg\"\n         alt=\"La côte de la Riviera entre Menton et Monaco\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "2 jours · rythme serein"
+      },
+      {
+        "label": "🚗",
+        "valeur": "En voiture, prévoir du stationnement payant à chaque étape"
+      },
+      {
+        "label": "📍",
+        "valeur": "6 étapes"
+      }
+    ],
+    "intro": "Deux jours de l'est vers l'ouest : Grande Corniche et villages perchés le premier jour, nuit à Monaco, Cap Ferrat et Villefranche au rythme du deuxième.",
+    "strip": [
+      {
+        "src": "../assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
+        "alt": "Le village de Roquebrune-Cap-Martin"
+      },
+      {
+        "src": "../assets/images/lieux/eze-village/thumb.jpg",
+        "alt": "Èze, le village perché"
+      },
+      {
+        "src": "../assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
+        "alt": "Le Trophée d'Auguste"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire Menton, Èze &amp; Monaco",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "09:00",
+        "lieuSlug": "roquebrune-cap-martin-village",
+        "nom": "Le village de Roquebrune-Cap-Martin",
+        "commune": "Roquebrune-Cap-Martin",
+        "desc": "Flânerie dans les ruelles voûtées avant l'arrivée des groupes.",
+        "activites": [
+          {
+            "label": "Château médiéval · 5 € · 1 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "roquebrune-cap-martin-village",
+            "activiteId": "visite-du-chateau-medieval"
+          },
+          {
+            "label": "Sentier Le Corbusier · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "roquebrune-cap-martin-village",
+            "activiteId": "sentier-le-corbusier"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 20 min — Grande Corniche (montée sinueuse)"
+      },
+      {
+        "type": "stop",
+        "heure": "11:00",
+        "lieuSlug": "trophee-auguste-la-turbie",
+        "nom": "Le Trophée d'Auguste",
+        "commune": "La Turbie",
+        "desc": "Vue imprenable sur Monaco depuis le monument romain, perché sur la Grande Corniche à 480 m.",
+        "activites": [
+          {
+            "label": "Trophée d'Auguste · 7 € · 1 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "trophee-auguste-la-turbie",
+            "activiteId": "visite-du-trophee-d-auguste"
+          },
+          {
+            "label": "Panorama Monaco · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "trophee-auguste-la-turbie",
+            "activiteId": "panorama-sur-monaco"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — descente vers Èze (Moyenne Corniche)"
+      },
+      {
+        "type": "stop",
+        "heure": "12:30",
+        "lieuSlug": "eze-village",
+        "nom": "Èze, le village perché",
+        "commune": "Èze",
+        "desc": "Déjeuner en terrasse au village, puis montée au Jardin exotique pour les panoramas les plus vertigineux.",
+        "activites": [
+          {
+            "label": "Jardin exotique · 8–10 € · 45 min",
+            "cls": "stop-act--paid",
+            "lieuSlug": "eze-village",
+            "activiteId": "le-jardin-exotique"
+          },
+          {
+            "label": "Chemin Nietzsche · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "eze-village",
+            "activiteId": "chemin-de-nietzsche"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 20 min — D6007 puis entrée Monaco"
+      },
+      {
+        "type": "stop",
+        "heure": "15:00",
+        "lieuSlug": "jardin-exotique-monaco",
+        "nom": "Le Jardin exotique de Monaco",
+        "commune": "Monaco",
+        "desc": "Jardin exotique, Musée Océanographique, Rocher de Monaco — avec une nuit sur place, pas besoin de courir.",
+        "activites": [
+          {
+            "label": "Musée Océanographique · 18 € · 2 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "jardin-exotique-monaco",
+            "activiteId": "musee-oceanographique"
+          },
+          {
+            "label": "Jardin exotique Monaco · 8 €",
+            "cls": "stop-act--paid",
+            "lieuSlug": "jardin-exotique-monaco",
+            "activiteId": "jardin-exotique-de-monaco"
+          }
+        ]
+      },
+      {
+        "type": "sleep",
+        "dormirA": "Dormir à Beaulieu-sur-Mer",
+        "commune": "Beaulieu-sur-Mer",
+        "desc": "Village élégant entre Monaco et le Cap Ferrat, idéal pour attaquer la Villa Ephrussi à l'ouverture. Bonne table au port le soir."
+      },
+      {
+        "type": "stop",
+        "heure": "09:30",
+        "lieuSlug": "villa-ephrussi-rothschild",
+        "nom": "Villa Ephrussi de Rothschild",
+        "commune": "Saint-Jean-Cap-Ferrat",
+        "desc": "Arriver à l'ouverture pour les jardins sans la foule — neuf jardins thématiques et vue sur les deux baies.",
+        "activites": [
+          {
+            "label": "Villa & jardins · 18 € · 1 h 30",
+            "cls": "stop-act--paid",
+            "lieuSlug": "sentier-cap-ferrat",
+            "activiteId": "villa-ephrussi-de-rothschild"
+          },
+          {
+            "label": "Villa Kerylos · 14 €",
+            "cls": "stop-act--paid",
+            "lieuSlug": "villa-ephrussi-rothschild",
+            "activiteId": "villa-kerylos"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 10 min — D125 vers Villefranche"
+      },
+      {
+        "type": "stop",
+        "heure": "11:30",
+        "lieuSlug": "rue-obscure-villefranche",
+        "nom": "La Rue Obscure",
+        "commune": "Villefranche-sur-Mer",
+        "desc": "Rue Obscure le matin, déjeuner face au port, après-midi libre pour le kayak ou la plage.",
+        "activites": [
+          {
+            "label": "Kayak de mer · 35–50 € · 2 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "rue-obscure-villefranche",
+            "activiteId": "sortie-kayak-de-mer"
+          },
+          {
+            "label": "Citadelle Saint-Elme · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "rue-obscure-villefranche",
+            "activiteId": "citadelle-saint-elme"
+          }
+        ]
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Roquebrune-Cap-Martin",
+        "nomLabel": "Château médiéval",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "roquebrune-cap-martin-village",
+        "activiteId": "visite-du-chateau-medieval"
+      },
+      {
+        "lieuLabel": "Èze",
+        "nomLabel": "Jardin exotique d'Èze",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "eze-village",
+        "activiteId": "le-jardin-exotique"
+      },
+      {
+        "lieuLabel": "Monaco",
+        "nomLabel": "Musée Océanographique",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "jardin-exotique-monaco",
+        "activiteId": "musee-oceanographique"
+      },
+      {
+        "lieuLabel": "Saint-Jean-Cap-Ferrat",
+        "nomLabel": "Villa Ephrussi de Rothschild",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "sentier-cap-ferrat",
+        "activiteId": "villa-ephrussi-de-rothschild"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "nice-peillon-peille.html",
+        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "badge": "4 étapes",
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+      },
+      {
+        "href": "villages-perches.html",
+        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "alt": "La route des villages perchés",
+        "badge": "6 étapes",
+        "titre": "La route des villages perchés"
+      },
+      {
+        "href": "antibes-biot-juan.html",
+        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "badge": "4 étapes",
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+      }
+    ]
+  },
+  {
+    "slug": "nice-peillon-peille",
+    "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+    "description": "Le meilleur du Vieux Nice le matin, deux villages suspendus l'après-midi — sans passer la journée sur la route.",
+    "badge": "4 étapes · Journée",
+    "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-nice/1200/800\" alt=\"Nice et l'arrière-pays niçois\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "Journée (arrière-pays à 25-30 min de Nice)"
+      },
+      {
+        "label": "🚗",
+        "valeur": "Marche en ville, voiture pour l'arrière-pays"
+      },
+      {
+        "label": "📍",
+        "valeur": "4 étapes"
+      }
+    ],
+    "intro": "Le meilleur du Vieux Nice le matin, deux villages suspendus l'après-midi — sans passer la journée sur la route.",
+    "strip": [
+      {
+        "src": "https://picsum.photos/seed/cours-saleya-vieux-nice/600/400",
+        "alt": "Le Cours Saleya et les ruelles du Vieux Nice"
+      },
+      {
+        "src": "https://picsum.photos/seed/colline-du-chateau-nice/600/400",
+        "alt": "La Colline du Château"
+      },
+      {
+        "src": "https://picsum.photos/seed/peillon-village/600/400",
+        "alt": "Peillon, village suspendu"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire Nice, Peillon &amp; Peille",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "08:30",
+        "lieuSlug": "cours-saleya-vieux-nice",
+        "nom": "Le Cours Saleya et les ruelles du Vieux Nice",
+        "commune": "Nice",
+        "desc": "Marché aux fleurs pendant qu'il est encore calme, avant les terrasses du midi.",
+        "activites": [
+          {
+            "label": "Marché Saleya · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "cours-saleya-vieux-nice",
+            "activiteId": "marche-du-cours-saleya"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚶 5 min — Vieux Nice, rue de la Préfecture"
+      },
+      {
+        "type": "stop",
+        "heure": "10:30",
+        "lieuSlug": "colline-du-chateau-nice",
+        "nom": "La Colline du Château",
+        "commune": "Nice",
+        "desc": "Montée pour la vue sur la baie des Anges en pleine lumière du matin.",
+        "activites": [
+          {
+            "label": "Parc &amp; cascade · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "colline-du-chateau-nice",
+            "activiteId": "cascade-et-parc-du-chateau"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 30 min — D2204, vallée du Paillon"
+      },
+      {
+        "type": "stop",
+        "heure": "12:30",
+        "lieuSlug": "peillon-village",
+        "nom": "Peillon, village suspendu",
+        "commune": "Peillon",
+        "desc": "Déjeuner sur place, puis balade dans le village pyramidal.",
+        "activites": [
+          {
+            "label": "Explorer le village · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "peillon-village",
+            "activiteId": "explorer-le-vieux-village"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 20 min — route de montagne, lacets serrés"
+      },
+      {
+        "type": "stop",
+        "heure": "15:30",
+        "lieuSlug": "peille-village",
+        "nom": "Peille, village de l'arrière-pays",
+        "commune": "Peille",
+        "desc": "Un second village, plus tranquille, pour finir la journée sans la foule.",
+        "activites": [
+          {
+            "label": "Village médiéval · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "peille-village",
+            "activiteId": "exploration-du-village-medieval"
+          }
+        ]
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Nice",
+        "nomLabel": "Tour gastronomique du Vieux Nice",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "cours-saleya-vieux-nice",
+        "activiteId": "tour-gastronomique-vieux-nice"
+      },
+      {
+        "lieuLabel": "Nice",
+        "nomLabel": "Visite guidée du Vieux Nice",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "colline-du-chateau-nice",
+        "activiteId": "vieux-nice-visite-guidee"
+      },
+      {
+        "lieuLabel": "Peillon",
+        "nomLabel": "Déjeuner à Peillon (sur réservation)",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "peillon-village",
+        "activiteId": "dejeuner-sur-la-plage-arnulf"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "menton-eze-monaco.html",
+        "img": "https://picsum.photos/seed/itin-menton/600/338",
+        "alt": "Menton, Èze &amp; Monaco : la route des classiques",
+        "badge": "6 étapes",
+        "titre": "Menton, Èze &amp; Monaco : la route des classiques"
+      },
+      {
+        "href": "villages-perches.html",
+        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "alt": "La route des villages perchés",
+        "badge": "6 étapes",
+        "titre": "La route des villages perchés"
+      },
+      {
+        "href": "antibes-biot-juan.html",
+        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "badge": "4 étapes",
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+      }
+    ]
+  },
+  {
+    "slug": "villages-perches",
+    "titre": "La route des villages perchés",
+    "description": "Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.",
+    "badge": "6 étapes · Journée complète",
+    "heroImgTag": "<img src=\"https://picsum.photos/seed/itin-villages/1200/800\" alt=\"Villages perchés de l'arrière-pays niçois\" loading=\"eager\">",
+    "metaPills": [
+      {
+        "label": "🗓️",
+        "valeur": "Journée complète, coucher de soleil à Gourdon"
+      },
+      {
+        "label": "🚗",
+        "valeur": "En voiture, routes sinueuses de montagne"
+      },
+      {
+        "label": "📍",
+        "valeur": "6 étapes"
+      }
+    ],
+    "intro": "Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.",
+    "strip": [
+      {
+        "src": "https://picsum.photos/seed/saint-paul-de-vence/600/400",
+        "alt": "Saint-Paul-de-Vence"
+      },
+      {
+        "src": "https://picsum.photos/seed/tourrettes-sur-loup/600/400",
+        "alt": "Tourrettes-sur-Loup, la cité des violettes"
+      },
+      {
+        "src": "https://picsum.photos/seed/gourdon-village/600/400",
+        "alt": "Gourdon, le nid d'aigle"
+      }
+    ],
+    "mapLabel": "Carte de l'itinéraire La route des villages perchés",
+    "items": [
+      {
+        "type": "stop",
+        "heure": "09:00",
+        "lieuSlug": "saint-paul-de-vence",
+        "nom": "Saint-Paul-de-Vence",
+        "commune": "Saint-Paul-de-Vence",
+        "desc": "Remparts et galeries d'art avant l'affluence de la mi-journée.",
+        "activites": [
+          {
+            "label": "Remparts &amp; galeries · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "saint-paul-de-vence",
+            "activiteId": "balade-sur-les-remparts"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 10 min — D2 direction Vence"
+      },
+      {
+        "type": "stop",
+        "heure": "11:00",
+        "lieuSlug": "chapelle-rosaire-vence",
+        "nom": "La Chapelle du Rosaire",
+        "commune": "Vence",
+        "desc": "La lumière du matin traverse le mieux les vitraux de Matisse.",
+        "activites": [
+          {
+            "label": "Chapelle Matisse · 7 € · 1 h",
+            "cls": "stop-act--paid",
+            "lieuSlug": "chapelle-rosaire-vence",
+            "activiteId": "chapelle-du-rosaire-matisse"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 15 min — D2210 direction Tourrettes"
+      },
+      {
+        "type": "stop",
+        "heure": "12:30",
+        "lieuSlug": "tourrettes-sur-loup",
+        "nom": "Tourrettes-sur-Loup, la cité des violettes",
+        "commune": "Tourrettes-sur-Loup",
+        "desc": "Déjeuner dans le village, ruelles fleuries en arc de cercle.",
+        "activites": [
+          {
+            "label": "Cité des violettes · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "tourrettes-sur-loup",
+            "activiteId": "visite-de-la-cite-des-violettes"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 10 min — D2210 puis D3"
+      },
+      {
+        "type": "stop",
+        "heure": "14:30",
+        "lieuSlug": "pont-du-loup",
+        "nom": "Pont du Loup et son viaduc",
+        "commune": "Pont-du-Loup",
+        "desc": "Arrêt rapide devant le viaduc en ruine, éventuellement un atelier de fruits confits.",
+        "activites": [
+          {
+            "label": "Confiserie Florian · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "pont-du-loup",
+            "activiteId": "confiserie-florian-visite-gratuite"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 5 min — D3, début des gorges"
+      },
+      {
+        "type": "stop",
+        "heure": "15:30",
+        "lieuSlug": "gorges-du-loup-cascade-courmes",
+        "nom": "Les gorges du Loup et la cascade de Courmes",
+        "commune": "Gorges du Loup",
+        "desc": "Marche jusqu'à la cascade, ou simple arrêt aux points de vue aménagés.",
+        "activites": [
+          {
+            "label": "Randonnée gorges · Libre",
+            "cls": "stop-act--free",
+            "lieuSlug": "gorges-du-loup-cascade-courmes",
+            "activiteId": "randonnee-gorges-du-loup"
+          },
+          {
+            "label": "Escalade &amp; via ferrata · 50–80 €",
+            "cls": "stop-act--paid",
+            "lieuSlug": "gorges-du-loup-cascade-courmes",
+            "activiteId": "escalade-et-via-ferrata"
+          }
+        ]
+      },
+      {
+        "type": "transit",
+        "desc": "🚗 8 min — D3, montée sinueuse vers le sommet"
+      },
+      {
+        "type": "stop",
+        "heure": "17:30",
+        "lieuSlug": "gourdon-village",
+        "nom": "Gourdon, le nid d'aigle",
+        "commune": "Gourdon",
+        "desc": "Le point final, pour le coucher de soleil sur les gorges depuis le nid d'aigle.",
+        "activites": [
+          {
+            "label": "Panorama falaise · Libre",
+            "cls": "stop-act--free",
+            "url": "https://www.gourdon-village.fr/"
+          }
+        ]
+      }
+    ],
+    "booking": [
+      {
+        "lieuLabel": "Saint-Paul-de-Vence",
+        "nomLabel": "Fondation Maeght",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "saint-paul-de-vence",
+        "activiteId": "fondation-maeght"
+      },
+      {
+        "lieuLabel": "Vence",
+        "nomLabel": "Chapelle du Rosaire (Matisse)",
+        "linkText": "Vérifier les horaires →",
+        "extraSpans": [
+          "Mardi &amp; jeudi"
+        ],
+        "lieuSlug": "chapelle-rosaire-vence",
+        "activiteId": "chapelle-du-rosaire-matisse"
+      },
+      {
+        "lieuLabel": "Tourrettes-sur-Loup",
+        "nomLabel": "Atelier céramique",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "tourrettes-sur-loup",
+        "activiteId": "atelier-ceramique-artisanale"
+      },
+      {
+        "lieuLabel": "Gourdon",
+        "nomLabel": "Château-musée de Gourdon",
+        "linkText": "Réserver →",
+        "extraSpans": [],
+        "lieuSlug": "gourdon-village",
+        "activiteId": "chateau-musee-de-gourdon"
+      }
+    ],
+    "suggestions": [
+      {
+        "href": "antibes-biot-juan.html",
+        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "badge": "4 étapes",
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+      },
+      {
+        "href": "lerins-esterel.html",
+        "img": "https://picsum.photos/seed/itin-lerins/600/338",
+        "alt": "Îles de Lérins &amp; Estérel sauvage",
+        "badge": "3 étapes",
+        "titre": "Îles de Lérins &amp; Estérel sauvage"
+      },
+      {
+        "href": "nice-peillon-peille.html",
+        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "badge": "4 étapes",
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+      }
+    ]
+  }
+]

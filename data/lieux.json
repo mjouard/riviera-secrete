@@ -1,0 +1,3395 @@
+[
+  {
+    "slug": "biot-village-verrier",
+    "nom": "Biot, le village des verriers",
+    "commune": "Biot",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.6289,
+    "lng": 7.0967,
+    "description": "Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bulles caractéristiques piégées dans le verre soufflé.",
+    "ogImage": "https://picsum.photos/seed/biot/1200/800",
+    "heroImage": "https://picsum.photos/seed/biot/1200/800",
+    "heroAlt": "Ruelles fleuries du village de Biot, connu pour son verre soufflé",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6289°N, 7.0967°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bulles caractéristiques piégées dans le verre soufflé.",
+    "description2": "Les ruelles pavées et fleuries mènent à des ateliers où l'on peut voir souffler le verre en direct, une tradition locale qui a fait la réputation du village bien au-delà de la région. Le musée national Fernand-Léger, à proximité, complète la visite pour les amateurs d'art moderne.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "15 minutes depuis Antibes, parking à l'entrée du village."
+      },
+      {
+        "label": "Verrerie",
+        "texte": "Démonstrations de soufflage visibles dans plusieurs ateliers du village."
+      },
+      {
+        "label": "Musée Léger",
+        "texte": "À 2 km du village, dédié à l'œuvre de Fernand Léger."
+      }
+    ],
+    "activites": [
+      {
+        "id": "verrerie-de-biot-demonstration",
+        "nom": "Verrerie de Biot (démonstration)",
+        "badge": "gratuit",
+        "duree": "45min",
+        "prix": "Accès libre",
+        "url": "https://www.verreriebiot.com/",
+        "image": "https://picsum.photos/seed/verrerie-biot/200/200",
+        "alt": "Verrerie de Biot (démonstration)",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "atelier-soufflage-de-verre",
+        "nom": "Atelier soufflage de verre",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "45–65 € / adulte",
+        "url": "https://www.getyourguide.com/biot-l97015/",
+        "image": "https://picsum.photos/seed/soufflage-verre/200/200",
+        "alt": "Atelier soufflage de verre",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "musee-national-fernand-leger",
+        "nom": "Musée National Fernand Léger",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "11 € / adulte",
+        "url": "https://www.musees-nationaux-alpesmaritimes.fr/fernand-leger",
+        "image": "https://picsum.photos/seed/musee-leger/200/200",
+        "alt": "Musée National Fernand Léger",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "calanques-esterel-theoule",
+    "nom": "Les calanques de l'Estérel",
+    "commune": "Théoule-sur-Mer",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.4956,
+    "lng": 6.9364,
+    "description": "Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que les calanques marseillaises mais tout aussi spectaculaires.",
+    "ogImage": "https://picsum.photos/seed/calanquesesterel/1200/800",
+    "heroImage": "https://picsum.photos/seed/calanquesesterel/1200/800",
+    "heroAlt": "Calanques rouges de l'Estérel à Théoule-sur-Mer",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.4956°N, 6.9364°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 à 4 h selon le nombre de calanques visitées"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré"
+      }
+    ],
+    "description1": "Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que les calanques marseillaises mais tout aussi spectaculaires.",
+    "description2": "Le sentier du littoral qui les relie serpente entre pins parasols et à-pics rocheux, avec des eaux d'un bleu profond contrastant avec la roche volcanique. Certaines calanques ne sont accessibles qu'à pied ou en kayak, ce qui limite naturellement la fréquentation.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Départs depuis Théoule-sur-Mer ou Le Trayas, plusieurs points d'entrée sur le sentier."
+      },
+      {
+        "label": "Baignade",
+        "texte": "Eaux limpides, certaines calanques idéales pour la plongée libre."
+      },
+      {
+        "label": "Prudence",
+        "texte": "Sentier étroit par endroits, éviter par mer agitée."
+      }
+    ],
+    "activites": [
+      {
+        "id": "kayak-de-mer-calanques",
+        "nom": "Kayak de mer calanques",
+        "badge": "payant",
+        "duree": "2h–3h",
+        "prix": "40–60 € / pers.",
+        "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/",
+        "image": "https://picsum.photos/seed/kayak-esterel/200/200",
+        "alt": "Kayak de mer calanques",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "snorkeling-calanques-rouges",
+        "nom": "Snorkeling calanques rouges",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "30–45 € / pers.",
+        "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/snorkeling",
+        "image": "https://picsum.photos/seed/snorkeling-calanques/200/200",
+        "alt": "Snorkeling calanques rouges",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-cotiere-calanques",
+        "nom": "Randonnée côtière calanques",
+        "badge": "gratuit",
+        "duree": "2h–3h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-theoule-sur-mer.html",
+        "image": "https://picsum.photos/seed/calanques-randonnee/200/200",
+        "alt": "Randonnée côtière calanques",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-antibes.html",
+        "img": "https://picsum.photos/seed/capantibes/500/375",
+        "alt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+        "stamp": "43.55°N<br>7.13°E",
+        "region": "Antibes",
+        "titre": "Le sentier du littoral du Cap d'Antibes",
+        "blurb": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre c…"
+      },
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "https://picsum.photos/seed/pinedegould/500/375",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "La pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus an…"
+      },
+      {
+        "href": "iles-de-lerins.html",
+        "img": "https://picsum.photos/seed/lerins/500/375",
+        "alt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+        "stamp": "43.52°N<br>7.05°E",
+        "region": "Cannes",
+        "titre": "Les îles de Lérins",
+        "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
+      }
+    ]
+  },
+  {
+    "slug": "chapelle-rosaire-vence",
+    "nom": "La Chapelle du Rosaire",
+    "commune": "Vence",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7278,
+    "lng": 7.1178,
+    "description": "Une petite chapelle entièrement conçue par Henri Matisse à la fin de sa vie, qu'il considérait comme son chef-d'œuvre malgré sa simplicité apparente.",
+    "ogImage": "https://picsum.photos/seed/chapellerosaire/1200/800",
+    "heroImage": "https://picsum.photos/seed/chapellerosaire/1200/800",
+    "heroAlt": "Chapelle du Rosaire dessinée par Henri Matisse à Vence",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7278°N, 7.1178°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année, matin pour la lumière"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "45 min"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une petite chapelle entièrement conçue par Henri Matisse à la fin de sa vie, qu'il considérait comme son chef-d'œuvre malgré sa simplicité apparente.",
+    "description2": "Vitraux bleu, vert et jaune, céramiques murales en noir et blanc : tout, du mobilier aux vêtements liturgiques, a été dessiné par l'artiste. La lumière qui traverse les vitraux change complètement l'atmosphère du lieu selon l'heure de la visite.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "En périphérie de Vence, parking sur place."
+      },
+      {
+        "label": "Horaires",
+        "texte": "Ouverture limitée à certains jours et créneaux, à vérifier avant de venir."
+      },
+      {
+        "label": "Silence",
+        "texte": "Lieu de culte actif, visite dans le calme demandée."
+      }
+    ],
+    "activites": [
+      {
+        "id": "chapelle-du-rosaire-matisse",
+        "nom": "Chapelle du Rosaire (Matisse)",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "7 € / adulte",
+        "url": "https://www.chapellematisse.com/",
+        "image": "https://picsum.photos/seed/chapelle-matisse/200/200",
+        "alt": "Chapelle du Rosaire (Matisse)",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "vieille-ville-de-vence",
+        "nom": "Vieille ville de Vence",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.vence.fr/tourisme",
+        "image": "https://picsum.photos/seed/vieille-ville-vence/200/200",
+        "alt": "Vieille ville de Vence",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-baous-de-vence",
+        "nom": "Randonnée Baous de Vence",
+        "badge": "gratuit",
+        "duree": "2h–3h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-vence.html",
+        "image": "https://picsum.photos/seed/baous-vence-randonnee/200/200",
+        "alt": "Randonnée Baous de Vence",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "citadelle-saint-tropez",
+    "nom": "La Citadelle de Saint-Tropez",
+    "commune": "Saint-Tropez",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.2731,
+    "lng": 6.6425,
+    "description": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet de l'agitation des quais en contrebas.",
+    "ogImage": "https://picsum.photos/seed/citadellesttropez/1200/800",
+    "heroImage": "https://picsum.photos/seed/citadellesttropez/1200/800",
+    "heroAlt": "Citadelle de Saint-Tropez dominant le golfe",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.2731°N, 6.6425°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet de l'agitation des quais en contrebas.",
+    "description2": "Les remparts, entourés d'un parc de pins et d'oliviers, offrent une vue d'ensemble sur la ville, le port et les collines des Maures qui referment le golfe. Le musée d'histoire maritime installé à l'intérieur retrace un Saint-Tropez bien antérieur à sa réputation actuelle.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "10 minutes à pied depuis le port, montée progressive à travers le parc."
+      },
+      {
+        "label": "Billetterie",
+        "texte": "Musée payant, remparts et parc extérieur libres d'accès."
+      },
+      {
+        "label": "Vue",
+        "texte": "Meilleur point de vue gratuit sur le golfe de Saint-Tropez."
+      }
+    ],
+    "activites": [
+      {
+        "id": "citadelle-amp-musee-naval",
+        "nom": "Citadelle &amp; musée naval",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "9 € / adulte",
+        "url": "https://www.saint-tropez.fr/culture/la-citadelle",
+        "image": "https://picsum.photos/seed/citadelle-saint-tropez/200/200",
+        "alt": "Citadelle & musée naval",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "balade-au-port-de-saint-tropez",
+        "nom": "Balade au port de Saint-Tropez",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.saint-tropez.fr/",
+        "image": "https://picsum.photos/seed/port-saint-tropez/200/200",
+        "alt": "Balade au port de Saint-Tropez",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "location-de-bateau",
+        "nom": "Location de bateau",
+        "badge": "payant",
+        "duree": "4h",
+        "prix": "200–500 € / groupe",
+        "url": "https://www.clickandboat.com/location-bateau/france/cote-azur/saint-tropez",
+        "image": "https://picsum.photos/seed/bateau-saint-tropez/200/200",
+        "alt": "Location de bateau",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieille-ville-grasse.html",
+        "img": "https://picsum.photos/seed/grasse/500/375",
+        "alt": "Ruelles de la vieille ville de Grasse, capitale mondiale du parfum",
+        "stamp": "43.66°N<br>6.92°E",
+        "region": "Grasse",
+        "titre": "La vieille ville de Grasse",
+        "blurb": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et…"
+      },
+      {
+        "href": "gassin-plus-beau-village.html",
+        "img": "https://picsum.photos/seed/gassin/500/375",
+        "alt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
+        "stamp": "43.23°N<br>6.58°E",
+        "region": "Gassin",
+        "titre": "Gassin, plus beau village de France",
+        "blurb": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seuleme…"
+      },
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      }
+    ]
+  },
+  {
+    "slug": "colline-du-chateau-nice",
+    "nom": "La Colline du Château",
+    "commune": "Nice",
+    "regionSlug": "nice",
+    "regionLabel": "Nice et ses environs immédiats",
+    "lat": 43.6959,
+    "lng": 7.2795,
+    "description": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, remplacée par un parc ombragé et un des meilleurs points de vue de la ville.",
+    "ogImage": "https://picsum.photos/seed/chateaunice/1200/800",
+    "heroImage": "https://picsum.photos/seed/chateaunice/1200/800",
+    "heroAlt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6959°N, 7.2795°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année, coucher de soleil recommandé"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile (ascenseur disponible) à modéré (escaliers)"
+      }
+    ],
+    "description1": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, remplacée par un parc ombragé et un des meilleurs points de vue de la ville.",
+    "description2": "D'en haut, la baie des Anges se déploie dans son intégralité, de l'aéroport jusqu'au port. Une cascade artificielle et les vestiges de la citadelle complètent la promenade, à l'écart de l'agitation de la Promenade des Anglais en contrebas.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Escaliers depuis le Vieux Nice, ou ascenseur payant depuis le quai des États-Unis."
+      },
+      {
+        "label": "Meilleur moment",
+        "texte": "Coucher de soleil, quand la baie s'illumine progressivement."
+      },
+      {
+        "label": "Gratuit",
+        "texte": "L'accès au parc est entièrement libre."
+      }
+    ],
+    "activites": [
+      {
+        "id": "cascade-et-parc-du-chateau",
+        "nom": "Cascade et parc du château",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.nicetourisme.com/activites/parc-du-chateau",
+        "image": "https://picsum.photos/seed/cascade-chateau-nice/200/200",
+        "alt": "Cascade et parc du château",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vieux-nice-visite-guidee",
+        "nom": "Vieux Nice — visite guidée",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "15 € / adulte",
+        "url": "https://www.getyourguide.com/nice-l175/vieux-nice",
+        "image": "https://picsum.photos/seed/vieux-nice-visite/200/200",
+        "alt": "Vieux Nice — visite guidée",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "montee-en-ascenseur-colline",
+        "nom": "Montée en ascenseur (Colline)",
+        "badge": "gratuit",
+        "duree": "30min",
+        "prix": "Accès libre",
+        "url": "https://www.nicetourisme.com/",
+        "image": "https://picsum.photos/seed/ascenseur-nice/200/200",
+        "alt": "Montée en ascenseur (Colline)",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "cours-saleya-vieux-nice.html",
+        "img": "https://picsum.photos/seed/coursaleya/500/375",
+        "alt": "Marché du Cours Saleya dans les ruelles colorées du Vieux Nice",
+        "stamp": "43.70°N<br>7.28°E",
+        "region": "Nice",
+        "titre": "Le Cours Saleya et les ruelles du Vieux Nice",
+        "blurb": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composen…"
+      },
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      }
+    ]
+  },
+  {
+    "slug": "cours-saleya-vieux-nice",
+    "nom": "Le Cours Saleya et les ruelles du Vieux Nice",
+    "commune": "Nice",
+    "regionSlug": "nice",
+    "regionLabel": "Nice et ses environs immédiats",
+    "lat": 43.6953,
+    "lng": 7.2764,
+    "description": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'image la plus photographiée de la ville après la Promenade des Anglais.",
+    "ogImage": "https://picsum.photos/seed/coursaleya/1200/800",
+    "heroImage": "https://picsum.photos/seed/coursaleya/1200/800",
+    "heroAlt": "Marché du Cours Saleya dans les ruelles colorées du Vieux Nice",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6953°N, 7.2764°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année, matin pour le marché"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h de balade"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'image la plus photographiée de la ville après la Promenade des Anglais.",
+    "description2": "Le matin, le marché déborde de fleurs, d'olives et de socca fraîchement cuite ; le soir, les mêmes tables se transforment en terrasses de restaurants. S'écarter d'une rue ou deux suffit à trouver des façades décrépies et poétiques, loin des foules.",
+    "tips": [
+      {
+        "label": "Marché",
+        "texte": "Marché aux fleurs et à la brocante, fermé le lundi (sauf brocante)."
+      },
+      {
+        "label": "Spécialité locale",
+        "texte": "La socca, galette de pois chiche, se déguste directement dans la rue."
+      },
+      {
+        "label": "Photo",
+        "texte": "Les ruelles perpendiculaires au Cours offrent les façades les plus typiques."
+      }
+    ],
+    "activites": [
+      {
+        "id": "marche-du-cours-saleya",
+        "nom": "Marché du Cours Saleya",
+        "badge": "gratuit",
+        "duree": "1h–2h",
+        "prix": "Accès libre",
+        "url": "https://www.nicetourisme.com/activites/marche-cours-saleya",
+        "image": "https://picsum.photos/seed/marche-cours-saleya/200/200",
+        "alt": "Marché du Cours Saleya",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "tour-gastronomique-vieux-nice",
+        "nom": "Tour gastronomique Vieux Nice",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "45–55 € / adulte",
+        "url": "https://www.getyourguide.com/nice-l175/tour-gastronomique",
+        "image": "https://picsum.photos/seed/gastronomie-nice/200/200",
+        "alt": "Tour gastronomique Vieux Nice",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "cours-de-cuisine-nicoise",
+        "nom": "Cours de cuisine niçoise",
+        "badge": "payant",
+        "duree": "3h",
+        "prix": "65–90 € / adulte",
+        "url": "https://www.getyourguide.com/nice-l175/cours-de-cuisine",
+        "image": "https://picsum.photos/seed/cuisine-nicoise/200/200",
+        "alt": "Cours de cuisine niçoise",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "colline-du-chateau-nice.html",
+        "img": "https://picsum.photos/seed/chateaunice/500/375",
+        "alt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
+        "stamp": "43.70°N<br>7.28°E",
+        "region": "Nice",
+        "titre": "La Colline du Château",
+        "blurb": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui dispar…"
+      },
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      }
+    ]
+  },
+  {
+    "slug": "eze-village",
+    "nom": "Èze, le village perché",
+    "commune": "Èze",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.6579,
+    "lng": 7.3616,
+    "description": "Un village médiéval accroché à un piton rocheux à 400 mètres au-dessus de la mer, avec des ruelles si étroites que certaines maisons se touchent au-dessus de la tête.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/eze-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/eze-village/hero.jpg",
+    "heroAlt": "Village perché d'Èze surplombant la Méditerranée",
+    "heroSlides": 3,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6579°N, 7.3616°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année, tôt le matin pour éviter la foule"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, mais pentu"
+      }
+    ],
+    "description1": "Un village médiéval accroché à un piton rocheux à 400 mètres au-dessus de la mer, avec des ruelles si étroites que certaines maisons se touchent au-dessus de la tête.",
+    "description2": "Le sommet du village, occupé par le Jardin exotique, offre l'un des panoramas les plus vertigineux de toute la Côte d'Azur, de Monaco au cap Ferrat. Tôt le matin, avant l'arrivée des cars, le village retrouve son silence de pierre.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking payant en contrebas du village, montée à pied uniquement."
+      },
+      {
+        "label": "Meilleur moment",
+        "texte": "Avant 10h ou en fin de journée pour éviter les groupes de visiteurs."
+      },
+      {
+        "label": "Jardin exotique",
+        "texte": "Site payant au sommet, vue circulaire sur la Riviera."
+      }
+    ],
+    "activites": [
+      {
+        "id": "le-jardin-exotique",
+        "nom": "Le Jardin exotique",
+        "badge": "payant",
+        "duree": "45 min – 1 h 15",
+        "prix": "8 – 10 € / adulte",
+        "url": "https://jardinexotique-eze.fr/",
+        "image": "../assets/images/lieux/eze-village/act-1.jpg",
+        "alt": "Jardin exotique d'Èze",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "chemin-de-nietzsche",
+        "nom": "Chemin de Nietzsche",
+        "badge": "gratuit",
+        "duree": "1 h 15 – 1 h 45 (montée)",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
+        "image": "../assets/images/lieux/eze-village/act-2.jpg",
+        "alt": "Chemin de Nietzsche à Èze",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "atelier-de-creation-de-parfum",
+        "nom": "Atelier de création de parfum",
+        "badge": "payant",
+        "duree": "45 min",
+        "prix": "30 € / adulte",
+        "url": "https://www.getyourguide.com/eze-l12561/fragonard-eze-cours-de-parfumerie-et-visite-de-la-fabrique-t417234/?ranking_uuid=e6009bd2-8aa6-4e0a-a1d5-7c70e27ed662&referral_redirect=1",
+        "image": "../assets/images/lieux/eze-village/act-3.jpg",
+        "alt": "Atelier de parfum à Èze",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "location-de-bateau",
+        "nom": "Location de bateau",
+        "badge": "payant",
+        "duree": "1 – 2 h",
+        "prix": "40 – 100 € / pers.",
+        "url": "https://www.clickandboat.com/location/type-de-bateau-semi-rigide/pays-france/departement-alpes-maritimes/ville-eze",
+        "image": "../assets/images/lieux/eze-village/act-4.jpeg",
+        "alt": "Location de bateau en Méditerranée",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "gassin-plus-beau-village",
+    "nom": "Gassin, plus beau village de France",
+    "commune": "Gassin",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.2258,
+    "lng": 6.5836,
+    "description": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.",
+    "ogImage": "https://picsum.photos/seed/gassin/1200/800",
+    "heroImage": "https://picsum.photos/seed/gassin/1200/800",
+    "heroAlt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.2258°N, 6.5836°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h à 1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.",
+    "description2": "Ruelles étroites, placettes ombragées et point de vue dit \"des Barri\", d'où le regard porte sur tout le golfe de Saint-Tropez jusqu'aux Maures. Contrairement à sa voisine, la circulation automobile y est quasi inexistante, ce qui en fait une pause tranquille au milieu des vignobles.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "10 minutes en voiture depuis Saint-Tropez, parking à l'entrée du village."
+      },
+      {
+        "label": "Point de vue",
+        "texte": "Le \"Point de vue des Barri\" est en accès libre, l'un des meilleurs panoramas du golfe."
+      },
+      {
+        "label": "Vignobles",
+        "texte": "Le village est entouré de domaines viticoles de l'appellation Côtes de Provence."
+      }
+    ],
+    "activites": [
+      {
+        "id": "randonnee-panorama-des-barri",
+        "nom": "Randonnée panorama des Barri",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.gassin.eu/",
+        "image": "https://picsum.photos/seed/panorama-barri-gassin/200/200",
+        "alt": "Randonnée panorama des Barri",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "degustation-vins-du-golfe",
+        "nom": "Dégustation vins du golfe",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "15–25 € / dégustation",
+        "url": "https://www.getyourguide.com/saint-tropez-l97024/degustation-vins",
+        "image": "https://picsum.photos/seed/degustation-vins-golfe/200/200",
+        "alt": "Dégustation vins du golfe",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "visite-du-village-classe",
+        "nom": "Visite du village classé",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/gassin",
+        "image": "https://picsum.photos/seed/gassin-village-classe/200/200",
+        "alt": "Visite du village classé",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieille-ville-grasse.html",
+        "img": "https://picsum.photos/seed/grasse/500/375",
+        "alt": "Ruelles de la vieille ville de Grasse, capitale mondiale du parfum",
+        "stamp": "43.66°N<br>6.92°E",
+        "region": "Grasse",
+        "titre": "La vieille ville de Grasse",
+        "blurb": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et…"
+      },
+      {
+        "href": "citadelle-saint-tropez.html",
+        "img": "https://picsum.photos/seed/citadellesttropez/500/375",
+        "alt": "Citadelle de Saint-Tropez dominant le golfe",
+        "stamp": "43.27°N<br>6.64°E",
+        "region": "Saint-Tropez",
+        "titre": "La Citadelle de Saint-Tropez",
+        "blurb": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart co…"
+      },
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      }
+    ]
+  },
+  {
+    "slug": "gorges-du-loup-cascade-courmes",
+    "nom": "Les gorges du Loup et la cascade de Courmes",
+    "commune": "Gorges du Loup",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7311,
+    "lng": 6.9825,
+    "description": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptées dans la roche.",
+    "ogImage": "https://picsum.photos/seed/gorgesduloup/1200/800",
+    "heroImage": "https://picsum.photos/seed/gorgesduloup/1200/800",
+    "heroAlt": "Cascade de Courmes dans les gorges du Loup",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7311°N, 6.9825°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps (débit maximal)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 à 3 h selon les points visités"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré, sentier escarpé pour la cascade"
+      }
+    ],
+    "description1": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptées dans la roche.",
+    "description2": "La cascade de Courmes, haute d'une quarantaine de mètres, se rejoint par un sentier escarpé mais reste l'une des plus impressionnantes de l'arrière-pays. Plus bas, les Saut du Loup et la passerelle suspendue offrent d'autres points de vue plus accessibles pour ceux qui préfèrent rester en voiture.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Route D3 entre Gourdon et Grasse, plusieurs points d'arrêt aménagés."
+      },
+      {
+        "label": "Baignade",
+        "texte": "Certaines vasques se prêtent à la baignade en été, prudence sur les rochers glissants."
+      },
+      {
+        "label": "Chaussures",
+        "texte": "De randonnée pour l'accès à la cascade de Courmes."
+      }
+    ],
+    "activites": [
+      {
+        "id": "randonnee-gorges-du-loup",
+        "nom": "Randonnée gorges du Loup",
+        "badge": "gratuit",
+        "duree": "2h–4h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-gorges-du-loup.html",
+        "image": "https://picsum.photos/seed/gorges-loup-sentier/200/200",
+        "alt": "Randonnée gorges du Loup",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "escalade-et-via-ferrata",
+        "nom": "Escalade et via ferrata",
+        "badge": "payant",
+        "duree": "3h–4h",
+        "prix": "50–80 € / pers.",
+        "url": "https://www.getyourguide.com/grasse-l96902/escalade",
+        "image": "https://picsum.photos/seed/escalade-gorges/200/200",
+        "alt": "Escalade et via ferrata",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "cascade-de-courmes",
+        "nom": "Cascade de Courmes",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.alpes-maritimes.com/cascade-de-courmes",
+        "image": "https://picsum.photos/seed/cascade-courmes/200/200",
+        "alt": "Cascade de Courmes",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "gourdon-village",
+    "nom": "Gourdon, le nid d'aigle",
+    "commune": "Gourdon",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7154,
+    "lng": 6.9764,
+    "description": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte, par temps clair, jusqu'à la mer.",
+    "ogImage": "https://picsum.photos/seed/gourdon/1200/800",
+    "heroImage": "https://picsum.photos/seed/gourdon/1200/800",
+    "heroAlt": "Village de Gourdon perché au-dessus des gorges du Loup",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7154°N, 6.9764°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année, éviter les jours de mistral"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte, par temps clair, jusqu'à la mer.",
+    "description2": "Le château médiéval du XIIe siècle, remanié à la Renaissance, domine un jardin dessiné par André Le Nôtre, le paysagiste de Versailles. Depuis le parvis de l'église, le vide sous les pieds et le panorama sur les gorges du Loup donnent le vertige aux moins habitués.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Route sinueuse depuis Le Bar-sur-Loup, environ 40 minutes depuis Nice."
+      },
+      {
+        "label": "Vue",
+        "texte": "Par temps très clair, on distingue la mer Méditerranée."
+      },
+      {
+        "label": "Château",
+        "texte": "Jardins et intérieur payants, extérieurs et village libres d'accès."
+      }
+    ],
+    "activites": [
+      {
+        "id": "panorama-depuis-la-falaise",
+        "nom": "Panorama depuis la falaise",
+        "badge": "gratuit",
+        "duree": "45min",
+        "prix": "Accès libre",
+        "url": "https://www.gourdon06.fr/",
+        "image": "https://picsum.photos/seed/panorama-falaise-gourdon/200/200",
+        "alt": "Panorama depuis la falaise",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "chateau-musee-de-gourdon",
+        "nom": "Château-musée de Gourdon",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "6 € / adulte",
+        "url": "https://www.chateaudegourdon.com/",
+        "image": "https://picsum.photos/seed/chateau-gourdon/200/200",
+        "alt": "Château-musée de Gourdon",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-gorges-du-loup",
+        "nom": "Randonnée gorges du Loup",
+        "badge": "gratuit",
+        "duree": "2h–3h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-gorges-du-loup.html",
+        "image": "https://picsum.photos/seed/gorges-loup-randonnee/200/200",
+        "alt": "Randonnée gorges du Loup",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gorges-du-loup-cascade-courmes.html",
+        "img": "https://picsum.photos/seed/gorgesduloup/500/375",
+        "alt": "Cascade de Courmes dans les gorges du Loup",
+        "stamp": "43.73°N<br>6.98°E",
+        "region": "Gorges du Loup",
+        "titre": "Les gorges du Loup et la cascade de Courmes",
+        "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
+      }
+    ]
+  },
+  {
+    "slug": "haut-de-cagnes",
+    "nom": "Le Haut-de-Cagnes",
+    "commune": "Cagnes-sur-Mer",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.6656,
+    "lng": 7.1486,
+    "description": "Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste saisissant entre pierre ancienne et béton du littoral.",
+    "ogImage": "https://picsum.photos/seed/hautdecagnes/1200/800",
+    "heroImage": "https://picsum.photos/seed/hautdecagnes/1200/800",
+    "heroAlt": "Village médiéval du Haut-de-Cagnes dominé par son château",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6656°N, 7.1486°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h avec le musée"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu"
+      }
+    ],
+    "description1": "Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste saisissant entre pierre ancienne et béton du littoral.",
+    "description2": "Le château-musée Grimaldi, avec sa cour Renaissance et son plafond en trompe-l'œil, domine des ruelles en pente raide où Renoir a peint ses dernières toiles. La maison-atelier du peintre, Les Collettes, se visite à quelques minutes en contrebas.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking en contrebas du village, montée à pied ensuite."
+      },
+      {
+        "label": "Château-musée",
+        "texte": "Payant, vue sur la baie depuis la cour."
+      },
+      {
+        "label": "Renoir",
+        "texte": "La maison-atelier Les Collettes se visite séparément, à 10 minutes."
+      }
+    ],
+    "activites": [
+      {
+        "id": "chateau-musee-grimaldi",
+        "nom": "Château-musée Grimaldi",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "7 € / adulte",
+        "url": "https://www.cagnes-tourisme.com/chateau-musee",
+        "image": "https://picsum.photos/seed/chateau-grimaldi-cagnes/200/200",
+        "alt": "Château-musée Grimaldi",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "musee-renoir",
+        "nom": "Musée Renoir",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "9 € / adulte",
+        "url": "https://www.musees-nationaux-alpesmaritimes.fr/renoir",
+        "image": "https://picsum.photos/seed/musee-renoir/200/200",
+        "alt": "Musée Renoir",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "balade-village-medieval",
+        "nom": "Balade village médiéval",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.cagnes-tourisme.com/haut-de-cagnes",
+        "image": "https://picsum.photos/seed/haut-cagnes-balade/200/200",
+        "alt": "Balade village médiéval",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "iles-de-lerins",
+    "nom": "Les îles de Lérins",
+    "commune": "Cannes",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.515,
+    "lng": 7.048,
+    "description": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appartenir à un autre siècle que la ville qui leur fait face.",
+    "ogImage": "https://picsum.photos/seed/lerins/1200/800",
+    "heroImage": "https://picsum.photos/seed/lerins/1200/800",
+    "heroAlt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.515°N, 7.048°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / été"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "Demi-journée par île"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appartenir à un autre siècle que la ville qui leur fait face.",
+    "description2": "Sainte-Marguerite, boisée et sauvage, abrite le fort où fut emprisonné le mystérieux Masque de fer. Saint-Honorat, plus petite, reste habitée par une communauté de moines cisterciens qui cultivent vigne et lavande — les deux îles se visitent en une seule journée, mais chacune mérite sa propre traversée.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Navettes régulières depuis le port de Cannes, deux compagnies différentes selon l'île."
+      },
+      {
+        "label": "Fort royal",
+        "texte": "Sur Sainte-Marguerite, payant, abrite aussi un musée."
+      },
+      {
+        "label": "Monastère",
+        "texte": "Sur Saint-Honorat, les moines vendent leur vin et leur liqueur sur place."
+      }
+    ],
+    "activites": [
+      {
+        "id": "traversee-en-bateau-depuis-cannes",
+        "nom": "Traversée en bateau depuis Cannes",
+        "badge": "payant",
+        "duree": "30min aller",
+        "prix": "18 € aller-retour",
+        "url": "https://www.cannes-ilesdelerins.com/",
+        "image": "https://picsum.photos/seed/traversee-lerins/200/200",
+        "alt": "Traversée en bateau depuis Cannes",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "abbaye-de-lerins-saint-honorat",
+        "nom": "Abbaye de Lérins (Saint-Honorat)",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.abbayedelerins.com/",
+        "image": "https://picsum.photos/seed/abbaye-lerins/200/200",
+        "alt": "Abbaye de Lérins (Saint-Honorat)",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-ile-sainte-marguerite",
+        "nom": "Randonnée Île Sainte-Marguerite",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.lerins.com/",
+        "image": "https://picsum.photos/seed/ile-sainte-marguerite/200/200",
+        "alt": "Randonnée Île Sainte-Marguerite",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-antibes.html",
+        "img": "https://picsum.photos/seed/capantibes/500/375",
+        "alt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+        "stamp": "43.55°N<br>7.13°E",
+        "region": "Antibes",
+        "titre": "Le sentier du littoral du Cap d'Antibes",
+        "blurb": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre c…"
+      },
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "https://picsum.photos/seed/pinedegould/500/375",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "La pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus an…"
+      },
+      {
+        "href": "pic-cap-roux-esterel.html",
+        "img": "https://picsum.photos/seed/piccaproux/500/375",
+        "alt": "Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel",
+        "stamp": "43.44°N<br>6.88°E",
+        "region": "Massif de l'Estérel",
+        "titre": "Le Pic du Cap Roux",
+        "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
+      }
+    ]
+  },
+  {
+    "slug": "jardin-exotique-monaco",
+    "nom": "Le Jardin exotique de Monaco",
+    "commune": "Monaco",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7326,
+    "lng": 7.413,
+    "description": "Un jardin de cactus et plantes succulentes accroché à flanc de falaise calcaire, avec l'une des plus belles vues plongeantes sur Monaco et son port.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/jardin-exotique-monaco/hero.jpg",
+    "heroImage": "../assets/images/lieux/jardin-exotique-monaco/hero.jpg",
+    "heroAlt": "Jardin exotique de Monaco à flanc de falaise",
+    "heroSlides": 4,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7326°N, 7.413°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, quelques escaliers"
+      }
+    ],
+    "description1": "Un jardin de cactus et plantes succulentes accroché à flanc de falaise calcaire, avec l'une des plus belles vues plongeantes sur Monaco et son port.",
+    "description2": "Les allées serpentent au-dessus du vide entre des euphorbes géantes et des cactus centenaires, avant de descendre vers la grotte de l'Observatoire, une cavité préhistorique visitable en contrebas. Le contraste entre végétation désertique et gratte-ciel monégasques est assez unique.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Bus depuis le centre de Monaco, parking limité sur place."
+      },
+      {
+        "label": "Billetterie",
+        "texte": "Site payant, billet combiné avec la grotte de l'Observatoire."
+      },
+      {
+        "label": "Vertige",
+        "texte": "Certains points de vue sont en surplomb direct, déconseillé aux personnes sujettes au vertige."
+      }
+    ],
+    "activites": [
+      {
+        "id": "jardin-exotique-de-monaco",
+        "nom": "Jardin exotique de Monaco",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "8 € / adulte",
+        "url": "https://www.jardin-exotique.mc/",
+        "image": "../assets/images/lieux/jardin-exotique-monaco/act-1.jpg",
+        "alt": "Jardin exotique de Monaco",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "musee-oceanographique",
+        "nom": "Musée Océanographique",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "18 € / adulte",
+        "url": "https://www.oceano.mc/",
+        "image": "../assets/images/lieux/jardin-exotique-monaco/act-2.jpg",
+        "alt": "Musée Océanographique",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "rocher-de-monaco-amp-palais",
+        "nom": "Rocher de Monaco &amp; Palais",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "10 € / adulte",
+        "url": "https://www.palais.mc/",
+        "image": "../assets/images/lieux/jardin-exotique-monaco/act-3.jpg",
+        "alt": "Rocher de Monaco & Palais",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "peille-village",
+    "nom": "Peille, village de l'arrière-pays",
+    "commune": "Peille",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7472,
+    "lng": 7.4056,
+    "description": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchevêtrement de ruelles voûtées et de passages couverts.",
+    "ogImage": "https://picsum.photos/seed/peille/1200/800",
+    "heroImage": "https://picsum.photos/seed/peille/1200/800",
+    "heroAlt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7472°N, 7.4056°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchevêtrement de ruelles voûtées et de passages couverts.",
+    "description2": "Les places minuscules et les fontaines anciennes racontent un village qui a peu changé depuis le Moyen Âge, sans la fréquentation touristique de la côte. Les environs, entre restanques et oliveraies, se prêtent bien à une randonnée tranquille.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Route de montagne depuis Nice, environ 30 minutes."
+      },
+      {
+        "label": "Tranquillité",
+        "texte": "Bien moins fréquenté que Peillon ou Èze, idéal pour flâner sans foule."
+      },
+      {
+        "label": "Randonnée",
+        "texte": "Le GR51 passe par le village, direction Peillon ou La Turbie."
+      }
+    ],
+    "activites": [
+      {
+        "id": "exploration-du-village-medieval",
+        "nom": "Exploration du village médiéval",
+        "badge": "gratuit",
+        "duree": "1h–1h30",
+        "prix": "Accès libre",
+        "url": "https://www.peille.fr/",
+        "image": "https://picsum.photos/seed/peille-village-medieval/200/200",
+        "alt": "Exploration du village médiéval",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-peille-peillon",
+        "nom": "Randonnée Peille–Peillon",
+        "badge": "gratuit",
+        "duree": "3h–4h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-peille.html",
+        "image": "https://picsum.photos/seed/randonnee-peille/200/200",
+        "alt": "Randonnée Peille–Peillon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "chapelle-saint-martin",
+        "nom": "Chapelle Saint-Martin",
+        "badge": "gratuit",
+        "duree": "30min",
+        "prix": "Accès libre",
+        "url": "https://www.peille.fr/decouvrir",
+        "image": "https://picsum.photos/seed/chapelle-saint-martin/200/200",
+        "alt": "Chapelle Saint-Martin",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      },
+      {
+        "href": "gorges-du-loup-cascade-courmes.html",
+        "img": "https://picsum.photos/seed/gorgesduloup/500/375",
+        "alt": "Cascade de Courmes dans les gorges du Loup",
+        "stamp": "43.73°N<br>6.98°E",
+        "region": "Gorges du Loup",
+        "titre": "Les gorges du Loup et la cascade de Courmes",
+        "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
+      }
+    ]
+  },
+  {
+    "slug": "peillon-village",
+    "nom": "Peillon, village suspendu",
+    "commune": "Peillon",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7581,
+    "lng": 7.3697,
+    "description": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît régulièrement dans des campagnes publicitaires sans que personne ne le reconnaisse.",
+    "ogImage": "https://picsum.photos/seed/peillon/1200/800",
+    "heroImage": "https://picsum.photos/seed/peillon/1200/800",
+    "heroAlt": "Village médiéval de Peillon perché sur son piton rocheux",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7581°N, 7.3697°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h à 1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu"
+      }
+    ],
+    "description1": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît régulièrement dans des campagnes publicitaires sans que personne ne le reconnaisse.",
+    "description2": "Aucune voiture ne peut entrer dans le village : on se gare en contrebas et on grimpe par des escaliers en pierre entre les maisons. La chapelle des Pénitents Blancs, ornée de fresques du XVe siècle, se visite sur demande à l'office de tourisme voisin.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking obligatoire en contrebas, 20 minutes en voiture depuis Nice."
+      },
+      {
+        "label": "Fresques",
+        "texte": "Chapelle des Pénitents Blancs visible sur demande."
+      },
+      {
+        "label": "Randonnée",
+        "texte": "Le GR51 relie Peillon à Peille pour les plus motivés."
+      }
+    ],
+    "activites": [
+      {
+        "id": "explorer-le-vieux-village",
+        "nom": "Explorer le vieux village",
+        "badge": "gratuit",
+        "duree": "1 h – 1 h 30",
+        "prix": "Accès libre",
+        "url": "https://www.villagesetpatrimoine.fr/peillon/",
+        "image": "https://picsum.photos/seed/village-peillon/200/200",
+        "alt": "Ruelles du vieux village de Peillon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-sur-la-plage-arnulf",
+        "nom": "Déjeuner sur la plage Arnulf",
+        "badge": "payant",
+        "duree": "1 h",
+        "prix": "40 – 50 € / pers.",
+        "url": "https://www.lesplaisirs-peillon.com/",
+        "image": "https://picsum.photos/seed/plage-arnulf/200/200",
+        "alt": "Plage Arnulf à Peillon",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "eglise-chapelle-des-penitents-blancs",
+        "nom": "Église & chapelle des Pénitents Blancs",
+        "badge": "gratuit",
+        "duree": "1 h – 1 h 30",
+        "prix": "Accès libre",
+        "url": "https://monumentum.fr/monument-historique/pa00080814/peillon-chapelle-des-penitents-blancs-ou-chapelle-notre-dame-des-sept-douleurs",
+        "image": "https://picsum.photos/seed/eglise-penitents/200/200",
+        "alt": "Chapelle des Pénitents Blancs de Peillon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balades-randonnees",
+        "nom": "Balades & randonnées",
+        "badge": "gratuit",
+        "duree": "1 h – 3 h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-peillon.html",
+        "image": "https://picsum.photos/seed/balade-peillon/200/200",
+        "alt": "Sentiers de randonnée autour de Peillon",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      },
+      {
+        "href": "gorges-du-loup-cascade-courmes.html",
+        "img": "https://picsum.photos/seed/gorgesduloup/500/375",
+        "alt": "Cascade de Courmes dans les gorges du Loup",
+        "stamp": "43.73°N<br>6.98°E",
+        "region": "Gorges du Loup",
+        "titre": "Les gorges du Loup et la cascade de Courmes",
+        "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
+      }
+    ]
+  },
+  {
+    "slug": "pic-cap-roux-esterel",
+    "nom": "Le Pic du Cap Roux",
+    "commune": "Massif de l'Estérel",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.4394,
+    "lng": 6.8825,
+    "description": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemment avec le bleu de la Méditerranée en contrebas.",
+    "ogImage": "https://picsum.photos/seed/piccaproux/1200/800",
+    "heroImage": "https://picsum.photos/seed/piccaproux/1200/800",
+    "heroAlt": "Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.4394°N, 6.8825°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Automne à printemps, éviter la chaleur estivale (risque incendie)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 h aller-retour"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré"
+      }
+    ],
+    "description1": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemment avec le bleu de la Méditerranée en contrebas.",
+    "description2": "La montée, courte mais soutenue, traverse une végétation de maquis bas avant de déboucher sur un panorama à 360° allant de Saint-Tropez à l'Italie par temps clair. La couleur de la roche, due à la rhyolite volcanique, change presque d'heure en heure selon la lumière.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking au col du Mistral ou depuis la maison forestière de Malpasset."
+      },
+      {
+        "label": "Restrictions estivales",
+        "texte": "Massif souvent fermé en cas de risque incendie élevé, se renseigner avant de partir."
+      },
+      {
+        "label": "Chaussures",
+        "texte": "De randonnée, sentier rocailleux et pentu par endroits."
+      }
+    ],
+    "activites": [
+      {
+        "id": "randonnee-pic-du-cap-roux",
+        "nom": "Randonnée Pic du Cap Roux",
+        "badge": "gratuit",
+        "duree": "3h–4h",
+        "prix": "Accès libre",
+        "url": "https://www.esterel-cote-azur.com/randonnee",
+        "image": "https://picsum.photos/seed/pic-cap-roux-randonnee/200/200",
+        "alt": "Randonnée Pic du Cap Roux",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-dans-l-esterel",
+        "nom": "VTT dans l'Estérel",
+        "badge": "payant",
+        "duree": "3h–5h",
+        "prix": "25–45 € / location",
+        "url": "https://www.getyourguide.com/esterel-l97025/",
+        "image": "https://picsum.photos/seed/vtt-esterel/200/200",
+        "alt": "VTT dans l'Estérel",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-esterel-cotiere",
+        "nom": "Randonnée Estérel côtière",
+        "badge": "gratuit",
+        "duree": "2h–3h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-esterel.html",
+        "image": "https://picsum.photos/seed/esterel-cotier/200/200",
+        "alt": "Randonnée Estérel côtière",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-antibes.html",
+        "img": "https://picsum.photos/seed/capantibes/500/375",
+        "alt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+        "stamp": "43.55°N<br>7.13°E",
+        "region": "Antibes",
+        "titre": "Le sentier du littoral du Cap d'Antibes",
+        "blurb": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre c…"
+      },
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "https://picsum.photos/seed/pinedegould/500/375",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "La pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus an…"
+      },
+      {
+        "href": "iles-de-lerins.html",
+        "img": "https://picsum.photos/seed/lerins/500/375",
+        "alt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+        "stamp": "43.52°N<br>7.05°E",
+        "region": "Cannes",
+        "titre": "Les îles de Lérins",
+        "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
+      }
+    ]
+  },
+  {
+    "slug": "pinede-gould-juan-les-pins",
+    "nom": "La pinède Gould",
+    "commune": "Juan-les-Pins",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.5686,
+    "lng": 7.1067,
+    "description": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens festivals de jazz d'Europe.",
+    "ogImage": "https://picsum.photos/seed/pinedegould/1200/800",
+    "heroImage": "https://picsum.photos/seed/pinedegould/1200/800",
+    "heroAlt": "Pinède Gould en bord de mer à Juan-les-Pins",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.5686°N, 7.1067°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Été (festival) ou toute l'année pour la tranquillité"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "30 min à 1 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens festivals de jazz d'Europe.",
+    "description2": "Hors saison de festival, c'est simplement un endroit ombragé rare sur cette portion de côte, où pique-niquer les pieds presque dans l'eau à l'abri du soleil. Les pins, tordus par le vent marin, créent une atmosphère différente du reste de la station balnéaire.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "En plein centre de Juan-les-Pins, à deux pas de la plage."
+      },
+      {
+        "label": "Festival Jazz à Juan",
+        "texte": "Se tient généralement en juillet, vérifier les dates chaque année."
+      },
+      {
+        "label": "Ombre",
+        "texte": "L'un des rares coins ombragés directement en bord de plage."
+      }
+    ],
+    "activites": [
+      {
+        "id": "festival-jazz-a-juan",
+        "nom": "Festival Jazz à Juan",
+        "badge": "payant",
+        "duree": "Soirée",
+        "prix": "30–80 € / place",
+        "url": "https://www.jazzajuan.com/",
+        "image": "https://picsum.photos/seed/jazz-juan-les-pins/200/200",
+        "alt": "Festival Jazz à Juan",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "location-paddle-sup",
+        "nom": "Location paddle / SUP",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "15–20 € / pers.",
+        "url": "https://www.getyourguide.com/juan-les-pins-l97018/",
+        "image": "https://picsum.photos/seed/paddle-juan-les-pins/200/200",
+        "alt": "Location paddle / SUP",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "plage-de-juan-les-pins",
+        "nom": "Plage de Juan-les-Pins",
+        "badge": "gratuit",
+        "duree": "Demi-journée",
+        "prix": "Accès libre",
+        "url": "https://www.antibesjuanlespins.com/plages",
+        "image": "https://picsum.photos/seed/plage-juan-pins/200/200",
+        "alt": "Plage de Juan-les-Pins",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-antibes.html",
+        "img": "https://picsum.photos/seed/capantibes/500/375",
+        "alt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+        "stamp": "43.55°N<br>7.13°E",
+        "region": "Antibes",
+        "titre": "Le sentier du littoral du Cap d'Antibes",
+        "blurb": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre c…"
+      },
+      {
+        "href": "iles-de-lerins.html",
+        "img": "https://picsum.photos/seed/lerins/500/375",
+        "alt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+        "stamp": "43.52°N<br>7.05°E",
+        "region": "Cannes",
+        "titre": "Les îles de Lérins",
+        "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
+      },
+      {
+        "href": "pic-cap-roux-esterel.html",
+        "img": "https://picsum.photos/seed/piccaproux/500/375",
+        "alt": "Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel",
+        "stamp": "43.44°N<br>6.88°E",
+        "region": "Massif de l'Estérel",
+        "titre": "Le Pic du Cap Roux",
+        "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
+      }
+    ]
+  },
+  {
+    "slug": "pont-du-loup",
+    "nom": "Pont du Loup et son viaduc",
+    "commune": "Pont-du-Loup",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7186,
+    "lng": 6.9967,
+    "description": "Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire détruit pendant la Seconde Guerre mondiale.",
+    "ogImage": "https://picsum.photos/seed/pontduloup/1200/800",
+    "heroImage": "https://picsum.photos/seed/pontduloup/1200/800",
+    "heroAlt": "Viaduc en ruine de Pont-du-Loup enjambant les gorges",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7186°N, 6.9967°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "30 min à 1 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire détruit pendant la Seconde Guerre mondiale.",
+    "description2": "Les piliers de pierre, envahis par la végétation, enjambent toujours la route comme un décor de film abandonné. Le village, connu aussi pour ses confiseries artisanales aux fruits confits, sert de point de départ pratique pour explorer les gorges du Loup à pied ou en voiture.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Sur la route entre Grasse et Gourdon, parking dans le village."
+      },
+      {
+        "label": "Confiserie",
+        "texte": "Plusieurs ateliers de fruits confits ouverts à la visite."
+      },
+      {
+        "label": "Photo",
+        "texte": "Les arches se photographient bien depuis la route en contrebas."
+      }
+    ],
+    "activites": [
+      {
+        "id": "confiserie-florian-visite-gratuite",
+        "nom": "Confiserie Florian (visite gratuite)",
+        "badge": "gratuit",
+        "duree": "45min",
+        "prix": "Accès libre",
+        "url": "https://www.confiserie-florian.com/",
+        "image": "https://picsum.photos/seed/confiserie-florian/200/200",
+        "alt": "Confiserie Florian (visite gratuite)",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-viaduc-et-gorges",
+        "nom": "Randonnée viaduc et gorges",
+        "badge": "gratuit",
+        "duree": "1h30–2h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-pont-du-loup.html",
+        "image": "https://picsum.photos/seed/viaduc-pont-loup/200/200",
+        "alt": "Randonnée viaduc et gorges",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "atelier-confitures-artisanales",
+        "nom": "Atelier confitures artisanales",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "30–45 € / adulte",
+        "url": "https://www.getyourguide.com/grasse-l96902/",
+        "image": "https://picsum.photos/seed/atelier-confiture/200/200",
+        "alt": "Atelier confitures artisanales",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "roquebrune-cap-martin-village",
+    "nom": "Le village de Roquebrune-Cap-Martin",
+    "commune": "Roquebrune-Cap-Martin",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7647,
+    "lng": 7.4967,
+    "description": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des plus anciens châteaux de France encore debout.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/roquebrune-cap-martin-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg\" data-slides=\"5",
+    "heroAlt": "Village médiéval perché de Roquebrune-Cap-Martin",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7647°N, 7.4967°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des plus anciens châteaux de France encore debout.",
+    "description2": "Les ruelles voûtées, parfois si étroites qu'on peut toucher les deux murs à la fois, mènent jusqu'au sommet où le donjon offre une vue sur la baie de Monaco. Un olivier millénaire, l'un des plus vieux d'Europe, se trouve juste en contrebas du village.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking à l'entrée du village, ruelles piétonnes ensuite."
+      },
+      {
+        "label": "Château",
+        "texte": "Donjon payant, vue incluse."
+      },
+      {
+        "label": "À proximité",
+        "texte": "L'olivier millénaire se visite gratuitement, à 5 minutes à pied."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-du-chateau-medieval",
+        "nom": "Visite du château médiéval",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "5 € / adulte",
+        "url": "https://www.roquebrune-cap-martin.fr/patrimoine/",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-1.jpg",
+        "alt": "Visite du château médiéval",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "sentier-le-corbusier",
+        "nom": "Sentier Le Corbusier",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-2.jpg",
+        "alt": "Sentier Le Corbusier",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-village-cotier",
+        "nom": "Randonnée village côtier",
+        "badge": "gratuit",
+        "duree": "1h30–2h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-roquebrune-cap-martin.html",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-3.jpg",
+        "alt": "Randonnée village côtier",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "rue-obscure-villefranche",
+    "nom": "La Rue Obscure",
+    "commune": "Villefranche-sur-Mer",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7042,
+    "lng": 7.3103,
+    "description": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-sur-Mer sous les maisons elles-mêmes.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/rue-obscure-villefranche/hero.jpg",
+    "heroImage": "../assets/images/lieux/rue-obscure-villefranche/hero.jpg",
+    "heroAlt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+    "heroSlides": 2,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7042°N, 7.3103°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "15-20 min"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-sur-Mer sous les maisons elles-mêmes.",
+    "description2": "Fraîche même en plein été, la Rue Obscure servait autrefois à protéger les habitants des bombardements côtiers. Aujourd'hui, c'est un passage presque secret entre deux ruelles ensoleillées, à la lumière tombant par intermittence.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "En plein cœur de la vieille ville de Villefranche, à deux pas du port."
+      },
+      {
+        "label": "Photo",
+        "texte": "Une simple lampe de poche ou le flash du téléphone aide à capter l'ambiance."
+      },
+      {
+        "label": "À combiner",
+        "texte": "La citadelle Saint-Elme et le port, juste à côté."
+      }
+    ],
+    "activites": [
+      {
+        "id": "balade-dans-le-vieux-villefranche",
+        "nom": "Balade dans le Vieux Villefranche",
+        "badge": "gratuit",
+        "duree": "1h–1h30",
+        "prix": "Accès libre",
+        "url": "https://www.villefranche-sur-mer.fr/decouvrir/patrimoine",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-1.jpg",
+        "alt": "Balade dans le Vieux Villefranche",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "sortie-kayak-de-mer",
+        "nom": "Sortie kayak de mer",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "35–50 € / pers.",
+        "url": "https://www.getyourguide.com/villefranche-sur-mer-l96796/",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-2.jpg",
+        "alt": "Sortie kayak de mer",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "citadelle-saint-elme",
+        "nom": "Citadelle Saint-Elme",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.citadellesaintelme.com/",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-3.jpg",
+        "alt": "Citadelle Saint-Elme",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "plongee-snorkeling",
+        "nom": "Plongée snorkeling",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "40–55 € / pers.",
+        "url": "https://www.getyourguide.com/villefranche-sur-mer-l96796/snorkeling",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-4.jpg",
+        "alt": "Plongée snorkeling",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      },
+      {
+        "href": "villa-kerylos.html",
+        "img": "https://picsum.photos/seed/kerylos/500/375",
+        "alt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
+        "stamp": "43.71°N<br>7.33°E",
+        "region": "Beaulieu-sur-Mer",
+        "titre": "Villa Kerylos",
+        "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
+      }
+    ]
+  },
+  {
+    "slug": "saint-paul-de-vence",
+    "nom": "Saint-Paul-de-Vence",
+    "commune": "Saint-Paul-de-Vence",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.697,
+    "lng": 7.1214,
+    "description": "Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts lieux de l'art moderne en Provence.",
+    "ogImage": "https://picsum.photos/seed/saintpauldevence/1200/800",
+    "heroImage": "https://picsum.photos/seed/saintpauldevence/1200/800",
+    "heroAlt": "Village fortifié de Saint-Paul-de-Vence, cité des artistes",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.697°N, 7.1214°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 à 3 h avec la fondation Maeght"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts lieux de l'art moderne en Provence.",
+    "description2": "Les remparts, encore intacts, encerclent un dédale de galeries d'art et de placettes ombragées par des platanes centenaires. La fondation Maeght, à deux pas du village, abrite l'une des plus importantes collections d'art moderne de France dans un bâtiment pensé par l'architecte catalan Josep Lluís Sert.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking payant à l'entrée du village, ruelles piétonnes ensuite."
+      },
+      {
+        "label": "Fondation Maeght",
+        "texte": "Site payant, à 10 minutes à pied du village."
+      },
+      {
+        "label": "Affluence",
+        "texte": "Très fréquenté en été, privilégier une visite matinale."
+      }
+    ],
+    "activites": [
+      {
+        "id": "fondation-maeght",
+        "nom": "Fondation Maeght",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20 € / adulte",
+        "url": "https://www.fondation-maeght.com/",
+        "image": "https://picsum.photos/seed/fondation-maeght/200/200",
+        "alt": "Fondation Maeght",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "balade-sur-les-remparts",
+        "nom": "Balade sur les remparts",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.saint-pauldevence.com/",
+        "image": "https://picsum.photos/seed/remparts-saint-paul/200/200",
+        "alt": "Balade sur les remparts",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "ateliers-d-artistes-galeries",
+        "nom": "Ateliers d'artistes — galeries",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.saint-pauldevence.com/galeries",
+        "image": "https://picsum.photos/seed/galeries-art-vence/200/200",
+        "alt": "Ateliers d'artistes — galeries",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "sentier-cap-antibes",
+    "nom": "Le sentier du littoral du Cap d'Antibes",
+    "commune": "Antibes",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.5461,
+    "lng": 7.1256,
+    "description": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre criques sauvages et villas discrètes.",
+    "ogImage": "https://picsum.photos/seed/capantibes/1200/800",
+    "heroImage": "https://picsum.photos/seed/capantibes/1200/800",
+    "heroAlt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.5461°N, 7.1256°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 h 30 pour le tour complet"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré, rochers glissants par endroits"
+      }
+    ],
+    "description1": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre criques sauvages et villas discrètes.",
+    "description2": "Certains tronçons longent directement les rochers battus par les vagues, avec des embruns qui rendent le sentier glissant les jours de vent fort. C'est l'un des rares endroits de la Côte d'Azur où l'on peut marcher longtemps au ras de l'eau sans croiser de route.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Départs possibles depuis la plage de la Garoupe ou le boulevard du littoral."
+      },
+      {
+        "label": "Météo",
+        "texte": "À éviter par mer agitée, certains passages sont exposés aux vagues."
+      },
+      {
+        "label": "Baignade",
+        "texte": "Quelques criques accessibles pour une pause fraîcheur."
+      }
+    ],
+    "activites": [
+      {
+        "id": "sentier-du-littoral-tirepoil",
+        "nom": "Sentier du littoral Tirepoil",
+        "badge": "gratuit",
+        "duree": "3h–4h",
+        "prix": "Accès libre",
+        "url": "https://www.antibesjuanlespins.com/sentier-littoral",
+        "image": "https://picsum.photos/seed/sentier-cap-antibes/200/200",
+        "alt": "Sentier du littoral Tirepoil",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "musee-picasso-d-antibes",
+        "nom": "Musée Picasso d'Antibes",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "8 € / adulte",
+        "url": "https://www.antibes-juanlespins.com/musee-picasso",
+        "image": "https://picsum.photos/seed/musee-picasso-antibes/200/200",
+        "alt": "Musée Picasso d'Antibes",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "location-de-velos-electriques",
+        "nom": "Location de vélos électriques",
+        "badge": "payant",
+        "duree": "2h–4h",
+        "prix": "20–35 €",
+        "url": "https://www.getyourguide.com/antibes-l96900/",
+        "image": "https://picsum.photos/seed/velo-antibes-mer/200/200",
+        "alt": "Location de vélos électriques",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "https://picsum.photos/seed/pinedegould/500/375",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "La pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus an…"
+      },
+      {
+        "href": "iles-de-lerins.html",
+        "img": "https://picsum.photos/seed/lerins/500/375",
+        "alt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+        "stamp": "43.52°N<br>7.05°E",
+        "region": "Cannes",
+        "titre": "Les îles de Lérins",
+        "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
+      },
+      {
+        "href": "pic-cap-roux-esterel.html",
+        "img": "https://picsum.photos/seed/piccaproux/500/375",
+        "alt": "Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel",
+        "stamp": "43.44°N<br>6.88°E",
+        "region": "Massif de l'Estérel",
+        "titre": "Le Pic du Cap Roux",
+        "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
+      }
+    ]
+  },
+  {
+    "slug": "sentier-cap-ferrat",
+    "nom": "Sentier du littoral du Cap Ferrat",
+    "commune": "Saint-Jean-Cap-Ferrat",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.689,
+    "lng": 7.33,
+    "description": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la Méditerranée entre pins parasols et rochers.",
+    "ogImage": "https://picsum.photos/seed/capferrat/1200/800",
+    "heroImage": "https://picsum.photos/seed/capferrat/1200/800",
+    "heroAlt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.689°N, 7.33°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 à 3 h pour le tour complet"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile à modéré"
+      }
+    ],
+    "description1": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la Méditerranée entre pins parasols et rochers.",
+    "description2": "Le tronçon entre la plage de Passable et la pointe Saint-Hospice est le plus spectaculaire, avec des criques accessibles à la baignade. Peu fréquenté en dehors de l'été, il reste l'un des meilleurs moyens de voir le Cap Ferrat sans passer devant les grilles des villas.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Départs possibles depuis la plage de Passable ou le port de Saint-Jean."
+      },
+      {
+        "label": "Baignade",
+        "texte": "Plusieurs criques sauvages accessibles directement depuis le sentier."
+      },
+      {
+        "label": "Chaussures",
+        "texte": "Chaussures fermées recommandées, certains passages sont rocailleux."
+      }
+    ],
+    "activites": [
+      {
+        "id": "sentier-du-littoral-tour-complet",
+        "nom": "Sentier du littoral (tour complet)",
+        "badge": "gratuit",
+        "duree": "3h",
+        "prix": "Accès libre",
+        "url": "https://www.saintjeancapferrat-tourisme.fr/randonnee",
+        "image": "https://picsum.photos/seed/sentier-cap-ferrat/200/200",
+        "alt": "Sentier du littoral (tour complet)",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "villa-ephrussi-de-rothschild",
+        "nom": "Villa Ephrussi de Rothschild",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "18 € / adulte",
+        "url": "https://www.villa-ephrussi.com/",
+        "image": "https://picsum.photos/seed/villa-ephrussi/200/200",
+        "alt": "Villa Ephrussi de Rothschild",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "location-de-velos",
+        "nom": "Location de vélos",
+        "badge": "payant",
+        "duree": "2–4h",
+        "prix": "15–25 € / jour",
+        "url": "https://www.getyourguide.com/saint-jean-cap-ferrat-l97002/",
+        "image": "https://picsum.photos/seed/velo-cap-ferrat/200/200",
+        "alt": "Location de vélos",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      },
+      {
+        "href": "villa-kerylos.html",
+        "img": "https://picsum.photos/seed/kerylos/500/375",
+        "alt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
+        "stamp": "43.71°N<br>7.33°E",
+        "region": "Beaulieu-sur-Mer",
+        "titre": "Villa Kerylos",
+        "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
+      }
+    ]
+  },
+  {
+    "slug": "sentier-corbusier-cap-martin",
+    "nom": "Le sentier Le Corbusier",
+    "commune": "Cap Martin",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7622,
+    "lng": 7.5027,
+    "description": "Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacances, et où il s'est noyé en 1965.",
+    "ogImage": "https://picsum.photos/seed/corbusier/1200/800",
+    "heroImage": "https://picsum.photos/seed/corbusier/1200/800",
+    "heroAlt": "Sentier littoral du Corbusier au Cap Martin",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7622°N, 7.5027°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps / automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h aller-retour"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile à modéré"
+      }
+    ],
+    "description1": "Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacances, et où il s'est noyé en 1965.",
+    "description2": "Le chemin alterne entre pinèdes ombragées et passages en balcon sur la mer, avec des criques discrètes accessibles par de courts détours. Moins connu que ses voisins d'Èze ou du Cap Ferrat, il reste l'un des tronçons les plus tranquilles du littoral azuréen.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Départ possible depuis la gare de Roquebrune-Cap-Martin."
+      },
+      {
+        "label": "Baignade",
+        "texte": "Quelques criques rocheuses accessibles sur le parcours."
+      },
+      {
+        "label": "Ombre",
+        "texte": "Bien ombragé par les pins, agréable même en été."
+      }
+    ],
+    "activites": [
+      {
+        "id": "sentier-le-corbusier",
+        "nom": "Sentier Le Corbusier",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/",
+        "image": "https://picsum.photos/seed/sentier-corbusier-mer/200/200",
+        "alt": "Sentier Le Corbusier",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "cabanon-le-corbusier-visite-guidee",
+        "nom": "Cabanon Le Corbusier (visite guidée)",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "10 € / adulte",
+        "url": "https://www.getyourguide.com/cap-martin-l97007/",
+        "image": "https://picsum.photos/seed/cabanon-corbusier/200/200",
+        "alt": "Cabanon Le Corbusier (visite guidée)",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "village-medieval-de-roquebrune",
+        "nom": "Village médiéval de Roquebrune",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "5 € / adulte",
+        "url": "https://www.roquebrune-cap-martin.fr/patrimoine/",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-1.jpg",
+        "alt": "Village médiéval de Roquebrune",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "sentier-nietzsche-eze",
+    "nom": "Le sentier Nietzsche",
+    "commune": "Èze",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.6664,
+    "lng": 7.356,
+    "description": "Le chemin escarpé que Friedrich Nietzsche empruntait chaque jour pour rejoindre le village d'Èze, et où il aurait conçu une partie d'Ainsi parlait Zarathoustra.",
+    "ogImage": "https://picsum.photos/seed/sentiernietzsche/1200/800",
+    "heroImage": "https://picsum.photos/seed/sentiernietzsche/1200/800",
+    "heroAlt": "Sentier Nietzsche reliant Èze bord de mer au village perché d'Èze",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6664°N, 7.356°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Automne / hiver / printemps (éviter la chaleur estivale)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "45 min à 1 h à la montée"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré, pentu et parfois glissant"
+      }
+    ],
+    "description1": "Le chemin escarpé que Friedrich Nietzsche empruntait chaque jour pour rejoindre le village d'Èze, et où il aurait conçu une partie d'Ainsi parlait Zarathoustra.",
+    "description2": "Le sentier grimpe environ 400 mètres de dénivelé à travers une végétation méditerranéenne dense, entre pins et euphorbes, avec des échappées régulières sur la mer. Physique mais court, il permet d'arriver au village par un autre chemin que les cars de tourisme.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Départ depuis la gare d'Èze-sur-Mer, arrivée dans le village perché."
+      },
+      {
+        "label": "Eau",
+        "texte": "Pas de point d'eau sur le parcours, à prévoir."
+      },
+      {
+        "label": "Chaussures",
+        "texte": "De marche impérativement, le sentier est caillouteux."
+      }
+    ],
+    "activites": [
+      {
+        "id": "randonnee-chemin-de-nietzsche",
+        "nom": "Randonnée chemin de Nietzsche",
+        "badge": "gratuit",
+        "duree": "1h15–1h45",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
+        "image": "https://picsum.photos/seed/nietzsche-sentier/200/200",
+        "alt": "Randonnée chemin de Nietzsche",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "jardin-exotique-d-eze",
+        "nom": "Jardin exotique d'Èze",
+        "badge": "payant",
+        "duree": "45min–1h15",
+        "prix": "8–10 € / adulte",
+        "url": "https://jardinexotique-eze.fr/",
+        "image": "https://picsum.photos/seed/jardin-exotique-eze/200/200",
+        "alt": "Jardin exotique d'Èze",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "village-medieval-d-eze",
+        "nom": "Village médiéval d'Èze",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.eze-tourisme.com/",
+        "image": "https://picsum.photos/seed/eze-village-medieval/200/200",
+        "alt": "Village médiéval d'Èze",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "tourrettes-sur-loup",
+    "nom": "Tourrettes-sur-Loup, la cité des violettes",
+    "commune": "Tourrettes-sur-Loup",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.7194,
+    "lng": 7.0472,
+    "description": "Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture de la violette qui borde ses environs depuis le début du XXe siècle.",
+    "ogImage": "https://picsum.photos/seed/tourrettes/1200/800",
+    "heroImage": "https://picsum.photos/seed/tourrettes/1200/800",
+    "heroAlt": "Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7194°N, 7.0472°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Février-mars (floraison des violettes)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture de la violette qui borde ses environs depuis le début du XXe siècle.",
+    "description2": "Les maisons, alignées comme un rempart continu, dominent une vallée où poussent encore des champs de violettes utilisées en parfumerie et en confiserie. Le vieux village, piéton, regroupe ateliers d'artistes et venelles fleuries loin de l'agitation du littoral.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "20 minutes depuis Vence, parking à l'entrée du village."
+      },
+      {
+        "label": "Fête de la violette",
+        "texte": "Célébrée début mars selon les années, à vérifier avant de planifier."
+      },
+      {
+        "label": "Artisanat",
+        "texte": "Nombreux ateliers de céramistes et peintres installés dans le village."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-de-la-cite-des-violettes",
+        "nom": "Visite de la cité des violettes",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.tourrettes-sur-loup.fr/",
+        "image": "https://picsum.photos/seed/tourrettes-violettes/200/200",
+        "alt": "Visite de la cité des violettes",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "atelier-ceramique-artisanale",
+        "nom": "Atelier céramique artisanale",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "35–55 € / adulte",
+        "url": "https://www.getyourguide.com/vence-l97030/",
+        "image": "https://picsum.photos/seed/atelier-ceramique/200/200",
+        "alt": "Atelier céramique artisanale",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "festival-des-violettes-fevrier-mars",
+        "nom": "Festival des violettes (février/mars)",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.tourrettes-sur-loup.fr/fete-des-violettes",
+        "image": "https://picsum.photos/seed/fete-violettes/200/200",
+        "alt": "Festival des violettes (février/mars)",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peillon-village.html",
+        "img": "https://picsum.photos/seed/peillon/500/375",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.76°N<br>7.37°E",
+        "region": "Peillon",
+        "titre": "Peillon, village suspendu",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il app…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "https://picsum.photos/seed/peille/500/375",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.75°N<br>7.41°E",
+        "region": "Peille",
+        "titre": "Peille, village de l'arrière-pays",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un e…"
+      },
+      {
+        "href": "gourdon-village.html",
+        "img": "https://picsum.photos/seed/gourdon/500/375",
+        "alt": "Village de Gourdon perché au-dessus des gorges du Loup",
+        "stamp": "43.72°N<br>6.98°E",
+        "region": "Gourdon",
+        "titre": "Gourdon, le nid d'aigle",
+        "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
+      }
+    ]
+  },
+  {
+    "slug": "trophee-auguste-la-turbie",
+    "nom": "Le Trophée d'Auguste",
+    "commune": "La Turbie",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7378,
+    "lng": 7.4014,
+    "description": "Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, perché à plus de 480 mètres au-dessus de la principauté de Monaco.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/trophee-auguste-la-turbie/hero.jpg",
+    "heroImage": "../assets/images/lieux/trophee-auguste-la-turbie/hero.jpg",
+    "heroAlt": "Trophée d'Auguste, monument romain à La Turbie surplombant Monaco",
+    "heroSlides": 4,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7378°N, 7.4014°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, perché à plus de 480 mètres au-dessus de la principauté de Monaco.",
+    "description2": "De ses vestiges partiellement restaurés, la vue plonge directement sur Monaco et le Rocher, avec l'Italie visible par temps clair. Le village de La Turbie qui l'entoure, traversé par la Via Julia Augusta romaine, ajoute au sentiment de traverser plusieurs époques d'un coup.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking dans le village de La Turbie, monument à quelques minutes à pied."
+      },
+      {
+        "label": "Vue",
+        "texte": "Le meilleur point de vue sur Monaco de toute la région, gratuit depuis les abords."
+      },
+      {
+        "label": "Billetterie",
+        "texte": "Musée sur site payant, extérieurs visibles librement."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-du-trophee-d-auguste",
+        "nom": "Visite du Trophée d'Auguste",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "7 € / adulte",
+        "url": "https://www.la-turbie.fr/monument/",
+        "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-1.jpg",
+        "alt": "Visite du Trophée d'Auguste",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "panorama-sur-monaco",
+        "nom": "Panorama sur Monaco",
+        "badge": "gratuit",
+        "duree": "30min",
+        "prix": "Accès libre",
+        "url": "https://www.la-turbie.fr/",
+        "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-2.jpg",
+        "alt": "Panorama sur Monaco",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "village-medieval-de-la-turbie",
+        "nom": "Village médiéval de La Turbie",
+        "badge": "gratuit",
+        "duree": "45min",
+        "prix": "Accès libre",
+        "url": "https://www.la-turbie.fr/patrimoine",
+        "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-3.jpg",
+        "alt": "Village médiéval de La Turbie",
+        "linkText": "En savoir plus →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  },
+  {
+    "slug": "vieille-ville-grasse",
+    "nom": "La vieille ville de Grasse",
+    "commune": "Grasse",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.6584,
+    "lng": 6.9228,
+    "description": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.",
+    "ogImage": "https://picsum.photos/seed/grasse/1200/800",
+    "heroImage": "https://picsum.photos/seed/grasse/1200/800",
+    "heroAlt": "Ruelles de la vieille ville de Grasse, capitale mondiale du parfum",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6584°N, 6.9228°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.",
+    "description2": "Les maisons hautes et étroites, construites à flanc de colline, créent des perspectives en enfilade typiques du vieux Grasse. Trois grandes maisons de parfum, Fragonard, Molinard et Galimard, proposent des visites gratuites de leurs ateliers historiques, une bonne façon de comprendre la ville au-delà de la carte postale.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parkings payants en périphérie de la vieille ville."
+      },
+      {
+        "label": "Parfumeries",
+        "texte": "Visites d'usine gratuites chez Fragonard, Molinard et Galimard."
+      },
+      {
+        "label": "Vue",
+        "texte": "Le jardin de la Princesse Pauline offre un beau point de vue sur la ville et la mer au loin."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-parfumerie-fragonard",
+        "nom": "Visite parfumerie Fragonard",
+        "badge": "gratuit",
+        "duree": "45min",
+        "prix": "Accès libre",
+        "url": "https://www.fragonard.com/fr/la-fabrique/visiter-la-fabrique",
+        "image": "https://picsum.photos/seed/parfumerie-fragonard/200/200",
+        "alt": "Visite parfumerie Fragonard",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "musee-international-de-la-parfumerie",
+        "nom": "Musée international de la Parfumerie",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "8 € / adulte",
+        "url": "https://www.museesdegrasse.com/",
+        "image": "https://picsum.photos/seed/musee-parfumerie-grasse/200/200",
+        "alt": "Musée international de la Parfumerie",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "atelier-creation-de-parfum",
+        "nom": "Atelier création de parfum",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "50–80 € / adulte",
+        "url": "https://www.getyourguide.com/grasse-l96902/creation-parfum",
+        "image": "https://picsum.photos/seed/atelier-parfum-grasse/200/200",
+        "alt": "Atelier création de parfum",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "citadelle-saint-tropez.html",
+        "img": "https://picsum.photos/seed/citadellesttropez/500/375",
+        "alt": "Citadelle de Saint-Tropez dominant le golfe",
+        "stamp": "43.27°N<br>6.64°E",
+        "region": "Saint-Tropez",
+        "titre": "La Citadelle de Saint-Tropez",
+        "blurb": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart co…"
+      },
+      {
+        "href": "gassin-plus-beau-village.html",
+        "img": "https://picsum.photos/seed/gassin/500/375",
+        "alt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
+        "stamp": "43.23°N<br>6.58°E",
+        "region": "Gassin",
+        "titre": "Gassin, plus beau village de France",
+        "blurb": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seuleme…"
+      },
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      }
+    ]
+  },
+  {
+    "slug": "villa-ephrussi-rothschild",
+    "nom": "Villa Ephrussi de Rothschild",
+    "commune": "Saint-Jean-Cap-Ferrat",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.6883,
+    "lng": 7.3306,
+    "description": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du style florentin au jardin japonais.",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/villa-ephrussi-rothschild/hero.jpg",
+    "heroImage": "../assets/images/lieux/villa-ephrussi-rothschild/hero.jpg",
+    "heroAlt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+    "heroSlides": 4,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.6883°N, 7.3306°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps (jardins en fleurs)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h 30 à 2 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, accessible à tous"
+      }
+    ],
+    "description1": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du style florentin au jardin japonais.",
+    "description2": "Construite au début du XXe siècle par la baronne Béatrice Ephrussi de Rothschild, elle offre une vue à 360° sur les deux baies qui encadrent la presqu'île. Les jardins, redessinés comme le pont d'un paquebot, restent l'un des ensembles paysagers les plus photographiés de la Côte d'Azur.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking payant sur place, à l'entrée de la presqu'île."
+      },
+      {
+        "label": "Billetterie",
+        "texte": "Site payant, billets sur place ou en ligne."
+      },
+      {
+        "label": "Musique",
+        "texte": "Les fontaines du jardin français s'animent en musique à heures fixes."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-villa-amp-jardins",
+        "nom": "Visite villa &amp; jardins",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "18 € / adulte",
+        "url": "https://www.villa-ephrussi.com/",
+        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-1.jpg",
+        "alt": "Visite villa & jardins",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-sentier-du-cap-ferrat",
+        "nom": "Randonnée sentier du Cap Ferrat",
+        "badge": "gratuit",
+        "duree": "3h",
+        "prix": "Accès libre",
+        "url": "https://www.saintjeancapferrat-tourisme.fr/randonnee",
+        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-2.jpg",
+        "alt": "Randonnée sentier du Cap Ferrat",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "villa-kerylos",
+        "nom": "Villa Kerylos",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "14 € / adulte",
+        "url": "https://www.villa-kerylos.com/",
+        "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-3.jpg",
+        "alt": "Villa Kerylos",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-kerylos.html",
+        "img": "https://picsum.photos/seed/kerylos/500/375",
+        "alt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
+        "stamp": "43.71°N<br>7.33°E",
+        "region": "Beaulieu-sur-Mer",
+        "titre": "Villa Kerylos",
+        "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
+      }
+    ]
+  },
+  {
+    "slug": "villa-kerylos",
+    "nom": "Villa Kerylos",
+    "commune": "Beaulieu-sur-Mer",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7089,
+    "lng": 7.3308,
+    "description": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement sur les rochers de la baie de Beaulieu.",
+    "ogImage": "https://picsum.photos/seed/kerylos/1200/800",
+    "heroImage": "https://picsum.photos/seed/kerylos/1200/800",
+    "heroAlt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
+    "heroSlides": null,
+    "metaPills": [
+      {
+        "label": "📍",
+        "valeur": "43.7089°N, 7.3308°E"
+      },
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1 h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement sur les rochers de la baie de Beaulieu.",
+    "description2": "Mosaïques, marbres et fresques recréent l'atmosphère d'une demeure de la Grèce classique, à quelques mètres des vagues. Le contraste entre l'architecture antique et la lumière méditerranéenne en fait un lieu à part, souvent éclipsé par sa voisine Ephrussi.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "En bord de mer, à 10 minutes à pied de la gare de Beaulieu-sur-Mer."
+      },
+      {
+        "label": "Billetterie",
+        "texte": "Site payant."
+      },
+      {
+        "label": "À combiner",
+        "texte": "La promenade Maurice Rouvier relie Beaulieu à Saint-Jean-Cap-Ferrat à pied."
+      }
+    ],
+    "activites": [
+      {
+        "id": "visite-villa-kerylos",
+        "nom": "Visite Villa Kerylos",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "14 € / adulte",
+        "url": "https://www.villa-kerylos.com/",
+        "image": "https://picsum.photos/seed/kerylos-visite/200/200",
+        "alt": "Visite Villa Kerylos",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "promenade-gustave-eiffel",
+        "nom": "Promenade Gustave Eiffel",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.beaulieusurmertourisme.fr/",
+        "image": "https://picsum.photos/seed/promenade-bord-mer/200/200",
+        "alt": "Promenade Gustave Eiffel",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "villa-ephrussi-de-rothschild",
+        "nom": "Villa Ephrussi de Rothschild",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "18 € / adulte",
+        "url": "https://www.villa-ephrussi.com/",
+        "image": "https://picsum.photos/seed/villa-ephrussi-cap/200/200",
+        "alt": "Villa Ephrussi de Rothschild",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "../assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
+      },
+      {
+        "href": "sentier-cap-ferrat.html",
+        "img": "https://picsum.photos/seed/capferrat/500/375",
+        "alt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Sentier du littoral du Cap Ferrat",
+        "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
+      },
+      {
+        "href": "villa-ephrussi-rothschild.html",
+        "img": "../assets/images/lieux/villa-ephrussi-rothschild/thumb.jpg",
+        "alt": "Villa Ephrussi de Rothschild et ses jardins sur le Cap Ferrat",
+        "stamp": "43.69°N<br>7.33°E",
+        "region": "Saint-Jean-Cap-Ferrat",
+        "titre": "Villa Ephrussi de Rothschild",
+        "blurb": "Une villa rose posée sur l'isthme du Cap Ferrat, entourée de neuf jardins thématiques allant du…"
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "riviera-secrete",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "extract:lieux": "node scripts/extract-lieux.mjs",
+    "extract:itineraires": "node scripts/extract-itineraires.mjs"
+  }
+}
