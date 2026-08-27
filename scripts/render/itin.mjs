@@ -19,7 +19,7 @@ function renderStopAct(lieuBySlug, a) {
   return `            <a class="stop-act ${a.cls}" href="${url}" target="_blank" rel="noopener">${a.label}</a>`;
 }
 
-function renderItem(lieuBySlug, item) {
+function renderItem(lieuBySlug, item, itinSlug) {
   if (item.type === 'transit') {
     return `      <li class="itin-transit" aria-hidden="true">
         <span class="transit-arrow">↓</span>
@@ -44,7 +44,7 @@ function renderItem(lieuBySlug, item) {
   return `      <li class="itin-stop">
         <span class="itin-time">${item.heure}</span>
         <div class="itin-stop-body">
-          <a href="../lieux/${lieu.slug}.html" class="itin-stop-name">${item.nom}</a>
+          <a href="../lieux/${lieu.slug}.html?itin=${itinSlug}" class="itin-stop-name">${item.nom}</a>
           <span class="itin-stop-commune">${item.commune}</span>${badges}
           <p>${item.desc}</p>${acts}
         </div>
@@ -174,6 +174,7 @@ export function renderItin(itin, lieuBySlug) {
   <div class="wrap">
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
+      <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
     </nav>
   </div>
@@ -208,7 +209,7 @@ ${strip.map(s => `    <img src="${s.src}" alt="${s.alt}" loading="lazy">`).join(
 
   <div class="itin-body">
     <ol class="itin-stops">
-${items.map(i => renderItem(lieuBySlug, i)).join('\n')}
+${items.map(i => renderItem(lieuBySlug, i, slug)).join('\n')}
     </ol>
     <div id="map-itin-${slug}" class="itin-map" role="application" aria-label="${mapLabel}"></div>
   </div>

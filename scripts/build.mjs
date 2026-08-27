@@ -10,9 +10,10 @@ const ROOT = join(import.meta.dirname, '..');
 const lieux = JSON.parse(readFileSync(join(ROOT, 'data', 'lieux.json'), 'utf8'));
 const itineraires = JSON.parse(readFileSync(join(ROOT, 'data', 'itineraires.json'), 'utf8'));
 const lieuBySlug = new Map(lieux.map(l => [l.slug, l]));
+const itinTitles = Object.fromEntries(itineraires.map(i => [i.slug, i.titre.replace(/&amp;/g, '&')]));
 
 for (const lieu of lieux) {
-  writeFileSync(join(ROOT, 'lieux', `${lieu.slug}.html`), renderLieu(lieu));
+  writeFileSync(join(ROOT, 'lieux', `${lieu.slug}.html`), renderLieu(lieu, itinTitles));
 }
 for (const itin of itineraires) {
   writeFileSync(join(ROOT, 'itin', `${itin.slug}.html`), renderItin(itin, lieuBySlug));

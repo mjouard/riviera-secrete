@@ -87,6 +87,7 @@
   <div class="wrap">
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
+      <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
     </nav>
   </div>
@@ -95,7 +96,7 @@
 <div class="wrap breadcrumb">
   <ol>
     <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../index.html#arriere-pays">L'arrière-pays : villages perchés & gorges</a></li>
+    <li><a href="../index.html#arriere-pays" id="breadcrumb-parent">L'arrière-pays : villages perchés & gorges</a></li>
     <li>Gourdon, le nid d'aigle</li>
   </ol>
 </div>
@@ -234,6 +235,19 @@
 </footer>
 
 <script src="../assets/main.js"></script>
+<script>
+  (function() {
+    const ITIN_TITLES = {"antibes-biot-juan":"Antibes, Biot & la pinède de Juan-les-Pins","grasse-saint-tropez":"Grasse et la presqu'île de Saint-Tropez","lerins-esterel":"Îles de Lérins & Estérel sauvage","menton-eze-monaco":"Menton, Èze & Monaco : la route des classiques","nice-peillon-peille":"Nice, Peillon & Peille : ville et arrière-pays express","villages-perches":"La route des villages perchés"};
+    const itinSlug = new URLSearchParams(location.search).get('itin');
+    if (itinSlug && ITIN_TITLES[itinSlug]) {
+      const crumb = document.getElementById('breadcrumb-parent');
+      if (crumb) {
+        crumb.href = '../itin/' + itinSlug + '.html';
+        crumb.textContent = ITIN_TITLES[itinSlug];
+      }
+    }
+  })();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function() {

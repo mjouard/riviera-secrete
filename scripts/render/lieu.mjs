@@ -70,7 +70,7 @@ function renderRelatedCard(r) {
       </a>`;
 }
 
-export function renderLieu(lieu) {
+export function renderLieu(lieu, itinTitles = {}) {
   const {
     slug, nom, commune, regionSlug, regionLabel, lat, lng,
     description, ogImage, heroImage, heroAlt, heroSlides,
@@ -169,6 +169,7 @@ export function renderLieu(lieu) {
   <div class="wrap">
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
+      <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
     </nav>
   </div>
@@ -177,7 +178,7 @@ export function renderLieu(lieu) {
 <div class="wrap breadcrumb">
   <ol>
     <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../index.html#${regionSlug}">${regionLabel}</a></li>
+    <li><a href="../index.html#${regionSlug}" id="breadcrumb-parent">${regionLabel}</a></li>
     <li>${nom}</li>
   </ol>
 </div>
@@ -240,6 +241,19 @@ ${related.map(renderRelatedCard).join('\n\n')}
 </footer>
 
 <script src="../assets/main.js"></script>
+<script>
+  (function() {
+    const ITIN_TITLES = ${JSON.stringify(itinTitles)};
+    const itinSlug = new URLSearchParams(location.search).get('itin');
+    if (itinSlug && ITIN_TITLES[itinSlug]) {
+      const crumb = document.getElementById('breadcrumb-parent');
+      if (crumb) {
+        crumb.href = '../itin/' + itinSlug + '.html';
+        crumb.textContent = ITIN_TITLES[itinSlug];
+      }
+    }
+  })();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function() {

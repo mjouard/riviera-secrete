@@ -109,14 +109,25 @@ manual updates in sync until this is folded into the build.
 
 There is no standalone full-screen map page or itinéraires hub page anymore — both were
 removed as redundant intermediates (`index.html` already embeds the full interactive map at
-`#carte` and the full itinéraire grid in its `itin-preview` section, each already linking
-straight to `lieux/*.html`/`itin/*.html`). Don't recreate `carte.html` or `itineraires.html`,
-and don't add nav links back to them. Site nav is now just: `index.html` has "Carte" (→
-`#carte` on itself) and "Lieux" (→ `#lieux` on itself); every other page (`lieux/*.html`,
-`itin/*.html`, `credits.html`) has only "Lieux" (→ `../index.html#lieux` or
-`index.html#lieux`) — there's no page-specific "Carte" equivalent to link to from a subpage,
-so it was dropped rather than repointed. Itinéraire page breadcrumbs go straight
-`Accueil → [titre]`, no middle "Itinéraires" crumb.
+`#carte` and the full itinéraire grid in its `itin-preview` section — which itself has
+`id="itineraires"` — each already linking straight to `lieux/*.html`/`itin/*.html`). Don't
+recreate `carte.html` or `itineraires.html`. Site nav is now: `index.html` has "Carte" (→
+`#carte`), "Itinéraires" (→ `#itineraires`), "Lieux" (→ `#lieux`), all anchors on itself;
+every other page (`lieux/*.html`, `itin/*.html`, `credits.html`) has "Itinéraires" (→
+`../index.html#itineraires`) and "Lieux" (→ `../index.html#lieux`) — no "Carte" equivalent to
+link to from a subpage, so that one was dropped rather than repointed. Itinéraire page
+breadcrumbs go straight `Accueil → [titre]`, no middle "Itinéraires" crumb.
+
+**Itinéraire → lieu breadcrumb context.** When a stop's lieu link is generated
+(`scripts/render/itin.mjs`), it carries `?itin=<slug>`. On the lieu page
+(`scripts/render/lieu.mjs`), a small inline script reads that query param against an embedded
+`ITIN_TITLES` map (slug → titre, built in `build.mjs` from `data/itineraires.json`, HTML
+entities decoded) and, if it matches, swaps the breadcrumb's middle crumb from the lieu's
+region (`id="breadcrumb-parent"`) to a link back to that itinéraire — so following a stop
+link and then going "back" returns to the itinéraire, not to the homepage's region list.
+Falls back to the normal region crumb whenever the param is absent or unrecognized (direct
+visits, search traffic, links from the homepage grid, etc.) — this is additive, not a
+replacement of the default breadcrumb.
 
 ## Custom skills
 
