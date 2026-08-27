@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La vieille ville de Grasse — Grasse | Riviera Secrète</title>
+<meta name="description" content="La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://riviera-secrete.netlify.app/lieux/vieille-ville-grasse.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="La vieille ville de Grasse — Grasse">
+<meta property="og:description" content="La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.">
+<meta property="og:url" content="https://riviera-secrete.netlify.app/lieux/vieille-ville-grasse.html">
+<meta property="og:image" content="https://picsum.photos/seed/grasse/1200/800">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Riviera Secrète">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La vieille ville de Grasse — Grasse">
+<meta name="twitter:description" content="La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "La vieille ville de Grasse",
+  "description": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.",
+  "image": "https://picsum.photos/seed/grasse/1200/800",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Grasse",
+    "addressRegion": "Alpes-Maritimes / Var",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.6584,
+    "longitude": 6.9228
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  .mini-map{
+    width:100%; height:200px; border-radius:3px;
+    border:1px solid var(--line); margin-bottom:20px;
+  }
+  .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+
+  .leaflet-popup-content-wrapper{
+    border-radius:3px; font-family:'Inter', sans-serif;
+    background:var(--surface); color:var(--text);
+  }
+  .leaflet-popup-tip{ background:var(--surface); }
+  .leaflet-popup-close-button{ color:var(--text-muted) !important; }
+  .leaflet-container a.leaflet-popup-close-button:hover{ color:var(--terracotta) !important; }
+  .popup-region{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px;
+  }
+  .popup-name{ font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem; margin-bottom:6px; display:block; }
+  .popup-intro{ font-size:0.85rem; color:var(--text-muted); margin-bottom:10px; }
+  .popup-link{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; letter-spacing:0.03em;
+    color:var(--terracotta); text-decoration:none; font-weight:500;
+  }
+  .popup-link:hover{ text-decoration:underline; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="../carte.html">Carte</a>
+      <a href="../itineraires.html">Itinéraires</a>
+      <a href="../index.html#lieux">Lieux</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap breadcrumb">
+  <ol>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#golfe-st-tropez">Grasse & le golfe de Saint-Tropez</a></li>
+    <li>La vieille ville de Grasse</li>
+  </ol>
+</div>
+
+<div class="wrap">
+  <div class="detail-hero">
+    <img src="https://picsum.photos/seed/grasse/1200/800" alt="Ruelles de la vieille ville de Grasse, capitale mondiale du parfum" loading="eager">
+    <div class="detail-hero-caption">
+      <span class="card-region">Grasse</span>
+      <h1>La vieille ville de Grasse</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="meta-bar">
+    <span class="meta-pill">📍 <strong>43.6584°N, 6.9228°E</strong></span>
+    <span class="meta-pill">🗓️ Meilleure saison : <strong>Toute l'année</strong></span>
+    <span class="meta-pill">⏱️ Durée : <strong>2 h</strong></span>
+    <span class="meta-pill">🥾 Niveau : <strong>Facile, pentu par endroits</strong></span>
+  </div>
+
+  <div class="article">
+    <div class="article-body">
+      <p>La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.</p>
+      <p>Les maisons hautes et étroites, construites à flanc de colline, créent des perspectives en enfilade typiques du vieux Grasse. Trois grandes maisons de parfum, Fragonard, Molinard et Galimard, proposent des visites gratuites de leurs ateliers historiques, une bonne façon de comprendre la ville au-delà de la carte postale.</p>
+    </div>
+    <aside class="tips">
+      <div id="mini-map-vieille-ville-grasse" class="mini-map" role="application" aria-label="Localisation de La vieille ville de Grasse"></div>
+      <h2>Bon à savoir</h2>
+      <ul>
+          <li><strong>Accès</strong>Parkings payants en périphérie de la vieille ville.</li>
+          <li><strong>Parfumeries</strong>Visites d'usine gratuites chez Fragonard, Molinard et Galimard.</li>
+          <li><strong>Vue</strong>Le jardin de la Princesse Pauline offre un beau point de vue sur la ville et la mer au loin.</li>
+      </ul>
+    </aside>
+  </div>
+</div>
+
+<section class="activities">
+  <div class="wrap">
+    <h2>Activités à Grasse</h2>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/parfumerie-fragonard/200/200" alt="Visite parfumerie Fragonard" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Visite parfumerie Fragonard</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 45min</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.fragonard.com/fr/la-fabrique/visiter-la-fabrique" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/musee-parfumerie-grasse/200/200" alt="Musée international de la Parfumerie" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Musée international de la Parfumerie</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30</span>
+            <span>💶 8 € / adulte</span>
+          </div>
+          <a class="activity-link" href="https://www.museesdegrasse.com/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/atelier-parfum-grasse/200/200" alt="Atelier création de parfum" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Atelier création de parfum</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30</span>
+            <span>💶 50–80 € / adulte</span>
+          </div>
+          <a class="activity-link" href="https://www.getyourguide.com/grasse-l96902/creation-parfum" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="wrap">
+    <h2>D'autres lieux à découvrir</h2>
+    <div class="grid">
+      <a class="card" href="citadelle-saint-tropez.html">
+        <div class="card-media">
+          <img src="https://picsum.photos/seed/citadellesttropez/500/375" alt="Citadelle de Saint-Tropez dominant le golfe" loading="lazy">
+          <span class="stamp">43.27°N<br>6.64°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Saint-Tropez</span>
+          <h3>La Citadelle de Saint-Tropez</h3>
+          <p>Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart co…</p>
+        </div>
+      </a>
+
+      <a class="card" href="gassin-plus-beau-village.html">
+        <div class="card-media">
+          <img src="https://picsum.photos/seed/gassin/500/375" alt="Village perché de Gassin surplombant le golfe de Saint-Tropez" loading="lazy">
+          <span class="stamp">43.23°N<br>6.58°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Gassin</span>
+          <h3>Gassin, plus beau village de France</h3>
+          <p>Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seuleme…</p>
+        </div>
+      </a>
+
+      <a class="card" href="rue-obscure-villefranche.html">
+        <div class="card-media">
+          <img src="../assets/images/lieux/rue-obscure-villefranche/thumb.jpg" alt="La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer" loading="lazy">
+          <span class="stamp">43.70°N<br>7.31°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Villefranche-sur-Mer</span>
+          <h3>La Rue Obscure</h3>
+          <p>Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    const map = L.map('mini-map-vieille-ville-grasse', { scrollWheelZoom: false, zoomControl: false, dragging: !L.Browser.mobile });
+    map.setView([43.6584, 6.9228], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:18px;height:18px;border-radius:50%;background:#E8A33D;border:2px solid #0C1116;box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>`,
+      iconSize: [18, 18], iconAnchor: [9, 9],
+    });
+    L.marker([43.6584, 6.9228], { icon }).addTo(map);
+    map.on('focus', () => map.scrollWheelZoom.enable());
+    map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+
+</body>
+</html>

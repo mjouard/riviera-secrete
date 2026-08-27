@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La route des villages perchés | Riviera Secrète</title>
+<meta name="description" content="Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+.leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+.itin-body{ display:grid; grid-template-columns:1.3fr 1fr; gap:32px; margin-top:8px; align-items:start; }
+.itin-map{ width:100%; height:420px; border-radius:3px; border:1px solid var(--line); position:sticky; top:88px; }
+.itin-stops{ list-style:none; margin:0; padding:0; }
+.itin-stop{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:18px 0; border-top:1px solid var(--line); }
+.itin-stop:first-child{ border-top:none; }
+.itin-time{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--terracotta); font-weight:500; padding-top:2px; }
+.itin-stop-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; text-decoration:none; color:var(--text); display:inline-block; }
+.itin-stop-name:hover{ color:var(--terracotta); }
+.itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
+.itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
+.leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
+.leaflet-popup-tip{ background:var(--surface); }
+.popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
+@media (max-width:900px){ .itin-body{ grid-template-columns:1fr; } .itin-map{ height:260px; position:static; order:-1; } }
+@media (max-width:600px){ .itin-stop{ grid-template-columns:1fr; gap:4px; } }
+.stop-acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.stop-act{ font-family:'IBM Plex Mono',monospace; font-size:0.71rem; letter-spacing:0.02em; padding:4px 10px; border-radius:2px; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; }
+.stop-act:hover{ opacity:0.7; }
+.stop-act--paid{ background:rgba(232,163,61,0.1); color:var(--terracotta); border:1px solid rgba(232,163,61,0.22); }
+.stop-act--free{ background:rgba(74,144,185,0.08); color:var(--azure); border:1px solid rgba(74,144,185,0.18); }
+.itin-transit{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:2px 0; }
+.transit-arrow{ font-size:0.75rem; color:var(--text-muted); opacity:0.4; text-align:center; }
+.transit-info{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-muted); font-style:italic; display:flex; align-items:center; }
+@media (max-width:600px){ .itin-transit{ grid-template-columns:1fr; } .transit-arrow{ display:none; } }
+.itin-booking{ padding:56px 0 32px; border-top:1px solid var(--line); }
+.itin-booking h2{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; margin:0 0 4px; }
+.itin-booking > .wrap > p{ color:var(--text-muted); font-size:0.9rem; margin:0 0 28px; }
+.itin-booking-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+@media (max-width:900px){ .itin-booking-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:500px){ .itin-booking-grid{ grid-template-columns:1fr; } }
+.itin-booking-card{ border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+.itin-booking-img{ aspect-ratio:4/3; overflow:hidden; }
+.itin-booking-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+.itin-booking-card:hover .itin-booking-img img{ transform:scale(1.04); }
+.itin-booking-body{ padding:12px 14px 14px; }
+.itin-booking-lieu{ font-family:'IBM Plex Mono',monospace; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
+.itin-booking-name{ font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; display:block; margin-bottom:8px; line-height:1.3; }
+.itin-booking-meta{ font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap; }
+.itin-booking-link{ font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--terracotta); text-decoration:none; font-weight:500; letter-spacing:0.03em; }
+.itin-booking-link:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="../carte.html">Carte</a>
+      <a href="../itineraires.html">Itinéraires</a>
+      <a href="../index.html#lieux">Lieux</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap breadcrumb">
+  <ol>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../itineraires.html">Itinéraires</a></li>
+    <li>La route des villages perchés</li>
+  </ol>
+</div>
+
+<div class="wrap">
+  <div class="detail-hero">
+    <img src="https://picsum.photos/seed/itin-villages/1200/800" alt="Villages perchés de l'arrière-pays niçois" loading="eager">
+    <div class="detail-hero-caption">
+      <span class="card-region">6 étapes · Journée complète</span>
+      <h1>La route des villages perchés</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="meta-bar">
+    <span class="meta-pill">🗓️ <strong>Journée complète, coucher de soleil à Gourdon</strong></span>
+    <span class="meta-pill">🚗 <strong>En voiture, routes sinueuses de montagne</strong></span>
+    <span class="meta-pill">📍 <strong>6 étapes</strong></span>
+  </div>
+  <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.</p>
+
+  <div class="itin-strip">
+    <img src="https://picsum.photos/seed/saint-paul-de-vence/600/400" alt="Saint-Paul-de-Vence" loading="lazy">
+    <img src="https://picsum.photos/seed/tourrettes-sur-loup/600/400" alt="Tourrettes-sur-Loup, la cité des violettes" loading="lazy">
+    <img src="https://picsum.photos/seed/gourdon-village/600/400" alt="Gourdon, le nid d'aigle" loading="lazy">
+  </div>
+
+  <div class="itin-body">
+    <ol class="itin-stops">
+      <li class="itin-stop">
+        <span class="itin-time">09:00</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/saint-paul-de-vence.html" class="itin-stop-name">Saint-Paul-de-Vence</a>
+          <span class="itin-stop-commune">Saint-Paul-de-Vence</span>
+          <p>Remparts et galeries d'art avant l'affluence de la mi-journée.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--free" href="https://www.saint-pauldevence.com/" target="_blank" rel="noopener">Remparts &amp; galeries · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 10 min — D2 direction Vence</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">11:00</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/chapelle-rosaire-vence.html" class="itin-stop-name">La Chapelle du Rosaire</a>
+          <span class="itin-stop-commune">Vence</span>
+          <p>La lumière du matin traverse le mieux les vitraux de Matisse.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.chapellematisse.com/" target="_blank" rel="noopener">Chapelle Matisse · 7 € · 1 h</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 15 min — D2210 direction Tourrettes</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">12:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/tourrettes-sur-loup.html" class="itin-stop-name">Tourrettes-sur-Loup, la cité des violettes</a>
+          <span class="itin-stop-commune">Tourrettes-sur-Loup</span>
+          <p>Déjeuner dans le village, ruelles fleuries en arc de cercle.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--free" href="https://www.tourrettes-sur-loup.fr/" target="_blank" rel="noopener">Cité des violettes · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 10 min — D2210 puis D3</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">14:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/pont-du-loup.html" class="itin-stop-name">Pont du Loup et son viaduc</a>
+          <span class="itin-stop-commune">Pont-du-Loup</span>
+          <p>Arrêt rapide devant le viaduc en ruine, éventuellement un atelier de fruits confits.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--free" href="https://www.confiserie-florian.com/" target="_blank" rel="noopener">Confiserie Florian · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 5 min — D3, début des gorges</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">15:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/gorges-du-loup-cascade-courmes.html" class="itin-stop-name">Les gorges du Loup et la cascade de Courmes</a>
+          <span class="itin-stop-commune">Gorges du Loup</span>
+          <p>Marche jusqu'à la cascade, ou simple arrêt aux points de vue aménagés.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--free" href="https://www.visorando.com/randonnee-gorges-du-loup.html" target="_blank" rel="noopener">Randonnée gorges · Libre</a>
+            <a class="stop-act stop-act--paid" href="https://www.getyourguide.com/grasse-l96902/escalade" target="_blank" rel="noopener">Escalade &amp; via ferrata · 50–80 €</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 8 min — D3, montée sinueuse vers le sommet</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">17:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/gourdon-village.html" class="itin-stop-name">Gourdon, le nid d'aigle</a>
+          <span class="itin-stop-commune">Gourdon</span>
+          <p>Le point final, pour le coucher de soleil sur les gorges depuis le nid d'aigle.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--free" href="https://www.gourdon-village.fr/" target="_blank" rel="noopener">Panorama falaise · Libre</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div id="map-itin-villages-perches" class="itin-map" role="application" aria-label="Carte de l'itinéraire La route des villages perchés"></div>
+  </div>
+</div>
+
+<section class="itin-booking">
+  <div class="wrap">
+    <h2>À réserver avant de partir</h2>
+    <p>Ces expériences demandent un peu d'anticipation, surtout en haute saison.</p>
+    <div class="itin-booking-grid">
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="https://picsum.photos/seed/fondation-maeght/400/300" alt="Fondation Maeght, Saint-Paul-de-Vence" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Saint-Paul-de-Vence</span>
+          <span class="itin-booking-name">Fondation Maeght</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h 30</span>
+            <span>💶 20 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.fondation-maeght.com/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="https://picsum.photos/seed/chapelle-matisse-vence/400/300" alt="Chapelle du Rosaire, Vence" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Vence</span>
+          <span class="itin-booking-name">Chapelle du Rosaire (Matisse)</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h</span>
+            <span>💶 7 €</span>
+            <span>Mardi &amp; jeudi</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.chapellematisse.com/" target="_blank" rel="noopener">Vérifier les horaires →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="https://picsum.photos/seed/tourrettes-ceramique/400/300" alt="Atelier céramique, Tourrettes-sur-Loup" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Tourrettes-sur-Loup</span>
+          <span class="itin-booking-name">Atelier céramique</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h 30</span>
+            <span>💶 35–55 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.getyourguide.com/vence-l97030/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="https://picsum.photos/seed/chateau-gourdon/400/300" alt="Château-musée de Gourdon" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Gourdon</span>
+          <span class="itin-booking-name">Château-musée de Gourdon</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h</span>
+            <span>💶 6 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.chateaudegourdon.com/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="itin-suggest">
+  <div class="wrap">
+    <h2>Autres itinéraires</h2>
+    <div class="itin-suggest-grid">
+      <a class="itin-suggest-card" href="antibes-biot-juan.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-antibes/600/338" alt="Antibes, Biot &amp; la pinède de Juan-les-Pins" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">4 étapes</span>
+          <h3>Antibes, Biot &amp; la pinède de Juan-les-Pins</h3>
+        </div>
+      </a>
+      <a class="itin-suggest-card" href="lerins-esterel.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-lerins/600/338" alt="Îles de Lérins &amp; Estérel sauvage" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">3 étapes</span>
+          <h3>Îles de Lérins &amp; Estérel sauvage</h3>
+        </div>
+      </a>
+      <a class="itin-suggest-card" href="nice-peillon-peille.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-nice/600/338" alt="Nice, Peillon &amp; Peille : ville et arrière-pays express" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">4 étapes</span>
+          <h3>Nice, Peillon &amp; Peille : ville et arrière-pays express</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    const STOPS = [
+      { n:1, name:"Saint-Paul-de-Vence", lat:43.697, lng:7.1214 },
+      { n:2, name:"La Chapelle du Rosaire", lat:43.7278, lng:7.1178 },
+      { n:3, name:"Tourrettes-sur-Loup, la cité des violettes", lat:43.7194, lng:7.0472 },
+      { n:4, name:"Pont du Loup et son viaduc", lat:43.7186, lng:6.9967 },
+      { n:5, name:"Les gorges du Loup et la cascade de Courmes", lat:43.7311, lng:6.9825 },
+      { n:6, name:"Gourdon, le nid d'aigle", lat:43.7154, lng:6.9764 }
+    ];
+    const map = L.map('map-itin-villages-perches', { scrollWheelZoom: false, zoomControl: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.control.zoom({ position:'bottomright' }).addTo(map);
+    const latlngs = STOPS.map(s => [s.lat, s.lng]);
+    L.polyline(latlngs, { color:'#E8A33D', weight:2, opacity:0.7, dashArray:'4 6' }).addTo(map);
+    STOPS.forEach(s => {
+      const icon = L.divIcon({
+        className:'',
+        html:`<div style="width:22px;height:22px;border-radius:50%;background:#E8A33D;color:#0C1116;border:2px solid #0C1116;box-shadow:0 1px 4px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;">${s.n}</div>`,
+        iconSize:[22,22], iconAnchor:[11,11],
+      });
+      L.marker([s.lat,s.lng],{icon}).bindPopup(`<span class="popup-name">${s.n}. ${s.name}</span>`).addTo(map);
+    });
+    map.fitBounds(L.latLngBounds(latlngs),{padding:[24,24]});
+    map.on('focus',()=>map.scrollWheelZoom.enable());
+    map.on('blur',()=>map.scrollWheelZoom.disable());
+  })();
+</script>
+</body>
+</html>

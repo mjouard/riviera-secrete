@@ -1,0 +1,14 @@
+IMAGES ATTENDUES — page d'accueil (carousel hero)
+==================================================
+Format : JPG ou WebP
+Dimensions : 1600 × 900 px
+
+Fichiers :
+  hero-1.jpg   (slide 1 — affiché en premier)
+  hero-2.jpg
+  hero-3.jpg
+  hero-4.jpg
+  hero-5.jpg
+  hero-6.jpg
+  hero-7.jpg
+  hero-8.jpg   (8 slides au total)

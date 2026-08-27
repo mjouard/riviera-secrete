@@ -1,0 +1,30 @@
+ARCHITECTURE DES IMAGES — Riviera Secrète
+==========================================
+
+PRINCIPE : zéro duplication.
+Les pages itinéraires ne stockent aucune image propre. Elles piochent
+directement dans les dossiers lieux/.
+
+DEUX DOSSIERS SEULEMENT :
+
+  accueil/
+    8 photos pour le carousel de la page d'accueil (format panoramique)
+    Ces photos ne sont pas liées à un lieu précis — choisissez librement.
+
+  lieux/[slug]/
+    Toutes les autres images du site. Une photo déposée ici peut être
+    utilisée dans :
+      - la page du lieu (bannière, carousel, activités)
+      - la page d'accueil (cards)
+      - les sections "lieux liés" des autres pages
+      - les popups de la carte interactive
+      - les pages itinéraires (bande de photos, section réservations)
+
+CORRESPONDANCE ITINÉRAIRES → LIEUX :
+  Les strips et bookings des pages itin utilisent les images des lieux
+  qui composent cet itinéraire. Ex : l'itinéraire Menton-Èze-Monaco
+  réutilise les images de roquebrune-cap-martin-village/, eze-village/,
+  trophee-auguste-la-turbie/, etc.
+
+FORMAT RECOMMANDÉ : JPG ou WebP.
+Pas besoin de fournir plusieurs tailles — le navigateur recadre avec object-fit.

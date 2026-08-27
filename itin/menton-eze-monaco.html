@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menton, Èze & Monaco : la route des classiques | Riviera Secrète</title>
+<meta name="description" content="Deux jours entre villages perchés, panoramas et villas Belle Époque : Grande Corniche, Monaco, Cap Ferrat et Villefranche-sur-Mer.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+.leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+.itin-body{ display:grid; grid-template-columns:1.3fr 1fr; gap:32px; margin-top:8px; align-items:start; }
+.itin-map{ width:100%; height:420px; border-radius:3px; border:1px solid var(--line); position:sticky; top:88px; }
+.itin-stops{ list-style:none; margin:0; padding:0; }
+.itin-stop{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:18px 0; border-top:1px solid var(--line); }
+.itin-stop:first-child{ border-top:none; }
+.itin-time{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--terracotta); font-weight:500; padding-top:2px; }
+.itin-stop-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; text-decoration:none; color:var(--text); display:inline-block; }
+.itin-stop-name:hover{ color:var(--terracotta); }
+.itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
+.itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
+.leaflet-popup-content-wrapper{ border-radius:3px; font-family:'Inter',sans-serif; background:var(--surface); color:var(--text); }
+.leaflet-popup-tip{ background:var(--surface); }
+.popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
+@media (max-width:900px){ .itin-body{ grid-template-columns:1fr; } .itin-map{ height:260px; position:static; order:-1; } }
+@media (max-width:600px){ .itin-stop{ grid-template-columns:1fr; gap:4px; } }
+.stop-acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.stop-act{ font-family:'IBM Plex Mono',monospace; font-size:0.71rem; letter-spacing:0.02em; padding:4px 10px; border-radius:2px; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; }
+.stop-act:hover{ opacity:0.7; }
+.stop-act--paid{ background:rgba(232,163,61,0.1); color:var(--terracotta); border:1px solid rgba(232,163,61,0.22); }
+.stop-act--free{ background:rgba(74,144,185,0.08); color:var(--azure); border:1px solid rgba(74,144,185,0.18); }
+.itin-transit{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:2px 0; }
+.transit-arrow{ font-size:0.75rem; color:var(--text-muted); opacity:0.4; text-align:center; }
+.transit-info{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-muted); font-style:italic; display:flex; align-items:center; }
+@media (max-width:600px){ .itin-transit{ grid-template-columns:1fr; } .transit-arrow{ display:none; } }
+.itin-sleep .itin-time{ color:var(--text-muted); }
+.itin-sleep-label{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; color:var(--text); display:inline-block; font-style:italic; }
+.itin-sleep .itin-stop-body p{ font-style:normal; }
+.itin-booking{ padding:56px 0 32px; border-top:1px solid var(--line); }
+.itin-booking h2{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; margin:0 0 4px; }
+.itin-booking > .wrap > p{ color:var(--text-muted); font-size:0.9rem; margin:0 0 28px; }
+.itin-booking-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+@media (max-width:900px){ .itin-booking-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:500px){ .itin-booking-grid{ grid-template-columns:1fr; } }
+.itin-booking-card{ border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+.itin-booking-img{ aspect-ratio:4/3; overflow:hidden; }
+.itin-booking-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+.itin-booking-card:hover .itin-booking-img img{ transform:scale(1.04); }
+.itin-booking-body{ padding:12px 14px 14px; }
+.itin-booking-lieu{ font-family:'IBM Plex Mono',monospace; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
+.itin-booking-name{ font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; display:block; margin-bottom:8px; line-height:1.3; }
+.itin-booking-meta{ font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; display:flex; gap:10px; }
+.itin-booking-link{ font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--terracotta); text-decoration:none; font-weight:500; letter-spacing:0.03em; }
+.itin-booking-link:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="../carte.html">Carte</a>
+      <a href="../itineraires.html">Itinéraires</a>
+      <a href="../index.html#lieux">Lieux</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap breadcrumb">
+  <ol>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../itineraires.html">Itinéraires</a></li>
+    <li>Menton, Èze &amp; Monaco : la route des classiques</li>
+  </ol>
+</div>
+
+<div class="wrap">
+  <div class="detail-hero">
+    <img src="../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg"
+         data-carousel-srcs="../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg,
+                             ../assets/images/lieux/trophee-auguste-la-turbie/hero.jpg,
+                             ../assets/images/lieux/eze-village/hero.jpg,
+                             ../assets/images/lieux/jardin-exotique-monaco/hero.jpg,
+                             ../assets/images/lieux/villa-ephrussi-rothschild/hero.jpg,
+                             ../assets/images/lieux/rue-obscure-villefranche/hero.jpg"
+         alt="La côte de la Riviera entre Menton et Monaco" loading="eager">
+    <div class="detail-hero-caption">
+      <span class="card-region">6 étapes · 2 jours</span>
+      <h1>Menton, Èze &amp; Monaco : la route des classiques</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="meta-bar">
+    <span class="meta-pill">🗓️ <strong>2 jours · rythme serein</strong></span>
+    <span class="meta-pill">🚗 <strong>En voiture, prévoir du stationnement payant à chaque étape</strong></span>
+    <span class="meta-pill">📍 <strong>6 étapes</strong></span>
+  </div>
+  <p style="color:var(--text-muted);font-size:1rem;max-width:68ch;margin-bottom:24px;">Deux jours de l'est vers l'ouest : Grande Corniche et villages perchés le premier jour, nuit à Monaco, Cap Ferrat et Villefranche au rythme du deuxième.</p>
+
+  <div class="itin-strip">
+    <img src="../assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg" alt="Le village de Roquebrune-Cap-Martin" loading="lazy">
+    <img src="../assets/images/lieux/eze-village/thumb.jpg" alt="Èze, le village perché" loading="lazy">
+    <img src="../assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg" alt="Le Trophée d'Auguste" loading="lazy">
+  </div>
+
+  <div class="itin-body">
+    <ol class="itin-stops">
+      <li class="itin-stop">
+        <span class="itin-time">09:00</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/roquebrune-cap-martin-village.html" class="itin-stop-name">Le village de Roquebrune-Cap-Martin</a>
+          <span class="itin-stop-commune">Roquebrune-Cap-Martin</span>
+          <p>Flânerie dans les ruelles voûtées avant l'arrivée des groupes.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.roquebrune-cap-martin.fr/patrimoine/" target="_blank" rel="noopener">Château médiéval · 5 € · 1 h</a>
+            <a class="stop-act stop-act--free" href="https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/" target="_blank" rel="noopener">Sentier Le Corbusier · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 20 min — Grande Corniche (montée sinueuse)</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">11:00</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/trophee-auguste-la-turbie.html" class="itin-stop-name">Le Trophée d'Auguste</a>
+          <span class="itin-stop-commune">La Turbie</span>
+          <p>Vue imprenable sur Monaco depuis le monument romain, perché sur la Grande Corniche à 480 m.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.la-turbie.fr/monument/" target="_blank" rel="noopener">Trophée d'Auguste · 7 € · 1 h</a>
+            <a class="stop-act stop-act--free" href="https://www.la-turbie.fr/" target="_blank" rel="noopener">Panorama Monaco · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 15 min — descente vers Èze (Moyenne Corniche)</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">12:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/eze-village.html" class="itin-stop-name">Èze, le village perché</a>
+          <span class="itin-stop-commune">Èze</span>
+          <p>Déjeuner en terrasse au village, puis montée au Jardin exotique pour les panoramas les plus vertigineux.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://jardinexotique-eze.fr/" target="_blank" rel="noopener">Jardin exotique · 8–10 € · 45 min</a>
+            <a class="stop-act stop-act--free" href="https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/" target="_blank" rel="noopener">Chemin Nietzsche · Libre</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 20 min — D6007 puis entrée Monaco</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">15:00</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/jardin-exotique-monaco.html" class="itin-stop-name">Le Jardin exotique de Monaco</a>
+          <span class="itin-stop-commune">Monaco</span>
+          <p>Jardin exotique, Musée Océanographique, Rocher de Monaco — avec une nuit sur place, pas besoin de courir.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.oceano.mc/" target="_blank" rel="noopener">Musée Océanographique · 18 € · 2 h</a>
+            <a class="stop-act stop-act--paid" href="https://www.jardin-exotique.mc/" target="_blank" rel="noopener">Jardin exotique Monaco · 8 €</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-stop itin-sleep">
+        <span class="itin-time">Nuit</span>
+        <div class="itin-stop-body">
+          <span class="itin-stop-name itin-sleep-label">Dormir à Beaulieu-sur-Mer</span>
+          <span class="itin-stop-commune">Beaulieu-sur-Mer</span>
+          <p>Village élégant entre Monaco et le Cap Ferrat, idéal pour attaquer la Villa Ephrussi à l'ouverture. Bonne table au port le soir.</p>
+        </div>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">09:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/villa-ephrussi-rothschild.html" class="itin-stop-name">Villa Ephrussi de Rothschild</a>
+          <span class="itin-stop-commune">Saint-Jean-Cap-Ferrat</span>
+          <p>Arriver à l'ouverture pour les jardins sans la foule — neuf jardins thématiques et vue sur les deux baies.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.villa-ephrussi.com/" target="_blank" rel="noopener">Villa & jardins · 18 € · 1 h 30</a>
+            <a class="stop-act stop-act--paid" href="https://www.villa-kerylos.com/" target="_blank" rel="noopener">Villa Kerylos · 14 €</a>
+          </div>
+        </div>
+      </li>
+      <li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 10 min — D125 vers Villefranche</span>
+      </li>
+      <li class="itin-stop">
+        <span class="itin-time">11:30</span>
+        <div class="itin-stop-body">
+          <a href="../lieux/rue-obscure-villefranche.html" class="itin-stop-name">La Rue Obscure</a>
+          <span class="itin-stop-commune">Villefranche-sur-Mer</span>
+          <p>Rue Obscure le matin, déjeuner face au port, après-midi libre pour le kayak ou la plage.</p>
+          <div class="stop-acts">
+            <a class="stop-act stop-act--paid" href="https://www.getyourguide.com/villefranche-sur-mer-l96796/" target="_blank" rel="noopener">Kayak de mer · 35–50 € · 2 h</a>
+            <a class="stop-act stop-act--free" href="https://www.citadellesaintelme.com/" target="_blank" rel="noopener">Citadelle Saint-Elme · Libre</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div id="map-itin-menton-eze-monaco" class="itin-map" role="application" aria-label="Carte de l'itinéraire Menton, Èze &amp; Monaco"></div>
+  </div>
+</div>
+
+<section class="itin-booking">
+  <div class="wrap">
+    <h2>À réserver avant de partir</h2>
+    <p>Ces expériences demandent un peu d'anticipation, surtout en haute saison.</p>
+    <div class="itin-booking-grid">
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="../assets/images/lieux/roquebrune-cap-martin-village/act-1.jpg" alt="Château médiéval de Roquebrune-Cap-Martin" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Roquebrune-Cap-Martin</span>
+          <span class="itin-booking-name">Château médiéval</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h</span>
+            <span>💶 5 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.roquebrune-cap-martin.fr/patrimoine/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="../assets/images/lieux/eze-village/act-1.jpg" alt="Jardin exotique d'Èze" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Èze</span>
+          <span class="itin-booking-name">Jardin exotique d'Èze</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 45 min – 1 h 15</span>
+            <span>💶 8 – 10 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://jardinexotique-eze.fr/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="../assets/images/lieux/jardin-exotique-monaco/act-2.jpg" alt="Musée Océanographique de Monaco" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Monaco</span>
+          <span class="itin-booking-name">Musée Océanographique</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 2 h</span>
+            <span>💶 18 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.oceano.mc/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="../assets/images/lieux/villa-ephrussi-rothschild/act-1.jpg" alt="Villa Ephrussi de Rothschild et ses jardins" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">Saint-Jean-Cap-Ferrat</span>
+          <span class="itin-booking-name">Villa Ephrussi de Rothschild</span>
+          <div class="itin-booking-meta">
+            <span>⏱ 1 h 30</span>
+            <span>💶 18 €</span>
+          </div>
+          <a class="itin-booking-link" href="https://www.villa-ephrussi.com/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="itin-suggest">
+  <div class="wrap">
+    <h2>Autres itinéraires</h2>
+    <div class="itin-suggest-grid">
+      <a class="itin-suggest-card" href="nice-peillon-peille.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-nice/600/338" alt="Nice, Peillon &amp; Peille : ville et arrière-pays express" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">4 étapes</span>
+          <h3>Nice, Peillon &amp; Peille : ville et arrière-pays express</h3>
+        </div>
+      </a>
+      <a class="itin-suggest-card" href="villages-perches.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-villages/600/338" alt="La route des villages perchés" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">6 étapes</span>
+          <h3>La route des villages perchés</h3>
+        </div>
+      </a>
+      <a class="itin-suggest-card" href="antibes-biot-juan.html">
+        <div class="itin-suggest-img">
+          <img src="https://picsum.photos/seed/itin-antibes/600/338" alt="Antibes, Biot &amp; la pinède de Juan-les-Pins" loading="lazy">
+        </div>
+        <div class="itin-suggest-body">
+          <span class="itin-suggest-badge">4 étapes</span>
+          <h3>Antibes, Biot &amp; la pinède de Juan-les-Pins</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    const STOPS = [
+      { n:1, name:"Le village de Roquebrune-Cap-Martin", lat:43.7647, lng:7.4967 },
+      { n:2, name:"Le Trophée d'Auguste", lat:43.7378, lng:7.4014 },
+      { n:3, name:"Èze, le village perché", lat:43.6579, lng:7.3616 },
+      { n:4, name:"Le Jardin exotique de Monaco", lat:43.7326, lng:7.413 },
+      { n:5, name:"Villa Ephrussi de Rothschild", lat:43.6883, lng:7.3306 },
+      { n:6, name:"La Rue Obscure", lat:43.7042, lng:7.3103 }
+    ];
+    const map = L.map('map-itin-menton-eze-monaco', { scrollWheelZoom: false, zoomControl: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.control.zoom({ position:'bottomright' }).addTo(map);
+    const latlngs = STOPS.map(s => [s.lat, s.lng]);
+    L.polyline(latlngs, { color:'#E8A33D', weight:2, opacity:0.7, dashArray:'4 6' }).addTo(map);
+    STOPS.forEach(s => {
+      const icon = L.divIcon({
+        className:'',
+        html:`<div style="width:22px;height:22px;border-radius:50%;background:#E8A33D;color:#0C1116;border:2px solid #0C1116;box-shadow:0 1px 4px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;">${s.n}</div>`,
+        iconSize:[22,22], iconAnchor:[11,11],
+      });
+      L.marker([s.lat,s.lng],{icon}).bindPopup(`<span class="popup-name">${s.n}. ${s.name}</span>`).addTo(map);
+    });
+    map.fitBounds(L.latLngBounds(latlngs),{padding:[24,24]});
+    map.on('focus',()=>map.scrollWheelZoom.enable());
+    map.on('blur',()=>map.scrollWheelZoom.disable());
+  })();
+</script>
+</body>
+</html>

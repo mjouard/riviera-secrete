@@ -1,0 +1,25 @@
+IMAGES — saint-paul-de-vence
+────────────────────────────
+Format : JPG ou WebP  |  Recadrage automatique par CSS, pas besoin de tailles exactes.
+
+  hero.jpg      ≥ 1200×800 px   Bannière du lieu + 1ère slide du carousel
+                                 → réutilisée en hero d'itinéraire si ce lieu est
+                                   le lieu "phare" de la route
+
+  hero-2.jpg    ≥ 1200×800 px   Carousel slide 2  ┐
+  hero-3.jpg    ≥ 1200×800 px   Carousel slide 3  │ optionnel
+  hero-4.jpg    ≥ 1200×800 px   Carousel slide 4  │ (laisser vide si une seule photo)
+  hero-5.jpg    ≥ 1200×800 px   Carousel slide 5  ┘
+
+  thumb.jpg     ≥ 500×375 px    Vignette polyvalente → réutilisée dans :
+                                 • cards page d'accueil
+                                 • sections "lieux liés"
+                                 • popups de la carte
+                                 • bandes de photos dans les itinéraires (strip)
+                                 • vignette hub itinéraires.html si ce lieu est
+                                   représentatif d'une route
+
+  act-1.jpg     ≥ 400×400 px    Photo activité 1 → réutilisée à 200×200 (page lieu)
+  act-2.jpg     ≥ 400×400 px    Photo activité 2   et à 400×300 (section booking itin)
+  act-3.jpg     ≥ 400×400 px    Photo activité 3
+  act-4.jpg     ≥ 400×400 px    Photo activité 4 (si présente)

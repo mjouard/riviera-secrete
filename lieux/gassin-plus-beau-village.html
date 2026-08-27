@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gassin, plus beau village de France — Gassin | Riviera Secrète</title>
+<meta name="description" content="Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://riviera-secrete.netlify.app/lieux/gassin-plus-beau-village.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gassin, plus beau village de France — Gassin">
+<meta property="og:description" content="Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.">
+<meta property="og:url" content="https://riviera-secrete.netlify.app/lieux/gassin-plus-beau-village.html">
+<meta property="og:image" content="https://picsum.photos/seed/gassin/1200/800">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Riviera Secrète">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gassin, plus beau village de France — Gassin">
+<meta name="twitter:description" content="Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "Gassin, plus beau village de France",
+  "description": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.",
+  "image": "https://picsum.photos/seed/gassin/1200/800",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Gassin",
+    "addressRegion": "Alpes-Maritimes / Var",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.2258,
+    "longitude": 6.5836
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  .mini-map{
+    width:100%; height:200px; border-radius:3px;
+    border:1px solid var(--line); margin-bottom:20px;
+  }
+  .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+
+  .leaflet-popup-content-wrapper{
+    border-radius:3px; font-family:'Inter', sans-serif;
+    background:var(--surface); color:var(--text);
+  }
+  .leaflet-popup-tip{ background:var(--surface); }
+  .leaflet-popup-close-button{ color:var(--text-muted) !important; }
+  .leaflet-container a.leaflet-popup-close-button:hover{ color:var(--terracotta) !important; }
+  .popup-region{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px;
+  }
+  .popup-name{ font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem; margin-bottom:6px; display:block; }
+  .popup-intro{ font-size:0.85rem; color:var(--text-muted); margin-bottom:10px; }
+  .popup-link{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; letter-spacing:0.03em;
+    color:var(--terracotta); text-decoration:none; font-weight:500;
+  }
+  .popup-link:hover{ text-decoration:underline; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="../carte.html">Carte</a>
+      <a href="../itineraires.html">Itinéraires</a>
+      <a href="../index.html#lieux">Lieux</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap breadcrumb">
+  <ol>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#golfe-st-tropez">Grasse & le golfe de Saint-Tropez</a></li>
+    <li>Gassin, plus beau village de France</li>
+  </ol>
+</div>
+
+<div class="wrap">
+  <div class="detail-hero">
+    <img src="https://picsum.photos/seed/gassin/1200/800" alt="Village perché de Gassin surplombant le golfe de Saint-Tropez" loading="eager">
+    <div class="detail-hero-caption">
+      <span class="card-region">Gassin</span>
+      <h1>Gassin, plus beau village de France</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="meta-bar">
+    <span class="meta-pill">📍 <strong>43.2258°N, 6.5836°E</strong></span>
+    <span class="meta-pill">🗓️ Meilleure saison : <strong>Toute l'année</strong></span>
+    <span class="meta-pill">⏱️ Durée : <strong>1 h à 1 h 30</strong></span>
+    <span class="meta-pill">🥾 Niveau : <strong>Facile</strong></span>
+  </div>
+
+  <div class="article">
+    <div class="article-body">
+      <p>Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.</p>
+      <p>Ruelles étroites, placettes ombragées et point de vue dit "des Barri", d'où le regard porte sur tout le golfe de Saint-Tropez jusqu'aux Maures. Contrairement à sa voisine, la circulation automobile y est quasi inexistante, ce qui en fait une pause tranquille au milieu des vignobles.</p>
+    </div>
+    <aside class="tips">
+      <div id="mini-map-gassin-plus-beau-village" class="mini-map" role="application" aria-label="Localisation de Gassin, plus beau village de France"></div>
+      <h2>Bon à savoir</h2>
+      <ul>
+          <li><strong>Accès</strong>10 minutes en voiture depuis Saint-Tropez, parking à l'entrée du village.</li>
+          <li><strong>Point de vue</strong>Le "Point de vue des Barri" est en accès libre, l'un des meilleurs panoramas du golfe.</li>
+          <li><strong>Vignobles</strong>Le village est entouré de domaines viticoles de l'appellation Côtes de Provence.</li>
+      </ul>
+    </aside>
+  </div>
+</div>
+
+<section class="activities">
+  <div class="wrap">
+    <h2>Activités à Gassin</h2>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/panorama-barri-gassin/200/200" alt="Randonnée panorama des Barri" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Randonnée panorama des Barri</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.gassin.eu/" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/degustation-vins-golfe/200/200" alt="Dégustation vins du golfe" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Dégustation vins du golfe</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h</span>
+            <span>💶 15–25 € / dégustation</span>
+          </div>
+          <a class="activity-link" href="https://www.getyourguide.com/saint-tropez-l97024/degustation-vins" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/gassin-village-classe/200/200" alt="Visite du village classé" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Visite du village classé</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/gassin" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="wrap">
+    <h2>D'autres lieux à découvrir</h2>
+    <div class="grid">
+      <a class="card" href="vieille-ville-grasse.html">
+        <div class="card-media">
+          <img src="https://picsum.photos/seed/grasse/500/375" alt="Ruelles de la vieille ville de Grasse, capitale mondiale du parfum" loading="lazy">
+          <span class="stamp">43.66°N<br>6.92°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Grasse</span>
+          <h3>La vieille ville de Grasse</h3>
+          <p>La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et…</p>
+        </div>
+      </a>
+
+      <a class="card" href="citadelle-saint-tropez.html">
+        <div class="card-media">
+          <img src="https://picsum.photos/seed/citadellesttropez/500/375" alt="Citadelle de Saint-Tropez dominant le golfe" loading="lazy">
+          <span class="stamp">43.27°N<br>6.64°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Saint-Tropez</span>
+          <h3>La Citadelle de Saint-Tropez</h3>
+          <p>Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart co…</p>
+        </div>
+      </a>
+
+      <a class="card" href="rue-obscure-villefranche.html">
+        <div class="card-media">
+          <img src="../assets/images/lieux/rue-obscure-villefranche/thumb.jpg" alt="La Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer" loading="lazy">
+          <span class="stamp">43.70°N<br>7.31°E</span>
+        </div>
+        <div class="card-body">
+          <span class="card-region">Villefranche-sur-Mer</span>
+          <h3>La Rue Obscure</h3>
+          <p>Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    const map = L.map('mini-map-gassin-plus-beau-village', { scrollWheelZoom: false, zoomControl: false, dragging: !L.Browser.mobile });
+    map.setView([43.2258, 6.5836], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:18px;height:18px;border-radius:50%;background:#E8A33D;border:2px solid #0C1116;box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>`,
+      iconSize: [18, 18], iconAnchor: [9, 9],
+    });
+    L.marker([43.2258, 6.5836], { icon }).addTo(map);
+    map.on('focus', () => map.scrollWheelZoom.enable());
+    map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+
+</body>
+</html>
