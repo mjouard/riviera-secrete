@@ -74,15 +74,16 @@ demoting again, expect the same manual sweep.
 vocabulary (`BADGE_DEFS` in `scripts/render/lieu.mjs`: `plage`, `randonnee`, `vtt`,
 `plongee`, `restaurant`) declaring what's *practicable* at that lieu, as opposed to
 `activites[]` which are unique, bookable things that exist at exactly one lieu ("Le Jardin
-exotique" only exists at `eze-village`). Every lieu has the `badges` field (empty array if
-none apply yet); only `eze-village` is currently populated
-(`["randonnee","vtt","restaurant"]`), as a first example — the other 27 are still `[]` and
-need the same research-then-populate treatment. A badge means the activity is practicable
-*at that specific lieu's location*, not just somewhere in the same commune: `eze-village` is
-the perched village at ~400m, so it does **not** carry `plage` or `plongee` even though the
-Èze commune has a beach and diving nearby — those are down at Èze-sur-Mer, a different
-physical place. Don't add a badge from memory/assumption; verify it's actually practicable
-at that lieu (WebSearch when uncertain) before adding it. `BADGE_DEFS` and the pill renderer
+exotique" only exists at `eze-village`). All 28 lieux have `badges` populated (WebSearch-verified, 2026-08-27) — `chapelle-rosaire-vence`
+is the one lieu with `[]` (a standalone chapel, nothing else practicable right there). A badge
+means the activity is practicable *at that specific lieu's location*, not just somewhere in the
+same commune: `eze-village` is the perched village at ~400m, so it does **not** carry `plage`
+or `plongee` even though the Èze commune has a beach and diving nearby — those are down at
+Èze-sur-Mer, a different physical place. Same reasoning excluded `plage`/`plongee` from
+`sentier-corbusier-cap-martin` (swimming signposted as prohibited along most of that specific
+path) while `roquebrune-cap-martin-village` — a ~10min walk from the same beaches — keeps
+`plage`. Don't add a badge from memory/assumption; verify it's actually practicable at that
+lieu (WebSearch when uncertain) before adding or changing one. `BADGE_DEFS` and the pill renderer
 live in `scripts/render/lieu.mjs` and are imported into `scripts/render/itin.mjs`
 (`renderBadgePills`) so an itinéraire stop shows the referenced lieu's own badges — same
 single-source rule as everything else here, no per-itinéraire badge data.

@@ -110,7 +110,10 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt"
+    ]
   },
   {
     "slug": "calanques-esterel-theoule",
@@ -223,7 +226,12 @@
         "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "randonnee",
+      "plongee",
+      "restaurant"
+    ]
   },
   {
     "slug": "chapelle-rosaire-vence",
@@ -449,7 +457,10 @@
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ]
   },
   {
     "slug": "colline-du-chateau-nice",
@@ -562,7 +573,10 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "randonnee"
+    ]
   },
   {
     "slug": "cours-saleya-vieux-nice",
@@ -675,7 +689,9 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "restaurant"
+    ]
   },
   {
     "slug": "eze-village",
@@ -916,7 +932,11 @@
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt",
+      "restaurant"
+    ]
   },
   {
     "slug": "gorges-du-loup-cascade-courmes",
@@ -1029,7 +1049,11 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt",
+      "restaurant"
+    ]
   },
   {
     "slug": "gourdon-village",
@@ -1131,7 +1155,10 @@
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ]
   },
   {
     "slug": "haut-de-cagnes",
@@ -1244,7 +1271,9 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "restaurant"
+    ]
   },
   {
     "slug": "iles-de-lerins",
@@ -1357,7 +1386,12 @@
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "randonnee",
+      "plongee",
+      "restaurant"
+    ]
   },
   {
     "slug": "jardin-exotique-monaco",
@@ -1461,7 +1495,9 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "restaurant"
+    ]
   },
   {
     "slug": "peille-village",
@@ -1574,7 +1610,11 @@
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt",
+      "restaurant"
+    ]
   },
   {
     "slug": "peillon-village",
@@ -1698,7 +1738,10 @@
         "blurb": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ]
   },
   {
     "slug": "pic-cap-roux-esterel",
@@ -1811,7 +1854,10 @@
         "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent a…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt"
+    ]
   },
   {
     "slug": "pinede-gould-juan-les-pins",
@@ -1924,7 +1970,10 @@
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "restaurant"
+    ]
   },
   {
     "slug": "pont-du-loup",
@@ -2037,7 +2086,10 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt"
+    ]
   },
   {
     "slug": "roquebrune-cap-martin-village",
@@ -2130,7 +2182,11 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "plage",
+      "restaurant"
+    ]
   },
   {
     "slug": "rue-obscure-villefranche",
@@ -2245,7 +2301,11 @@
         "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "plongee",
+      "restaurant"
+    ]
   },
   {
     "slug": "saint-paul-de-vence",
@@ -2358,7 +2418,9 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "restaurant"
+    ]
   },
   {
     "slug": "sentier-cap-antibes",
@@ -2471,7 +2533,11 @@
         "blurb": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche vio…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "plage",
+      "plongee"
+    ]
   },
   {
     "slug": "sentier-cap-ferrat",
@@ -2575,7 +2641,12 @@
         "blurb": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle direct…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "plage",
+      "plongee",
+      "restaurant"
+    ]
   },
   {
     "slug": "sentier-corbusier-cap-martin",
@@ -2668,7 +2739,9 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee"
+    ]
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -2781,7 +2854,11 @@
         "blurb": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui p…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "vtt",
+      "restaurant"
+    ]
   },
   {
     "slug": "trophee-auguste-la-turbie",
@@ -2885,7 +2962,10 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ]
   },
   {
     "slug": "vieille-ville-grasse",
@@ -2998,7 +3078,9 @@
         "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefran…"
       }
     ],
-    "badges": []
+    "badges": [
+      "restaurant"
+    ]
   },
   {
     "slug": "villa-kerylos",
@@ -3091,6 +3173,9 @@
         "blurb": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues su…"
       }
     ],
-    "badges": []
+    "badges": [
+      "plage",
+      "restaurant"
+    ]
   }
 ]
