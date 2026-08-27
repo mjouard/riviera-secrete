@@ -28,26 +28,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let leafletMap = null;
   let mapLayerGroup = null;
 
-  D.fetchLieux().then((lieux) => {
-    lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
-    renderPicker(lieux);
+  D.fetchLieux()
+    .then((lieux) => {
+      lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
+      renderPicker(lieux);
 
-    const params = new URLSearchParams(location.search);
-    const loadId = params.get('id');
-    if (loadId) {
-      const saved = D.getSaved(loadId);
-      if (saved) {
-        currentId = saved.id;
-        currentNom = saved.nom;
-        currentDureeKey = saved.dureeKey;
-        currentDays = saved.days.map((day) => day.map((slug) => lieuBySlug.get(slug)).filter(Boolean));
-        precheckPicker(saved.days.flat());
-        const radio = document.querySelector(`input[name="duree"][value="${currentDureeKey}"]`);
-        if (radio) radio.checked = true;
-        showResults();
+      const params = new URLSearchParams(location.search);
+      const loadId = params.get('id');
+      if (loadId) {
+        const saved = D.getSaved(loadId);
+        if (saved) {
+          currentId = saved.id;
+          currentNom = saved.nom;
+          currentDureeKey = saved.dureeKey;
+          currentDays = saved.days.map((day) => day.map((slug) => lieuBySlug.get(slug)).filter(Boolean));
+          precheckPicker(saved.days.flat());
+          const radio = document.querySelector(`input[name="duree"][value="${currentDureeKey}"]`);
+          if (radio) radio.checked = true;
+          showResults();
+        }
       }
-    }
-  });
+    })
+    .catch((err) => {
+      console.error('Échec du chargement de data/lieux.json', err);
+      zonesEl.innerHTML =
+        '<p class="builder-load-error">Impossible de charger la liste des lieux. Si tu as ouvert ce fichier directement (chemin en <code>file://</code>), passe par le site en ligne ou lance un petit serveur local (<code>python3 -m http.server</code> depuis le dossier du site) — les navigateurs bloquent le chargement de données JSON en ouvrant un fichier HTML directement.</p>';
+      btnGenerate.disabled = true;
+    });
 
   function renderPicker(lieux) {
     const byRegion = new Map();

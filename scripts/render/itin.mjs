@@ -199,7 +199,6 @@ export function renderItin(itin, lieuBySlug) {
     <nav aria-label="Navigation principale">
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Lieux</a>
-      <a href="../creer-itineraire.html">Créer un itinéraire</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
     </nav>
   </div>

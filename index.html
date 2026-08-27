@@ -108,6 +108,18 @@
   @media (max-width:900px){ .itin-preview-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:600px){ .itin-preview-grid{ grid-template-columns:1fr; } }
 
+  .itin-create-cta{
+    display:flex; align-items:center; justify-content:space-between; gap:24px;
+    margin-top:20px; padding:28px 32px; text-decoration:none; color:var(--text);
+    background:rgba(232,163,61,0.06); border:1px solid rgba(232,163,61,0.3); border-radius:3px;
+    transition:border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .itin-create-cta:hover{ border-color:var(--terracotta); background:rgba(232,163,61,0.1); transform:translateY(-2px); }
+  .itin-create-cta h3{ font-size:1.15rem; margin-bottom:6px; }
+  .itin-create-cta p{ color:var(--text-muted); font-size:0.9rem; max-width:52ch; }
+  .itin-create-cta-arrow{ font-size:1.6rem; color:var(--terracotta); flex-shrink:0; }
+  @media (max-width:600px){ .itin-create-cta{ flex-direction:column; align-items:flex-start; gap:14px; padding:22px; } }
+
   /* Hero carousel */
   .hero::before, .hero::after{ display:none; }
   .hero{ min-height:540px; display:flex; flex-direction:column; justify-content:center; }
@@ -140,7 +152,6 @@
       <a href="#carte">Carte</a>
       <a href="#itineraires">Itinéraires</a>
       <a href="#lieux">Lieux</a>
-      <a href="creer-itineraire.html">Créer un itinéraire</a>
       <a href="mes-itineraires.html">Mes itinéraires</a>
     </nav>
   </div>
@@ -259,6 +270,15 @@
         </div>
       </a>
     </div>
+
+    <a class="itin-create-cta" href="creer-itineraire.html">
+      <div>
+        <span class="eyebrow" style="margin-bottom:8px;">Sur mesure</span>
+        <h3>Envie d'autre chose ? Crée ton propre itinéraire.</h3>
+        <p>Choisis une durée, coche des zones ou des lieux — l'algorithme construit un parcours réaliste selon le temps disponible.</p>
+      </div>
+      <span class="itin-create-cta-arrow" aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 

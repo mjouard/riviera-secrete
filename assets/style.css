@@ -367,6 +367,10 @@ footer p{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(-
 .builder-lieu-check input{ accent-color:var(--terracotta); width:15px; height:15px; flex-shrink:0; }
 
 .builder-empty-note{ color:var(--terracotta); font-size:0.88rem; margin:16px 0; }
+.builder-load-error{ color:var(--terracotta); font-size:0.9rem; background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:14px 16px; max-width:64ch; }
+.builder-load-error code{ font-family:'IBM Plex Mono', monospace; background:rgba(255,255,255,0.06); padding:1px 5px; border-radius:2px; }
+.btn:disabled{ opacity:0.4; cursor:not-allowed; }
+.btn:disabled:hover{ background:var(--terracotta); transform:none; }
 
 .builder-results{ padding:44px 0 70px; }
 .builder-results-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:6px; }
