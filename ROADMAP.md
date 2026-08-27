@@ -2,7 +2,9 @@
 
 ## Priorité contenu
 
-- [ ] Finir les vraies images — 21/27 lieux ont encore des placeholders picsum.photos
+- [ ] Finir les vraies images — 18/27 lieux ont encore des placeholders picsum.photos
+      (Peillon, gorges du Loup/cascade de Courmes et la Citadelle de Saint-Tropez faits le
+      28/08, sourcées sur Wikimedia Commons avec attribution sur `credits.html`)
 - [x] Lien "Ouvrir dans Google Maps / Waze / Plans" sur chaque fiche lieu
 - [ ] Photo sur chaque carte `itin-preview-card` de la homepage — les 6 cartes de la
       section "6 itinéraires prêts à suivre" sont 100% texte aujourd'hui alors que chaque

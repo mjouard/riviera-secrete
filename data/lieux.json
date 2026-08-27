@@ -1066,10 +1066,10 @@
     "lat": 43.7786,
     "lng": 7.3828,
     "description": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît régulièrement dans des campagnes publicitaires sans que personne ne le reconnaisse.",
-    "ogImage": "https://picsum.photos/seed/peillon/1200/800",
-    "heroImage": "https://picsum.photos/seed/peillon/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/peillon-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/peillon-village/hero.jpg",
     "heroAlt": "Village médiéval de Peillon perché sur son piton rocheux",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1179,7 +1179,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/peillon/500/375"
+    "thumbImage": "assets/images/lieux/peillon-village/thumb.jpg"
   },
   {
     "slug": "peille-village",
@@ -1406,10 +1406,10 @@
     "lat": 43.7311,
     "lng": 6.9825,
     "description": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptées dans la roche.",
-    "ogImage": "https://picsum.photos/seed/gorgesduloup/1200/800",
-    "heroImage": "https://picsum.photos/seed/gorgesduloup/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg",
+    "heroImage": "../assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg",
     "heroAlt": "Cascade de Courmes dans les gorges du Loup",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1509,7 +1509,7 @@
       "vtt",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/gorgesduloup/500/375"
+    "thumbImage": "assets/images/lieux/gorges-du-loup-cascade-courmes/thumb.jpg"
   },
   {
     "slug": "pont-du-loup",
@@ -2800,10 +2800,10 @@
     "lat": 43.2731,
     "lng": 6.6425,
     "description": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet de l'agitation des quais en contrebas.",
-    "ogImage": "https://picsum.photos/seed/citadellesttropez/1200/800",
-    "heroImage": "https://picsum.photos/seed/citadellesttropez/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/citadelle-saint-tropez/hero.jpg",
+    "heroImage": "../assets/images/lieux/citadelle-saint-tropez/hero.jpg",
     "heroAlt": "Citadelle de Saint-Tropez dominant le golfe",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2902,7 +2902,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/citadellesttropez/500/375"
+    "thumbImage": "assets/images/lieux/citadelle-saint-tropez/thumb.jpg"
   },
   {
     "slug": "gassin-plus-beau-village",

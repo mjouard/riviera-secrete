@@ -5,7 +5,24 @@
       "Bash(Select-Object FullName)",
       "Bash(ConvertTo-Csv -NoTypeInformation)",
       "Bash(powershell -Command ' *)",
-      "Bash(node scripts/build.mjs)"
+      "Bash(node scripts/build.mjs)",
+      "Bash(sips --help)",
+      "Bash(sips -s format webp)",
+      "Bash(sips --formats)",
+      "Bash(python3 -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "Bash(brew list *)",
+      "Bash(python3 -c ' *)",
+      "WebSearch",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:fr.wikipedia.org)",
+      "Bash(sips -c 1200 1800 --cropOffset 300 370 courmes-src.jpg --out courmes-test-crop.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight courmes-test-crop.jpg)",
+      "Bash(sips -c 1000 1500 --cropOffset 600 520 courmes-src.jpg --out courmes-test-crop2.jpg)",
+      "Bash(cp __TRACKED_VAR__/peillon-hero.jpg assets/images/lieux/peillon-village/hero.jpg)",
+      "Bash(cp __TRACKED_VAR__/peillon-thumb.jpg assets/images/lieux/peillon-village/thumb.jpg)",
+      "Bash(cp __TRACKED_VAR__/courmes-hero.jpg assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg)",
+      "Bash(cp __TRACKED_VAR__/courmes-thumb.jpg assets/images/lieux/gorges-du-loup-cascade-courmes/thumb.jpg)",
+      "Bash(cp __TRACKED_VAR__/citadelle-hero.jpg assets/images/lieux/citadelle-saint-tropez/hero.jpg)"
     ]
   }
 }
