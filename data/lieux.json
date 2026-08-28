@@ -168,7 +168,7 @@
         "duree": "3h",
         "prix": "Accès libre",
         "url": "https://www.saintjeancapferrat-tourisme.fr/randonnee",
-        "image": "https://picsum.photos/seed/sentier-cap-ferrat/200/200",
+        "image": "../assets/images/lieux/sentier-cap-ferrat/act-1.jpg",
         "alt": "Sentier du littoral (tour complet)",
         "linkText": "En savoir plus →"
       },
@@ -179,7 +179,7 @@
         "duree": "2–4h",
         "prix": "15–25 € / jour",
         "url": "https://www.getyourguide.com/saint-jean-cap-ferrat-l97002/",
-        "image": "https://picsum.photos/seed/velo-cap-ferrat/200/200",
+        "image": "../assets/images/lieux/sentier-cap-ferrat/act-2.jpg",
         "alt": "Location de vélos",
         "linkText": "Réserver →"
       },
@@ -275,7 +275,7 @@
         "duree": "1h",
         "prix": "14 € / adulte",
         "url": "https://www.villa-kerylos.com/",
-        "image": "https://picsum.photos/seed/kerylos-visite/200/200",
+        "image": "../assets/images/lieux/villa-kerylos/act-1.jpg",
         "alt": "Visite Villa Kerylos",
         "linkText": "Réserver →"
       },
@@ -286,7 +286,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.beaulieusurmertourisme.fr/",
-        "image": "https://picsum.photos/seed/promenade-bord-mer/200/200",
+        "image": "../assets/images/lieux/villa-kerylos/act-2.jpg",
         "alt": "Promenade Gustave Eiffel",
         "linkText": "En savoir plus →"
       }
@@ -391,7 +391,7 @@
         "duree": "1 – 2 h",
         "prix": "40 – 100 € / pers.",
         "url": "https://www.clickandboat.com/location/type-de-bateau-semi-rigide/pays-france/departement-alpes-maritimes/ville-eze",
-        "image": "../assets/images/lieux/eze-village/act-4.jpeg",
+        "image": "../assets/images/lieux/eze-village/act-4.jpg",
         "alt": "Location de bateau en Méditerranée",
         "linkText": "Réserver →"
       },
@@ -402,7 +402,7 @@
         "duree": "1h15–1h45",
         "prix": "Accès libre",
         "url": "https://www.explorenicecotedazur.com/en/itinerary/chemin-de-nietzsche/",
-        "image": "https://picsum.photos/seed/nietzsche-sentier/200/200",
+        "image": "../assets/images/lieux/eze-village/act-5.jpg",
         "alt": "Randonnée chemin de Nietzsche",
         "linkText": "En savoir plus →"
       }
@@ -799,7 +799,7 @@
         "duree": "2h",
         "prix": "Accès libre",
         "url": "https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/",
-        "image": "https://picsum.photos/seed/sentier-corbusier-mer/200/200",
+        "image": "../assets/images/lieux/sentier-corbusier-cap-martin/act-2.jpg",
         "alt": "Sentier Le Corbusier",
         "linkText": "En savoir plus →"
       },
@@ -810,7 +810,7 @@
         "duree": "1h",
         "prix": "10 € / adulte",
         "url": "https://www.getyourguide.com/cap-martin-l97007/",
-        "image": "https://picsum.photos/seed/cabanon-corbusier/200/200",
+        "image": "../assets/images/lieux/sentier-corbusier-cap-martin/act-1.jpg",
         "alt": "Cabanon Le Corbusier (visite guidée)",
         "linkText": "Réserver →"
       }
@@ -892,7 +892,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.nicetourisme.com/activites/parc-du-chateau",
-        "image": "https://picsum.photos/seed/cascade-chateau-nice/200/200",
+        "image": "../assets/images/lieux/colline-du-chateau-nice/act-1.jpg",
         "alt": "Cascade et parc du château",
         "linkText": "En savoir plus →"
       },
@@ -903,7 +903,7 @@
         "duree": "2h",
         "prix": "15 € / adulte",
         "url": "https://www.getyourguide.com/nice-l175/vieux-nice",
-        "image": "https://picsum.photos/seed/vieux-nice-visite/200/200",
+        "image": "../assets/images/lieux/colline-du-chateau-nice/act-2.jpg",
         "alt": "Vieux Nice — visite guidée",
         "linkText": "Réserver →"
       },
@@ -914,7 +914,7 @@
         "duree": "30min",
         "prix": "Accès libre",
         "url": "https://www.nicetourisme.com/",
-        "image": "https://picsum.photos/seed/ascenseur-nice/200/200",
+        "image": "../assets/images/lieux/colline-du-chateau-nice/act-3.jpg",
         "alt": "Montée en ascenseur (Colline)",
         "linkText": "En savoir plus →"
       }
@@ -1006,7 +1006,7 @@
         "duree": "1h–2h",
         "prix": "Accès libre",
         "url": "https://www.nicetourisme.com/activites/marche-cours-saleya",
-        "image": "https://picsum.photos/seed/marche-cours-saleya/200/200",
+        "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-1.jpg",
         "alt": "Marché du Cours Saleya",
         "linkText": "En savoir plus →"
       },
@@ -1017,7 +1017,7 @@
         "duree": "2h",
         "prix": "45–55 € / adulte",
         "url": "https://www.getyourguide.com/nice-l175/tour-gastronomique",
-        "image": "https://picsum.photos/seed/gastronomie-nice/200/200",
+        "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-3.jpg",
         "alt": "Tour gastronomique Vieux Nice",
         "linkText": "Réserver →"
       },
@@ -1028,7 +1028,7 @@
         "duree": "3h",
         "prix": "65–90 € / adulte",
         "url": "https://www.getyourguide.com/nice-l175/cours-de-cuisine",
-        "image": "https://picsum.photos/seed/cuisine-nicoise/200/200",
+        "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-2.jpg",
         "alt": "Cours de cuisine niçoise",
         "linkText": "Réserver →"
       }
@@ -1119,7 +1119,7 @@
         "duree": "1 h – 1 h 30",
         "prix": "Accès libre",
         "url": "https://www.villagesetpatrimoine.fr/peillon/",
-        "image": "https://picsum.photos/seed/village-peillon/200/200",
+        "image": "../assets/images/lieux/peillon-village/act-4.jpg",
         "alt": "Ruelles du vieux village de Peillon",
         "linkText": "En savoir plus →"
       },
@@ -1130,7 +1130,7 @@
         "duree": "1 h",
         "prix": "40 – 50 € / pers.",
         "url": "https://www.lesplaisirs-peillon.com/",
-        "image": "https://picsum.photos/seed/plage-arnulf/200/200",
+        "image": "../assets/images/lieux/peillon-village/act-1.jpg",
         "alt": "Plage Arnulf à Peillon",
         "linkText": "Réserver →"
       },
@@ -1141,7 +1141,7 @@
         "duree": "1 h – 1 h 30",
         "prix": "Accès libre",
         "url": "https://monumentum.fr/monument-historique/pa00080814/peillon-chapelle-des-penitents-blancs-ou-chapelle-notre-dame-des-sept-douleurs",
-        "image": "https://picsum.photos/seed/eglise-penitents/200/200",
+        "image": "../assets/images/lieux/peillon-village/act-2.jpg",
         "alt": "Chapelle des Pénitents Blancs de Peillon",
         "linkText": "En savoir plus →"
       },
@@ -1152,7 +1152,7 @@
         "duree": "1 h – 3 h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-peillon.html",
-        "image": "https://picsum.photos/seed/balade-peillon/200/200",
+        "image": "../assets/images/lieux/peillon-village/act-3.jpg",
         "alt": "Sentiers de randonnée autour de Peillon",
         "linkText": "En savoir plus →"
       }
@@ -1244,7 +1244,7 @@
         "duree": "1h–1h30",
         "prix": "Accès libre",
         "url": "https://www.peille.fr/",
-        "image": "https://picsum.photos/seed/peille-village-medieval/200/200",
+        "image": "../assets/images/lieux/peille-village/act-1.jpg",
         "alt": "Exploration du village médiéval",
         "linkText": "En savoir plus →"
       },
@@ -1255,7 +1255,7 @@
         "duree": "3h–4h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-peille.html",
-        "image": "https://picsum.photos/seed/randonnee-peille/200/200",
+        "image": "../assets/images/lieux/peille-village/act-2.jpg",
         "alt": "Randonnée Peille–Peillon",
         "linkText": "En savoir plus →"
       },
@@ -1266,7 +1266,7 @@
         "duree": "30min",
         "prix": "Accès libre",
         "url": "https://www.peille.fr/decouvrir",
-        "image": "https://picsum.photos/seed/chapelle-saint-martin/200/200",
+        "image": "../assets/images/lieux/peille-village/act-3.jpg",
         "alt": "Chapelle Saint-Martin",
         "linkText": "En savoir plus →"
       }
@@ -1359,7 +1359,7 @@
         "duree": "45min",
         "prix": "Accès libre",
         "url": "https://www.gourdon06.fr/",
-        "image": "https://picsum.photos/seed/panorama-falaise-gourdon/200/200",
+        "image": "../assets/images/lieux/gourdon-village/act-2.jpg",
         "alt": "Panorama depuis la falaise",
         "linkText": "En savoir plus →"
       },
@@ -1370,7 +1370,7 @@
         "duree": "1h",
         "prix": "6 € / adulte",
         "url": "https://www.chateaudegourdon.com/",
-        "image": "https://picsum.photos/seed/chateau-gourdon/200/200",
+        "image": "../assets/images/lieux/gourdon-village/act-1.jpg",
         "alt": "Château-musée de Gourdon",
         "linkText": "Réserver →"
       }
@@ -1462,7 +1462,7 @@
         "duree": "2h–4h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-gorges-du-loup.html",
-        "image": "https://picsum.photos/seed/gorges-loup-sentier/200/200",
+        "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-1.jpg",
         "alt": "Randonnée gorges du Loup",
         "linkText": "En savoir plus →"
       },
@@ -1473,7 +1473,7 @@
         "duree": "3h–4h",
         "prix": "50–80 € / pers.",
         "url": "https://www.getyourguide.com/grasse-l96902/escalade",
-        "image": "https://picsum.photos/seed/escalade-gorges/200/200",
+        "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-2.jpg",
         "alt": "Escalade et via ferrata",
         "linkText": "Réserver →"
       },
@@ -1484,7 +1484,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.alpes-maritimes.com/cascade-de-courmes",
-        "image": "https://picsum.photos/seed/cascade-courmes/200/200",
+        "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-3.jpg",
         "alt": "Cascade de Courmes",
         "linkText": "En savoir plus →"
       }
@@ -1577,7 +1577,7 @@
         "duree": "45min",
         "prix": "Accès libre",
         "url": "https://www.confiserie-florian.com/",
-        "image": "https://picsum.photos/seed/confiserie-florian/200/200",
+        "image": "../assets/images/lieux/pont-du-loup/act-3.jpg",
         "alt": "Confiserie Florian (visite gratuite)",
         "linkText": "En savoir plus →"
       },
@@ -1588,7 +1588,7 @@
         "duree": "1h30–2h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-pont-du-loup.html",
-        "image": "https://picsum.photos/seed/viaduc-pont-loup/200/200",
+        "image": "../assets/images/lieux/pont-du-loup/act-1.jpg",
         "alt": "Randonnée viaduc et gorges",
         "linkText": "En savoir plus →"
       },
@@ -1599,7 +1599,7 @@
         "duree": "1h30",
         "prix": "30–45 € / adulte",
         "url": "https://www.getyourguide.com/grasse-l96902/",
-        "image": "https://picsum.photos/seed/atelier-confiture/200/200",
+        "image": "../assets/images/lieux/pont-du-loup/act-2.jpg",
         "alt": "Atelier confitures artisanales",
         "linkText": "Réserver →"
       }
@@ -1691,7 +1691,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.tourrettes-sur-loup.fr/",
-        "image": "https://picsum.photos/seed/tourrettes-violettes/200/200",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-2.jpg",
         "alt": "Visite de la cité des violettes",
         "linkText": "En savoir plus →"
       },
@@ -1702,7 +1702,7 @@
         "duree": "1h30",
         "prix": "35–55 € / adulte",
         "url": "https://www.getyourguide.com/vence-l97030/",
-        "image": "https://picsum.photos/seed/atelier-ceramique/200/200",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-1.jpg",
         "alt": "Atelier céramique artisanale",
         "linkText": "Réserver →"
       },
@@ -1713,7 +1713,7 @@
         "duree": "2h",
         "prix": "Accès libre",
         "url": "https://www.tourrettes-sur-loup.fr/fete-des-violettes",
-        "image": "https://picsum.photos/seed/fete-violettes/200/200",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-3.jpg",
         "alt": "Festival des violettes (février/mars)",
         "linkText": "En savoir plus →"
       }
@@ -1806,7 +1806,7 @@
         "duree": "1h30",
         "prix": "20 € / adulte",
         "url": "https://www.fondation-maeght.com/",
-        "image": "https://picsum.photos/seed/fondation-maeght/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-1.jpg",
         "alt": "Fondation Maeght",
         "linkText": "Réserver →"
       },
@@ -1817,7 +1817,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.saint-pauldevence.com/",
-        "image": "https://picsum.photos/seed/remparts-saint-paul/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-2.jpg",
         "alt": "Balade sur les remparts",
         "linkText": "En savoir plus →"
       },
@@ -1828,7 +1828,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.saint-pauldevence.com/galeries",
-        "image": "https://picsum.photos/seed/galeries-art-vence/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-6.jpg",
         "alt": "Ateliers d'artistes — galeries",
         "linkText": "En savoir plus →"
       },
@@ -1839,7 +1839,7 @@
         "duree": "1h",
         "prix": "7 € / adulte",
         "url": "https://www.chapellematisse.com/",
-        "image": "https://picsum.photos/seed/chapelle-matisse/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-3.jpg",
         "alt": "Chapelle du Rosaire (Matisse)",
         "linkText": "Réserver →"
       },
@@ -1850,7 +1850,7 @@
         "duree": "1h30",
         "prix": "Accès libre",
         "url": "https://www.vence.fr/tourisme",
-        "image": "https://picsum.photos/seed/vieille-ville-vence/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-4.jpg",
         "alt": "Vieille ville de Vence",
         "linkText": "En savoir plus →"
       },
@@ -1861,7 +1861,7 @@
         "duree": "2h–3h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-vence.html",
-        "image": "https://picsum.photos/seed/baous-vence-randonnee/200/200",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-5.jpg",
         "alt": "Randonnée Baous de Vence",
         "linkText": "En savoir plus →"
       }
@@ -1953,7 +1953,7 @@
         "duree": "45min",
         "prix": "Accès libre",
         "url": "https://www.verreriebiot.com/",
-        "image": "https://picsum.photos/seed/verrerie-biot/200/200",
+        "image": "../assets/images/lieux/biot-village-verrier/act-3.jpg",
         "alt": "Verrerie de Biot (démonstration)",
         "linkText": "En savoir plus →"
       },
@@ -1964,7 +1964,7 @@
         "duree": "1h30",
         "prix": "45–65 € / adulte",
         "url": "https://www.getyourguide.com/biot-l97015/",
-        "image": "https://picsum.photos/seed/soufflage-verre/200/200",
+        "image": "../assets/images/lieux/biot-village-verrier/act-1.jpg",
         "alt": "Atelier soufflage de verre",
         "linkText": "Réserver →"
       },
@@ -1975,7 +1975,7 @@
         "duree": "1h30",
         "prix": "11 € / adulte",
         "url": "https://www.musees-nationaux-alpesmaritimes.fr/fernand-leger",
-        "image": "https://picsum.photos/seed/musee-leger/200/200",
+        "image": "../assets/images/lieux/biot-village-verrier/act-2.jpg",
         "alt": "Musée National Fernand Léger",
         "linkText": "Réserver →"
       }
@@ -2067,7 +2067,7 @@
         "duree": "1h30",
         "prix": "7 € / adulte",
         "url": "https://www.cagnes-tourisme.com/chateau-musee",
-        "image": "https://picsum.photos/seed/chateau-grimaldi-cagnes/200/200",
+        "image": "../assets/images/lieux/haut-de-cagnes/act-1.jpg",
         "alt": "Château-musée Grimaldi",
         "linkText": "Réserver →"
       },
@@ -2078,7 +2078,7 @@
         "duree": "1h",
         "prix": "9 € / adulte",
         "url": "https://www.musees-nationaux-alpesmaritimes.fr/renoir",
-        "image": "https://picsum.photos/seed/musee-renoir/200/200",
+        "image": "../assets/images/lieux/haut-de-cagnes/act-3.jpg",
         "alt": "Musée Renoir",
         "linkText": "Réserver →"
       },
@@ -2089,7 +2089,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.cagnes-tourisme.com/haut-de-cagnes",
-        "image": "https://picsum.photos/seed/haut-cagnes-balade/200/200",
+        "image": "../assets/images/lieux/haut-de-cagnes/act-2.jpg",
         "alt": "Balade village médiéval",
         "linkText": "En savoir plus →"
       }
@@ -2180,7 +2180,7 @@
         "duree": "3h–4h",
         "prix": "Accès libre",
         "url": "https://www.antibesjuanlespins.com/sentier-littoral",
-        "image": "https://picsum.photos/seed/sentier-cap-antibes/200/200",
+        "image": "../assets/images/lieux/sentier-cap-antibes/act-1.jpg",
         "alt": "Sentier du littoral Tirepoil",
         "linkText": "En savoir plus →"
       },
@@ -2191,7 +2191,7 @@
         "duree": "1h30",
         "prix": "8 € / adulte",
         "url": "https://www.antibes-juanlespins.com/musee-picasso",
-        "image": "https://picsum.photos/seed/musee-picasso-antibes/200/200",
+        "image": "../assets/images/lieux/sentier-cap-antibes/act-2.jpg",
         "alt": "Musée Picasso d'Antibes",
         "linkText": "Réserver →"
       },
@@ -2202,7 +2202,7 @@
         "duree": "2h–4h",
         "prix": "20–35 €",
         "url": "https://www.getyourguide.com/antibes-l96900/",
-        "image": "https://picsum.photos/seed/velo-antibes-mer/200/200",
+        "image": "../assets/images/lieux/sentier-cap-antibes/act-3.jpg",
         "alt": "Location de vélos électriques",
         "linkText": "Réserver →"
       }
@@ -2295,7 +2295,7 @@
         "duree": "Soirée",
         "prix": "30–80 € / place",
         "url": "https://www.jazzajuan.com/",
-        "image": "https://picsum.photos/seed/jazz-juan-les-pins/200/200",
+        "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-1.jpg",
         "alt": "Festival Jazz à Juan",
         "linkText": "Réserver →"
       },
@@ -2306,7 +2306,7 @@
         "duree": "1h",
         "prix": "15–20 € / pers.",
         "url": "https://www.getyourguide.com/juan-les-pins-l97018/",
-        "image": "https://picsum.photos/seed/paddle-juan-les-pins/200/200",
+        "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-2.jpg",
         "alt": "Location paddle / SUP",
         "linkText": "Réserver →"
       },
@@ -2317,7 +2317,7 @@
         "duree": "Demi-journée",
         "prix": "Accès libre",
         "url": "https://www.antibesjuanlespins.com/plages",
-        "image": "https://picsum.photos/seed/plage-juan-pins/200/200",
+        "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-3.jpg",
         "alt": "Plage de Juan-les-Pins",
         "linkText": "En savoir plus →"
       }
@@ -2409,7 +2409,7 @@
         "duree": "30min aller",
         "prix": "18 € aller-retour",
         "url": "https://www.cannes-ilesdelerins.com/",
-        "image": "https://picsum.photos/seed/traversee-lerins/200/200",
+        "image": "../assets/images/lieux/iles-de-lerins/act-3.jpg",
         "alt": "Traversée en bateau depuis Cannes",
         "linkText": "Réserver →"
       },
@@ -2420,7 +2420,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.abbayedelerins.com/",
-        "image": "https://picsum.photos/seed/abbaye-lerins/200/200",
+        "image": "../assets/images/lieux/iles-de-lerins/act-1.jpg",
         "alt": "Abbaye de Lérins (Saint-Honorat)",
         "linkText": "En savoir plus →"
       },
@@ -2431,7 +2431,7 @@
         "duree": "2h",
         "prix": "Accès libre",
         "url": "https://www.lerins.com/",
-        "image": "https://picsum.photos/seed/ile-sainte-marguerite/200/200",
+        "image": "../assets/images/lieux/iles-de-lerins/act-2.jpg",
         "alt": "Randonnée Île Sainte-Marguerite",
         "linkText": "En savoir plus →"
       }
@@ -2525,7 +2525,7 @@
         "duree": "3h–4h",
         "prix": "Accès libre",
         "url": "https://www.esterel-cote-azur.com/randonnee",
-        "image": "https://picsum.photos/seed/pic-cap-roux-randonnee/200/200",
+        "image": "../assets/images/lieux/pic-cap-roux-esterel/act-1.jpg",
         "alt": "Randonnée Pic du Cap Roux",
         "linkText": "En savoir plus →"
       },
@@ -2536,7 +2536,7 @@
         "duree": "3h–5h",
         "prix": "25–45 € / location",
         "url": "https://www.getyourguide.com/esterel-l97025/",
-        "image": "https://picsum.photos/seed/vtt-esterel/200/200",
+        "image": "../assets/images/lieux/pic-cap-roux-esterel/act-3.jpg",
         "alt": "VTT dans l'Estérel",
         "linkText": "Réserver →"
       },
@@ -2547,7 +2547,7 @@
         "duree": "2h–3h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-esterel.html",
-        "image": "https://picsum.photos/seed/esterel-cotier/200/200",
+        "image": "../assets/images/lieux/pic-cap-roux-esterel/act-2.jpg",
         "alt": "Randonnée Estérel côtière",
         "linkText": "En savoir plus →"
       }
@@ -2639,7 +2639,7 @@
         "duree": "2h–3h",
         "prix": "40–60 € / pers.",
         "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/",
-        "image": "https://picsum.photos/seed/kayak-esterel/200/200",
+        "image": "../assets/images/lieux/calanques-esterel-theoule/act-1.jpg",
         "alt": "Kayak de mer calanques",
         "linkText": "Réserver →"
       },
@@ -2650,7 +2650,7 @@
         "duree": "2h",
         "prix": "30–45 € / pers.",
         "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/snorkeling",
-        "image": "https://picsum.photos/seed/snorkeling-calanques/200/200",
+        "image": "../assets/images/lieux/calanques-esterel-theoule/act-2.jpg",
         "alt": "Snorkeling calanques rouges",
         "linkText": "Réserver →"
       },
@@ -2661,7 +2661,7 @@
         "duree": "2h–3h",
         "prix": "Accès libre",
         "url": "https://www.visorando.com/randonnee-theoule-sur-mer.html",
-        "image": "https://picsum.photos/seed/calanques-randonnee/200/200",
+        "image": "../assets/images/lieux/calanques-esterel-theoule/act-3.jpg",
         "alt": "Randonnée côtière calanques",
         "linkText": "En savoir plus →"
       }
@@ -2755,7 +2755,7 @@
         "duree": "45min",
         "prix": "Accès libre",
         "url": "https://www.fragonard.com/fr/la-fabrique/visiter-la-fabrique",
-        "image": "https://picsum.photos/seed/parfumerie-fragonard/200/200",
+        "image": "../assets/images/lieux/vieille-ville-grasse/act-1.jpg",
         "alt": "Visite parfumerie Fragonard",
         "linkText": "En savoir plus →"
       },
@@ -2766,7 +2766,7 @@
         "duree": "1h30",
         "prix": "8 € / adulte",
         "url": "https://www.museesdegrasse.com/",
-        "image": "https://picsum.photos/seed/musee-parfumerie-grasse/200/200",
+        "image": "../assets/images/lieux/vieille-ville-grasse/act-2.jpg",
         "alt": "Musée international de la Parfumerie",
         "linkText": "Réserver →"
       },
@@ -2777,7 +2777,7 @@
         "duree": "1h30",
         "prix": "50–80 € / adulte",
         "url": "https://www.getyourguide.com/grasse-l96902/creation-parfum",
-        "image": "https://picsum.photos/seed/atelier-parfum-grasse/200/200",
+        "image": "../assets/images/lieux/vieille-ville-grasse/act-3.jpg",
         "alt": "Atelier création de parfum",
         "linkText": "Réserver →"
       }
@@ -2868,7 +2868,7 @@
         "duree": "1h30",
         "prix": "9 € / adulte",
         "url": "https://www.saint-tropez.fr/culture/la-citadelle",
-        "image": "https://picsum.photos/seed/citadelle-saint-tropez/200/200",
+        "image": "../assets/images/lieux/citadelle-saint-tropez/act-1.jpg",
         "alt": "Citadelle & musée naval",
         "linkText": "Réserver →"
       },
@@ -2879,7 +2879,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.saint-tropez.fr/",
-        "image": "https://picsum.photos/seed/port-saint-tropez/200/200",
+        "image": "../assets/images/lieux/citadelle-saint-tropez/act-3.jpg",
         "alt": "Balade au port de Saint-Tropez",
         "linkText": "En savoir plus →"
       },
@@ -2890,7 +2890,7 @@
         "duree": "4h",
         "prix": "200–500 € / groupe",
         "url": "https://www.clickandboat.com/location-bateau/france/cote-azur/saint-tropez",
-        "image": "https://picsum.photos/seed/bateau-saint-tropez/200/200",
+        "image": "../assets/images/lieux/citadelle-saint-tropez/act-2.jpg",
         "alt": "Location de bateau",
         "linkText": "Réserver →"
       }
@@ -2982,7 +2982,7 @@
         "duree": "1h30",
         "prix": "Accès libre",
         "url": "https://www.gassin.eu/",
-        "image": "https://picsum.photos/seed/panorama-barri-gassin/200/200",
+        "image": "../assets/images/lieux/gassin-plus-beau-village/act-1.jpg",
         "alt": "Randonnée panorama des Barri",
         "linkText": "En savoir plus →"
       },
@@ -2993,7 +2993,7 @@
         "duree": "1h",
         "prix": "15–25 € / dégustation",
         "url": "https://www.getyourguide.com/saint-tropez-l97024/degustation-vins",
-        "image": "https://picsum.photos/seed/degustation-vins-golfe/200/200",
+        "image": "../assets/images/lieux/gassin-plus-beau-village/act-2.jpg",
         "alt": "Dégustation vins du golfe",
         "linkText": "Réserver →"
       },
@@ -3004,7 +3004,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/gassin",
-        "image": "https://picsum.photos/seed/gassin-village-classe/200/200",
+        "image": "../assets/images/lieux/gassin-plus-beau-village/act-3.jpg",
         "alt": "Visite du village classé",
         "linkText": "En savoir plus →"
       }
