@@ -117,10 +117,14 @@
   .itin-preview-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; padding-bottom:20px; }
   .itin-preview-card{
     display:block; background:var(--surface); border:1px solid var(--line); border-radius:3px;
-    padding:22px; text-decoration:none; color:var(--text);
+    overflow:hidden; text-decoration:none; color:var(--text);
     transition:border-color .2s ease, transform .2s ease;
   }
   .itin-preview-card:hover{ border-color:var(--terracotta); transform:translateY(-2px); }
+  .itin-preview-img{ aspect-ratio:4/3; overflow:hidden; }
+  .itin-preview-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .itin-preview-card:hover .itin-preview-img img{ transform:scale(1.06); }
+  .itin-preview-body{ padding:20px 22px 22px; }
   .itin-preview-num{ font-size:0.72rem; color:var(--azure); display:block; margin-bottom:10px; }
   .itin-preview-card h3{ font-family:'Fraunces', serif; font-weight:600; font-size:1.08rem; margin-bottom:8px; }
   .itin-preview-card p{ font-size:0.88rem; color:var(--text-muted); margin-bottom:14px; }
@@ -232,6 +236,8 @@
     </div>
     <div class="itin-preview-grid">
       <a class="itin-preview-card" href="itin/menton-eze-monaco.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg" alt="Village médiéval perché de Roquebrune-Cap-Martin" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">01</span>
         <h3>Menton, Èze & Monaco : la route des classiques</h3>
         <p>Une journée en voiture entre villages perchés, panoramas et villas Belle Époque, de la frontière italienne à Monaco.</p>
@@ -239,9 +245,12 @@
           <span>📍 6 étapes</span>
           <span>Journée complète</span>
         </div>
+        </div>
       </a>
 
       <a class="itin-preview-card" href="itin/nice-peillon-peille.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg" alt="Marché du Cours Saleya dans les ruelles colorées du Vieux Nice" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">02</span>
         <h3>Nice, Peillon & Peille : ville et arrière-pays express</h3>
         <p>Le meilleur du Vieux Nice le matin, deux villages suspendus l'après-midi — sans passer la journée sur la route.</p>
@@ -249,9 +258,12 @@
           <span>📍 4 étapes</span>
           <span>Journée</span>
         </div>
+        </div>
       </a>
 
       <a class="itin-preview-card" href="itin/villages-perches.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/saint-paul-de-vence/thumb.jpg" alt="Village fortifié de Saint-Paul-de-Vence, cité des artistes" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">03</span>
         <h3>La route des villages perchés</h3>
         <p>Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.</p>
@@ -259,9 +271,12 @@
           <span>📍 5 étapes</span>
           <span>Journée complète</span>
         </div>
+        </div>
       </a>
 
       <a class="itin-preview-card" href="itin/antibes-biot-juan.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/sentier-cap-antibes/thumb.jpg" alt="Sentier du littoral du Cap d'Antibes longeant la mer" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">04</span>
         <h3>Antibes, Biot & la pinède de Juan-les-Pins</h3>
         <p>Sentier côtier, sieste à l'ombre des pins et verre soufflé — une journée qui alterne mer et artisanat.</p>
@@ -269,9 +284,12 @@
           <span>📍 4 étapes</span>
           <span>Journée</span>
         </div>
+        </div>
       </a>
 
       <a class="itin-preview-card" href="itin/lerins-esterel.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/iles-de-lerins/thumb.jpg" alt="Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">05</span>
         <h3>Îles de Lérins & Estérel sauvage</h3>
         <p>Une matinée au large de Cannes, un après-midi sur les roches rouges du massif volcanique le plus photogénique de la Riviera.</p>
@@ -279,15 +297,19 @@
           <span>📍 3 étapes</span>
           <span>Journée complète</span>
         </div>
+        </div>
       </a>
 
       <a class="itin-preview-card" href="itin/grasse-saint-tropez.html">
+        <div class="itin-preview-img"><img src="assets/images/lieux/vieille-ville-grasse/thumb.jpg" alt="Ruelles de la vieille ville de Grasse, capitale mondiale du parfum" loading="lazy"></div>
+        <div class="itin-preview-body">
         <span class="itin-preview-num mono">06</span>
         <h3>Grasse et la presqu'île de Saint-Tropez</h3>
         <p>Les parfumeries de Grasse le matin, un plus beau village de France et la citadelle du golfe l'après-midi.</p>
         <div class="itin-preview-meta mono">
           <span>📍 3 étapes</span>
           <span>Journée</span>
+        </div>
         </div>
       </a>
     </div>
@@ -330,7 +352,7 @@
 
       <a class="card" href="lieux/sentier-cap-ferrat.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/capferrat/500/375" alt="Sentier du littoral du Cap Ferrat longeant la mer Méditerranée" loading="lazy">
+          <img src="assets/images/lieux/sentier-cap-ferrat/thumb.jpg" alt="Sentier du littoral du Cap Ferrat longeant la mer Méditerranée" loading="lazy">
           <span class="stamp">43.69°N<br>7.33°E</span>
         </div>
         <div class="card-body">
@@ -342,7 +364,7 @@
 
       <a class="card" href="lieux/villa-kerylos.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/kerylos/500/375" alt="Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer" loading="lazy">
+          <img src="assets/images/lieux/villa-kerylos/thumb.jpg" alt="Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer" loading="lazy">
           <span class="stamp">43.71°N<br>7.33°E</span>
         </div>
         <div class="card-body">
@@ -402,7 +424,7 @@
 
       <a class="card" href="lieux/sentier-corbusier-cap-martin.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/corbusier/500/375" alt="Sentier littoral du Corbusier au Cap Martin" loading="lazy">
+          <img src="assets/images/lieux/sentier-corbusier-cap-martin/thumb.jpg" alt="Sentier littoral du Corbusier au Cap Martin" loading="lazy">
           <span class="stamp">43.76°N<br>7.50°E</span>
         </div>
         <div class="card-body">
@@ -426,7 +448,7 @@
         <div class="grid">
       <a class="card" href="lieux/colline-du-chateau-nice.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/chateaunice/500/375" alt="Vue depuis la Colline du Château sur la baie des Anges à Nice" loading="lazy">
+          <img src="assets/images/lieux/colline-du-chateau-nice/thumb.jpg" alt="Vue depuis la Colline du Château sur la baie des Anges à Nice" loading="lazy">
           <span class="stamp">43.70°N<br>7.28°E</span>
         </div>
         <div class="card-body">
@@ -438,7 +460,7 @@
 
       <a class="card" href="lieux/cours-saleya-vieux-nice.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/coursaleya/500/375" alt="Marché du Cours Saleya dans les ruelles colorées du Vieux Nice" loading="lazy">
+          <img src="assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg" alt="Marché du Cours Saleya dans les ruelles colorées du Vieux Nice" loading="lazy">
           <span class="stamp">43.70°N<br>7.28°E</span>
         </div>
         <div class="card-body">
@@ -474,7 +496,7 @@
 
       <a class="card" href="lieux/peille-village.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/peille/500/375" alt="Ruelles voûtées du village de Peille dans l'arrière-pays niçois" loading="lazy">
+          <img src="assets/images/lieux/peille-village/thumb.jpg" alt="Ruelles voûtées du village de Peille dans l'arrière-pays niçois" loading="lazy">
           <span class="stamp">43.80°N<br>7.40°E</span>
         </div>
         <div class="card-body">
@@ -486,7 +508,7 @@
 
       <a class="card" href="lieux/gourdon-village.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/gourdon/500/375" alt="Village de Gourdon perché au-dessus des gorges du Loup" loading="lazy">
+          <img src="assets/images/lieux/gourdon-village/thumb.jpg" alt="Village de Gourdon perché au-dessus des gorges du Loup" loading="lazy">
           <span class="stamp">43.72°N<br>6.98°E</span>
         </div>
         <div class="card-body">
@@ -510,7 +532,7 @@
 
       <a class="card" href="lieux/pont-du-loup.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/pontduloup/500/375" alt="Viaduc en ruine de Pont-du-Loup enjambant les gorges" loading="lazy">
+          <img src="assets/images/lieux/pont-du-loup/thumb.jpg" alt="Viaduc en ruine de Pont-du-Loup enjambant les gorges" loading="lazy">
           <span class="stamp">43.72°N<br>7.00°E</span>
         </div>
         <div class="card-body">
@@ -522,7 +544,7 @@
 
       <a class="card" href="lieux/tourrettes-sur-loup.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/tourrettes/500/375" alt="Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes" loading="lazy">
+          <img src="assets/images/lieux/tourrettes-sur-loup/thumb.jpg" alt="Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes" loading="lazy">
           <span class="stamp">43.72°N<br>7.05°E</span>
         </div>
         <div class="card-body">
@@ -534,7 +556,7 @@
 
       <a class="card" href="lieux/saint-paul-de-vence.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/saintpauldevence/500/375" alt="Village fortifié de Saint-Paul-de-Vence, cité des artistes" loading="lazy">
+          <img src="assets/images/lieux/saint-paul-de-vence/thumb.jpg" alt="Village fortifié de Saint-Paul-de-Vence, cité des artistes" loading="lazy">
           <span class="stamp">43.70°N<br>7.12°E</span>
         </div>
         <div class="card-body">
@@ -558,7 +580,7 @@
 
       <a class="card" href="lieux/haut-de-cagnes.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/hautdecagnes/500/375" alt="Village médiéval du Haut-de-Cagnes dominé par son château" loading="lazy">
+          <img src="assets/images/lieux/haut-de-cagnes/thumb.jpg" alt="Village médiéval du Haut-de-Cagnes dominé par son château" loading="lazy">
           <span class="stamp">43.67°N<br>7.15°E</span>
         </div>
         <div class="card-body">
@@ -582,7 +604,7 @@
         <div class="grid">
       <a class="card" href="lieux/sentier-cap-antibes.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/capantibes/500/375" alt="Sentier du littoral du Cap d'Antibes longeant la mer" loading="lazy">
+          <img src="assets/images/lieux/sentier-cap-antibes/thumb.jpg" alt="Sentier du littoral du Cap d'Antibes longeant la mer" loading="lazy">
           <span class="stamp">43.55°N<br>7.13°E</span>
         </div>
         <div class="card-body">
@@ -594,7 +616,7 @@
 
       <a class="card" href="lieux/pinede-gould-juan-les-pins.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/pinedegould/500/375" alt="Pinède Gould en bord de mer à Juan-les-Pins" loading="lazy">
+          <img src="assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg" alt="Pinède Gould en bord de mer à Juan-les-Pins" loading="lazy">
           <span class="stamp">43.57°N<br>7.11°E</span>
         </div>
         <div class="card-body">
@@ -606,7 +628,7 @@
 
       <a class="card" href="lieux/iles-de-lerins.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/lerins/500/375" alt="Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat" loading="lazy">
+          <img src="assets/images/lieux/iles-de-lerins/thumb.jpg" alt="Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat" loading="lazy">
           <span class="stamp">43.52°N<br>7.05°E</span>
         </div>
         <div class="card-body">
@@ -618,7 +640,7 @@
 
       <a class="card" href="lieux/pic-cap-roux-esterel.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/piccaproux/500/375" alt="Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel" loading="lazy">
+          <img src="assets/images/lieux/pic-cap-roux-esterel/thumb.jpg" alt="Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel" loading="lazy">
           <span class="stamp">43.44°N<br>6.88°E</span>
         </div>
         <div class="card-body">
@@ -630,7 +652,7 @@
 
       <a class="card" href="lieux/calanques-esterel-theoule.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/calanquesesterel/500/375" alt="Calanques rouges de l'Estérel à Théoule-sur-Mer" loading="lazy">
+          <img src="assets/images/lieux/calanques-esterel-theoule/thumb.jpg" alt="Calanques rouges de l'Estérel à Théoule-sur-Mer" loading="lazy">
           <span class="stamp">43.50°N<br>6.94°E</span>
         </div>
         <div class="card-body">
@@ -654,7 +676,7 @@
         <div class="grid">
       <a class="card" href="lieux/vieille-ville-grasse.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/grasse/500/375" alt="Ruelles de la vieille ville de Grasse, capitale mondiale du parfum" loading="lazy">
+          <img src="assets/images/lieux/vieille-ville-grasse/thumb.jpg" alt="Ruelles de la vieille ville de Grasse, capitale mondiale du parfum" loading="lazy">
           <span class="stamp">43.66°N<br>6.92°E</span>
         </div>
         <div class="card-body">
@@ -678,7 +700,7 @@
 
       <a class="card" href="lieux/gassin-plus-beau-village.html">
         <div class="card-media">
-          <img src="https://picsum.photos/seed/gassin/500/375" alt="Village perché de Gassin surplombant le golfe de Saint-Tropez" loading="lazy">
+          <img src="assets/images/lieux/gassin-plus-beau-village/thumb.jpg" alt="Village perché de Gassin surplombant le golfe de Saint-Tropez" loading="lazy">
           <span class="stamp">43.23°N<br>6.58°E</span>
         </div>
         <div class="card-body">
@@ -738,7 +760,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function() {
-    const SPOTS_MAP_HOME = [{"name":"La Rue Obscure","commune":"Villefranche-sur-Mer","lat":43.7042,"lng":7.3103,"region":"menton-monaco","color":"#E8A33D","url":"lieux/rue-obscure-villefranche.html","img":"assets/images/lieux/rue-obscure-villefranche/thumb.jpg","intro":"Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-s…"},{"name":"Sentier du littoral du Cap Ferrat","commune":"Saint-Jean-Cap-Ferrat","lat":43.689,"lng":7.33,"region":"menton-monaco","color":"#E8A33D","url":"lieux/sentier-cap-ferrat.html","img":"https://picsum.photos/seed/capferrat/500/375","intro":"Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la …"},{"name":"Villa Kerylos","commune":"Beaulieu-sur-Mer","lat":43.7089,"lng":7.3308,"region":"menton-monaco","color":"#E8A33D","url":"lieux/villa-kerylos.html","img":"https://picsum.photos/seed/kerylos/500/375","intro":"Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement…"},{"name":"Èze, le village perché","commune":"Èze","lat":43.6579,"lng":7.3616,"region":"menton-monaco","color":"#E8A33D","url":"lieux/eze-village.html","img":"assets/images/lieux/eze-village/thumb.jpg","intro":"Un village médiéval accroché à un piton rocheux à 400 mètres au-dessus de la mer, avec des ruelles s…"},{"name":"Le Trophée d'Auguste","commune":"La Turbie","lat":43.7378,"lng":7.4014,"region":"menton-monaco","color":"#E8A33D","url":"lieux/trophee-auguste-la-turbie.html","img":"assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg","intro":"Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, p…"},{"name":"Le Jardin exotique de Monaco","commune":"Monaco","lat":43.7326,"lng":7.413,"region":"menton-monaco","color":"#E8A33D","url":"lieux/jardin-exotique-monaco.html","img":"assets/images/lieux/jardin-exotique-monaco/thumb.jpg","intro":"Un jardin de cactus et plantes succulentes accroché à flanc de falaise calcaire, avec l'une des plus…"},{"name":"Le village de Roquebrune-Cap-Martin","commune":"Roquebrune-Cap-Martin","lat":43.7612,"lng":7.452,"region":"menton-monaco","color":"#E8A33D","url":"lieux/roquebrune-cap-martin-village.html","img":"assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg","intro":"Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des p…"},{"name":"Le sentier Le Corbusier","commune":"Cap Martin","lat":43.7622,"lng":7.5027,"region":"menton-monaco","color":"#E8A33D","url":"lieux/sentier-corbusier-cap-martin.html","img":"https://picsum.photos/seed/corbusier/500/375","intro":"Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacanc…"},{"name":"La Colline du Château","commune":"Nice","lat":43.6959,"lng":7.2795,"region":"nice","color":"#4FC3C9","url":"lieux/colline-du-chateau-nice.html","img":"https://picsum.photos/seed/chateaunice/500/375","intro":"Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, r…"},{"name":"Le Cours Saleya et les ruelles du Vieux Nice","commune":"Nice","lat":43.6953,"lng":7.2764,"region":"nice","color":"#4FC3C9","url":"lieux/cours-saleya-vieux-nice.html","img":"https://picsum.photos/seed/coursaleya/500/375","intro":"Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'i…"},{"name":"Peillon, village suspendu","commune":"Peillon","lat":43.7786,"lng":7.3828,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/peillon-village.html","img":"assets/images/lieux/peillon-village/thumb.jpg","intro":"Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît…"},{"name":"Peille, village de l'arrière-pays","commune":"Peille","lat":43.8031,"lng":7.4025,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/peille-village.html","img":"https://picsum.photos/seed/peille/500/375","intro":"Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchev…"},{"name":"Gourdon, le nid d'aigle","commune":"Gourdon","lat":43.7154,"lng":6.9764,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/gourdon-village.html","img":"https://picsum.photos/seed/gourdon/500/375","intro":"Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte,…"},{"name":"Les gorges du Loup et la cascade de Courmes","commune":"Gorges du Loup","lat":43.7311,"lng":6.9825,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/gorges-du-loup-cascade-courmes.html","img":"assets/images/lieux/gorges-du-loup-cascade-courmes/thumb.jpg","intro":"Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptée…"},{"name":"Pont du Loup et son viaduc","commune":"Pont-du-Loup","lat":43.7186,"lng":6.9967,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/pont-du-loup.html","img":"https://picsum.photos/seed/pontduloup/500/375","intro":"Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire…"},{"name":"Tourrettes-sur-Loup, la cité des violettes","commune":"Tourrettes-sur-Loup","lat":43.7194,"lng":7.0472,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/tourrettes-sur-loup.html","img":"https://picsum.photos/seed/tourrettes/500/375","intro":"Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture…"},{"name":"Saint-Paul-de-Vence","commune":"Saint-Paul-de-Vence","lat":43.697,"lng":7.1214,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/saint-paul-de-vence.html","img":"https://picsum.photos/seed/saintpauldevence/500/375","intro":"Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts l…"},{"name":"Biot, le village des verriers","commune":"Biot","lat":43.6289,"lng":7.0967,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/biot-village-verrier.html","img":"assets/images/lieux/biot-village-verrier/thumb.jpg","intro":"Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bul…"},{"name":"Le Haut-de-Cagnes","commune":"Cagnes-sur-Mer","lat":43.6656,"lng":7.1486,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/haut-de-cagnes.html","img":"https://picsum.photos/seed/hautdecagnes/500/375","intro":"Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste…"},{"name":"Le sentier du littoral du Cap d'Antibes","commune":"Antibes","lat":43.5461,"lng":7.1256,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/sentier-cap-antibes.html","img":"https://picsum.photos/seed/capantibes/500/375","intro":"Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre crique…"},{"name":"La pinède Gould","commune":"Juan-les-Pins","lat":43.5686,"lng":7.1067,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/pinede-gould-juan-les-pins.html","img":"https://picsum.photos/seed/pinedegould/500/375","intro":"Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens…"},{"name":"Les îles de Lérins","commune":"Cannes","lat":43.515,"lng":7.048,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/iles-de-lerins.html","img":"https://picsum.photos/seed/lerins/500/375","intro":"Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appart…"},{"name":"Le Pic du Cap Roux","commune":"Massif de l'Estérel","lat":43.4394,"lng":6.8825,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/pic-cap-roux-esterel.html","img":"https://picsum.photos/seed/piccaproux/500/375","intro":"Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemme…"},{"name":"Les calanques de l'Estérel","commune":"Théoule-sur-Mer","lat":43.4956,"lng":6.9364,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/calanques-esterel-theoule.html","img":"https://picsum.photos/seed/calanquesesterel/500/375","intro":"Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que le…"},{"name":"La vieille ville de Grasse","commune":"Grasse","lat":43.6584,"lng":6.9228,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/vieille-ville-grasse.html","img":"https://picsum.photos/seed/grasse/500/375","intro":"La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de p…"},{"name":"La Citadelle de Saint-Tropez","commune":"Saint-Tropez","lat":43.2731,"lng":6.6425,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/citadelle-saint-tropez.html","img":"assets/images/lieux/citadelle-saint-tropez/thumb.jpg","intro":"Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet…"},{"name":"Gassin, plus beau village de France","commune":"Gassin","lat":43.2258,"lng":6.5836,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/gassin-plus-beau-village.html","img":"https://picsum.photos/seed/gassin/500/375","intro":"Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de…"}];
+    const SPOTS_MAP_HOME = [{"name":"La Rue Obscure","commune":"Villefranche-sur-Mer","lat":43.7042,"lng":7.3103,"region":"menton-monaco","color":"#E8A33D","url":"lieux/rue-obscure-villefranche.html","img":"assets/images/lieux/rue-obscure-villefranche/thumb.jpg","intro":"Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-s…"},{"name":"Sentier du littoral du Cap Ferrat","commune":"Saint-Jean-Cap-Ferrat","lat":43.689,"lng":7.33,"region":"menton-monaco","color":"#E8A33D","url":"lieux/sentier-cap-ferrat.html","img":"assets/images/lieux/sentier-cap-ferrat/thumb.jpg","intro":"Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la …"},{"name":"Villa Kerylos","commune":"Beaulieu-sur-Mer","lat":43.7089,"lng":7.3308,"region":"menton-monaco","color":"#E8A33D","url":"lieux/villa-kerylos.html","img":"assets/images/lieux/villa-kerylos/thumb.jpg","intro":"Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement…"},{"name":"Èze, le village perché","commune":"Èze","lat":43.6579,"lng":7.3616,"region":"menton-monaco","color":"#E8A33D","url":"lieux/eze-village.html","img":"assets/images/lieux/eze-village/thumb.jpg","intro":"Un village médiéval accroché à un piton rocheux à 400 mètres au-dessus de la mer, avec des ruelles s…"},{"name":"Le Trophée d'Auguste","commune":"La Turbie","lat":43.7378,"lng":7.4014,"region":"menton-monaco","color":"#E8A33D","url":"lieux/trophee-auguste-la-turbie.html","img":"assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg","intro":"Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, p…"},{"name":"Le Jardin exotique de Monaco","commune":"Monaco","lat":43.7326,"lng":7.413,"region":"menton-monaco","color":"#E8A33D","url":"lieux/jardin-exotique-monaco.html","img":"assets/images/lieux/jardin-exotique-monaco/thumb.jpg","intro":"Un jardin de cactus et plantes succulentes accroché à flanc de falaise calcaire, avec l'une des plus…"},{"name":"Le village de Roquebrune-Cap-Martin","commune":"Roquebrune-Cap-Martin","lat":43.7612,"lng":7.452,"region":"menton-monaco","color":"#E8A33D","url":"lieux/roquebrune-cap-martin-village.html","img":"assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg","intro":"Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des p…"},{"name":"Le sentier Le Corbusier","commune":"Cap Martin","lat":43.7622,"lng":7.5027,"region":"menton-monaco","color":"#E8A33D","url":"lieux/sentier-corbusier-cap-martin.html","img":"assets/images/lieux/sentier-corbusier-cap-martin/thumb.jpg","intro":"Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacanc…"},{"name":"La Colline du Château","commune":"Nice","lat":43.6959,"lng":7.2795,"region":"nice","color":"#4FC3C9","url":"lieux/colline-du-chateau-nice.html","img":"assets/images/lieux/colline-du-chateau-nice/thumb.jpg","intro":"Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, r…"},{"name":"Le Cours Saleya et les ruelles du Vieux Nice","commune":"Nice","lat":43.6953,"lng":7.2764,"region":"nice","color":"#4FC3C9","url":"lieux/cours-saleya-vieux-nice.html","img":"assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg","intro":"Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'i…"},{"name":"Peillon, village suspendu","commune":"Peillon","lat":43.7786,"lng":7.3828,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/peillon-village.html","img":"assets/images/lieux/peillon-village/thumb.jpg","intro":"Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît…"},{"name":"Peille, village de l'arrière-pays","commune":"Peille","lat":43.8031,"lng":7.4025,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/peille-village.html","img":"assets/images/lieux/peille-village/thumb.jpg","intro":"Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchev…"},{"name":"Gourdon, le nid d'aigle","commune":"Gourdon","lat":43.7154,"lng":6.9764,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/gourdon-village.html","img":"assets/images/lieux/gourdon-village/thumb.jpg","intro":"Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte,…"},{"name":"Les gorges du Loup et la cascade de Courmes","commune":"Gorges du Loup","lat":43.7311,"lng":6.9825,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/gorges-du-loup-cascade-courmes.html","img":"assets/images/lieux/gorges-du-loup-cascade-courmes/thumb.jpg","intro":"Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptée…"},{"name":"Pont du Loup et son viaduc","commune":"Pont-du-Loup","lat":43.7186,"lng":6.9967,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/pont-du-loup.html","img":"assets/images/lieux/pont-du-loup/thumb.jpg","intro":"Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire…"},{"name":"Tourrettes-sur-Loup, la cité des violettes","commune":"Tourrettes-sur-Loup","lat":43.7194,"lng":7.0472,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/tourrettes-sur-loup.html","img":"assets/images/lieux/tourrettes-sur-loup/thumb.jpg","intro":"Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture…"},{"name":"Saint-Paul-de-Vence","commune":"Saint-Paul-de-Vence","lat":43.697,"lng":7.1214,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/saint-paul-de-vence.html","img":"assets/images/lieux/saint-paul-de-vence/thumb.jpg","intro":"Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts l…"},{"name":"Biot, le village des verriers","commune":"Biot","lat":43.6289,"lng":7.0967,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/biot-village-verrier.html","img":"assets/images/lieux/biot-village-verrier/thumb.jpg","intro":"Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bul…"},{"name":"Le Haut-de-Cagnes","commune":"Cagnes-sur-Mer","lat":43.6656,"lng":7.1486,"region":"arriere-pays","color":"#8FBF6B","url":"lieux/haut-de-cagnes.html","img":"assets/images/lieux/haut-de-cagnes/thumb.jpg","intro":"Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste…"},{"name":"Le sentier du littoral du Cap d'Antibes","commune":"Antibes","lat":43.5461,"lng":7.1256,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/sentier-cap-antibes.html","img":"assets/images/lieux/sentier-cap-antibes/thumb.jpg","intro":"Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre crique…"},{"name":"La pinède Gould","commune":"Juan-les-Pins","lat":43.5686,"lng":7.1067,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/pinede-gould-juan-les-pins.html","img":"assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg","intro":"Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens…"},{"name":"Les îles de Lérins","commune":"Cannes","lat":43.515,"lng":7.048,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/iles-de-lerins.html","img":"assets/images/lieux/iles-de-lerins/thumb.jpg","intro":"Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appart…"},{"name":"Le Pic du Cap Roux","commune":"Massif de l'Estérel","lat":43.4394,"lng":6.8825,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/pic-cap-roux-esterel.html","img":"assets/images/lieux/pic-cap-roux-esterel/thumb.jpg","intro":"Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemme…"},{"name":"Les calanques de l'Estérel","commune":"Théoule-sur-Mer","lat":43.4956,"lng":6.9364,"region":"antibes-cannes","color":"#E88B4F","url":"lieux/calanques-esterel-theoule.html","img":"assets/images/lieux/calanques-esterel-theoule/thumb.jpg","intro":"Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que le…"},{"name":"La vieille ville de Grasse","commune":"Grasse","lat":43.6584,"lng":6.9228,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/vieille-ville-grasse.html","img":"assets/images/lieux/vieille-ville-grasse/thumb.jpg","intro":"La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de p…"},{"name":"La Citadelle de Saint-Tropez","commune":"Saint-Tropez","lat":43.2731,"lng":6.6425,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/citadelle-saint-tropez.html","img":"assets/images/lieux/citadelle-saint-tropez/thumb.jpg","intro":"Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet…"},{"name":"Gassin, plus beau village de France","commune":"Gassin","lat":43.2258,"lng":6.5836,"region":"golfe-st-tropez","color":"#C97FA0","url":"lieux/gassin-plus-beau-village.html","img":"assets/images/lieux/gassin-plus-beau-village/thumb.jpg","intro":"Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de…"}];
     const map = L.map('map-home', { scrollWheelZoom: false });
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,

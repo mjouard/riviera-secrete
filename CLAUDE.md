@@ -283,19 +283,25 @@ philosophy for itineraries, etc.).
   lieux in order, sleep markers skipped (they carry no coordinates of their own). Google
   Maps only; don't add a matching Waze/Plans button next to it; that's the whole reason the
   per-stop links exist instead.
-- Hero images: most lieux still use `picsum.photos` placeholders rather than real photos
-  (18/27, tracked in `ROADMAP.md`). Originally the user wanted to pick/supply these
+- Hero images: all 27 lieux now have real photography (finished 2026-08-28 — until then
+  most used `picsum.photos` placeholders). Originally the user wanted to pick/supply these
   themselves and rejected an earlier autonomous Wikimedia Commons batch for being
-  incoherent — that changed 2026-08-28, when the user explicitly asked for autonomous
-  sourcing again, this time worked in small reviewed batches (3 lieux at a time) rather
-  than one big unreviewed batch: search Wikimedia Commons, view the actual candidate images
-  before picking (composition/coherence matters — a technically-licensed but poorly-framed
-  photo, like a blank wall or a blown-out sky, was rejected in favor of a better shot of the
-  same subject), crop with `sips -c height width --cropOffset y x` (off-center crop lets you
-  cut a bad sky/foreground rather than just center-cropping) to the site's exact `hero.jpg`
-  (1200×800, 3:2) and `thumb.jpg` (500×375, 4:3) dimensions, then add attribution to
-  `credits.html` (CC BY-SA/CC BY both require it). Ask before downloading each batch. A
-  lieu with real photography sets `heroSlides` (int) so `main.js`'s carousel picks up
+  incoherent; that changed 2026-08-28, when the user explicitly asked for autonomous
+  sourcing again ("carte blanche… pour cette session" — a session-scoped grant, not a
+  standing preference change, don't assume it carries to a future session without asking).
+  The process that actually worked, worth repeating if a photo ever needs replacing or a
+  new lieu is added: search Wikimedia Commons (a Wikipedia article's own infobox image is
+  often already well-curated — check that first), view the actual candidate image before
+  picking, not just its filename/license (composition/coherence matters — a
+  technically-licensed but poorly-framed photo, like a blank wall or a blown-out sky, was
+  rejected more than once in favor of a better shot of the same subject), crop with
+  `sips -c height width --cropOffset y x` (off-center crop lets you cut a bad sky/foreground
+  rather than just center-cropping — see the one-off helper script pattern: compute the
+  target-aspect crop box from source dimensions, crop, then `sips -z` to the exact final
+  size) to the site's exact `hero.jpg` (1200×800, 3:2) and `thumb.jpg` (500×375, 4:3)
+  dimensions, then add attribution to `credits.html` (CC BY-SA/CC BY both require it,
+  grouped there by region to match the rest of the site). A lieu with real photography sets
+  `heroSlides` (int) so `main.js`'s carousel picks up
   `hero.jpg`, `hero-2.jpg`, … from `assets/images/lieux/<slug>/`. An itinéraire hero can
   instead carry a literal `data-carousel-srcs` attribute listing multiple lieu hero images —
   stored verbatim as `heroImgTag` in `data/itineraires.json` rather than modeled as

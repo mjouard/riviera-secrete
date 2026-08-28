@@ -124,10 +124,10 @@
     "lat": 43.689,
     "lng": 7.33,
     "description": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la Méditerranée entre pins parasols et rochers.",
-    "ogImage": "https://picsum.photos/seed/capferrat/1200/800",
-    "heroImage": "https://picsum.photos/seed/capferrat/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/sentier-cap-ferrat/hero.jpg",
+    "heroImage": "../assets/images/lieux/sentier-cap-ferrat/hero.jpg",
     "heroAlt": "Sentier du littoral du Cap Ferrat longeant la mer Méditerranée",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -219,7 +219,7 @@
       "plongee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/capferrat/500/375"
+    "thumbImage": "assets/images/lieux/sentier-cap-ferrat/thumb.jpg"
   },
   {
     "slug": "villa-kerylos",
@@ -230,10 +230,10 @@
     "lat": 43.7089,
     "lng": 7.3308,
     "description": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement sur les rochers de la baie de Beaulieu.",
-    "ogImage": "https://picsum.photos/seed/kerylos/1200/800",
-    "heroImage": "https://picsum.photos/seed/kerylos/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/villa-kerylos/hero.jpg",
+    "heroImage": "../assets/images/lieux/villa-kerylos/hero.jpg",
     "heroAlt": "Villa Kerylos, reconstitution d'une demeure grecque antique à Beaulieu-sur-Mer",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -312,7 +312,7 @@
       "plage",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/kerylos/500/375"
+    "thumbImage": "assets/images/lieux/villa-kerylos/thumb.jpg"
   },
   {
     "slug": "eze-village",
@@ -749,10 +749,10 @@
     "lat": 43.7622,
     "lng": 7.5027,
     "description": "Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacances, et où il s'est noyé en 1965.",
-    "ogImage": "https://picsum.photos/seed/corbusier/1200/800",
-    "heroImage": "https://picsum.photos/seed/corbusier/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/sentier-corbusier-cap-martin/hero.jpg",
+    "heroImage": "../assets/images/lieux/sentier-corbusier-cap-martin/hero.jpg",
     "heroAlt": "Sentier littoral du Corbusier au Cap Martin",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -830,7 +830,7 @@
     "badges": [
       "randonnee"
     ],
-    "thumbImage": "https://picsum.photos/seed/corbusier/500/375"
+    "thumbImage": "assets/images/lieux/sentier-corbusier-cap-martin/thumb.jpg"
   },
   {
     "slug": "colline-du-chateau-nice",
@@ -841,10 +841,10 @@
     "lat": 43.6959,
     "lng": 7.2795,
     "description": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, remplacée par un parc ombragé et un des meilleurs points de vue de la ville.",
-    "ogImage": "https://picsum.photos/seed/chateaunice/1200/800",
-    "heroImage": "https://picsum.photos/seed/chateaunice/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/colline-du-chateau-nice/hero.jpg",
+    "heroImage": "../assets/images/lieux/colline-du-chateau-nice/hero.jpg",
     "heroAlt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -943,7 +943,7 @@
       "plage",
       "randonnee"
     ],
-    "thumbImage": "https://picsum.photos/seed/chateaunice/500/375"
+    "thumbImage": "assets/images/lieux/colline-du-chateau-nice/thumb.jpg"
   },
   {
     "slug": "cours-saleya-vieux-nice",
@@ -954,10 +954,10 @@
     "lat": 43.6953,
     "lng": 7.2764,
     "description": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'image la plus photographiée de la ville après la Promenade des Anglais.",
-    "ogImage": "https://picsum.photos/seed/coursaleya/1200/800",
-    "heroImage": "https://picsum.photos/seed/coursaleya/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/cours-saleya-vieux-nice/hero.jpg",
+    "heroImage": "../assets/images/lieux/cours-saleya-vieux-nice/hero.jpg",
     "heroAlt": "Marché du Cours Saleya dans les ruelles colorées du Vieux Nice",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1055,7 +1055,7 @@
     "badges": [
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/coursaleya/500/375"
+    "thumbImage": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg"
   },
   {
     "slug": "peillon-village",
@@ -1190,10 +1190,10 @@
     "lat": 43.8031,
     "lng": 7.4025,
     "description": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchevêtrement de ruelles voûtées et de passages couverts.",
-    "ogImage": "https://picsum.photos/seed/peille/1200/800",
-    "heroImage": "https://picsum.photos/seed/peille/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/peille-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/peille-village/hero.jpg",
     "heroAlt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1293,7 +1293,7 @@
       "vtt",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/peille/500/375"
+    "thumbImage": "assets/images/lieux/peille-village/thumb.jpg"
   },
   {
     "slug": "gourdon-village",
@@ -1304,10 +1304,10 @@
     "lat": 43.7154,
     "lng": 6.9764,
     "description": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte, par temps clair, jusqu'à la mer.",
-    "ogImage": "https://picsum.photos/seed/gourdon/1200/800",
-    "heroImage": "https://picsum.photos/seed/gourdon/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/gourdon-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/gourdon-village/hero.jpg",
     "heroAlt": "Village de Gourdon perché au-dessus des gorges du Loup",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1395,7 +1395,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/gourdon/500/375"
+    "thumbImage": "assets/images/lieux/gourdon-village/thumb.jpg"
   },
   {
     "slug": "gorges-du-loup-cascade-courmes",
@@ -1520,10 +1520,10 @@
     "lat": 43.7186,
     "lng": 6.9967,
     "description": "Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire détruit pendant la Seconde Guerre mondiale.",
-    "ogImage": "https://picsum.photos/seed/pontduloup/1200/800",
-    "heroImage": "https://picsum.photos/seed/pontduloup/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/pont-du-loup/hero.jpg",
+    "heroImage": "../assets/images/lieux/pont-du-loup/hero.jpg",
     "heroAlt": "Viaduc en ruine de Pont-du-Loup enjambant les gorges",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1622,7 +1622,7 @@
       "randonnee",
       "vtt"
     ],
-    "thumbImage": "https://picsum.photos/seed/pontduloup/500/375"
+    "thumbImage": "assets/images/lieux/pont-du-loup/thumb.jpg"
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -1633,10 +1633,10 @@
     "lat": 43.7194,
     "lng": 7.0472,
     "description": "Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture de la violette qui borde ses environs depuis le début du XXe siècle.",
-    "ogImage": "https://picsum.photos/seed/tourrettes/1200/800",
-    "heroImage": "https://picsum.photos/seed/tourrettes/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/tourrettes-sur-loup/hero.jpg",
+    "heroImage": "../assets/images/lieux/tourrettes-sur-loup/hero.jpg",
     "heroAlt": "Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1736,7 +1736,7 @@
       "vtt",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/tourrettes/500/375"
+    "thumbImage": "assets/images/lieux/tourrettes-sur-loup/thumb.jpg"
   },
   {
     "slug": "saint-paul-de-vence",
@@ -1747,10 +1747,10 @@
     "lat": 43.697,
     "lng": 7.1214,
     "description": "Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts lieux de l'art moderne en Provence.",
-    "ogImage": "https://picsum.photos/seed/saintpauldevence/1200/800",
-    "heroImage": "https://picsum.photos/seed/saintpauldevence/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/saint-paul-de-vence/hero.jpg",
+    "heroImage": "../assets/images/lieux/saint-paul-de-vence/hero.jpg",
     "heroAlt": "Village fortifié de Saint-Paul-de-Vence, cité des artistes",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -1882,7 +1882,7 @@
       "restaurant",
       "randonnee"
     ],
-    "thumbImage": "https://picsum.photos/seed/saintpauldevence/500/375"
+    "thumbImage": "assets/images/lieux/saint-paul-de-vence/thumb.jpg"
   },
   {
     "slug": "biot-village-verrier",
@@ -2006,10 +2006,10 @@
     "lat": 43.6656,
     "lng": 7.1486,
     "description": "Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste saisissant entre pierre ancienne et béton du littoral.",
-    "ogImage": "https://picsum.photos/seed/hautdecagnes/1200/800",
-    "heroImage": "https://picsum.photos/seed/hautdecagnes/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/haut-de-cagnes/hero.jpg",
+    "heroImage": "../assets/images/lieux/haut-de-cagnes/hero.jpg",
     "heroAlt": "Village médiéval du Haut-de-Cagnes dominé par son château",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2107,7 +2107,7 @@
     "badges": [
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/hautdecagnes/500/375"
+    "thumbImage": "assets/images/lieux/haut-de-cagnes/thumb.jpg"
   },
   {
     "slug": "sentier-cap-antibes",
@@ -2118,10 +2118,10 @@
     "lat": 43.5461,
     "lng": 7.1256,
     "description": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre criques sauvages et villas discrètes.",
-    "ogImage": "https://picsum.photos/seed/capantibes/1200/800",
-    "heroImage": "https://picsum.photos/seed/capantibes/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/sentier-cap-antibes/hero.jpg",
+    "heroImage": "../assets/images/lieux/sentier-cap-antibes/hero.jpg",
     "heroAlt": "Sentier du littoral du Cap d'Antibes longeant la mer",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2221,7 +2221,7 @@
       "plage",
       "plongee"
     ],
-    "thumbImage": "https://picsum.photos/seed/capantibes/500/375"
+    "thumbImage": "assets/images/lieux/sentier-cap-antibes/thumb.jpg"
   },
   {
     "slug": "pinede-gould-juan-les-pins",
@@ -2232,10 +2232,10 @@
     "lat": 43.5686,
     "lng": 7.1067,
     "description": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens festivals de jazz d'Europe.",
-    "ogImage": "https://picsum.photos/seed/pinedegould/1200/800",
-    "heroImage": "https://picsum.photos/seed/pinedegould/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/pinede-gould-juan-les-pins/hero.jpg",
+    "heroImage": "../assets/images/lieux/pinede-gould-juan-les-pins/hero.jpg",
     "heroAlt": "Pinède Gould en bord de mer à Juan-les-Pins",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2334,7 +2334,7 @@
       "plage",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/pinedegould/500/375"
+    "thumbImage": "assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg"
   },
   {
     "slug": "iles-de-lerins",
@@ -2345,10 +2345,10 @@
     "lat": 43.515,
     "lng": 7.048,
     "description": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appartenir à un autre siècle que la ville qui leur fait face.",
-    "ogImage": "https://picsum.photos/seed/lerins/1200/800",
-    "heroImage": "https://picsum.photos/seed/lerins/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/iles-de-lerins/hero.jpg",
+    "heroImage": "../assets/images/lieux/iles-de-lerins/hero.jpg",
     "heroAlt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2449,7 +2449,7 @@
       "plongee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/lerins/500/375"
+    "thumbImage": "assets/images/lieux/iles-de-lerins/thumb.jpg"
   },
   {
     "slug": "pic-cap-roux-esterel",
@@ -2460,10 +2460,10 @@
     "lat": 43.4394,
     "lng": 6.8825,
     "description": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemment avec le bleu de la Méditerranée en contrebas.",
-    "ogImage": "https://picsum.photos/seed/piccaproux/1200/800",
-    "heroImage": "https://picsum.photos/seed/piccaproux/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/pic-cap-roux-esterel/hero.jpg",
+    "heroImage": "../assets/images/lieux/pic-cap-roux-esterel/hero.jpg",
     "heroAlt": "Vue depuis le Pic du Cap Roux sur les roches rouges de l'Estérel",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2562,7 +2562,7 @@
       "randonnee",
       "vtt"
     ],
-    "thumbImage": "https://picsum.photos/seed/piccaproux/500/375"
+    "thumbImage": "assets/images/lieux/pic-cap-roux-esterel/thumb.jpg"
   },
   {
     "slug": "calanques-esterel-theoule",
@@ -2573,10 +2573,10 @@
     "lat": 43.4956,
     "lng": 6.9364,
     "description": "Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que les calanques marseillaises mais tout aussi spectaculaires.",
-    "ogImage": "https://picsum.photos/seed/calanquesesterel/1200/800",
-    "heroImage": "https://picsum.photos/seed/calanquesesterel/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/calanques-esterel-theoule/hero.jpg",
+    "heroImage": "../assets/images/lieux/calanques-esterel-theoule/hero.jpg",
     "heroAlt": "Calanques rouges de l'Estérel à Théoule-sur-Mer",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2677,7 +2677,7 @@
       "plongee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/calanquesesterel/500/375"
+    "thumbImage": "assets/images/lieux/calanques-esterel-theoule/thumb.jpg"
   },
   {
     "slug": "vieille-ville-grasse",
@@ -2688,10 +2688,10 @@
     "lat": 43.6584,
     "lng": 6.9228,
     "description": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.",
-    "ogImage": "https://picsum.photos/seed/grasse/1200/800",
-    "heroImage": "https://picsum.photos/seed/grasse/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/vieille-ville-grasse/hero.jpg",
+    "heroImage": "../assets/images/lieux/vieille-ville-grasse/hero.jpg",
     "heroAlt": "Ruelles de la vieille ville de Grasse, capitale mondiale du parfum",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -2789,7 +2789,7 @@
     "badges": [
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/grasse/500/375"
+    "thumbImage": "assets/images/lieux/vieille-ville-grasse/thumb.jpg"
   },
   {
     "slug": "citadelle-saint-tropez",
@@ -2913,10 +2913,10 @@
     "lat": 43.2258,
     "lng": 6.5836,
     "description": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.",
-    "ogImage": "https://picsum.photos/seed/gassin/1200/800",
-    "heroImage": "https://picsum.photos/seed/gassin/1200/800",
+    "ogImage": "https://riviera-secrete.netlify.app/assets/images/lieux/gassin-plus-beau-village/hero.jpg",
+    "heroImage": "../assets/images/lieux/gassin-plus-beau-village/hero.jpg",
     "heroAlt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
-    "heroSlides": null,
+    "heroSlides": 1,
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -3016,6 +3016,6 @@
       "vtt",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/gassin/500/375"
+    "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg"
   }
 ]
