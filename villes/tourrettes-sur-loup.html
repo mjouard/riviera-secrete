@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tourrettes-sur-Loup — Côte d'Azur | Riviera Secrète</title>
+<meta name="description" content="La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://riviera-secrete.netlify.app/villes/tourrettes-sur-loup.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tourrettes-sur-Loup — Riviera Secrète">
+<meta property="og:description" content="La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.">
+<meta property="og:url" content="https://riviera-secrete.netlify.app/villes/tourrettes-sur-loup.html">
+<meta property="og:image" content="https://riviera-secrete.netlify.app/assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Riviera Secrète">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tourrettes-sur-Loup — Riviera Secrète">
+<meta name="twitter:description" content="La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "Tourrettes-sur-Loup",
+  "description": "La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.",
+  "image": "https://riviera-secrete.netlify.app/assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.7194,
+    "longitude": 7.0472
+  },
+  "url": "https://riviera-secrete.netlify.app/villes/tourrettes-sur-loup.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  .mini-map{
+    width:100%; height:200px; border-radius:3px;
+    border:1px solid var(--line); margin-bottom:20px;
+  }
+  .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg); }
+
+  .leaflet-popup-content-wrapper{
+    border-radius:3px; font-family:'Inter', sans-serif;
+    background:var(--surface); color:var(--text);
+  }
+  .leaflet-popup-tip{ background:var(--surface); }
+  .leaflet-popup-close-button{ color:var(--text-muted) !important; }
+  .leaflet-container a.leaflet-popup-close-button:hover{ color:var(--terracotta) !important; }
+  .popup-name{ font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem; margin-bottom:6px; display:block; }
+  .popup-link{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; letter-spacing:0.03em;
+    color:var(--terracotta); text-decoration:none; font-weight:500;
+  }
+  .popup-link:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="../index.html#itineraires">Itinéraires</a>
+      <a href="../index.html#lieux">Lieux</a>
+      <a href="../mes-itineraires.html">Mes itinéraires</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<div class="wrap breadcrumb">
+  <ol>
+    <li><a href="../index.html">Accueil</a></li>
+    <li>L'arrière-pays : villages perchés & gorges</li>
+    <li>Tourrettes-sur-Loup</li>
+  </ol>
+</div>
+
+<div class="wrap">
+  <div class="detail-hero">
+    <img src="../assets/images/lieux/gorges-du-loup-cascade-courmes/hero.jpg" alt="Cascade de Courmes dans les gorges du Loup" loading="eager" data-slides="1">
+    <div class="detail-hero-caption">
+      <span class="card-region">L'arrière-pays : villages perchés & gorges</span>
+      <h1>Tourrettes-sur-Loup</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="article">
+    <div class="article-body">
+      <p>La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.</p>
+      <p class="meta-pill" style="margin-top:12px;">📍 3 lieux à explorer</p>
+    </div>
+    <aside class="tips">
+      <div id="mini-map-tourrettes-sur-loup" class="mini-map" role="application" aria-label="Localisation de Tourrettes-sur-Loup"></div>
+      <div class="map-links">
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=43.7194,7.0472" target="_blank" rel="noopener">🗺️ Google Maps</a>
+        <a class="map-link" href="https://waze.com/ul?ll=43.7194,7.0472&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+        <a class="map-link" href="https://maps.apple.com/?ll=43.7194,7.0472&q=Tourrettes-sur-Loup" target="_blank" rel="noopener">📍 Plans</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="activities">
+  <div class="wrap">
+    <h2>Lieux à découvrir à Tourrettes-sur-Loup</h2>
+    <div class="grid">
+
+      <a class="card" href="../lieux/gorges-du-loup-cascade-courmes.html">
+        <div class="card-media">
+          <img src="../assets/images/lieux/gorges-du-loup-cascade-courmes/thumb.jpg" alt="Cascade de Courmes dans les gorges du Loup" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-region">Gorges du Loup</span>
+          <h3>Les gorges du Loup et la cascade de Courmes</h3>
+          <p>Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants scu…</p>
+          <div class="lieu-badges">
+          <span class="lieu-badge">🥾 Randonnée</span>
+          <span class="lieu-badge">🚵 VTT</span>
+          <span class="lieu-badge">🍽️ Restaurant</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="../lieux/pont-du-loup.html">
+        <div class="card-media">
+          <img src="../assets/images/lieux/pont-du-loup/thumb.jpg" alt="Viaduc en ruine de Pont-du-Loup enjambant les gorges" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-region">Pont-du-Loup</span>
+          <h3>Pont du Loup et son viaduc</h3>
+          <p>Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferrov…</p>
+          <div class="lieu-badges">
+          <span class="lieu-badge">🥾 Randonnée</span>
+          <span class="lieu-badge">🚵 VTT</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="../lieux/tourrettes-sur-loup.html">
+        <div class="card-media">
+          <img src="../assets/images/lieux/tourrettes-sur-loup/thumb.jpg" alt="Village médiéval de Tourrettes-sur-Loup entouré de champs de violettes" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-region">Tourrettes-sur-Loup</span>
+          <h3>Tourrettes-sur-Loup, la cité des violettes</h3>
+          <p>Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la cu…</p>
+          <div class="lieu-badges">
+          <span class="lieu-badge">🥾 Randonnée</span>
+          <span class="lieu-badge">🚵 VTT</span>
+          <span class="lieu-badge">🍽️ Restaurant</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="activities">
+  <div class="wrap">
+    <h2>Activités à Tourrettes-sur-Loup</h2>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/gorges-loup-sentier/200/200" alt="Randonnée gorges du Loup" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Randonnée gorges du Loup</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 2h–4h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.visorando.com/randonnee-gorges-du-loup.html" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/escalade-gorges/200/200" alt="Escalade et via ferrata" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Escalade et via ferrata</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 3h–4h</span>
+            <span>💶 50–80 € / pers.</span>
+          </div>
+          <a class="activity-link" href="https://www.getyourguide.com/grasse-l96902/escalade" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/cascade-courmes/200/200" alt="Cascade de Courmes" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Cascade de Courmes</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.alpes-maritimes.com/cascade-de-courmes" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/confiserie-florian/200/200" alt="Confiserie Florian (visite gratuite)" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Confiserie Florian (visite gratuite)</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 45min</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.confiserie-florian.com/" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/viaduc-pont-loup/200/200" alt="Randonnée viaduc et gorges" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Randonnée viaduc et gorges</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30–2h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.visorando.com/randonnee-pont-du-loup.html" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/atelier-confiture/200/200" alt="Atelier confitures artisanales" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Atelier confitures artisanales</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30</span>
+            <span>💶 30–45 € / adulte</span>
+          </div>
+          <a class="activity-link" href="https://www.getyourguide.com/grasse-l96902/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/tourrettes-violettes/200/200" alt="Visite de la cité des violettes" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Visite de la cité des violettes</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.tourrettes-sur-loup.fr/" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/atelier-ceramique/200/200" alt="Atelier céramique artisanale" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Atelier céramique artisanale</span>
+            <span class="activity-badge payant">Payant</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 1h30</span>
+            <span>💶 35–55 € / adulte</span>
+          </div>
+          <a class="activity-link" href="https://www.getyourguide.com/vence-l97030/" target="_blank" rel="noopener">Réserver →</a>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb">
+          <img src="https://picsum.photos/seed/fete-violettes/200/200" alt="Festival des violettes (février/mars)" loading="lazy">
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <span class="activity-name">Festival des violettes (février/mars)</span>
+            <span class="activity-badge gratuit">Gratuit</span>
+          </div>
+          <div class="activity-meta">
+            <span>⏱ 2h</span>
+            <span>💶 Accès libre</span>
+          </div>
+          <a class="activity-link free" href="https://www.tourrettes-sur-loup.fr/fete-des-violettes" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="../index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    const map = L.map('mini-map-tourrettes-sur-loup', { scrollWheelZoom: false, zoomControl: false, dragging: !L.Browser.mobile });
+    map.setView([43.7194, 7.0472], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:18px;height:18px;border-radius:50%;background:#E8A33D;border:2px solid #0C1116;box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>`,
+      iconSize: [18, 18], iconAnchor: [9, 9],
+    });
+    L.marker([43.7311, 6.9825], { icon }).addTo(map).bindPopup('<span class="popup-name">Les gorges du Loup et la cascade de Courmes</span><br><a class="popup-link" href="../lieux/gorges-du-loup-cascade-courmes.html">Voir la fiche →</a>');
+    L.marker([43.7186, 6.9967], { icon }).addTo(map).bindPopup('<span class="popup-name">Pont du Loup et son viaduc</span><br><a class="popup-link" href="../lieux/pont-du-loup.html">Voir la fiche →</a>');
+    L.marker([43.7194, 7.0472], { icon }).addTo(map).bindPopup('<span class="popup-name">Tourrettes-sur-Loup, la cité des violettes</span><br><a class="popup-link" href="../lieux/tourrettes-sur-loup.html">Voir la fiche →</a>');
+    map.on('focus', () => map.scrollWheelZoom.enable());
+    map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+
+</body>
+</html>

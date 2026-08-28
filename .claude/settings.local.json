@@ -115,7 +115,10 @@
       "Bash(curl -sL -o gassin-src.jpg \"https://commons.wikimedia.org/wiki/Special:FilePath/Panorama%20au-dessus%20de%20la%20table%20d%27orientation%20de%20Gassin.jpg\")",
       "Bash(sips -g pixelWidth -g pixelHeight gassin-src.jpg)",
       "Bash(python3 photos/crop.py photos2/gassin-src.jpg photos2/gassin-plus-beau-village-hero.jpg 1200 800 0.5 0.12)",
-      "Bash(python3 photos/crop.py photos2/gassin-src.jpg photos2/gassin-plus-beau-village-thumb.jpg 500 375 0.5 0.12)"
+      "Bash(python3 photos/crop.py photos2/gassin-src.jpg photos2/gassin-plus-beau-village-thumb.jpg 500 375 0.5 0.12)",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\Jouard\\\\Documents\\\\FrenchRiviera\\\\RivieraSecrete\\\\villes\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Host \"done\")"
     ]
   }
 }

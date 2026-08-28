@@ -89,12 +89,17 @@ function renderRelatedCard(r) {
       </a>`;
 }
 
-export function renderLieu(lieu, itinTitles = {}) {
+export function renderLieu(lieu, itinTitles = {}, villeBySlug = new Map()) {
   const {
     slug, nom, commune, regionSlug, regionLabel, lat, lng,
     description, ogImage, heroImage, heroAlt, heroSlides,
     metaPills, description1, description2, tips, activites, related, badges,
+    villeSlug,
   } = lieu;
+
+  const ville = villeBySlug.get(villeSlug);
+  const villeNom = ville ? ville.nom : commune;
+  const villeHref = ville ? `../villes/${villeSlug}.html` : `../index.html#${regionSlug}`;
 
   const ogTitle = `${nom} — ${commune}`;
   const heroSlidesAttr = heroSlides ? ` data-slides="${heroSlides}"` : '';
@@ -193,7 +198,7 @@ export function renderLieu(lieu, itinTitles = {}) {
 <div class="wrap breadcrumb">
   <ol>
     <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../index.html#${regionSlug}" id="breadcrumb-parent">${regionLabel}</a></li>
+    <li><a href="${villeHref}" id="breadcrumb-parent">${villeNom}</a></li>
     <li>${nom}</li>
   </ol>
 </div>
