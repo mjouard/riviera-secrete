@@ -130,7 +130,7 @@ export function renderVille(ville, lieux, itinTitles = {}) {
     <a class="logo" href="../index.html">Côte <em>d'Azur</em></a>
     <nav aria-label="Navigation principale">
       <a href="../index.html#itineraires">Itinéraires</a>
-      <a href="../index.html#lieux">Lieux</a>
+      <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
