@@ -7,53 +7,53 @@ function truncate(str, len) {
   return str.length > len ? str.slice(0, len) + '…' : str;
 }
 
-function renderLieuCard(lieu) {
-  const badges = renderBadgePills(lieu.badges, '          ');
-  const badgesBlock = badges
-    ? `\n          <div class="lieu-badges">\n${badges}\n          </div>` : '';
-  return `      <a class="card" href="../lieux/${lieu.slug}.html">
-        <div class="card-media">
-          <img src="../${lieu.thumbImage}" alt="${lieu.heroAlt}" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-region">${lieu.commune}</span>
-          <h3>${lieu.nom}</h3>
-          <p>${truncate(lieu.description, 95)}</p>${badgesBlock}
-        </div>
-      </a>`;
-}
-
 function renderActivityCard(a) {
   const linkClass = a.badge === 'gratuit' ? ' free' : '';
-  return `      <div class="activity-card">
-        <div class="activity-thumb">
-          <img src="${a.image.startsWith('http') ? a.image : '../' + a.image.replace(/^\.\.\//, '')}" alt="${a.alt}" loading="lazy">
-        </div>
-        <div class="activity-content">
-          <div class="activity-header">
-            <span class="activity-name">${a.nom}</span>
-            <span class="activity-badge ${a.badge}">${a.badge === 'gratuit' ? 'Gratuit' : 'Payant'}</span>
+  const imgSrc = a.image.startsWith('http') ? a.image : '../' + a.image.replace(/^\.\.\//, '');
+  return `        <div class="activity-card">
+          <div class="activity-thumb">
+            <img src="${imgSrc}" alt="${a.alt}" loading="lazy">
           </div>
-          <div class="activity-meta">
-            <span>⏱ ${a.duree}</span>
-            <span>💶 ${a.prix}</span>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-name">${a.nom}</span>
+              <span class="activity-badge ${a.badge}">${a.badge === 'gratuit' ? 'Gratuit' : 'Payant'}</span>
+            </div>
+            <div class="activity-meta">
+              <span>⏱ ${a.duree}</span>
+              <span>💶 ${a.prix}</span>
+            </div>
+            <a class="activity-link${linkClass}" href="${a.url}" target="_blank" rel="noopener">${a.linkText}</a>
           </div>
-          <a class="activity-link${linkClass}" href="${a.url}" target="_blank" rel="noopener">${a.linkText}</a>
+        </div>`;
+}
+
+function renderLieuSection(lieu) {
+  const badges = renderBadgePills(lieu.badges, '        ');
+  const badgesBlock = badges ? `\n        <div class="lieu-badges">\n${badges}\n        </div>` : '';
+  const activitesBlock = (lieu.activites || []).length > 0
+    ? `\n      <div class="activities-grid">\n${lieu.activites.map(renderActivityCard).join('\n\n')}\n      </div>` : '';
+  return `    <div class="ville-lieu-section">
+      <div class="ville-lieu-header">
+        <div class="ville-lieu-thumb">
+          <img src="../${lieu.thumbImage}" alt="${lieu.heroAlt}" loading="lazy">
         </div>
-      </div>`;
+        <div class="ville-lieu-meta">
+          <h2>${lieu.nom}</h2>
+          <p>${truncate(lieu.description, 120)}</p>${badgesBlock}
+          <a class="ville-lieu-link" href="../lieux/${lieu.slug}.html">Voir la fiche complète →</a>
+        </div>
+      </div>${activitesBlock}
+    </div>`;
 }
 
 export function renderVille(ville, lieux, itinTitles = {}) {
   const { slug, nom, regionSlug, regionLabel, lat, lng, description, thumbImage } = ville;
 
-  // Hero: use the first lieu's hero image and heroSlides
   const firstLieu = lieux[0];
   const heroImage = firstLieu.heroImage;
   const heroAlt = firstLieu.heroAlt;
   const heroSlidesAttr = firstLieu.heroSlides ? ` data-slides="${firstLieu.heroSlides}"` : '';
-
-  // All activités across all lieux of this ville
-  const allActivites = lieux.flatMap(l => l.activites || []);
 
   const lieuxCountLabel = lieux.length === 1 ? '1 lieu' : `${lieux.length} lieux`;
 
@@ -170,27 +170,12 @@ ${renderMapLinks(lat, lng, nom)}
   </div>
 </div>
 
-<section class="activities">
+<section class="ville-lieux">
   <div class="wrap">
-    <h2>Lieux à découvrir à ${nom}</h2>
-    <div class="grid">
-
-${lieux.map(renderLieuCard).join('\n\n')}
-
-    </div>
+    <h2>À découvrir à ${nom}</h2>
+${lieux.map(renderLieuSection).join('\n\n')}
   </div>
 </section>
-
-${allActivites.length > 0 ? `<section class="activities">
-  <div class="wrap">
-    <h2>Activités à ${nom}</h2>
-    <div class="activities-grid">
-
-${allActivites.map(renderActivityCard).join('\n\n')}
-
-    </div>
-  </div>
-</section>` : ''}
 
 <footer>
   <div class="wrap">
