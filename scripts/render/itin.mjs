@@ -59,11 +59,14 @@ function renderItem(lieuBySlug, item, itinSlug) {
   const badgePills = renderBadgePills(lieu.badges, '            ');
   const badges = badgePills ? `\n          <div class="lieu-badges">\n${badgePills}\n          </div>` : '';
   const mapLinks = `\n          <div class="map-links">\n${renderMapLinks(lieu.lat, lieu.lng, lieu.nom, '            ')}\n          </div>`;
+  const communeEl = lieu.villeSlug
+    ? `<a href="../villes/${lieu.villeSlug}.html" class="itin-stop-commune">${item.commune}</a>`
+    : `<span class="itin-stop-commune">${item.commune}</span>`;
   return `      <li class="itin-stop">
         <span class="itin-time">${item.heure}</span>
         <div class="itin-stop-body">
           <a href="../lieux/${lieu.slug}.html?itin=${itinSlug}" class="itin-stop-name">${item.nom}</a>
-          <span class="itin-stop-commune">${item.commune}</span>${badges}
+          ${communeEl}${badges}
           <p>${item.desc}</p>${acts}${mapLinks}
         </div>
       </li>`;
@@ -147,7 +150,8 @@ export function renderItin(itin, lieuBySlug) {
 .itin-time{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--terracotta); font-weight:500; padding-top:2px; }
 .itin-stop-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; text-decoration:none; color:var(--text); display:inline-block; }
 .itin-stop-name:hover{ color:var(--terracotta); }
-.itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
+.itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; text-decoration:none; }
+.itin-stop-commune:hover{ text-decoration:underline; }
 .itin-stop-body p{ color:var(--text-muted); font-size:0.94rem; max-width:56ch; margin:0; }
 .lieu-badges{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
 .lieu-badge{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
