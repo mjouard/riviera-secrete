@@ -305,7 +305,7 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
   color:var(--text-muted); display:flex; align-items:center; justify-content:center;
   transition:color 0.15s;
 }
-.fav-btn svg{ fill:none; transition:fill 0.15s; }
+.fav-btn svg{ fill:none; transition:fill 0.15s; pointer-events:none; }
 .fav-btn:hover, .fav-btn.is-fav{ color:var(--terracotta); }
 .fav-btn.is-fav svg{ fill:currentColor; }
 @media (max-width:700px){ .activities-grid{ grid-template-columns:1fr; } }
