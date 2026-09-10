@@ -75,9 +75,10 @@
 ## Mise en production réelle
 
 ### Domaine & DNS
+- [x] Migrer de Netlify vers Vercel — site en prod sur Vercel (déploiement auto sur push
+      `main`, `vercel.json` configuré avec cache et headers de sécurité)
 - [ ] Acheter un nom de domaine (ex. `riviera-secrete.fr` ou `.com`) et le configurer sur
-      Netlify — HTTPS Let's Encrypt activé automatiquement par Netlify une fois le domaine
-      pointé
+      Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine pointé
 - [ ] Mettre à jour toutes les URLs canoniques dans les balises `<link rel="canonical">`,
       `<meta property="og:url">` et le JSON-LD — actuellement hardcodées sur
       `riviera-secrete.netlify.app`, à remplacer par le vrai domaine (chercher dans
@@ -93,12 +94,9 @@
 - [ ] Ajouter le site dans Bing Webmaster Tools (2e moteur, souvent négligé)
 
 ### Performance & cache
-- [ ] Créer `netlify.toml` avec des règles de cache agressives pour les assets statiques
-      (`assets/`, `lieux/`, `itin/`) — `Cache-Control: public, max-age=31536000, immutable`
-      pour les images, CSS, JS versionnés ; `no-cache` pour `index.html` et les pages HTML
-- [ ] Ajouter les headers de sécurité HTTP dans `netlify.toml` — `X-Frame-Options`,
-      `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` (pas de CSP strict
-      tant que Leaflet et Google Fonts sont chargés en CDN externe)
+- [x] Règles de cache et headers de sécurité configurés dans `vercel.json` — assets statiques
+      en `max-age=31536000`, HTML en `no-cache`, `X-Frame-Options` / `X-Content-Type-Options` /
+      `Referrer-Policy` / `Permissions-Policy` en place
 - [ ] Minification CSS/JS au build (ex. via `esbuild` ou `lightningcss`) — actuellement
       les assets sont servis tels quels
 
@@ -109,11 +107,10 @@
       INP) — les images non optimisées (pas encore de WebP/srcset) sont le risque principal
 
 ### Versionning & déploiement
-- [ ] S'assurer que tout le code est commité et pushé sur la branche `main` avant la mise en
-      ligne — le déploiement Netlify se déclenche automatiquement sur push
-- [ ] Configurer une branche `staging` (ou Netlify Deploy Previews) pour tester les
-      changements avant de les mettre en prod — les Deploy Previews Netlify sont activables
-      gratuitement sur chaque PR/branche
+- [x] Code commité et pushé, déploiement automatique Vercel déclenché sur chaque push `main`
+- [ ] Configurer une branche `staging` (ou Vercel Preview Deployments) pour tester les
+      changements avant de les mettre en prod — les Preview Deployments Vercel sont activés
+      automatiquement sur chaque PR/branche
 
 ## SEO / technique
 
