@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes favoris — Riviera Secrète</title>
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Côte <em>d'Azur</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="index.html#itineraires">Itinéraires</a>
+      <a href="index.html#lieux">Villes</a>
+      <a href="mes-itineraires.html">Mes itinéraires</a>
+      <a href="mes-favoris.html">Mes favoris</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="mes-itin-hero">
+  <div class="wrap">
+    <span class="eyebrow">Mes sélections</span>
+    <h1>Mes <em>favoris.</em></h1>
+    <p>Les activités mises de côté — gardées uniquement dans ton navigateur.</p>
+  </div>
+</section>
+
+<section class="mes-itin-list">
+  <div class="wrap">
+    <div class="favoris-grid" id="favoris-grid" hidden></div>
+    <div class="mes-itin-empty" id="favoris-empty" hidden>
+      <p>Aucune activité sauvegardée pour l'instant.</p>
+      <a class="btn" href="index.html#lieux">Explorer les lieux</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Riviera Secrète — carnet de repérage, pas un guide officiel.</p>
+    <p><a href="index.html">← Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/favoris.js"></script>
+<script>
+(function() {
+  var favs = Favoris.getAll();
+  var grid = document.getElementById('favoris-grid');
+  var empty = document.getElementById('favoris-empty');
+
+  if (favs.length === 0) {
+    empty.hidden = false;
+    return;
+  }
+
+  var HEART = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+  fetch('data/lieux.json')
+    .then(function(r) { return r.json(); })
+    .then(function(lieux) {
+      var lieuBySlug = {};
+      lieux.forEach(function(l) { lieuBySlug[l.slug] = l; });
+
+      var html = favs.map(function(f) {
+        var lieu = lieuBySlug[f.lieuSlug];
+        if (!lieu) return '';
+        var act = (lieu.activites || []).find(function(a) { return a.id === f.activiteId; });
+        if (!act) return '';
+        var badgeLabel = act.badge === 'gratuit' ? 'Gratuit' : 'Payant';
+        var linkClass = act.badge === 'gratuit' ? ' free' : '';
+        return '<div class="fav-act-card">' +
+          '<div class="fav-act-thumb"><img src="' + act.image + '" alt="' + act.alt + '" loading="lazy"></div>' +
+          '<div class="fav-act-body">' +
+            '<div class="fav-act-header">' +
+              '<span class="activity-name">' + act.nom + '</span>' +
+              '<button class="fav-remove-btn" data-lieu="' + f.lieuSlug + '" data-act="' + f.activiteId + '" type="button" aria-label="Retirer des favoris">' + HEART + '</button>' +
+            '</div>' +
+            '<a class="fav-act-lieu" href="lieux/' + lieu.slug + '.html">' + lieu.nom + ' · ' + lieu.commune + '</a>' +
+            '<div class="activity-meta"><span>⏱ ' + act.duree + '</span><span>💶 ' + act.prix + '</span></div>' +
+            '<div class="fav-act-footer">' +
+              '<span class="activity-badge ' + act.badge + '">' + badgeLabel + '</span>' +
+              '<a class="activity-link' + linkClass + '" href="' + act.url + '" target="_blank" rel="noopener">' + act.linkText + '</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      if (!html.trim()) {
+        empty.hidden = false;
+        return;
+      }
+
+      grid.innerHTML = html;
+      grid.hidden = false;
+
+      grid.addEventListener('click', function(e) {
+        var btn = e.target.closest('.fav-remove-btn');
+        if (!btn) return;
+        Favoris.toggleFavori(btn.dataset.lieu, btn.dataset.act);
+        var card = btn.closest('.fav-act-card');
+        card.remove();
+        if (!grid.querySelector('.fav-act-card')) {
+          grid.hidden = true;
+          empty.hidden = false;
+        }
+      });
+    })
+    .catch(function() { empty.hidden = false; });
+})();
+</script>
+</body>
+</html>

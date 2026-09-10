@@ -73,6 +73,7 @@
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
+      <a href="../mes-favoris.html">Mes favoris</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -133,6 +134,7 @@
       </div>
       <div class="activities-grid">
         <div class="activity-card">
+          <button class="fav-btn" data-lieu="peillon-village" data-act="explorer-le-vieux-village" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
           <div class="activity-thumb">
             <img src="../assets/images/lieux/peillon-village/act-4.jpg" alt="Ruelles du vieux village de Peillon" loading="lazy">
           </div>
@@ -150,6 +152,7 @@
         </div>
 
         <div class="activity-card">
+          <button class="fav-btn" data-lieu="peillon-village" data-act="dejeuner-sur-la-plage-arnulf" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
           <div class="activity-thumb">
             <img src="../assets/images/lieux/peillon-village/act-1.jpg" alt="Plage Arnulf à Peillon" loading="lazy">
           </div>
@@ -167,6 +170,7 @@
         </div>
 
         <div class="activity-card">
+          <button class="fav-btn" data-lieu="peillon-village" data-act="eglise-chapelle-des-penitents-blancs" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
           <div class="activity-thumb">
             <img src="../assets/images/lieux/peillon-village/act-2.jpg" alt="Chapelle des Pénitents Blancs de Peillon" loading="lazy">
           </div>
@@ -184,6 +188,7 @@
         </div>
 
         <div class="activity-card">
+          <button class="fav-btn" data-lieu="peillon-village" data-act="balades-randonnees" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
           <div class="activity-thumb">
             <img src="../assets/images/lieux/peillon-village/act-3.jpg" alt="Sentiers de randonnée autour de Peillon" loading="lazy">
           </div>
@@ -212,6 +217,24 @@
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/favoris.js"></script>
+<script>
+  (function() {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      var lieuSlug = btn.dataset.lieu;
+      var actId = btn.dataset.act;
+      if (Favoris.isFavori(lieuSlug, actId)) {
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('is-fav');
+      }
+      btn.addEventListener('click', function() {
+        var added = Favoris.toggleFavori(lieuSlug, actId);
+        btn.setAttribute('aria-pressed', String(added));
+        btn.classList.toggle('is-fav', added);
+      });
+    });
+  })();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function() {

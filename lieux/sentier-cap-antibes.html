@@ -84,6 +84,7 @@
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
+      <a href="../mes-favoris.html">Mes favoris</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -150,6 +151,7 @@
     <div class="activities-grid">
 
       <div class="activity-card">
+        <button class="fav-btn" data-lieu="sentier-cap-antibes" data-act="sentier-du-littoral-tirepoil" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
         <div class="activity-thumb">
           <img src="../assets/images/lieux/sentier-cap-antibes/act-1.jpg" alt="Sentier du littoral Tirepoil" loading="lazy">
         </div>
@@ -167,6 +169,7 @@
       </div>
 
       <div class="activity-card">
+        <button class="fav-btn" data-lieu="sentier-cap-antibes" data-act="musee-picasso-d-antibes" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
         <div class="activity-thumb">
           <img src="../assets/images/lieux/sentier-cap-antibes/act-2.jpg" alt="Musée Picasso d'Antibes" loading="lazy">
         </div>
@@ -184,6 +187,7 @@
       </div>
 
       <div class="activity-card">
+        <button class="fav-btn" data-lieu="sentier-cap-antibes" data-act="location-de-velos-electriques" type="button" aria-label="Sauvegarder" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
         <div class="activity-thumb">
           <img src="../assets/images/lieux/sentier-cap-antibes/act-3.jpg" alt="Location de vélos électriques" loading="lazy">
         </div>
@@ -255,6 +259,7 @@
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/favoris.js"></script>
 <script>
   (function() {
     const ITIN_TITLES = {"antibes-biot-juan":"Antibes, Biot & la pinède de Juan-les-Pins","grasse-saint-tropez":"Grasse et la presqu'île de Saint-Tropez","lerins-esterel":"Îles de Lérins & Estérel sauvage","menton-eze-monaco":"Menton, Èze & Monaco : la route des classiques","nice-peillon-peille":"Nice, Peillon & Peille : ville et arrière-pays express","villages-perches":"La route des villages perchés"};
@@ -286,6 +291,23 @@
     L.marker([43.5461, 7.1256], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      var lieuSlug = btn.dataset.lieu;
+      var actId = btn.dataset.act;
+      if (Favoris.isFavori(lieuSlug, actId)) {
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('is-fav');
+      }
+      btn.addEventListener('click', function() {
+        var added = Favoris.toggleFavori(lieuSlug, actId);
+        btn.setAttribute('aria-pressed', String(added));
+        btn.classList.toggle('is-fav', added);
+      });
+    });
   })();
 </script>
 <script>

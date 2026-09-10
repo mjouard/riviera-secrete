@@ -204,6 +204,7 @@ export function renderItin(itin, lieuBySlug) {
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
+      <a href="../mes-favoris.html">Mes favoris</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>

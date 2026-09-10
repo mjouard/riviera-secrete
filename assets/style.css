@@ -276,7 +276,7 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 .activities-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
 .activity-card{
   border:1px solid var(--line); border-radius:3px;
-  background:var(--surface); display:flex; overflow:hidden;
+  background:var(--surface); display:flex; overflow:hidden; position:relative;
 }
 .activity-thumb{ flex:0 0 96px; }
 .activity-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -299,7 +299,40 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 }
 .activity-link:hover{ text-decoration:underline; }
 .activity-link.free{ color:var(--azure); }
+.fav-btn{
+  position:absolute; bottom:6px; right:6px;
+  background:rgba(12,17,22,0.55); border:none; border-radius:50%;
+  width:28px; height:28px; cursor:pointer;
+  color:var(--text-muted); display:flex; align-items:center; justify-content:center;
+  transition:color 0.15s, background 0.15s; padding:0;
+}
+.fav-btn svg{ fill:none; transition:fill 0.15s; }
+.fav-btn:hover, .fav-btn.is-fav{ color:var(--terracotta); background:rgba(232,163,61,0.15); }
+.fav-btn.is-fav svg{ fill:currentColor; }
 @media (max-width:700px){ .activities-grid{ grid-template-columns:1fr; } }
+
+/* ---------- MES FAVORIS ---------- */
+.favoris-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.fav-act-card{
+  border:1px solid var(--line); border-radius:3px; background:var(--surface);
+  display:flex; overflow:hidden;
+}
+.fav-act-thumb{ flex:0 0 110px; }
+.fav-act-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.fav-act-body{ padding:13px 15px 14px; display:flex; flex-direction:column; gap:8px; flex:1; min-width:0; }
+.fav-act-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+.fav-act-lieu{
+  font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--azure);
+  text-decoration:none; letter-spacing:0.02em;
+}
+.fav-act-lieu:hover{ text-decoration:underline; }
+.fav-act-footer{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+.fav-remove-btn{
+  background:none; border:none; padding:0; cursor:pointer; flex-shrink:0;
+  color:var(--terracotta); display:flex; align-items:center; transition:opacity 0.15s;
+}
+.fav-remove-btn svg{ fill:currentColor; }
+.fav-remove-btn:hover{ opacity:0.7; }
 
 /* ---------- VILLE — lieux groupés ---------- */
 .ville-lieux{ padding:48px 0; }

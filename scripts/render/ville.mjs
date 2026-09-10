@@ -3,14 +3,17 @@
 // Follows the same patterns as lieu.mjs: no framework, plain JS template literals.
 import { renderBadgePills, renderMapLinks } from './lieu.mjs';
 
+const HEART_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
 function truncate(str, len) {
   return str.length > len ? str.slice(0, len) + '…' : str;
 }
 
-function renderActivityCard(a) {
+function renderActivityCard(a, lieuSlug) {
   const linkClass = a.badge === 'gratuit' ? ' free' : '';
   const imgSrc = a.image.startsWith('http') ? a.image : '../' + a.image.replace(/^\.\.\//, '');
   return `        <div class="activity-card">
+          <button class="fav-btn" data-lieu="${lieuSlug}" data-act="${a.id}" type="button" aria-label="Sauvegarder" aria-pressed="false">${HEART_SVG}</button>
           <div class="activity-thumb">
             <img src="${imgSrc}" alt="${a.alt}" loading="lazy">
           </div>
@@ -32,7 +35,7 @@ function renderLieuSection(lieu) {
   const badges = renderBadgePills(lieu.badges, '        ');
   const badgesBlock = badges ? `\n        <div class="lieu-badges">\n${badges}\n        </div>` : '';
   const activitesBlock = (lieu.activites || []).length > 0
-    ? `\n      <div class="activities-grid">\n${lieu.activites.map(renderActivityCard).join('\n\n')}\n      </div>` : '';
+    ? `\n      <div class="activities-grid">\n${lieu.activites.map(a => renderActivityCard(a, lieu.slug)).join('\n\n')}\n      </div>` : '';
   return `    <div class="ville-lieu-section">
       <div class="ville-lieu-header">
         <div class="ville-lieu-thumb">
@@ -132,6 +135,7 @@ export function renderVille(ville, lieux, itinTitles = {}) {
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
+      <a href="../mes-favoris.html">Mes favoris</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -185,6 +189,24 @@ ${lieux.map(renderLieuSection).join('\n\n')}
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/favoris.js"></script>
+<script>
+  (function() {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      var lieuSlug = btn.dataset.lieu;
+      var actId = btn.dataset.act;
+      if (Favoris.isFavori(lieuSlug, actId)) {
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('is-fav');
+      }
+      btn.addEventListener('click', function() {
+        var added = Favoris.toggleFavori(lieuSlug, actId);
+        btn.setAttribute('aria-pressed', String(added));
+        btn.classList.toggle('is-fav', added);
+      });
+    });
+  })();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function() {

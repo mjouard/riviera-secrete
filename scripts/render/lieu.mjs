@@ -5,6 +5,8 @@
 // Badges are generic tags ("can you do X here?"), unlike activités which are unique
 // to one lieu (e.g. "Le Jardin exotique" only exists at eze-village). A lieu only lists
 // the badges that actually apply — this is not a fixed checklist rendered as on/off.
+const HEART_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
 export const BADGE_DEFS = {
   plage: { icon: '🏖️', label: 'Plage' },
   randonnee: { icon: '🥾', label: 'Randonnée' },
@@ -55,9 +57,10 @@ function renderTips(tips) {
   return tips.map(t => `          <li><strong>${t.label}</strong>${t.texte}</li>`).join('\n');
 }
 
-function renderActivityCard(a) {
+function renderActivityCard(a, lieuSlug) {
   const linkClass = a.badge === 'gratuit' ? ' free' : '';
   return `      <div class="activity-card">
+        <button class="fav-btn" data-lieu="${lieuSlug}" data-act="${a.id}" type="button" aria-label="Sauvegarder" aria-pressed="false">${HEART_SVG}</button>
         <div class="activity-thumb">
           <img src="${a.image}" alt="${a.alt}" loading="lazy">
         </div>
@@ -190,6 +193,7 @@ export function renderLieu(lieu, itinTitles = {}, villeBySlug = new Map()) {
       <a href="../index.html#itineraires">Itinéraires</a>
       <a href="../index.html#lieux">Villes</a>
       <a href="../mes-itineraires.html">Mes itinéraires</a>
+      <a href="../mes-favoris.html">Mes favoris</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -242,7 +246,7 @@ ${renderTips(tips)}
     <h2>Activités à ${commune}</h2>
     <div class="activities-grid">
 
-${activites.map(renderActivityCard).join('\n\n')}
+${activites.map(a => renderActivityCard(a, slug)).join('\n\n')}
 
     </div>
   </div>
@@ -265,6 +269,7 @@ ${related.map(renderRelatedCard).join('\n\n')}
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/favoris.js"></script>
 <script>
   (function() {
     const ITIN_TITLES = ${JSON.stringify(itinTitles)};
@@ -296,6 +301,23 @@ ${related.map(renderRelatedCard).join('\n\n')}
     L.marker([${lat}, ${lng}], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      var lieuSlug = btn.dataset.lieu;
+      var actId = btn.dataset.act;
+      if (Favoris.isFavori(lieuSlug, actId)) {
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('is-fav');
+      }
+      btn.addEventListener('click', function() {
+        var added = Favoris.toggleFavori(lieuSlug, actId);
+        btn.setAttribute('aria-pressed', String(added));
+        btn.classList.toggle('is-fav', added);
+      });
+    });
   })();
 </script>
 <script>
