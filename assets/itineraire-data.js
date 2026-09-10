@@ -122,6 +122,37 @@ window.ItinData = (function () {
     return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
+  function formatTime(minutesSinceMidnight) {
+    const rounded = Math.round(minutesSinceMidnight / 5) * 5;
+    const h = Math.floor(rounded / 60) % 24;
+    const m = rounded % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  }
+
+  function formatTransitDesc(minutes) {
+    if (minutes < 60) return `~${minutes} min de trajet estimé`;
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return m ? `~${h} h ${m} min de trajet estimé` : `~${h} h de trajet estimé`;
+  }
+
+  // Collecte toutes les activités payantes des lieux sélectionnés (pour la section "À réserver").
+  function buildBookingActivites(days) {
+    const seen = new Set();
+    const result = [];
+    for (const day of days) {
+      for (const lieu of day) {
+        for (const act of lieu.activites || []) {
+          if (act.badge === 'payant' && act.url && !seen.has(act.id)) {
+            seen.add(act.id);
+            result.push({ lieu, activite: act });
+          }
+        }
+      }
+    }
+    return result;
+  }
+
   function listSaved() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -171,5 +202,8 @@ window.ItinData = (function () {
     getSaved,
     saveItineraire,
     deleteSaved,
+    formatTime,
+    formatTransitDesc,
+    buildBookingActivites,
   };
 })();

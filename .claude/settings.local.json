@@ -120,7 +120,10 @@
       "Bash(Out-Null)",
       "Bash(Write-Host \"done\")",
       "Bash(npm run *)",
-      "Bash(python -m http.server 8000)"
+      "Bash(python -m http.server 8000)",
+      "Bash(python3 -m http.server 8743)",
+      "PowerShell(python --version 2>&1; node --version 2>&1; npx --version 2>&1)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8743/creer-itineraire.html\" -UseBasicParsing)"
     ]
   }
 }

@@ -192,6 +192,116 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     updateMap();
+    renderProgramme(currentDays);
+    renderBooking(currentDays);
+  }
+
+  function renderProgramme(days) {
+    const el = document.getElementById('builder-programme');
+    if (!el) return;
+    const allStops = days.flat();
+    if (!allStops.length) { el.innerHTML = ''; return; }
+
+    let timeMinutes = 9 * 60;
+    let prevLieu = null;
+    const items = [];
+
+    days.forEach((day, dayIndex) => {
+      day.forEach((lieu) => {
+        if (prevLieu) {
+          const transit = D.travelMinutes(prevLieu, lieu);
+          items.push({ type: 'transit', minutes: transit });
+          timeMinutes += transit;
+        }
+        items.push({ type: 'stop', lieu, heure: D.formatTime(timeMinutes) });
+        timeMinutes += D.parseVisitMinutes(lieu);
+        prevLieu = lieu;
+      });
+      if (dayIndex < days.length - 1) {
+        items.push({ type: 'sleep', dayNum: dayIndex + 1 });
+        timeMinutes = 9 * 60;
+        prevLieu = null;
+      }
+    });
+
+    const itemsHtml = items.map((item) => {
+      if (item.type === 'transit') {
+        return `<li class="itin-transit" aria-hidden="true">
+        <span class="transit-arrow">↓</span>
+        <span class="transit-info">🚗 ${D.formatTransitDesc(item.minutes)}</span>
+      </li>`;
+      }
+      if (item.type === 'sleep') {
+        return `<li class="itin-stop itin-sleep">
+        <span class="itin-time">Nuit</span>
+        <div class="itin-stop-body">
+          <span class="itin-stop-name itin-sleep-label">Fin du jour ${item.dayNum}</span>
+          <span class="itin-stop-commune">Hébergement au choix</span>
+        </div>
+      </li>`;
+      }
+      const l = item.lieu;
+      const badgePills = (l.badges || [])
+        .map((id) => { const def = D.BADGE_DEFS[id]; return def ? `<span class="lieu-badge">${def.icon} ${def.label}</span>` : ''; })
+        .join('');
+      const badgesHtml = badgePills ? `<div class="lieu-badges">${badgePills}</div>` : '';
+      const acts = (l.activites || []).filter((a) => a.url);
+      const actsHtml = acts.length
+        ? `<div class="stop-acts">${acts.map((act) => {
+            const cls = act.badge === 'payant' ? 'stop-act--paid' : 'stop-act--free';
+            const label = act.badge === 'payant'
+              ? `${act.nom} · ${act.prix} · ${act.duree}`
+              : `${act.nom} · Libre`;
+            return `<a class="stop-act ${cls}" href="${act.url}" target="_blank" rel="noopener">${label}</a>`;
+          }).join('')}</div>`
+        : '';
+      const mapLinksHtml = D.buildMapLinks(l.lat, l.lng, l.nom)
+        .map((link) => `<a class="map-link" href="${link.url}" target="_blank" rel="noopener">${link.icon} ${link.label}</a>`)
+        .join('');
+      return `<li class="itin-stop">
+        <span class="itin-time">${item.heure}</span>
+        <div class="itin-stop-body">
+          <a class="itin-stop-name" href="lieux/${l.slug}.html" target="_blank" rel="noopener">${l.nom}</a>
+          <span class="itin-stop-commune">${l.commune}</span>
+          ${badgesHtml}${actsHtml}
+          <div class="map-links">${mapLinksHtml}</div>
+        </div>
+      </li>`;
+    }).join('\n');
+
+    el.innerHTML = `<div class="builder-programme">
+      <h2>Programme détaillé</h2>
+      <ul class="itin-stops">${itemsHtml}</ul>
+    </div>`;
+  }
+
+  function renderBooking(days) {
+    const el = document.getElementById('builder-booking');
+    if (!el) return;
+    const bookings = D.buildBookingActivites(days);
+    if (!bookings.length) { el.innerHTML = ''; return; }
+
+    const cols = Math.min(bookings.length, 3);
+    const cardsHtml = bookings.map(({ lieu, activite: act }) => `<div class="itin-booking-card">
+        <div class="itin-booking-img">
+          <img src="${act.image}" alt="${act.alt}" loading="lazy">
+        </div>
+        <div class="itin-booking-body">
+          <span class="itin-booking-lieu">${lieu.nom}</span>
+          <span class="itin-booking-name">${act.nom}</span>
+          <div class="itin-booking-meta">
+            <span>⏱ ${act.duree || ''}</span>
+            <span>💶 ${act.prix || ''}</span>
+          </div>
+          <a class="itin-booking-link" href="${act.url}" target="_blank" rel="noopener">${act.linkText || 'Réserver'}</a>
+        </div>
+      </div>`).join('');
+
+    el.innerHTML = `<div class="itin-booking">
+      <h2>À réserver avant de partir</h2>
+      <p>Ces expériences demandent un peu d'anticipation, surtout en haute saison.</p>
+      <div class="itin-booking-grid" style="grid-template-columns:repeat(${cols},1fr)">${cardsHtml}</div>
+    </div>`;
   }
 
   // Chemin de réordonnancement robuste sur tactile et au clavier — le drag-and-drop natif

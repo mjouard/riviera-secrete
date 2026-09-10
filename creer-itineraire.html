@@ -19,6 +19,44 @@
   .leaflet-popup-tip{ background:var(--surface); }
   .popup-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1rem; display:block; }
   .itin-map{ width:100%; height:420px; border-radius:3px; border:1px solid var(--line); position:sticky; top:88px; }
+  /* Programme détaillé */
+  .builder-programme{ padding:48px 0 0; border-top:1px solid var(--line); margin-top:40px; }
+  .builder-programme h2{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; margin:0 0 24px; }
+  .itin-stops{ list-style:none; margin:0; padding:0; }
+  .itin-stop{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:18px 0; border-top:1px solid var(--line); }
+  .itin-stop:first-child{ border-top:none; }
+  .itin-time{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--terracotta); font-weight:500; padding-top:2px; }
+  .itin-stop-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; text-decoration:none; color:var(--text); display:inline-block; }
+  .itin-stop-name:hover{ color:var(--terracotta); }
+  .itin-stop-commune{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin:2px 0 6px; }
+  .itin-transit{ display:grid; grid-template-columns:70px 1fr; gap:18px; padding:2px 0; }
+  .transit-arrow{ font-size:0.75rem; color:var(--text-muted); opacity:0.4; text-align:center; }
+  .transit-info{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-muted); font-style:italic; display:flex; align-items:center; }
+  .itin-sleep .itin-time{ color:var(--text-muted); }
+  .itin-sleep-label{ font-family:'Fraunces',serif; font-weight:600; font-size:1.08rem; color:var(--text); display:inline-block; font-style:italic; }
+  .stop-acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .stop-act{ font-family:'IBM Plex Mono',monospace; font-size:0.71rem; letter-spacing:0.02em; padding:4px 10px; border-radius:2px; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; }
+  .stop-act:hover{ opacity:0.7; }
+  .stop-act--paid{ background:rgba(232,163,61,0.1); color:var(--terracotta); border:1px solid rgba(232,163,61,0.22); }
+  .stop-act--free{ background:rgba(74,144,185,0.08); color:var(--azure); border:1px solid rgba(74,144,185,0.18); }
+  @media(max-width:600px){ .itin-stop,.itin-transit{ grid-template-columns:1fr; } .transit-arrow{ display:none; } }
+  /* À réserver */
+  .itin-booking{ padding:48px 0 32px; border-top:1px solid var(--line); margin-top:0; }
+  .itin-booking h2{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; margin:0 0 4px; }
+  .itin-booking>p{ color:var(--text-muted); font-size:0.9rem; margin:0 0 28px; }
+  .itin-booking-grid{ display:grid; gap:16px; }
+  @media(max-width:900px){ .itin-booking-grid{ grid-template-columns:repeat(2,1fr)!important; } }
+  @media(max-width:500px){ .itin-booking-grid{ grid-template-columns:1fr!important; } }
+  .itin-booking-card{ border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .itin-booking-img{ aspect-ratio:4/3; overflow:hidden; }
+  .itin-booking-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+  .itin-booking-card:hover .itin-booking-img img{ transform:scale(1.04); }
+  .itin-booking-body{ padding:12px 14px 14px; }
+  .itin-booking-lieu{ font-family:'IBM Plex Mono',monospace; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--azure); display:block; margin-bottom:4px; }
+  .itin-booking-name{ font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; display:block; margin-bottom:8px; line-height:1.3; }
+  .itin-booking-meta{ font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; display:flex; gap:10px; }
+  .itin-booking-link{ font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--terracotta); text-decoration:none; font-weight:500; letter-spacing:0.03em; }
+  .itin-booking-link:hover{ text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -81,6 +119,8 @@
       <div class="builder-days" id="builder-days"></div>
       <div id="builder-map" class="itin-map" role="application" aria-label="Carte de l'itinéraire personnalisé"></div>
     </div>
+    <div id="builder-programme"></div>
+    <div id="builder-booking"></div>
   </div>
 </section>
 
