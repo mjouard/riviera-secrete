@@ -60,7 +60,6 @@ function renderTips(tips) {
 function renderActivityCard(a, lieuSlug) {
   const linkClass = a.badge === 'gratuit' ? ' free' : '';
   return `      <div class="activity-card">
-        <button class="fav-btn" data-lieu="${lieuSlug}" data-act="${a.id}" type="button" aria-label="Sauvegarder" aria-pressed="false">${HEART_SVG}</button>
         <div class="activity-thumb">
           <img src="${a.image}" alt="${a.alt}" loading="lazy">
         </div>
@@ -73,7 +72,10 @@ function renderActivityCard(a, lieuSlug) {
             <span>⏱ ${a.duree}</span>
             <span>💶 ${a.prix}</span>
           </div>
-          <a class="activity-link${linkClass}" href="${a.url}" target="_blank" rel="noopener">${a.linkText}</a>
+          <div class="activity-footer">
+            <a class="activity-link${linkClass}" href="${a.url}" target="_blank" rel="noopener">${a.linkText}</a>
+            <button class="fav-btn" data-lieu="${lieuSlug}" data-act="${a.id}" type="button" aria-label="Sauvegarder" aria-pressed="false">${HEART_SVG}</button>
+          </div>
         </div>
       </div>`;
 }

@@ -276,7 +276,7 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 .activities-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
 .activity-card{
   border:1px solid var(--line); border-radius:3px;
-  background:var(--surface); display:flex; overflow:hidden; position:relative;
+  background:var(--surface); display:flex; overflow:hidden;
 }
 .activity-thumb{ flex:0 0 96px; }
 .activity-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -293,21 +293,20 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
   font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-muted);
   display:flex; flex-direction:column; gap:2px; line-height:1.5;
 }
+.activity-footer{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; gap:8px; }
 .activity-link{
   font-family:'IBM Plex Mono',monospace; font-size:0.73rem; letter-spacing:0.03em;
-  color:var(--terracotta); text-decoration:none; font-weight:500; margin-top:auto;
+  color:var(--terracotta); text-decoration:none; font-weight:500;
 }
 .activity-link:hover{ text-decoration:underline; }
 .activity-link.free{ color:var(--azure); }
 .fav-btn{
-  position:absolute; bottom:6px; right:6px; z-index:1;
-  background:rgba(12,17,22,0.55); border:none; border-radius:50%;
-  width:28px; height:28px; cursor:pointer;
+  background:none; border:none; padding:4px; cursor:pointer; flex-shrink:0;
   color:var(--text-muted); display:flex; align-items:center; justify-content:center;
-  transition:color 0.15s, background 0.15s; padding:0;
+  transition:color 0.15s;
 }
 .fav-btn svg{ fill:none; transition:fill 0.15s; }
-.fav-btn:hover, .fav-btn.is-fav{ color:var(--terracotta); background:rgba(232,163,61,0.15); }
+.fav-btn:hover, .fav-btn.is-fav{ color:var(--terracotta); }
 .fav-btn.is-fav svg{ fill:currentColor; }
 @media (max-width:700px){ .activities-grid{ grid-template-columns:1fr; } }
 
