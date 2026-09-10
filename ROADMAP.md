@@ -55,6 +55,15 @@
 - [ ] Analytics respectueux de la vie privée (Plausible ou Netlify Analytics) pour voir
       quels lieux/itinéraires attirent réellement et prioriser objectivement
 
+## Communauté / comptes
+
+- [ ] Connexion Google (OAuth) — authentification sans mot de passe ; prérequis à tout ce
+      qui suit ; nécessite un backend (Netlify Functions ou service tiers type Supabase/Firebase)
+      car le site est actuellement 100 % statique, sans serveur ni base de données
+- [ ] Avis et notes sur les activités — noter une activité (étoiles) et laisser un commentaire
+      court, visible par tous les visiteurs connectés ; stockage côté backend (pas localStorage),
+      modération a minima (signalement) ; dépend de la connexion Google ci-dessus
+
 ## SEO / technique
 
 - [ ] Générer `sitemap.xml` depuis `data/lieux.json` dans `build.mjs` au lieu de le
