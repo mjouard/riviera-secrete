@@ -194,6 +194,7 @@ ${lieux.map(renderLieuSection).join('\n\n')}
 <script src="../assets/favoris.js"></script>
 <script>
   (function() {
+    if (typeof Favoris === 'undefined') return;
     document.querySelectorAll('.fav-btn').forEach(function(btn) {
       var lieuSlug = btn.dataset.lieu;
       var actId = btn.dataset.act;
