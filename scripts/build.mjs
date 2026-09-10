@@ -60,7 +60,7 @@ indexHtml = injectOrThrow(
 indexHtml = injectOrThrow(
   indexHtml,
   /  <section class="region-section" id="menton-monaco">[\s\S]*?<\/section>\r?\n<\/div>\r?\n\r?\n<footer>/,
-  `${buildRegionSectionsHtml(villes)}\n</div>\n\n<footer>`,
+  `${buildRegionSectionsHtml(villes, lieuBySlug)}\n</div>\n\n<footer>`,
   'region sections (#lieux)',
 );
 

@@ -23,7 +23,7 @@
 
 ## Features UX
 
-- [ ] Filtres sur la grille des 27 lieux (par type : sentier, village, monument, île… —
+- [x] Filtres sur la grille des 27 lieux (par type : sentier, village, monument, île… —
       et par durée)
 - [ ] Favoris en localStorage — épingler des lieux sans compte ni backend
 - [ ] Bouton de partage natif (`navigator.share`) sur les fiches lieu

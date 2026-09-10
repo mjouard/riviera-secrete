@@ -17,10 +17,14 @@ export function buildItemList(villes) {
   }));
 }
 
-function renderCard(v) {
+function renderCard(v, lieuBySlug) {
   const lieuxCount = v.lieux.length;
   const lieuxLabel = lieuxCount === 1 ? '1 lieu' : `${lieuxCount} lieux`;
-  return `      <a class="card" href="villes/${v.slug}.html">
+  const badges = lieuBySlug
+    ? [...new Set(v.lieux.flatMap(slug => lieuBySlug.get(slug)?.badges || []))]
+    : [];
+  const dataBadges = badges.length ? ` data-badges="${badges.join(',')}"` : '';
+  return `      <a class="card" href="villes/${v.slug}.html"${dataBadges}>
         <div class="card-media">
           <img src="${v.thumbImage}" alt="${v.nom}" loading="lazy">
           <span class="stamp">${v.lat.toFixed(2)}°N<br>${v.lng.toFixed(2)}°E</span>
@@ -33,7 +37,7 @@ function renderCard(v) {
       </a>`;
 }
 
-function renderRegionSection(regionSlug, villesInRegion) {
+function renderRegionSection(regionSlug, villesInRegion, lieuBySlug) {
   const { regionLabel } = villesInRegion[0];
   const count = villesInRegion.length;
   const countLabel = count === 1 ? '1 ville' : `${count} villes`;
@@ -45,15 +49,15 @@ function renderRegionSection(regionSlug, villesInRegion) {
           <span class="region-toggle-meta"><span class="region-count">${countLabel}</span><span class="region-toggle-icon">+</span></span>
         </summary>
         <div class="grid">
-${villesInRegion.map(renderCard).join('\n\n')}
+${villesInRegion.map(v => renderCard(v, lieuBySlug)).join('\n\n')}
       </div>
       </details>
     </div>
   </section>`;
 }
 
-export function buildRegionSectionsHtml(villes) {
+export function buildRegionSectionsHtml(villes, lieuBySlug) {
   return REGION_ORDER
-    .map(region => renderRegionSection(region, villes.filter(v => v.regionSlug === region)))
+    .map(region => renderRegionSection(region, villes.filter(v => v.regionSlug === region), lieuBySlug))
     .join('\n\n');
 }

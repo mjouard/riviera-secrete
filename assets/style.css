@@ -212,6 +212,19 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
 }
 .meta-pill strong{ color:var(--text); font-weight:500; }
 
+/* ---------- FILTRES LIEUX (homepage #lieux) ---------- */
+.lieux-filters-wrap{ padding-top:20px; padding-bottom:4px; }
+.lieux-filters{ display:flex; flex-wrap:wrap; gap:8px; }
+.lieux-filter-btn{
+  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.04em;
+  border:1px solid var(--line); background:transparent; color:var(--text-muted);
+  padding:6px 14px; border-radius:2px; cursor:pointer; transition:border-color 0.15s, color 0.15s, background 0.15s;
+  white-space:nowrap;
+}
+.lieux-filter-btn:hover{ border-color:var(--terracotta); color:var(--terracotta); }
+.lieux-filter-btn.is-active{ background:rgba(232,163,61,0.1); border-color:var(--terracotta); color:var(--terracotta); }
+.card[hidden]{ display:none !important; }
+
 /* ---------- BADGES & MAP LINKS (fiches lieu, cartes d'étape du créateur) ---------- */
 /* Les pages itin/*.html gardent leur propre variante plus compacte, définie dans le
    <style> inline de scripts/render/itin.mjs (contexte imbriqué dans une liste d'étapes) —
