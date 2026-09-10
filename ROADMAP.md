@@ -2,6 +2,14 @@
 
 ## Priorité contenu
 
+- [ ] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
+      intimes ou bon-plans (pas les incontournables déjà sur tous les guides). Règle de
+      cohérence à respecter : tout lieu portant un badge doit avoir au moins une activité en
+      rapport direct avec ce badge (ex. badge `randonnee` → au moins un itinéraire de randonnée
+      proposé ; badge `plage` → au moins une activité plage/baignade ; badge `plongee` → au
+      moins un spot ou sortie plongée/snorkeling, etc.). À faire via `/add-activities` qui
+      vérifie déjà qu'une activité n'est pas elle-même un lieu existant.
+
 - [x] Finir les vraies images — les 27 lieux ont une vraie photo (terminé le 28/08 ; les 21
       sourcées sur Wikimedia Commons cette session-là sont créditées sur `credits.html`,
       licences CC BY/CC BY-SA)
