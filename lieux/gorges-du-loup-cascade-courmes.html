@@ -133,6 +133,7 @@
         <a class="map-link" href="https://waze.com/ul?ll=43.7311,6.9825&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
         <a class="map-link" href="https://maps.apple.com/?ll=43.7311,6.9825&q=Les%20gorges%20du%20Loup%20et%20la%20cascade%20de%20Courmes" target="_blank" rel="noopener">📍 Plans</a>
       </div>
+      <button class="share-btn" id="share-btn-gorges-du-loup-cascade-courmes" type="button">🔗 Partager ce lieu</button>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Accès</strong>Route D3 entre Gourdon et Grasse, plusieurs points d'arrêt aménagés.</li>
@@ -285,6 +286,27 @@
     L.marker([43.7311, 6.9825], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    var btn = document.getElementById('share-btn-gorges-du-loup-cascade-courmes');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var fallback = function() {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(location.href).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = 'Lien copié ✓';
+          setTimeout(function() { btn.textContent = orig; }, 2000);
+        }).catch(function() {});
+      };
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: location.href }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   })();
 </script>
 

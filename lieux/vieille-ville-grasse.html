@@ -131,6 +131,7 @@
         <a class="map-link" href="https://waze.com/ul?ll=43.6584,6.9228&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
         <a class="map-link" href="https://maps.apple.com/?ll=43.6584,6.9228&q=La%20vieille%20ville%20de%20Grasse" target="_blank" rel="noopener">📍 Plans</a>
       </div>
+      <button class="share-btn" id="share-btn-vieille-ville-grasse" type="button">🔗 Partager ce lieu</button>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Accès</strong>Parkings payants en périphérie de la vieille ville.</li>
@@ -283,6 +284,27 @@
     L.marker([43.6584, 6.9228], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    var btn = document.getElementById('share-btn-vieille-ville-grasse');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var fallback = function() {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(location.href).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = 'Lien copié ✓';
+          setTimeout(function() { btn.textContent = orig; }, 2000);
+        }).catch(function() {});
+      };
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: location.href }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   })();
 </script>
 

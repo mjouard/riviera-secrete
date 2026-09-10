@@ -131,6 +131,7 @@
         <a class="map-link" href="https://waze.com/ul?ll=43.6953,7.2764&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
         <a class="map-link" href="https://maps.apple.com/?ll=43.6953,7.2764&q=Le%20Cours%20Saleya%20et%20les%20ruelles%20du%20Vieux%20Nice" target="_blank" rel="noopener">📍 Plans</a>
       </div>
+      <button class="share-btn" id="share-btn-cours-saleya-vieux-nice" type="button">🔗 Partager ce lieu</button>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Marché</strong>Marché aux fleurs et à la brocante, fermé le lundi (sauf brocante).</li>
@@ -283,6 +284,27 @@
     L.marker([43.6953, 7.2764], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    var btn = document.getElementById('share-btn-cours-saleya-vieux-nice');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var fallback = function() {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(location.href).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = 'Lien copié ✓';
+          setTimeout(function() { btn.textContent = orig; }, 2000);
+        }).catch(function() {});
+      };
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: location.href }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   })();
 </script>
 

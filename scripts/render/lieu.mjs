@@ -228,6 +228,7 @@ ${renderMetaPills(metaPills, lat, lng)}
       <div class="map-links">
 ${renderMapLinks(lat, lng, nom)}
       </div>
+      <button class="share-btn" id="share-btn-${slug}" type="button">🔗 Partager ce lieu</button>
       <h2>Bon à savoir</h2>
       <ul>
 ${renderTips(tips)}
@@ -295,6 +296,27 @@ ${related.map(renderRelatedCard).join('\n\n')}
     L.marker([${lat}, ${lng}], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    var btn = document.getElementById('share-btn-${slug}');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var fallback = function() {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(location.href).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = 'Lien copié ✓';
+          setTimeout(function() { btn.textContent = orig; }, 2000);
+        }).catch(function() {});
+      };
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: location.href }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   })();
 </script>
 

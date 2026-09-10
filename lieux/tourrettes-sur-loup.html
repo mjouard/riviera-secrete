@@ -133,6 +133,7 @@
         <a class="map-link" href="https://waze.com/ul?ll=43.7194,7.0472&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
         <a class="map-link" href="https://maps.apple.com/?ll=43.7194,7.0472&q=Tourrettes-sur-Loup%2C%20la%20cit%C3%A9%20des%20violettes" target="_blank" rel="noopener">📍 Plans</a>
       </div>
+      <button class="share-btn" id="share-btn-tourrettes-sur-loup" type="button">🔗 Partager ce lieu</button>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Accès</strong>20 minutes depuis Vence, parking à l'entrée du village.</li>
@@ -285,6 +286,27 @@
     L.marker([43.7194, 7.0472], { icon }).addTo(map);
     map.on('focus', () => map.scrollWheelZoom.enable());
     map.on('blur', () => map.scrollWheelZoom.disable());
+  })();
+</script>
+<script>
+  (function() {
+    var btn = document.getElementById('share-btn-tourrettes-sur-loup');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var fallback = function() {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(location.href).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = 'Lien copié ✓';
+          setTimeout(function() { btn.textContent = orig; }, 2000);
+        }).catch(function() {});
+      };
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: location.href }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   })();
 </script>
 
