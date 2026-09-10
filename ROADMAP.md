@@ -18,12 +18,9 @@
       du premier lieu de chaque itinéraire (fait le 28/08, en même temps que les vraies
       photos des lieux plutôt que via `heroImgTag`, qui est resté un placeholder — voir
       point suivant)
-- [ ] Les pages `itin/*.html` ont leur propre hero carousel (`heroImgTag` dans
-      `data/itineraires.json`), toujours en placeholder picsum pour les 6 itinéraires —
-      distinct des cartes homepage ci-dessus ; pourrait réutiliser les photos des lieux qui
-      composent chaque itinéraire (`data-carousel-srcs`, déjà le mécanisme utilisé par
-      `menton-eze-monaco` avant sa dépose de Villa Ephrussi) plutôt que d'en chercher de
-      nouvelles
+- [x] Les pages `itin/*.html` ont leur propre hero carousel — les 6 itinéraires utilisent
+      désormais les photos réelles des lieux qui les composent via `data-carousel-srcs`
+      (fini le picsum)
 - [ ] Système d'images formalisé — ratios/dimensions par composant (`heroImage`,
       `thumbImage`, cartes homepage, strip itinéraire…), résolution minimale, export
       WebP/AVIF + `srcset` ; chantier technique indépendant du choix des photos elles-mêmes
