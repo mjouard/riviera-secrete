@@ -72,6 +72,49 @@
       court, visible par tous les visiteurs connectés ; stockage côté backend (pas localStorage),
       modération a minima (signalement) ; dépend de la connexion Google ci-dessus
 
+## Mise en production réelle
+
+### Domaine & DNS
+- [ ] Acheter un nom de domaine (ex. `riviera-secrete.fr` ou `.com`) et le configurer sur
+      Netlify — HTTPS Let's Encrypt activé automatiquement par Netlify une fois le domaine
+      pointé
+- [ ] Mettre à jour toutes les URLs canoniques dans les balises `<link rel="canonical">`,
+      `<meta property="og:url">` et le JSON-LD — actuellement hardcodées sur
+      `riviera-secrete.netlify.app`, à remplacer par le vrai domaine (chercher dans
+      `scripts/render/lieu.mjs`, `scripts/render/itin.mjs`, `index.html`, puis rebuilder)
+
+### SEO & indexation
+- [ ] Soumettre `sitemap.xml` dans Google Search Console (après avoir enregistré le site avec
+      le vrai domaine) — prérequis : générer `sitemap.xml` depuis `build.mjs` (déjà en
+      roadmap SEO) pour qu'il soit à jour automatiquement
+- [ ] Vérifier `robots.txt` — doit pointer vers le bon `sitemap.xml` avec l'URL du vrai
+      domaine ; vérifier aussi que les pages `noindex` (`creer-itineraire.html`,
+      `mes-itineraires.html`) sont bien exclues de l'indexation
+- [ ] Ajouter le site dans Bing Webmaster Tools (2e moteur, souvent négligé)
+
+### Performance & cache
+- [ ] Créer `netlify.toml` avec des règles de cache agressives pour les assets statiques
+      (`assets/`, `lieux/`, `itin/`) — `Cache-Control: public, max-age=31536000, immutable`
+      pour les images, CSS, JS versionnés ; `no-cache` pour `index.html` et les pages HTML
+- [ ] Ajouter les headers de sécurité HTTP dans `netlify.toml` — `X-Frame-Options`,
+      `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` (pas de CSP strict
+      tant que Leaflet et Google Fonts sont chargés en CDN externe)
+- [ ] Minification CSS/JS au build (ex. via `esbuild` ou `lightningcss`) — actuellement
+      les assets sont servis tels quels
+
+### Monitoring
+- [ ] Mettre en place un uptime monitor (ex. UptimeRobot gratuit) sur le domaine de
+      production — alerte email si le site tombe
+- [ ] Vérifier les Core Web Vitals dans Google Search Console après mise en ligne (LCP, CLS,
+      INP) — les images non optimisées (pas encore de WebP/srcset) sont le risque principal
+
+### Versionning & déploiement
+- [ ] S'assurer que tout le code est commité et pushé sur la branche `main` avant la mise en
+      ligne — le déploiement Netlify se déclenche automatiquement sur push
+- [ ] Configurer une branche `staging` (ou Netlify Deploy Previews) pour tester les
+      changements avant de les mettre en prod — les Deploy Previews Netlify sont activables
+      gratuitement sur chaque PR/branche
+
 ## SEO / technique
 
 - [ ] Générer `sitemap.xml` depuis `data/lieux.json` dans `build.mjs` au lieu de le
