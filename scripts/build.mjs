@@ -1,4 +1,4 @@
-// Regenerates lieux/*.html, itin/*.html and villes/*.html from data/*.json.
+// Regenerates lieux/*.html, itin/*.html, villes/*.html and sitemap.xml from data/*.json.
 // data/lieux.json, data/itineraires.json and data/villes.json are now the source of truth —
 // edit the JSON, then run this, not the HTML.
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -66,4 +66,18 @@ indexHtml = injectOrThrow(
 
 writeFileSync(indexPath, indexHtml);
 
-console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires + ${villes.length} pages villes régénérées, index.html à jour.`);
+// sitemap.xml — généré depuis les JSON, jamais édité à la main
+const BASE_URL = 'https://riviera-secrete.vercel.app';
+function urlTag(loc, priority) {
+  return `  <url>\n    <loc>${loc}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}
+const sitemapUrls = [
+  urlTag(`${BASE_URL}/`, '1.0'),
+  ...itineraires.map(i => urlTag(`${BASE_URL}/itin/${i.slug}.html`, '0.9')),
+  ...lieux.map(l => urlTag(`${BASE_URL}/lieux/${l.slug}.html`, '0.7')),
+  ...villes.map(v => urlTag(`${BASE_URL}/villes/${v.slug}.html`, '0.6')),
+].join('\n');
+writeFileSync(join(ROOT, 'sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`);
+
+console.log(`${lieux.length} pages lieux + ${itineraires.length} pages itinéraires + ${villes.length} pages villes régénérées, index.html et sitemap.xml à jour.`);

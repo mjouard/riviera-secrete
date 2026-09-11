@@ -1,253 +1,283 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://riviera-secrete.netlify.app/</loc>
+    <loc>https://riviera-secrete.vercel.app/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/rue-obscure-villefranche.html</loc>
+    <loc>https://riviera-secrete.vercel.app/itin/antibes-biot-juan.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/itin/grasse-saint-tropez.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/itin/lerins-esterel.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/itin/menton-eze-monaco.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/itin/nice-peillon-peille.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/itin/villages-perches.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://riviera-secrete.vercel.app/lieux/rue-obscure-villefranche.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/sentier-cap-ferrat.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/sentier-cap-ferrat.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/villa-kerylos.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/villa-kerylos.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/eze-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/eze-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/trophee-auguste-la-turbie.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/trophee-auguste-la-turbie.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/jardin-exotique-monaco.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/jardin-exotique-monaco.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/roquebrune-cap-martin-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/roquebrune-cap-martin-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/sentier-corbusier-cap-martin.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/sentier-corbusier-cap-martin.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/colline-du-chateau-nice.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/colline-du-chateau-nice.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/cours-saleya-vieux-nice.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/cours-saleya-vieux-nice.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/peillon-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/peillon-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/peille-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/peille-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/gourdon-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/gourdon-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/gorges-du-loup-cascade-courmes.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/gorges-du-loup-cascade-courmes.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/pont-du-loup.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/pont-du-loup.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/tourrettes-sur-loup.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/tourrettes-sur-loup.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/saint-paul-de-vence.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/saint-paul-de-vence.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/biot-village-verrier.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/biot-village-verrier.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/haut-de-cagnes.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/haut-de-cagnes.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/sentier-cap-antibes.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/sentier-cap-antibes.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/pinede-gould-juan-les-pins.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/pinede-gould-juan-les-pins.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/iles-de-lerins.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/iles-de-lerins.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/pic-cap-roux-esterel.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/pic-cap-roux-esterel.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/calanques-esterel-theoule.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/calanques-esterel-theoule.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/vieille-ville-grasse.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/vieille-ville-grasse.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/citadelle-saint-tropez.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/citadelle-saint-tropez.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/lieux/gassin-plus-beau-village.html</loc>
+    <loc>https://riviera-secrete.vercel.app/lieux/gassin-plus-beau-village.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/villefranche-sur-mer.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/villefranche-sur-mer.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/saint-jean-cap-ferrat.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/saint-jean-cap-ferrat.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/beaulieu-sur-mer.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/beaulieu-sur-mer.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/eze.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/eze.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/la-turbie.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/la-turbie.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/monaco.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/monaco.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/roquebrune-cap-martin.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/roquebrune-cap-martin.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/nice.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/nice.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/peillon.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/peillon.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/peille.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/peille.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/gourdon.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/gourdon.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/tourrettes-sur-loup.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/tourrettes-sur-loup.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/saint-paul-de-vence.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/saint-paul-de-vence.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/biot.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/biot.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/cagnes-sur-mer.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/cagnes-sur-mer.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/antibes.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/antibes.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/juan-les-pins.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/juan-les-pins.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/cannes.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/cannes.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/theoule-sur-mer.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/theoule-sur-mer.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/grasse.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/grasse.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/saint-tropez.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/saint-tropez.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://riviera-secrete.netlify.app/villes/gassin.html</loc>
+    <loc>https://riviera-secrete.vercel.app/villes/gassin.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>

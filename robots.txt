@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://riviera-secrete.netlify.app/sitemap.xml
+Sitemap: https://riviera-secrete.vercel.app/sitemap.xml
