@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, buildMapLinks } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -76,17 +76,35 @@ export default async function LieuPage({
           </div>
         )}
 
-        {/* MetaPills */}
-        {lieu.metaPills.length > 0 && (
-          <div className="flex flex-wrap gap-3">
-            {lieu.metaPills.map((pill, i) => (
-              <span key={i} className="text-sm" style={{ color: "var(--text-muted)" }}>
-                <span>{pill.label}</span>{" "}
-                <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
-              </span>
-            ))}
-          </div>
-        )}
+        {/* MetaPills + GPS */}
+        <div className="flex flex-wrap gap-3">
+          <span className="text-sm" style={{ color: "var(--text-muted)" }}>
+            <span>📍</span>{" "}
+            <span style={{ color: "var(--text)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
+          </span>
+          {lieu.metaPills.map((pill, i) => (
+            <span key={i} className="text-sm" style={{ color: "var(--text-muted)" }}>
+              <span>{pill.label}</span>{" "}
+              <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
+            </span>
+          ))}
+        </div>
+
+        {/* Liens Maps/Waze/Plans */}
+        <div className="flex flex-wrap gap-2 mt-3">
+          {buildMapLinks(lieu.lat, lieu.lng, lieu.nom).map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5"
+              style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+            >
+              {link.icon} {link.label}
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Description */}

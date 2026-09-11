@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
+import { buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -30,10 +31,18 @@ export default async function ItinerairePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const itin = await api.itineraires.bySlug(slug).catch(() => null);
+  const [itin, lieux] = await Promise.all([
+    api.itineraires.bySlug(slug).catch(() => null),
+    api.lieux.list(),
+  ]);
   if (!itin) notFound();
 
+  const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
   const stops = itin.items.filter((item) => item.type === "stop");
+
+  const routeStops = stops
+    .map((s) => s.lieuSlug ? lieuBySlug.get(s.lieuSlug) : null)
+    .filter((l): l is NonNullable<typeof l> => l != null);
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
@@ -63,6 +72,20 @@ export default async function ItinerairePage({
                 {pill.label} <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
               </span>
             ))}
+          </div>
+        )}
+
+        {routeStops.length > 0 && (
+          <div className="mt-6">
+            <a
+              href={buildGoogleMapsRouteUrl(routeStops)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border transition-colors hover:bg-white/5"
+              style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+            >
+              🗺️ Ouvrir l&apos;itinéraire dans Google Maps
+            </a>
           </div>
         )}
       </div>
@@ -118,6 +141,26 @@ export default async function ItinerairePage({
                   <p className="text-sm" style={{ color: "var(--text-muted)" }}>
                     {item.desc}
                   </p>
+                )}
+                {item.lieuSlug && lieuBySlug.get(item.lieuSlug) && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {buildMapLinks(
+                      lieuBySlug.get(item.lieuSlug)!.lat,
+                      lieuBySlug.get(item.lieuSlug)!.lng,
+                      item.nom ?? item.lieuSlug
+                    ).map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs px-2.5 py-1 rounded-full border transition-colors hover:bg-white/5"
+                        style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                      >
+                        {link.icon} {link.label}
+                      </a>
+                    ))}
+                  </div>
                 )}
                 {item.activites && item.activites.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-3">
