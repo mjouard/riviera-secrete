@@ -13,6 +13,7 @@
 
 ## Feedback & pièges
 - [Vercel deploy](feedback_vercel_deploy.md) — déployer depuis `frontend/`, rootDirectory null, ne pas déployer depuis la racine
+- [JWT MapInboundClaims](backend_dotnet.md#piège-critique--jwt-mapinboundclaims) — `opts.MapInboundClaims = false` requis sinon 401 sur tous les endpoints protégés
 
 ## Utilisateur
 - [Profil](user_profile.md) — développeur .NET au quotidien, projet personnel

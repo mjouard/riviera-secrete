@@ -52,9 +52,11 @@ src/
       page.tsx            — grille villes par région
       [slug]/page.tsx     — hero, description, MapLieuWrapper, grille lieux
     creer-itineraire/
-      page.tsx            — créateur drag-and-drop, ▲/▼ mobile, BuilderMap, save localStorage
+      page.tsx            — créateur drag-and-drop, ▲/▼ mobile, BuilderMap, save → DB (login requis)
     mes-itineraires/
-      page.tsx            — liste localStorage, liens vers créateur ?id=, delete
+      page.tsx            — liste DB (connexion requise), liens vers créateur ?id=, delete
+    mes-favoris/
+      page.tsx            — liste des favoris DB, retirer, lien vers /lieux si vide
     sitemap.xml/
       route.ts            — sitemap dynamique (fetch all lieux/itins/villes)
 ```
@@ -70,12 +72,13 @@ src/
 | `/itineraires/[slug]` | SSG 1h | 6 pages |
 | `/villes` | SSG 1h | Liste |
 | `/villes/[slug]` | SSG 1h | 22 pages |
-| `/creer-itineraire` | Client | Créateur |
-| `/mes-itineraires` | Client | Liste sauvegardés |
+| `/creer-itineraire` | Client | Créateur (save → DB si connecté, sinon signIn) |
+| `/mes-itineraires` | Client | Liste DB (connexion requise) |
+| `/mes-favoris` | Client | Liste favoris DB (connexion requise) |
 | `/api/auth/[...nextauth]` | Dynamic | Handler NextAuth |
 | `/sitemap.xml` | SSG 1h | Sitemap |
 
-**Total au build** : 65 pages (27 lieux + 6 itin + 22 villes + statiques + sitemap).
+**Total au build** : 66 pages (27 lieux + 6 itin + 22 villes + statiques + sitemap).
 
 ## Auth NextAuth v4
 
@@ -99,6 +102,18 @@ src/
 import { authFetch } from "@/lib/api";
 const res = await authFetch("/api/favorites", session.apiToken, { method: "GET" });
 ```
+
+## Composants notables
+
+- **`FavoriteButton`** (`src/components/FavoriteButton.tsx`) — bouton ♡/♥ sur les pages lieu. `useSession()` → si pas connecté, `signIn("google")`. Fetch la liste `/api/favorites` au mount, toggle POST/DELETE. "use client".
+- **Tailwind preflight reset** — Tailwind v4 reset `button { cursor: default }`. Fix global dans `globals.css` : `button:not(:disabled) { cursor: pointer; }`. Ajouter aussi `cursor-pointer` explicite si besoin.
+
+## Itinéraires — DB only (plus de localStorage)
+
+Depuis la session 2026-09-11 :
+- **`creer-itineraire`** : "Sauvegarder" → POST `/api/my-itineraires` (nouveau) ou PUT `/api/my-itineraires/{id}` (mise à jour). Si non connecté → `signIn("google", { callbackUrl })`. Charge depuis DB via `?id=` param (effet secondaire qui attend `session` + `lieux` avant de fetcher). Plus de `getSaved`/`saveItineraire` localStorage.
+- **`mes-itineraires`** : uniquement DB. Bannière connexion si déconnecté. Plus de localStorage, plus de bridge/import.
+- **`mes-favoris`** : liste des slugs favoris depuis `GET /api/favorites`, hydratée avec `GET /api/lieux`. Bouton "Retirer" → `DELETE /api/favorites/{slug}`.
 
 ## Patterns importants
 

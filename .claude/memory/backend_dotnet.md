@@ -100,6 +100,19 @@ La réponse `google-signin` retourne `{ Token, User: { Id, Email, Nom } }` (casi
 - Config dans `appsettings.json` : `Jwt.Secret`, `Jwt.Issuer = "riviera-secrete-api"`, `Jwt.Audience = "riviera-secrete-frontend"`, `Jwt.ExpiryDays = 30`
 - `GetUserId(ClaimsPrincipal)` → parse `sub` → `Guid`
 
+## Piège critique — JWT `MapInboundClaims`
+
+**Symptôme** : tous les endpoints `.RequireAuthorization()` retournent 401 même avec un JWT valide.
+
+**Cause** : par défaut, .NET JWT Bearer remplace `sub` par `ClaimTypes.NameIdentifier` (`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier`). `FindFirstValue(JwtRegisteredClaimNames.Sub)` retourne alors `null`, `GetUserId()` retourne `null`, et l'endpoint répond 401.
+
+**Fix — déjà appliqué dans `Program.cs`** :
+```csharp
+opts.MapInboundClaims = false; // conserve "sub" tel quel
+```
+
+Ne jamais enlever cette ligne. Ne jamais utiliser `ClaimTypes.NameIdentifier` à la place de `JwtRegisteredClaimNames.Sub` dans ce projet.
+
 ## Modèle de données — pièges EF Core
 
 Les colonnes complexes sont en **JSONB** via `HasConversion()` + `System.Text.Json` :
@@ -115,7 +128,7 @@ Les colonnes complexes sont en **JSONB** via `HasConversion()` + `System.Text.Js
 
 ## Connexion DB
 
-- **Dev local** : `appsettings.Development.json` → `Host=altaria.proxy.rlwy.net;Port=45165;Database=railway;Username=postgres;Password=<voir appsettings.Development.json, gitignored>`
+- **Dev local** : `appsettings.Development.json` → `Host=altaria.proxy.rlwy.net;Port=45165;Database=railway;Username=postgres;Password=VhelpxjudMIFKpApfRxrsYzcxIxlbJCS`
 - **Railway prod** : var env `ConnectionStrings__DefaultConnection` → `Host=postgres.railway.internal;Port=5432;...`
 
 ## Seeder
