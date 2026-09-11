@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     "27 lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez.",
 };
 
+// Plausible analytics — même domaine que le site statique
+const plausibleScript = "https://plausible.io/js/pa-R_6LcENgDIgoUpT8QUE4g.js";
+
 export default function RootLayout({
   children,
 }: {
@@ -18,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.className}>
+      <head>
+        <script async src={plausibleScript} />
+      </head>
       <body className="min-h-screen flex flex-col">
         <header
           className="sticky top-0 z-10 border-b"
