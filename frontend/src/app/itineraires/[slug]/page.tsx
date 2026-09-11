@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
+import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -17,11 +17,24 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const itin = await api.itineraires.bySlug(slug).catch(() => null);
+  const [itin, lieux] = await Promise.all([
+    api.itineraires.bySlug(slug).catch(() => null),
+    api.lieux.list().catch(() => []),
+  ]);
   if (!itin) return {};
+  const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
+  const firstLieu = firstStop?.lieuSlug
+    ? lieux.find((l) => l.slug === firstStop.lieuSlug)
+    : undefined;
+  const ogImage = firstLieu?.heroImage ? imgUrl(firstLieu.heroImage) : undefined;
   return {
-    title: `${itin.titre} — Riviera Secrète`,
+    title: itin.titre,
     description: itin.description,
+    openGraph: {
+      title: itin.titre,
+      description: itin.description,
+      ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 800 }] } : {}),
+    },
   };
 }
 

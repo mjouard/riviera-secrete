@@ -20,8 +20,13 @@ export async function generateMetadata({
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) return {};
   return {
-    title: `${lieu.nom} — Riviera Secrète`,
+    title: lieu.nom,
     description: lieu.description,
+    openGraph: {
+      title: lieu.nom,
+      description: lieu.description,
+      images: lieu.heroImage ? [{ url: imgUrl(lieu.heroImage), width: 1200, height: 800 }] : [],
+    },
   };
 }
 

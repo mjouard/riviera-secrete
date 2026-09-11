@@ -5,10 +5,22 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Riviera Secrète — Les spots confidentiels de la Côte d'Azur",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Riviera Secrète — Les spots confidentiels de la Côte d'Azur",
+    template: "%s — Riviera Secrète",
+  },
   description:
     "27 lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez.",
+  openGraph: {
+    siteName: "Riviera Secrète",
+    locale: "fr_FR",
+    type: "website",
+  },
 };
 
 // Plausible analytics — même domaine que le site statique
