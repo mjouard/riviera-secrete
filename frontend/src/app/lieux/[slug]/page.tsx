@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
+import { imgUrl } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -33,8 +34,6 @@ export default async function LieuPage({
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
 
-  const imgBase = "https://riviera-secrete.netlify.app/";
-
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
       {/* Breadcrumb */}
@@ -49,7 +48,7 @@ export default async function LieuPage({
       {/* Hero */}
       <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
         <img
-          src={lieu.heroImage.replace("../", imgBase)}
+          src={imgUrl(lieu.heroImage)}
           alt={lieu.heroAlt}
           className="w-full h-full object-cover"
         />
@@ -139,7 +138,7 @@ export default async function LieuPage({
               >
                 <div className="aspect-video overflow-hidden">
                   <img
-                    src={act.image.replace("../", imgBase)}
+                    src={imgUrl(act.image)}
                     alt={act.alt}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"
@@ -190,7 +189,7 @@ export default async function LieuPage({
               >
                 <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
                   <img
-                    src={r.img}
+                    src={imgUrl(r.img)}
                     alt={r.alt}
                     className="w-full h-full object-cover"
                     loading="lazy"

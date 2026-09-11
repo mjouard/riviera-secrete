@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { api } from "@/lib/api";
+import { imgUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Lieux — Riviera Secrète",
@@ -51,10 +52,7 @@ export default async function LieuxPage() {
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
-                    src={lieu.thumbImage.replace(
-                      "../",
-                      "https://riviera-secrete.netlify.app/"
-                    )}
+                    src={imgUrl(lieu.thumbImage)}
                     alt={lieu.heroAlt}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"

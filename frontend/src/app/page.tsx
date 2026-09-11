@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { api } from "@/lib/api";
+import { imgUrl } from "@/lib/utils";
 import type { Lieu, Itineraire } from "@/lib/types";
 
 export const revalidate = 3600;
@@ -13,7 +14,7 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
     >
       <div className="aspect-[4/3] overflow-hidden">
         <img
-          src={lieu.thumbImage.replace("../", "https://riviera-secrete.netlify.app/")}
+          src={imgUrl(lieu.thumbImage)}
           alt={lieu.heroAlt}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
           loading="lazy"
