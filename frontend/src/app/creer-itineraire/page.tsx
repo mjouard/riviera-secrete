@@ -249,8 +249,8 @@ export default function CreerItinerairePage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
+    <div className="print-page max-w-4xl mx-auto px-6 py-12">
+      <nav className="no-print text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
         <span>/</span>
         <span style={{ color: "var(--text)" }}>Créer un itinéraire</span>
@@ -469,7 +469,15 @@ function ResultsView({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6 gap-4">
+      <div className="print-header">
+        <p className="print-header-url">riviera-secrete.vercel.app</p>
+        <h1>{currentNom || `Itinéraire ${DUREE_META[dureeKey].label}`}</h1>
+        <p className="print-header-meta">
+          {currentDays.length} jour{currentDays.length > 1 ? "s" : ""} · {nbLieux} lieu{nbLieux > 1 ? "x" : ""}
+        </p>
+      </div>
+
+      <div className="no-print flex items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold">
             {currentNom || `Itinéraire ${DUREE_META[dureeKey].label}`}
@@ -482,6 +490,9 @@ function ResultsView({
           <button onClick={onBack} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
             ← Modifier
           </button>
+          <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
+            🖨 Exporter en PDF
+          </button>
           <button onClick={onSaveClick} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>
             Sauvegarder
           </button>
@@ -489,22 +500,22 @@ function ResultsView({
       </div>
 
       {savedBanner && (
-        <div className="mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
+        <div className="no-print mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
           ✓ Itinéraire sauvegardé. <Link href="/mes-itineraires" className="underline">Voir mes itinéraires</Link>
         </div>
       )}
 
       {excluded.length > 0 && (
-        <p className="mb-6 text-sm rounded-xl p-3" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
+        <p className="no-print mb-6 text-sm rounded-xl p-3" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
           {excluded.length} lieu{excluded.length > 1 ? "x" : ""} non inclus faute de temps :{" "}
           {excluded.map((l) => l.nom).join(", ")}.
         </p>
       )}
 
       {/* Day columns */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+      <div className="print-days grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
         {currentDays.map((day, dayIndex) => (
-          <div key={dayIndex} className="rounded-xl p-4" style={{ background: "var(--surface)" }}>
+          <div key={dayIndex} className="print-day rounded-xl p-4" style={{ background: "var(--surface)" }}>
             <h3 className="text-sm font-semibold mb-3" style={{ color: "var(--azure)" }}>
               Jour {dayIndex + 1} <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>— {day.length} lieu{day.length > 1 ? "x" : ""}</span>
             </h3>
@@ -524,10 +535,10 @@ function ResultsView({
                     draggable
                     onDragStart={() => onDragStart(dayIndex, stopIndex)}
                     onDragOver={(e) => onDragOver(e, dayIndex, stopIndex)}
-                    className="builder-stop-card rounded-lg flex gap-3 p-2 cursor-grab active:cursor-grabbing"
+                    className="print-stop builder-stop-card rounded-lg flex gap-3 p-2 cursor-grab active:cursor-grabbing"
                     style={{ background: "var(--surface-hover)" }}
                   >
-                    <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="no-print w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
                       <img src={imgUrl(lieu.thumbImage)} alt="" className="w-full h-full object-cover" loading="lazy" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -547,7 +558,7 @@ function ResultsView({
                         </div>
                       )}
                     </div>
-                    <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                    <div className="no-print flex flex-col items-center gap-1 flex-shrink-0">
                       <button onClick={() => onMoveStop(dayIndex, stopIndex, -1)} disabled={isFirstOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Monter">▲</button>
                       <button onClick={() => onRemoveStop(dayIndex, stopIndex)} className="text-xs px-1 py-0.5 rounded" style={{ color: "var(--text-muted)" }} aria-label="Retirer">✕</button>
                       <button onClick={() => onMoveStop(dayIndex, stopIndex, 1)} disabled={isLastOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Descendre">▼</button>
@@ -565,7 +576,7 @@ function ResultsView({
 
       {/* Map */}
       {mapStops.length > 0 && (
-        <div className="mb-10">
+        <div className="no-print mb-10">
           <BuilderMap stops={mapStops} />
         </div>
       )}
@@ -618,14 +629,14 @@ function ProgrammeSection({ days }: { days: Lieu[][] }) {
         {items.map((item, i) => {
           if (item.type === "transit") {
             return (
-              <div key={i} className="text-sm py-2 px-4 rounded-lg" style={{ color: "var(--text-muted)", background: "var(--surface)" }}>
+              <div key={i} className="print-stop text-sm py-2 px-4 rounded-lg" style={{ color: "var(--text-muted)", background: "var(--surface)" }}>
                 🚗 {formatTransitDesc(item.minutes)}
               </div>
             );
           }
           if (item.type === "sleep") {
             return (
-              <div key={i} className="rounded-xl p-4 flex items-center gap-4" style={{ background: "var(--surface)" }}>
+              <div key={i} className="print-stop rounded-xl p-4 flex items-center gap-4" style={{ background: "var(--surface)" }}>
                 <span className="text-xs font-mono" style={{ color: "var(--azure)" }}>Nuit</span>
                 <span className="text-sm font-semibold">Fin du jour {item.dayNum} — Hébergement au choix</span>
               </div>
@@ -633,13 +644,13 @@ function ProgrammeSection({ days }: { days: Lieu[][] }) {
           }
           const l = item.lieu;
           return (
-            <div key={i} className="rounded-xl p-4" style={{ background: "var(--surface)" }}>
+            <div key={i} className="print-stop rounded-xl p-4" style={{ background: "var(--surface)" }}>
               <div className="flex items-start justify-between gap-4 mb-2">
                 <div>
                   <span className="text-xs font-mono mr-2" style={{ color: "var(--azure)" }}>{item.heure}</span>
                   <span className="text-xs" style={{ color: "var(--text-muted)" }}>{l.commune}</span>
                 </div>
-                <Link href={`/lieux/${l.slug}`} target="_blank" className="text-xs hover:underline flex-shrink-0" style={{ color: "var(--azure)" }}>
+                <Link href={`/lieux/${l.slug}`} target="_blank" className="no-print text-xs hover:underline flex-shrink-0" style={{ color: "var(--azure)" }}>
                   Voir le lieu →
                 </Link>
               </div>
@@ -656,7 +667,7 @@ function ProgrammeSection({ days }: { days: Lieu[][] }) {
                   })}
                 </div>
               )}
-              <div className="flex flex-wrap gap-2">
+              <div className="no-print flex flex-wrap gap-2">
                 {buildMapLinks(l.lat, l.lng, l.nom).map((link) => (
                   <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer"
                     className="text-xs px-2.5 py-1 rounded-full border transition-colors hover:bg-white/5"
@@ -687,15 +698,15 @@ function BookingSection({ days }: { days: Lieu[][] }) {
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {bookings.map(({ lieu, activite: act }, i) => (
-          <div key={i} className="rounded-xl overflow-hidden" style={{ background: "var(--surface)" }}>
-            <div className="aspect-video overflow-hidden">
+          <div key={i} className="print-stop rounded-xl overflow-hidden" style={{ background: "var(--surface)" }}>
+            <div className="no-print aspect-video overflow-hidden">
               <img src={imgUrl(act.image)} alt={act.alt} className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div className="p-4">
               <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>{lieu.nom}</p>
               <p className="font-semibold text-sm mb-1">{act.nom}</p>
               <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>⏱ {act.duree} · 💶 {act.prix}</p>
-              <a href={act.url} target="_blank" rel="noopener noreferrer" className="text-xs" style={{ color: "var(--azure)" }}>
+              <a href={act.url} target="_blank" rel="noopener noreferrer" className="no-print text-xs" style={{ color: "var(--azure)" }}>
                 {act.linkText || "Réserver"} →
               </a>
             </div>
