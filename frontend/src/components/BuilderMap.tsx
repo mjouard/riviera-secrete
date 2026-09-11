@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { applyDarkTileFilter, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from "@/lib/map-tiles";
 
 interface Stop { lat: number; lng: number; nom: string; }
 
@@ -44,10 +45,11 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
       if (cancelled || !ref.current) return;
       delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
       const map = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true });
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      L.tileLayer(MAP_TILE_URL, {
+        attribution: MAP_TILE_ATTRIBUTION,
         maxZoom: 19,
       }).addTo(map);
+      applyDarkTileFilter(map);
       const layer = L.layerGroup().addTo(map);
       stateRef.current = { L, map, layer };
       applyStops(stateRef.current, stopsRef.current);

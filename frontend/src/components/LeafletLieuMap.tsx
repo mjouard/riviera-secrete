@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { applyDarkTileFilter, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from "@/lib/map-tiles";
 
 interface Props {
   lat: number;
@@ -28,10 +29,11 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
         14
       );
 
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      L.tileLayer(MAP_TILE_URL, {
+        attribution: MAP_TILE_ATTRIBUTION,
         maxZoom: 19,
       }).addTo(map);
+      applyDarkTileFilter(map);
 
       L.marker([lat, lng]).addTo(map).bindPopup(nom, { closeButton: false }).openPopup();
     });

@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Ville } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
 import { REGION_COLORS, REGION_LABELS, REGION_ORDER, truncate } from "@/lib/home-data";
+import { applyDarkTileFilter, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from "@/lib/map-tiles";
 
 interface Props {
   villes: Ville[];
@@ -31,11 +32,11 @@ export default function HomeMap({ villes }: Props) {
       map = currentMap;
       mapInstance.current = currentMap;
 
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-        attribution:
-          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      L.tileLayer(MAP_TILE_URL, {
+        attribution: MAP_TILE_ATTRIBUTION,
         maxZoom: 19,
       }).addTo(currentMap);
+      applyDarkTileFilter(currentMap);
 
       const bounds = L.latLngBounds(villes.map((v) => [v.lat, v.lng] as [number, number]));
       currentMap.fitBounds(bounds, { padding: [30, 30] });
