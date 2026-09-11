@@ -95,8 +95,9 @@ filtres badge sur la grille lieux, images sur les cartes itinéraires (tous manq
 décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur OpenStreetMap
 (CARTO a coupé l'accès anonyme à ses tuiles `dark_all`, renvoyait un "API key required").
 
-- [ ] Export PDF / impression de l'itinéraire créé (`/creer-itineraire`) — existe sur le site
-      statique (`window.print()` + `@media print`), absent sur Next.js
+- [x] Export PDF / impression de l'itinéraire créé (`/creer-itineraire`, 2026-09-12) — porté
+      depuis le site statique (`window.print()` + `@media print`, classes `.no-print`/
+      `.print-day`/`.print-stop`/`.print-header` dans `globals.css`)
 - [ ] Bouton "Partager" (Web Share API) sur les fiches lieu — absent sur Next.js
 - [ ] Bouton "Ajouter à un itinéraire" sur les fiches lieu — mini-panneau listant les
       itinéraires sauvegardés, absent sur Next.js (existe sur le site statique)
