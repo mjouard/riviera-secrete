@@ -34,6 +34,7 @@ var jwtAudience = builder.Configuration["Jwt:Audience"]!;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opts =>
     {
+        opts.MapInboundClaims = false; // conserve "sub" tel quel, évite le mapping vers ClaimTypes.NameIdentifier
         opts.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
