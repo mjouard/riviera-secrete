@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { api } from "@/lib/api";
+import { useSession, signIn } from "next-auth/react";
+import { api, authFetch } from "@/lib/api";
 import type { Lieu, Activite } from "@/lib/types";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
 import {
@@ -11,7 +12,6 @@ import {
   type DureeKey,
   generateItineraire, parseVisitMinutes, travelMinutes,
   formatTime, formatTransitDesc, buildBookingActivites,
-  getSaved, saveItineraire,
 } from "@/lib/itineraire-logic";
 
 const BuilderMap = dynamic(() => import("@/components/BuilderMap"), { ssr: false });
@@ -23,6 +23,7 @@ type View = "picker" | "results";
 // ─── Main page ───────────────────────────────────────────────────────────────
 
 export default function CreerItinerairePage() {
+  const { data: session, status } = useSession();
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>("picker");
@@ -41,44 +42,64 @@ export default function CreerItinerairePage() {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [saveInput, setSaveInput] = useState("");
   const [savedBanner, setSavedBanner] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   // Drag-and-drop
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
+  const dbIdAttempted = useRef<string | null>(null);
 
   const lieuBySlug = useMemo(() => new Map(lieux.map((l) => [l.slug, l])), [lieux]);
 
-  // Fetch lieux + load from URL
+  // Fetch lieux (once)
   useEffect(() => {
     api.lieux.list().then((data) => {
       setLieux(data);
       setLoading(false);
 
-      const map = new Map(data.map((l) => [l.slug, l]));
       const params = new URLSearchParams(window.location.search);
-
-      const id = params.get("id");
-      if (id) {
-        const saved = getSaved(id);
-        if (saved) {
-          setCurrentId(saved.id);
-          setCurrentNom(saved.nom);
-          setDureeKey(saved.dureeKey);
-          const days = saved.days.map((day) =>
-            day.map((slug) => map.get(slug)).filter(Boolean) as Lieu[]
-          );
-          setCurrentDays(days);
-          setSelectedSlugs(new Set(saved.days.flat()));
-          setView("results");
-        }
-      }
-
       const add = params.get("add");
-      if (add && map.has(add)) {
-        setSelectedSlugs(new Set([add]));
-        setExpandedRegions(new Set([map.get(add)!.regionSlug]));
+      if (add) {
+        const map = new Map(data.map((l) => [l.slug, l]));
+        if (map.has(add)) {
+          setSelectedSlugs(new Set([add]));
+          setExpandedRegions(new Set([map.get(add)!.regionSlug]));
+        }
       }
     }).catch(() => setLoading(false));
   }, []);
+
+  // Load from ?id= param once lieux + session are ready
+  useEffect(() => {
+    if (loading) return;
+    if (status === "loading") return;
+    if (!session?.apiToken) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (!id) return;
+    if (view === "results") return;
+    if (dbIdAttempted.current === id) return;
+    dbIdAttempted.current = id;
+
+    const map = new Map(lieux.map((l) => [l.slug, l]));
+    authFetch("/api/my-itineraires", session.apiToken)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((itins: Array<{ id: string; nom: string; dureeKey: string; days: string[][] }>) => {
+        const found = itins.find((it) => it.id === id);
+        if (found) {
+          setCurrentId(found.id);
+          setCurrentNom(found.nom);
+          setDureeKey(found.dureeKey as DureeKey);
+          const days = found.days.map((day) =>
+            day.map((slug) => map.get(slug)).filter(Boolean) as Lieu[]
+          );
+          setCurrentDays(days);
+          setSelectedSlugs(new Set(found.days.flat()));
+          setView("results");
+        }
+      })
+      .catch(() => {});
+  }, [loading, status, session, lieux, view]);
 
   // ─── Picker logic ──────────────────────────────────────────────────────────
 
@@ -176,15 +197,41 @@ export default function CreerItinerairePage() {
     [currentDays]
   );
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const nom = saveInput.trim();
     if (!nom) return;
-    const id = saveItineraire({ id: currentId, nom, dureeKey, days: currentDays });
-    setCurrentId(id);
-    setCurrentNom(nom);
-    setShowSaveModal(false);
-    setSavedBanner(true);
-    window.history.replaceState(null, "", `/creer-itineraire?id=${encodeURIComponent(id)}`);
+    if (!session?.apiToken) {
+      signIn("google", { callbackUrl: window.location.href });
+      return;
+    }
+    setSaving(true);
+    try {
+      const slugDays = currentDays.map((day) => day.map((l) => l.slug));
+      let id: string;
+      if (currentId) {
+        await authFetch(`/api/my-itineraires/${currentId}`, session.apiToken, {
+          method: "PUT",
+          body: JSON.stringify({ nom, dureeKey, days: slugDays }),
+        });
+        id = currentId;
+      } else {
+        const res = await authFetch("/api/my-itineraires", session.apiToken, {
+          method: "POST",
+          body: JSON.stringify({ nom, dureeKey, days: slugDays }),
+        });
+        const data = await res.json();
+        id = data.id;
+      }
+      setCurrentId(id);
+      setCurrentNom(nom);
+      setShowSaveModal(false);
+      setSavedBanner(true);
+      window.history.replaceState(null, "", `/creer-itineraire?id=${encodeURIComponent(id)}`);
+    } catch {
+      // silent — état inchangé si erreur réseau
+    } finally {
+      setSaving(false);
+    }
   };
 
   // ─── Render ────────────────────────────────────────────────────────────────
@@ -257,7 +304,7 @@ export default function CreerItinerairePage() {
               style={{ background: "var(--surface-hover)", color: "var(--text)", border: "1px solid var(--line)" }}
               value={saveInput}
               onChange={(e) => setSaveInput(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") handleSave(); }}
+              onKeyDown={(e) => { if (e.key === "Enter") void handleSave(); }}
               placeholder="Mon itinéraire…"
               autoFocus
             />
@@ -265,8 +312,13 @@ export default function CreerItinerairePage() {
               <button onClick={() => setShowSaveModal(false)} className="text-sm px-4 py-2 rounded-lg transition-colors hover:bg-white/5" style={{ color: "var(--text-muted)" }}>
                 Annuler
               </button>
-              <button onClick={handleSave} className="text-sm px-4 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>
-                Sauvegarder
+              <button
+                onClick={() => void handleSave()}
+                disabled={saving}
+                className="text-sm px-4 py-2 rounded-lg font-semibold disabled:opacity-50 cursor-pointer disabled:cursor-default"
+                style={{ background: "var(--azure)", color: "#0c1116" }}
+              >
+                {saving ? "Sauvegarde…" : session ? "Sauvegarder" : "Connexion requise"}
               </button>
             </div>
           </div>
