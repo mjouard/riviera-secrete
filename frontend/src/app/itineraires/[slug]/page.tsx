@@ -1,0 +1,212 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { api } from "@/lib/api";
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const itineraires = await api.itineraires.list();
+  return itineraires.map((i) => ({ slug: i.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const itin = await api.itineraires.bySlug(slug).catch(() => null);
+  if (!itin) return {};
+  return {
+    title: `${itin.titre} — Riviera Secrète`,
+    description: itin.description,
+  };
+}
+
+export default async function ItinerairePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const itin = await api.itineraires.bySlug(slug).catch(() => null);
+  if (!itin) notFound();
+
+  const stops = itin.items.filter((item) => item.type === "stop");
+
+  return (
+    <article className="max-w-4xl mx-auto px-6 py-12">
+      {/* Breadcrumb */}
+      <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
+        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <span>/</span>
+        <Link href="/itineraires" className="hover:text-white transition-colors">Itinéraires</Link>
+        <span>/</span>
+        <span style={{ color: "var(--text)" }}>{itin.titre}</span>
+      </nav>
+
+      {/* Header */}
+      <div className="mb-10">
+        <p className="text-sm font-semibold mb-2" style={{ color: "var(--terracotta)" }}>
+          {itin.badge}
+        </p>
+        <h1 className="text-3xl font-bold mb-4 leading-tight">{itin.titre}</h1>
+        <p className="text-lg" style={{ color: "var(--text-muted)" }}>
+          {itin.description}
+        </p>
+
+        {itin.metaPills.length > 0 && (
+          <div className="flex flex-wrap gap-x-6 gap-y-1 mt-6 text-sm">
+            {itin.metaPills.map((pill, i) => (
+              <span key={i} style={{ color: "var(--text-muted)" }}>
+                {pill.label} <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Programme */}
+      <section className="mb-12">
+        <h2 className="text-xl font-bold mb-6">Programme détaillé</h2>
+        <div className="space-y-2">
+          {itin.items.map((item, i) => {
+            if (item.type === "transit") {
+              return (
+                <div
+                  key={i}
+                  className="text-sm py-3 px-4 rounded-lg"
+                  style={{ color: "var(--text-muted)", background: "var(--surface)" }}
+                >
+                  {item.desc}
+                </div>
+              );
+            }
+            return (
+              <div
+                key={i}
+                className="rounded-xl p-5"
+                style={{ background: "var(--surface)" }}
+              >
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <div>
+                    {item.heure && (
+                      <span
+                        className="text-xs font-mono mr-2"
+                        style={{ color: "var(--azure)" }}
+                      >
+                        {item.heure}
+                      </span>
+                    )}
+                    <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+                      {item.commune}
+                    </span>
+                  </div>
+                  {item.lieuSlug && (
+                    <Link
+                      href={`/lieux/${item.lieuSlug}`}
+                      className="text-xs hover:underline flex-shrink-0"
+                      style={{ color: "var(--azure)" }}
+                    >
+                      Voir le lieu →
+                    </Link>
+                  )}
+                </div>
+                <h3 className="font-semibold mb-1">{item.nom}</h3>
+                {item.desc && (
+                  <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                    {item.desc}
+                  </p>
+                )}
+                {item.activites && item.activites.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {item.activites.map((act, j) => (
+                      <span
+                        key={j}
+                        className="text-xs px-2 py-1 rounded"
+                        style={{
+                          background: "var(--surface-hover)",
+                          color:
+                            act.cls?.includes("free")
+                              ? "var(--azure)"
+                              : "var(--terracotta)",
+                        }}
+                      >
+                        {act.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* À réserver */}
+      {itin.booking.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-xl font-bold mb-6">À réserver</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {itin.booking.map((b, i) => (
+              <div
+                key={i}
+                className="rounded-xl p-5 flex flex-col gap-3"
+                style={{ background: "var(--surface)" }}
+              >
+                <div>
+                  <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>
+                    {b.lieuLabel}
+                  </p>
+                  <p className="font-semibold">{b.nomLabel}</p>
+                </div>
+                <Link
+                  href={`/lieux/${b.lieuSlug}`}
+                  className="text-sm self-start"
+                  style={{ color: "var(--azure)" }}
+                >
+                  {b.linkText}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Étapes en bref */}
+      {stops.length > 0 && (
+        <section
+          className="pt-8 border-t"
+          style={{ borderColor: "var(--line)" }}
+        >
+          <h2 className="text-lg font-semibold mb-4">
+            {stops.length} étapes
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {stops.map((s, i) => (
+              s.lieuSlug ? (
+                <Link
+                  key={i}
+                  href={`/lieux/${s.lieuSlug}`}
+                  className="text-sm px-3 py-1 rounded-full border transition-colors hover:bg-white/5"
+                  style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                >
+                  {s.nom ?? s.lieuSlug}
+                </Link>
+              ) : (
+                <span
+                  key={i}
+                  className="text-sm px-3 py-1 rounded-full border"
+                  style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                >
+                  {s.nom}
+                </span>
+              )
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  );
+}

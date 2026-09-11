@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0C1116;
+  --surface: #151B22;
+  --surface-hover: #1C242D;
+  --text: #ECEEF1;
+  --text-muted: #8B96A1;
+  --terracotta: #E8A33D;
+  --azure: #4FC3C9;
+  --line: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
