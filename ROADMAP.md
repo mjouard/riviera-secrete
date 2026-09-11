@@ -113,8 +113,7 @@
 
 ## SEO / technique
 
-- [ ] Générer `sitemap.xml` depuis `data/lieux.json` dans `build.mjs` au lieu de le
-      maintenir à la main (un `<url>` par lieu actuellement) — point de synchro manuelle
-      fragile, déjà documenté dans `CLAUDE.md`
+- [x] Générer `sitemap.xml` depuis les JSON dans `build.mjs` — 56 URLs auto (1 homepage +
+      6 itin + 27 lieux + 22 villes), domaine corrigé vercel.app, robots.txt à jour
 - [ ] Images Open Graph par page lieu (absentes pour la plupart)
 - [ ] Migration SSG (Eleventy) si le site continue de grandir
