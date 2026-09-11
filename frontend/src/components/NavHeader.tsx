@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "/lieux", label: "Lieux" },
   { href: "/villes", label: "Villes" },
   { href: "/itineraires", label: "Itinéraires" },
+  { href: "/mes-itineraires", label: "Mes itinéraires" },
 ];
 
 export default function NavHeader() {
