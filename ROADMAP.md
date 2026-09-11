@@ -47,9 +47,10 @@
       query params plutôt que dans localStorage uniquement, pour partager un itinéraire créé
       via un simple lien, sans compte ni backend
 - [ ] Créateur d'itinéraire : export/impression pour usage hors ligne sur le terrain
-- [ ] Bouton "Ajouter à mon itinéraire" directement sur chaque fiche lieu (et sur le popup
-      de la carte homepage) — aujourd'hui il faut passer par le picker de
-      `creer-itineraire.html`, aucun raccourci depuis une fiche lieu déjà consultée
+- [x] Bouton "Ajouter à mon itinéraire" directement sur chaque fiche lieu — mini-panneau
+      déroulant listant les itinéraires sauvegardés, clic pour ajouter le lieu au dernier
+      jour de l'itinéraire sans quitter la page ; `?add=slug` sur `creer-itineraire.html`
+      pré-coche le lieu si aucun itinéraire sauvegardé ; popup de la carte homepage non inclus
 - [ ] PWA — manifest + service worker pour usage hors ligne sur le terrain
 
 ## Audience

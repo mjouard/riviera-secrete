@@ -135,6 +135,10 @@
         <a class="map-link" href="https://maps.apple.com/?ll=43.5461,7.1256&q=Le%20sentier%20du%20littoral%20du%20Cap%20d'Antibes" target="_blank" rel="noopener">📍 Plans</a>
       </div>
       <button class="share-btn" id="share-btn-sentier-cap-antibes" type="button">🔗 Partager ce lieu</button>
+      <div class="add-itin-wrap">
+        <button class="add-itin-btn" id="add-itin-btn-sentier-cap-antibes" type="button">➕ Ajouter à un itinéraire</button>
+        <div class="add-itin-panel" id="add-itin-panel-sentier-cap-antibes" hidden></div>
+      </div>
       <h2>Bon à savoir</h2>
       <ul>
           <li><strong>Accès</strong>Départs possibles depuis la plage de la Garoupe ou le boulevard du littoral.</li>
@@ -314,6 +318,62 @@
         btn.setAttribute('aria-pressed', String(added));
         btn.classList.toggle('is-fav', added);
       });
+    });
+  })();
+</script>
+<script>
+  (function() {
+    var STORAGE_KEY = 'riviera-secrete:itineraires-custom';
+    var lieuSlug = 'sentier-cap-antibes';
+    var addBtn = document.getElementById('add-itin-btn-sentier-cap-antibes');
+    var panel = document.getElementById('add-itin-panel-sentier-cap-antibes');
+    if (!addBtn || !panel) return;
+
+    function getSaved() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch(e) { return []; }
+    }
+
+    function renderPanel() {
+      var saved = getSaved();
+      if (saved.length === 0) {
+        panel.innerHTML = '<p class="add-itin-empty">Aucun itinéraire sauvegardé.<br><a href="../creer-itineraire.html?add=' + lieuSlug + '">Créer un itinéraire →</a></p>';
+        return;
+      }
+      var items = saved.map(function(itin) {
+        var alreadyIn = itin.days.some(function(day) { return day.indexOf(lieuSlug) >= 0; });
+        var daysLabel = itin.days.length + ' jour' + (itin.days.length > 1 ? 's' : '');
+        return '<li><button class="add-itin-item" data-id="' + itin.id + '"' + (alreadyIn ? ' disabled' : '') + '>' +
+          '<span class="add-itin-name">' + itin.nom + '</span>' +
+          '<span class="add-itin-days">' + daysLabel + '</span>' +
+          (alreadyIn ? '<span class="add-itin-already">✓ Déjà présent</span>' : '') +
+          '</button></li>';
+      }).join('');
+      panel.innerHTML = '<ul class="add-itin-list">' + items + '</ul>' +
+        '<a class="add-itin-new" href="../creer-itineraire.html?add=' + lieuSlug + '">+ Nouvel itinéraire</a>';
+      panel.querySelectorAll('.add-itin-item:not([disabled])').forEach(function(itemBtn) {
+        itemBtn.addEventListener('click', function() {
+          var id = itemBtn.dataset.id;
+          var all = getSaved();
+          var itin = all.find(function(it) { return it.id === id; });
+          if (!itin) return;
+          itin.days[itin.days.length - 1].push(lieuSlug);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+          itemBtn.innerHTML = '<span class="add-itin-name">✓ Ajouté !</span>';
+          itemBtn.disabled = true;
+          setTimeout(function() { panel.hidden = true; }, 1000);
+        });
+      });
+    }
+
+    addBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!panel.hidden) { panel.hidden = true; return; }
+      renderPanel();
+      panel.hidden = false;
+    });
+    document.addEventListener('click', function(e) {
+      if (!panel.hidden && !panel.contains(e.target) && e.target !== addBtn) panel.hidden = true;
     });
   })();
 </script>

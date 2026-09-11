@@ -48,6 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
           showResults();
         }
       }
+      const addSlug = params.get('add');
+      if (addSlug && lieuBySlug.has(addSlug)) {
+        precheckPicker([addSlug]);
+        const cb = zonesEl.querySelector(`.lieu-checkbox[data-slug="${addSlug}"]`);
+        if (cb) {
+          const details = cb.closest('details.builder-zone');
+          if (details) details.open = true;
+          setTimeout(() => cb.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+        }
+      }
     })
     .catch((err) => {
       console.error('Échec du chargement de data/lieux.json', err);
