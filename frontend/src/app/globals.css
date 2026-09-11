@@ -35,6 +35,10 @@
   .carousel-dots { bottom: 12px; right: 14px; }
 }
 
+/* ---------- BUILDER ---------- */
+.builder-stop-card.dragging { opacity: 0.4; }
+.builder-day-stops { min-height: 60px; }
+
 :root {
   --bg: #0C1116;
   --surface: #151B22;
