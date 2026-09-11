@@ -6,6 +6,7 @@ using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RivieraSecrete.Api;
 using RivieraSecrete.Domain.Entities;
 using RivieraSecrete.Infrastructure.Data;
 
@@ -123,9 +124,12 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
                 GoogleId = payload.Subject,
                 Email = email,
                 Nom = payload.Name ?? email,
+                EmailConfirmed = true, // Google a déjà vérifié la propriété de l'email
             };
             db.Users.Add(user);
         }
+        // Google vouche pour cet email, y compris pour un compte email/mdp existant qu'on lie ici.
+        user.EmailConfirmed = true;
         await db.SaveChangesAsync();
     }
 
@@ -153,12 +157,16 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
         Email = email,
         Nom = nom,
         PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+        EmailConfirmed = false,
+        EmailConfirmationToken = GenerateToken(),
+        EmailConfirmationTokenExpiry = DateTime.UtcNow.AddHours(24),
     };
     db.Users.Add(user);
     await db.SaveChangesAsync();
 
-    var token = GenerateJwt(user, config);
-    return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
+    await EmailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!, config);
+
+    return Results.Ok(new { Status = "confirmation_required", Email = user.Email });
 });
 
 app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfiguration config) =>
@@ -167,12 +175,47 @@ app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfig
     var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
 
     if (user is null || user.PasswordHash is null)
-        return Results.Unauthorized();
+        return Results.Json(new { Error = "Email ou mot de passe incorrect." }, statusCode: 401);
     if (!BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
-        return Results.Unauthorized();
+        return Results.Json(new { Error = "Email ou mot de passe incorrect." }, statusCode: 401);
+    if (!user.EmailConfirmed)
+        return Results.Json(new { Error = "Confirme ton email avant de te connecter.", Code = "email_not_confirmed" }, statusCode: 403);
 
     var token = GenerateJwt(user, config);
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
+});
+
+app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbContext db, IConfiguration config) =>
+{
+    var user = await db.Users.FirstOrDefaultAsync(u => u.EmailConfirmationToken == req.Token);
+    if (user is null)
+        return Results.BadRequest(new { Error = "Lien de confirmation invalide." });
+    if (user.EmailConfirmationTokenExpiry is null || user.EmailConfirmationTokenExpiry < DateTime.UtcNow)
+        return Results.BadRequest(new { Error = "Ce lien de confirmation a expiré. Demande-en un nouveau." });
+
+    user.EmailConfirmed = true;
+    user.EmailConfirmationToken = null;
+    user.EmailConfirmationTokenExpiry = null;
+    await db.SaveChangesAsync();
+
+    return Results.Ok(new { Status = "confirmed" });
+});
+
+app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest req, AppDbContext db, IConfiguration config) =>
+{
+    var email = req.Email.Trim().ToLowerInvariant();
+    var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+    // Réponse générique dans tous les cas pour ne pas révéler si l'email existe.
+    if (user is not null && user.PasswordHash is not null && !user.EmailConfirmed)
+    {
+        user.EmailConfirmationToken = GenerateToken();
+        user.EmailConfirmationTokenExpiry = DateTime.UtcNow.AddHours(24);
+        await db.SaveChangesAsync();
+        await EmailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!, config);
+    }
+
+    return Results.Ok(new { Status = "sent" });
 });
 
 // ── Protected: Favoris ────────────────────────────────────────────────────────
@@ -290,6 +333,12 @@ static Guid? GetUserId(ClaimsPrincipal principal)
     return Guid.TryParse(sub, out var id) ? id : null;
 }
 
+static string GenerateToken()
+{
+    var bytes = System.Security.Cryptography.RandomNumberGenerator.GetBytes(32);
+    return Convert.ToHexString(bytes).ToLowerInvariant();
+}
+
 static string GenerateJwt(User user, IConfiguration config)
 {
     var secret = config["Jwt:Secret"]!;
@@ -322,4 +371,6 @@ static string GenerateJwt(User user, IConfiguration config)
 record GoogleSignInRequest(string IdToken);
 record RegisterRequest(string Email, string Password, string Nom);
 record LoginRequest(string Email, string Password);
+record ConfirmEmailRequest(string Token);
+record ResendConfirmationRequest(string Email);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);

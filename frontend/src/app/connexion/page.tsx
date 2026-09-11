@@ -19,6 +19,9 @@ export default function ConnexionPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [needsConfirmation, setNeedsConfirmation] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -28,11 +31,27 @@ export default function ConnexionPage() {
   function switchMode(next: Mode) {
     setMode(next);
     setError(null);
+    setNeedsConfirmation(false);
+  }
+
+  async function resendConfirmation(targetEmail: string) {
+    setResendStatus("sending");
+    try {
+      await fetch(`${API_URL}/api/auth/resend-confirmation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: targetEmail }),
+      });
+      setResendStatus("sent");
+    } catch {
+      setResendStatus("idle");
+    }
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+    setNeedsConfirmation(false);
     setLoading(true);
 
     try {
@@ -42,12 +61,38 @@ export default function ConnexionPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password, nom }),
         });
+        const data = await res.json().catch(() => null);
         if (!res.ok) {
-          const data = await res.json().catch(() => null);
           setError(data?.error ?? "Impossible de créer le compte.");
           setLoading(false);
           return;
         }
+        // Inscription ok mais compte pas encore confirmé — pas de session tant que
+        // l'email n'est pas validé.
+        setPendingEmail(data?.email ?? email);
+        setLoading(false);
+        return;
+      }
+
+      // Login : on interroge d'abord l'API directement pour distinguer un mauvais mot
+      // de passe d'un compte pas encore confirmé (NextAuth ne renvoie qu'une erreur
+      // générique via authorize()).
+      const loginRes = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!loginRes.ok) {
+        const data = await loginRes.json().catch(() => null);
+        if (data?.code === "email_not_confirmed") {
+          setNeedsConfirmation(true);
+          setPendingEmail(email);
+        } else {
+          setError(data?.error ?? "Email ou mot de passe incorrect.");
+        }
+        setLoading(false);
+        return;
       }
 
       const result = await signIn("credentials", {
@@ -69,6 +114,31 @@ export default function ConnexionPage() {
       setError("Une erreur est survenue. Réessaie.");
       setLoading(false);
     }
+  }
+
+  if (pendingEmail && !needsConfirmation) {
+    return (
+      <div className="max-w-sm mx-auto px-6 py-16 text-center">
+        <h1 className="text-2xl font-bold mb-3">Vérifie ta boîte mail</h1>
+        <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
+          On a envoyé un lien de confirmation à <strong style={{ color: "var(--text)" }}>{pendingEmail}</strong>.
+          Clique dessus pour activer ton compte.
+        </p>
+        <button
+          onClick={() => resendConfirmation(pendingEmail)}
+          disabled={resendStatus !== "idle"}
+          className="text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-default"
+          style={{ borderColor: "var(--line)", color: "var(--text)" }}
+        >
+          {resendStatus === "sent" ? "Email renvoyé ✓" : resendStatus === "sending" ? "Envoi…" : "Renvoyer l'email"}
+        </button>
+        <p className="text-xs text-center mt-8">
+          <Link href="/" className="hover:text-white transition-colors" style={{ color: "var(--text-muted)" }}>
+            ← Retour à l&apos;accueil
+          </Link>
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -167,6 +237,23 @@ export default function ConnexionPage() {
           <p className="text-xs px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>
             {error}
           </p>
+        )}
+
+        {needsConfirmation && pendingEmail && (
+          <div
+            className="text-xs px-3 py-2.5 rounded-lg flex items-center justify-between gap-3"
+            style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}
+          >
+            <span>Ton email n&apos;est pas encore confirmé.</span>
+            <button
+              type="button"
+              onClick={() => resendConfirmation(pendingEmail)}
+              disabled={resendStatus !== "idle"}
+              className="underline whitespace-nowrap cursor-pointer disabled:opacity-50"
+            >
+              {resendStatus === "sent" ? "Renvoyé ✓" : resendStatus === "sending" ? "Envoi…" : "Renvoyer"}
+            </button>
+          </div>
         )}
 
         <button

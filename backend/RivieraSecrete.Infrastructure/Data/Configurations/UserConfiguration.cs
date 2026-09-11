@@ -16,6 +16,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(u => u.Email).IsUnique();
         builder.Property(u => u.Email).HasMaxLength(256).IsRequired();
         builder.Property(u => u.Nom).HasMaxLength(200).IsRequired();
+        builder.Property(u => u.EmailConfirmed).HasDefaultValue(false);
+        builder.Property(u => u.EmailConfirmationToken).HasMaxLength(64);
+        builder.HasIndex(u => u.EmailConfirmationToken);
         builder.Property(u => u.CreatedAt).HasDefaultValueSql("now()");
 
         builder.HasMany(u => u.Favorites)
