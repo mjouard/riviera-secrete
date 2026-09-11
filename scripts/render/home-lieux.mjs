@@ -12,7 +12,7 @@ export function buildItemList(villes) {
   return villes.map((v, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    url: `https://riviera-secrete.netlify.app/villes/${v.slug}.html`,
+    url: `https://riviera-secrete.vercel.app/villes/${v.slug}.html`,
     name: v.nom,
   }));
 }
