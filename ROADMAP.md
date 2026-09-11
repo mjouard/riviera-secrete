@@ -83,6 +83,41 @@
       bilingue) mais probablement le plus gros levier d'audience disponible
 - [x] Analytics respectueux de la vie privée (Plausible) — script déployé sur les 63 pages
 
+## Portage site statique → Next.js (priorité depuis le 2026-09-11)
+
+`frontend/` est maintenant le stack prioritaire (voir CLAUDE.md, "Frontend/backend rewrite") —
+le site statique reste en prod mais n'a plus vocation à recevoir de nouvelles features. Cette
+section liste ce qu'il reste à porter pour atteindre la parité ; état détaillé et sourcé dans
+`.claude/memory/frontend_migration_checklist.md` (table complète feature par feature).
+
+Fait le 2026-09-11 dans cette passe : carte Leaflet homepage, section activités par catégorie,
+filtres badge sur la grille lieux, images sur les cartes itinéraires (tous manquants avant),
+décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur OpenStreetMap
+(CARTO a coupé l'accès anonyme à ses tuiles `dark_all`, renvoyait un "API key required").
+
+- [ ] Export PDF / impression de l'itinéraire créé (`/creer-itineraire`) — existe sur le site
+      statique (`window.print()` + `@media print`), absent sur Next.js
+- [ ] Bouton "Partager" (Web Share API) sur les fiches lieu — absent sur Next.js
+- [ ] Bouton "Ajouter à un itinéraire" sur les fiches lieu — mini-panneau listant les
+      itinéraires sauvegardés, absent sur Next.js (existe sur le site statique)
+- [ ] Booking cards "À réserver" avec image + prix + durée — la section existe sur les pages
+      itinéraire Next.js mais n'affiche que lieu/nom/lien, pas l'image ni le prix (nécessite de
+      croiser avec l'activité référencée, comme le fait `itin.mjs` côté site statique)
+- [ ] Section "Autres itinéraires" (suggestions) en bas d'une page itinéraire — absente sur
+      Next.js, les données `suggestions[]` existent déjà côté API
+- [ ] Lien `?itin=<slug>` sur les stops + breadcrumb contextuel retour-vers-l'itinéraire —
+      absent sur Next.js (comportement présent sur le site statique, voir CLAUDE.md)
+- [ ] Hero carrousel sur la homepage (8 images) — absent sur Next.js (le composant
+      `HeroCarousel.tsx` existe et est utilisé sur les pages lieu/itinéraire, juste pas monté
+      sur la homepage elle-même)
+- [ ] JSON-LD `ItemList` sur la homepage Next.js — absent (existe sur le site statique,
+      généré par `home-lieux.mjs`)
+- [ ] JSON-LD `TouristDestination` sur les pages ville Next.js — absent
+- [ ] `noindex` sur les pages user-generated (`/creer-itineraire`, `/mes-itineraires`,
+      `/mes-favoris`) — pas confirmé posé sur Next.js, existe sur le site statique
+- [ ] Apparition au scroll (IntersectionObserver) sur la grille homepage — cosmétique, non
+      prioritaire
+
 ## Communauté / comptes (backend requis)
 
 - [x] Connexion Google (OAuth) via NextAuth.js (Option A retenue) — backend ASP.NET Core +
