@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
+import NavHeader from "@/components/NavHeader";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,35 +25,7 @@ export default function RootLayout({
         <script async src={plausibleScript} />
       </head>
       <body className="min-h-screen flex flex-col">
-        <header
-          className="sticky top-0 z-10 border-b"
-          style={{
-            background: "rgba(12,17,22,0.85)",
-            backdropFilter: "blur(8px)",
-            borderColor: "var(--line)",
-          }}
-        >
-          <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <Link
-              href="/"
-              className="font-serif text-lg font-semibold tracking-tight"
-              style={{ color: "var(--text)" }}
-            >
-              Riviera Secrète
-            </Link>
-            <nav className="flex gap-6 text-sm" style={{ color: "var(--text-muted)" }}>
-              <Link href="/lieux" className="hover:text-white transition-colors">
-                Lieux
-              </Link>
-              <Link
-                href="/itineraires"
-                className="hover:text-white transition-colors"
-              >
-                Itinéraires
-              </Link>
-            </nav>
-          </div>
-        </header>
+        <NavHeader />
 
         <main className="flex-1">{children}</main>
 
