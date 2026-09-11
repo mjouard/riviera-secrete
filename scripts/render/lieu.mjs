@@ -234,9 +234,9 @@ ${renderMetaPills(metaPills, lat, lng)}
       <div class="map-links">
 ${renderMapLinks(lat, lng, nom)}
       </div>
-      <button class="share-btn" id="share-btn-${slug}" type="button">🔗 Partager ce lieu</button>
+      <button class="btn-secondary" id="share-btn-${slug}" type="button" style="width:100%;margin-top:8px;">🔗 Partager ce lieu</button>
       <div class="add-itin-wrap">
-        <button class="add-itin-btn" id="add-itin-btn-${slug}" type="button">➕ Ajouter à un itinéraire</button>
+        <button class="btn-secondary add-itin-btn" id="add-itin-btn-${slug}" type="button">➕ Ajouter à un itinéraire</button>
         <div class="add-itin-panel" id="add-itin-panel-${slug}" hidden></div>
       </div>
       <h2>Bon à savoir</h2>

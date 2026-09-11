@@ -244,22 +244,8 @@ nav a:hover, nav a:focus-visible{ color:var(--text); border-color:rgba(255,255,2
   transition:border-color 0.15s, opacity 0.15s;
 }
 .map-link:hover{ border-color:var(--terracotta); opacity:0.85; }
-.share-btn{
-  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
-  padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
-  display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
-  background:transparent; cursor:pointer; margin-top:4px;
-  transition:border-color 0.15s, color 0.15s;
-}
-.share-btn:hover{ border-color:var(--terracotta); color:var(--terracotta); }
 .add-itin-wrap{ position:relative; margin-top:8px; }
-.add-itin-btn{
-  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.02em;
-  padding:5px 12px; border-radius:2px; border:1px solid var(--line); color:var(--text-muted);
-  display:flex; align-items:center; gap:5px; white-space:nowrap; width:100%;
-  background:transparent; cursor:pointer; transition:border-color 0.15s, color 0.15s;
-}
-.add-itin-btn:hover{ border-color:var(--terracotta); color:var(--terracotta); }
+.add-itin-btn{ width:100%; }
 .add-itin-panel{
   position:absolute; top:calc(100% + 4px); left:0; right:0;
   background:var(--surface); border:1px solid var(--line); border-radius:3px;
