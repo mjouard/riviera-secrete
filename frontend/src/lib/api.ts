@@ -8,6 +8,22 @@ async function get<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+/** Fetch avec token JWT — à utiliser côté client uniquement. */
+export async function authFetch(
+  path: string,
+  token: string,
+  options: RequestInit = {}
+): Promise<Response> {
+  return fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...(options.headers ?? {}),
+    },
+  });
+}
+
 export const api = {
   lieux: {
     list: () => get<Lieu[]>("/api/lieux"),

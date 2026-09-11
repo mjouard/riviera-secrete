@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const NAV_LINKS = [
   { href: "/lieux", label: "Lieux" },
@@ -9,6 +10,34 @@ const NAV_LINKS = [
   { href: "/itineraires", label: "Itinéraires" },
   { href: "/mes-itineraires", label: "Mes itinéraires" },
 ];
+
+function AuthButton({ onClose }: { onClose?: () => void }) {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return null;
+
+  if (session) {
+    return (
+      <button
+        onClick={() => { signOut(); onClose?.(); }}
+        className="text-sm transition-colors hover:text-white"
+        style={{ color: "var(--text-muted)" }}
+      >
+        {session.user?.name?.split(" ")[0] ?? "Mon compte"} · Déconnexion
+      </button>
+    );
+  }
+
+  return (
+    <button
+      onClick={() => { signIn("google"); onClose?.(); }}
+      className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10"
+      style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+    >
+      Connexion
+    </button>
+  );
+}
 
 export default function NavHeader() {
   const [open, setOpen] = useState(false);
@@ -34,12 +63,13 @@ export default function NavHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden sm:flex gap-6 text-sm" style={{ color: "var(--text-muted)" }}>
+        <nav className="hidden sm:flex gap-6 items-center text-sm" style={{ color: "var(--text-muted)" }}>
           {NAV_LINKS.map(({ href, label }) => (
             <Link key={href} href={href} className="hover:text-white transition-colors">
               {label}
             </Link>
           ))}
+          <AuthButton />
         </nav>
 
         {/* Hamburger button — mobile only */}
@@ -71,6 +101,9 @@ export default function NavHeader() {
               {label}
             </Link>
           ))}
+          <div className="px-6 py-4">
+            <AuthButton onClose={close} />
+          </div>
         </nav>
       )}
     </header>
