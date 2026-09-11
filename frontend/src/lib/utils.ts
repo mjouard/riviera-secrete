@@ -1,3 +1,27 @@
+const HTML_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+/** Décode les entités HTML restées littérales dans les données (ex. "&amp;" venu du site statique). Ne touche jamais document/DOM — utilisable côté serveur. */
+export function decodeEntities(str: string): string {
+  if (!str || !str.includes("&")) return str;
+  return str.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z]+);/g, (match, entity: string) => {
+    if (entity[0] === "#") {
+      const code =
+        entity[1] === "x" || entity[1] === "X"
+          ? parseInt(entity.slice(2), 16)
+          : parseInt(entity.slice(1), 10);
+      return Number.isNaN(code) ? match : String.fromCodePoint(code);
+    }
+    return HTML_ENTITIES[entity] ?? match;
+  });
+}
+
 export function imgUrl(path: string): string {
   if (!path) return "";
   if (/^https?:\/\/|^data:/.test(path)) return path;
