@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/lieux", label: "Lieux" },
+  { href: "/villes", label: "Villes" },
   { href: "/itineraires", label: "Itinéraires" },
 ];
 

@@ -7,14 +7,16 @@ const SITE_URL =
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [lieux, itineraires] = await Promise.all([
+  const [lieux, itineraires, villes] = await Promise.all([
     api.lieux.list().catch(() => []),
     api.itineraires.list().catch(() => []),
+    api.villes.list().catch(() => []),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, priority: 1, changeFrequency: "weekly" },
     { url: `${SITE_URL}/lieux`, priority: 0.8, changeFrequency: "weekly" },
+    { url: `${SITE_URL}/villes`, priority: 0.8, changeFrequency: "weekly" },
     { url: `${SITE_URL}/itineraires`, priority: 0.8, changeFrequency: "weekly" },
   ];
 
@@ -30,5 +32,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly" as const,
   }));
 
-  return [...staticRoutes, ...lieuRoutes, ...itinRoutes];
+  const villeRoutes: MetadataRoute.Sitemap = villes.map((v) => ({
+    url: `${SITE_URL}/villes/${v.slug}`,
+    priority: 0.6,
+    changeFrequency: "monthly" as const,
+  }));
+
+  return [...staticRoutes, ...lieuRoutes, ...itinRoutes, ...villeRoutes];
 }
