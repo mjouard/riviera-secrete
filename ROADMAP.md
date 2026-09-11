@@ -122,6 +122,16 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 
 - [x] Connexion Google (OAuth) via NextAuth.js (Option A retenue) — backend ASP.NET Core +
       PostgreSQL sur Railway (décision archi 2026-09-11), `frontend/` uniquement
+- [x] Connexion par email/mot de passe (2026-09-12) — `CredentialsProvider` NextAuth +
+      `POST /api/auth/{register,login}`, hash BCrypt, page `/connexion` unique (bascule
+      login/inscription, Google et mot de passe côte à côte)
+- [x] Confirmation d'email obligatoire à l'inscription par mot de passe (2026-09-12) —
+      email envoyé via Resend (`backend/RivieraSecrete.Api/EmailService.cs`), login refusé
+      tant que non confirmé, page `/confirmer-email`. **Limitation connue** : Resend est en
+      mode sandbox (`onboarding@resend.dev`, aucun domaine vérifié) donc n'accepte d'envoyer
+      qu'à l'adresse email du compte Resend lui-même — les vrais visiteurs ne recevront pas
+      cet email tant qu'un domaine n'est pas vérifié sur resend.com/domains (voir la tâche
+      domaine ci-dessous, `RESEND_API_KEY` déjà configurée sur Railway)
 - [x] Migration favoris + itinéraires custom de localStorage → DB — favoris (`/mes-favoris`,
       `9e055b3`) et itinéraires custom (`fc84181`, DB-only) faits côté `frontend/` ; le site
       statique garde sa propre version localStorage séparée (`mes-favoris.html`), non migrée
@@ -137,7 +147,9 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 - [x] Migrer de Netlify vers Vercel — site en prod sur Vercel (déploiement auto sur push
       `main`, `vercel.json` configuré avec cache et headers de sécurité)
 - [ ] Acheter un nom de domaine (ex. `riviera-secrete.fr` ou `.com`) et le configurer sur
-      Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine pointé
+      Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine
+      pointé. Sert aussi à vérifier un domaine sur Resend (resend.com/domains) pour lever la
+      limitation d'envoi sandbox des emails de confirmation (voir "Communauté / comptes")
 - [ ] Mettre à jour toutes les URLs canoniques (`<link rel="canonical">`, `og:url`, JSON-LD,
       `ogImage` dans les lieux) — hardcodées sur `riviera-secrete.netlify.app` ; chercher
       dans `scripts/render/lieu.mjs`, `itin.mjs`, `index.html`, puis rebuilder

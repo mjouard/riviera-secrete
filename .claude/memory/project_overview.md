@@ -33,12 +33,17 @@ Le projet est en transition entre un site statique (historique) et une stack com
 
 | Couche | URL | Hébergement |
 |---|---|---|
-| Site statique (legacy) | https://riviera-secrete.netlify.app | Netlify |
+| Site statique (legacy) | https://riviera-secrete.vercel.app | Vercel (projet `riviera-secrete`, migré depuis Netlify — `riviera-secrete.netlify.app` 404 désormais, vérifié 2026-09-12) |
 | Frontend Next.js | https://frontend-two-plum-92.vercel.app | Vercel (projet `frontend`) |
 | API .NET | https://api-production-19623.up.railway.app | Railway (service `api`) |
 | PostgreSQL | interne Railway | Railway (projet `fearless-happiness`) |
 
-Le site statique sera progressivement remplacé par le frontend Next.js. Ne pas investir dans le site statique au-delà des corrections urgentes.
+Le site statique sera progressivement remplacé par le frontend Next.js, qui est le stack
+prioritaire pour tout travail en cours (décidé et confirmé par l'utilisateur le 2026-09-11).
+Ne pas investir dans le site statique au-delà des corrections urgentes. Certains champs
+internes (`data/lieux.json`'s `ogImage`, canonicals dans `scripts/render/*.mjs`) référencent
+encore `netlify.app` en dur malgré la migration — tâche différée existante dans
+`ROADMAP.md`, pas encore corrigée.
 
 ---
 
