@@ -40,6 +40,39 @@
   .stop-act--paid{ background:rgba(232,163,61,0.1); color:var(--terracotta); border:1px solid rgba(232,163,61,0.22); }
   .stop-act--free{ background:rgba(74,144,185,0.08); color:var(--azure); border:1px solid rgba(74,144,185,0.18); }
   @media(max-width:600px){ .itin-stop,.itin-transit{ grid-template-columns:1fr; } .transit-arrow{ display:none; } }
+
+  /* ---------- PRINT / PDF EXPORT ---------- */
+  .print-header{ display:none; }
+  .print-header-url{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:#888; margin-bottom:4px; }
+  .print-header h1{ font-family:'Fraunces',serif; font-size:1.8rem; font-weight:600; margin:0 0 4px; }
+  .print-header-meta{ font-size:0.82rem; color:#666; padding-bottom:14px; border-bottom:2px solid #333; margin-bottom:20px; }
+  @media print{
+    :root{ --bg:#fff; --surface:#f5f5f5; --surface-hover:#ebebeb; --text:#111; --text-muted:#555; --line:#ccc; --terracotta:#b86c0a; --azure:#1a6a7a; }
+    body{ background:white !important; }
+    @page{ margin:1.5cm; size:A4; }
+    header, footer, .builder-hero, #picker,
+    .builder-results-head, .builder-drag-hint,
+    #save-banner, #excluded-note, .modal,
+    #builder-map, .itin-map{ display:none !important; }
+    #results{ display:block !important; }
+    .print-header{ display:block !important; }
+    .builder-results{ padding:0 !important; }
+    .builder-results .wrap{ max-width:100% !important; padding:0 !important; }
+    .builder-body{ display:block !important; }
+    .builder-days{ display:block !important; }
+    .builder-day{ margin-bottom:20px; break-inside:avoid; }
+    .builder-day-empty{ display:none !important; }
+    .builder-stop-card{ display:block !important; cursor:default; padding:8px 12px; margin-bottom:6px; }
+    .builder-stop-drag, .builder-stop-media, .builder-stop-actions, .map-links{ display:none !important; }
+    .builder-stop-body{ display:block !important; }
+    .builder-programme{ margin-top:20px; }
+    .itin-stop, .itin-transit{ break-inside:avoid; }
+    .stop-acts a{ text-decoration:none; }
+    .itin-booking-img, .itin-booking-link{ display:none !important; }
+    .itin-booking-grid{ grid-template-columns:repeat(2,1fr) !important; }
+    .itin-booking-card{ break-inside:avoid; }
+  }
+
   /* À réserver */
   .itin-booking{ padding:48px 0 32px; border-top:1px solid var(--line); margin-top:0; }
   .itin-booking h2{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; margin:0 0 4px; }
@@ -103,12 +136,18 @@
 
 <section class="builder-results" id="results" hidden>
   <div class="wrap">
+    <div class="print-header" id="print-header">
+      <p class="print-header-url">riviera-secrete.vercel.app</p>
+      <h1 id="print-header-title">Mon itinéraire</h1>
+      <p id="print-header-meta" class="print-header-meta"></p>
+    </div>
     <div class="builder-results-head">
       <div>
         <button class="btn-secondary" id="btn-back-picker">← Modifier la sélection</button>
         <h2>Ton itinéraire</h2>
       </div>
       <div class="builder-results-actions">
+        <button class="btn-secondary" id="btn-print">🖨 Exporter en PDF</button>
         <button class="btn" id="btn-save">💾 Sauvegarder</button>
       </div>
     </div>

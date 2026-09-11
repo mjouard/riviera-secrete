@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const excludedNote = document.getElementById('excluded-note');
   const daysEl = document.getElementById('builder-days');
   const btnSave = document.getElementById('btn-save');
+  const btnPrint = document.getElementById('btn-print');
   const saveModal = document.getElementById('save-modal');
   const saveInput = document.getElementById('save-name-input');
   const saveConfirmBtn = document.getElementById('save-confirm');
@@ -171,7 +172,20 @@ document.addEventListener('DOMContentLoaded', () => {
     pickerSection.hidden = true;
     resultsSection.hidden = false;
     saveBanner.hidden = true;
+    updatePrintHeader();
     renderDays();
+  }
+
+  function updatePrintHeader() {
+    const titleEl = document.getElementById('print-header-title');
+    const metaEl = document.getElementById('print-header-meta');
+    if (!titleEl) return;
+    const dureeLabels = { 'demi-journee': 'Demi-journée', 'journee': '1 journée', '2-jours': '2 jours', '3-jours': '3 jours' };
+    titleEl.textContent = currentNom || `Itinéraire ${dureeLabels[currentDureeKey] || ''} — Côte d'Azur`;
+    if (metaEl) {
+      const nbLieux = currentDays.flat().length;
+      metaEl.textContent = `${currentDays.length} jour${currentDays.length > 1 ? 's' : ''} · ${nbLieux} lieu${nbLieux > 1 ? 'x' : ''}`;
+    }
   }
 
   function renderDays() {
@@ -444,6 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
     leafletMap.fitBounds(L.latLngBounds(latlngs), { padding: [24, 24] });
   }
 
+  btnPrint.addEventListener('click', () => window.print());
+
   btnSave.addEventListener('click', () => {
     saveInput.value = currentNom;
     saveModal.hidden = false;
@@ -464,5 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
     saveModal.hidden = true;
     history.replaceState(null, '', `creer-itineraire.html?id=${encodeURIComponent(currentId)}`);
     saveBanner.hidden = false;
+    updatePrintHeader();
   });
 });
