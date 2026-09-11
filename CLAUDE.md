@@ -4,10 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Riviera Secrète — a static site (no framework, no server) listing 27 lesser-known spots
-("lieux") on the French Riviera (Menton → Saint-Tropez), grouped into 6 day-trip
-itineraries ("itinéraires"). Deployed to Netlify (`riviera-secrete.netlify.app`), French
-content throughout.
+Riviera Secrète — a site listing 27 lesser-known spots ("lieux") on the French Riviera
+(Menton → Saint-Tropez), grouped into 22 villes and 6 day-trip itineraries
+("itinéraires"). French content throughout.
+
+**Two stacks currently coexist in this repo**, at different maturity levels:
+
+1. **The static site** (repo root: `index.html`, `lieux/*.html`, `itin/*.html`,
+   `villes/*.html`, `assets/`, `scripts/build.mjs`) — no framework, no server, generated
+   from `data/*.json`. This is the one actually deployed to production (Vercel, migrated
+   from Netlify — see `netlify.toml`/`vercel.json` both still present, Vercel is current).
+   Everything below "Commands" through "Content conventions" describes this stack.
+2. **`frontend/` + `backend/`** — a from-scratch rewrite as a Next.js 16 app backed by an
+   ASP.NET Core + PostgreSQL API, started 2026-09-11 to unlock accounts/auth (the static
+   site has no server to hold user data). Not yet cut over as the production site. See
+   "Frontend/backend rewrite" below for its own architecture — it's a separate concern
+   from the static-site data model documented first in this file.
+
+Ongoing work should default to the static site unless told otherwise, since that's what's
+live; treat the new stack as the migration target, not yet the source of truth.
 
 ## Commands
 
@@ -15,19 +30,32 @@ content throughout.
 node scripts/build.mjs      # or: npm run build
 ```
 
-Regenerates every file in `lieux/*.html` and `itin/*.html` from `data/lieux.json` and
-`data/itineraires.json`. **Run this after any edit to those JSON files** — it's the only
-way changes reach the actual pages. There is no lint/test suite.
+Regenerates every file in `lieux/*.html`, `itin/*.html` and `villes/*.html`, plus the
+generated blocks in `index.html` and the whole of `sitemap.xml`, from `data/lieux.json`,
+`data/itineraires.json` and `data/villes.json`. **Run this after any edit to those JSON
+files** — it's the only way changes reach the actual pages. There is no lint/test suite.
 
 To preview locally: `.claude/launch.json` defines a `static` config (`python3 -m
 http.server`) usable with the Browser tool's `preview_start`.
 
+For the new stack, see "Frontend/backend rewrite" below for its own dev commands
+(`npm run dev` in `frontend/`, `dotnet run` in `backend/RivieraSecrete.Api/`).
+
 ## Architecture: data model, not templates-over-nothing
 
-The object hierarchy is: **Itinéraire → Lieux → Activités**, where a Lieu is a physical
-place (village, trail, monument…) and owns its Activités. This is real in the data, not
-just conceptual:
+The object hierarchy is: **Région → Ville → Lieu → Activité**, plus **Itinéraire → Lieux**
+as a separate cross-cutting grouping. A Lieu is a physical place (village, trail,
+monument…) and owns its Activités; a Ville is the town/commune it sits in, and owns its
+Lieux. This is real in the data, not just conceptual:
 
+- **`data/villes.json`** — added 2026-09-11, source of truth for 22 villes (`slug`, `nom`,
+  `regionSlug`/`regionLabel`, `lat`/`lng`, `description`, `thumbImage`, and `lieux: []` — a
+  list of lieu slugs it owns, same by-reference pattern as everywhere else in this file).
+  This is now the **primary unit the homepage displays** — the `#lieux` card grid and the
+  JSON-LD `ItemList` are built from villes, not lieux directly (see the `index.html`
+  bullet below); a lieu page's breadcrumb parent crumb is its ville, not its region (see
+  below). A lieu references its ville via `villeSlug`; `build.mjs` throws if a lieu's
+  `villeSlug` doesn't resolve, so this can't silently drift.
 - **`data/lieux.json`** — source of truth for the 27 lieux, including `lat`/`lng`
   (WebSearch-verified against real-world coordinates, 2026-08-27 — 3 were found off by
   2–6km and corrected: `peille-village`, `peillon-village`,
@@ -46,10 +74,11 @@ just conceptual:
   `scripts/render/itin.mjs` looks up the referenced activité in `lieuBySlug` and pulls the
   real facts from there; the itinerary map's `STOPS` array (lat/lng per stop) is likewise
   computed from the referenced lieu's coordinates, never stored separately.
-- **`lieux/*.html`** and **`itin/*.html`** are generated output — **never hand-edit them**,
-  edits get silently overwritten by the next build. Edit the JSON and rebuild instead.
-- `scripts/render/lieu.mjs` / `scripts/render/itin.mjs` hold the HTML templates (plain JS
-  template literals, no templating engine/dependency).
+- **`lieux/*.html`**, **`itin/*.html`** and **`villes/*.html`** are generated output —
+  **never hand-edit them**, edits get silently overwritten by the next build. Edit the
+  JSON and rebuild instead.
+- `scripts/render/lieu.mjs` / `scripts/render/itin.mjs` / `scripts/render/ville.mjs` hold
+  the HTML templates (plain JS template literals, no templating engine/dependency).
 - `scripts/extract-lieux.mjs` / `scripts/extract-itineraires.mjs` were the one-time
   regex-based extraction used to bootstrap the JSON from the original hand-authored HTML.
   Re-running them would overwrite any hand-edits made directly to the JSON since — treat
@@ -108,20 +137,25 @@ single-source rule as everything else here, no per-itinéraire badge data.
 
 **`index.html` is hand-authored HTML with three generated blocks injected in place** by
 `build.mjs`, each via its own regex-replace guarded to throw (not silently no-op) if the
-marker it expects isn't found:
+marker it expects isn't found. **All three now render villes, not lieux** (changed
+2026-09-11 when `data/villes.json` was introduced — the homepage groups by town, a lieu
+page is one level further in):
 - The homepage map's `const SPOTS_MAP_HOME = [...]` — from `scripts/render/home-map.mjs`'s
-  `buildSpotsMapHome(lieux)`.
+  `buildSpotsMapHome(villes)`.
 - The JSON-LD `"itemListElement": [...]` in `<head>` — from `home-lieux.mjs`'s
-  `buildItemList(lieux)`.
+  `buildItemList(villes)`.
 - The five `<section class="region-section">…</section>` blocks under `#lieux` — from
-  `home-lieux.mjs`'s `buildRegionSectionsHtml(lieux)`, one call per region in
-  `REGION_ORDER` (`menton-monaco, nice, arriere-pays, antibes-cannes, golfe-st-tropez`).
+  `home-lieux.mjs`'s `buildRegionSectionsHtml(villes, lieuBySlug)`, one call per region in
+  `REGION_ORDER` (`menton-monaco, nice, arriere-pays, antibes-cannes, golfe-st-tropez`); the
+  card grid shows one card per ville (badge dots aggregated from that ville's lieux via
+  `lieuBySlug`), not one per lieu.
 
-**`data/lieux.json`'s array order is the canonical display order** (grouped by region,
+**`data/villes.json`'s array order is the canonical display order** (grouped by region,
 sequenced within each region) — this is what both the card grid and the JSON-LD `ItemList`
-render in, and what the `region-count` per section is computed from (`lieux.length` after
-filtering to that `regionSlug`, not a stored number). Insert a new lieu at the position you
-want it to appear, not just anywhere.
+render in, and what the `region-count` per section is computed from (`villesInRegion.length`
+after filtering to that `regionSlug`, not a stored number). Insert a new ville at the
+position you want it to appear, not just anywhere. `data/lieux.json`'s own array order still
+matters too — it's what a ville page's own lieu list renders in.
 
 Every lieu also has `thumbImage` — a dedicated small-format image (real `thumb.jpg` where a
 lieu has real photography, otherwise a `picsum.photos/…/500/375` placeholder) distinct from
@@ -137,9 +171,13 @@ source text.
 `home-map.mjs` — keep it in sync with the filter-button dot colors hand-authored in
 `index.html`'s own HTML/CSS if either ever changes.
 
-No known gap left in `index.html` itself. Two more places still hardcode "27" and would need
-updating if the lieu count changes again: `sitemap.xml` (one `<url>` block per lieu) and
-`ROADMAP.md`'s placeholder-image tally.
+No known gap left in `index.html` itself, and none left in `sitemap.xml` either — it's now
+fully regenerated by `build.mjs` from all three JSON files (itinéraires, lieux, villes) on
+every build, nothing hand-maintained there anymore. One place still hardcodes "27" and would
+need updating if the lieu count changes again: `ROADMAP.md`'s placeholder-image tally. Note
+`home-lieux.mjs`'s `buildItemList` still hardcodes the old `netlify.app` domain for its
+JSON-LD `url`s while `build.mjs`'s own sitemap generator already uses `vercel.app` —
+a small pre-existing inconsistency, not something introduced by this note.
 
 ## Site structure (2026-08-27)
 
@@ -148,19 +186,32 @@ removed as redundant intermediates (`index.html` already embeds the full interac
 `#carte` and the full itinéraire grid in its `itin-preview` section — which itself has
 `id="itineraires"` — each already linking straight to `lieux/*.html`/`itin/*.html`). Don't
 recreate `carte.html` or `itineraires.html`. Site nav is now: `index.html` has "Carte" (→
-`#carte`), "Itinéraires" (→ `#itineraires`), "Lieux" (→ `#lieux`), all anchors on itself,
-plus "Mes itinéraires" (→ the root-level page below); every other page (`lieux/*.html`,
-`itin/*.html`, `credits.html`, `creer-itineraire.html`, `mes-itineraires.html`) has
-"Itinéraires" (→ `../index.html#itineraires` or `index.html#itineraires`), "Lieux" and the
-same "Mes itinéraires" link — no "Carte" equivalent to link to from a subpage, so that one
-was dropped rather than repointed. "Créer un itinéraire" is deliberately **not** in the nav
-— it lives as a CTA card (`.itin-create-cta`) under the 6 preset itinéraires on the homepage
-instead, so it reads as one of the itinerary options rather than a persistent utility link
-like "Mes itinéraires". Itinéraire page breadcrumbs go straight `Accueil → [titre]`, no
-middle "Itinéraires" crumb. The nav `<a>` markup (plus the `.nav-toggle` hamburger button,
-see below) is duplicated in 6 places — `index.html`, `credits.html`, `creer-itineraire.html`,
-`mes-itineraires.html`, and the `<nav>` block inside `scripts/render/lieu.mjs` and
-`scripts/render/itin.mjs` — change all 6 together and rebuild.
+`#carte`), "Itinéraires" (→ `#itineraires`), "Villes" (→ `#lieux` — label reads "Villes"
+since the 2026-09-11 Ville layer made villes the homepage's primary grouping, but the
+anchor id itself is still `#lieux`, unrenamed), all anchors on itself, plus "Mes
+itinéraires" and "Mes favoris" (→ the two root-level pages below); every other page
+(`lieux/*.html`, `itin/*.html`, `villes/*.html`, `credits.html`, `creer-itineraire.html`,
+`mes-itineraires.html`, `mes-favoris.html`) has "Itinéraires" (→ `../index.html#itineraires`
+or `index.html#itineraires`), "Villes" and the same "Mes itinéraires"/"Mes favoris" links —
+no "Carte" equivalent to link to from a subpage, so that one was dropped rather than
+repointed. "Créer un itinéraire" is deliberately **not** in the nav — it lives as a CTA card
+(`.itin-create-cta`) under the 6 preset itinéraires on the homepage instead, so it reads as
+one of the itinerary options rather than a persistent utility link like "Mes itinéraires".
+Itinéraire page breadcrumbs go straight `Accueil → [titre]`, no middle "Itinéraires" crumb.
+The nav `<a>` markup (plus the `.nav-toggle` hamburger button, see below) is duplicated in 8
+places — `index.html`, `credits.html`, `creer-itineraire.html`, `mes-itineraires.html`,
+`mes-favoris.html`, and the `<nav>` block inside `scripts/render/lieu.mjs`,
+`scripts/render/itin.mjs` and `scripts/render/ville.mjs` — change all 8 together and
+rebuild.
+
+**Mes favoris** (`mes-favoris.html`, root-level, hand-authored) is a third localStorage-only
+client-side page alongside "Mes itinéraires"/"Créer un itinéraire" — `assets/favoris.js`
+(loaded on every lieu/ville page plus `mes-favoris.html` itself) lets a visitor star a lieu's
+activité from its own page and lists starred ones here; nothing server-backed, same
+ephemeral/no-build-step category as the itinéraire creator described further below. This is
+**unrelated** to the `UserFavorite` entity in the new backend (see "Frontend/backend
+rewrite") — that one is a separate, DB-backed favorites feature being built for the Next.js
+rewrite and isn't wired to this localStorage version at all.
 
 **Mobile nav.** Below 700px the pill-style nav (`header nav a`) doesn't fit next to the logo
 — it used to force the "Côte d'Azur" logo onto 2 lines, which overflowed the fixed-height
@@ -173,16 +224,22 @@ panel on any link click), so any page using this header pattern must load `asset
 — `credits.html`, `creer-itineraire.html` and `mes-itineraires.html` didn't originally and
 had it added specifically for this.
 
+**Lieu breadcrumb parent.** A lieu page's middle breadcrumb crumb (`id="breadcrumb-parent"`)
+links to its **ville** (`../villes/<villeSlug>.html`, resolved via the `villeBySlug` map
+`build.mjs` passes into `renderLieu`), falling back to the region anchor
+(`../index.html#<regionSlug>`) only if the lieu's `villeSlug` has no match — normally
+unreachable since `build.mjs` throws on an unresolved `villeSlug` at build time (see above),
+so this fallback is defensive, not a real code path today.
+
 **Itinéraire → lieu breadcrumb context.** When a stop's lieu link is generated
 (`scripts/render/itin.mjs`), it carries `?itin=<slug>`. On the lieu page
 (`scripts/render/lieu.mjs`), a small inline script reads that query param against an embedded
 `ITIN_TITLES` map (slug → titre, built in `build.mjs` from `data/itineraires.json`, HTML
 entities decoded) and, if it matches, swaps the breadcrumb's middle crumb from the lieu's
-region (`id="breadcrumb-parent"`) to a link back to that itinéraire — so following a stop
-link and then going "back" returns to the itinéraire, not to the homepage's region list.
-Falls back to the normal region crumb whenever the param is absent or unrecognized (direct
-visits, search traffic, links from the homepage grid, etc.) — this is additive, not a
-replacement of the default breadcrumb.
+ville (see above) to a link back to that itinéraire — so following a stop link and then
+going "back" returns to the itinéraire, not to the ville page. Falls back to the ville crumb
+whenever the param is absent or unrecognized (direct visits, search traffic, links from the
+homepage grid, etc.) — this is additive, not a replacement of the default breadcrumb.
 
 ## Créateur d'itinéraire à la volée (client-side, no build step)
 
@@ -252,6 +309,102 @@ generated by the build.
   Maps/Waze/Plans links, no transit-time blocks, sleep markers, or "à réserver" booking
   cards (those need data — realistic transit estimates, accommodation, which activité to
   feature — that isn't reliable to generate automatically yet; tracked in `ROADMAP.md`).
+
+## Frontend/backend rewrite (Next.js + ASP.NET Core, started 2026-09-11)
+
+`frontend/` and `backend/` are a from-scratch rewrite of the whole site as a real
+client/server app — not yet the deployed production site (see "What this is" above). The
+motivation is accounts: the static site has no server to hold user data, so localStorage is
+the ceiling for anything personal (favoris, itinéraires custom). This stack exists to lift
+that ceiling. **Not documented anywhere else** — `ROADMAP.md` points to a memory file
+`architecture_future.md` for the architecture decision behind this, but that file was never
+actually written; this section is the only record of the decision's shape.
+
+### `backend/` — ASP.NET Core API + PostgreSQL
+
+Three-project .NET solution (`RivieraSecrete.slnx`): `RivieraSecrete.Domain` (POCO entities,
+no EF references), `RivieraSecrete.Infrastructure` (EF Core `AppDbContext`, Npgsql, EF
+migrations, `DatabaseSeeder`), `RivieraSecrete.Api` (minimal-API `Program.cs`, the only
+project with HTTP/auth concerns). Deployed as a container (`backend/Dockerfile`, .NET 10 SDK
+→ ASP.NET runtime, `EXPOSE 8080`) to Railway — the production API URL
+(`https://api-production-19623.up.railway.app`) is what `frontend/.env.example` points
+`NEXT_PUBLIC_API_URL` at.
+
+- **Entities** (`RivieraSecrete.Domain/Entities/`): `Ville` 1–N `Lieu` 1–N `Activite`
+  (mirrors `data/villes.json`/`lieux.json` exactly, down to field names — `Lieu.Badges`,
+  `MetaPills`, `Tips`, `Related` are stored as EF-mapped JSON columns rather than join
+  tables, since they're read-only editorial blobs with no relational query need);
+  `Itineraire` is a flatter standalone entity (`Items`/`Booking`/`Suggestions` as JSON
+  columns) — same "snapshot, not cross-referenced" shape the static site's own
+  `itineraires.json` has for its `related`/`suggestions` arrays. `User` (Google-identity
+  row) owns `UserFavorite` (a user × lieu slug pair) and `UserItineraire` (`Days: string[][]`
+  of lieu slugs, `DureeKey` — the DB-backed sibling of the static site's
+  `riviera-secrete:itineraires-custom` localStorage schema, same shape).
+- **`DatabaseSeeder.SeedAsync`** reads `data/villes.json`/`lieux.json`/`itineraires.json`
+  directly (relative path `../../data` from the Api project by default, overridable via
+  `?dataDir=`) and bulk-inserts — **idempotent by checking `db.Villes.Any()` first**, so
+  re-running it after the first seed is a no-op, not a refresh. There is no update path yet:
+  a static-site JSON edit does not propagate to the backend DB automatically, only a fresh
+  (empty) database would pick it up. Seeding is wired as a dev-only endpoint
+  (`POST /api/seed`, gated behind `app.Environment.IsDevelopment()`), not a CLI command.
+- **Auth flow**: the frontend does Google sign-in via NextAuth (see below), then POSTs the
+  Google ID token to `POST /api/auth/google-signin`; the backend verifies it against Google
+  (`Google.Apis.Auth`'s `GoogleJsonWebSignature.ValidateAsync`, audience = the Google OAuth
+  client id), upserts a `User` row keyed on `GoogleId`, and mints **its own** HS256 JWT
+  (`Jwt:Secret`/`Issuer`/`Audience` config, 30-day expiry, `sub` claim = the `User.Id` guid)
+  — the backend never trusts Google's token directly for later requests, only its own JWT,
+  validated by the standard `AddJwtBearer` pipeline on every `.RequireAuthorization()`
+  endpoint. `GetUserId(ClaimsPrincipal)` reads `sub` back out as the `User.Id`.
+- **Endpoints**: public reads `GET /api/{lieux,villes,itineraires}` (+ `/{slug}` variants)
+  and `GET /health`; protected (`.RequireAuthorization()`) `GET/POST/DELETE /api/favorites`
+  and full CRUD on `/api/my-itineraires`, all scoped to the caller's own `userId` via the JWT
+  `sub` claim — no endpoint accepts a `userId` from the client.
+- **Migrations**: `InitialCreate` (villes/lieux/activités/itinéraires schema) then
+  `AddUserTables` (users/favorites/itinéraires-custom) — run via standard `dotnet ef
+  database update`, not automated on startup.
+- CORS is locked to a single configured origin (`Cors:AllowedOrigin`, defaults to
+  `http://localhost:3000` for local dev) — update it when the frontend's real deployed
+  origin is known.
+
+### `frontend/` — Next.js 16 (App Router) + Tailwind v4 + NextAuth v4
+
+Routes under `frontend/src/app/`: `/`, `/lieux`, `/lieux/[slug]`, `/villes`,
+`/villes/[slug]`, `/itineraires`, `/itineraires/[slug]`, `/creer-itineraire`,
+`/mes-itineraires`, plus `/api/auth/[...nextauth]` (NextAuth's own route handler). **No
+`/mes-favoris` route yet** — the backend's favorites API exists and is fully protected, but
+no frontend page consumes it yet; that's the biggest visible gap versus the static site's
+localStorage-based "Mes favoris".
+
+- **`src/lib/api.ts`** — typed fetch helpers against the backend: `api.{lieux,villes,
+  itineraires}.{list,bySlug}()` for public server-side reads (Next.js `revalidate: 3600`,
+  i.e. ISR — not fetched fresh per request), plus `authFetch(path, token, options)` for
+  client-side calls that need the `Authorization: Bearer <token>` header. `NEXT_PUBLIC_API_URL`
+  (env var, see `.env.example`) points at the backend; defaults to
+  `http://localhost:5171` for local dev against `dotnet run`.
+- **`src/lib/auth.ts`** — NextAuth v4 config: a single `GoogleProvider`. The `jwt` callback
+  is where the backend exchange happens (see "Auth flow" above) — on first sign-in it POSTs
+  `account.id_token` to the backend and stashes the returned `{ token, user }` onto the
+  NextAuth JWT as `apiToken`/`apiUser`; the `session` callback then surfaces those as
+  `session.apiToken` and `session.user.{id,name,email}` so client components never touch
+  NextAuth's own token shape directly. `frontend/src/types/next-auth.d.ts` extends the
+  library's `Session`/`JWT` types to add these fields.
+- **`src/lib/itineraire-logic.ts`** — a TypeScript **third copy** of the itinerary-generation
+  algorithm, alongside the static site's `assets/itineraire-data.js` (JS) and its own
+  `generateItineraire`. Same "keep copies in sync if either changes" caveat the static site's
+  CLAUDE.md section already calls out for `BADGE_DEFS`/map-link builders applies here too,
+  now three-way instead of two-way.
+- **Leaflet maps**: `LeafletLieuMap`/`LeafletItinMap` are the actual Leaflet components;
+  `MapLieuWrapper`/`MapItinWrapper` exist to dynamically import them client-side-only
+  (Leaflet touches `window` at module load, incompatible with Next's SSR) — always add new
+  map usage through the wrapper, not the Leaflet component directly.
+- **Images** live in `frontend/public/assets/`, moved there (not just referenced) from the
+  static site's `assets/images/` so Vercel serves them directly for the Next.js app —
+  **a separate copy**, not a shared mount; a new lieu photo added to the static site's
+  `assets/images/lieux/<slug>/` needs a manual copy into `frontend/public/assets/` too if
+  the Next.js app should show it.
+- No `frontend/vercel.json` — relies on Vercel's Next.js framework auto-detection if/when
+  deployed as its own Vercel project (distinct from the root `vercel.json`, which is the
+  static site's own deploy config and unrelated to this app).
 
 ## Custom skills
 
