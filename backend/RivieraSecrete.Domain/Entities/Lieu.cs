@@ -22,7 +22,7 @@ public class Lieu
     // Stored as JSON columns
     public List<string> Badges { get; set; } = [];
     public List<MetaPill> MetaPills { get; set; } = [];
-    public List<string> Tips { get; set; } = [];
+    public List<Tip> Tips { get; set; } = [];
     public List<RelatedCard> Related { get; set; } = [];
 
     // Navigation
@@ -30,6 +30,8 @@ public class Lieu
     public Ville? Ville { get; set; }
 }
 
-public record MetaPill(string Icon, string Label, string Value);
+public record MetaPill(string Label, string Valeur);
+
+public record Tip(string Label, string Texte);
 
 public record RelatedCard(string Href, string Img, string Alt, string Stamp, string Region, string Titre, string Blurb);

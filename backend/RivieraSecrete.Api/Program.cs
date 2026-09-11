@@ -1,9 +1,13 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using RivieraSecrete.Infrastructure.Data;
+using RivieraSecrete.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.ConfigureHttpJsonOptions(opts =>
+    opts.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -45,5 +49,20 @@ app.MapGet("/api/itineraires/{slug}", async (string slug, AppDbContext db) =>
     is { } itin ? Results.Ok(itin) : Results.NotFound());
 
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
+
+// Dev-only: seed database from local JSON files
+// POST /api/seed?dataDir=C:/Users/.../data
+if (app.Environment.IsDevelopment())
+{
+    app.MapPost("/api/seed", async (string? dataDir, AppDbContext db) =>
+    {
+        var dir = dataDir ?? Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data");
+        dir = Path.GetFullPath(dir);
+        if (!Directory.Exists(dir))
+            return Results.BadRequest(new { Error = $"dataDir not found: {dir}" });
+        await DatabaseSeeder.SeedAsync(db, dir);
+        return Results.Ok(new { Status = "seeded", DataDir = dir });
+    });
+}
 
 app.Run();

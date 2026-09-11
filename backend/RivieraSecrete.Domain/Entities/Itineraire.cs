@@ -5,29 +5,44 @@ public class Itineraire
     public int Id { get; set; }
     public string Slug { get; set; } = default!;
     public string Titre { get; set; } = default!;
-    public string SousTitre { get; set; } = default!;
+    public string Badge { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public string DureeLabel { get; set; } = default!;
+    public string Intro { get; set; } = default!;
     public string HeroImgTag { get; set; } = default!;
+    public string MapLabel { get; set; } = default!;
 
-    // Stored as JSON — structure complexe, snapshot éditorial
-    public List<ItineraireStop> Stops { get; set; } = [];
+    // Stored as JSON columns — structures complexes, snapshot éditorial
+    public List<MetaPill> MetaPills { get; set; } = [];
+    public List<ItineraireItem> Items { get; set; } = [];
+    public List<BookingRef> Booking { get; set; } = [];
     public List<SuggestCard> Suggestions { get; set; } = [];
 }
 
-public record ItineraireStop(
-    string Type,           // "stop" | "sleep"
+public record ItineraireItem(
+    string Type,           // "stop" | "transit"
+    string? Heure,
     string? LieuSlug,
-    string? Label,
-    List<ItinPill>? Pills,
-    ItinTransit? Transit,
-    ItinBookingRef? Booking
+    string? Nom,
+    string? Commune,
+    string? Desc,
+    List<StopActivite>? Activites
 );
 
-public record ItinPill(string Icon, string Text);
+public record StopActivite(
+    string Label,
+    string Cls,
+    string? LieuSlug,
+    string? ActiviteId,
+    string? Url
+);
 
-public record ItinTransit(string Mode, string Duree, string? Detail);
+public record BookingRef(
+    string LieuLabel,
+    string NomLabel,
+    string LinkText,
+    List<string> ExtraSpans,
+    string LieuSlug,
+    string ActiviteId
+);
 
-public record ItinBookingRef(string LieuSlug, string ActiviteId, string? NomLabel, string? LieuLabel, string? LinkText);
-
-public record SuggestCard(string Slug, string Titre, string Img, string Alt, string Etapes, string Duree, string Blurb);
+public record SuggestCard(string Href, string Img, string Alt, string Badge, string Titre);

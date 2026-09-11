@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RivieraSecrete.Domain.Entities;
@@ -6,6 +7,8 @@ namespace RivieraSecrete.Infrastructure.Data.Configurations;
 
 public class LieuConfiguration : IEntityTypeConfiguration<Lieu>
 {
+    private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
+
     public void Configure(EntityTypeBuilder<Lieu> builder)
     {
         builder.HasKey(l => l.Id);
@@ -24,9 +27,28 @@ public class LieuConfiguration : IEntityTypeConfiguration<Lieu>
                .HasForeignKey(a => a.LieuId)
                .OnDelete(DeleteBehavior.Cascade);
 
-        builder.OwnsMany(l => l.MetaPills, b => b.ToJson());
-        builder.OwnsMany(l => l.Related, b => b.ToJson());
-        builder.Property(l => l.Badges).HasColumnType("jsonb");
-        builder.Property(l => l.Tips).HasColumnType("jsonb");
+        builder.Property(l => l.Badges)
+               .HasColumnType("jsonb")
+               .HasConversion(
+                   v => JsonSerializer.Serialize(v, Json),
+                   v => JsonSerializer.Deserialize<List<string>>(v, Json) ?? new List<string>());
+
+        builder.Property(l => l.MetaPills)
+               .HasColumnType("jsonb")
+               .HasConversion(
+                   v => JsonSerializer.Serialize(v, Json),
+                   v => JsonSerializer.Deserialize<List<MetaPill>>(v, Json) ?? new List<MetaPill>());
+
+        builder.Property(l => l.Tips)
+               .HasColumnType("jsonb")
+               .HasConversion(
+                   v => JsonSerializer.Serialize(v, Json),
+                   v => JsonSerializer.Deserialize<List<Tip>>(v, Json) ?? new List<Tip>());
+
+        builder.Property(l => l.Related)
+               .HasColumnType("jsonb")
+               .HasConversion(
+                   v => JsonSerializer.Serialize(v, Json),
+                   v => JsonSerializer.Deserialize<List<RelatedCard>>(v, Json) ?? new List<RelatedCard>());
     }
 }
