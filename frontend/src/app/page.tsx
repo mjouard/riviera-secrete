@@ -1,46 +1,34 @@
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { imgUrl } from "@/lib/utils";
-import type { Lieu, Itineraire } from "@/lib/types";
+import type { Itineraire, Lieu } from "@/lib/types";
+import HomeMapWrapper from "@/components/HomeMapWrapper";
+import HomeActivities from "@/components/HomeActivities";
+import HomeLieuxGrid from "@/components/HomeLieuxGrid";
 
 export const revalidate = 3600;
 
-function LieuCard({ lieu }: { lieu: Lieu }) {
-  return (
-    <Link
-      href={`/lieux/${lieu.slug}`}
-      className="group block rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
-      style={{ background: "var(--surface)" }}
-    >
-      <div className="aspect-[4/3] overflow-hidden">
-        <img
-          src={imgUrl(lieu.thumbImage)}
-          alt={lieu.heroAlt}
-          className="w-full h-full object-cover transition-transform group-hover:scale-105"
-          loading="lazy"
-        />
-      </div>
-      <div className="p-4">
-        <p className="text-xs mb-1" style={{ color: "var(--azure)" }}>
-          {lieu.commune}
-        </p>
-        <h3 className="font-semibold text-sm leading-snug mb-1">{lieu.nom}</h3>
-        <p className="text-xs line-clamp-2" style={{ color: "var(--text-muted)" }}>
-          {lieu.description}
-        </p>
-      </div>
-    </Link>
-  );
-}
+function ItineraireCard({ itin, lieuBySlug }: { itin: Itineraire; lieuBySlug: Map<string, Lieu> }) {
+  const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
+  const thumb = firstStop?.lieuSlug ? lieuBySlug.get(firstStop.lieuSlug)?.thumbImage : undefined;
 
-function ItineraireCard({ itin }: { itin: Itineraire }) {
   return (
     <Link
       href={`/itineraires/${itin.slug}`}
-      className="group flex gap-4 rounded-xl p-4 transition-colors"
+      className="group flex gap-4 rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
-      <div className="flex-1 min-w-0">
+      {thumb && (
+        <div className="w-28 flex-shrink-0 overflow-hidden">
+          <img
+            src={imgUrl(thumb)}
+            alt={itin.titre}
+            className="w-full h-full object-cover transition-transform group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+      )}
+      <div className="flex-1 min-w-0 py-4 pr-4">
         <p className="text-xs mb-1" style={{ color: "var(--terracotta)" }}>
           {itin.badge}
         </p>
@@ -54,10 +42,12 @@ function ItineraireCard({ itin }: { itin: Itineraire }) {
 }
 
 export default async function HomePage() {
-  const [lieux, itineraires] = await Promise.all([
+  const [lieux, itineraires, villes] = await Promise.all([
     api.lieux.list(),
     api.itineraires.list(),
+    api.villes.list(),
   ]);
+  const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
 
   return (
     <>
@@ -108,26 +98,44 @@ export default async function HomePage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {itineraires.map((itin) => (
-              <ItineraireCard key={itin.id} itin={itin} />
+              <ItineraireCard key={itin.id} itin={itin} lieuBySlug={lieuBySlug} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Activités suggérées */}
+      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-1">
+              Activités, <em className="not-italic" style={{ color: "var(--terracotta)" }}>loin de l&apos;ordinaire</em>
+            </h2>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+              Des idées pour chaque profil — à pied, en mer, à table ou en visite.
+            </p>
+          </div>
+          <HomeActivities lieux={lieux} />
+        </div>
+      </section>
+
+      {/* Carte */}
+      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-1">La carte des {villes.length} villes</h2>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+              Clique sur un marqueur pour ouvrir la fiche. Filtre par zone :
+            </p>
+          </div>
+          <HomeMapWrapper villes={villes} />
         </div>
       </section>
 
       {/* Lieux */}
       <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-baseline justify-between mb-8">
-            <h2 className="text-2xl font-bold">Tous les lieux</h2>
-            <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-              {lieux.length} spots
-            </span>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {lieux.map((lieu) => (
-              <LieuCard key={lieu.id} lieu={lieu} />
-            ))}
-          </div>
+          <HomeLieuxGrid lieux={lieux} />
         </div>
       </section>
     </>
