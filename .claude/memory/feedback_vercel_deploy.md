@@ -22,3 +22,5 @@ Si on lance `vercel` depuis la racine du repo, Vercel pointe vers le projet stat
 - Solution la plus fiable : `cd frontend && npx vercel --prod --yes`
 
 **Symptôme du problème** : build en 5-7 secondes, `Builds: [0ms]` dans `vercel inspect` → le build Next.js ne s'est pas exécuté, Vercel sert des fichiers statiques depuis la mauvaise racine.
+
+**GitHub integration désactivée (2026-09-11)** : la git integration du projet `frontend` sur Vercel a été déconnectée (`vercel git disconnect`) car chaque `git push` déclenchait un redéploiement depuis la racine du repo (site statique, 0ms), écrasant le vrai build Next.js. **Ne pas reconnecter la GitHub integration** sur ce projet — déployer uniquement via CLI depuis `frontend/`.
