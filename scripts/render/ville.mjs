@@ -127,6 +127,9 @@ export function renderVille(ville, lieux, itinTitles = {}) {
   }
   .popup-link:hover{ text-decoration:underline; }
 </style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-R_6LcENgDIgoUpT8QUE4g.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
 </head>
 <body>
 
