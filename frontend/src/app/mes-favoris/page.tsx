@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import { imgUrl } from "@/lib/utils";
 import type { Lieu } from "@/lib/types";
@@ -58,13 +58,13 @@ export default function MesFavorisPage() {
           <p className="mb-4" style={{ color: "var(--text-muted)" }}>
             Connecte-toi pour retrouver tes lieux favoris.
           </p>
-          <button
-            onClick={() => signIn("google")}
-            className="text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/10 cursor-pointer"
+          <Link
+            href="/connexion?callbackUrl=/mes-favoris"
+            className="inline-block text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/10"
             style={{ borderColor: "var(--line)", color: "var(--text)" }}
           >
-            Connexion avec Google
-          </button>
+            Se connecter
+          </Link>
         </div>
       ) : lieux.length === 0 ? (
         <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>

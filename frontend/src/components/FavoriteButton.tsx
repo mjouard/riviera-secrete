@@ -1,8 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
+
+function goToConnexion() {
+  window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
+}
 
 export default function FavoriteButton({ slug }: { slug: string }) {
   const { data: session, status } = useSession();
@@ -19,12 +23,12 @@ export default function FavoriteButton({ slug }: { slug: string }) {
 
   async function toggle() {
     if (!session) {
-      signIn("google");
+      goToConnexion();
       return;
     }
     if (!session.apiToken) {
-      // Session Google OK mais échange backend raté — forcer un nouveau login
-      signIn("google");
+      // Session OK mais échange backend raté — forcer un nouveau login
+      goToConnexion();
       return;
     }
     setLoading(true);

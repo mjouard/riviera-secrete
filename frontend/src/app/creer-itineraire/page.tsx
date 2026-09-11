@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import type { Lieu, Activite } from "@/lib/types";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
@@ -201,7 +201,7 @@ export default function CreerItinerairePage() {
     const nom = saveInput.trim();
     if (!nom) return;
     if (!session?.apiToken) {
-      signIn("google", { callbackUrl: window.location.href });
+      window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
       return;
     }
     setSaving(true);

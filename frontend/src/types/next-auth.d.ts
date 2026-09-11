@@ -11,6 +11,10 @@ declare module "next-auth" {
       image?: string | null;
     };
   }
+
+  interface User {
+    apiToken?: string;
+  }
 }
 
 declare module "next-auth/jwt" {

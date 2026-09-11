@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { DUREE_META } from "@/lib/itineraire-logic";
 import { authFetch } from "@/lib/api";
 
@@ -93,13 +93,13 @@ export default function MesItinerairesPage() {
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
             Connecte-toi pour créer et synchroniser tes itinéraires sur tous tes appareils.
           </p>
-          <button
-            onClick={() => signIn("google")}
-            className="text-sm px-3 py-1.5 rounded-lg border flex-shrink-0 transition-colors hover:bg-white/5 cursor-pointer"
+          <Link
+            href="/connexion?callbackUrl=/mes-itineraires"
+            className="text-sm px-3 py-1.5 rounded-lg border flex-shrink-0 transition-colors hover:bg-white/5"
             style={{ borderColor: "var(--line)", color: "var(--text)" }}
           >
             Connexion
-          </button>
+          </Link>
         </div>
       )}
 

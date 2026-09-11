@@ -105,18 +105,71 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
         return Results.Unauthorized();
     }
 
+    var email = payload.Email.Trim().ToLowerInvariant();
     var user = await db.Users.FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
     if (user is null)
     {
-        user = new User
+        // Un compte existe peut-être déjà avec cet email (inscription par mot de passe) — on lie
+        // le GoogleId dessus plutôt que de créer un doublon (Email est unique en base).
+        user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user is not null)
         {
-            GoogleId = payload.Subject,
-            Email = payload.Email,
-            Nom = payload.Name ?? payload.Email,
-        };
-        db.Users.Add(user);
+            user.GoogleId = payload.Subject;
+        }
+        else
+        {
+            user = new User
+            {
+                GoogleId = payload.Subject,
+                Email = email,
+                Nom = payload.Name ?? email,
+            };
+            db.Users.Add(user);
+        }
         await db.SaveChangesAsync();
     }
+
+    var token = GenerateJwt(user, config);
+    return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
+});
+
+app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, IConfiguration config) =>
+{
+    var email = req.Email.Trim().ToLowerInvariant();
+    var nom = req.Nom.Trim();
+
+    if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
+        return Results.BadRequest(new { Error = "Adresse email invalide." });
+    if (string.IsNullOrWhiteSpace(nom))
+        return Results.BadRequest(new { Error = "Le nom est requis." });
+    if (req.Password.Length < 8)
+        return Results.BadRequest(new { Error = "Le mot de passe doit faire au moins 8 caractères." });
+
+    if (await db.Users.AnyAsync(u => u.Email == email))
+        return Results.Conflict(new { Error = "Un compte existe déjà avec cet email." });
+
+    var user = new User
+    {
+        Email = email,
+        Nom = nom,
+        PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+    };
+    db.Users.Add(user);
+    await db.SaveChangesAsync();
+
+    var token = GenerateJwt(user, config);
+    return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
+});
+
+app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfiguration config) =>
+{
+    var email = req.Email.Trim().ToLowerInvariant();
+    var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+    if (user is null || user.PasswordHash is null)
+        return Results.Unauthorized();
+    if (!BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
+        return Results.Unauthorized();
 
     var token = GenerateJwt(user, config);
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
@@ -267,4 +320,6 @@ static string GenerateJwt(User user, IConfiguration config)
 // ── DTOs ──────────────────────────────────────────────────────────────────────
 
 record GoogleSignInRequest(string IdToken);
+record RegisterRequest(string Email, string Password, string Nom);
+record LoginRequest(string Email, string Password);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);

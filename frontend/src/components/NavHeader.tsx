@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const NAV_LINKS = [
   { href: "/lieux", label: "Lieux" },
@@ -30,13 +30,14 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
   }
 
   return (
-    <button
-      onClick={() => { signIn("google"); onClose?.(); }}
-      className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10 cursor-pointer"
+    <Link
+      href="/connexion"
+      onClick={onClose}
+      className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10"
       style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
     >
       Connexion
-    </button>
+    </Link>
   );
 }
 

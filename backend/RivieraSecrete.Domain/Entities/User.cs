@@ -3,7 +3,8 @@ namespace RivieraSecrete.Domain.Entities;
 public class User
 {
     public Guid Id { get; set; }
-    public string GoogleId { get; set; } = default!;
+    public string? GoogleId { get; set; }
+    public string? PasswordHash { get; set; }
     public string Email { get; set; } = default!;
     public string Nom { get; set; } = default!;
     public DateTime CreatedAt { get; set; }

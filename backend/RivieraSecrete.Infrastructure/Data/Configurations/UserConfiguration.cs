@@ -11,7 +11,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasDefaultValueSql("gen_random_uuid()");
         builder.HasIndex(u => u.GoogleId).IsUnique();
-        builder.Property(u => u.GoogleId).HasMaxLength(128).IsRequired();
+        builder.Property(u => u.GoogleId).HasMaxLength(128);
+        builder.Property(u => u.PasswordHash).HasMaxLength(200);
+        builder.HasIndex(u => u.Email).IsUnique();
         builder.Property(u => u.Email).HasMaxLength(256).IsRequired();
         builder.Property(u => u.Nom).HasMaxLength(200).IsRequired();
         builder.Property(u => u.CreatedAt).HasDefaultValueSql("now()");
