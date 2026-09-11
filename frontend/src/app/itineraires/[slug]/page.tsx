@@ -4,6 +4,17 @@ import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
 import MapItinWrapper from "@/components/MapItinWrapper";
+import HeroCarousel from "@/components/HeroCarousel";
+
+function parseHeroImgTag(tag: string): { srcs: string[]; alt: string } {
+  const srcMatch = tag.match(/src="([^"]+)"/);
+  const altMatch = tag.match(/alt="([^"]+)"/);
+  const srcsMatch = tag.match(/data-carousel-srcs="([^"]+)"/);
+  const src = srcMatch?.[1] ?? "";
+  const alt = altMatch?.[1] ?? "";
+  const srcs = srcsMatch ? srcsMatch[1].split(",").map((s) => s.trim()) : src ? [src] : [];
+  return { srcs, alt };
+}
 
 export const revalidate = 3600;
 
@@ -58,8 +69,18 @@ export default async function ItinerairePage({
     .map((s) => s.lieuSlug ? lieuBySlug.get(s.lieuSlug) : null)
     .filter((l): l is NonNullable<typeof l> => l != null);
 
+  const hero = itin.heroImgTag ? parseHeroImgTag(itin.heroImgTag) : null;
+  const heroSlides = hero?.srcs.map((src) => ({ src: imgUrl(src), alt: hero.alt })) ?? [];
+
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
+      {/* Hero */}
+      {heroSlides.length > 0 && (
+        <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
+          <HeroCarousel slides={heroSlides} />
+        </div>
+      )}
+
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">Accueil</Link>

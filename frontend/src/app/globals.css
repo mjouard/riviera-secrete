@@ -1,5 +1,40 @@
 @import "tailwindcss";
 
+/* ---------- CAROUSEL ---------- */
+.carousel-wrap { position: relative; overflow: hidden; }
+.carousel-track {
+  display: flex; height: 100%;
+  transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.carousel-slide { flex: 0 0 100%; height: 100%; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  background: rgba(12,17,22,0.48); border: 1px solid rgba(255,255,255,0.18);
+  color: #fff; width: 44px; height: 44px; border-radius: 50%;
+  font-size: 1.6rem; line-height: 1; cursor: pointer;
+  transition: background 0.2s; backdrop-filter: blur(5px);
+}
+.carousel-btn:hover { background: rgba(12,17,22,0.82); }
+.carousel-prev { left: 14px; }
+.carousel-next { right: 14px; }
+.carousel-dots {
+  position: absolute; bottom: 16px; right: 20px;
+  display: flex; gap: 7px; z-index: 3;
+}
+.carousel-dot {
+  width: 7px; height: 7px; border-radius: 50%; padding: 0; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.38); transition: background 0.2s, transform 0.2s;
+}
+.carousel-dot.active { background: #fff; transform: scale(1.3); }
+@media (max-width: 640px) {
+  .carousel-btn { width: 36px; height: 36px; font-size: 1.3rem; top: 16px; transform: none; }
+  .carousel-prev { left: 8px; }
+  .carousel-next { right: 8px; }
+  .carousel-dots { bottom: 12px; right: 14px; }
+}
+
 :root {
   --bg: #0C1116;
   --surface: #151B22;

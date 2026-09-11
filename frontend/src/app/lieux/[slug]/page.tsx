@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export const revalidate = 3600;
 
@@ -53,10 +54,13 @@ export default async function LieuPage({
 
       {/* Hero */}
       <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
-        <img
-          src={imgUrl(lieu.heroImage)}
-          alt={lieu.heroAlt}
-          className="w-full h-full object-cover"
+        <HeroCarousel
+          slides={Array.from({ length: lieu.heroSlides ?? 1 }, (_, i) => ({
+            src: i === 0
+              ? imgUrl(lieu.heroImage)
+              : imgUrl(lieu.heroImage.replace(/hero\.jpg$/, `hero-${i + 1}.jpg`)),
+            alt: lieu.heroAlt,
+          }))}
         />
       </div>
 
