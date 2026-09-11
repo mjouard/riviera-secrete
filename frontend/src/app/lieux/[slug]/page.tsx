@@ -5,6 +5,7 @@ import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export const revalidate = 3600;
 
@@ -100,7 +101,7 @@ export default async function LieuPage({
           ))}
         </div>
 
-        {/* Liens Maps/Waze/Plans */}
+        {/* Liens Maps/Waze/Plans + Favori */}
         <div className="flex flex-wrap gap-2 mt-3">
           {buildMapLinks(lieu.lat, lieu.lng, lieu.nom).map((link) => (
             <a
@@ -114,6 +115,7 @@ export default async function LieuPage({
               {link.icon} {link.label}
             </a>
           ))}
+          <FavoriteButton slug={lieu.slug} />
         </div>
       </div>
 

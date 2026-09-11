@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind préflight reset button cursor — on rétablit pointer globalement */
+button:not(:disabled) { cursor: pointer; }
+
 /* ---------- CAROUSEL ---------- */
 .carousel-wrap { position: relative; overflow: hidden; }
 .carousel-track {

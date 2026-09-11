@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: "/villes", label: "Villes" },
   { href: "/itineraires", label: "Itinéraires" },
   { href: "/mes-itineraires", label: "Mes itinéraires" },
+  { href: "/mes-favoris", label: "Mes favoris" },
 ];
 
 function AuthButton({ onClose }: { onClose?: () => void }) {
@@ -20,7 +21,7 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
     return (
       <button
         onClick={() => { signOut(); onClose?.(); }}
-        className="text-sm transition-colors hover:text-white"
+        className="text-sm transition-colors hover:text-white cursor-pointer"
         style={{ color: "var(--text-muted)" }}
       >
         {session.user?.name?.split(" ")[0] ?? "Mon compte"} · Déconnexion
@@ -31,7 +32,7 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
   return (
     <button
       onClick={() => { signIn("google"); onClose?.(); }}
-      className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10"
+      className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10 cursor-pointer"
       style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
     >
       Connexion
