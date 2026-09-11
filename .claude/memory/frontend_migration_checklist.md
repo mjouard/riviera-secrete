@@ -20,10 +20,10 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Header nav + liens | ✅ | Simplifié (sans Villes ni Favoris pour l'instant) |
-| Menu hamburger mobile | 🔜 | Nécessite un composant client React |
+| Header nav + liens | ✅ | `NavHeader.tsx`, inclut Connexion/Déconnexion |
+| Menu hamburger mobile | ✅ | Dans `NavHeader.tsx` |
 | Breadcrumb | ✅ | Implémenté dans lieux/[slug] et itineraires/[slug] |
-| Breadcrumb contextuel `?itin=` | 🔜 | Lecture de searchParams → lien retour vers l'itinéraire |
+| Breadcrumb contextuel `?itin=` | 🔜 | Pas confirmé porté (existe sur le site statique) — vérifier avant de supposer fait |
 
 ---
 
@@ -31,15 +31,22 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Hero carrousel 8 images | 🔜 | Composant client React avec timer |
-| Carte Leaflet des villes | 🔜 | Leaflet dans Next.js = `dynamic(() => import(...), { ssr: false })` |
-| Filtres par badge sur la grille | 🔜 | État client React |
-| Grille des villes par région | ✅ | Implémenté (lieux groupés par région) |
-| Filtre par région (boutons) | 🔜 | État client React |
-| Apparition au scroll (IntersectionObserver) | 🔜 | Hook React ou CSS animation |
-| Grille des 6 itinéraires | ✅ | |
-| Section activités par catégorie (tabs) | 🔜 | Composant client, données depuis API |
-| CTA "Créer ton itinéraire" | 🔜 | Lien vers /creer-itineraire |
+| Hero carrousel 8 images | ❓ | `HeroCarousel.tsx` existe (composant partagé) — pas de hero carousel dédié homepage confirmé, hors scope de la passe du 2026-09-11 |
+| Carte Leaflet des villes | ✅ | Ajoutée 2026-09-11 : `HomeMap.tsx`/`HomeMapWrapper.tsx`, 22 marqueurs colorés par région, panneau d'info au clic, filtres région (toggle layer group) |
+| Filtres par badge sur la grille | ✅ | Ajouté 2026-09-11 : `HomeLieuxGrid.tsx`, mêmes 5 badges (`BADGE_DEFS`) que le site statique |
+| Grille des villes par région | ✅ | |
+| Filtre par région (boutons) | ✅ | Fait sur la carte homepage (`HomeMap.tsx`), pas sur la grille villes elle-même |
+| Apparition au scroll (IntersectionObserver) | 🔜 | Pas confirmé — cosmétique, non prioritaire |
+| Grille des 6 itinéraires | ✅ | Images ajoutées 2026-09-11 (thumbnail du 1er stop, manquaient avant) |
+| Section activités par catégorie (tabs) | ✅ | Ajoutée 2026-09-11 : `HomeActivities.tsx`, `FEATURED_ACTIVITIES` copié depuis index.html (`lib/home-data.ts`) — garder les deux copies en synchro |
+| CTA "Créer ton itinéraire" | ✅ | `/creer-itineraire` existe et est lié depuis la nav/homepage |
+
+**Note (2026-09-11)** : ces 4 trous (carte, activités, filtres badges, images itinéraires) avaient été
+signalés par l'utilisateur comme "sautés" par rapport au site statique — corrigés dans la même
+session. Nouveaux fichiers : `frontend/src/lib/home-data.ts`, `frontend/src/components/{HomeMap,
+HomeMapWrapper,HomeActivities,HomeLieuxGrid}.tsx`. Un bug de course Leaflet (double-init sous React
+Strict Mode) a été trouvé et corrigé dans `HomeMap.tsx` au passage — probablement présent aussi
+dans `LeafletLieuMap.tsx`/`LeafletItinMap.tsx` (non corrigé, tâche séparée flaggée).
 
 ---
 
@@ -47,23 +54,23 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Hero image | ✅ | Image simple |
-| Hero carrousel multi-slides | 🔜 | Swipe tactile, dots, boutons ‹/› |
+| Hero image | ✅ | |
+| Hero carrousel multi-slides | ✅ | `HeroCarousel.tsx`, P2 |
 | Badges | ✅ | |
 | Meta-pills (saison, durée, niveau) | ✅ | |
-| Coordonnées GPS pill | 🔜 | Calculer depuis lat/lng |
+| Coordonnées GPS pill | ✅ | P1 |
 | Description | ✅ | |
 | Conseils pratiques (tips) | ✅ | |
-| Mini-carte Leaflet | 🔜 | `dynamic()` ssr:false |
-| Liens Google Maps / Waze / Plans | 🔜 | Construire depuis lat/lng |
-| Bouton "Partager" (Share API) | 🔜 | Composant client |
-| Bouton "Ajouter à un itinéraire" | ⏳ | Dépend des itinéraires en DB |
-| Bouton favori (cœur) sur activités | ⏳ | Dépend de l'auth ou localStorage |
-| Grille d'activités | ✅ | Sans bouton favori pour l'instant |
+| Mini-carte Leaflet | ✅ | `MapLieuWrapper.tsx` / `LeafletLieuMap.tsx`, P2 |
+| Liens Google Maps / Waze / Plans | ✅ | `buildMapLinks()`, P1 |
+| Bouton "Partager" (Share API) | 🔜 | Pas confirmé porté |
+| Bouton "Ajouter à un itinéraire" | 🔜 | Pas confirmé porté (existe sur le site statique) |
+| Bouton favori (cœur) sur activités | ✅ | `FavoriteButton.tsx`, DB via `/api/favorites`, fait 2026-09-11 (`9e055b3`) |
+| Grille d'activités | ✅ | |
 | Section "Related" (lieux proches) | ✅ | |
-| JSON-LD TouristAttraction | 🔜 | `<script type="application/ld+json">` dans generateMetadata |
-| OG tags complets (og:image, etc.) | 🔜 | Via generateMetadata |
-| Canonical URL | 🔜 | Via generateMetadata |
+| JSON-LD TouristAttraction | ✅ | P1 |
+| OG tags complets (og:image, etc.) | ✅ | P1 |
+| Canonical URL | ✅ | P1 |
 
 ---
 
@@ -71,17 +78,17 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Hero carrousel multi-lieu | 🔜 | Même composant que pages lieux |
+| Hero carrousel multi-lieu | ✅ | P2 |
 | Meta-pills | ✅ | |
-| Bouton "Ouvrir dans Google Maps" | 🔜 | URL multi-waypoints depuis stops |
-| Strip de photos des stops | 🔜 | |
-| Programme détaillé (stops + transit + sleep) | ✅ | Stops OK, transits OK, marqueur nuit à améliorer |
-| Lien `?itin=<slug>` sur chaque stop | 🔜 | Pour le breadcrumb contextuel |
-| Liens GPS par stop (Maps/Waze/Plans) | 🔜 | Construire depuis lat/lng du lieu |
-| Carte Leaflet de la route | 🔜 | Polyline + marqueurs numérotés |
-| Section "À réserver" (booking cards) | ✅ | Lien vers lieu, sans image/prix pour l'instant |
-| Booking cards avec image + prix + durée | 🔜 | Nécessite de croiser avec les activités via API |
-| Section "Autres itinéraires" | 🔜 | suggestions[] existe en DB, pas encore rendu |
+| Bouton "Ouvrir dans Google Maps" | ✅ | `buildGoogleMapsRouteUrl()`, P1 |
+| Strip de photos des stops | 🔜 | Pas confirmé |
+| Programme détaillé (stops + transit + sleep) | ✅ | |
+| Lien `?itin=<slug>` sur chaque stop | 🔜 | Pas confirmé porté |
+| Liens GPS par stop (Maps/Waze/Plans) | ✅ | P1 |
+| Carte Leaflet de la route | ✅ | `MapItinWrapper.tsx` / `LeafletItinMap.tsx`, P2 |
+| Section "À réserver" (booking cards) | ✅ | |
+| Booking cards avec image + prix + durée | 🔜 | Pas confirmé |
+| Section "Autres itinéraires" | 🔜 | Pas confirmé |
 
 ---
 
@@ -89,10 +96,10 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Page ville entière | 🔜 | Pas encore créée dans Next.js |
-| Hero + mini-carte Leaflet | 🔜 | |
-| Liste des lieux de la ville | 🔜 | |
-| JSON-LD TouristDestination | 🔜 | |
+| Page ville entière | ✅ | P3, `/villes` + `/villes/[slug]` (22 pages SSG) |
+| Hero + mini-carte Leaflet | ✅ | `MapLieuWrapper` réutilisé |
+| Liste des lieux de la ville | ✅ | |
+| JSON-LD TouristDestination | 🔜 | Pas confirmé |
 
 ---
 
@@ -100,16 +107,16 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Page entière | 🔜 | Page complexe, priorité après les bases |
-| Picker durée + zones/lieux | 🔜 | |
-| Génération algorithmique (greedy) | 🔜 | Logique dans `itineraire-data.js` à porter |
-| Drag-and-drop + boutons ▲/▼ | 🔜 | Composants client |
-| Carte Leaflet résultats | 🔜 | |
-| Programme détaillé avec heures/transits | 🔜 | |
-| Section "À réserver" dynamique | 🔜 | |
-| Sauvegarde localStorage | ⏳ | localStorage pour l'instant, DB après auth |
-| Chargement `?id=` et `?add=` | 🔜 | |
-| Export PDF / impression | 🔜 | `window.print()` + @media print |
+| Page entière | ✅ | P3, port complet |
+| Picker durée + zones/lieux | ✅ | |
+| Génération algorithmique (greedy) | ✅ | `itineraire-logic.ts` (port TS) |
+| Drag-and-drop + boutons ▲/▼ | ✅ | Mobile-first |
+| Carte Leaflet résultats | ✅ | `BuilderMap.tsx` |
+| Programme détaillé avec heures/transits | ✅ | `ProgrammeSection` |
+| Section "À réserver" dynamique | ✅ | `BookingSection` |
+| Sauvegarde | ✅ | DB uniquement depuis 2026-09-11 (`fc84181`) — plus de localStorage, login requis |
+| Chargement `?id=` et `?add=` | ❓ | `?id=` confirmé ; `?add=` pas confirmé |
+| Export PDF / impression | 🔜 | Existait sur le site statique — pas confirmé porté |
 
 ---
 
@@ -117,8 +124,8 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Page entière | ⏳ | localStorage → DB après auth |
-| Liste des itinéraires sauvegardés | ⏳ | |
+| Page entière | ✅ | DB uniquement, connexion requise (`fc84181`) |
+| Liste des itinéraires sauvegardés | ✅ | Liens vers créateur `?id=`, delete |
 
 ---
 
@@ -126,8 +133,8 @@ metadata:
 
 | Feature | Statut | Notes |
 |---|---|---|
-| Page entière | ⏳ | localStorage → DB après auth |
-| Bouton cœur sur les activités | ⏳ | |
+| Page entière | ✅ | DB via `/api/favorites`, connexion requise (`9e055b3`) |
+| Bouton cœur sur les activités | ✅ | `FavoriteButton.tsx` sur pages lieu (pas confirmé sur pages ville) |
 
 ---
 
@@ -136,11 +143,21 @@ metadata:
 | Feature | Statut | Notes |
 |---|---|---|
 | Plausible Analytics | ✅ | Même script que site statique |
-| JSON-LD ItemList homepage | 🔜 | |
-| OG tags par page | 🔜 | Via generateMetadata |
-| Canonical URL | 🔜 | Via generateMetadata |
-| Sitemap | 🔜 | Next.js peut auto-générer via `sitemap.ts` |
-| noindex sur pages user-generated | 🔜 | |
+| JSON-LD ItemList homepage | 🔜 | Pas confirmé |
+| OG tags par page | ✅ | P1, via generateMetadata |
+| Canonical URL | ✅ | P1 |
+| Sitemap | ✅ | `/sitemap.xml` dynamique (route.ts) |
+| noindex sur pages user-generated | 🔜 | Pas confirmé (`/creer-itineraire`, `/mes-itineraires`, `/mes-favoris`) |
+
+---
+
+## Note sur ce fichier (2026-09-11)
+
+Ce fichier était significativement en retard sur l'état réel du projet — plusieurs lignes
+marquées 🔜/⏳ étaient déjà faites (villes, maps, favoris DB, itinéraires DB-only, SEO P1).
+Corrigé après vérification croisée avec `frontend_nextjs.md`, `architecture_future.md` et
+l'historique git. Les lignes ❓ restent à vérifier concrètement (lire le code, pas juste
+supposer) avant de les traiter comme faites ou manquantes.
 
 ---
 

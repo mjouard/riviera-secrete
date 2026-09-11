@@ -85,14 +85,16 @@
 
 ## Communauté / comptes (backend requis)
 
-- [ ] Connexion Google (OAuth) via NextAuth.js (Option A retenue) — prérequis à tout ce
-      qui suit ; backend ASP.NET Core + PostgreSQL sur Railway (décision archi 2026-09-11)
+- [x] Connexion Google (OAuth) via NextAuth.js (Option A retenue) — backend ASP.NET Core +
+      PostgreSQL sur Railway (décision archi 2026-09-11), `frontend/` uniquement
+- [x] Migration favoris + itinéraires custom de localStorage → DB — favoris (`/mes-favoris`,
+      `9e055b3`) et itinéraires custom (`fc84181`, DB-only) faits côté `frontend/` ; le site
+      statique garde sa propre version localStorage séparée (`mes-favoris.html`), non migrée
 - [ ] Social proof — "X personnes ont mis ce lieu en favori", visible publiquement
 - [ ] "J'y suis allé" — visited tracker distinct des favoris
 - [ ] Avis et notes sur les activités — étoiles + commentaire court, stockage backend,
       modération a minima ; dépend de la connexion Google
 - [ ] Tips visiteurs — note courte laissée par les utilisateurs sur un lieu
-- [ ] Migration favoris + itinéraires custom de localStorage → DB (nécessite auth)
 
 ## Mise en production réelle
 

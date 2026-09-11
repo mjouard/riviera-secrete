@@ -12,17 +12,25 @@ Riviera Secrète — a site listing 27 lesser-known spots ("lieux") on the Frenc
 
 1. **The static site** (repo root: `index.html`, `lieux/*.html`, `itin/*.html`,
    `villes/*.html`, `assets/`, `scripts/build.mjs`) — no framework, no server, generated
-   from `data/*.json`. This is the one actually deployed to production (Vercel, migrated
-   from Netlify — see `netlify.toml`/`vercel.json` both still present, Vercel is current).
-   Everything below "Commands" through "Content conventions" describes this stack.
+   from `data/*.json`. Deployed to production (Vercel, migrated from Netlify — see
+   `netlify.toml`/`vercel.json` both still present, Vercel is current) and still what's
+   live/indexed today, but **legacy as of 2026-09-11**: don't invest in it beyond urgent
+   fixes. Everything below "Commands" through "Content conventions" describes this stack,
+   kept for reference while it's still deployed.
 2. **`frontend/` + `backend/`** — a from-scratch rewrite as a Next.js 16 app backed by an
    ASP.NET Core + PostgreSQL API, started 2026-09-11 to unlock accounts/auth (the static
-   site has no server to hold user data). Not yet cut over as the production site. See
-   "Frontend/backend rewrite" below for its own architecture — it's a separate concern
-   from the static-site data model documented first in this file.
+   site has no server to hold user data). **This is the priority stack for ongoing work**
+   (decided 2026-09-11) — the static site will be progressively replaced by it, not yet
+   cut over as the production domain but treated as the real site going forward. See
+   "Frontend/backend rewrite" below for its own architecture, and the repo's own
+   `.claude/memory/` (project_overview.md, architecture_future.md, frontend_nextjs.md,
+   backend_dotnet.md, frontend_migration_checklist.md) for the fuller, more current
+   day-to-day detail on this stack — check those before this section if they conflict,
+   they're updated more frequently.
 
-Ongoing work should default to the static site unless told otherwise, since that's what's
-live; treat the new stack as the migration target, not yet the source of truth.
+Ongoing work should default to `frontend/`+`backend/` unless told otherwise. Only touch the
+static site for urgent fixes (a live bug, content that must ship before the Next.js app has
+that page) — don't build new features there.
 
 ## Commands
 
@@ -374,10 +382,12 @@ project with HTTP/auth concerns). Deployed as a container (`backend/Dockerfile`,
 
 Routes under `frontend/src/app/`: `/`, `/lieux`, `/lieux/[slug]`, `/villes`,
 `/villes/[slug]`, `/itineraires`, `/itineraires/[slug]`, `/creer-itineraire`,
-`/mes-itineraires`, plus `/api/auth/[...nextauth]` (NextAuth's own route handler). **No
-`/mes-favoris` route yet** — the backend's favorites API exists and is fully protected, but
-no frontend page consumes it yet; that's the biggest visible gap versus the static site's
-localStorage-based "Mes favoris".
+`/mes-itineraires`, `/mes-favoris` (added in `9e055b3`, alongside a ♡ button on lieu pages),
+plus `/api/auth/[...nextauth]` (NextAuth's own route handler). `/mes-favoris` consumes the
+backend's protected favorites API directly (`GET/DELETE /api/favorites` via `authFetch`,
+no localStorage fallback — logged-out visitors just see a "Connexion avec Google" prompt),
+unlike `/mes-itineraires`'s DB-with-localStorage-fallback hybrid described above for
+logged-out users.
 
 - **`src/lib/api.ts`** — typed fetch helpers against the backend: `api.{lieux,villes,
   itineraires}.{list,bySlug}()` for public server-side reads (Next.js `revalidate: 3600`,
