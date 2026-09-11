@@ -46,7 +46,8 @@
 - [ ] Créateur d'itinéraire : partage par URL — encoder la sélection de lieux dans les
       query params plutôt que dans localStorage uniquement, pour partager un itinéraire créé
       via un simple lien, sans compte ni backend
-- [ ] Créateur d'itinéraire : export/impression pour usage hors ligne sur le terrain
+- [x] Créateur d'itinéraire : export/impression pour usage hors ligne sur le terrain —
+      bouton "Exporter en PDF" (window.print + @media print thème clair, jours en colonne A4)
 - [x] Bouton "Ajouter à mon itinéraire" directement sur chaque fiche lieu — mini-panneau
       déroulant listant les itinéraires sauvegardés, clic pour ajouter le lieu au dernier
       jour de l'itinéraire sans quitter la page ; `?add=slug` sur `creer-itineraire.html`
@@ -58,8 +59,8 @@
 - [ ] Version anglaise du site — la Côte d'Azur est une destination majeure pour les
       anglophones ; gros chantier (contenu à dupliquer/traduire, routing bilingue) mais
       probablement le plus gros levier d'audience disponible
-- [ ] Analytics respectueux de la vie privée (Plausible ou Netlify Analytics) pour voir
-      quels lieux/itinéraires attirent réellement et prioriser objectivement
+- [x] Analytics respectueux de la vie privée (Plausible) — script déployé sur les 63 pages
+      du site (5 hand-authored + 27 lieux + 6 itinéraires + 22 villes + templates)
 
 ## Communauté / comptes
 
