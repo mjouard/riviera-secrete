@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
+import MapLieuWrapper from "@/components/MapLieuWrapper";
 
 export const revalidate = 3600;
 
@@ -110,6 +111,11 @@ export default async function LieuPage({
             </a>
           ))}
         </div>
+      </div>
+
+      {/* Carte */}
+      <div className="mb-10">
+        <MapLieuWrapper lat={lieu.lat} lng={lieu.lng} nom={lieu.nom} />
       </div>
 
       {/* Description */}

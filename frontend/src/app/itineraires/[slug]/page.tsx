@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
+import MapItinWrapper from "@/components/MapItinWrapper";
 
 export const revalidate = 3600;
 
@@ -102,6 +103,15 @@ export default async function ItinerairePage({
           </div>
         )}
       </div>
+
+      {/* Carte */}
+      {routeStops.length > 0 && (
+        <div className="mb-12">
+          <MapItinWrapper
+            stops={routeStops.map((l) => ({ lat: l.lat, lng: l.lng, nom: l.nom }))}
+          />
+        </div>
+      )}
 
       {/* Programme */}
       <section className="mb-12">
