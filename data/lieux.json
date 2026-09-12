@@ -1826,6 +1826,39 @@
         "image": "../assets/images/lieux/tourrettes-sur-loup/act-3.jpg",
         "alt": "Festival des violettes (février/mars)",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-le-mounard",
+        "nom": "Randonnée du Mounard",
+        "badge": "gratuit",
+        "duree": "3h à 3h30",
+        "prix": "Accès libre",
+        "url": "https://www.visugpx.com/les-plus-belles-randonnees/alpes-maritimes/tourrettes-sur-loup/",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-4.jpg",
+        "alt": "Pont de pierre sur le vallon du Cassan, sur le parcours de la randonnée du Mounard",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-viaduc-cassan",
+        "nom": "VTT jusqu'au viaduc de Cassan",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.outdooractive.com/fr/parcours-vtt/tourrettes-sur-loup/parcours-vtt-autour-de-tourrettes-sur-loup/190120487/",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-5.jpg",
+        "alt": "Ancien viaduc ferroviaire de Cassan, avec le village de Tourrettes-sur-Loup en arrière-plan",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-auberge-de-tourrettes",
+        "nom": "Dîner à l'Auberge de Tourrettes",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "35–50 € / pers.",
+        "url": "https://www.aubergedetourrettes.com/restaurant",
+        "image": "../assets/images/lieux/tourrettes-sur-loup/act-6.jpg",
+        "alt": "Vue sur la campagne depuis une auberge du vieux village de Tourrettes-sur-Loup",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

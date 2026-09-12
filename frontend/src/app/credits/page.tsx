@@ -48,6 +48,9 @@ const CREDITS: Credit[] = [
   { titre: "Ruelle d'Èze (restaurant Taverne d'Antan)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:EZE_ruelle_2.JPG", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Trophée d'Auguste vu du Mont Bataille (randonnée)", auteur: "Lourem", fileUrl: "https://commons.wikimedia.org/wiki/File:Tour_d%27Auguste_%C3%A0_la_Turbie_vue_du_mont_Bataille.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Rue de La Turbie (restaurant Les Santons)", auteur: "avu-edm", fileUrl: "https://commons.wikimedia.org/wiki/File:La_Turbie_-_panoramio_(4).jpg", licenceLabel: "CC BY 3.0", licenceUrl: "https://creativecommons.org/licenses/by/3.0/deed.fr" },
+  { titre: "Vallon du Cassan (randonnée du Mounard)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Vallon_du_cassan_P1060538.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
+  { titre: "Viaduc de Cassan (VTT)", auteur: "Olivier Cleynen", fileUrl: "https://commons.wikimedia.org/wiki/File:Viaduc_de_Cassan,_Tourrettes-sur-Loup.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Vue depuis une auberge du vieux village (restaurant)", auteur: "Art Anderson", fileUrl: "https://commons.wikimedia.org/wiki/File:View_of_Tourrettes_from_Auberge_window_-_panoramio.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
