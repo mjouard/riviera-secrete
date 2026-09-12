@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
 import { DUREE_META, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";

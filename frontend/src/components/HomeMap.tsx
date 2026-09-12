@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Ville } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
 import { REGION_COLORS, REGION_LABELS, REGION_ORDER, truncate } from "@/lib/home-data";

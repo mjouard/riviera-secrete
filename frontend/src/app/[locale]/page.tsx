@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 import HomeMapWrapper from "@/components/HomeMapWrapper";
 import HomeActivities from "@/components/HomeActivities";

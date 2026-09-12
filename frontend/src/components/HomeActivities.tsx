@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
 import { ACTIVITY_CATEGORIES, FEATURED_ACTIVITIES } from "@/lib/home-data";

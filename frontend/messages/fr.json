@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Riviera Secrète — Les spots confidentiels de la Côte d'Azur",
+    "titleTemplate": "%s — Riviera Secrète",
+    "description": "27 lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez."
+  },
+  "nav": {
+    "villes": "Villes",
+    "creerItineraire": "Créer un itinéraire",
+    "mesItineraires": "Mes itinéraires",
+    "mesFavoris": "Mes favoris",
+    "connexion": "Connexion",
+    "deconnexion": "Déconnexion",
+    "menu": "Menu"
+  },
+  "footer": {
+    "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
+    "photos": "Photos :",
+    "credits": "crédits & licences"
+  }
+}

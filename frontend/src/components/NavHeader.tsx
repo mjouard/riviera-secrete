@@ -1,22 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
+import { Link } from "@/i18n/navigation";
 
-const CONTENT_LINKS = [
-  { href: "/villes", label: "Villes" },
-];
-
-const ACCOUNT_LINKS = [
-  { href: "/creer-itineraire", label: "Créer un itinéraire" },
-  { href: "/mes-itineraires", label: "Mes itinéraires" },
-  { href: "/mes-favoris", label: "Mes favoris" },
-];
-
-const NAV_LINKS = [...CONTENT_LINKS, ...ACCOUNT_LINKS];
+function useNavLinks() {
+  const t = useTranslations("nav");
+  const contentLinks = [{ href: "/villes", label: t("villes") }];
+  const accountLinks = [
+    { href: "/creer-itineraire", label: t("creerItineraire") },
+    { href: "/mes-itineraires", label: t("mesItineraires") },
+    { href: "/mes-favoris", label: t("mesFavoris") },
+  ];
+  return { contentLinks, accountLinks, navLinks: [...contentLinks, ...accountLinks] };
+}
 
 function AuthButton({ onClose }: { onClose?: () => void }) {
+  const t = useTranslations("nav");
   const { data: session, status } = useSession();
 
   if (status === "loading") return null;
@@ -28,7 +29,7 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
         className="text-sm transition-colors hover:text-white cursor-pointer"
         style={{ color: "var(--text-muted)" }}
       >
-        {session.user?.name?.split(" ")[0] ?? "Mon compte"} · Déconnexion
+        {session.user?.name?.split(" ")[0] ?? "..."} · {t("deconnexion")}
       </button>
     );
   }
@@ -40,7 +41,7 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
       className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/10"
       style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
     >
-      Connexion
+      {t("connexion")}
     </Link>
   );
 }
@@ -48,6 +49,8 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
 export default function NavHeader() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const t = useTranslations("nav");
+  const { contentLinks, accountLinks, navLinks } = useNavLinks();
 
   return (
     <header
@@ -70,7 +73,7 @@ export default function NavHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden sm:flex gap-6 items-center text-sm" style={{ color: "var(--text-muted)" }}>
-          {NAV_LINKS.map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link key={href} href={href} className="hover:text-white transition-colors">
               {label}
             </Link>
@@ -82,7 +85,7 @@ export default function NavHeader() {
         <button
           className="sm:hidden p-2 -mr-2 rounded-lg transition-colors hover:bg-white/5"
           style={{ color: "var(--text-muted)" }}
-          aria-label="Menu"
+          aria-label={t("menu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
@@ -96,7 +99,7 @@ export default function NavHeader() {
           className="sm:hidden border-t flex flex-col"
           style={{ borderColor: "var(--line)", background: "rgba(12,17,22,0.97)" }}
         >
-          {CONTENT_LINKS.map(({ href, label }) => (
+          {contentLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -108,7 +111,7 @@ export default function NavHeader() {
             </Link>
           ))}
           <div style={{ background: "rgba(255,255,255,0.02)" }}>
-            {ACCOUNT_LINKS.map(({ href, label }) => (
+            {accountLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}

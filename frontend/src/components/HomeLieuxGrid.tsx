@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";

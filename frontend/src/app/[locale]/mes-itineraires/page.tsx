@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { DUREE_META } from "@/lib/itineraire-logic";
 import { authFetch } from "@/lib/api";
