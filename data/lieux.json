@@ -471,6 +471,28 @@
         "image": "../assets/images/lieux/eze-village/act-5.jpg",
         "alt": "Randonnée chemin de Nietzsche",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "circuits-vtt-col-eze",
+        "nom": "Circuits VTT du Col d'Èze",
+        "badge": "gratuit",
+        "duree": "2h à 3h",
+        "prix": "Accès libre",
+        "url": "https://www.visugpx.com/itineraires/vtt/alpes-maritimes/eze/",
+        "image": "../assets/images/lieux/eze-village/act-6.jpg",
+        "alt": "Vue d'Èze village depuis la Grande Corniche, terrain des circuits VTT du Col d'Èze",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-taverne-antan",
+        "nom": "Déjeuner à la Taverne d'Antan",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20–30 € / pers.",
+        "url": "https://www.lataverne-eze.fr/",
+        "image": "../assets/images/lieux/eze-village/act-7.jpg",
+        "alt": "Ruelle du village d'Èze où se niche la Taverne d'Antan",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
