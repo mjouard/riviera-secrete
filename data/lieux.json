@@ -3517,5 +3517,131 @@
       "restaurant"
     ],
     "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg"
+  },
+  {
+    "slug": "cimetiere-vieux-chateau-menton",
+    "villeSlug": "menton",
+    "nom": "Le Cimetière du Vieux-Château",
+    "commune": "Menton",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7781,
+    "lng": 7.5054,
+    "description": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure d'aristocrates russes et britanniques, avec vue jusqu'à l'Italie.",
+    "ogImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/1200/800",
+    "heroImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/1200/800",
+    "heroAlt": "Vue panoramique sur la baie de Menton depuis le cimetière du Vieux-Château",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "30-45 min"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure d'aristocrates russes et britanniques, avec vue jusqu'à l'Italie.",
+    "description2": "Construit en 1807 sur les ruines du château détruit trois ans plus tôt, le cimetière du Vieux-Château est devenu au XIXe siècle le dernier repos d'une clientèle européenne huppée venue hiverner à Menton — mausoleums russes à coupole, tombes britanniques et polonaises se côtoient sur quatre terrasses. On y vient surtout pour le panorama à 360°, de l'Italie au cap Martin, largement méconnu des visiteurs qui s'arrêtent au Vieux Port en contrebas.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Monter par la Montée du Souvenir depuis le Vieux Port, ou directement depuis les ruelles du Vieux Menton — une dizaine de minutes à pied, quelques marches."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Cherchez la tombe discrète de William Webb Ellis, l'écolier anglais à qui la légende attribue l'invention du rugby, noyée parmi les mausoleums russes."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le Vieux Port et les jardins de Garavan, juste en contrebas de la colline."
+      }
+    ],
+    "activites": [
+      {
+        "id": "sur-les-traces-de-william-webb-ellis",
+        "nom": "Sur les traces de William Webb Ellis",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://www.menton.fr/Admirez-le-panorama-depuis-le-cimetiere-du-Vieux-Chateau-et-le-Boulevard-de.html",
+        "image": "https://picsum.photos/seed/webb-ellis-menton/200/200",
+        "alt": "Tombes du cimetière du Vieux-Château, dont celle du supposé inventeur du rugby",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balade-vieux-menton",
+        "nom": "Balade dans les ruelles du Vieux Menton",
+        "badge": "gratuit",
+        "duree": "1h-1h30",
+        "prix": "Accès libre",
+        "url": "https://www.menton.fr/-A-Voir-.html",
+        "image": "https://picsum.photos/seed/vieux-menton-balade/200/200",
+        "alt": "Ruelles colorées et escaliers du Vieux Menton",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "jardin-serre-de-la-madone",
+        "nom": "Visite du Jardin Serre de la Madone",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "10 € / adulte",
+        "url": "https://serredelamadone.fr/",
+        "image": "https://picsum.photos/seed/serre-madone/200/200",
+        "alt": "Bassins en terrasses et plantes rares du Jardin Serre de la Madone",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "jardin-botanique-val-rahmeh",
+        "nom": "Jardin botanique Val Rahmeh",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "8 € / adulte",
+        "url": "https://www.jardinbotaniquevalrahmehmenton.fr/",
+        "image": "https://picsum.photos/seed/val-rahmeh/200/200",
+        "alt": "Palmiers centenaires et plantes tropicales du jardin Val Rahmeh",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "diner-petit-port",
+        "nom": "Dîner au Petit Port",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "25-45 € / pers.",
+        "url": "https://le-petit-port.hey-restaurants.com/",
+        "image": "https://picsum.photos/seed/petit-port-menton/200/200",
+        "alt": "Terrasse du restaurant Le Petit Port au pied du Vieux Menton",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "roquebrune-cap-martin-village.html",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
+        "alt": "Village médiéval perché de Roquebrune-Cap-Martin",
+        "stamp": "43.76°N<br>7.45°E",
+        "region": "Roquebrune-Cap-Martin",
+        "titre": "Village médiéval de Roquebrune",
+        "blurb": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des pl…"
+      },
+      {
+        "href": "trophee-auguste-la-turbie.html",
+        "img": "assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
+        "alt": "Trophée d'Auguste, monument romain à La Turbie surplombant Monaco",
+        "stamp": "43.74°N<br>7.40°E",
+        "region": "La Turbie",
+        "titre": "Trophée d'Auguste",
+        "blurb": "Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, pe…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/500/375"
   }
 ]

@@ -240,5 +240,18 @@
     "description": "Un village perché classé parmi les plus beaux villages de France, dominant les vignobles et le golfe de Saint-Tropez.",
     "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg",
     "lieux": ["gassin-plus-beau-village"]
+  },
+  {
+    "slug": "menton",
+    "nom": "Menton",
+    "regionSlug": "menton-monaco",
+    "regionLabel": "Menton, Monaco & la frontière",
+    "lat": 43.7781,
+    "lng": 7.5054,
+    "description": "La ville-jardin des citrons à la frontière italienne, entre vieille ville baroque et cimetière belvédère sur la mer.",
+    "thumbImage": "https://picsum.photos/seed/menton/500/375",
+    "lieux": [
+      "cimetiere-vieux-chateau-menton"
+    ]
   }
 ]
