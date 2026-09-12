@@ -281,13 +281,13 @@
       },
       {
         "id": "promenade-gustave-eiffel",
-        "nom": "Promenade Gustave Eiffel",
+        "nom": "Promenade Maurice Rouvier",
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.explorenicecotedazur.com/itinerary/promenade-maurice-rouvier/",
         "image": "../assets/images/lieux/villa-kerylos/act-2.jpg",
-        "alt": "Promenade Gustave Eiffel",
+        "alt": "Promenade Maurice Rouvier",
         "linkText": "En savoir plus →"
       }
     ],
@@ -382,17 +382,6 @@
         "url": "https://www.getyourguide.com/eze-l12561/fragonard-eze-cours-de-parfumerie-et-visite-de-la-fabrique-t417234/?ranking_uuid=e6009bd2-8aa6-4e0a-a1d5-7c70e27ed662&referral_redirect=1",
         "image": "../assets/images/lieux/eze-village/act-3.jpg",
         "alt": "Atelier de parfum à Èze",
-        "linkText": "Réserver →"
-      },
-      {
-        "id": "location-de-bateau",
-        "nom": "Location de bateau",
-        "badge": "payant",
-        "duree": "1 – 2 h",
-        "prix": "40 – 100 € / pers.",
-        "url": "https://www.clickandboat.com/location/type-de-bateau-semi-rigide/pays-france/departement-alpes-maritimes/ville-eze",
-        "image": "../assets/images/lieux/eze-village/act-4.jpg",
-        "alt": "Location de bateau en Méditerranée",
         "linkText": "Réserver →"
       },
       {
@@ -1125,13 +1114,13 @@
       },
       {
         "id": "dejeuner-sur-la-plage-arnulf",
-        "nom": "Déjeuner sur la plage Arnulf",
+        "nom": "Déjeuner au restaurant Les Plaisirs",
         "badge": "payant",
         "duree": "1 h",
         "prix": "40 – 50 € / pers.",
         "url": "https://www.lesplaisirs-peillon.com/",
         "image": "../assets/images/lieux/peillon-village/act-1.jpg",
-        "alt": "Plage Arnulf à Peillon",
+        "alt": "Restaurant Les Plaisirs à Peillon",
         "linkText": "Réserver →"
       },
       {
