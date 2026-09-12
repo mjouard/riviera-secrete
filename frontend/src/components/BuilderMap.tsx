@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { applyDarkTileFilter, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from "@/lib/map-tiles";
+import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
 
 interface Stop { lat: number; lng: number; nom: string; }
 
@@ -45,13 +45,7 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
     let cancelled = false;
     import("leaflet").then((L) => {
       if (cancelled || !ref.current) return;
-      delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
-      const map = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true });
-      L.tileLayer(MAP_TILE_URL, {
-        attribution: MAP_TILE_ATTRIBUTION,
-        maxZoom: 19,
-      }).addTo(map);
-      applyDarkTileFilter(map);
+      const map = createBaseMap(L, ref.current, { scrollWheelZoom: false });
       const layer = L.layerGroup().addTo(map);
       stateRef.current = { L, map, layer };
       applyStops(stateRef.current, stopsRef.current);
@@ -71,7 +65,7 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
 
   return (
     <>
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossOrigin="" />
+      <link rel="stylesheet" href={LEAFLET_CSS_HREF} crossOrigin="" />
       <div ref={ref} style={{ height: "320px", borderRadius: "12px", overflow: "hidden" }} />
     </>
   );
