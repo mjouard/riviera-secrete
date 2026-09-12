@@ -42,6 +42,13 @@ button:not(:disabled) { cursor: pointer; }
 .builder-stop-card.dragging { opacity: 0.4; }
 .builder-day-stops { min-height: 60px; }
 
+/* ---------- SCROLL REVEAL (grille lieux homepage) ---------- */
+.card-reveal { opacity: 0; transform: translateY(16px); transition: transform 0.25s ease; }
+.card-reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .card-reveal { transition: none; opacity: 1; transform: none; }
+}
+
 /* ---------- PRINT / PDF EXPORT (créateur d'itinéraire) ---------- */
 .print-header { display: none; }
 .print-header-url { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin-bottom: 4px; }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Lieu } from "@/lib/types";
 import { imgUrl } from "@/lib/utils";
@@ -9,7 +9,7 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
-      className="group block rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
+      className="card-reveal group block rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
       <div className="aspect-[4/3] overflow-hidden">
@@ -35,6 +35,7 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
 
 export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const [activeBadge, setActiveBadge] = useState<string>("");
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filtered = activeBadge
     ? lieux.filter((l) => l.badges?.includes(activeBadge))
@@ -43,6 +44,27 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   function toggle(badge: string) {
     setActiveBadge((prev) => (prev === badge ? "" : badge));
   }
+
+  // Apparition douce des cartes au scroll — même comportement que le site statique
+  // (assets/main.js) : threshold 0.15, "one-shot" (unobserve dès la première apparition).
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid || !("IntersectionObserver" in window)) return;
+    const cards = grid.querySelectorAll(".card-reveal:not(.visible)");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [filtered]);
 
   return (
     <div>
@@ -84,7 +106,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           Aucun lieu pour ce filtre.
         </p>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div ref={gridRef} className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((lieu) => (
             <LieuCard key={lieu.id} lieu={lieu} />
           ))}
