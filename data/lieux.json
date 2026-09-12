@@ -2411,6 +2411,17 @@
         "image": "../assets/images/lieux/haut-de-cagnes/act-2.jpg",
         "alt": "Balade village médiéval",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-le-village",
+        "nom": "Déjeuner au restaurant Le Village",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "30–40 € / pers.",
+        "url": "https://legrimaldibylevillage.com/le-village-restaurant-haut-de-cagnes-sur-mer",
+        "image": "../assets/images/lieux/haut-de-cagnes/act-4.jpg",
+        "alt": "Place du Château au Haut-de-Cagnes, où se trouve le restaurant Le Village",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
