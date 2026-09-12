@@ -141,7 +141,7 @@ Pour rester dans l'esprit "petit à petit" demandé :
 | Nice et ses environs immédiats | fait | `falicon` (lieu `falicon-village`) + `parc-mont-boron` (nouveau lieu sur la ville `nice` existante) | Commits `51b7c12`/`840cabc`, syncés en DB. Autres candidats envisagés et écartés pour cette nuit : Aspremont (redondant avec Falicon — même angle "village perché vue sur Nice"), Bellet/Cimiez (gardés pour une session future, moins prioritaires). |
 | L'arrière-pays : villages perchés & gorges | à faire | — | Candidats pressentis à vérifier : Sainte-Agnès, Coaraze, Sospel, Saorge, Lucéram, Gorbio, Vence (centre), Castellar |
 | Antibes, Cannes & le massif de l'Estérel | fait | `mougins` (lieu `vieux-mougins`), `vallauris` (lieu `vieux-vallauris-ceramique`) | Commits `1eb2386`/`22ff6e4`, syncés en DB. Angle éditorial : art vivant/artisanat plutôt que le seul nom "Picasso" (déjà connu partout) — galeries habitées à Mougins, ateliers de céramistes à Vallauris. |
-| Grasse & le golfe de Saint-Tropez | à faire | — | Candidats pressentis : Mougins, Valbonne, Ramatuelle |
+| Grasse & le golfe de Saint-Tropez | fait | `grimaud` (lieu `vieux-village-grimaud`), `ramatuelle` (lieu `vieux-village-ramatuelle`) | Commits `a811b98`/`86f6858`, syncés en DB. Mougins traité sous `antibes-cannes` (géographiquement plus cohérent, voir cette ligne) plutôt qu'ici. Valbonne non traité cette nuit (candidat restant, voir "Prochaine étape"). |
 
 *(Mettre à jour "Statut" en `en cours` / `fait` / `interrompu — voir note`, et lister les
 villes réellement ajoutées avec leur slug au fil de l'eau.)*
@@ -161,6 +161,10 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 | `vieux-mougins` | Le Vieux Mougins | hero + thumb |
 | `vallauris` (ville) | Vallauris | thumb |
 | `vieux-vallauris-ceramique` | Le Vieux Vallauris, cité de la céramique | hero + thumb |
+| `grimaud` (ville) | Grimaud | thumb |
+| `vieux-village-grimaud` | Le Vieux Village de Grimaud | hero + thumb |
+| `ramatuelle` (ville) | Ramatuelle | thumb |
+| `vieux-village-ramatuelle` | Le Vieux Village de Ramatuelle | hero + thumb |
 
 ## Si le travail s'arrête en cours de route
 
