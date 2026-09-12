@@ -344,6 +344,28 @@
         "image": "../assets/images/lieux/villa-kerylos/act-2.jpg",
         "alt": "Promenade Maurice Rouvier",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "baignade-baie-des-fourmis",
+        "nom": "Baignade à la Baie des Fourmis",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/structure/plage-de-la-baie-des-fourmis/",
+        "image": "../assets/images/lieux/villa-kerylos/act-3.jpg",
+        "alt": "Plage de la Baie des Fourmis à Beaulieu-sur-Mer, juste au pied de la Villa Kerylos",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-african-queen",
+        "nom": "Déjeuner au restaurant African Queen",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "50–70 € / pers.",
+        "url": "https://africanqueen-restaurant.com/beaulieu-sur-mer/",
+        "image": "../assets/images/lieux/villa-kerylos/act-4.jpg",
+        "alt": "Le port de Beaulieu-sur-Mer, où se trouve le restaurant African Queen",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

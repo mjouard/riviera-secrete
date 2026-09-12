@@ -42,6 +42,8 @@ const CREDITS: Credit[] = [
   { titre: "Anse des Fossettes (sentier sous-marin)", auteur: "Tangopaso", fileUrl: "https://commons.wikimedia.org/wiki/File:Anse_des_Fossettes_(St-Jean-Cap-Ferrat).jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Plage de Passable (restaurant)", auteur: "Tangopaso", fileUrl: "https://commons.wikimedia.org/wiki/File:Plage_de_Passable.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Plage des Marinières (Villefranche-sur-Mer)", auteur: "Mx. Granger", fileUrl: "https://commons.wikimedia.org/wiki/File:Plage_des_Marini%C3%A8res.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
+  { titre: "Baie des Fourmis (baignade, Villa Kerylos)", auteur: "Ianholton", fileUrl: "https://commons.wikimedia.org/wiki/File:Baie_des_Fourmis,_Beaulieu-sur-Mer.jpg", licenceLabel: "CC BY 3.0", licenceUrl: "https://creativecommons.org/licenses/by/3.0/deed.fr" },
+  { titre: "Port de Beaulieu-sur-Mer (restaurant African Queen)", auteur: "Florian Pépellin", fileUrl: "https://commons.wikimedia.org/wiki/File:Port_de_Beaulieu-sur-Mer.JPG", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
