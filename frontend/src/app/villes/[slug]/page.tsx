@@ -99,7 +99,7 @@ export default async function VillePage({
         <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
           {ville.regionLabel}
         </p>
-        <h1 className="text-3xl font-bold mb-4">{ville.nom}</h1>
+        <h1 className="font-display text-3xl font-bold mb-4">{ville.nom}</h1>
         <p className="text-base leading-relaxed" style={{ color: "var(--text-muted)" }}>
           {ville.description}
         </p>
@@ -133,7 +133,7 @@ export default async function VillePage({
                   />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold line-clamp-1">{lieu.nom}</p>
+                  <p className="text-sm font-semibold line-clamp-2">{lieu.nom}</p>
                   <p className="text-xs mt-1 line-clamp-2" style={{ color: "var(--text-muted)" }}>
                     {lieu.description}
                   </p>

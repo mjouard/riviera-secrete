@@ -4,14 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
-const NAV_LINKS = [
+const CONTENT_LINKS = [
   { href: "/lieux", label: "Lieux" },
   { href: "/villes", label: "Villes" },
   { href: "/itineraires", label: "Itinéraires" },
+];
+
+const ACCOUNT_LINKS = [
   { href: "/creer-itineraire", label: "Créer un itinéraire" },
   { href: "/mes-itineraires", label: "Mes itinéraires" },
   { href: "/mes-favoris", label: "Mes favoris" },
 ];
+
+const NAV_LINKS = [...CONTENT_LINKS, ...ACCOUNT_LINKS];
 
 function AuthButton({ onClose }: { onClose?: () => void }) {
   const { data: session, status } = useSession();
@@ -59,7 +64,7 @@ export default function NavHeader() {
         <Link
           href="/"
           onClick={close}
-          className="font-serif text-lg font-semibold tracking-tight"
+          className="font-display text-lg font-semibold tracking-tight"
           style={{ color: "var(--text)" }}
         >
           Riviera Secrète
@@ -93,7 +98,7 @@ export default function NavHeader() {
           className="sm:hidden border-t flex flex-col"
           style={{ borderColor: "var(--line)", background: "rgba(12,17,22,0.97)" }}
         >
-          {NAV_LINKS.map(({ href, label }) => (
+          {CONTENT_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -104,8 +109,21 @@ export default function NavHeader() {
               {label}
             </Link>
           ))}
-          <div className="px-6 py-4">
-            <AuthButton onClose={close} />
+          <div style={{ background: "rgba(255,255,255,0.02)" }}>
+            {ACCOUNT_LINKS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={close}
+                className="block px-6 py-4 text-sm border-b transition-colors hover:bg-white/5"
+                style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+              >
+                {label}
+              </Link>
+            ))}
+            <div className="px-6 py-4">
+              <AuthButton onClose={close} />
+            </div>
           </div>
         </nav>
       )}

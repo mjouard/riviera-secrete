@@ -95,7 +95,7 @@ export default async function ItinerairePage({
         <p className="text-sm font-semibold mb-2" style={{ color: "var(--terracotta)" }}>
           {itin.badge}
         </p>
-        <h1 className="text-3xl font-bold mb-4 leading-tight">{itin.titre}</h1>
+        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 leading-tight">{itin.titre}</h1>
         <p className="text-lg" style={{ color: "var(--text-muted)" }}>
           {itin.description}
         </p>

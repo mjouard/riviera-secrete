@@ -89,7 +89,7 @@ export default async function LieuPage({
         <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
           {lieu.commune} · {lieu.regionLabel}
         </p>
-        <h1 className="text-3xl font-bold mb-4">{lieu.nom}</h1>
+        <h1 className="font-display text-3xl font-bold mb-4">{lieu.nom}</h1>
 
         {/* Badges */}
         {lieu.badges.length > 0 && (
@@ -111,32 +111,36 @@ export default async function LieuPage({
 
         {/* MetaPills + GPS */}
         <div className="flex flex-wrap gap-3">
-          <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-            <span>📍</span>{" "}
-            <span style={{ color: "var(--text)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
-          </span>
           {lieu.metaPills.map((pill, i) => (
             <span key={i} className="text-sm" style={{ color: "var(--text-muted)" }}>
               <span>{pill.label}</span>{" "}
               <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
             </span>
           ))}
+          <span className="text-sm" style={{ color: "var(--text-muted)" }}>
+            <span>📍</span>{" "}
+            <span style={{ color: "var(--text)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
+          </span>
         </div>
 
-        {/* Liens Maps/Waze/Plans + Favori */}
-        <div className="flex flex-wrap gap-2 mt-3">
+        {/* Liens Maps/Waze/Plans — quittent le site, traitement discret */}
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
           {buildMapLinks(lieu.lat, lieu.lng, lieu.nom).map((link) => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5"
-              style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+              className="text-xs hover:underline transition-colors"
+              style={{ color: "var(--text-muted)" }}
             >
               {link.icon} {link.label}
             </a>
           ))}
+        </div>
+
+        {/* Favori / Partager / Itinéraire — actions sur le site */}
+        <div className="flex flex-wrap gap-2 mt-3">
           <FavoriteButton slug={lieu.slug} />
           <ShareButton title={lieu.nom} />
           <AddToItinButton lieuSlug={lieu.slug} />
@@ -258,7 +262,7 @@ export default async function LieuPage({
                   <p className="text-xs mb-0.5" style={{ color: "var(--text-muted)" }}>
                     {r.region}
                   </p>
-                  <p className="text-sm font-semibold line-clamp-1">{r.titre}</p>
+                  <p className="text-sm font-semibold line-clamp-2">{r.titre}</p>
                   <p className="text-xs line-clamp-1" style={{ color: "var(--text-muted)" }}>
                     {r.blurb}
                   </p>

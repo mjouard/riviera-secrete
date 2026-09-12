@@ -98,3 +98,8 @@ body {
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Serif éditorial — logo + titres de page (h1). Chargée via next/font/google dans layout.tsx. */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-fraunces",
+});
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
@@ -34,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={inter.className}>
+    <html lang="fr" className={`${inter.className} ${fraunces.variable}`}>
       <head>
         <script async src={plausibleScript} />
       </head>

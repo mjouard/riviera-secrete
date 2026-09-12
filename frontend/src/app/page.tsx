@@ -49,7 +49,7 @@ export default async function HomePage() {
           }}
         />
         <div className="relative z-[2] max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4 leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
             La Côte d&apos;Azur{" "}
             <em className="not-italic" style={{ color: "var(--terracotta)" }}>
               hors des sentiers battus
