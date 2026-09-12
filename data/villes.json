@@ -253,5 +253,18 @@
     "lieux": [
       "cimetiere-vieux-chateau-menton"
     ]
+  },
+  {
+    "slug": "falicon",
+    "nom": "Falicon",
+    "regionSlug": "nice",
+    "regionLabel": "Nice et ses environs immédiats",
+    "lat": 43.7488,
+    "lng": 7.2786,
+    "description": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
+    "thumbImage": "https://picsum.photos/seed/falicon/500/375",
+    "lieux": [
+      "falicon-village"
+    ]
   }
 ]

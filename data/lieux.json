@@ -3643,5 +3643,120 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/500/375"
+  },
+  {
+    "slug": "falicon-village",
+    "villeSlug": "falicon",
+    "nom": "Falicon",
+    "commune": "Falicon",
+    "regionSlug": "nice",
+    "regionLabel": "Nice et ses environs immédiats",
+    "lat": 43.7488,
+    "lng": 7.2786,
+    "description": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
+    "ogImage": "https://picsum.photos/seed/falicon-village/1200/800",
+    "heroImage": "https://picsum.photos/seed/falicon-village/1200/800",
+    "heroAlt": "Ruelles pastel et façades en trompe-l'œil du village perché de Falicon",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
+    "description2": "Ancien haut lieu de la culture de l'œillet, Falicon a gardé son plan en colimaçon derrière son rempart, ses passages voûtés et ses façades baroques peintes en trompe-l'œil. L'écrivain Jules Romains y situa une partie de sa \"Douceur de la vie\" et prenait ses habitudes à l'ancien restaurant du Plateau Bellevue, d'où la vue plonge sur Nice et la baie des Anges sans qu'aucun car de tourisme n'y monte jamais.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "15 minutes en voiture depuis le centre de Nice, ou bus de ville — pas de parking dans le village, se garer aux abords."
+      },
+      {
+        "label": "Meilleur moment",
+        "texte": "Fin d'après-midi pour la lumière rasante sur les façades peintes et le coucher de soleil depuis le plateau Bellevue."
+      },
+      {
+        "label": "À combiner",
+        "texte": "La Colline du Château et le Vieux-Nice, à 15 minutes en voiture."
+      }
+    ],
+    "activites": [
+      {
+        "id": "balade-ruelles-falicon",
+        "nom": "Balade dans les ruelles en trompe-l'œil",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre",
+        "url": "https://www.falicon.fr/visiter-falicon/",
+        "image": "https://picsum.photos/seed/ruelles-falicon/200/200",
+        "alt": "Ruelle voûtée et façade peinte en trompe-l'œil à Falicon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "plateau-bellevue-falicon",
+        "nom": "Point de vue du Plateau Bellevue",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/explore/towns-villages/mid-country/falicon/",
+        "image": "https://picsum.photos/seed/bellevue-falicon/200/200",
+        "alt": "Panorama sur Nice et la baie des Anges depuis le plateau Bellevue de Falicon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-mont-chauve-falicon",
+        "nom": "Randonnée au pied du Mont Chauve",
+        "badge": "gratuit",
+        "duree": "1h30-2h",
+        "prix": "Accès libre",
+        "url": "https://www.alltrails.com/trail/france/alpes-maritimes/au-pied-du-mont-chauve",
+        "image": "https://picsum.photos/seed/mont-chauve-falicon/200/200",
+        "alt": "Sentier de randonnée vers le Mont Chauve depuis Falicon",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "diner-parcours-live-falicon",
+        "nom": "Dîner au Parcours Live",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "25-70 € / pers.",
+        "url": "https://www.facebook.com/parcoursliverestaurant/",
+        "image": "https://picsum.photos/seed/parcours-live-falicon/200/200",
+        "alt": "Terrasse panoramique du restaurant Parcours Live à Falicon",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "colline-du-chateau-nice.html",
+        "img": "assets/images/lieux/colline-du-chateau-nice/thumb.jpg",
+        "alt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
+        "stamp": "43.70°N<br>7.28°E",
+        "region": "Nice",
+        "titre": "Colline du Château",
+        "blurb": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disp…"
+      },
+      {
+        "href": "cours-saleya-vieux-nice.html",
+        "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
+        "alt": "Marché du Cours Saleya dans les ruelles colorées du Vieux Nice",
+        "stamp": "43.70°N<br>7.28°E",
+        "region": "Nice",
+        "titre": "Cours Saleya",
+        "blurb": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/falicon-village/500/375"
   }
 ]

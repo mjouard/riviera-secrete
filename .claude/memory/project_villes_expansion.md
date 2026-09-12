@@ -137,7 +137,7 @@ Pour rester dans l'esprit "petit à petit" demandé :
 
 | Région | Statut | Villes ajoutées | Notes |
 |---|---|---|---|
-| Menton, Monaco & la frontière | à faire | — | |
+| Menton, Monaco & la frontière | en cours | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). D'autres trous possibles dans cette région (Cap-Martin, Sainte-Agnès est côté arrière-pays) mais non traités cette nuit — voir "Prochaine étape". |
 | Nice et ses environs immédiats | à faire | — | 1 seule ville existante (Nice) aujourd'hui, probablement le plus gros trou |
 | L'arrière-pays : villages perchés & gorges | à faire | — | Candidats pressentis à vérifier : Sainte-Agnès, Coaraze, Sospel, Saorge, Lucéram, Gorbio, Vence (centre), Castellar |
 | Antibes, Cannes & le massif de l'Estérel | à faire | — | |
@@ -152,6 +152,8 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 
 | Slug lieu | Nom | Type (hero/thumb) |
 |---|---|---|
+| `menton` (ville) | Menton | thumb |
+| `cimetiere-vieux-chateau-menton` | Le Cimetière du Vieux-Château | hero + thumb |
 
 ## Si le travail s'arrête en cours de route
 
