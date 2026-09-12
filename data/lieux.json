@@ -4001,5 +4001,130 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/vieux-mougins/500/375"
+  },
+  {
+    "slug": "vieux-vallauris-ceramique",
+    "villeSlug": "vallauris",
+    "nom": "Le Vieux Vallauris, cité de la céramique",
+    "commune": "Vallauris",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.5798,
+    "lng": 7.0531,
+    "description": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
+    "ogImage": "https://picsum.photos/seed/vieux-vallauris-ceramique/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieux-vallauris-ceramique/1200/800",
+    "heroAlt": "Ateliers de céramistes et poteries exposées dans le vieux Vallauris",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
+    "description2": "Deux mille ans de tradition potière, portés par l'argile locale et les pins d'Alep qui alimentaient les fours : Vallauris vivait de la poterie utilitaire bien avant que Picasso ne s'y installe en 1948 et n'y crée près de 4000 céramiques avec les Ramié de l'atelier Madoura. Contrairement à Antibes ou Cannes, la ville reste un vrai bourg d'artisans plutôt qu'une destination balnéaire — l'avenue Georges Clemenceau aligne encore les ateliers-boutiques où l'on peut voir tourner l'argile.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "10 minutes d'Antibes ou de Golfe-Juan en voiture ; se garer place de la Libération, devant le château."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "La statue \"L'Homme au mouton\", offerte par Picasso à la ville en 1950, trône en plein air sur la place du marché, sans vitrine ni ticket d'entrée."
+      },
+      {
+        "label": "À combiner",
+        "texte": "La colonne du débarquement de Napoléon à Golfe-Juan, à 2 km, ou les plages de Juan-les-Pins."
+      }
+    ],
+    "activites": [
+      {
+        "id": "balade-ateliers-ceramistes",
+        "nom": "Balade chez les céramistes de l'avenue Clemenceau",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.vallaurisgolfejuan-tourisme.fr/picasso-ceramic/ceramic/pottery-workshop-tours/",
+        "image": "https://picsum.photos/seed/ateliers-vallauris/200/200",
+        "alt": "Tournage de poterie dans un atelier de céramiste à Vallauris",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "chateau-musee-vallauris",
+        "nom": "Château-Musée (Picasso & céramique Magnelli)",
+        "badge": "payant",
+        "duree": "1h-1h30",
+        "prix": "6 € / adulte",
+        "url": "https://www.vallaurisgolfejuan-tourisme.fr/lieux-touristique/chateau-musee-de-vallauris/",
+        "image": "https://picsum.photos/seed/chateau-musee-vallauris/200/200",
+        "alt": "Chapelle romane du château de Vallauris abritant La Guerre et la Paix de Picasso",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "homme-au-mouton-place",
+        "nom": "\"L'Homme au mouton\" sur la place du marché",
+        "badge": "gratuit",
+        "duree": "10 min",
+        "prix": "Accès libre",
+        "url": "https://www.vallauris-golfe-juan.fr/20737-la-ville.htm",
+        "image": "https://picsum.photos/seed/homme-mouton-vallauris/200/200",
+        "alt": "Statue de bronze L'Homme au mouton de Picasso sur la place du marché de Vallauris",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "colonne-debarquement-golfe-juan",
+        "nom": "Colonne du débarquement de Napoléon",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.vallaurisgolfejuan-tourisme.fr/discover/from-land-to-sea/",
+        "image": "https://picsum.photos/seed/colonne-golfe-juan/200/200",
+        "alt": "Colonne commémorative du débarquement de Napoléon sur la plage de Golfe-Juan",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-temps-jadis",
+        "nom": "Déjeuner au Temps Jadis",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "16-23 € / pers.",
+        "url": "https://www.thefork.fr/restaurant/le-temps-jadis-r669613",
+        "image": "https://picsum.photos/seed/temps-jadis-vallauris/200/200",
+        "alt": "Salle du restaurant Le Temps Jadis avenue Clemenceau à Vallauris",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sentier-cap-antibes.html",
+        "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
+        "alt": "Sentier du littoral du Cap d'Antibes longeant la mer",
+        "stamp": "43.55°N<br>7.13°E",
+        "region": "Antibes",
+        "titre": "Sentier du Cap d'Antibes",
+        "blurb": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre cr…"
+      },
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "Pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anc…"
+      }
+    ],
+    "badges": [
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieux-vallauris-ceramique/500/375"
   }
 ]

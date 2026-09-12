@@ -279,5 +279,18 @@
     "lieux": [
       "vieux-mougins"
     ]
+  },
+  {
+    "slug": "vallauris",
+    "nom": "Vallauris",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.5798,
+    "lng": 7.0531,
+    "description": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
+    "thumbImage": "https://picsum.photos/seed/vallauris/500/375",
+    "lieux": [
+      "vieux-vallauris-ceramique"
+    ]
   }
 ]
