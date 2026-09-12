@@ -126,13 +126,23 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       `/mes-itineraires`, `/mes-favoris` (parité site statique) + `/connexion` et
       `/confirmer-email` (pages compte propres à Next.js, même traitement)
 - [x] Apparition au scroll (IntersectionObserver) sur la grille homepage (2026-09-12) —
-      mêmes valeurs que le site statique (threshold 0.15, one-shot, translateY 16px).
-      Portage terminé : plus aucun item restant dans cette section. Le comportement du
-      `useEffect`/`IntersectionObserver` n'a pas pu être confirmé visuellement en prod dans
-      cette session (l'onglet de test avait `document.visibilityState: "hidden"`, qui
-      suspend l'API navigateur elle-même — même un observer trivial isolé ne se déclenche
-      pas dans ces conditions) ; la logique est un portage exact et standard, aucune raison
-      de douter du comportement en usage réel
+      mêmes valeurs que le site statique (threshold 0.15, one-shot, translateY 16px). Le
+      comportement du `useEffect`/`IntersectionObserver` n'a pas pu être confirmé
+      visuellement en prod dans cette session (l'onglet de test avait
+      `document.visibilityState: "hidden"`, qui suspend l'API navigateur elle-même — même
+      un observer trivial isolé ne se déclenche pas dans ces conditions) ; la logique est un
+      portage exact et standard, aucune raison de douter du comportement en usage réel
+
+**Trou trouvé le 2026-09-12 en auditant avant une suppression du site statique — pas encore
+dans la liste ci-dessus car découvert après coup, à traiter avant de considérer la parité
+réellement complète :**
+
+- [ ] Page `/credits` (attribution photos) — `credits.html` existe sur le site statique et
+      liste les crédits CC BY/CC BY-SA obligatoires (licence) pour les photos Wikimedia
+      Commons utilisées ; **aucun équivalent sur Next.js**. Contrairement aux autres items de
+      cette liste, ce n'est pas une feature UX optionnelle : retirer le site statique sans
+      porter cette page reviendrait à supprimer une attribution légalement requise du site
+      qui sera réellement en ligne
 
 ## Communauté / comptes (backend requis)
 
