@@ -14,16 +14,22 @@ const SITE_URL =
 const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
 
 export default function ResultsView({
-  currentDays, excluded, dureeKey, currentNom, mapStops, savedBanner,
-  onBack, onMoveStop, onRemoveStop, onDragStart, onDragOver, onSaveClick,
+  currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner,
+  editMode, onBack, onToggleEdit, onMoveStop, onRemoveStop, onDragStart, onDragOver, onSaveClick,
 }: {
   currentDays: Lieu[][];
   excluded: Lieu[];
+  bonusSuggestions: {
+    mode: "excluded" | "related";
+    items: Array<{ slug: string; nom: string; thumbImage: string }>;
+  };
   dureeKey: DureeKey;
   currentNom: string;
   mapStops: Array<{ lat: number; lng: number; nom: string }>;
   savedBanner: boolean;
+  editMode: boolean;
   onBack: () => void;
+  onToggleEdit: () => void;
   onMoveStop: (dayIndex: number, stopIndex: number, dir: -1 | 1) => void;
   onRemoveStop: (dayIndex: number, stopIndex: number) => void;
   onDragStart: (dayIndex: number, stopIndex: number) => void;
@@ -53,14 +59,20 @@ export default function ResultsView({
         </div>
         <div className="flex flex-wrap gap-2">
           <button onClick={onBack} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
-            ← Modifier
+            ← Choisir d&apos;autres lieux
           </button>
           <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
             🖨 Exporter en PDF
           </button>
-          <button onClick={onSaveClick} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>
-            Sauvegarder
-          </button>
+          {editMode ? (
+            <button onClick={onSaveClick} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>
+              Sauvegarder
+            </button>
+          ) : (
+            <button onClick={onToggleEdit} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>
+              ✏️ Modifier
+            </button>
+          )}
         </div>
       </div>
 
@@ -100,10 +112,10 @@ export default function ResultsView({
                 return (
                   <div
                     key={lieu.slug}
-                    draggable
-                    onDragStart={() => onDragStart(dayIndex, stopIndex)}
-                    onDragOver={(e) => onDragOver(e, dayIndex, stopIndex)}
-                    className="print-stop builder-stop-card rounded-lg flex gap-3 p-2 cursor-grab active:cursor-grabbing"
+                    draggable={editMode}
+                    onDragStart={editMode ? () => onDragStart(dayIndex, stopIndex) : undefined}
+                    onDragOver={editMode ? (e) => onDragOver(e, dayIndex, stopIndex) : undefined}
+                    className={`print-stop builder-stop-card rounded-lg flex gap-3 p-2 ${editMode ? "cursor-grab active:cursor-grabbing" : ""}`}
                     style={{ background: "var(--surface-hover)" }}
                   >
                     <div className="no-print w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
@@ -126,11 +138,13 @@ export default function ResultsView({
                         </div>
                       )}
                     </div>
-                    <div className="no-print flex flex-col items-center gap-1 flex-shrink-0">
-                      <button onClick={() => onMoveStop(dayIndex, stopIndex, -1)} disabled={isFirstOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Monter">▲</button>
-                      <button onClick={() => onRemoveStop(dayIndex, stopIndex)} className="text-xs px-1 py-0.5 rounded" style={{ color: "var(--text-muted)" }} aria-label="Retirer">✕</button>
-                      <button onClick={() => onMoveStop(dayIndex, stopIndex, 1)} disabled={isLastOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Descendre">▼</button>
-                    </div>
+                    {editMode && (
+                      <div className="no-print flex flex-col items-center gap-1 flex-shrink-0">
+                        <button onClick={() => onMoveStop(dayIndex, stopIndex, -1)} disabled={isFirstOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Monter">▲</button>
+                        <button onClick={() => onRemoveStop(dayIndex, stopIndex)} className="text-xs px-1 py-0.5 rounded" style={{ color: "var(--text-muted)" }} aria-label="Retirer">✕</button>
+                        <button onClick={() => onMoveStop(dayIndex, stopIndex, 1)} disabled={isLastOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label="Descendre">▼</button>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -155,26 +169,29 @@ export default function ResultsView({
       {/* Booking */}
       <BookingSection days={currentDays} />
 
-      {/* Bonus : lieux non retenus faute de temps, discret pour ne pas concurrencer l'itinéraire */}
-      {excluded.length > 0 && (
+      {/* Bonus : lieux écartés faute de temps (ou suggestions à proximité pour un itinéraire
+          déjà sauvegardé), discret pour ne pas concurrencer l'itinéraire lui-même */}
+      {bonusSuggestions.items.length > 0 && (
         <section id="suggestions-bonus" className="no-print mt-10 pt-8" style={{ borderTop: "1px solid var(--line)" }}>
           <h2 className="text-sm font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
-            🎁 Mais encore…
+            {bonusSuggestions.mode === "excluded" ? "🎁 Mais encore…" : "🎁 À proximité"}
           </h2>
           <p className="text-xs mb-4" style={{ color: "var(--text-muted)" }}>
-            Ces lieux n&apos;ont pas trouvé de place dans le planning demandé, mais méritent le détour si tu as un peu plus de temps.
+            {bonusSuggestions.mode === "excluded"
+              ? "Ces lieux n'ont pas trouvé de place dans le planning demandé, mais méritent le détour si tu as un peu plus de temps."
+              : "D'autres lieux à découvrir près de ton itinéraire."}
           </p>
           <div className="flex flex-wrap gap-3">
-            {excluded.map((lieu) => (
+            {bonusSuggestions.items.map((item) => (
               <Link
-                key={lieu.slug}
-                href={`/lieux/${lieu.slug}`}
+                key={item.slug}
+                href={`/lieux/${item.slug}`}
                 target="_blank"
                 className="flex items-center gap-2 pr-3 rounded-full overflow-hidden transition-colors hover:bg-white/5"
                 style={{ background: "var(--surface)" }}
               >
-                <img src={imgUrl(lieu.thumbImage)} alt="" className="w-9 h-9 object-cover flex-shrink-0" loading="lazy" />
-                <span className="text-xs" style={{ color: "var(--text-muted)" }}>{lieu.nom}</span>
+                <img src={imgUrl(item.thumbImage)} alt="" className="w-9 h-9 object-cover flex-shrink-0" loading="lazy" />
+                <span className="text-xs" style={{ color: "var(--text-muted)" }}>{item.nom}</span>
               </Link>
             ))}
           </div>

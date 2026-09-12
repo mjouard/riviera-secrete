@@ -45,6 +45,9 @@ export default function CreerItinerairePage() {
   const [saveInput, setSaveInput] = useState("");
   const [savedBanner, setSavedBanner] = useState(false);
   const [saving, setSaving] = useState(false);
+  /** Lecture seule à l'ouverture d'un itinéraire déjà sauvegardé (gagne en lisibilité) —
+   * true par défaut pour un itinéraire fraîchement généré, pas encore sauvegardé. */
+  const [editMode, setEditMode] = useState(true);
 
   // Drag-and-drop
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
@@ -98,6 +101,7 @@ export default function CreerItinerairePage() {
           );
           setCurrentDays(days);
           setSelectedSlugs(new Set(found.days.flat()));
+          setEditMode(false);
           setView("results");
         }
       })
@@ -127,6 +131,7 @@ export default function CreerItinerairePage() {
         setDureeKey(draft.dureeKey);
         setCurrentNom(draft.nom);
         setSaveInput(draft.nom);
+        setEditMode(true);
         setView("results");
         setShowSaveModal(true);
       } catch {
@@ -176,6 +181,7 @@ export default function CreerItinerairePage() {
     setCurrentId(null);
     setCurrentNom("");
     setSavedBanner(false);
+    setEditMode(true);
     setView("results");
   };
 
@@ -231,6 +237,32 @@ export default function CreerItinerairePage() {
     () => currentDays.flat().map((l) => ({ lat: l.lat, lng: l.lng, nom: l.nom })),
     [currentDays]
   );
+
+  // Bonus "Mais encore…" : les lieux écartés faute de temps juste après une génération, ou —
+  // pour un itinéraire déjà sauvegardé rechargé via ?id= (où cette liste d'origine n'existe
+  // plus) — les lieux "à proximité" (related[]) de ceux déjà dans l'itinéraire.
+  const bonusSuggestions = useMemo(() => {
+    if (excluded.length > 0) {
+      return {
+        mode: "excluded" as const,
+        items: excluded.map((l) => ({ slug: l.slug, nom: l.nom, thumbImage: l.thumbImage })),
+      };
+    }
+    const includedSlugs = new Set(currentDays.flat().map((l) => l.slug));
+    const seen = new Set<string>();
+    const items: Array<{ slug: string; nom: string; thumbImage: string }> = [];
+    for (const lieu of currentDays.flat()) {
+      for (const rel of lieu.related || []) {
+        const slug = rel.href.replace(/\.html$/, "");
+        if (includedSlugs.has(slug) || seen.has(slug)) continue;
+        seen.add(slug);
+        items.push({ slug, nom: rel.titre, thumbImage: rel.img });
+        if (items.length >= 6) break;
+      }
+      if (items.length >= 6) break;
+    }
+    return { mode: "related" as const, items };
+  }, [excluded, currentDays]);
 
   const handleSave = async () => {
     const nom = saveInput.trim();
@@ -315,6 +347,7 @@ export default function CreerItinerairePage() {
         <ResultsView
           currentDays={currentDays}
           excluded={excluded}
+          bonusSuggestions={bonusSuggestions}
           dureeKey={dureeKey}
           currentNom={currentNom}
           mapStops={mapStops}
@@ -325,6 +358,8 @@ export default function CreerItinerairePage() {
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
           onSaveClick={() => { setSaveInput(currentNom); setShowSaveModal(true); }}
+          editMode={editMode}
+          onToggleEdit={() => setEditMode(true)}
         />
       )}
 
