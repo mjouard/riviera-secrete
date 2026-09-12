@@ -2458,6 +2458,28 @@
         "image": "../assets/images/lieux/sentier-cap-antibes/act-3.jpg",
         "alt": "Location de vélos électriques",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "baignade-plage-de-la-garoupe",
+        "nom": "Baignade à la plage de la Garoupe",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.antibes-juanlespins.com/annuaire-des-associations-1-1/plage-de-la-garoupe",
+        "image": "../assets/images/lieux/sentier-cap-antibes/act-4.jpg",
+        "alt": "Plage de la Garoupe, seule plage de sable du Cap d'Antibes",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "snorkeling-baie-des-milliardaires",
+        "nom": "Snorkeling à la Baie des Milliardaires",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://cap-antibes.com/en/guide/activites/diving-snorkeling-cap-dantibes",
+        "image": "../assets/images/lieux/sentier-cap-antibes/act-5.jpg",
+        "alt": "La Baie des Milliardaires au pied de la Villa Eilenroc, spot de snorkeling en accès libre",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [

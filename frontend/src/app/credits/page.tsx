@@ -64,6 +64,8 @@ const CREDITS: Credit[] = [
   { titre: "Place du Mont-Agel, Peille (restaurant Cauvin Chez Nana)", auteur: "MOSSOT", fileUrl: "https://commons.wikimedia.org/wiki/File:Peille_-_Place_du_Mont-Agel_(ancienne_place_Lascaris)_-01.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Canyon du Loup (VTT)", auteur: "Harald Hetzner", fileUrl: "https://commons.wikimedia.org/wiki/File:Gorges_du_Loup,_canyon_of_the_river_Loup_in_France.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
   { titre: "Cascade du Saut du Loup (restaurant)", auteur: "Ballista", fileUrl: "https://commons.wikimedia.org/wiki/File:Le_Saut_du_Loup.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Plage de la Garoupe (Cap d'Antibes)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Plage_de_la_garoupe_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Baie des Milliardaires (snorkeling, Cap d'Antibes)", auteur: "Spike", fileUrl: "https://commons.wikimedia.org/wiki/File:Antibes_Baie_des_Milliardaires_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
