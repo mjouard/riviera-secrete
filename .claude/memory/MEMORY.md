@@ -6,6 +6,9 @@
 - [Frontend Next.js](frontend_nextjs.md) — Next.js 16 App Router, pages (dont /connexion, /confirmer-email, /credits), NextAuth Google+Credentials, homepage (carte/activités/filtres), Vercel, design
 - [Architecture & roadmap](architecture_future.md) — décisions stack, état P1-P4.5 (tout fait), suppression du site statique le 2026-09-12, URLs Railway/Vercel
 
+## Chantiers en cours
+- [Activités par badge](project_activites_par_badge.md) — 9/~23 lieux traités (2026-09-12), processus établi, prochain lieu dans ROADMAP.md
+
 ## Feedback & pièges
 - [Vercel deploy](feedback_vercel_deploy.md) — déployer depuis `frontend/`, rootDirectory null, ne pas déployer depuis la racine
 - [JWT MapInboundClaims](backend_dotnet.md#piège-critique--jwt-mapinboundclaims) — `opts.MapInboundClaims = false` requis sinon 401 sur tous les endpoints protégés

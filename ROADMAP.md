@@ -2,13 +2,31 @@
 
 ## Priorité contenu
 
-- [ ] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
+- [~] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
       intimes ou bon-plans (pas les incontournables déjà sur tous les guides). Règle de
       cohérence à respecter : tout lieu portant un badge doit avoir au moins une activité en
       rapport direct avec ce badge (ex. badge `randonnee` → au moins un itinéraire de randonnée
       proposé ; badge `plage` → au moins une activité plage/baignade ; badge `plongee` → au
       moins un spot ou sortie plongée/snorkeling, etc.). À faire via `/add-activities` qui
-      vérifie déjà qu'une activité n'est pas elle-même un lieu existant.
+      vérifie déjà qu'une activité n'est pas elle-même un lieu existant (mais dont le
+      placeholder image `picsum.photos` est **obsolète** — voir la consigne "vraie photo
+      Wikimedia" ci-dessous, pas encore corrigée dans le fichier de la commande lui-même).
+      **En cours, démarré le 2026-09-12** — processus établi : un lieu à la fois, un panel
+      d'activités assez complet (pas juste le minimum pour combler les badges), chaque
+      nouvelle activité avec une vraie photo Wikimedia Commons sourcée/vérifiée/créditée sur
+      `frontend/src/app/credits/page.tsx`, et une synchronisation manuelle vers la DB prod
+      Railway après confirmation (l'édition de `data/lieux.json` seule ne suffit pas, voir
+      "Data model" dans `CLAUDE.md`). 9 lieux traités et synchronisés en prod jusqu'ici (24
+      activités ajoutées) : `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`,
+      `eze-village`, `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`,
+      `gourdon-village`, `roquebrune-cap-martin-village`. Restent ~14 lieux avec des badges
+      non couverts (détecté par un script heuristique de correspondance mot-clé, à re-lancer
+      pour une liste à jour) : `jardin-exotique-monaco`, `colline-du-chateau-nice`,
+      `cours-saleya-vieux-nice`, `peille-village`, `gorges-du-loup-cascade-courmes`,
+      `pont-du-loup`, `saint-paul-de-vence`, `biot-village-verrier`, `haut-de-cagnes`,
+      `sentier-cap-antibes`, `pinede-gould-juan-les-pins`, `calanques-esterel-theoule`,
+      `vieille-ville-grasse`, `citadelle-saint-tropez`, `gassin-plus-beau-village`. Continuer
+      lieu par lieu avec le même processus.
 
 - [x] Finir les vraies images — les 27 lieux ont une vraie photo (terminé le 28/08 ; les 21
       sourcées sur Wikimedia Commons cette session-là sont créditées sur `credits.html`,
