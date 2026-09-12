@@ -3198,6 +3198,17 @@
         "image": "../assets/images/lieux/vieille-ville-grasse/act-3.jpg",
         "alt": "Atelier création de parfum",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "restaurant-le-petit-caboulot",
+        "nom": "Déjeuner au Petit Caboulot",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "10–20 € / pers.",
+        "url": "https://provence-alpes-cotedazur.com/en/plan-your-stay/restaurants/all-restaurants/le-petit-caboulot-grasse-en-2975227/",
+        "image": "../assets/images/lieux/vieille-ville-grasse/act-4.jpg",
+        "alt": "Place de la Foux à Grasse, près du restaurant Le Petit Caboulot",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
