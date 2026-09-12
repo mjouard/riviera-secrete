@@ -4712,5 +4712,235 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/vieille-ville-sospel/500/375"
+  },
+  {
+    "slug": "gorbio-village",
+    "villeSlug": "gorbio",
+    "nom": "Gorbio",
+    "commune": "Gorbio",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.787,
+    "lng": 7.445,
+    "description": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
+    "ogImage": "https://picsum.photos/seed/gorbio-village/1200/800",
+    "heroImage": "https://picsum.photos/seed/gorbio-village/1200/800",
+    "heroAlt": "Ruelles pavées et passages voûtés du village médiéval de Gorbio",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1h30-2h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
+    "description2": "Avec seulement 300 habitants dans le village lui-même, Gorbio reste l'un des plus discrets de l'arrière-pays mentonnais, malgré des demeures aux portes des XIe et XVIe siècles et un réseau de venelles pavées, de passages voûtés et de fontaines anciennes. Sur la place de la République trône un orme planté en 1713, l'année même du traité d'Utrecht, classé parmi les arbres remarquables de France — ses branches ont abrité pendant trois siècles les assemblées où se décidait la vie du village.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "20 minutes de route depuis Menton par une route étroite et sinueuse ; se garer avant l'entrée du village piéton."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "En juin, la procession de la Fête-Dieu se prolonge à la tombée de la nuit par la \"procession aux limaces\" : les ruelles ne sont éclairées que par des coquilles d'escargots remplies d'huile en guise de lampions."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Sainte-Agnès, à quelques kilomètres, ou la corniche vers Menton."
+      }
+    ],
+    "activites": [
+      {
+        "id": "balade-ruelles-fontaines-gorbio",
+        "nom": "Balade dans les ruelles et fontaines anciennes",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.gorbio.fr/patrimoine-et-histoire/",
+        "image": "https://picsum.photos/seed/ruelles-gorbio/200/200",
+        "alt": "Fontaine ancienne et ruelle pavée du village de Gorbio",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "orme-tricentenaire-gorbio",
+        "nom": "L'Orme tricentenaire de la place de la République",
+        "badge": "gratuit",
+        "duree": "10 min",
+        "prix": "Accès libre",
+        "url": "https://www.menton-riviera-merveilles.co.uk/offers/the-tercentenary-elm-of-gorbio-village-gorbio-en-3110266/",
+        "image": "https://picsum.photos/seed/orme-gorbio/200/200",
+        "alt": "L'orme tricentenaire planté en 1713 sur la place de la République à Gorbio",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "eglise-saint-barthelemy-gorbio",
+        "nom": "Église Saint-Barthélemy",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://diocese.mc/service/tourisme/actualites/les-escapades-de-jean-pierre-leglise-saint-barthelemy-de-gorbio",
+        "image": "https://picsum.photos/seed/eglise-gorbio/200/200",
+        "alt": "Façade de l'église Saint-Barthélemy de Gorbio",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-bistrot-orme-gorbio",
+        "nom": "Déjeuner au Bistrot de l'Orme",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20-35 € / pers.",
+        "url": "https://www.menton-riviera-merveilles.fr/offres/bar-restaurant-bistrot-de-lorme-gorbio-fr-6078161/",
+        "image": "https://picsum.photos/seed/bistrot-orme-gorbio/200/200",
+        "alt": "Terrasse du Bistrot de l'Orme sous l'orme tricentenaire de Gorbio",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "sainte-agnes-village.html",
+        "img": "assets/images/lieux/sainte-agnes-village/thumb.jpg",
+        "alt": "Ruelles pavées de Sainte-Agnès surplombant la Méditerranée depuis 780 mètres d'altitude",
+        "stamp": "43.80°N<br>7.46°E",
+        "region": "Sainte-Agnès",
+        "titre": "Sainte-Agnès",
+        "blurb": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de …"
+      },
+      {
+        "href": "cimetiere-vieux-chateau-menton.html",
+        "img": "assets/images/lieux/cimetiere-vieux-chateau-menton/thumb.jpg",
+        "alt": "Vue panoramique sur la baie de Menton depuis le cimetière du Vieux-Château",
+        "stamp": "43.78°N<br>7.51°E",
+        "region": "Menton",
+        "titre": "Le Cimetière du Vieux-Château",
+        "blurb": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure …"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/gorbio-village/500/375"
+  },
+  {
+    "slug": "luceram-village",
+    "villeSlug": "luceram",
+    "nom": "Lucéram",
+    "commune": "Lucéram",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.884,
+    "lng": 7.361,
+    "description": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
+    "ogImage": "https://picsum.photos/seed/luceram-village/1200/800",
+    "heroImage": "https://picsum.photos/seed/luceram-village/1200/800",
+    "heroAlt": "Ruelles en escalier et façades de pierre grise du village de Lucéram",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année (crèches en hiver)"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, quelques escaliers"
+      }
+    ],
+    "description1": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
+    "description2": "Bâti en pierre grise du pays pour résister au temps, Lucéram déroule un labyrinthe de venelles en escalier, de portes ogivales et de fenêtres géminées jusqu'à l'église Sainte-Marguerite, qui abrite depuis 1498 un retable attribué à Louis Bréa. Mais c'est en hiver que le village se révèle vraiment : depuis plus de vingt ans, plusieurs centaines de crèches occupent vitrines, passages voûtés, caves et fontaines lors du circuit des crèches, une tradition que peu de visiteurs de la Côte connaissent hors saison.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "35 minutes de route depuis Nice par la vallée du Paillon ; se garer aux abords du village piéton."
+      },
+      {
+        "label": "Meilleur moment",
+        "texte": "Fin novembre à début janvier pour le circuit des crèches ; le reste de l'année pour la tranquillité des ruelles."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Peille ou Coaraze, à une vingtaine de minutes dans le même arrière-pays."
+      }
+    ],
+    "activites": [
+      {
+        "id": "eglise-sainte-marguerite-luceram",
+        "nom": "Église Sainte-Marguerite et son retable de Louis Bréa",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://fr.wikipedia.org/wiki/%C3%89glise_Sainte-Marguerite_de_Luc%C3%A9ram",
+        "image": "https://picsum.photos/seed/eglise-luceram/200/200",
+        "alt": "Retable de Louis Bréa dans l'église Sainte-Marguerite de Lucéram",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "musee-de-la-creche-luceram",
+        "nom": "Musée de la Crèche",
+        "badge": "payant",
+        "duree": "45 min",
+        "prix": "2 € / adulte",
+        "url": "https://www.maisondepaysdeluceram.fr/musee-des-creches/",
+        "image": "https://picsum.photos/seed/musee-creche-luceram/200/200",
+        "alt": "Crèche napolitaine de collection au Musée de la Crèche de Lucéram",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "circuit-creches-village-luceram",
+        "nom": "Circuit des crèches dans le village",
+        "badge": "gratuit",
+        "duree": "1h-1h30",
+        "prix": "Accès libre (novembre-janvier)",
+        "url": "https://recreanice.fr/circuit-creche-luceram-village-noel-programme",
+        "image": "https://picsum.photos/seed/circuit-creches-luceram/200/200",
+        "alt": "Crèche installée dans un passage voûté du village de Lucéram",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-chez-mumu-luceram",
+        "nom": "Déjeuner Chez Mumu",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20-30 € / pers.",
+        "url": "https://lavantoura.fr/chez-mumu/",
+        "image": "https://picsum.photos/seed/chez-mumu-luceram/200/200",
+        "alt": "Cuisine niçoise traditionnelle servie chez Mumu à Lucéram",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peille-village.html",
+        "img": "assets/images/lieux/peille-village/thumb.jpg",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.80°N<br>7.40°E",
+        "region": "Peille",
+        "titre": "Village de Peille",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un en…"
+      },
+      {
+        "href": "coaraze-cadrans-solaires.html",
+        "img": "assets/images/lieux/coaraze-cadrans-solaires/thumb.jpg",
+        "alt": "Cadran solaire peint sur une façade du village de Coaraze",
+        "stamp": "43.87°N<br>7.29°E",
+        "region": "Coaraze",
+        "titre": "Coaraze, le village aux cadrans solaires",
+        "blurb": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaire…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/luceram-village/500/375"
   }
 ]

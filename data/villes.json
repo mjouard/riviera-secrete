@@ -357,5 +357,31 @@
     "lieux": [
       "vieille-ville-sospel"
     ]
+  },
+  {
+    "slug": "gorbio",
+    "nom": "Gorbio",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.787,
+    "lng": 7.445,
+    "description": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
+    "thumbImage": "https://picsum.photos/seed/gorbio/500/375",
+    "lieux": [
+      "gorbio-village"
+    ]
+  },
+  {
+    "slug": "luceram",
+    "nom": "Lucéram",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.884,
+    "lng": 7.361,
+    "description": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
+    "thumbImage": "https://picsum.photos/seed/luceram/500/375",
+    "lieux": [
+      "luceram-village"
+    ]
   }
 ]
