@@ -2972,6 +2972,28 @@
         "image": "../assets/images/lieux/calanques-esterel-theoule/act-3.jpg",
         "alt": "Randonnée côtière calanques",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "baignade-calanque-de-maubois",
+        "nom": "Baignade à la calanque de Maubois",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.esterel-cotedazur.com/en/discover/beaches/cove-of-maubois/",
+        "image": "../assets/images/lieux/calanques-esterel-theoule/act-4.jpg",
+        "alt": "Calanque de galets rouges accessible uniquement à pied, près du Trayas",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-la-marea",
+        "nom": "Déjeuner au restaurant La Maréa",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "60–90 € / pers.",
+        "url": "https://www.lamarea.fr/?lang=fr",
+        "image": "../assets/images/lieux/calanques-esterel-theoule/act-5.jpg",
+        "alt": "Port de Théoule-sur-Mer, non loin du restaurant La Maréa",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

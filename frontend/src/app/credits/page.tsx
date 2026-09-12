@@ -66,6 +66,8 @@ const CREDITS: Credit[] = [
   { titre: "Cascade du Saut du Loup (restaurant)", auteur: "Ballista", fileUrl: "https://commons.wikimedia.org/wiki/File:Le_Saut_du_Loup.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Plage de la Garoupe (Cap d'Antibes)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Plage_de_la_garoupe_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Baie des Milliardaires (snorkeling, Cap d'Antibes)", auteur: "Spike", fileUrl: "https://commons.wikimedia.org/wiki/File:Antibes_Baie_des_Milliardaires_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Calanque au Trayas (baignade)", auteur: "Gavan Connolly", fileUrl: "https://commons.wikimedia.org/wiki/File:Le_Trayas_at_For%C3%AAt_Domaniale_de_l%27Est%C3%A9rel,_Commune_de_Saint_Raphael.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Port de Théoule-sur-Mer (restaurant La Maréa)", auteur: "Txllxt TxllxT", fileUrl: "https://commons.wikimedia.org/wiki/File:Th%C3%A9oule-sur-Mer_-_Quai_%C3%89douard_Blondy_-_View_NNE_on_Harbour.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
