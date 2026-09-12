@@ -2577,6 +2577,39 @@
         "image": "../assets/images/lieux/iles-de-lerins/act-2.jpg",
         "alt": "Randonnée Île Sainte-Marguerite",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "baignade-criques-sainte-marguerite",
+        "nom": "Baignade aux criques de Sainte-Marguerite",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.cannes.com/fr/index/les-iles-de-lerins/ile-sainte-marguerite.html",
+        "image": "../assets/images/lieux/iles-de-lerins/act-4.jpg",
+        "alt": "Crique rocheuse sur l'Île Sainte-Marguerite, avec l'Île Saint-Honorat au loin",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "musee-subaquatique-de-cannes",
+        "nom": "Snorkeling au musée subaquatique",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre (masque-tuba)",
+        "url": "https://www.cannes.com/fr/culture/musees-et-expositions/ecomusee-sous-marin/ecomusee-sous-marin-naissance-d-un-musee.html",
+        "image": "../assets/images/lieux/iles-de-lerins/act-5.jpg",
+        "alt": "Sculpture immergée du musée subaquatique de Cannes, au large de l'Île Sainte-Marguerite",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-la-tonnelle-saint-honorat",
+        "nom": "Déjeuner à La Tonnelle (Saint-Honorat)",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "35–45 € / pers.",
+        "url": "https://tonnelle-abbayedelerins.fr/en/",
+        "image": "../assets/images/lieux/iles-de-lerins/act-6.jpg",
+        "alt": "Vignoble de l'abbaye de Lérins sur l'Île Saint-Honorat, cultivé par les moines",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

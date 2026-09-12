@@ -51,6 +51,9 @@ const CREDITS: Credit[] = [
   { titre: "Vallon du Cassan (randonnée du Mounard)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Vallon_du_cassan_P1060538.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
   { titre: "Viaduc de Cassan (VTT)", auteur: "Olivier Cleynen", fileUrl: "https://commons.wikimedia.org/wiki/File:Viaduc_de_Cassan,_Tourrettes-sur-Loup.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Vue depuis une auberge du vieux village (restaurant)", auteur: "Art Anderson", fileUrl: "https://commons.wikimedia.org/wiki/File:View_of_Tourrettes_from_Auberge_window_-_panoramio.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Crique de l'Île Sainte-Marguerite (baignade)", auteur: "CandiMa", fileUrl: "https://commons.wikimedia.org/wiki/File:Spiaggia_%C3%AEle_Sainte-Marguerite.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Musée subaquatique de Cannes (snorkeling)", auteur: "Jennifer Roording", fileUrl: "https://commons.wikimedia.org/wiki/File:Jason_deCaires_Taylor_Cannes_Underwater_Museum.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Vignoble de l'abbaye de Lérins (restaurant La Tonnelle)", auteur: "Tangopaso", fileUrl: "https://commons.wikimedia.org/wiki/File:Vignoble_de_l%27abbaye_de_L%C3%A9rins.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
