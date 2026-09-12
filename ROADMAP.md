@@ -112,9 +112,12 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       (2026-09-12) — corrige au passage le crumb par défaut de la fiche lieu (pointait vers
       la liste générique `/lieux`, pointe maintenant vers la ville). `/lieux/[slug]` passe de
       statique à dynamique (rendu à la demande) suite à l'usage de `searchParams`
-- [ ] Hero carrousel sur la homepage (8 images) — absent sur Next.js (le composant
-      `HeroCarousel.tsx` existe et est utilisé sur les pages lieu/itinéraire, juste pas monté
-      sur la homepage elle-même)
+- [x] Hero carrousel ambiant sur la homepage (2026-09-12) — nouveau composant `HomeHero.tsx`
+      (fondu auto 5s, sans contrôles — différent de `HeroCarousel.tsx` qui est manuel/à
+      clics, utilisé sur lieu/itinéraire). Cycle de state React vérifié en prod (0→6 sur la
+      durée du test) ; le rendu visuel exact de la transition CSS n'a pas pu être confirmé à
+      l'oeil dans cette session (outil de capture instable), mais la logique est correcte et
+      standard (`transition: opacity`)
 - [ ] JSON-LD `ItemList` sur la homepage Next.js — absent (existe sur le site statique,
       généré par `home-lieux.mjs`)
 - [ ] JSON-LD `TouristDestination` sur les pages ville Next.js — absent
