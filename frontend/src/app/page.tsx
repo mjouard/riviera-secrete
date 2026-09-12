@@ -9,6 +9,9 @@ import HomeHero from "@/components/HomeHero";
 
 export const revalidate = 3600;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 function ItineraireCard({ itin, lieuBySlug }: { itin: Itineraire; lieuBySlug: Map<string, Lieu> }) {
   const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
   const thumb = firstStop?.lieuSlug ? lieuBySlug.get(firstStop.lieuSlug)?.thumbImage : undefined;
@@ -50,8 +53,25 @@ export default async function HomePage() {
   ]);
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
 
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "27 lieux insolites de la Côte d'Azur",
+    itemListElement: villes.map((v, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE_URL}/villes/${v.slug}`,
+      name: v.nom,
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+
       {/* Hero */}
       <section className="relative overflow-hidden py-24 px-6 text-center" style={{ minHeight: 540 }}>
         <HomeHero />
