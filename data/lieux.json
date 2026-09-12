@@ -4241,5 +4241,131 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/vieux-village-grimaud/500/375"
+  },
+  {
+    "slug": "vieux-village-ramatuelle",
+    "villeSlug": "ramatuelle",
+    "nom": "Le Vieux Village de Ramatuelle",
+    "commune": "Ramatuelle",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.215,
+    "lng": 6.614,
+    "description": "Un village en colimaçon sur la presqu'île de Saint-Tropez, entre moulins à vent sur la crête et crique sauvage accessible seulement à pied.",
+    "ogImage": "https://picsum.photos/seed/vieux-village-ramatuelle/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieux-village-ramatuelle/1200/800",
+    "heroAlt": "Ruelles en colimaçon du vieux village de Ramatuelle sur la presqu'île de Saint-Tropez",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "Demi-journée"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile à modéré"
+      }
+    ],
+    "description1": "Un village en colimaçon sur la presqu'île de Saint-Tropez, entre moulins à vent sur la crête et crique sauvage accessible seulement à pied.",
+    "description2": "\"Voisine discrète\" de Saint-Tropez selon ses propres habitants, Ramatuelle reste éclipsée par sa presqu'île, alors qu'elle cumule les atouts : un village médiéval unique en Provence par son plan en spirale, des moulins de Paillas juchés sur la crête avec vue jusqu'aux îles d'Or, et surtout le Cap Taillat, isthme sauvage protégé par le Conservatoire du littoral, inaccessible en voiture — à l'exact opposé de l'esprit Pampelonne à quelques kilomètres de là.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Se garer aux abords du village piéton. Pour le Cap Taillat, prendre la route de l'Escalet puis marcher environ 35 minutes par le sentier du littoral — aucun accès en voiture."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le portail de l'église Notre-Dame, sculpté en 1620 dans la serpentinite verte extraite près de Cavalaire, est un des rares du genre sur la Côte d'Azur."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Gassin, à 10 minutes en voiture, ou la citadelle de Saint-Tropez."
+      }
+    ],
+    "activites": [
+      {
+        "id": "moulins-de-paillas",
+        "nom": "Randonnée aux moulins de Paillas",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.ramatuelle-tourisme.com/fr/animation/distractions-et-loisirs/ramatuelle/randonnee-le-chemin-du-meunier-du-village-au-moulin-de-paillas-7839967/",
+        "image": "https://picsum.photos/seed/moulins-paillas/200/200",
+        "alt": "Moulins à vent de Paillas surplombant la baie de Pampelonne",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "eglise-notre-dame-ramatuelle",
+        "nom": "Église Notre-Dame et son portail en serpentine",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.ramatuelle-tourisme.com/fr/decouvrir-la-presquile/cote-village/les-monuments/leglise-notre-dame/",
+        "image": "https://picsum.photos/seed/eglise-ramatuelle/200/200",
+        "alt": "Portail de serpentinite verte de l'église Notre-Dame de Ramatuelle",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balade-ruelles-ramatuelle",
+        "nom": "Balade dans les ruelles en colimaçon",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre",
+        "url": "https://www.ramatuelle-tourisme.com/fr/decouvrir-la-presquile/cote-village/",
+        "image": "https://picsum.photos/seed/ruelles-ramatuelle/200/200",
+        "alt": "Ruelle en colimaçon du village de Ramatuelle",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "cap-taillat-plage-sauvage",
+        "nom": "Cap Taillat, la crique sauvage à pied",
+        "badge": "gratuit",
+        "duree": "2h-3h",
+        "prix": "Accès libre",
+        "url": "https://www.camping-var-ramatuelle.com/actualites/cap-taillat/",
+        "image": "https://picsum.photos/seed/cap-taillat/200/200",
+        "alt": "Isthme sauvage et eaux turquoise du Cap Taillat, accessible uniquement à pied",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-chez-camille",
+        "nom": "Bouillabaisse au feu de bois chez Camille",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "25-130 € / pers.",
+        "url": "https://www.chezcamille.fr/",
+        "image": "https://picsum.photos/seed/chez-camille-ramatuelle/200/200",
+        "alt": "Bouillabaisse au feu de bois servie sur la plage de Bonne Terrasse chez Camille",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "gassin-plus-beau-village.html",
+        "img": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg",
+        "alt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
+        "stamp": "43.23°N<br>6.58°E",
+        "region": "Gassin",
+        "titre": "Village de Gassin",
+        "blurb": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement…"
+      },
+      {
+        "href": "citadelle-saint-tropez.html",
+        "img": "assets/images/lieux/citadelle-saint-tropez/thumb.jpg",
+        "alt": "Citadelle de Saint-Tropez dominant le golfe",
+        "stamp": "43.27°N<br>6.64°E",
+        "region": "Saint-Tropez",
+        "titre": "Citadelle de Saint-Tropez",
+        "blurb": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart comp…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieux-village-ramatuelle/500/375"
   }
 ]

@@ -305,5 +305,18 @@
     "lieux": [
       "vieux-village-grimaud"
     ]
+  },
+  {
+    "slug": "ramatuelle",
+    "nom": "Ramatuelle",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.215,
+    "lng": 6.614,
+    "description": "Un village en colimaçon sur la presqu'île de Saint-Tropez, entre moulins à vent sur la crête et crique sauvage accessible seulement à pied.",
+    "thumbImage": "https://picsum.photos/seed/ramatuelle/500/375",
+    "lieux": [
+      "vieux-village-ramatuelle"
+    ]
   }
 ]
