@@ -383,5 +383,18 @@
     "lieux": [
       "luceram-village"
     ]
+  },
+  {
+    "slug": "saorge",
+    "nom": "Saorge",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.999,
+    "lng": 7.517,
+    "description": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",
+    "thumbImage": "https://picsum.photos/seed/saorge/500/375",
+    "lieux": [
+      "saorge-village"
+    ]
   }
 ]

@@ -4942,5 +4942,120 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/luceram-village/500/375"
+  },
+  {
+    "slug": "saorge-village",
+    "villeSlug": "saorge",
+    "nom": "Saorge",
+    "commune": "Saorge",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.999,
+    "lng": 7.517,
+    "description": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",
+    "ogImage": "https://picsum.photos/seed/saorge-village/1200/800",
+    "heroImage": "https://picsum.photos/seed/saorge-village/1200/800",
+    "heroAlt": "Toits en lauzes du village-amphithéâtre de Saorge dans les gorges de la Roya",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",
+    "description2": "Niché à 1h30 de la côte, à la lisière du Mercantour, Saorge occupe le creux d'un versant abrupt comme les gradins d'un amphithéâtre — l'un des villages les plus spectaculaires du haut pays niçois, classé parmi les plus beaux villages de France mais resté à l'écart des flux touristiques du littoral. Le monastère franciscain, fondé en 1633, veille sur un village de toits en lauzes que l'église Saint-Sauveur et son clocher lombard dominent depuis le XVe siècle.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Environ 1h30 de route depuis Nice ou Menton par la vallée de la Roya ; ligne ferroviaire Nice-Cuneo avec halte à Saorge-Fontan."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le cloître du monastère est orné de fresques du XVIIe siècle sur la vie de saint François d'Assise et d'un ensemble de neuf cadrans solaires de la même époque."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Sospel, à 30 minutes, ou La Brigue et ses hameaux, plus loin dans la vallée de la Roya."
+      }
+    ],
+    "activites": [
+      {
+        "id": "monastere-franciscain-saorge",
+        "nom": "Monastère franciscain et ses fresques du XVIIe siècle",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "7 € / adulte",
+        "url": "https://www.monastere-saorge.fr/",
+        "image": "https://picsum.photos/seed/monastere-saorge/200/200",
+        "alt": "Cloître et fresques du XVIIe siècle du monastère franciscain de Saorge",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "balade-amphitheatre-saorge",
+        "nom": "Balade dans le village-amphithéâtre",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/roya-valley/saorge/",
+        "image": "https://picsum.photos/seed/amphitheatre-saorge/200/200",
+        "alt": "Toits en lauzes du village de Saorge accroché à flanc de montagne",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "eglise-saint-sauveur-saorge",
+        "nom": "Église Saint-Sauveur et son clocher lombard",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.menton-riviera-merveilles.co.uk/offers/parish-church-saint-sauveur-saorge-en-3051628/",
+        "image": "https://picsum.photos/seed/eglise-saorge/200/200",
+        "alt": "Clocher lombard à six étages de l'église Saint-Sauveur de Saorge",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-petite-epicerie-saorge",
+        "nom": "Déjeuner à la Petite Épicerie",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20-35 € / pers.",
+        "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/roya-valley/saorge/",
+        "image": "https://picsum.photos/seed/petite-epicerie-saorge/200/200",
+        "alt": "Terrasse de la Petite Épicerie au cœur du village de Saorge",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieille-ville-sospel.html",
+        "img": "assets/images/lieux/vieille-ville-sospel/thumb.jpg",
+        "alt": "Le Pont Vieux fortifié de Sospel enjambant la Bévéra",
+        "stamp": "43.88°N<br>7.45°E",
+        "region": "Sospel",
+        "titre": "Vieille ville de Sospel",
+        "blurb": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des dernie…"
+      },
+      {
+        "href": "peille-village.html",
+        "img": "assets/images/lieux/peille-village/thumb.jpg",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.80°N<br>7.40°E",
+        "region": "Peille",
+        "titre": "Village de Peille",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un en…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/saorge-village/500/375"
   }
 ]
