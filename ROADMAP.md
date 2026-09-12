@@ -103,9 +103,9 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 - [x] Bouton "Ajouter à un itinéraire" sur les fiches lieu (2026-09-12) — porté depuis le
       site statique, `AddToItinButton.tsx`, adapté pour passer par `/api/my-itineraires`
       (DB) au lieu de localStorage
-- [ ] Booking cards "À réserver" avec image + prix + durée — la section existe sur les pages
-      itinéraire Next.js mais n'affiche que lieu/nom/lien, pas l'image ni le prix (nécessite de
-      croiser avec l'activité référencée, comme le fait `itin.mjs` côté site statique)
+- [x] Booking cards "À réserver" avec image + prix + durée (2026-09-12) — croise
+      `b.lieuSlug`/`b.activiteId` avec l'activité réelle (déjà chargée via `lieuBySlug`),
+      lien "Réserver" pointe maintenant vers l'URL réelle de l'activité au lieu de la fiche lieu
 - [ ] Section "Autres itinéraires" (suggestions) en bas d'une page itinéraire — absente sur
       Next.js, les données `suggestions[]` existent déjà côté API
 - [ ] Lien `?itin=<slug>` sur les stops + breadcrumb contextuel retour-vers-l'itinéraire —
