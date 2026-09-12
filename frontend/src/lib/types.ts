@@ -78,13 +78,14 @@ export interface StopActivite {
 }
 
 export interface ItineraireItem {
-  type: "stop" | "transit";
+  type: "stop" | "transit" | "sleep";
   heure?: string;
   lieuSlug?: string;
   nom?: string;
   commune?: string;
   desc?: string;
   activites?: StopActivite[];
+  dormirA?: string;
 }
 
 export interface BookingRef {

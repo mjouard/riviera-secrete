@@ -150,6 +150,24 @@ export default async function ItinerairePage({
                 </div>
               );
             }
+            if (item.type === "sleep") {
+              return (
+                <div
+                  key={i}
+                  className="rounded-xl p-5 border"
+                  style={{ background: "var(--surface)", borderColor: "var(--line)" }}
+                >
+                  <h3 className="font-semibold mb-1">
+                    🌙 {item.dormirA ?? `Dormir à ${item.commune ?? ""}`}
+                  </h3>
+                  {item.desc && (
+                    <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                      {item.desc}
+                    </p>
+                  )}
+                </div>
+              );
+            }
             return (
               <div
                 key={i}

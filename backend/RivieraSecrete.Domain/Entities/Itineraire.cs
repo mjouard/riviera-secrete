@@ -19,13 +19,14 @@ public class Itineraire
 }
 
 public record ItineraireItem(
-    string Type,           // "stop" | "transit"
+    string Type,           // "stop" | "transit" | "sleep"
     string? Heure,
     string? LieuSlug,
     string? Nom,
     string? Commune,
     string? Desc,
-    List<StopActivite>? Activites
+    List<StopActivite>? Activites,
+    string? DormirA = null
 );
 
 public record StopActivite(
