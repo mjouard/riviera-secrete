@@ -4367,5 +4367,350 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/vieux-village-ramatuelle/500/375"
+  },
+  {
+    "slug": "sainte-agnes-village",
+    "villeSlug": "sainte-agnes",
+    "nom": "Sainte-Agnès",
+    "commune": "Sainte-Agnès",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.8014,
+    "lng": 7.4622,
+    "description": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
+    "ogImage": "https://picsum.photos/seed/sainte-agnes-village/1200/800",
+    "heroImage": "https://picsum.photos/seed/sainte-agnes-village/1200/800",
+    "heroAlt": "Ruelles pavées de Sainte-Agnès surplombant la Méditerranée depuis 780 mètres d'altitude",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
+    "description2": "À une douzaine de kilomètres de Menton mais un autre monde : ruelles pavées de galets, chapelles et vue à 360° du cap Martin à la Riviera italienne depuis les ruines du château. Sous les pieds des visiteurs, plus de 55 mètres de roche cachent un ouvrage de la ligne Maginot construit entre 1932 et 1938 — 2000 m² de galeries souterraines équipées comme un sous-marin, que la plupart des touristes de la Côte ignorent complètement.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "20-25 minutes de route depuis Menton par une route en lacets ; se garer aux abords du village piéton."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le fort pouvait loger 240 soldats sans qu'ils ne voient la lumière du jour pendant trois mois d'affilée."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Gorbio ou la corniche de la Riviera, en redescendant vers Menton."
+      }
+    ],
+    "activites": [
+      {
+        "id": "fort-maginot-sainte-agnes",
+        "nom": "Visite du fort de la ligne Maginot",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "7 € / adulte",
+        "url": "https://www.sainteagnes.fr/le-fort-de-la-ligne-maginot/",
+        "image": "https://picsum.photos/seed/fort-sainte-agnes/200/200",
+        "alt": "Galerie souterraine du fort de la ligne Maginot à Sainte-Agnès",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "jardin-medieval-sainte-agnes",
+        "nom": "Jardin médiéval des vertus et des senteurs",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.menton-riviera-merveilles.co.uk/menton-and-its-coastline/the-riviera-and-its-hilltop-villages/sainte-agnes/",
+        "image": "https://picsum.photos/seed/jardin-medieval-sainte-agnes/200/200",
+        "alt": "Jardin médiéval abrité derrière les remparts de Sainte-Agnès",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "ruines-chateau-sainte-agnes",
+        "nom": "Ruines du château et panorama à 360°",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/sainte-agnes/",
+        "image": "https://picsum.photos/seed/chateau-sainte-agnes/200/200",
+        "alt": "Vue depuis les ruines du château de Sainte-Agnès sur la Méditerranée",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-le-righi-sainte-agnes",
+        "nom": "Déjeuner au Righi",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "25-40 € / pers.",
+        "url": "https://restaurant-lerighi.fr/",
+        "image": "https://picsum.photos/seed/le-righi-sainte-agnes/200/200",
+        "alt": "Terrasse panoramique du restaurant Le Righi à Sainte-Agnès",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peille-village.html",
+        "img": "assets/images/lieux/peille-village/thumb.jpg",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.80°N<br>7.40°E",
+        "region": "Peille",
+        "titre": "Village de Peille",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un en…"
+      },
+      {
+        "href": "roquebrune-cap-martin-village.html",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
+        "alt": "Village médiéval perché de Roquebrune-Cap-Martin",
+        "stamp": "43.76°N<br>7.45°E",
+        "region": "Roquebrune-Cap-Martin",
+        "titre": "Village médiéval de Roquebrune",
+        "blurb": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des pl…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/sainte-agnes-village/500/375"
+  },
+  {
+    "slug": "coaraze-cadrans-solaires",
+    "villeSlug": "coaraze",
+    "nom": "Coaraze, le village aux cadrans solaires",
+    "commune": "Coaraze",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.865,
+    "lng": 7.2937,
+    "description": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
+    "ogImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/1200/800",
+    "heroImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/1200/800",
+    "heroAlt": "Cadran solaire peint sur une façade du village de Coaraze",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "1h30-2h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
+    "description2": "Orienté plein sud et protégé des vents du nord par les crêtes alpines, Coaraze cumule un ensoleillement record qui lui a valu le label officiel \"Village du Soleil\". En 1960, le maire de l'époque a demandé à des artistes de renom de créer des cadrans solaires sur les façades du village — Jean Cocteau y a peint \"Les Lézards\" avec le céramiste Gilbert Valentin. Le projet, abandonné puis relancé en 2008, compte aujourd'hui onze cadrans signés Cocteau, Ben, Sosno et Ponce de León, une collection à ciel ouvert que la plupart des visiteurs de la Côte n'imaginent pas trouver dans un village de 800 habitants.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Environ 30 minutes de route depuis Nice ; se garer aux abords, le centre du village est piéton."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Les \"pontis\", passages voûtés typiquement niçois, permettaient autrefois aux habitants de fuir par les toits en cas de danger."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Peille ou Sainte-Agnès, dans le même arrière-pays niçois."
+      }
+    ],
+    "activites": [
+      {
+        "id": "cadrans-solaires-coaraze",
+        "nom": "Balade à la recherche des cadrans solaires",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/coaraze/",
+        "image": "https://picsum.photos/seed/cadrans-solaires-coaraze/200/200",
+        "alt": "Cadran solaire peint signé sur une façade de Coaraze",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "chapelle-bleue-coaraze",
+        "nom": "La Chapelle Bleue et ses fresques de Ponce de León",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://coaraze.fr/cadre-de-vie/patrimoine/",
+        "image": "https://picsum.photos/seed/chapelle-bleue-coaraze/200/200",
+        "alt": "Fresques bleues de la Chapelle Bleue de Coaraze",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "eglise-saint-jean-baptiste-coaraze",
+        "nom": "Église Saint-Jean-Baptiste et son décor baroque niçois",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://coaraze.fr/cadre-de-vie/patrimoine/",
+        "image": "https://picsum.photos/seed/eglise-coaraze/200/200",
+        "alt": "Stucs et trompe-l'œil baroques de l'église Saint-Jean-Baptiste de Coaraze",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-lo-castel-coaraze",
+        "nom": "Déjeuner à Lo Castel",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20-35 € / pers.",
+        "url": "https://lalouchedelouisxiv.fr/lo-castel",
+        "image": "https://picsum.photos/seed/lo-castel-coaraze/200/200",
+        "alt": "Terrasse ombragée du restaurant Lo Castel sur la place du château à Coaraze",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peille-village.html",
+        "img": "assets/images/lieux/peille-village/thumb.jpg",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.80°N<br>7.40°E",
+        "region": "Peille",
+        "titre": "Village de Peille",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un en…"
+      },
+      {
+        "href": "peillon-village.html",
+        "img": "assets/images/lieux/peillon-village/thumb.jpg",
+        "alt": "Village médiéval de Peillon perché sur son piton rocheux",
+        "stamp": "43.78°N<br>7.38°E",
+        "region": "Peillon",
+        "titre": "Village de Peillon",
+        "blurb": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il appa…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/500/375"
+  },
+  {
+    "slug": "vieille-ville-sospel",
+    "villeSlug": "sospel",
+    "nom": "La Vieille Ville de Sospel",
+    "commune": "Sospel",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.879,
+    "lng": 7.449,
+    "description": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
+    "ogImage": "https://picsum.photos/seed/vieille-ville-sospel/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieille-ville-sospel/1200/800",
+    "heroAlt": "Le Pont Vieux fortifié de Sospel enjambant la Bévéra",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
+    "description2": "Étape obligée sur l'ancienne route muletière du sel reliant Nice à Turin, Sospel prélevait autrefois un péage sur son pont du XIIIe siècle — aujourd'hui occupé par l'office de tourisme, l'un des derniers ponts fortifiés d'Europe. Cité épiscopale dès le Ve siècle, elle a gardé ses façades en trompe-l'œil ocre et brun le long de la Bévéra, ses demeures gothiques et son lavoir toujours en activité — sans jamais figurer sur les itinéraires classiques de la Côte, qui s'arrêtent en général à la frontière du Mercantour.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "35-40 minutes de route depuis Menton par le col de Braus ou la vallée de la Bévéra ; parkings aux abords du centre piéton."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le Fort Saint-Roch, à quelques minutes du village, pouvait loger 240 hommes sous 28 mètres de roche sans qu'ils ne voient le jour pendant des mois."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le col de Braus et ses lacets, ou le village de Breil-sur-Roya un peu plus loin dans la vallée."
+      }
+    ],
+    "activites": [
+      {
+        "id": "pont-vieux-sospel",
+        "nom": "Le Pont Vieux fortifié",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://fr.wikipedia.org/wiki/Vieux_Pont_de_Sospel",
+        "image": "https://picsum.photos/seed/pont-vieux-sospel/200/200",
+        "alt": "Tour fortifiée du Pont Vieux de Sospel enjambant la Bévéra",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balade-vieille-ville-sospel",
+        "nom": "Balade dans la vieille ville en trompe-l'œil",
+        "badge": "gratuit",
+        "duree": "1h",
+        "prix": "Accès libre",
+        "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/the-bevera-valley/sospel/",
+        "image": "https://picsum.photos/seed/vieille-ville-sospel/200/200",
+        "alt": "Façades en trompe-l'œil ocre et brun le long de la Bévéra à Sospel",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "fort-saint-roch-sospel",
+        "nom": "Fort Saint-Roch, immersion dans la ligne Maginot",
+        "badge": "payant",
+        "duree": "1h30-2h",
+        "prix": "9 € / adulte",
+        "url": "https://provence-alpes-cotedazur.com/en/things-to-do/culture-and-heritage/places/fort-maginot-saint-roch-journey-to-the-heart-of-the-maginot-line-sospel-en-2864401/",
+        "image": "https://picsum.photos/seed/fort-saint-roch-sospel/200/200",
+        "alt": "Galeries souterraines en béton du Fort Saint-Roch à Sospel",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "dejeuner-le-picoun-sospel",
+        "nom": "Déjeuner au Picoun, terrasse sur la Bévéra",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20-35 € / pers.",
+        "url": "https://www.picoun.fr/",
+        "image": "https://picsum.photos/seed/le-picoun-sospel/200/200",
+        "alt": "Terrasse du restaurant Le Picoun au bord de la Bévéra à Sospel",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "peille-village.html",
+        "img": "assets/images/lieux/peille-village/thumb.jpg",
+        "alt": "Ruelles voûtées du village de Peille dans l'arrière-pays niçois",
+        "stamp": "43.80°N<br>7.40°E",
+        "region": "Peille",
+        "titre": "Village de Peille",
+        "blurb": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un en…"
+      },
+      {
+        "href": "sainte-agnes-village.html",
+        "img": "assets/images/lieux/sainte-agnes-village/thumb.jpg",
+        "alt": "Ruelles pavées de Sainte-Agnès surplombant la Méditerranée depuis 780 mètres d'altitude",
+        "stamp": "43.80°N<br>7.46°E",
+        "region": "Sainte-Agnès",
+        "titre": "Sainte-Agnès",
+        "blurb": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de …"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieille-ville-sospel/500/375"
   }
 ]

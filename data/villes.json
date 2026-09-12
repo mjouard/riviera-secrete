@@ -318,5 +318,44 @@
     "lieux": [
       "vieux-village-ramatuelle"
     ]
+  },
+  {
+    "slug": "sainte-agnes",
+    "nom": "Sainte-Agnès",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.8014,
+    "lng": 7.4622,
+    "description": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
+    "thumbImage": "https://picsum.photos/seed/sainte-agnes/500/375",
+    "lieux": [
+      "sainte-agnes-village"
+    ]
+  },
+  {
+    "slug": "coaraze",
+    "nom": "Coaraze",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.865,
+    "lng": 7.2937,
+    "description": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
+    "thumbImage": "https://picsum.photos/seed/coaraze/500/375",
+    "lieux": [
+      "coaraze-cadrans-solaires"
+    ]
+  },
+  {
+    "slug": "sospel",
+    "nom": "Sospel",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.879,
+    "lng": 7.449,
+    "description": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
+    "thumbImage": "https://picsum.photos/seed/sospel/500/375",
+    "lieux": [
+      "vieille-ville-sospel"
+    ]
   }
 ]
