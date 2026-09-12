@@ -125,8 +125,14 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 - [x] `noindex` sur les pages user-generated (2026-09-12) — `/creer-itineraire`,
       `/mes-itineraires`, `/mes-favoris` (parité site statique) + `/connexion` et
       `/confirmer-email` (pages compte propres à Next.js, même traitement)
-- [ ] Apparition au scroll (IntersectionObserver) sur la grille homepage — cosmétique, non
-      prioritaire
+- [x] Apparition au scroll (IntersectionObserver) sur la grille homepage (2026-09-12) —
+      mêmes valeurs que le site statique (threshold 0.15, one-shot, translateY 16px).
+      Portage terminé : plus aucun item restant dans cette section. Le comportement du
+      `useEffect`/`IntersectionObserver` n'a pas pu être confirmé visuellement en prod dans
+      cette session (l'onglet de test avait `document.visibilityState: "hidden"`, qui
+      suspend l'API navigateur elle-même — même un observer trivial isolé ne se déclenche
+      pas dans ces conditions) ; la logique est un portage exact et standard, aucune raison
+      de douter du comportement en usage réel
 
 ## Communauté / comptes (backend requis)
 
