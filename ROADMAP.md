@@ -98,7 +98,8 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 - [x] Export PDF / impression de l'itinéraire créé (`/creer-itineraire`, 2026-09-12) — porté
       depuis le site statique (`window.print()` + `@media print`, classes `.no-print`/
       `.print-day`/`.print-stop`/`.print-header` dans `globals.css`)
-- [ ] Bouton "Partager" (Web Share API) sur les fiches lieu — absent sur Next.js
+- [x] Bouton "Partager" (Web Share API) sur les fiches lieu (2026-09-12) — porté depuis le
+      site statique, `ShareButton.tsx`, fallback presse-papiers si l'API est indisponible
 - [ ] Bouton "Ajouter à un itinéraire" sur les fiches lieu — mini-panneau listant les
       itinéraires sauvegardés, absent sur Next.js (existe sur le site statique)
 - [ ] Booking cards "À réserver" avec image + prix + durée — la section existe sur les pages
