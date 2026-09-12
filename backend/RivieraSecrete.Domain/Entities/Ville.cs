@@ -12,6 +12,11 @@ public class Ville
     public string Description { get; set; } = default!;
     public string ThumbImage { get; set; } = default!;
 
+    // Traduction anglaise — colonnes jumelles nullable, voir
+    // .claude/memory/project_version_anglaise.md.
+    public string? NomEn { get; set; }
+    public string? DescriptionEn { get; set; }
+
     // Navigation
     public ICollection<Lieu> Lieux { get; set; } = [];
 }

@@ -13,6 +13,11 @@ public class Activite
     public string Alt { get; set; } = default!;
     public string LinkText { get; set; } = default!;
 
+    // Traduction anglaise — colonnes jumelles nullable, voir
+    // .claude/memory/project_version_anglaise.md.
+    public string? NomEn { get; set; }
+    public string? AltEn { get; set; }
+
     // FK
     public int LieuId { get; set; }
     public Lieu Lieu { get; set; } = default!;

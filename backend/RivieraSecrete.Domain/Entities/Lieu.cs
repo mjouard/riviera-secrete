@@ -7,6 +7,13 @@ public class Lieu
     public string Nom { get; set; } = default!;
     public string Description { get; set; } = default!;
     public string? Description2 { get; set; }
+
+    // Traduction anglaise — colonnes jumelles nullable, voir
+    // .claude/memory/project_version_anglaise.md. Tant que non traduit (null), le frontend
+    // retombe sur le champ français correspondant.
+    public string? NomEn { get; set; }
+    public string? DescriptionEn { get; set; }
+    public string? Description2En { get; set; }
     public string Commune { get; set; } = default!;
     public string RegionSlug { get; set; } = default!;
     public string RegionLabel { get; set; } = default!;

@@ -11,6 +11,16 @@ public class Itineraire
     public string HeroImgTag { get; set; } = default!;
     public string MapLabel { get; set; } = default!;
 
+    // Traduction anglaise — colonnes jumelles nullable, voir
+    // .claude/memory/project_version_anglaise.md. Ne couvre que les champs scalaires ;
+    // les libellés imbriqués dans Items/Booking/Suggestions (JSON) seront traduits en
+    // phase 2/3 directement dans leur structure JSON, sans nouvelle migration nécessaire.
+    public string? TitreEn { get; set; }
+    public string? BadgeEn { get; set; }
+    public string? DescriptionEn { get; set; }
+    public string? IntroEn { get; set; }
+    public string? MapLabelEn { get; set; }
+
     // Stored as JSON columns — structures complexes, snapshot éditorial
     public List<MetaPill> MetaPills { get; set; } = [];
     public List<ItineraireItem> Items { get; set; } = [];
