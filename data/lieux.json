@@ -3875,5 +3875,131 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/parc-mont-boron/500/375"
+  },
+  {
+    "slug": "vieux-mougins",
+    "villeSlug": "mougins",
+    "nom": "Le Vieux Mougins",
+    "commune": "Mougins",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.6004,
+    "lng": 6.9953,
+    "description": "Un village perché en colimaçon entre Cannes et Grasse, refuge d'artistes au XXe siècle — Picasso y vécut ses douze dernières années — resté à l'écart de la foule de la Croisette.",
+    "ogImage": "https://picsum.photos/seed/vieux-mougins/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieux-mougins/1200/800",
+    "heroAlt": "Ruelles en colimaçon et galeries d'art du Vieux Mougins",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "Un village perché en colimaçon entre Cannes et Grasse, refuge d'artistes au XXe siècle — Picasso y vécut ses douze dernières années — resté à l'écart de la foule de la Croisette.",
+    "description2": "Dès les années 1920, Picabia puis Léger, Cocteau, Man Ray et enfin Picasso se sont installés dans ce village aux ruelles concentriques héritées de son plan défensif médiéval. Contrairement à un village-musée, Mougins reste habité par l'art : la densité de galeries au mètre carré y est inhabituelle, sans les cars de tourisme qui envahissent d'autres villages perchés du Var. Prévoir de lever la tête entre deux façades couvertes de plantes grimpantes et de volets colorés.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Se garer aux abords du village (rues piétonnes à l'intérieur) — 15 min de Cannes, 10 min de Grasse en voiture."
+      },
+      {
+        "label": "Meilleur moment",
+        "texte": "En semaine et hors saison : les ruelles sont étroites et se remplissent vite en plein été."
+      },
+      {
+        "label": "À combiner",
+        "texte": "La vieille ville de Grasse ou les îles de Lérins, à 15-20 minutes en voiture."
+      }
+    ],
+    "activites": [
+      {
+        "id": "balade-galeries-vieux-mougins",
+        "nom": "Balade dans les ruelles et galeries d'art",
+        "badge": "gratuit",
+        "duree": "1h-1h30",
+        "prix": "Accès libre",
+        "url": "https://mouginstourisme.com/culture-et-patrimoine/",
+        "image": "https://picsum.photos/seed/galeries-mougins/200/200",
+        "alt": "Galerie d'art dans une ruelle du Vieux Mougins",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "etang-fontmerle-lotus",
+        "nom": "Étang de Fontmerle et ses lotus géants",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre",
+        "url": "https://mougins.fr/decouvrir/ville-verte/etang-fontmerle/",
+        "image": "https://picsum.photos/seed/fontmerle-mougins/200/200",
+        "alt": "Lotus géants en fleur sur l'étang de Fontmerle à Mougins",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "centre-photographie-mougins",
+        "nom": "Centre de la photographie de Mougins",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "6 € / adulte",
+        "url": "https://centrephotographiemougins.com/",
+        "image": "https://picsum.photos/seed/centre-photo-mougins/200/200",
+        "alt": "Exposition au Centre de la photographie de Mougins",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "chapelle-notre-dame-de-vie",
+        "nom": "Chapelle Notre-Dame-de-Vie",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://mouginstourisme.com/culture-et-patrimoine/eglises-et-chapelles/notre-dame-de-vie/",
+        "image": "https://picsum.photos/seed/notre-dame-de-vie-mougins/200/200",
+        "alt": "Chapelle Notre-Dame-de-Vie entourée de cyprès, ancien voisinage de Picasso",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "diner-bistrot-mougins",
+        "nom": "Dîner au Bistrot de Mougins",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "30-50 € / pers.",
+        "url": "https://www.lebistrotdemougins.fr/",
+        "image": "https://picsum.photos/seed/bistrot-mougins/200/200",
+        "alt": "Ancienne écurie du XVIIIe siècle transformée en salle du Bistrot de Mougins",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieille-ville-grasse.html",
+        "img": "assets/images/lieux/vieille-ville-grasse/thumb.jpg",
+        "alt": "Ruelles de la vieille ville de Grasse, capitale mondiale du parfum",
+        "stamp": "43.66°N<br>6.92°E",
+        "region": "Grasse",
+        "titre": "Vieille ville de Grasse",
+        "blurb": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de p…"
+      },
+      {
+        "href": "iles-de-lerins.html",
+        "img": "assets/images/lieux/iles-de-lerins/thumb.jpg",
+        "alt": "Îles de Lérins au large de Cannes, Sainte-Marguerite et Saint-Honorat",
+        "stamp": "43.52°N<br>7.05°E",
+        "region": "Cannes",
+        "titre": "Îles de Lérins",
+        "blurb": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appart…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieux-mougins/500/375"
   }
 ]

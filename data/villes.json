@@ -266,5 +266,18 @@
     "lieux": [
       "falicon-village"
     ]
+  },
+  {
+    "slug": "mougins",
+    "nom": "Mougins",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.6004,
+    "lng": 6.9953,
+    "description": "Un village perché en colimaçon entre Cannes et Grasse, refuge d'artistes au XXe siècle — Picasso y vécut ses douze dernières années — resté à l'écart de la foule de la Croisette.",
+    "thumbImage": "https://picsum.photos/seed/mougins/500/375",
+    "lieux": [
+      "vieux-mougins"
+    ]
   }
 ]
