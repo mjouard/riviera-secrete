@@ -232,7 +232,7 @@ Le projet `frontend` (Vercel) a `rootDirectory = null` (auto-detect).
 
 ## Design
 
-Palette CSS (partagée avec le site statique) :
+Palette CSS :
 - `--bg: #0C1116` / `--surface: #151B22` / `--terracotta: #E8A33D` / `--azure: #4FC3C9`
 - Police : Inter (Google Fonts)
 
@@ -251,4 +251,3 @@ silencieusement côté Server Component (`TypeError: fetch failed`, page 500 en 
 ## Plausible Analytics
 
 Script dans `layout.tsx` : `https://plausible.io/js/pa-R_6LcENgDIgoUpT8QUE4g.js`
-Même script que le site statique → stats consolidées.

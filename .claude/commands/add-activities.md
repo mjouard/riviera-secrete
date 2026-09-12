@@ -2,12 +2,19 @@
 
 Ajoute des activités à un lieu de Riviera Secrète.
 
-**Source de vérité : `data/lieux.json`.** Ne jamais éditer `lieux/*.html` à la main — ces
-fichiers sont générés par `node scripts/build.mjs` à partir des données. Toute édition
-HTML directe sera écrasée au prochain build, et casse la règle du site : un lieu possède
-ses activités, chaque fait (prix, durée, url, image) n'existe qu'à un seul endroit — dans
-`data/lieux.json`. Les itinéraires (`data/itineraires.json`) référencent ces activités par
-`{ lieuSlug, activiteId }`, jamais en recopiant leurs prix/durées.
+**Source de vérité : `data/lieux.json`.** Chaque fait (prix, durée, url, image) n'existe
+qu'à un seul endroit — dans `data/lieux.json`. Les itinéraires (`data/itineraires.json`)
+référencent ces activités par `{ lieuSlug, activiteId }`, jamais en recopiant leurs
+prix/durées.
+
+**Ce fichier JSON est la source de seed du backend** (`backend/RivieraSecrete.Infrastructure/Data/DatabaseSeeder.cs`),
+consommé par le frontend Next.js via l'API — il n'y a plus de site statique généré à partir
+de ce JSON (supprimé le 2026-09-12). **Éditer ce fichier ne met à jour ni le frontend
+Next.js ni la DB automatiquement** : le seeder est idempotent (ne fait rien si la table
+`Villes` contient déjà des lignes), donc une édition JSON reste invisible sur le site en
+prod tant que quelqu'un n'a pas appliqué le changement en base manuellement (pas d'outillage
+pour ça aujourd'hui — signaler ce point à l'utilisateur après l'édition plutôt que de
+supposer que c'est automatique).
 
 ## Ce que tu dois recevoir de l'utilisateur
 
@@ -41,8 +48,9 @@ Si des infos manquent, demande-les avant de coder.
 }
 ```
 
-3. Lancer `node scripts/build.mjs` (ou `npm run build`) pour régénérer `lieux/<slug>.html`
-   et tous les `itin/*.html` qui pourraient référencer une de ses activités.
+3. Dire clairement à l'utilisateur que cette édition ne sera visible en prod qu'après une
+   mise à jour de la base de données (hors scope de ce skill) — ne pas prétendre que c'est
+   déjà fait juste parce que le JSON est modifié.
 
 ## Règles
 
@@ -57,8 +65,8 @@ Si des infos manquent, demande-les avant de coder.
   (dans ce cas ne rien ajouter, l'itinéraire pourra la référencer directement) ou une
   coïncidence
 - **Un lieu ne doit jamais apparaître comme "activité" d'un autre lieu.** Si l'activité que
-  tu t'apprêtes à ajouter EST en fait un des 30 autres lieux du site (même village, même
-  sentier, même monument avec sa propre fiche dans `lieux/`) — pas une visite ponctuelle
+  tu t'apprêtes à ajouter EST en fait un des 27 autres lieux du site (même village, même
+  sentier, même monument avec sa propre fiche `/lieux/<slug>`) — pas une visite ponctuelle
   DANS ce lieu — ne l'ajoute pas à `activites`. Ajoute plutôt ce lieu au tableau `related`
   du lieu courant (voir les autres entrées de `related` pour le format de la card). C'était
   la source du plus gros lot de doublons trouvés dans ce dataset (ex: "Villa Ephrussi de
@@ -67,7 +75,7 @@ Si des infos manquent, demande-les avant de coder.
 
 ## Vérification finale
 
-Après édition du JSON et build :
-1. `git diff lieux/<slug>.html` ne montre que l'ajout attendu
-2. Aucun autre fichier `lieux/*.html` ou `itin/*.html` n'a bougé de façon inattendue
-3. Les URLs sont exactement celles fournies par l'utilisateur (pas raccourcies)
+Après édition du JSON :
+1. `git diff data/lieux.json` ne montre que l'ajout attendu
+2. Les URLs sont exactement celles fournies par l'utilisateur (pas raccourcies)
+3. Rappeler à l'utilisateur que la DB de prod n'est pas mise à jour automatiquement

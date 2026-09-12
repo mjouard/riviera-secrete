@@ -9,11 +9,15 @@ metadata:
 
 Toujours déployer le projet Next.js depuis `frontend/` avec `npx vercel --prod --yes`.
 
-**Why:** Le monorepo a deux projets Vercel :
+**Why:** Le repo a historiquement deux projets Vercel :
 - `frontend` (Next.js) → lié via `frontend/.vercel/project.json`
-- `riviera-secrete` (site statique) → lié via `.vercel/project.json` à la racine
+- `riviera-secrete` (site statique, code supprimé le 2026-09-12) → était lié via
+  `.vercel/project.json` à la racine
 
-Si on lance `vercel` depuis la racine du repo, Vercel pointe vers le projet statique, pas le Next.js.
+Le code du site statique n'existe plus dans ce repo, mais si le projet Vercel
+`riviera-secrete` reste connecté (git integration ou lien local), lancer `vercel` depuis la
+racine du repo risque toujours de résoudre vers ce mauvais projet plutôt que `frontend` —
+règle inchangée : toujours déployer depuis `frontend/`.
 
 **How to apply:**
 - `rootDirectory` du projet `frontend` sur Vercel doit rester à `null` (auto-detect)

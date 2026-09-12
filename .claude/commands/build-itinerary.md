@@ -6,11 +6,17 @@ Enrichit un itinéraire de Riviera Secrète avec :
 3. Une **cohérence géographique et temporelle** des horaires
 4. Un marqueur **"Dormir à…"** si l'itinéraire s'étend sur plusieurs jours
 
-**Source de vérité : `data/itineraires.json` + `data/lieux.json`.** Ne jamais éditer
-`itin/*.html` à la main — ces fichiers sont générés par `node scripts/build.mjs`. Le
-HTML/CSS des pills, blocs de trajet, marqueurs "Dormir à…" et cartes "à réserver" est déjà
-géré par `scripts/render/itin.mjs` : cette commande ne touche qu'aux données, jamais au
-gabarit.
+**Source de vérité : `data/itineraires.json` + `data/lieux.json`.** Cette commande ne
+touche qu'aux données JSON, jamais à du code de rendu. Le rendu HTML/CSS des pills, blocs
+de trajet, marqueurs "Dormir à…" et cartes "à réserver" se fait côté
+`frontend/src/app/itineraires/[slug]/page.tsx` (Next.js) à partir de ces mêmes données —
+il n'y a plus de site statique généré à partir de ce JSON (supprimé le 2026-09-12).
+
+**Ce fichier JSON est aussi la source de seed du backend**
+(`backend/RivieraSecrete.Infrastructure/Data/DatabaseSeeder.cs`), consommé par le frontend
+via l'API. **Éditer ce fichier ne met pas à jour la DB automatiquement** : le seeder est
+idempotent (ne fait rien si la table `Itineraires` contient déjà des lignes) — signaler ce
+point à l'utilisateur après l'édition plutôt que de supposer que c'est déjà en prod.
 
 Règle centrale du modèle de données : un itinéraire ne recopie **jamais** le prix, la
 durée, l'url ou l'image d'une activité. Il pointe vers elle avec `{ "lieuSlug": "...",
@@ -48,9 +54,10 @@ Analyser l'ordre des `items` de type `stop` par position (lat/lng du lieu réfé
 - Les étapes doivent suivre un axe cohérent (ex: est→ouest, côte→arrière-pays, boucle)
 - Si deux étapes consécutives créent un **backtrack** évident (revenir sur ses pas de >5 km), les inverser dans le tableau `items`
 
-Le tableau `STOPS` utilisé par la carte Leaflet n'existe plus comme donnée séparée : il est
-recalculé par le build directement depuis `items` + les lat/lng des lieux référencés. Il
-suffit donc de réordonner `items` — pas besoin de synchroniser un second tableau.
+Les points de la carte Leaflet n'existent pas comme donnée séparée : ils sont recalculés à
+l'affichage (`itineraires/[slug]/page.tsx`) directement depuis `items` + les lat/lng des
+lieux référencés. Il suffit donc de réordonner `items` — pas besoin de synchroniser un
+second tableau.
 
 ---
 
@@ -161,12 +168,9 @@ Règles :
 
 ---
 
-## Étape 6 — Build et vérification finale
+## Étape 6 — Vérification finale
 
-Lancer `node scripts/build.mjs` (ou `npm run build`) pour régénérer `itin/<slug>.html`.
-
-Puis vérifier :
-1. `git diff itin/<slug>.html` correspond aux changements attendus, rien d'autre n'a bougé
+1. `git diff data/itineraires.json` correspond aux changements attendus, rien d'autre n'a bougé
 2. L'ordre des étapes est géographiquement logique
 3. Les horaires sont cohérents (durée visite + trajet = heure de départ suivante)
 4. Le déjeuner est bien placé (~12:30)
@@ -174,3 +178,4 @@ Puis vérifier :
 6. Si multi-jours : les marqueurs `sleep` sont présents entre chaque journée
 7. Le `metaPills` reflète le bon nombre de jours/étapes (ex: "2 jours · rythme serein")
 8. `intro` reflète la logique de la route (ex: "est → ouest via les corniches")
+9. Rappeler à l'utilisateur que la DB de prod n'est pas mise à jour automatiquement

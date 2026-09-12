@@ -1,6 +1,6 @@
 ---
 name: project-overview
-description: "Vue d'ensemble du projet Riviera Secrète — ce que c'est, état actuel de la stack, URLs, structure du dépôt"
+description: "Vue d'ensemble du projet Riviera Secrète — ce que c'est, stack unique Next.js+ASP.NET Core (site statique supprimé 2026-09-12), URLs, structure du dépôt"
 metadata: 
   node_type: memory
   type: project
@@ -15,35 +15,32 @@ Guide des lieux méconnus de la Côte d'Azur (Menton → Saint-Tropez). 27 lieux
 
 ---
 
-## Stack actuelle (2026-09-11)
+## Stack actuelle (2026-09-12)
 
-Le projet est en transition entre un site statique (historique) et une stack complète :
+Stack unique — le site statique historique (HTML/CSS/JS généré depuis `data/*.json`) a été
+supprimé du repo le 2026-09-12, une fois le frontend Next.js arrivé à parité fonctionnelle
+(portage suivi jusqu'au bout dans `ROADMAP.md`). Structure actuelle :
 
 ```
-/                        ← Site statique HTML/CSS/JS (Netlify, legacy)
 /backend/                ← ASP.NET Core Web API (.NET 10, Railway)
-/frontend/               ← Next.js 16 App Router (Vercel)
-/data/                   ← JSON sources de vérité (lieux, villes, itinéraires)
-/scripts/                ← Build du site statique (node scripts/build.mjs)
-/assets/                 ← CSS/JS/images partagés par le site statique
-/lieux/ /itin/           ← Pages HTML générées (ne pas éditer à la main)
+/frontend/                ← Next.js 16 App Router (Vercel) — le site
+/data/                   ← JSON sources de vérité (lieux, villes, itinéraires), consommées
+                            uniquement par le seeder backend désormais
 ```
 
 ### Sites déployés
 
 | Couche | URL | Hébergement |
 |---|---|---|
-| Site statique (legacy) | https://riviera-secrete.vercel.app | Vercel (projet `riviera-secrete`, migré depuis Netlify — `riviera-secrete.netlify.app` 404 désormais, vérifié 2026-09-12) |
-| Frontend Next.js | https://frontend-two-plum-92.vercel.app | Vercel (projet `frontend`) |
+| Site (Next.js) | https://frontend-two-plum-92.vercel.app | Vercel (projet `frontend`) — c'est le vrai site |
 | API .NET | https://api-production-19623.up.railway.app | Railway (service `api`) |
 | PostgreSQL | interne Railway | Railway (projet `fearless-happiness`) |
 
-Le site statique sera progressivement remplacé par le frontend Next.js, qui est le stack
-prioritaire pour tout travail en cours (décidé et confirmé par l'utilisateur le 2026-09-11).
-Ne pas investir dans le site statique au-delà des corrections urgentes. Certains champs
-internes (`data/lieux.json`'s `ogImage`, canonicals dans `scripts/render/*.mjs`) référencent
-encore `netlify.app` en dur malgré la migration — tâche différée existante dans
-`ROADMAP.md`, pas encore corrigée.
+Le projet Vercel `riviera-secrete` (`riviera-secrete.vercel.app`) a existé pour l'ancien
+site statique — son code source a été supprimé du repo, donc si ce projet Vercel est encore
+connecté au repo, son prochain déploiement échouera ou servira du contenu périmé/cassé ;
+ignore cette URL, ce n'est plus le site. Aucun nom de domaine personnalisé n'est encore
+acheté/pointé (tâche `ROADMAP.md` toujours ouverte).
 
 ---
 
@@ -55,11 +52,10 @@ encore `netlify.app` en dur malgré la migration — tâche différée existante
 - 22 villes
 - 6 itinéraires
 
-Ces JSON sont lus par :
-1. `scripts/build.mjs` → génère les pages HTML statiques
-2. `DatabaseSeeder.cs` → seed la PostgreSQL Railway (fait une fois, données en DB)
-
-**Ne jamais éditer** `lieux/*.html`, `itin/*.html` — générés, écrasés au prochain build.
+Ces JSON sont lus uniquement par `DatabaseSeeder.cs` (backend) pour peupler la PostgreSQL
+Railway — idempotent, ne se relance pas tout seul, voir `backend_dotnet.md`. Éditer ces
+fichiers ne met donc rien à jour automatiquement en prod (ni la DB, ni a fortiori le
+frontend, qui ne lit que la DB via l'API).
 
 ---
 
@@ -94,4 +90,5 @@ Ces JSON sont lus par :
 - Un lieu ne doit jamais apparaître en `activites[]` d'un autre lieu (→ `related[]` à la place)
 - Coordonnées vérifiées via WebSearch (3 corrigées en 2026-08-27)
 - Badges (`plage`, `randonnee`, `vtt`, `plongee`, `restaurant`) = practicable à l'emplacement exact du lieu, pas dans la commune
-- `<title>` utilise `&` nu, tout le reste utilise `&amp;`
+- `data/*.json` contient des `&amp;` littéraux hérités de l'ancien rendu HTML — le frontend
+  les décode uniformément (`decodeDeep`/`decodeEntities`), aucune règle de split à retenir

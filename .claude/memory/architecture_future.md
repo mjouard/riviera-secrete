@@ -110,11 +110,13 @@ mails soient checkés avec email de confirmation").
 
 ### ✅ Restauration de features homepage manquantes (2026-09-11/12)
 
-Sans rapport avec l'auth — trouvé en comparant à l'oeil le site statique et le Next.js :
-carte Leaflet homepage, section activités par catégorie, filtres badge sur la grille lieux,
-image sur les cartes itinéraires. Voir `frontend_migration_checklist.md` pour le détail —
-c'était la table de suivi feature-par-feature qui a permis de les repérer, elle-même trouvée
-en retard sur plusieurs points au passage et corrigée dans la foulée.
+Sans rapport avec l'auth — trouvé en comparant à l'oeil le site statique (avant sa
+suppression) et le Next.js : carte Leaflet homepage, section activités par catégorie,
+filtres badge sur la grille lieux, image sur les cartes itinéraires. Le suivi
+feature-par-feature qui a permis de les repérer (`frontend_migration_checklist.md`) a été
+supprimé le 2026-09-12 en même temps que le site statique lui-même, son rôle terminé — la
+liste complète des items portés reste dans `ROADMAP.md`, section "Portage site statique →
+Next.js".
 
 ### ✅ Autres corrections notables de cette période
 
@@ -143,17 +145,20 @@ en retard sur plusieurs points au passage et corrigée dans la foulée.
 - **Itinéraires custom** → `UserItineraire` en DB, fait (plus de localStorage)
 - **Favoris** → `UserFavorite` en DB, fait (`/mes-favoris`)
 - **Auth** → Google + email/mot de passe + confirmation d'email, fait (voir P4/P4.5)
-- **Images** → toujours servies depuis `frontend/public/assets/` (copie du site statique),
+- **Images** → servies depuis `frontend/public/assets/`, seule copie qui existe
+  (l'ancien site statique avait sa propre copie, supprimée avec son code le 2026-09-12).
   Cloudflare R2 pas encore commencé — pas bloquant, juste une dette
 
-## Site statique legacy
+## Site statique — supprimé le 2026-09-12
 
-Le site statique a lui-même migré de Netlify vers Vercel (`riviera-secrete.vercel.app`,
-`netlify.toml` et `vercel.json` coexistent dans le repo mais Vercel est la config active) —
-`riviera-secrete.netlify.app` n'est donc plus nécessairement la bonne URL à citer, vérifier
-l'état courant plutôt que de supposer. Le frontend Next.js reste le nouveau site / stack
-prioritaire (décidé 2026-09-11, confirmé par l'utilisateur — voir `CLAUDE.md` racine, section
-"What this is") ; ne pas investir de nouvelles features dans le site statique au-delà des
-corrections urgentes. Deux projets Vercel distincts coexistent : `frontend` (Next.js, ce
-document) et `riviera-secrete` (site statique) — ne jamais déployer le Next.js depuis la
-racine du repo, voir `feedback_vercel_deploy.md`.
+Après audit confirmant la parité fonctionnelle (liste complète dans `ROADMAP.md`, section
+"Portage site statique → Next.js"), tout le code du site statique (racine `index.html`,
+`lieux/`, `itin/`, `villes/`, `assets/`, `scripts/`, `netlify.toml`, `vercel.json` racine,
+`sitemap.xml`, `robots.txt`) a été supprimé du repo. `data/*.json` a survécu — c'est la
+seule chose qui restait utile (source de seed du backend). Le projet Vercel
+`riviera-secrete` (`riviera-secrete.vercel.app`) a existé pour héberger ce site ; son code
+source n'existe plus dans ce repo, donc ignorer cette URL — le frontend Next.js
+(`frontend-two-plum-92.vercel.app`) est le seul vrai site désormais. Toujours déployer
+le Next.js depuis `frontend/`, jamais depuis la racine du repo (voir
+`feedback_vercel_deploy.md` — le risque de résoudre vers le mauvais projet Vercel reste le
+même même si ce projet-là ne sert plus rien de valide).
