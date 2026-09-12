@@ -74,6 +74,7 @@ const CREDITS: Credit[] = [
   { titre: "Ruelle de Saint-Tropez (restaurant Le Goustado Tropézien)", auteur: "Gzen92", fileUrl: "https://commons.wikimedia.org/wiki/File:Rue_(Saint-Tropez)_(4).jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Ruelle du Rocher de Monaco (restaurant U Cavagnëtu)", auteur: "Rundvald", fileUrl: "https://commons.wikimedia.org/wiki/File:Monaco-Ville-ruelle.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Socca dans le Vieux-Nice (Chez Théresa)", auteur: "Myrabella", fileUrl: "https://commons.wikimedia.org/wiki/File:Socca_a_Nice.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Plateau de Coursegoules-Bramafan (VTT)", auteur: "Julien", fileUrl: "https://commons.wikimedia.org/wiki/File:Fall_Landscape_(128978853).jpeg", licenceLabel: "CC BY 3.0", licenceUrl: "https://creativecommons.org/licenses/by/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

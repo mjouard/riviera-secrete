@@ -1844,6 +1844,17 @@
         "image": "../assets/images/lieux/pont-du-loup/act-2.jpg",
         "alt": "Atelier confitures artisanales",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "vtt-bramafan-plateau-saint-barnabe",
+        "nom": "VTT vers Bramafan et le plateau de Saint-Barnabé",
+        "badge": "gratuit",
+        "duree": "2h à 3h",
+        "prix": "Accès libre",
+        "url": "https://vttour.fr/departs/1539",
+        "image": "../assets/images/lieux/pont-du-loup/act-4.jpg",
+        "alt": "Paysage du plateau au-dessus de Bramafan, sur le circuit VTT accessible depuis Pont-du-Loup",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
