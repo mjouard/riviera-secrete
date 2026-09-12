@@ -118,8 +118,8 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       durée du test) ; le rendu visuel exact de la transition CSS n'a pas pu être confirmé à
       l'oeil dans cette session (outil de capture instable), mais la logique est correcte et
       standard (`transition: opacity`)
-- [ ] JSON-LD `ItemList` sur la homepage Next.js — absent (existe sur le site statique,
-      généré par `home-lieux.mjs`)
+- [x] JSON-LD `ItemList` sur la homepage Next.js (2026-09-12) — 22 `ListItem` (une par
+      ville), même structure que le site statique, urls vers les routes Next.js
 - [ ] JSON-LD `TouristDestination` sur les pages ville Next.js — absent
 - [ ] `noindex` sur les pages user-generated (`/creer-itineraire`, `/mes-itineraires`,
       `/mes-favoris`) — pas confirmé posé sur Next.js, existe sur le site statique
