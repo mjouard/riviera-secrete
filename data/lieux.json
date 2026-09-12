@@ -61,7 +61,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "35–50 € / pers.",
-        "url": "https://www.getyourguide.com/villefranche-sur-mer-l96796/",
+        "url": "https://www.getyourguide.com/villefranche-sur-mer-l1706/",
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-2.jpg",
         "alt": "Sortie kayak de mer",
         "linkText": "Réserver →"
@@ -72,7 +72,7 @@
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
-        "url": "https://www.citadellesaintelme.com/",
+        "url": "https://www.explorenicecotedazur.com/culture/citadelle-saint-elme/",
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-3.jpg",
         "alt": "Citadelle Saint-Elme",
         "linkText": "En savoir plus →"
@@ -83,7 +83,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "40–55 € / pers.",
-        "url": "https://www.getyourguide.com/villefranche-sur-mer-l96796/snorkeling",
+        "url": "https://www.getyourguide.com/villefranche-sur-mer-l1706/",
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-4.jpg",
         "alt": "Plongée snorkeling",
         "linkText": "Réserver →"
@@ -167,7 +167,7 @@
         "badge": "gratuit",
         "duree": "3h",
         "prix": "Accès libre",
-        "url": "https://www.saintjeancapferrat-tourisme.fr/randonnee",
+        "url": "https://www.explorenicecotedazur.com/explore/towns-villages/coastal-area/saint-jean-cap-ferrat/the-paths/",
         "image": "../assets/images/lieux/sentier-cap-ferrat/act-1.jpg",
         "alt": "Sentier du littoral (tour complet)",
         "linkText": "En savoir plus →"
@@ -178,7 +178,7 @@
         "badge": "payant",
         "duree": "2–4h",
         "prix": "15–25 € / jour",
-        "url": "https://www.getyourguide.com/saint-jean-cap-ferrat-l97002/",
+        "url": "https://www.getyourguide.com/saint-jean-cap-ferrat-l113407/",
         "image": "../assets/images/lieux/sentier-cap-ferrat/act-2.jpg",
         "alt": "Location de vélos",
         "linkText": "Réserver →"
@@ -285,7 +285,7 @@
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
-        "url": "https://www.beaulieusurmertourisme.fr/",
+        "url": "https://www.explorenicecotedazur.com/itinerary/promenade-maurice-rouvier/",
         "image": "../assets/images/lieux/villa-kerylos/act-2.jpg",
         "alt": "Promenade Gustave Eiffel",
         "linkText": "En savoir plus →"
@@ -494,7 +494,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "7 € / adulte",
-        "url": "https://www.la-turbie.fr/monument/",
+        "url": "https://www.ville-la-turbie.fr/trophee-dauguste/",
         "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-1.jpg",
         "alt": "Visite du Trophée d'Auguste",
         "linkText": "Réserver →"
@@ -505,7 +505,7 @@
         "badge": "gratuit",
         "duree": "30min",
         "prix": "Accès libre",
-        "url": "https://www.la-turbie.fr/",
+        "url": "https://www.ville-la-turbie.fr/",
         "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-2.jpg",
         "alt": "Panorama sur Monaco",
         "linkText": "En savoir plus →"
@@ -516,7 +516,7 @@
         "badge": "gratuit",
         "duree": "45min",
         "prix": "Accès libre",
-        "url": "https://www.la-turbie.fr/patrimoine",
+        "url": "https://www.ville-la-turbie.fr/",
         "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-3.jpg",
         "alt": "Village médiéval de La Turbie",
         "linkText": "En savoir plus →"
@@ -610,7 +610,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "18 € / adulte",
-        "url": "https://www.oceano.mc/",
+        "url": "https://musee.oceano.org/",
         "image": "../assets/images/lieux/jardin-exotique-monaco/act-2.jpg",
         "alt": "Musée Océanographique",
         "linkText": "Réserver →"
@@ -703,7 +703,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "5 € / adulte",
-        "url": "https://www.roquebrune-cap-martin.fr/patrimoine/",
+        "url": "https://www.roquebrune-cap-martin.fr/16752-le-chateau.htm",
         "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-1.jpg",
         "alt": "Visite du château médiéval",
         "linkText": "Réserver →"
@@ -798,7 +798,7 @@
         "badge": "gratuit",
         "duree": "2h",
         "prix": "Accès libre",
-        "url": "https://www.roquebrune-cap-martin.fr/decouvrir/sentier-le-corbusier/",
+        "url": "https://www.roquebrune-cap-martin.fr/25986-randonnees.htm",
         "image": "../assets/images/lieux/sentier-corbusier-cap-martin/act-2.jpg",
         "alt": "Sentier Le Corbusier",
         "linkText": "En savoir plus →"
@@ -809,7 +809,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "10 € / adulte",
-        "url": "https://www.getyourguide.com/cap-martin-l97007/",
+        "url": "https://www.getyourguide.com/roquebrune-cap-martin-l158938/",
         "image": "../assets/images/lieux/sentier-corbusier-cap-martin/act-1.jpg",
         "alt": "Cabanon Le Corbusier (visite guidée)",
         "linkText": "Réserver →"
@@ -891,7 +891,7 @@
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
-        "url": "https://www.nicetourisme.com/activites/parc-du-chateau",
+        "url": "https://www.explorenicecotedazur.com/explore/towns-villages/coastal-area/nice/",
         "image": "../assets/images/lieux/colline-du-chateau-nice/act-1.jpg",
         "alt": "Cascade et parc du château",
         "linkText": "En savoir plus →"
@@ -902,7 +902,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "15 € / adulte",
-        "url": "https://www.getyourguide.com/nice-l175/vieux-nice",
+        "url": "https://www.getyourguide.com/nice-l314/",
         "image": "../assets/images/lieux/colline-du-chateau-nice/act-2.jpg",
         "alt": "Vieux Nice — visite guidée",
         "linkText": "Réserver →"
@@ -913,7 +913,7 @@
         "badge": "gratuit",
         "duree": "30min",
         "prix": "Accès libre",
-        "url": "https://www.nicetourisme.com/",
+        "url": "https://www.explorenicecotedazur.com/explore/towns-villages/coastal-area/nice/",
         "image": "../assets/images/lieux/colline-du-chateau-nice/act-3.jpg",
         "alt": "Montée en ascenseur (Colline)",
         "linkText": "En savoir plus →"
@@ -1005,7 +1005,7 @@
         "badge": "gratuit",
         "duree": "1h–2h",
         "prix": "Accès libre",
-        "url": "https://www.nicetourisme.com/activites/marche-cours-saleya",
+        "url": "https://www.explorenicecotedazur.com/culture/cours-saleya/",
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-1.jpg",
         "alt": "Marché du Cours Saleya",
         "linkText": "En savoir plus →"
@@ -1016,7 +1016,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "45–55 € / adulte",
-        "url": "https://www.getyourguide.com/nice-l175/tour-gastronomique",
+        "url": "https://www.getyourguide.com/nice-l314/",
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-3.jpg",
         "alt": "Tour gastronomique Vieux Nice",
         "linkText": "Réserver →"
@@ -1027,7 +1027,7 @@
         "badge": "payant",
         "duree": "3h",
         "prix": "65–90 € / adulte",
-        "url": "https://www.getyourguide.com/nice-l175/cours-de-cuisine",
+        "url": "https://www.getyourguide.com/nice-l314/",
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-2.jpg",
         "alt": "Cours de cuisine niçoise",
         "linkText": "Réserver →"
@@ -1472,7 +1472,7 @@
         "badge": "payant",
         "duree": "3h–4h",
         "prix": "50–80 € / pers.",
-        "url": "https://www.getyourguide.com/grasse-l96902/escalade",
+        "url": "https://www.getyourguide.com/grasse-l2037/",
         "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-2.jpg",
         "alt": "Escalade et via ferrata",
         "linkText": "Réserver →"
@@ -1483,7 +1483,7 @@
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
-        "url": "https://www.alpes-maritimes.com/cascade-de-courmes",
+        "url": "https://cotedazurfrance.fr/decouvrir/les-plus-beaux-sites-naturels/que-faire-dans-les-gorges-du-loup/",
         "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-3.jpg",
         "alt": "Cascade de Courmes",
         "linkText": "En savoir plus →"
@@ -1576,7 +1576,7 @@
         "badge": "gratuit",
         "duree": "45min",
         "prix": "Accès libre",
-        "url": "https://www.confiserie-florian.com/",
+        "url": "https://www.confiserieflorian.com/",
         "image": "../assets/images/lieux/pont-du-loup/act-3.jpg",
         "alt": "Confiserie Florian (visite gratuite)",
         "linkText": "En savoir plus →"
@@ -1587,7 +1587,7 @@
         "badge": "gratuit",
         "duree": "1h30–2h",
         "prix": "Accès libre",
-        "url": "https://www.visorando.com/randonnee-pont-du-loup.html",
+        "url": "https://www.visorando.com/randonnee-autour-de-gourdon-via-les-gorges-du-loup/",
         "image": "../assets/images/lieux/pont-du-loup/act-1.jpg",
         "alt": "Randonnée viaduc et gorges",
         "linkText": "En savoir plus →"
@@ -1598,7 +1598,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "30–45 € / adulte",
-        "url": "https://www.getyourguide.com/grasse-l96902/",
+        "url": "https://www.getyourguide.com/grasse-l2037/",
         "image": "../assets/images/lieux/pont-du-loup/act-2.jpg",
         "alt": "Atelier confitures artisanales",
         "linkText": "Réserver →"
@@ -1690,7 +1690,7 @@
         "badge": "gratuit",
         "duree": "1h",
         "prix": "Accès libre",
-        "url": "https://www.tourrettes-sur-loup.fr/",
+        "url": "https://www.tourrettessurloup.com/",
         "image": "../assets/images/lieux/tourrettes-sur-loup/act-2.jpg",
         "alt": "Visite de la cité des violettes",
         "linkText": "En savoir plus →"
@@ -1701,7 +1701,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "35–55 € / adulte",
-        "url": "https://www.getyourguide.com/vence-l97030/",
+        "url": "https://poterie-tournesol.fr/atelier/",
         "image": "../assets/images/lieux/tourrettes-sur-loup/act-1.jpg",
         "alt": "Atelier céramique artisanale",
         "linkText": "Réserver →"
@@ -1712,7 +1712,7 @@
         "badge": "gratuit",
         "duree": "2h",
         "prix": "Accès libre",
-        "url": "https://www.tourrettes-sur-loup.fr/fete-des-violettes",
+        "url": "https://www.tourrettessurloup.com/",
         "image": "../assets/images/lieux/tourrettes-sur-loup/act-3.jpg",
         "alt": "Festival des violettes (février/mars)",
         "linkText": "En savoir plus →"
@@ -1963,7 +1963,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "45–65 € / adulte",
-        "url": "https://www.getyourguide.com/biot-l97015/",
+        "url": "https://www.getyourguide.com/la-verrerie-de-biot-l194026/",
         "image": "../assets/images/lieux/biot-village-verrier/act-1.jpg",
         "alt": "Atelier soufflage de verre",
         "linkText": "Réserver →"
@@ -1974,7 +1974,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "11 € / adulte",
-        "url": "https://www.musees-nationaux-alpesmaritimes.fr/fernand-leger",
+        "url": "https://www.biot.fr/musee-national-fernand-leger",
         "image": "../assets/images/lieux/biot-village-verrier/act-2.jpg",
         "alt": "Musée National Fernand Léger",
         "linkText": "Réserver →"
@@ -2066,7 +2066,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "7 € / adulte",
-        "url": "https://www.cagnes-tourisme.com/chateau-musee",
+        "url": "https://tourisme.cagnes.fr/chateau-musee-grimaldi/",
         "image": "../assets/images/lieux/haut-de-cagnes/act-1.jpg",
         "alt": "Château-musée Grimaldi",
         "linkText": "Réserver →"
@@ -2077,7 +2077,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "9 € / adulte",
-        "url": "https://www.musees-nationaux-alpesmaritimes.fr/renoir",
+        "url": "https://ville.cagnes.fr/musee-renoir/",
         "image": "../assets/images/lieux/haut-de-cagnes/act-3.jpg",
         "alt": "Musée Renoir",
         "linkText": "Réserver →"
@@ -2179,7 +2179,7 @@
         "badge": "gratuit",
         "duree": "3h–4h",
         "prix": "Accès libre",
-        "url": "https://www.antibesjuanlespins.com/sentier-littoral",
+        "url": "https://www.antibesjuanlespins.com/toute-l-offre/balade-nature-sur-le-sentier-du-littoral-2031746",
         "image": "../assets/images/lieux/sentier-cap-antibes/act-1.jpg",
         "alt": "Sentier du littoral Tirepoil",
         "linkText": "En savoir plus →"
@@ -2201,7 +2201,7 @@
         "badge": "payant",
         "duree": "2h–4h",
         "prix": "20–35 €",
-        "url": "https://www.getyourguide.com/antibes-l96900/",
+        "url": "https://www.getyourguide.com/antibes-l5075/",
         "image": "../assets/images/lieux/sentier-cap-antibes/act-3.jpg",
         "alt": "Location de vélos électriques",
         "linkText": "Réserver →"
@@ -2305,7 +2305,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "15–20 € / pers.",
-        "url": "https://www.getyourguide.com/juan-les-pins-l97018/",
+        "url": "https://www.getyourguide.com/juan-les-pins-l134702/",
         "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-2.jpg",
         "alt": "Location paddle / SUP",
         "linkText": "Réserver →"
@@ -2316,7 +2316,7 @@
         "badge": "gratuit",
         "duree": "Demi-journée",
         "prix": "Accès libre",
-        "url": "https://www.antibesjuanlespins.com/plages",
+        "url": "https://www.antibesjuanlespins.com/en/discover/antibes-juan-les-pins-a-mediterranean-city/the-beaches",
         "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-3.jpg",
         "alt": "Plage de Juan-les-Pins",
         "linkText": "En savoir plus →"
@@ -2524,7 +2524,7 @@
         "badge": "gratuit",
         "duree": "3h–4h",
         "prix": "Accès libre",
-        "url": "https://www.esterel-cote-azur.com/randonnee",
+        "url": "https://circuits.esterel-cotedazur.com/trouver-un-circuit/circuits-vtt/",
         "image": "../assets/images/lieux/pic-cap-roux-esterel/act-1.jpg",
         "alt": "Randonnée Pic du Cap Roux",
         "linkText": "En savoir plus →"
@@ -2535,7 +2535,7 @@
         "badge": "payant",
         "duree": "3h–5h",
         "prix": "25–45 € / location",
-        "url": "https://www.getyourguide.com/esterel-l97025/",
+        "url": "https://circuits.esterel-cotedazur.com/trouver-un-circuit/circuits-vtt/",
         "image": "../assets/images/lieux/pic-cap-roux-esterel/act-3.jpg",
         "alt": "VTT dans l'Estérel",
         "linkText": "Réserver →"
@@ -2638,7 +2638,7 @@
         "badge": "payant",
         "duree": "2h–3h",
         "prix": "40–60 € / pers.",
-        "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/",
+        "url": "https://www.getyourguide.com/theoule-sur-mer-l158932/",
         "image": "../assets/images/lieux/calanques-esterel-theoule/act-1.jpg",
         "alt": "Kayak de mer calanques",
         "linkText": "Réserver →"
@@ -2649,7 +2649,7 @@
         "badge": "payant",
         "duree": "2h",
         "prix": "30–45 € / pers.",
-        "url": "https://www.getyourguide.com/theoule-sur-mer-l97028/snorkeling",
+        "url": "https://www.getyourguide.com/theoule-sur-mer-l158932/",
         "image": "../assets/images/lieux/calanques-esterel-theoule/act-2.jpg",
         "alt": "Snorkeling calanques rouges",
         "linkText": "Réserver →"
@@ -2776,7 +2776,7 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "50–80 € / adulte",
-        "url": "https://www.getyourguide.com/grasse-l96902/creation-parfum",
+        "url": "https://www.getyourguide.com/grasse-l2037/",
         "image": "../assets/images/lieux/vieille-ville-grasse/act-3.jpg",
         "alt": "Atelier création de parfum",
         "linkText": "Réserver →"
@@ -2889,7 +2889,7 @@
         "badge": "payant",
         "duree": "4h",
         "prix": "200–500 € / groupe",
-        "url": "https://www.clickandboat.com/location-bateau/france/cote-azur/saint-tropez",
+        "url": "https://www.clickandboat.com/location-bateau/france/saint-tropez",
         "image": "../assets/images/lieux/citadelle-saint-tropez/act-2.jpg",
         "alt": "Location de bateau",
         "linkText": "Réserver →"
@@ -2992,7 +2992,7 @@
         "badge": "payant",
         "duree": "1h",
         "prix": "15–25 € / dégustation",
-        "url": "https://www.getyourguide.com/saint-tropez-l97024/degustation-vins",
+        "url": "https://www.getyourguide.com/fr-fr/saint-tropez-l518/visites-de-vignobles-et-degustation-de-vin-tc104/",
         "image": "../assets/images/lieux/gassin-plus-beau-village/act-2.jpg",
         "alt": "Dégustation vins du golfe",
         "linkText": "Réserver →"
