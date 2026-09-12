@@ -20,20 +20,6 @@
       }
     ],
     "intro": "Sentier côtier, sieste à l'ombre des pins et verre soufflé — une journée qui alterne mer et artisanat.",
-    "strip": [
-      {
-        "src": "https://picsum.photos/seed/sentier-cap-antibes/600/400",
-        "alt": "Le sentier du littoral du Cap d'Antibes"
-      },
-      {
-        "src": "https://picsum.photos/seed/pinede-gould-juan-les-pins/600/400",
-        "alt": "La pinède Gould"
-      },
-      {
-        "src": "https://picsum.photos/seed/biot-village-verrier/600/400",
-        "alt": "Biot, le village des verriers"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire Antibes, Biot &amp; la pinède de Juan-les-Pins",
     "items": [
       {
@@ -147,21 +133,21 @@
     "suggestions": [
       {
         "href": "lerins-esterel.html",
-        "img": "https://picsum.photos/seed/itin-lerins/600/338",
+        "img": "assets/images/lieux/iles-de-lerins/thumb.jpg",
         "alt": "Îles de Lérins &amp; Estérel sauvage",
         "badge": "3 étapes",
         "titre": "Îles de Lérins &amp; Estérel sauvage"
       },
       {
         "href": "villages-perches.html",
-        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
         "href": "nice-peillon-peille.html",
-        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
@@ -189,20 +175,6 @@
       }
     ],
     "intro": "Les parfumeries de Grasse le matin, un plus beau village de France et la citadelle du golfe l'après-midi.",
-    "strip": [
-      {
-        "src": "https://picsum.photos/seed/vieille-ville-grasse/600/400",
-        "alt": "La vieille ville de Grasse"
-      },
-      {
-        "src": "https://picsum.photos/seed/gassin-plus-beau-village/600/400",
-        "alt": "Gassin, plus beau village de France"
-      },
-      {
-        "src": "https://picsum.photos/seed/citadelle-saint-tropez/600/400",
-        "alt": "La Citadelle de Saint-Tropez"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire Grasse et la presqu'île de Saint-Tropez",
     "items": [
       {
@@ -290,21 +262,21 @@
     "suggestions": [
       {
         "href": "menton-eze-monaco.html",
-        "img": "https://picsum.photos/seed/itin-menton/600/338",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
         "alt": "Menton, Èze &amp; Monaco : la route des classiques",
         "badge": "6 étapes",
         "titre": "Menton, Èze &amp; Monaco : la route des classiques"
       },
       {
         "href": "nice-peillon-peille.html",
-        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
       },
       {
         "href": "villages-perches.html",
-        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
@@ -332,20 +304,6 @@
       }
     ],
     "intro": "Une matinée au large de Cannes, un après-midi sur les roches rouges du massif volcanique le plus photogénique de la Riviera.",
-    "strip": [
-      {
-        "src": "https://picsum.photos/seed/iles-de-lerins/600/400",
-        "alt": "Les îles de Lérins"
-      },
-      {
-        "src": "https://picsum.photos/seed/pic-cap-roux-esterel/600/400",
-        "alt": "Le Pic du Cap Roux"
-      },
-      {
-        "src": "https://picsum.photos/seed/calanques-esterel-theoule/600/400",
-        "alt": "Les calanques de l'Estérel"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire Îles de Lérins &amp; Estérel sauvage",
     "items": [
       {
@@ -427,21 +385,21 @@
     "suggestions": [
       {
         "href": "grasse-saint-tropez.html",
-        "img": "https://picsum.photos/seed/itin-grasse/600/338",
+        "img": "assets/images/lieux/vieille-ville-grasse/thumb.jpg",
         "alt": "Grasse et la presqu'île de Saint-Tropez",
         "badge": "3 étapes",
         "titre": "Grasse et la presqu'île de Saint-Tropez"
       },
       {
         "href": "antibes-biot-juan.html",
-        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
       },
       {
         "href": "villages-perches.html",
-        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
@@ -469,20 +427,6 @@
       }
     ],
     "intro": "Deux jours de l'est vers l'ouest : Grande Corniche et villages perchés le premier jour, nuit à Monaco, Cap Ferrat et Villefranche au rythme du deuxième.",
-    "strip": [
-      {
-        "src": "../assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
-        "alt": "Le village de Roquebrune-Cap-Martin"
-      },
-      {
-        "src": "../assets/images/lieux/eze-village/thumb.jpg",
-        "alt": "Èze, le village perché"
-      },
-      {
-        "src": "../assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
-        "alt": "Le Trophée d'Auguste"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire Menton, Èze &amp; Monaco",
     "items": [
       {
@@ -677,21 +621,21 @@
     "suggestions": [
       {
         "href": "nice-peillon-peille.html",
-        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
       },
       {
         "href": "villages-perches.html",
-        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
         "href": "antibes-biot-juan.html",
-        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
@@ -719,20 +663,6 @@
       }
     ],
     "intro": "Le meilleur du Vieux Nice le matin, deux villages suspendus l'après-midi — sans passer la journée sur la route.",
-    "strip": [
-      {
-        "src": "https://picsum.photos/seed/cours-saleya-vieux-nice/600/400",
-        "alt": "Le Cours Saleya et les ruelles du Vieux Nice"
-      },
-      {
-        "src": "https://picsum.photos/seed/colline-du-chateau-nice/600/400",
-        "alt": "La Colline du Château"
-      },
-      {
-        "src": "https://picsum.photos/seed/peillon-village/600/400",
-        "alt": "Peillon, village suspendu"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire Nice, Peillon &amp; Peille",
     "items": [
       {
@@ -841,21 +771,21 @@
     "suggestions": [
       {
         "href": "menton-eze-monaco.html",
-        "img": "https://picsum.photos/seed/itin-menton/600/338",
+        "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
         "alt": "Menton, Èze &amp; Monaco : la route des classiques",
         "badge": "6 étapes",
         "titre": "Menton, Èze &amp; Monaco : la route des classiques"
       },
       {
         "href": "villages-perches.html",
-        "img": "https://picsum.photos/seed/itin-villages/600/338",
+        "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
       },
       {
         "href": "antibes-biot-juan.html",
-        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
@@ -883,20 +813,6 @@
       }
     ],
     "intro": "Saint-Paul-de-Vence, Tourrettes, les gorges du Loup et Gourdon au coucher du soleil — le meilleur de l'arrière-pays en une journée.",
-    "strip": [
-      {
-        "src": "https://picsum.photos/seed/saint-paul-de-vence/600/400",
-        "alt": "Saint-Paul-de-Vence"
-      },
-      {
-        "src": "https://picsum.photos/seed/tourrettes-sur-loup/600/400",
-        "alt": "Tourrettes-sur-Loup, la cité des violettes"
-      },
-      {
-        "src": "https://picsum.photos/seed/gourdon-village/600/400",
-        "alt": "Gourdon, le nid d'aigle"
-      }
-    ],
     "mapLabel": "Carte de l'itinéraire La route des villages perchés",
     "items": [
       {
@@ -1046,21 +962,21 @@
     "suggestions": [
       {
         "href": "antibes-biot-juan.html",
-        "img": "https://picsum.photos/seed/itin-antibes/600/338",
+        "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
       },
       {
         "href": "lerins-esterel.html",
-        "img": "https://picsum.photos/seed/itin-lerins/600/338",
+        "img": "assets/images/lieux/iles-de-lerins/thumb.jpg",
         "alt": "Îles de Lérins &amp; Estérel sauvage",
         "badge": "3 étapes",
         "titre": "Îles de Lérins &amp; Estérel sauvage"
       },
       {
         "href": "nice-peillon-peille.html",
-        "img": "https://picsum.photos/seed/itin-nice/600/338",
+        "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
