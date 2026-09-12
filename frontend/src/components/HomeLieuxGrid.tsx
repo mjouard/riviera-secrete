@@ -9,7 +9,7 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
-      className="card-reveal group block rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
+      className="card-reveal group block rounded-xl overflow-hidden flex-shrink-0 snap-start w-[46%] sm:w-auto transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
       <div className="aspect-[4/3] overflow-hidden">
@@ -106,7 +106,10 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           Aucun lieu pour ce filtre.
         </p>
       ) : (
-        <div ref={gridRef} className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div
+          ref={gridRef}
+          className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-6 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
           {filtered.map((lieu) => (
             <LieuCard key={lieu.id} lieu={lieu} />
           ))}
