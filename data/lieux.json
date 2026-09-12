@@ -1685,6 +1685,28 @@
         "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-3.jpg",
         "alt": "Cascade de Courmes",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-gorges-du-loup-plateau-calern",
+        "nom": "VTT gorges du Loup et plateau de Calern",
+        "badge": "gratuit",
+        "duree": "3h à 4h",
+        "prix": "Accès libre",
+        "url": "https://www.utagawavtt.com/randonnee-vtt-gps/Les-gorges-du-Loup-et-le-plateau-de-Calern-3847",
+        "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-4.jpg",
+        "alt": "Le canyon du Loup vu depuis un des points d'arrêt de la route, terrain du circuit VTT",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-le-saut-du-loup",
+        "nom": "Déjeuner au restaurant du Saut du Loup",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20–25 € / pers.",
+        "url": "https://du-saut-du-loup.eatbu.com/?lang=fr",
+        "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-5.jpg",
+        "alt": "La cascade du Saut du Loup, juste à côté du restaurant du même nom",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
