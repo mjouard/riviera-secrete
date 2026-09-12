@@ -4126,5 +4126,120 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/vieux-vallauris-ceramique/500/375"
+  },
+  {
+    "slug": "vieux-village-grimaud",
+    "villeSlug": "grimaud",
+    "nom": "Le Vieux Village de Grimaud",
+    "commune": "Grimaud",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.274,
+    "lng": 6.525,
+    "description": "Un village médiéval accroché au massif des Maures, sur l'autre rive du golfe par rapport à Saint-Tropez, avec un château en ruine et un moulin à vent qui dominent toute la baie.",
+    "ogImage": "https://picsum.photos/seed/vieux-village-grimaud/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieux-village-grimaud/1200/800",
+    "heroAlt": "Ruelles médiévales et ruines du château dominant le vieux village de Grimaud",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Printemps et automne"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile, pentu par endroits"
+      }
+    ],
+    "description1": "Un village médiéval accroché au massif des Maures, sur l'autre rive du golfe par rapport à Saint-Tropez, avec un château en ruine et un moulin à vent qui dominent toute la baie.",
+    "description2": "Alors que tous les regards se tournent vers la presqu'île et ses villages perchés (Gassin, Ramatuelle), Grimaud occupe l'autre versant du golfe, adossé au massif des Maures — et reste largement ignoré des visiteurs qui filent directement à Saint-Tropez ou à Port Grimaud en contrebas. Ruelles pavées, passages voûtés, volets pastel et bougainvillées mènent en quelques minutes des ruines du château du XIe siècle jusqu'au moulin Saint-Roch, panorama gratuit sur tout le golfe.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Se garer aux parkings en périphérie du village (rues piétonnes à l'intérieur) — à ne pas confondre avec Port Grimaud, sur le littoral, à 15 minutes à pied ou en voiture."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le moulin Saint-Roch, du XVIe siècle, s'appelait à l'origine \"moulin de la Gardiole\" avant de prendre le nom de la chapelle voisine — sa vue s'étend jusqu'au château et à tout le golfe de Saint-Tropez."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Gassin ou la citadelle de Saint-Tropez, de l'autre côté du golfe."
+      }
+    ],
+    "activites": [
+      {
+        "id": "ruines-chateau-grimaud",
+        "nom": "Ruines du Château de Grimaud",
+        "badge": "gratuit",
+        "duree": "1h-1h30",
+        "prix": "Accès libre",
+        "url": "https://www.grimaud-provence.com/decouvrez/grimaud-et-son-patrimoine-provencal/un-patrimoine-riche-et-diversifie/le-chateau/",
+        "image": "https://picsum.photos/seed/chateau-grimaud/200/200",
+        "alt": "Ruines médiévales du château de Grimaud dominant le golfe de Saint-Tropez",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "moulin-saint-roch-grimaud",
+        "nom": "Moulin Saint-Roch et panorama sur le golfe",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://www.grimaud-provence.com/decouvrez/le-charme-dun-village/le-patrimoine-et-les-monuments/le-moulin-saint-roch/",
+        "image": "https://picsum.photos/seed/moulin-saint-roch/200/200",
+        "alt": "Moulin Saint-Roch du XVIe siècle surplombant le golfe de Saint-Tropez",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balade-ruelles-grimaud",
+        "nom": "Balade dans les ruelles médiévales",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre",
+        "url": "https://www.grimaud-provence.com/decouvrez/le-charme-dun-village/",
+        "image": "https://picsum.photos/seed/ruelles-grimaud/200/200",
+        "alt": "Ruelle pavée aux volets pastel et bougainvillées dans le vieux Grimaud",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "diner-les-santons-grimaud",
+        "nom": "Dîner gastronomique aux Santons",
+        "badge": "payant",
+        "duree": "2h",
+        "prix": "65-120 € / pers.",
+        "url": "https://restaurant-les-santons.fr/",
+        "image": "https://picsum.photos/seed/les-santons-grimaud/200/200",
+        "alt": "Salle gastronomique du restaurant Les Santons au cœur du village de Grimaud",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "gassin-plus-beau-village.html",
+        "img": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg",
+        "alt": "Village perché de Gassin surplombant le golfe de Saint-Tropez",
+        "stamp": "43.23°N<br>6.58°E",
+        "region": "Gassin",
+        "titre": "Village de Gassin",
+        "blurb": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement…"
+      },
+      {
+        "href": "citadelle-saint-tropez.html",
+        "img": "assets/images/lieux/citadelle-saint-tropez/thumb.jpg",
+        "alt": "Citadelle de Saint-Tropez dominant le golfe",
+        "stamp": "43.27°N<br>6.64°E",
+        "region": "Saint-Tropez",
+        "titre": "Citadelle de Saint-Tropez",
+        "blurb": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart comp…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/vieux-village-grimaud/500/375"
   }
 ]

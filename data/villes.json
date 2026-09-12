@@ -292,5 +292,18 @@
     "lieux": [
       "vieux-vallauris-ceramique"
     ]
+  },
+  {
+    "slug": "grimaud",
+    "nom": "Grimaud",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.274,
+    "lng": 6.525,
+    "description": "Un village médiéval accroché au massif des Maures, sur l'autre rive du golfe par rapport à Saint-Tropez, avec un château en ruine et un moulin à vent qui dominent toute la baie.",
+    "thumbImage": "https://picsum.photos/seed/grimaud/500/375",
+    "lieux": [
+      "vieux-village-grimaud"
+    ]
   }
 ]
