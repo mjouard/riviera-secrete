@@ -2,36 +2,21 @@
 
 ## Priorité contenu
 
-- [~] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
+- [x] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
       intimes ou bon-plans (pas les incontournables déjà sur tous les guides). Règle de
       cohérence à respecter : tout lieu portant un badge doit avoir au moins une activité en
       rapport direct avec ce badge (ex. badge `randonnee` → au moins un itinéraire de randonnée
       proposé ; badge `plage` → au moins une activité plage/baignade ; badge `plongee` → au
-      moins un spot ou sortie plongée/snorkeling, etc.). À faire via `/add-activities` qui
-      vérifie déjà qu'une activité n'est pas elle-même un lieu existant (mais dont le
-      placeholder image `picsum.photos` est **obsolète** — voir la consigne "vraie photo
-      Wikimedia" ci-dessous, pas encore corrigée dans le fichier de la commande lui-même).
-      **En cours, démarré le 2026-09-12** — processus établi : un lieu à la fois, un panel
-      d'activités assez complet (pas juste le minimum pour combler les badges), chaque
-      nouvelle activité avec une vraie photo Wikimedia Commons sourcée/vérifiée/créditée sur
-      `frontend/src/app/credits/page.tsx`, et une synchronisation manuelle vers la DB prod
-      Railway après confirmation (l'édition de `data/lieux.json` seule ne suffit pas, voir
-      "Data model" dans `CLAUDE.md`). **Piège trouvé le 2026-09-12** : `git push` seul ne
-      déploie jamais le frontend (git integration Vercel désactivée, voir
-      `feedback_vercel_deploy.md`) — après chaque lieu, penser à `cd frontend && npx vercel
-      --prod --yes` en plus du commit/push, sinon les nouvelles photos restent en 404 en prod
-      (repéré une fois par l'utilisateur avant d'être corrigé et intégré au processus).
-      12 lieux traités et synchronisés en prod jusqu'ici (28 activités ajoutées) :
-      `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`, `eze-village`,
-      `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`, `gourdon-village`,
-      `roquebrune-cap-martin-village`, `colline-du-chateau-nice`, `peille-village`,
-      `gorges-du-loup-cascade-courmes`. Restent ~13 lieux avec des badges non couverts
-      (détecté par un script heuristique de correspondance mot-clé, à re-lancer pour une liste
-      à jour) : `jardin-exotique-monaco`, `cours-saleya-vieux-nice`, `pont-du-loup`,
-      `saint-paul-de-vence`, `biot-village-verrier`, `haut-de-cagnes`, `sentier-cap-antibes`,
-      `pinede-gould-juan-les-pins`, `calanques-esterel-theoule`, `vieille-ville-grasse`,
-      `citadelle-saint-tropez`, `gassin-plus-beau-village`. Continuer lieu par lieu avec le
-      même processus.
+      moins un spot ou sortie plongée/snorkeling, etc.). Fait via `/add-activities` (dont le
+      placeholder image `picsum.photos` reste **obsolète** dans le fichier de la commande
+      lui-même — vraies photos Wikimedia utilisées à la place tout du long, voir ci-dessous).
+      **Terminé le 2026-09-12** — les 23 lieux qui avaient un gap sont tous traités (49
+      activités ajoutées en tout sur ce chantier), et un script heuristique de correspondance
+      mot-clé confirme 0 gap restant sur les 27 lieux. Détail complet (process, pièges,
+      lieu-par-lieu) dans `.claude/memory/project_activites_par_badge.md`. Piège trouvé et
+      corrigé en cours de route : `git push` seul ne déploie jamais le frontend (git
+      integration Vercel désactivée, voir `feedback_vercel_deploy.md`) — un
+      `cd frontend && npx vercel --prod --yes` est nécessaire après chaque sync DB.
 
 - [x] Finir les vraies images — les 27 lieux ont une vraie photo (terminé le 28/08 ; les 21
       sourcées sur Wikimedia Commons cette session-là sont créditées sur `credits.html`,

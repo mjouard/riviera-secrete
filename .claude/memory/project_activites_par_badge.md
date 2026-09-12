@@ -1,10 +1,18 @@
 ---
 name: project-activites-par-badge
-description: "Chantier en cours : enrichir data/lieux.json avec des activités par badge manquant, lieu par lieu, avec vraies photos Wikimedia — état d'avancement et prochain lieu"
+description: "Chantier TERMINÉ (2026-09-12) : enrichi data/lieux.json avec des activités par badge manquant sur les 27 lieux, lieu par lieu, avec vraies photos Wikimedia — process et pièges à réutiliser pour un chantier similaire"
 metadata:
   type: project
   originSessionId: 24767a28-abd9-41f0-9385-80f67dd8db6d
 ---
+
+## Statut : terminé le 2026-09-12
+
+Les 23 lieux qui avaient un gap ont tous été traités (49 activités ajoutées en tout). Un
+script heuristique de correspondance mot-clé (voir plus bas) confirme **0 gap restant sur
+les 27 lieux**. Ce fichier reste utile comme référence de process pour un futur chantier
+similaire (ex. si de nouveaux lieux/badges sont ajoutés plus tard), pas comme suivi
+d'avancement actif.
 
 ## Le chantier
 
@@ -28,17 +36,34 @@ moins une activité en rapport direct avec ce badge dans `lieu.activites[]`.
 - Après la sync DB, redéployer aussi le frontend (`cd frontend && npx vercel --prod --yes`)
   — un `git push` seul ne suffit pas, voir le piège ci-dessous.
 
-## État d'avancement (voir `ROADMAP.md` pour la liste à jour)
+## Lieux traités (23, dans l'ordre) — tous synchronisés en prod
 
-12 lieux traités et synchronisés en prod au 2026-09-12 (28 activités ajoutées) :
 `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`, `eze-village`,
 `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`, `gourdon-village`,
 `roquebrune-cap-martin-village`, `colline-du-chateau-nice`, `peille-village`,
-`gorges-du-loup-cascade-courmes`.
+`gorges-du-loup-cascade-courmes`, `sentier-cap-antibes`, `calanques-esterel-theoule`,
+`biot-village-verrier`, `citadelle-saint-tropez`, `jardin-exotique-monaco`,
+`cours-saleya-vieux-nice`, `pont-du-loup`, `saint-paul-de-vence`, `haut-de-cagnes`,
+`pinede-gould-juan-les-pins`, `vieille-ville-grasse`, `gassin-plus-beau-village`.
 
-Reste ~13 lieux avec des badges non couverts (liste précise dans `ROADMAP.md`, détectée via
-un script heuristique de correspondance mot-clé sur `activites[].nom`/`alt` — à re-lancer
-pour confirmer la liste avant de continuer, elle peut avoir légèrement bougé).
+(23 lieux listés car `gassin-plus-beau-village` a été le dernier — le compte total de lieux
+*touchés* est 23, mais certains avaient déjà un panel partiel ; voir les commits Git
+individuels, un par lieu, pour le détail exact de ce qui a été ajouté à chacun.)
+
+## Script heuristique de vérification (à réutiliser si besoin)
+
+Un script Python inline (badges vs mots-clés dans `activites[].nom`/`alt`, normalisation
+accents) a servi tout du long à détecter les gaps et à confirmer la fin du chantier — il a
+deux angles morts connus, trouvés en pratique :
+- **Faux positif** : une activité peut contenir un mot-clé sans vraiment couvrir le badge
+  (ex. "Montée par l'escalier Rossetti" ne contient aucun mot-clé "randonnee" bien que ce
+  soit une vraie activité de marche — repéré sur `colline-du-chateau-nice`, resté tel quel
+  car déjà réellement couvert).
+- **Faux négatif inverse** : un mot-clé peut matcher une activité qui ne couvre PAS
+  vraiment le badge (ex. "dégustation" matchait la liste de mots-clés `restaurant`, alors
+  qu'une dégustation de vin sans repas n'est pas un restaurant — repéré sur
+  `gassin-plus-beau-village`, corrigé en ajoutant une vraie activité restaurant en plus).
+Toujours relire le résultat du script avec un œil critique, pas seulement compter les 0.
 
 ## Pièges trouvés pendant ce chantier
 
