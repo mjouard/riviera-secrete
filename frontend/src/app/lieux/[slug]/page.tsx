@@ -6,6 +6,7 @@ import { imgUrl, buildMapLinks } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 import FavoriteButton from "@/components/FavoriteButton";
+import ShareButton from "@/components/ShareButton";
 
 export const revalidate = 3600;
 
@@ -116,6 +117,7 @@ export default async function LieuPage({
             </a>
           ))}
           <FavoriteButton slug={lieu.slug} />
+          <ShareButton title={lieu.nom} />
         </div>
       </div>
 
