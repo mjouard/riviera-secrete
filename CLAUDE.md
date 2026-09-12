@@ -97,6 +97,18 @@ for the full entity/endpoint reference):
   `lieuBySlug` map (built from the already-fetched full lieux list) and pulls the real
   facts from there; the itinerary map's route points (lat/lng per stop) are likewise
   computed from the referenced lieu's coordinates at render time, never stored separately.
+  An item with `"type": "sleep"` (the "Dormir à…" overnight marker on multi-day itinéraires —
+  only `menton-eze-monaco` has one today, "Dormir à Beaulieu-sur-Mer") carries its own
+  `dormirA` display string. **Found broken in prod 2026-09-12**: `ItineraireItem` (backend)
+  had no `DormirA` property, so `System.Text.Json` silently dropped the field at seed time
+  (unmapped JSON key, no error) — it never reached the DB. The frontend type didn't even
+  declare `"sleep"` as a possible `type`, and the render loop had no branch for it, so it
+  fell through to the generic stop card and rendered `item.nom` (always empty on a sleep
+  item) as the heading — a blank-titled card with no indication it's an overnight
+  recommendation. Fixed in code (both sides now handle `dormirA`/`"sleep"` properly) — but
+  the already-seeded prod row still has the old, field-less JSON (seeding is a no-op past the
+  first run, so redeploying alone won't fix it); needs either a targeted reseed of the
+  `Itineraires` table or a direct one-off DB update to backfill that one row.
 
 **These three JSON files are consumed two ways today**: `backend/RivieraSecrete.Infrastructure/Data/DatabaseSeeder.cs`
 reads them to seed PostgreSQL (idempotent — checks `db.Villes.Any()` first, so re-running
