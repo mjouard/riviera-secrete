@@ -98,6 +98,17 @@
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-5.jpg",
         "alt": "Entrée de la Rue Obscure, où se niche le restaurant L'Aparté",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "plage-des-marinieres",
+        "nom": "Baignade à la plage des Marinières",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/structure/plage-des-marinieres/",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-6.jpg",
+        "alt": "Plage des Marinières à Villefranche-sur-Mer, vue sur la baie et le Cap Ferrat",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
