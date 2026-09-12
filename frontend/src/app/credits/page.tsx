@@ -37,6 +37,7 @@ const CREDITS: Credit[] = [
   { titre: "La vieille ville de Grasse", auteur: "Lylambda", fileUrl: "https://commons.wikimedia.org/wiki/File:Vue_de_Grasse.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "La Citadelle de Saint-Tropez", auteur: "dronepicr", fileUrl: "https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Citadel_of_Saint-Tropez,_France_(52723266272).jpg", licenceLabel: "CC BY 2.0", licenceUrl: "https://creativecommons.org/licenses/by/2.0/deed.fr" },
   { titre: "Gassin, plus beau village de France", auteur: "l'Office de tourisme de Gassin", fileUrl: "https://commons.wikimedia.org/wiki/File:Panorama_au-dessus_de_la_table_d%27orientation_de_Gassin.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Entrée de la Rue Obscure (restaurant L'Aparté)", auteur: "Cguerrieri", fileUrl: "https://commons.wikimedia.org/wiki/File:L%27entr%C3%A9e_de_la_rue_Obscure.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

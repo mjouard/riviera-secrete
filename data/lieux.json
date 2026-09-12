@@ -87,6 +87,17 @@
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-4.jpg",
         "alt": "Plongée snorkeling",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "restaurant-laparte",
+        "nom": "Dîner au restaurant L'Aparté",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "29–50 € / pers.",
+        "url": "https://www.laparte-villefranche-sur-mer.com/",
+        "image": "../assets/images/lieux/rue-obscure-villefranche/act-5.jpg",
+        "alt": "Entrée de la Rue Obscure, où se niche le restaurant L'Aparté",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
