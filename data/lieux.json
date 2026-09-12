@@ -3458,6 +3458,28 @@
         "image": "../assets/images/lieux/gassin-plus-beau-village/act-3.jpg",
         "alt": "Visite du village classé",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-sentier-de-la-mer",
+        "nom": "VTT sur la piste du sentier de la Mer",
+        "badge": "gratuit",
+        "duree": "2h à 3h",
+        "prix": "Accès libre",
+        "url": "https://www.golfe-saint-tropez-information.com/en/leisure-activities/sport/gassin/piste-du-sentier-de-la-mer-a-vtt-5594678",
+        "image": "../assets/images/lieux/gassin-plus-beau-village/act-4.jpg",
+        "alt": "Chemin forestier balisé autour de Gassin, terrain des circuits VTT vers la mer",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-au-vieux-gassin",
+        "nom": "Déjeuner à Au Vieux Gassin",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "30–40 € / pers.",
+        "url": "https://auvieuxgassin.com/",
+        "image": "../assets/images/lieux/gassin-plus-beau-village/act-5.jpg",
+        "alt": "Ruelle fleurie du village de Gassin",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

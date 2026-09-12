@@ -79,6 +79,8 @@ const CREDITS: Credit[] = [
   { titre: "Place du Château, Haut-de-Cagnes (restaurant Le Village)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Hauts_de_cagnes_pl_du_chateau.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Jardin Pauline, Juan-les-Pins (restaurant Le Bistrot)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Jardin_pauline_1.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
   { titre: "Place de la Foux, Grasse (restaurant Le Petit Caboulot)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Place_de_la_foux_grasse_04.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Sentiers forestiers de Gassin (VTT)", auteur: "Office de tourisme de Gassin", fileUrl: "https://commons.wikimedia.org/wiki/File:Panneaux_d%27orientation_sur_les_boucles_de_l%E2%80%99Arlatane_%C3%A0_Gassin.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "L'Androuno, Gassin (restaurant Au Vieux Gassin)", auteur: "Office de tourisme de Gassin", fileUrl: "https://commons.wikimedia.org/wiki/File:L%27Androuno_%C3%A0_Gassin,_dite_%22la_plus_petite_rue_du_monde%22.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
