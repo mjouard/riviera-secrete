@@ -608,6 +608,28 @@
         "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-3.jpg",
         "alt": "Village médiéval de La Turbie",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "randonnee-mont-bataille",
+        "nom": "Randonnée du Mont Bataille",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://provence-alpes-cotedazur.com/en/things-to-do/routes-and-walks/hiking-on-the-mont-bataille-at-la-turbie-la-turbie-en-4345845/",
+        "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-4.jpg",
+        "alt": "Le Trophée d'Auguste vu depuis le Mont Bataille, point de vue de la randonnée en boucle",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-les-santons",
+        "nom": "Déjeuner au restaurant Les Santons",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "20–35 € / pers.",
+        "url": "https://www.les-santons.fr/",
+        "image": "../assets/images/lieux/trophee-auguste-la-turbie/act-5.jpg",
+        "alt": "Rue du village de La Turbie, avec le Trophée d'Auguste visible à l'arrière-plan",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

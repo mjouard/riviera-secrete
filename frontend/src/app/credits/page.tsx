@@ -46,6 +46,8 @@ const CREDITS: Credit[] = [
   { titre: "Port de Beaulieu-sur-Mer (restaurant African Queen)", auteur: "Florian Pépellin", fileUrl: "https://commons.wikimedia.org/wiki/File:Port_de_Beaulieu-sur-Mer.JPG", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Èze vue depuis la Grande Corniche (circuits VTT)", auteur: "Jimi magic", fileUrl: "https://commons.wikimedia.org/wiki/File:Eze_viewed_from_Grand_Corniche.JPG", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Ruelle d'Èze (restaurant Taverne d'Antan)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:EZE_ruelle_2.JPG", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Trophée d'Auguste vu du Mont Bataille (randonnée)", auteur: "Lourem", fileUrl: "https://commons.wikimedia.org/wiki/File:Tour_d%27Auguste_%C3%A0_la_Turbie_vue_du_mont_Bataille.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Rue de La Turbie (restaurant Les Santons)", auteur: "avu-edm", fileUrl: "https://commons.wikimedia.org/wiki/File:La_Turbie_-_panoramio_(4).jpg", licenceLabel: "CC BY 3.0", licenceUrl: "https://creativecommons.org/licenses/by/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
