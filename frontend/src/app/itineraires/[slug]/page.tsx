@@ -236,27 +236,57 @@ export default async function ItinerairePage({
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-6">À réserver</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            {itin.booking.map((b, i) => (
-              <div
-                key={i}
-                className="rounded-xl p-5 flex flex-col gap-3"
-                style={{ background: "var(--surface)" }}
-              >
-                <div>
-                  <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>
-                    {b.lieuLabel}
-                  </p>
-                  <p className="font-semibold">{b.nomLabel}</p>
-                </div>
-                <Link
-                  href={`/lieux/${b.lieuSlug}`}
-                  className="text-sm self-start"
-                  style={{ color: "var(--azure)" }}
+            {itin.booking.map((b, i) => {
+              const activite = lieuBySlug
+                .get(b.lieuSlug)
+                ?.activites.find((a) => a.activiteId === b.activiteId);
+
+              return (
+                <div
+                  key={i}
+                  className="rounded-xl overflow-hidden flex flex-col"
+                  style={{ background: "var(--surface)" }}
                 >
-                  {b.linkText}
-                </Link>
-              </div>
-            ))}
+                  {activite && (
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={imgUrl(activite.image)}
+                        alt={activite.alt}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="p-5 flex flex-col gap-1 flex-1">
+                    <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                      {b.lieuLabel}
+                    </p>
+                    <p className="font-semibold mb-1">{b.nomLabel}</p>
+                    {activite && (
+                      <div
+                        className="flex flex-wrap gap-x-3 gap-y-0.5 text-sm mb-3"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>⏱ {activite.duree}</span>
+                        <span>💶 {activite.prix}</span>
+                        {b.extraSpans.map((s, j) => (
+                          <span key={j}>{s}</span>
+                        ))}
+                      </div>
+                    )}
+                    <a
+                      href={activite?.url ?? `/lieux/${b.lieuSlug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm mt-auto self-start"
+                      style={{ color: "var(--azure)" }}
+                    >
+                      {b.linkText}
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
