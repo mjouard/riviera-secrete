@@ -3,10 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
-
-function goToConnexion() {
-  window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
-}
+import { redirectToConnexion } from "@/lib/utils";
 
 export default function FavoriteButton({ slug }: { slug: string }) {
   const { data: session, status } = useSession();
@@ -23,12 +20,12 @@ export default function FavoriteButton({ slug }: { slug: string }) {
 
   async function toggle() {
     if (!session) {
-      goToConnexion();
+      redirectToConnexion();
       return;
     }
     if (!session.apiToken) {
       // Session OK mais échange backend raté — forcer un nouveau login
-      goToConnexion();
+      redirectToConnexion();
       return;
     }
     setLoading(true);

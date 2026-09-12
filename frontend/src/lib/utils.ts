@@ -37,6 +37,11 @@ export function buildMapLinks(lat: number, lng: number, nom: string) {
   ];
 }
 
+/** Redirige vers /connexion en conservant l'URL courante comme callbackUrl. Client uniquement. */
+export function redirectToConnexion(): void {
+  window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
+}
+
 export function buildGoogleMapsRouteUrl(stops: Array<{ lat: number; lng: number }>): string {
   if (stops.length === 0) return "#";
   const coords = stops.map((s) => `${s.lat},${s.lng}`);

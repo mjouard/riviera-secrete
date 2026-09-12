@@ -6,30 +6,23 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { DUREE_META } from "@/lib/itineraire-logic";
 import { authFetch } from "@/lib/api";
-
-interface DbItineraire {
-  id: string;
-  nom: string;
-  dureeKey: string;
-  days: string[][];
-  createdAt: string;
-}
+import type { UserItineraire } from "@/lib/types";
 
 export default function MesItinerairesPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [items, setItems] = useState<DbItineraire[]>([]);
+  const [items, setItems] = useState<UserItineraire[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const loadItems = useCallback(async () => {
     if (session?.apiToken) {
       const res = await authFetch("/api/my-itineraires", session.apiToken).then((r) =>
-        r.ok ? (r.json() as Promise<DbItineraire[]>) : []
+        r.ok ? (r.json() as Promise<UserItineraire[]>) : []
       );
       setItems(
-        (res as DbItineraire[]).sort(
+        (res as UserItineraire[]).sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
       );

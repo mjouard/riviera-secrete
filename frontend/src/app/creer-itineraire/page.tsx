@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, buildMapLinks } from "@/lib/utils";
+import { imgUrl, buildMapLinks, redirectToConnexion } from "@/lib/utils";
 import {
   DUREE_META, BADGE_DEFS, REGION_ORDER,
   type DureeKey,
@@ -205,7 +205,7 @@ export default function CreerItinerairePage() {
     const nom = saveInput.trim();
     if (!nom) return;
     if (!session?.apiToken) {
-      window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
+      redirectToConnexion();
       return;
     }
     setSaving(true);

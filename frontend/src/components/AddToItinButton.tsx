@@ -5,20 +5,14 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
-
-interface DbItineraire {
-  id: string;
-  nom: string;
-  dureeKey: string;
-  days: string[][];
-  createdAt: string;
-}
+import type { UserItineraire } from "@/lib/types";
+import { redirectToConnexion } from "@/lib/utils";
 
 export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
   const { data: session } = useSession();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState<DbItineraire[] | null>(null);
+  const [items, setItems] = useState<UserItineraire[] | null>(null);
   const [addedId, setAddedId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,7 +25,7 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
 
   async function toggle() {
     if (!session?.apiToken) {
-      window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
+      redirectToConnexion();
       return;
     }
     if (!open) {
@@ -42,7 +36,7 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
     setOpen((v) => !v);
   }
 
-  async function addTo(itin: DbItineraire) {
+  async function addTo(itin: UserItineraire) {
     if (!session?.apiToken) return;
     const days = itin.days.length > 0 ? itin.days.map((d) => [...d]) : [[]];
     days[days.length - 1].push(lieuSlug);

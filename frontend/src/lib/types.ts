@@ -119,3 +119,12 @@ export interface Itineraire {
   booking: BookingRef[];
   suggestions: SuggestCard[];
 }
+
+/** Itinéraire custom sauvegardé par un utilisateur (table UserItineraire côté backend) — à ne pas confondre avec `Itineraire`, l'itinéraire éditorial. */
+export interface UserItineraire {
+  id: string;
+  nom: string;
+  dureeKey: string;
+  days: string[][];
+  createdAt: string;
+}
