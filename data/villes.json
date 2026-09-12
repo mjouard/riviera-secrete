@@ -85,7 +85,7 @@
     "lng": 7.2795,
     "description": "La capitale de la Côte d'Azur, entre le Vieux-Nice baroque, la Colline du Château et la baie des Anges.",
     "thumbImage": "assets/images/lieux/colline-du-chateau-nice/thumb.jpg",
-    "lieux": ["colline-du-chateau-nice", "cours-saleya-vieux-nice"]
+    "lieux": ["colline-du-chateau-nice", "cours-saleya-vieux-nice", "parc-mont-boron"]
   },
   {
     "slug": "peillon",

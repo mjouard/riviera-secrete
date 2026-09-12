@@ -3758,5 +3758,122 @@
       "restaurant"
     ],
     "thumbImage": "https://picsum.photos/seed/falicon-village/500/375"
+  },
+  {
+    "slug": "parc-mont-boron",
+    "villeSlug": "nice",
+    "nom": "Le Parc du Mont Boron",
+    "commune": "Nice",
+    "regionSlug": "nice",
+    "regionLabel": "Nice et ses environs immédiats",
+    "lat": 43.7013,
+    "lng": 7.3002,
+    "description": "Une colline boisée de 57 hectares entre le port de Nice et Villefranche, avec 11 km de sentiers, un fort du XVIe siècle et une crique de rochers en contrebas — méconnue des visiteurs qui restent sur la Promenade des Anglais.",
+    "ogImage": "https://picsum.photos/seed/parc-mont-boron/1200/800",
+    "heroImage": "https://picsum.photos/seed/parc-mont-boron/1200/800",
+    "heroAlt": "Sentier boisé du Parc du Mont Boron surplombant la baie de Villefranche",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Modéré"
+      }
+    ],
+    "description1": "Une colline boisée de 57 hectares entre le port de Nice et Villefranche, avec 11 km de sentiers, un fort du XVIe siècle et une crique de rochers en contrebas — méconnue des visiteurs qui restent sur la Promenade des Anglais.",
+    "description2": "Coincé entre le port de Nice et la baie de Villefranche, le Mont Boron reste l'un des angles morts du tourisme niçois : à quinze minutes à pied du Vieux-Port, ses pins d'Alep et ses oliviers cachent un fort du XVIe siècle, onze kilomètres de sentiers et un panorama à 360° du cap Ferrat à l'Estérel — sans qu'aucun car de tourisme n'y monte jamais. En contrebas, la crique sauvage de Coco Beach complète la balade pour qui veut prolonger par une baignade.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Entrée principale boulevard du Mont Boron, ou à pied depuis le port de Nice via le boulevard Franck Pilatte (15-20 min)."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le Fort du Mont Alban, construit en 1560 pour surveiller la frontière avec le Comté de Nice, garde encore ses embrasures — et sa vue imprenable, gratuite, quand celle de la Colline du Château se remplit de monde en été."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Villefranche-sur-Mer et la Rue Obscure, juste de l'autre côté de la colline."
+      }
+    ],
+    "activites": [
+      {
+        "id": "sentier-crete-mont-boron",
+        "nom": "Sentier des Crêtes du Mont Boron",
+        "badge": "gratuit",
+        "duree": "1h30-2h",
+        "prix": "Accès libre",
+        "url": "https://recreanice.fr/mont-boron-fort-alban-nice-balade",
+        "image": "https://picsum.photos/seed/sentier-mont-boron/200/200",
+        "alt": "Sentier boisé le long des crêtes du Mont Boron",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "fort-mont-alban",
+        "nom": "Visite du Fort du Mont Alban",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://monumentum.fr/monument-historique/pa00080795/nice-fort-du-mont-alban",
+        "image": "https://picsum.photos/seed/fort-mont-alban/200/200",
+        "alt": "Remparts du Fort du Mont Alban surplombant la baie de Villefranche",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "coco-beach-baignade",
+        "nom": "Baignade sauvage à Coco Beach",
+        "badge": "gratuit",
+        "duree": "1h-2h",
+        "prix": "Accès libre",
+        "url": "https://www.plages.tv/detail/plage-de-coco-beach-nice-06000",
+        "image": "https://picsum.photos/seed/coco-beach-nice/200/200",
+        "alt": "Rochers aménagés pour la baignade à Coco Beach, au pied du Mont Boron",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-le-plongeoir",
+        "nom": "Déjeuner au Plongeoir",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "30-70 € / pers.",
+        "url": "https://www.leplongeoir.com/",
+        "image": "https://picsum.photos/seed/le-plongeoir-nice/200/200",
+        "alt": "Terrasse du restaurant Le Plongeoir posé sur les rochers du Cap de Nice",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "rue-obscure-villefranche.html",
+        "img": "assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
+        "alt": "Rue Obscure, rue voûtée médiévale à Villefranche-sur-Mer",
+        "stamp": "43.70°N<br>7.31°E",
+        "region": "Villefranche-sur-Mer",
+        "titre": "La Rue Obscure",
+        "blurb": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-s…"
+      },
+      {
+        "href": "colline-du-chateau-nice.html",
+        "img": "assets/images/lieux/colline-du-chateau-nice/thumb.jpg",
+        "alt": "Vue depuis la Colline du Château sur la baie des Anges à Nice",
+        "stamp": "43.70°N<br>7.28°E",
+        "region": "Nice",
+        "titre": "Colline du Château",
+        "blurb": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disp…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "plage",
+      "plongee",
+      "restaurant"
+    ],
+    "thumbImage": "https://picsum.photos/seed/parc-mont-boron/500/375"
   }
 ]
