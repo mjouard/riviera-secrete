@@ -54,6 +54,8 @@ const CREDITS: Credit[] = [
   { titre: "Crique de l'Île Sainte-Marguerite (baignade)", auteur: "CandiMa", fileUrl: "https://commons.wikimedia.org/wiki/File:Spiaggia_%C3%AEle_Sainte-Marguerite.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Musée subaquatique de Cannes (snorkeling)", auteur: "Jennifer Roording", fileUrl: "https://commons.wikimedia.org/wiki/File:Jason_deCaires_Taylor_Cannes_Underwater_Museum.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Vignoble de l'abbaye de Lérins (restaurant La Tonnelle)", auteur: "Tangopaso", fileUrl: "https://commons.wikimedia.org/wiki/File:Vignoble_de_l%27abbaye_de_L%C3%A9rins.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
+  { titre: "Chemin du Paradis, entre Gourdon et Bar-sur-Loup", auteur: "Gilbert Bochenek", fileUrl: "https://commons.wikimedia.org/wiki/File:Gourdon-Chemin_du_Paradis-PACA-gb.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Restaurant Au Vieux Four, Gourdon", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Gourdon_(Alpes-Maritimes)_09.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

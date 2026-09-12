@@ -1483,6 +1483,28 @@
         "image": "../assets/images/lieux/gourdon-village/act-1.jpg",
         "alt": "Château-musée de Gourdon",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-chemin-du-paradis",
+        "nom": "Randonnée du Chemin du Paradis",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.villagesvalleesdazur-tourisme.fr/soxygener/balades-et-randonnees/a-pied/moyen/le-bar-sur-loup-gourdon-circuit-du-paradis",
+        "image": "../assets/images/lieux/gourdon-village/act-3.jpg",
+        "alt": "Ancien chemin muletier en pierre du Chemin du Paradis, entre Gourdon et Le Bar-sur-Loup",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-au-vieux-four",
+        "nom": "Déjeuner au restaurant Au Vieux Four",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "29–42 € / pers.",
+        "url": "https://provence-alpes-cotedazur.com/en/plan-your-stay/restaurants/all-restaurants/restaurant-au-vieux-four-gourdon-en-2860218/",
+        "image": "../assets/images/lieux/gourdon-village/act-4.jpg",
+        "alt": "Façade du restaurant Au Vieux Four, rue Basse à Gourdon",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
