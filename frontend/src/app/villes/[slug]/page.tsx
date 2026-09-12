@@ -8,6 +8,9 @@ import MapLieuWrapper from "@/components/MapLieuWrapper";
 
 export const revalidate = 3600;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 export async function generateStaticParams() {
   const villes = await api.villes.list();
   return villes.map((v) => ({ slug: v.slug }));
@@ -41,8 +44,28 @@ export default async function VillePage({
   const ville = await api.villes.bySlug(slug).catch(() => null);
   if (!ville) notFound();
 
+  const heroImage = ville.lieux[0]?.heroImage ?? ville.thumbImage;
+  const touristDestinationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    name: ville.nom,
+    description: ville.description,
+    image: `${SITE_URL}${imgUrl(heroImage)}`,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: ville.lat,
+      longitude: ville.lng,
+    },
+    url: `${SITE_URL}/villes/${ville.slug}`,
+  };
+
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristDestinationJsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
