@@ -184,9 +184,19 @@ export default async function ItinerairePage({
                         {item.heure}
                       </span>
                     )}
-                    <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-                      {item.commune}
-                    </span>
+                    {item.lieuSlug && lieuBySlug.get(item.lieuSlug)?.villeSlug ? (
+                      <Link
+                        href={`/villes/${lieuBySlug.get(item.lieuSlug)!.villeSlug}`}
+                        className="text-xs hover:underline"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        {item.commune}
+                      </Link>
+                    ) : (
+                      <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+                        {item.commune}
+                      </span>
+                    )}
                   </div>
                   {item.lieuSlug && (
                     <Link

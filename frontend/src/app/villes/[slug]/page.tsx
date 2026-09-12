@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
+import ItineraireCard from "@/components/ItineraireCard";
 
 export const revalidate = 3600;
 
@@ -40,8 +41,18 @@ export default async function VillePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const ville = await api.villes.bySlug(slug).catch(() => null);
+  const [ville, itineraires, lieux] = await Promise.all([
+    api.villes.bySlug(slug).catch(() => null),
+    api.itineraires.list().catch(() => []),
+    api.lieux.list().catch(() => []),
+  ]);
   if (!ville) notFound();
+
+  const villeLieuSlugs = new Set(ville.lieux.map((l) => l.slug));
+  const itinerairesIci = itineraires.filter((it) =>
+    it.items.some((item) => item.type === "stop" && item.lieuSlug && villeLieuSlugs.has(item.lieuSlug))
+  );
+  const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
 
   const heroImage = ville.lieux[0]?.heroImage ?? ville.thumbImage;
   const touristDestinationJsonLd = {
@@ -128,6 +139,21 @@ export default async function VillePage({
                   </p>
                 </div>
               </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Itinéraires qui passent par ici */}
+      {itinerairesIci.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-lg font-semibold mb-4">
+            {itinerairesIci.length} itinéraire{itinerairesIci.length > 1 ? "s" : ""} qui passe
+            {itinerairesIci.length > 1 ? "nt" : ""} par ici
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {itinerairesIci.map((it) => (
+              <ItineraireCard key={it.id} itin={it} lieuBySlug={lieuBySlug} />
             ))}
           </div>
         </section>
