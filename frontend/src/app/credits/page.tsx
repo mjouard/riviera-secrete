@@ -68,6 +68,8 @@ const CREDITS: Credit[] = [
   { titre: "Baie des Milliardaires (snorkeling, Cap d'Antibes)", auteur: "Spike", fileUrl: "https://commons.wikimedia.org/wiki/File:Antibes_Baie_des_Milliardaires_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Calanque au Trayas (baignade)", auteur: "Gavan Connolly", fileUrl: "https://commons.wikimedia.org/wiki/File:Le_Trayas_at_For%C3%AAt_Domaniale_de_l%27Est%C3%A9rel,_Commune_de_Saint_Raphael.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Port de Théoule-sur-Mer (restaurant La Maréa)", auteur: "Txllxt TxllxT", fileUrl: "https://commons.wikimedia.org/wiki/File:Th%C3%A9oule-sur-Mer_-_Quai_%C3%89douard_Blondy_-_View_NNE_on_Harbour.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Parc de la Brague, Biot (randonnée)", auteur: "Денисище", fileUrl: "https://commons.wikimedia.org/wiki/File:Parc_departamentale_de_la_Brague,_Biot_-_panoramio_(1).jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Parc de la Brague, Biot (VTT)", auteur: "Денисище", fileUrl: "https://commons.wikimedia.org/wiki/File:Parc_departamentale_de_la_Brague,_Biot_-_panoramio.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

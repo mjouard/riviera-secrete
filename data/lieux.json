@@ -2231,6 +2231,28 @@
         "image": "../assets/images/lieux/biot-village-verrier/act-2.jpg",
         "alt": "Musée National Fernand Léger",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-parc-de-la-brague",
+        "nom": "Randonnée du parc de la Brague",
+        "badge": "gratuit",
+        "duree": "2h à 3h",
+        "prix": "Accès libre",
+        "url": "https://www.randofamille-cotedazur.fr/la-brague/",
+        "image": "../assets/images/lieux/biot-village-verrier/act-4.jpg",
+        "alt": "La rivière de la Brague dans son parc naturel départemental, entre Biot et Valbonne",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-boucle-parc-brague",
+        "nom": "VTT en boucle dans le parc de la Brague",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://www.utagawavtt.com/randonnee-vtt-gps/Boucle-dans-le-parc-de-la-Brague-44141",
+        "image": "../assets/images/lieux/biot-village-verrier/act-5.jpg",
+        "alt": "Petit pont de pierre sur la Brague, sur le parcours du circuit VTT",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
