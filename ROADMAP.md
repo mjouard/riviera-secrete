@@ -100,8 +100,9 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       `.print-day`/`.print-stop`/`.print-header` dans `globals.css`)
 - [x] Bouton "Partager" (Web Share API) sur les fiches lieu (2026-09-12) — porté depuis le
       site statique, `ShareButton.tsx`, fallback presse-papiers si l'API est indisponible
-- [ ] Bouton "Ajouter à un itinéraire" sur les fiches lieu — mini-panneau listant les
-      itinéraires sauvegardés, absent sur Next.js (existe sur le site statique)
+- [x] Bouton "Ajouter à un itinéraire" sur les fiches lieu (2026-09-12) — porté depuis le
+      site statique, `AddToItinButton.tsx`, adapté pour passer par `/api/my-itineraires`
+      (DB) au lieu de localStorage
 - [ ] Booking cards "À réserver" avec image + prix + durée — la section existe sur les pages
       itinéraire Next.js mais n'affiche que lieu/nom/lien, pas l'image ni le prix (nécessite de
       croiser avec l'activité référencée, comme le fait `itin.mjs` côté site statique)
