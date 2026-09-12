@@ -137,9 +137,9 @@ Pour rester dans l'esprit "petit à petit" demandé :
 
 | Région | Statut | Villes ajoutées | Notes |
 |---|---|---|---|
-| Menton, Monaco & la frontière | en cours | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). D'autres trous possibles dans cette région (Cap-Martin, Sainte-Agnès est côté arrière-pays) mais non traités cette nuit — voir "Prochaine étape". |
+| Menton, Monaco & la frontière | fait | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). |
 | Nice et ses environs immédiats | fait | `falicon` (lieu `falicon-village`) + `parc-mont-boron` (nouveau lieu sur la ville `nice` existante) | Commits `51b7c12`/`840cabc`, syncés en DB. Autres candidats envisagés et écartés pour cette nuit : Aspremont (redondant avec Falicon — même angle "village perché vue sur Nice"), Bellet/Cimiez (gardés pour une session future, moins prioritaires). |
-| L'arrière-pays : villages perchés & gorges | à faire | — | Candidats pressentis à vérifier : Sainte-Agnès, Coaraze, Sospel, Saorge, Lucéram, Gorbio, Vence (centre), Castellar |
+| L'arrière-pays : villages perchés & gorges | fait | `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`, `saorge` (un lieu chacun) | Commits `50baf07`/`e97cde1`/`c45e7a8`, syncés en DB. Vence (centre) et Castellar non traités cette nuit (candidats restants, voir "Prochaine étape") — le reste de la liste pressentie est fait. |
 | Antibes, Cannes & le massif de l'Estérel | fait | `mougins` (lieu `vieux-mougins`), `vallauris` (lieu `vieux-vallauris-ceramique`) | Commits `1eb2386`/`22ff6e4`, syncés en DB. Angle éditorial : art vivant/artisanat plutôt que le seul nom "Picasso" (déjà connu partout) — galeries habitées à Mougins, ateliers de céramistes à Vallauris. |
 | Grasse & le golfe de Saint-Tropez | fait | `grimaud` (lieu `vieux-village-grimaud`), `ramatuelle` (lieu `vieux-village-ramatuelle`) | Commits `a811b98`/`86f6858`, syncés en DB. Mougins traité sous `antibes-cannes` (géographiquement plus cohérent, voir cette ligne) plutôt qu'ici. Valbonne non traité cette nuit (candidat restant, voir "Prochaine étape"). |
 
@@ -165,6 +165,18 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 | `vieux-village-grimaud` | Le Vieux Village de Grimaud | hero + thumb |
 | `ramatuelle` (ville) | Ramatuelle | thumb |
 | `vieux-village-ramatuelle` | Le Vieux Village de Ramatuelle | hero + thumb |
+| `sainte-agnes` (ville) | Sainte-Agnès | thumb |
+| `sainte-agnes-village` | Sainte-Agnès | hero + thumb |
+| `coaraze` (ville) | Coaraze | thumb |
+| `coaraze-cadrans-solaires` | Coaraze, le village aux cadrans solaires | hero + thumb |
+| `sospel` (ville) | Sospel | thumb |
+| `vieille-ville-sospel` | La Vieille Ville de Sospel | hero + thumb |
+| `gorbio` (ville) | Gorbio | thumb |
+| `gorbio-village` | Gorbio | hero + thumb |
+| `luceram` (ville) | Lucéram | thumb |
+| `luceram-village` | Lucéram | hero + thumb |
+| `saorge` (ville) | Saorge | thumb |
+| `saorge-village` | Saorge | hero + thumb |
 
 ## Si le travail s'arrête en cours de route
 
@@ -179,4 +191,43 @@ Avant de stopper (contexte épuisé, erreur bloquante, fin de nuit) :
 
 ### Prochaine étape
 
-*(à remplir par l'agent)*
+**Toutes les 5 régions ont été couvertes cette nuit (2026-09-13), pas d'état incohérent —
+chaque ville/lieu committé est complet.** Récapitulatif : 12 nouvelles villes, 13 nouveaux
+lieux (dont `parc-mont-boron`, seul lieu ajouté sur une ville déjà existante — `nice`), 56
+nouvelles activités, tous syncés en DB de prod et déployés sur Vercel. Le site compte
+maintenant 34 villes / 40 lieux (contre 22/27 au départ).
+
+Rien n'est en cours ni à moitié fini. S'il y a une suite à donner :
+
+1. **Session photo dédiée (prioritaire)** — les 24 lignes de la table "Photos à remplacer"
+   ci-dessus (12 villes + 12 lieux, comptant les deux lieux ajoutés sur `nice`) sont
+   actuellement en placeholder picsum.photos. Reprendre le processus documenté dans
+   `CLAUDE.md` ("Hero images") : Wikimedia Commons d'abord, vérifier la photo avant de la
+   choisir, crop `hero.jpg` (1200×800) + `thumb.jpg` (500×375), déposer dans
+   `frontend/public/assets/images/lieux/<slug>/`, ajouter le crédit dans
+   `frontend/src/app/credits/page.tsx`. **Redemander l'autorisation "carte blanche" à
+   l'utilisateur avant de sourcer** (règle habituelle, voir
+   `feedback_dont-autopick-photos.md` — le mandat photo placeholder de cette nuit ne vaut
+   que pour cette session).
+2. **Candidats restants non traités**, si un futur chantier veut aller plus loin (aucun
+   n'est urgent, la couverture actuelle est déjà solide) :
+   - `arriere-pays` : Vence (centre historique, distinct de Saint-Paul-de-Vence déjà
+     couvert) et Castellar (petit village au-dessus de Menton, jugé moins distinctif que
+     les 6 déjà ajoutés — vérifier s'il apporte vraiment quelque chose avant de l'ajouter).
+   - `golfe-st-tropez` : Valbonne (bastide Renaissance à plan en damier, géographiquement
+     plus proche d'Antibes/Sophia-Antipolis que du golfe — si ajoutée, la rattacher plutôt à
+     `antibes-cannes` par cohérence géographique, comme Mougins l'a été cette nuit).
+   - Autres pistes jamais vérifiées : Bellet (vignoble AOC dans les collines de Nice) et
+     Cimiez (arènes romaines, monastère, oliveraie) comme lieux supplémentaires sur la ville
+     `nice` déjà existante.
+3. **Aucune ville/lieu/activité existant(e) n'a été modifié(e) ou supprimé(e)** cette nuit —
+   uniquement des ajouts, conformément au garde-fou. Seule exception au sens strict :
+   l'ajout de `"parc-mont-boron"` au tableau `lieux` de la ville `nice` déjà existante dans
+   `data/villes.json` (append pur, aucun champ existant touché — ce tableau n'est de toute
+   façon pas consommé par le backend, voir `BuildVille` dans `DatabaseSeeder.cs`).
+4. **Vérification prod faite** : chaque lieu ajouté a été testé avec un `curl` sur
+   `https://frontend-two-plum-92.vercel.app/lieux/<slug>` (200 partout) après chaque
+   déploiement Vercel. Le dernier déploiement date de la fin de la région Antibes-Cannes ;
+   un déploiement final a eu lieu après le lot golfe-St-Tropez et arrière-pays — revérifier
+   au réveil que `https://frontend-two-plum-92.vercel.app/lieux/saorge-village` répond bien
+   200 si un doute subsiste (c'est le tout dernier lieu ajouté).
