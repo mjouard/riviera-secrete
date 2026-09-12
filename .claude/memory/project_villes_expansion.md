@@ -205,7 +205,7 @@ Rien n'est en cours ni à moitié fini. S'il y a une suite à donner :
    `CLAUDE.md` ("Hero images") : Wikimedia Commons d'abord, vérifier la photo avant de la
    choisir, crop `hero.jpg` (1200×800) + `thumb.jpg` (500×375), déposer dans
    `frontend/public/assets/images/lieux/<slug>/`, ajouter le crédit dans
-   `frontend/src/app/credits/page.tsx`. **Redemander l'autorisation "carte blanche" à
+   `frontend/src/app/[locale]/credits/page.tsx`. **Redemander l'autorisation "carte blanche" à
    l'utilisateur avant de sourcer** (règle habituelle, voir
    `feedback_dont-autopick-photos.md` — le mandat photo placeholder de cette nuit ne vaut
    que pour cette session).

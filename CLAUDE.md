@@ -4,9 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Riviera Secrète — a site listing 27 lesser-known spots ("lieux") on the French Riviera
-(Menton → Saint-Tropez), grouped into 22 villes and 6 day-trip itineraries
-("itinéraires"). French content throughout.
+Riviera Secrète — a site listing lesser-known spots ("lieux") on the French Riviera
+(Menton → Saint-Tropez), grouped into villes and 6 day-trip itineraries ("itinéraires").
+French content throughout. The exact lieu/ville counts drift as content is added (34 villes
+/ 40 lieux as of 2026-09-13, up from an original 22/27 — see
+`.claude/memory/project_villes_expansion.md`) — check `data/villes.json`/`lieux.json`
+directly rather than trusting a specific number written anywhere in this file.
 
 **Single stack**: `frontend/` (Next.js 16 App Router) + `backend/` (ASP.NET Core +
 PostgreSQL API), started 2026-09-11 to unlock accounts/auth. This repo used to also
@@ -244,11 +247,31 @@ project with HTTP/auth concerns). Deployed as a container (`backend/Dockerfile`,
   `Program.cs` with `opts.MapInboundClaims = false;` — never remove this line, never use
   `ClaimTypes.NameIdentifier` instead of `JwtRegisteredClaimNames.Sub` in this project.
 
-### `frontend/` — Next.js 16 (App Router) + Tailwind v4 + NextAuth v4
+### `frontend/` — Next.js 16 (App Router) + Tailwind v4 + NextAuth v4 + next-intl
 
-Routes under `frontend/src/app/`: `/`, `/lieux`, `/lieux/[slug]`, `/villes`,
-`/villes/[slug]`, `/itineraires`, `/itineraires/[slug]`, `/creer-itineraire`,
-`/mes-itineraires`, `/mes-favoris`, `/connexion`, `/confirmer-email`, `/credits`, plus
+**i18n routing (added 2026-09-13, Phase 0 of the English-version chantier — see
+`.claude/memory/project_version_anglaise.md`)**: every page route lives under
+`frontend/src/app/[locale]/` (French = default locale, unprefixed — `/`, `/villes`,
+`/lieux/[slug]`… — English prefixed `/en/…`, identical slugs in both languages, no
+translated slugs). `frontend/src/app/api/`, `sitemap.ts`, and `favicon.ico` stay *outside*
+`[locale]` (not localized). `frontend/src/proxy.ts` (not `middleware.ts` — Next.js 16
+renamed that file convention to `proxy`) runs `next-intl`'s locale middleware.
+`src/i18n/{routing,navigation,request}.ts` hold the next-intl config; every internal
+`<Link>`/`useRouter` in the app imports from `@/i18n/navigation` instead of
+`next/link`/`next/navigation`, so links stay in the current locale. Only the nav and footer
+chrome are actually translated so far (`messages/{fr,en}.json`) — every other page still
+renders French content under `/en/*`, which is why the root layout marks `/en/*`
+`robots: noindex, follow` until real translated content ships (Phase 1+).
+
+**`/lieux` and `/itineraires` (the full-list pages) were removed on 2026-09-12** — they
+duplicated the homepage's own "Tous les lieux" grid and "Itinéraires" section with no added
+value. Every link that used to point there (hero CTAs, nav, breadcrumbs, `/mes-favoris`'s
+empty state) now points at the homepage's `#lieux`/`#itineraires` anchors instead.
+`/lieux/[slug]` and `/itineraires/[slug]` (the actual detail pages) are untouched.
+
+Routes under `frontend/src/app/[locale]/`: `/`, `/lieux/[slug]`, `/villes`,
+`/villes/[slug]`, `/itineraires/[slug]`, `/creer-itineraire`, `/mes-itineraires`,
+`/mes-favoris`, `/connexion`, `/confirmer-email`, `/credits`, plus (outside `[locale]`)
 `/api/auth/[...nextauth]` (NextAuth's own route handler). `/mes-favoris` consumes the
 backend's protected favorites API directly (`GET/DELETE /api/favorites` via `authFetch`) —
 logged-out visitors are linked to `/connexion?callbackUrl=…`. Every account-related entry
@@ -369,9 +392,13 @@ ruleset (pill/label formatting conventions, day-rhythm philosophy for itinerarie
   origin/destination/waypoints built from the stop lieux in order, sleep markers skipped
   (they carry no coordinates of their own). Google Maps only; don't add a matching
   Waze/Plans button next to it — that's the whole reason the per-stop links exist instead.
-- Hero images: all 27 lieux have real photography (finished 2026-08-28 — until then most
-  used `picsum.photos` placeholders). The process that worked, worth repeating if a photo
-  ever needs replacing or a new lieu is added: search Wikimedia Commons (a Wikipedia
+- Hero images: the original 27 lieux got real photography on 2026-08-28. **13 lieux added
+  during the 2026-09-13 villes-expansion chantier are back on `picsum.photos` placeholders**
+  (deliberately, to let that chantier run unsupervised — see
+  `.claude/memory/project_villes_expansion.md`'s "Photos à remplacer" table for the exact
+  list) and still need the real-photo pass below; don't assume "all lieux have real photos"
+  without checking that table first. The process that worked, worth repeating whenever a
+  placeholder needs replacing or a new lieu is added: search Wikimedia Commons (a Wikipedia
   article's own infobox image is often already well-curated — check that first), view the
   actual candidate image before picking, not just its filename/license (composition/coherence
   matters — a technically-licensed but poorly-framed photo, like a blank wall or a blown-out
@@ -380,7 +407,7 @@ ruleset (pill/label formatting conventions, day-rhythm philosophy for itinerarie
   rather than just center-cropping) to the site's exact `hero.jpg` (1200×800, 3:2) and
   `thumb.jpg` (500×375, 4:3) dimensions, place them at
   `frontend/public/assets/images/lieux/<slug>/`, then add attribution to
-  `frontend/src/app/credits/page.tsx`'s `CREDITS` array (CC BY-SA/CC BY both require it).
+  `frontend/src/app/[locale]/credits/page.tsx`'s `CREDITS` array (CC BY-SA/CC BY both require it).
   Ask the user before autonomously sourcing photos — a past "carte blanche" grant for this
   was explicitly session-scoped, not a standing preference. A lieu with multiple real photos sets
   `heroSlides` (int) so `HeroCarousel` picks up `hero.jpg`, `hero-2.jpg`, … from that same
