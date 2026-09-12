@@ -73,7 +73,9 @@
       traversent ; une page itinéraire renvoie vers les pages ville de ses stops ; améliore
       le maillage interne (SEO) et la navigation (~1h dans les templates + build)
 - [ ] Structured data enrichi — schéma `Activity` sur les activités payantes pour apparaître
-      dans Google Things to do ; enrichissement du JSON-LD existant dans `lieu.mjs` (~2h)
+      dans Google Things to do ; il n'y a actuellement aucun JSON-LD sur les pages lieu
+      (seulement homepage `ItemList` et ville `TouristDestination`, voir CLAUDE.md) — à
+      ajouter dans `frontend/src/app/lieux/[slug]/page.tsx` (~2h)
 
 ## Audience & engagement
 
@@ -192,9 +194,9 @@ ignorer cette URL, le seul vrai site est désormais `frontend-two-plum-92.vercel
 
 ### SEO & indexation
 - [ ] Soumettre `sitemap.xml` dans Google Search Console après enregistrement du vrai domaine
-- [ ] Vérifier `robots.txt` — pointer vers le bon `sitemap.xml` avec l'URL du vrai domaine ;
-      vérifier que les pages `noindex` (`creer-itineraire.html`, `mes-itineraires.html`,
-      `mes-favoris.html`) sont bien exclues
+- [x] Pages `noindex` — `/creer-itineraire`, `/mes-itineraires`, `/mes-favoris`, `/connexion`,
+      `/confirmer-email` toutes exclues via `metadata.robots` (voir Portage ci-dessus,
+      2026-09-12) ; `frontend/src/app/sitemap.ts` (route Next.js dynamique) ne les liste pas
 - [ ] Ajouter le site dans Bing Webmaster Tools (2e moteur, souvent négligé)
 
 ### Performance & cache
@@ -206,7 +208,11 @@ ignorer cette URL, le seul vrai site est désormais `frontend-two-plum-92.vercel
 - [ ] Vérifier les Core Web Vitals dans Google Search Console après mise en ligne
 
 ### Versionning & déploiement
-- [x] Code commité et pushé, déploiement automatique Vercel déclenché sur chaque push `main`
+- [x] Code systématiquement commité et pushé sur `main` après chaque changement — mais
+      déploiement **manuel** (`cd frontend && vercel --prod --yes`), pas automatique : la
+      GitHub integration Vercel a été désactivée le 2026-09-11 (voir
+      `feedback_vercel_deploy.md`) car elle re-déployait depuis la racine du repo au lieu de
+      `frontend/`. Ne pas la reconnecter.
 - [ ] Configurer une branche `staging` (ou Vercel Preview Deployments)
 
 ## SEO / technique
