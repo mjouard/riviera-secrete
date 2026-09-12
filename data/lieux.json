@@ -735,6 +735,17 @@
         "image": "../assets/images/lieux/jardin-exotique-monaco/act-3.jpg",
         "alt": "Rocher de Monaco & Palais",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "restaurant-u-cavagnetu",
+        "nom": "Déjeuner à U Cavagnëtu",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "16–30 € / pers.",
+        "url": "https://www.monaco-tribune.com/en/listing/u-cavagnetu/",
+        "image": "../assets/images/lieux/jardin-exotique-monaco/act-4.jpg",
+        "alt": "Ruelle du Rocher de Monaco, où se niche le restaurant U Cavagnëtu",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
