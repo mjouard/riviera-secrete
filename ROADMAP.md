@@ -128,7 +128,22 @@
 - [ ] Newsletter — "Un lieu secret par semaine" via Brevo ou Mailchimp (formulaire embed,
       aucun backend requis) ; meilleur levier de rétention avant le backend (30 min)
 - [ ] Version anglaise du site — gros chantier (contenu à dupliquer/traduire, routing
-      bilingue) mais probablement le plus gros levier d'audience disponible
+      bilingue) mais probablement le plus gros levier d'audience disponible. **Plan établi le
+      2026-09-12** (pas encore démarré, deux décisions à valider avant la phase 0 — voir
+      `.claude/memory/project_version_anglaise.md` pour le détail complet) :
+      1. Routing en `frontend/src/app/[locale]/...` + `next-intl` pour la UI chrome, slugs
+         de lieux/villes **identiques** dans les deux langues (pas de slug anglais dédié).
+      2. Contenu traduit stocké en **colonnes jumelles nullable** sur les entités backend
+         existantes (`Lieu.NomEn`, `DescriptionEn`, `Activite.NomEn`…) plutôt qu'une
+         deuxième ligne/fichier dupliqué par langue — un champ non traduit retombe sur le
+         français côté `/en/` au lieu de casser la page.
+      Phasage proposé : 0) migration EF + routing + next-intl pour la chrome + hreflang/
+      sitemap ; 1) MVP anglais (homepage, nav, listes) ; 2) traduction des 27 lieux/22
+      villes/6 itinéraires (lot par lot, même rythme que le chantier "activités par badge") ;
+      3) traduction des ~109 `activites[].nom/alt` (intégrable à la phase 2) ; 4) auth +
+      emails Resend en anglais ; 5) polish SEO (hreflang croisés, og:locale). Explicitement
+      déconseillé : slugs traduits, ou dupliquer `data/*.json` en `data/*.en.json` séparés
+      (risque de désync avec le contenu français déjà enrichi).
 - [x] Analytics respectueux de la vie privée (Plausible) — script déployé sur les 63 pages
 
 ## Portage site statique → Next.js (terminé le 2026-09-12)

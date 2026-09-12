@@ -7,7 +7,8 @@
 - [Architecture & roadmap](architecture_future.md) — décisions stack, état P1-P4.5 (tout fait), suppression du site statique le 2026-09-12, URLs Railway/Vercel
 
 ## Chantiers en cours
-- [Activités par badge](project_activites_par_badge.md) — 9/~23 lieux traités (2026-09-12), processus établi, prochain lieu dans ROADMAP.md
+- [Activités par badge](project_activites_par_badge.md) — 12/~25 lieux traités (2026-09-12), processus établi, prochain lieu dans ROADMAP.md
+- [Version anglaise](project_version_anglaise.md) — plan établi 2026-09-12, pas démarré, 2 décisions à valider (routing + stockage traduction) avant la phase 0
 
 ## Feedback & pièges
 - [Vercel deploy](feedback_vercel_deploy.md) — déployer depuis `frontend/`, rootDirectory null, ne pas déployer depuis la racine
