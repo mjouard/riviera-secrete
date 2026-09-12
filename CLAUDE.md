@@ -74,7 +74,14 @@ for the full entity/endpoint reference):
   `nom`, `badge` (`gratuit`/`payant`), `duree`, `prix`, `url`, `image`, `alt`, `linkText`).
   Price/duration/url/image for a given activité exist **only here**. `metaPills` holds only
   the saison/durée/niveau pills — the 📍 coordinates pill is never stored, always computed
-  from `lat`/`lng` at render time.
+  from `lat`/`lng` at render time. **`ogImage` is dead data** (found 2026-09-12): every lieu
+  has it hardcoded to `https://riviera-secrete.netlify.app/...`, a domain that predates even
+  the Vercel migration and is now doubly dead since the static site was removed — but the
+  Next.js frontend never reads this field at all (`lieux/[slug]/page.tsx` and
+  `itineraires/[slug]/page.tsx` both compute their own `openGraph.images` from `heroImage` via
+  `imgUrl()` instead). No user-visible impact, just stale data sitting in the JSON/DB column —
+  safe to ignore until someone bothers to drop the field (JSON + `Lieu` entity + an EF
+  migration), tracked in `ROADMAP.md`'s "Mise en production réelle" section.
 - **`data/itineraires.json`** — the 6 itinéraires. Each `stop` item references a lieu by
   `lieuSlug`; its pills and the "à réserver" booking cards reference an activité by
   `{ lieuSlug, activiteId }` — never by copying its price/duration/url/image. Only a
