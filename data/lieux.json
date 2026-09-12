@@ -204,6 +204,39 @@
         "image": "../assets/images/lieux/villa-ephrussi-rothschild/act-1.jpg",
         "alt": "Visite villa & jardins",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "criques-pointe-sainte-hospice",
+        "nom": "Baignade aux criques de la pointe Sainte-Hospice",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/explore/towns-villages/coastal-area/saint-jean-cap-ferrat/beaches/",
+        "image": "../assets/images/lieux/sentier-cap-ferrat/act-3.jpg",
+        "alt": "Crique de galets et eau turquoise près de la pointe Sainte-Hospice, au Cap Ferrat",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "sentier-sous-marin-fossettes",
+        "nom": "Sentier sous-marin de la plage des Fossettes",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "Prêt de matériel gratuit, casier consigné",
+        "url": "https://saintjeancapferrat-tourisme-fr.com/activites-nautiques/",
+        "image": "../assets/images/lieux/sentier-cap-ferrat/act-4.jpg",
+        "alt": "Crique de la plage des Fossettes au Cap Ferrat, parcours de snorkeling balisé",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "restaurant-plage-passable",
+        "nom": "Déjeuner au restaurant de la Plage de Passable",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "25–50 € / pers.",
+        "url": "https://www.plage-de-passable.fr/le-restaurant",
+        "image": "../assets/images/lieux/sentier-cap-ferrat/act-5.jpg",
+        "alt": "Crique de la plage de Passable au Cap Ferrat, vue depuis le sentier du littoral",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
