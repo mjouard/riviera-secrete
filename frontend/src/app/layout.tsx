@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import Providers from "@/components/Providers";
 import "./globals.css";
@@ -48,7 +49,13 @@ export default function RootLayout({
             style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
           >
             <div className="max-w-6xl mx-auto px-6">
-              Riviera Secrète — Côte d&apos;Azur hors des sentiers battus
+              <p>Riviera Secrète — Côte d&apos;Azur hors des sentiers battus</p>
+              <p className="mt-1">
+                Photos :{" "}
+                <Link href="/credits" className="hover:text-white transition-colors">
+                  crédits &amp; licences
+                </Link>
+              </p>
             </div>
           </footer>
         </Providers>
