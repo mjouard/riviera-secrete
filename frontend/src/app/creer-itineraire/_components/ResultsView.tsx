@@ -42,7 +42,7 @@ export default function ResultsView({
         </p>
       </div>
 
-      <div className="no-print flex items-center justify-between mb-6 gap-4">
+      <div className="no-print flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold">
             {currentNom || `Itinéraire ${DUREE_META[dureeKey].label}`}
@@ -51,7 +51,7 @@ export default function ResultsView({
             {currentDays.length} jour{currentDays.length > 1 ? "s" : ""} · {nbLieux} lieu{nbLieux > 1 ? "x" : ""}
           </p>
         </div>
-        <div className="flex gap-2 flex-shrink-0">
+        <div className="flex flex-wrap gap-2">
           <button onClick={onBack} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
             ← Modifier
           </button>
@@ -72,8 +72,11 @@ export default function ResultsView({
 
       {excluded.length > 0 && (
         <p className="no-print mb-6 text-sm rounded-xl p-3" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
-          {excluded.length} lieu{excluded.length > 1 ? "x" : ""} non inclus faute de temps :{" "}
-          {excluded.map((l) => l.nom).join(", ")}.
+          {excluded.length} lieu{excluded.length > 1 ? "x" : ""} non inclus faute de temps —{" "}
+          <a href="#suggestions-bonus" className="underline" style={{ color: "var(--azure)" }}>
+            à voir en bas de page
+          </a>
+          .
         </p>
       )}
 
@@ -147,10 +150,36 @@ export default function ResultsView({
       )}
 
       {/* Programme */}
-      <ProgrammeSection days={currentDays} />
+      <ProgrammeSection days={currentDays} dureeKey={dureeKey} />
 
       {/* Booking */}
       <BookingSection days={currentDays} />
+
+      {/* Bonus : lieux non retenus faute de temps, discret pour ne pas concurrencer l'itinéraire */}
+      {excluded.length > 0 && (
+        <section id="suggestions-bonus" className="no-print mt-10 pt-8" style={{ borderTop: "1px solid var(--line)" }}>
+          <h2 className="text-sm font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
+            🎁 Mais encore…
+          </h2>
+          <p className="text-xs mb-4" style={{ color: "var(--text-muted)" }}>
+            Ces lieux n&apos;ont pas trouvé de place dans le planning demandé, mais méritent le détour si tu as un peu plus de temps.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {excluded.map((lieu) => (
+              <Link
+                key={lieu.slug}
+                href={`/lieux/${lieu.slug}`}
+                target="_blank"
+                className="flex items-center gap-2 pr-3 rounded-full overflow-hidden transition-colors hover:bg-white/5"
+                style={{ background: "var(--surface)" }}
+              >
+                <img src={imgUrl(lieu.thumbImage)} alt="" className="w-9 h-9 object-cover flex-shrink-0" loading="lazy" />
+                <span className="text-xs" style={{ color: "var(--text-muted)" }}>{lieu.nom}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

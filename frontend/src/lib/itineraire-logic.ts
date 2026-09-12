@@ -1,10 +1,13 @@
 import type { Lieu, Activite } from "./types";
 
+/** Durée d'une pause déjeuner réservée sur les journées complètes (pas sur une demi-journée). */
+export const LUNCH_BREAK_MINUTES = 75;
+
 export const DUREE_META = {
-  "demi-journee": { label: "Demi-journée", dayBudgets: [240] },
-  journee: { label: "Journée", dayBudgets: [480] },
-  "2-jours": { label: "2 jours", dayBudgets: [480, 480] },
-  "3-jours": { label: "3 jours", dayBudgets: [480, 480, 480] },
+  "demi-journee": { label: "Demi-journée", dayBudgets: [240], lunchBreak: false },
+  journee: { label: "Journée", dayBudgets: [480], lunchBreak: true },
+  "2-jours": { label: "2 jours", dayBudgets: [480, 480], lunchBreak: true },
+  "3-jours": { label: "3 jours", dayBudgets: [480, 480, 480], lunchBreak: true },
 } as const;
 
 export type DureeKey = keyof typeof DUREE_META;
@@ -44,20 +47,35 @@ export function generateItineraire(candidates: Lieu[], dureeKey: DureeKey): { da
   const days: Lieu[][] = [];
   let currentPos = pool.reduce((a, b) => (b.lng > a.lng ? b : a));
 
-  for (let d = 0; d < meta.dayBudgets.length && pool.length; d++) {
-    let budget = meta.dayBudgets[d];
+  const numDays = meta.dayBudgets.length;
+  for (let d = 0; d < numDays && pool.length; d++) {
+    // Répartit le pool restant à parts égales sur les jours restants, plutôt que de tout
+    // entasser sur les premiers jours dès que ça tient dans leur budget horaire — sinon un
+    // itinéraire "2 jours"/"3 jours" avec peu de lieux sélectionnés ne produit qu'un seul
+    // jour rempli et des jours suivants vides (jamais générés).
+    const remainingDays = numDays - d;
+    const targetCount = Math.ceil(pool.length / remainingDays);
+    // Réserve le temps de la pause déjeuner sur le budget du jour, pour ne pas enchaîner
+    // 8h de visites/trajets sans respirer.
+    let budget = meta.dayBudgets[d] - (meta.lunchBreak ? LUNCH_BREAK_MINUTES : 0);
     const day: Lieu[] = [];
-    while (pool.length) {
+    while (pool.length && day.length < targetCount) {
+      // Choisit le prochain arrêt géographiquement le plus proche (trajet le plus court),
+      // pas celui dont le coût total (trajet + visite) est le plus faible — sinon
+      // l'algorithme peut préférer un lieu lointain à visite rapide à un lieu tout proche
+      // à visite plus longue, ce qui crée des trajets incohérents (détours, allers-retours).
+      // Le coût combiné ne sert qu'à vérifier que l'arrêt rentre dans le budget du jour.
       let best: Lieu | null = null;
-      let bestCost = Infinity;
+      let bestTravel = Infinity;
       for (const cand of pool) {
-        const cost = travelMinutes(currentPos, cand) + parseVisitMinutes(cand);
-        if (cost < bestCost) { bestCost = cost; best = cand; }
+        const travel = travelMinutes(currentPos, cand);
+        if (travel < bestTravel) { bestTravel = travel; best = cand; }
       }
-      if (bestCost > budget && day.length > 0) break;
+      const cost = bestTravel + parseVisitMinutes(best!);
+      if (cost > budget && day.length > 0) break;
       pool.splice(pool.indexOf(best!), 1);
       day.push(best!);
-      budget -= bestCost;
+      budget -= cost;
       currentPos = best!;
     }
     days.push(day);

@@ -2,14 +2,22 @@ import Link from "next/link";
 import type { Lieu } from "@/lib/types";
 import { buildMapLinks } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
-import { travelMinutes, parseVisitMinutes, formatTime, formatTransitDesc } from "@/lib/itineraire-logic";
+import {
+  travelMinutes, parseVisitMinutes, formatTime, formatTransitDesc,
+  DUREE_META, LUNCH_BREAK_MINUTES, type DureeKey,
+} from "@/lib/itineraire-logic";
 
-export default function ProgrammeSection({ days }: { days: Lieu[][] }) {
+const LUNCH_THRESHOLD_MINUTES = 12 * 60 + 30; // 12h30
+
+export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; dureeKey: DureeKey }) {
   if (days.flat().length === 0) return null;
+
+  const hasLunchBreak = DUREE_META[dureeKey].lunchBreak;
 
   type ProgramItem =
     | { type: "transit"; minutes: number }
     | { type: "sleep"; dayNum: number }
+    | { type: "lunch" }
     | { type: "stop"; lieu: Lieu; heure: string };
 
   let timeMinutes = 9 * 60;
@@ -17,11 +25,17 @@ export default function ProgrammeSection({ days }: { days: Lieu[][] }) {
   const items: ProgramItem[] = [];
 
   days.forEach((day, dayIndex) => {
+    let lunchInserted = !hasLunchBreak;
     day.forEach((lieu) => {
       if (prevLieu) {
         const transit = travelMinutes(prevLieu, lieu);
         items.push({ type: "transit", minutes: transit });
         timeMinutes += transit;
+      }
+      if (!lunchInserted && timeMinutes >= LUNCH_THRESHOLD_MINUTES) {
+        items.push({ type: "lunch" });
+        timeMinutes += LUNCH_BREAK_MINUTES;
+        lunchInserted = true;
       }
       items.push({ type: "stop", lieu, heure: formatTime(timeMinutes) });
       timeMinutes += parseVisitMinutes(lieu);
@@ -43,6 +57,14 @@ export default function ProgrammeSection({ days }: { days: Lieu[][] }) {
             return (
               <div key={i} className="print-stop text-sm py-2 px-4 rounded-lg" style={{ color: "var(--text-muted)", background: "var(--surface)" }}>
                 🚗 {formatTransitDesc(item.minutes)}
+              </div>
+            );
+          }
+          if (item.type === "lunch") {
+            return (
+              <div key={i} className="print-stop rounded-xl p-4 flex items-center gap-4" style={{ background: "var(--surface)" }}>
+                <span className="text-xs font-mono" style={{ color: "var(--azure)" }}>Pause</span>
+                <span className="text-sm font-semibold">Déjeuner — ~1 h dans le coin</span>
               </div>
             );
           }
