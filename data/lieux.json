@@ -1196,6 +1196,17 @@
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-2.jpg",
         "alt": "Cours de cuisine niçoise",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "restaurant-chez-theresa",
+        "nom": "Socca chez Théresa",
+        "badge": "payant",
+        "duree": "30min",
+        "prix": "3–8 € / pers.",
+        "url": "https://chez-theresa.fr/",
+        "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-4.jpg",
+        "alt": "Socca fraîchement cuite au feu de bois, spécialité de Chez Théresa au Cours Saleya",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

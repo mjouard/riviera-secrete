@@ -73,6 +73,7 @@ const CREDITS: Credit[] = [
   { titre: "Plage des Graniers vue de la Citadelle (randonnée)", auteur: "DimiTalen", fileUrl: "https://commons.wikimedia.org/wiki/File:View_of_Plage_des_Graniers_from_the_Citadelle,_Saint-Tropez,_2004.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
   { titre: "Ruelle de Saint-Tropez (restaurant Le Goustado Tropézien)", auteur: "Gzen92", fileUrl: "https://commons.wikimedia.org/wiki/File:Rue_(Saint-Tropez)_(4).jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Ruelle du Rocher de Monaco (restaurant U Cavagnëtu)", auteur: "Rundvald", fileUrl: "https://commons.wikimedia.org/wiki/File:Monaco-Ville-ruelle.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
+  { titre: "Socca dans le Vieux-Nice (Chez Théresa)", auteur: "Myrabella", fileUrl: "https://commons.wikimedia.org/wiki/File:Socca_a_Nice.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
