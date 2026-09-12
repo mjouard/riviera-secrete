@@ -5,6 +5,7 @@ import type { Itineraire, Lieu } from "@/lib/types";
 import HomeMapWrapper from "@/components/HomeMapWrapper";
 import HomeActivities from "@/components/HomeActivities";
 import HomeLieuxGrid from "@/components/HomeLieuxGrid";
+import HomeHero from "@/components/HomeHero";
 
 export const revalidate = 3600;
 
@@ -52,8 +53,16 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-24 px-6 text-center">
-        <div className="max-w-2xl mx-auto">
+      <section className="relative overflow-hidden py-24 px-6 text-center" style={{ minHeight: 540 }}>
+        <HomeHero />
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            background:
+              "linear-gradient(160deg, rgba(12,17,22,0.72) 0%, rgba(12,17,22,0.52) 50%, rgba(12,17,22,0.78) 100%)",
+          }}
+        />
+        <div className="relative z-[2] max-w-2xl mx-auto">
           <h1 className="text-4xl font-bold mb-4 leading-tight">
             La Côte d&apos;Azur{" "}
             <em className="not-italic" style={{ color: "var(--terracotta)" }}>
