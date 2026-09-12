@@ -25,19 +25,22 @@ moins une activité en rapport direct avec ce badge dans `lieu.activites[]`.
 - Après commit+push du JSON/images/credits, toujours demander confirmation avant de
   synchroniser manuellement vers la DB prod Railway (l'édition de `data/lieux.json` seule
   ne se propage jamais automatiquement, voir `project_overview.md`).
+- Après la sync DB, redéployer aussi le frontend (`cd frontend && npx vercel --prod --yes`)
+  — un `git push` seul ne suffit pas, voir le piège ci-dessous.
 
 ## État d'avancement (voir `ROADMAP.md` pour la liste à jour)
 
-9 lieux traités et synchronisés en prod au 2026-09-12 (24 activités ajoutées) :
+12 lieux traités et synchronisés en prod au 2026-09-12 (28 activités ajoutées) :
 `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`, `eze-village`,
 `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`, `gourdon-village`,
-`roquebrune-cap-martin-village`.
+`roquebrune-cap-martin-village`, `colline-du-chateau-nice`, `peille-village`,
+`gorges-du-loup-cascade-courmes`.
 
-Reste ~14 lieux avec des badges non couverts (liste précise dans `ROADMAP.md`, détectée via
+Reste ~13 lieux avec des badges non couverts (liste précise dans `ROADMAP.md`, détectée via
 un script heuristique de correspondance mot-clé sur `activites[].nom`/`alt` — à re-lancer
 pour confirmer la liste avant de continuer, elle peut avoir légèrement bougé).
 
-## Piège trouvé pendant ce chantier
+## Pièges trouvés pendant ce chantier
 
 Un premier passage sur `rue-obscure-villefranche` avait été marqué "terminé" alors qu'un
 badge (`plage`) restait sans activité, et une activité déjà ajoutée en JSON
@@ -45,6 +48,13 @@ badge (`plage`) restait sans activité, et une activité déjà ajoutée en JSON
 ou ratée silencieusement). Toujours re-vérifier via le script heuristique + une requête SQL
 directe sur la table `Activites` avant de considérer un lieu vraiment complet, ne pas se
 fier uniquement au souvenir d'avoir "déjà fait ce lieu".
+
+Plus tard dans le même chantier, l'utilisateur a signalé une photo manquante en prod (VTT du
+Col d'Èze) : la DB était bien synchronisée mais **le frontend n'avait jamais été redéployé**
+sur 9 lieux d'affilée — `git push` seul ne suffit pas sur ce projet (voir
+`feedback_vercel_deploy.md`, git integration Vercel désactivée). Un `cd frontend && npx
+vercel --prod --yes` explicite est maintenant fait après chaque lieu synchronisé, pas
+seulement en fin de session.
 
 ## Bug trouvé en passant, pas corrigé (hors scope de ce chantier)
 

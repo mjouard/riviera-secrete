@@ -16,17 +16,22 @@
       nouvelle activité avec une vraie photo Wikimedia Commons sourcée/vérifiée/créditée sur
       `frontend/src/app/credits/page.tsx`, et une synchronisation manuelle vers la DB prod
       Railway après confirmation (l'édition de `data/lieux.json` seule ne suffit pas, voir
-      "Data model" dans `CLAUDE.md`). 9 lieux traités et synchronisés en prod jusqu'ici (24
-      activités ajoutées) : `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`,
-      `eze-village`, `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`,
-      `gourdon-village`, `roquebrune-cap-martin-village`. Restent ~14 lieux avec des badges
-      non couverts (détecté par un script heuristique de correspondance mot-clé, à re-lancer
-      pour une liste à jour) : `jardin-exotique-monaco`, `colline-du-chateau-nice`,
-      `cours-saleya-vieux-nice`, `peille-village`, `gorges-du-loup-cascade-courmes`,
-      `pont-du-loup`, `saint-paul-de-vence`, `biot-village-verrier`, `haut-de-cagnes`,
-      `sentier-cap-antibes`, `pinede-gould-juan-les-pins`, `calanques-esterel-theoule`,
-      `vieille-ville-grasse`, `citadelle-saint-tropez`, `gassin-plus-beau-village`. Continuer
-      lieu par lieu avec le même processus.
+      "Data model" dans `CLAUDE.md`). **Piège trouvé le 2026-09-12** : `git push` seul ne
+      déploie jamais le frontend (git integration Vercel désactivée, voir
+      `feedback_vercel_deploy.md`) — après chaque lieu, penser à `cd frontend && npx vercel
+      --prod --yes` en plus du commit/push, sinon les nouvelles photos restent en 404 en prod
+      (repéré une fois par l'utilisateur avant d'être corrigé et intégré au processus).
+      12 lieux traités et synchronisés en prod jusqu'ici (28 activités ajoutées) :
+      `rue-obscure-villefranche`, `sentier-cap-ferrat`, `villa-kerylos`, `eze-village`,
+      `trophee-auguste-la-turbie`, `tourrettes-sur-loup`, `iles-de-lerins`, `gourdon-village`,
+      `roquebrune-cap-martin-village`, `colline-du-chateau-nice`, `peille-village`,
+      `gorges-du-loup-cascade-courmes`. Restent ~13 lieux avec des badges non couverts
+      (détecté par un script heuristique de correspondance mot-clé, à re-lancer pour une liste
+      à jour) : `jardin-exotique-monaco`, `cours-saleya-vieux-nice`, `pont-du-loup`,
+      `saint-paul-de-vence`, `biot-village-verrier`, `haut-de-cagnes`, `sentier-cap-antibes`,
+      `pinede-gould-juan-les-pins`, `calanques-esterel-theoule`, `vieille-ville-grasse`,
+      `citadelle-saint-tropez`, `gassin-plus-beau-village`. Continuer lieu par lieu avec le
+      même processus.
 
 - [x] Finir les vraies images — les 27 lieux ont une vraie photo (terminé le 28/08 ; les 21
       sourcées sur Wikimedia Commons cette session-là sont créditées sur `credits.html`,
