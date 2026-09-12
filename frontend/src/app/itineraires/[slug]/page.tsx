@@ -324,6 +324,38 @@ export default async function ItinerairePage({
           </div>
         </section>
       )}
+
+      {/* Autres itinéraires */}
+      {itin.suggestions.length > 0 && (
+        <section className="pt-12 mt-8 border-t" style={{ borderColor: "var(--line)" }}>
+          <h2 className="text-xl font-bold mb-6">Autres itinéraires</h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {itin.suggestions.map((s, i) => (
+              <Link
+                key={i}
+                href={`/itineraires/${s.href.replace(".html", "")}`}
+                className="group rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
+                style={{ background: "var(--surface)" }}
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={imgUrl(s.img)}
+                    alt={s.alt}
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs font-semibold mb-1" style={{ color: "var(--azure)" }}>
+                    {s.badge}
+                  </p>
+                  <h3 className="text-sm font-semibold leading-snug">{s.titre}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   );
 }
