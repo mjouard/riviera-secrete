@@ -2150,6 +2150,17 @@
         "image": "../assets/images/lieux/saint-paul-de-vence/act-5.jpg",
         "alt": "Randonnée Baous de Vence",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-cafe-timothe",
+        "nom": "Déjeuner au Café Timothé",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "16–25 € / pers.",
+        "url": "https://cafetimothe.com/fr",
+        "image": "../assets/images/lieux/saint-paul-de-vence/act-7.jpg",
+        "alt": "Ruelle en escalier du village de Saint-Paul-de-Vence",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

@@ -75,6 +75,7 @@ const CREDITS: Credit[] = [
   { titre: "Ruelle du Rocher de Monaco (restaurant U Cavagnëtu)", auteur: "Rundvald", fileUrl: "https://commons.wikimedia.org/wiki/File:Monaco-Ville-ruelle.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Socca dans le Vieux-Nice (Chez Théresa)", auteur: "Myrabella", fileUrl: "https://commons.wikimedia.org/wiki/File:Socca_a_Nice.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Plateau de Coursegoules-Bramafan (VTT)", auteur: "Julien", fileUrl: "https://commons.wikimedia.org/wiki/File:Fall_Landscape_(128978853).jpeg", licenceLabel: "CC BY 3.0", licenceUrl: "https://creativecommons.org/licenses/by/3.0/deed.fr" },
+  { titre: "Rue du Casse-Cou, Saint-Paul-de-Vence (restaurant Café Timothé)", auteur: "Jebulon", fileUrl: "https://commons.wikimedia.org/wiki/File:Saint-Paul_de_Vence,_rue_du_casse-cou.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
