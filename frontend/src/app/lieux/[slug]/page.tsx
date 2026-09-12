@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
+import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -93,15 +94,18 @@ export default async function LieuPage({
         {/* Badges */}
         {lieu.badges.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
-            {lieu.badges.map((b) => (
-              <span
-                key={b}
-                className="text-xs px-3 py-1 rounded-full border"
-                style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
-              >
-                {b}
-              </span>
-            ))}
+            {lieu.badges.map((b) => {
+              const def = BADGE_DEFS_BY_SLUG[b];
+              return (
+                <span
+                  key={b}
+                  className="text-xs px-3 py-1 rounded-full border"
+                  style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                >
+                  {def ? `${def.emoji} ${def.label}` : b}
+                </span>
+              );
+            })}
           </div>
         )}
 
