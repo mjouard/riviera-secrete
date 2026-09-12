@@ -16,6 +16,10 @@ import {
 
 const BuilderMap = dynamic(() => import("@/components/BuilderMap"), { ssr: false });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 type View = "picker" | "results";
@@ -470,7 +474,7 @@ function ResultsView({
   return (
     <div>
       <div className="print-header">
-        <p className="print-header-url">riviera-secrete.vercel.app</p>
+        <p className="print-header-url">{SITE_DISPLAY_URL}</p>
         <h1>{currentNom || `Itinéraire ${DUREE_META[dureeKey].label}`}</h1>
         <p className="print-header-meta">
           {currentDays.length} jour{currentDays.length > 1 ? "s" : ""} · {nbLieux} lieu{nbLieux > 1 ? "x" : ""}

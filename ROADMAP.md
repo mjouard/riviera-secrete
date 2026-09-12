@@ -46,7 +46,7 @@
       activité depuis les fiches lieu et les pages ville, page `mes-favoris.html`)
 - [x] Bouton de partage natif (`navigator.share`) sur les fiches lieu
 - [x] Carte homepage : panneau latéral en desktop, bottom-sheet en mobile au clic marqueur
-- [ ] Page `/a-propos.html` — angle éditorial du site ("carnet de repérage, pas un guide
+- [ ] Page `/a-propos` — angle éditorial du site ("carnet de repérage, pas un guide
       officiel"), aide le SEO et donne confiance aux premiers visiteurs (30 min)
 
 ## Features différenciantes
@@ -60,8 +60,8 @@
 - [x] Bouton "Ajouter à mon itinéraire" directement sur chaque fiche lieu — mini-panneau
       déroulant listant les itinéraires sauvegardés, clic pour ajouter le lieu au dernier
       jour de l'itinéraire sans quitter la page
-- [ ] "Partir de cet itinéraire" — bouton sur chaque page `itin/*.html` qui ouvre
-      `creer-itineraire.html` en pré-cochant les lieux de cet itinéraire éditorial ;
+- [ ] "Partir de cet itinéraire" — bouton sur chaque page `/itineraires/[slug]` qui ouvre
+      `/creer-itineraire` en pré-cochant les lieux de cet itinéraire éditorial ;
       pont entre contenu éditorial et créateur custom (~1h)
 - [ ] Créateur d'itinéraire : partage par URL — encoder la sélection dans les query params
       pour partager sans compte ni backend (sera mieux fait côté backend)
@@ -83,12 +83,12 @@
       bilingue) mais probablement le plus gros levier d'audience disponible
 - [x] Analytics respectueux de la vie privée (Plausible) — script déployé sur les 63 pages
 
-## Portage site statique → Next.js (priorité depuis le 2026-09-11)
+## Portage site statique → Next.js (terminé le 2026-09-12)
 
-`frontend/` est maintenant le stack prioritaire (voir CLAUDE.md, "Frontend/backend rewrite") —
-le site statique reste en prod mais n'a plus vocation à recevoir de nouvelles features. Cette
-section liste ce qu'il reste à porter pour atteindre la parité ; état détaillé et sourcé dans
-`.claude/memory/frontend_migration_checklist.md` (table complète feature par feature).
+`frontend/` est le seul stack désormais (voir CLAUDE.md) — le site statique a été supprimé du
+repo le 2026-09-12 une fois la parité listée ci-dessous atteinte. Le suivi feature par feature
+qui a servi à repérer ces trous (`.claude/memory/frontend_migration_checklist.md`) a été
+supprimé avec le site statique lui-même, son rôle terminé.
 
 Fait le 2026-09-11 dans cette passe : carte Leaflet homepage, section activités par catégorie,
 filtres badge sur la grille lieux, images sur les cartes itinéraires (tous manquants avant),
@@ -133,16 +133,20 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       un observer trivial isolé ne se déclenche pas dans ces conditions) ; la logique est un
       portage exact et standard, aucune raison de douter du comportement en usage réel
 
-**Trou trouvé le 2026-09-12 en auditant avant une suppression du site statique — pas encore
-dans la liste ci-dessus car découvert après coup, à traiter avant de considérer la parité
-réellement complète :**
+- [x] Page `/credits` (attribution photos, 2026-09-12) — trou trouvé en auditant avant la
+      suppression du site statique : `credits.html` listait les crédits CC BY/CC BY-SA
+      obligatoires (licence) pour les photos Wikimedia Commons utilisées, sans équivalent sur
+      Next.js. Contrairement aux autres items de cette liste ce n'était pas une feature UX
+      optionnelle — retirer le site statique sans porter cette page aurait supprimé une
+      attribution légalement requise du site réellement en ligne. Porté en premier, avant la
+      suppression, précisément pour ça (`frontend/src/app/credits/page.tsx`)
 
-- [ ] Page `/credits` (attribution photos) — `credits.html` existe sur le site statique et
-      liste les crédits CC BY/CC BY-SA obligatoires (licence) pour les photos Wikimedia
-      Commons utilisées ; **aucun équivalent sur Next.js**. Contrairement aux autres items de
-      cette liste, ce n'est pas une feature UX optionnelle : retirer le site statique sans
-      porter cette page reviendrait à supprimer une attribution légalement requise du site
-      qui sera réellement en ligne
+**Site statique supprimé le 2026-09-12** — tous les items ci-dessus vérifiés en prod, la
+parité fonctionnelle atteinte ; `index.html`, `lieux/`, `itin/`, `villes/`, `assets/`,
+`scripts/`, `netlify.toml`, `vercel.json` racine, `sitemap.xml`, `robots.txt` supprimés du
+repo. `data/*.json` conservé (seule source de seed du backend). Le projet Vercel
+`riviera-secrete.vercel.app` qui hébergeait ce site n'a plus de code source dans ce repo —
+ignorer cette URL, le seul vrai site est désormais `frontend-two-plum-92.vercel.app`.
 
 ## Communauté / comptes (backend requis)
 
@@ -159,8 +163,10 @@ réellement complète :**
       cet email tant qu'un domaine n'est pas vérifié sur resend.com/domains (voir la tâche
       domaine ci-dessous, `RESEND_API_KEY` déjà configurée sur Railway)
 - [x] Migration favoris + itinéraires custom de localStorage → DB — favoris (`/mes-favoris`,
-      `9e055b3`) et itinéraires custom (`fc84181`, DB-only) faits côté `frontend/` ; le site
-      statique garde sa propre version localStorage séparée (`mes-favoris.html`), non migrée
+      `9e055b3`) et itinéraires custom (`fc84181`, DB-only) faits côté `frontend/` ; la
+      version localStorage séparée du site statique (`mes-favoris.html`) était restée non
+      migrée mais le site statique lui-même a été supprimé le 2026-09-12, donc sans objet
+      désormais
 - [ ] Social proof — "X personnes ont mis ce lieu en favori", visible publiquement
 - [ ] "J'y suis allé" — visited tracker distinct des favoris
 - [ ] Avis et notes sur les activités — étoiles + commentaire court, stockage backend,
@@ -176,9 +182,13 @@ réellement complète :**
       Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine
       pointé. Sert aussi à vérifier un domaine sur Resend (resend.com/domains) pour lever la
       limitation d'envoi sandbox des emails de confirmation (voir "Communauté / comptes")
-- [ ] Mettre à jour toutes les URLs canoniques (`<link rel="canonical">`, `og:url`, JSON-LD,
-      `ogImage` dans les lieux) — hardcodées sur `riviera-secrete.netlify.app` ; chercher
-      dans `scripts/render/lieu.mjs`, `itin.mjs`, `index.html`, puis rebuilder
+- [ ] Purger le champ `ogImage` de `data/lieux.json`/la DB — hardcodé sur
+      `riviera-secrete.netlify.app` (domaine mort, l'ancien site statique n'existe plus).
+      **Trouvé mort le 2026-09-12** : le frontend Next.js ne le lit jamais — les pages lieu/
+      itinéraire calculent leur propre `openGraph.images` à partir de `heroImage`/
+      `firstLieu.heroImage` via `imgUrl()` (voir `lieux/[slug]/page.tsx`,
+      `itineraires/[slug]/page.tsx`). Pas un bug visible aujourd'hui, mais de la donnée morte
+      à nettoyer (retirer le champ du JSON + colonne EF + migration) plutôt qu'à corriger
 
 ### SEO & indexation
 - [ ] Soumettre `sitemap.xml` dans Google Search Console après enregistrement du vrai domaine
@@ -201,9 +211,7 @@ réellement complète :**
 
 ## SEO / technique
 
-- [x] Générer `sitemap.xml` depuis les JSON dans `build.mjs` — 56 URLs auto (1 homepage +
-      6 itin + 27 lieux + 22 villes), domaine corrigé vercel.app, robots.txt à jour
-- [ ] Images Open Graph par page lieu — `ogImage` existe dans le JSON mais les URLs sont
-      hardcodées sur `netlify.app` ; à corriger en même temps que les canonicals
-- [ ] Migration vers Next.js + ASP.NET Core backend (décision archi 2026-09-11 —
-      voir fichier mémoire `architecture_future.md`)
+Section fusionnée le 2026-09-12 dans "Mise en production réelle" et "Portage" ci-dessus —
+elle datait d'avant la décision de migrer vers Next.js (2026-09-11) et listait cette migration
+elle-même comme non faite, ainsi qu'un `sitemap.xml` généré par le `build.mjs` du site
+statique (remplacé depuis par `frontend/src/app/sitemap.ts`, une route Next.js dynamique).
