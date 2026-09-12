@@ -1423,6 +1423,28 @@
         "image": "../assets/images/lieux/peille-village/act-3.jpg",
         "alt": "Chapelle Saint-Martin",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "circuits-vtt-peille",
+        "nom": "Circuits VTT autour de Peille",
+        "badge": "gratuit",
+        "duree": "2h à 3h",
+        "prix": "Accès libre",
+        "url": "https://www.visugpx.com/itineraires/vtt/alpes-maritimes/peille/",
+        "image": "../assets/images/lieux/peille-village/act-4.jpg",
+        "alt": "Peille vu depuis la route de La Turbie, terrain vallonné des circuits VTT",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-cauvin-chez-nana",
+        "nom": "Déjeuner chez Cauvin \"Chez Nana\"",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "28–35 € / pers.",
+        "url": "https://fr.gaultmillau.com/en/restaurants/restaurant-cauvin-chez-nana",
+        "image": "../assets/images/lieux/peille-village/act-5.jpg",
+        "alt": "Place ancienne du village de Peille, avec sa fontaine et ses arcades",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

@@ -60,6 +60,8 @@ const CREDITS: Credit[] = [
   { titre: "Place du vieux village (restaurant La Grotte et l'Olivier)", auteur: "Leon petrosyan", fileUrl: "https://commons.wikimedia.org/wiki/File:In_the_center_of_Roquebrune.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Plage des Ponchettes (Nice)", auteur: "Zairon", fileUrl: "https://commons.wikimedia.org/wiki/File:Nice_Plage_des_Ponchettes_1.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Escalier Rossetti (montée vers la Colline du Château)", auteur: "Reinhold Möller", fileUrl: "https://commons.wikimedia.org/wiki/File:Nizza-Rue_Rossetti_(Nice)-4070886.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Peille vu depuis la route de La Turbie (VTT)", auteur: "Copyleft", fileUrl: "https://commons.wikimedia.org/wiki/File:2013_Peille_(vue_depuis_la_route_de_La_Turbie-Monaco).JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Place du Mont-Agel, Peille (restaurant Cauvin Chez Nana)", auteur: "MOSSOT", fileUrl: "https://commons.wikimedia.org/wiki/File:Peille_-_Place_du_Mont-Agel_(ancienne_place_Lascaris)_-01.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
