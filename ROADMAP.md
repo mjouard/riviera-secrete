@@ -21,12 +21,23 @@
 - [ ] Système d'images formalisé — ratios/dimensions par composant (`heroImage`,
       `thumbImage`, cartes homepage, strip itinéraire…), résolution minimale, export
       WebP/AVIF + `srcset` ; chantier technique indépendant du choix des photos elles-mêmes
+- [ ] Horaires et jours de fermeture des activités payantes — **trouvé par l'audit produit du
+      2026-09-12** : un lieu (village, sentier…) n'a pas d'horaire propre, mais ses activités
+      payantes/visitables (musée, villa, jardin…) si — et beaucoup de sites français ferment
+      un jour fixe (souvent lundi ou mardi) ou réduisent/ferment hors-saison. Les `tips[]`
+      actuels restent qualitatifs (« Accès », « Billetterie »…), rien de structuré. Risque
+      concret qu'un visiteur se déplace pour une porte close, en particulier sur les
+      itinéraires qui recommandent d'y aller tôt/hors-saison. Nouveau champ sur chaque entrée
+      de `lieu.activites[]` dans `data/lieux.json` (et donc l'entité `Activite` + une
+      migration EF), pas sur le `Lieu` lui-même
 
 ## Découverte & navigation
 
 - [ ] Recherche textuelle client-side — input qui filtre la grille des lieux en temps réel
       par nom / commune / badge ; toutes les données sont déjà chargées sur la homepage,
-      zéro backend requis ; levier UX le plus impactant actuellement (~2h)
+      zéro backend requis ; levier UX le plus impactant actuellement (~2h). **Confirmé par
+      l'audit produit du 2026-09-12** : c'est la première frustration concrète qu'un visiteur
+      pressé remarquerait, avant même le contenu
 - [ ] Filtres supplémentaires sur la grille — exploiter les `metaPills` déjà présents dans
       `data/lieux.json` (saison, durée, niveau) et ajouter un filtre "Gratuit seulement"
       (badge activité) — données disponibles, juste un filtre JS à câbler (~2h)
@@ -46,8 +57,15 @@
       activité depuis les fiches lieu et les pages ville, page `mes-favoris.html`)
 - [x] Bouton de partage natif (`navigator.share`) sur les fiches lieu
 - [x] Carte homepage : panneau latéral en desktop, bottom-sheet en mobile au clic marqueur
-- [ ] Page `/a-propos` — angle éditorial du site ("carnet de repérage, pas un guide
-      officiel"), aide le SEO et donne confiance aux premiers visiteurs (30 min)
+- [ ] Page `/a-propos` + contact/signalement d'erreur — angle éditorial du site ("carnet de
+      repérage, pas un guide officiel"), aide le SEO et donne confiance aux premiers
+      visiteurs (30 min). **Renforcé par l'audit produit du 2026-09-12** : c'est le trou de
+      confiance le plus cité — aucune page du site n'explique qui écrit, comment les lieux
+      sont choisis, ni comment signaler un prix/horaire obsolète ; à une époque où le contenu
+      générique par IA inonde les résultats de recherche voyage, l'absence totale de signal
+      de crédibilité (bio, méthode, contact) joue contre un site qui a pourtant fait un vrai
+      travail éditorial. Prévoir un lien de contact/signalement, pas seulement un texte
+      éditorial
 
 ## Features différenciantes
 
@@ -65,7 +83,12 @@
       pont entre contenu éditorial et créateur custom (~1h)
 - [ ] Créateur d'itinéraire : partage par URL — encoder la sélection dans les query params
       pour partager sans compte ni backend (sera mieux fait côté backend)
-- [ ] PWA — manifest + service worker pour usage hors ligne sur le terrain
+- [ ] PWA — manifest + service worker pour usage hors ligne sur le terrain. **Renforcé par
+      l'audit produit du 2026-09-12** : ironie du positionnement — les lieux "hors des
+      sentiers battus" sont statistiquement ceux où la couverture mobile est la plus faible
+      (sentiers côtiers, villages perchés, arrière-pays), et le site dépend entièrement d'une
+      connexion live (API, cartes) sans aucun mode hors-ligne — au moment précis où l'usage
+      terrain en aurait le plus besoin
 
 ## Maillage interne & SEO éditorial
 
@@ -174,6 +197,11 @@ ignorer cette URL, le seul vrai site est désormais `frontend-two-plum-92.vercel
 - [ ] Avis et notes sur les activités — étoiles + commentaire court, stockage backend,
       modération a minima ; dépend de la connexion Google
 - [ ] Tips visiteurs — note courte laissée par les utilisateurs sur un lieu
+
+**Ces quatre items renforcés par l'audit produit du 2026-09-12** : zéro avis, zéro note, zéro
+photo déposée par un visiteur aujourd'hui — combiné à l'absence de page à propos (ci-dessus),
+le site prive le visiteur de toute preuve sociale, dans une catégorie (voyage) où TripAdvisor/
+Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
 
 ## Mise en production réelle
 
