@@ -122,8 +122,9 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       ville), même structure que le site statique, urls vers les routes Next.js
 - [x] JSON-LD `TouristDestination` sur les pages ville Next.js (2026-09-12) — même structure
       que `ville.mjs`, image du premier lieu de la ville, urls vers les routes Next.js
-- [ ] `noindex` sur les pages user-generated (`/creer-itineraire`, `/mes-itineraires`,
-      `/mes-favoris`) — pas confirmé posé sur Next.js, existe sur le site statique
+- [x] `noindex` sur les pages user-generated (2026-09-12) — `/creer-itineraire`,
+      `/mes-itineraires`, `/mes-favoris` (parité site statique) + `/connexion` et
+      `/confirmer-email` (pages compte propres à Next.js, même traitement)
 - [ ] Apparition au scroll (IntersectionObserver) sur la grille homepage — cosmétique, non
       prioritaire
 
