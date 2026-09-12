@@ -828,6 +828,28 @@
         "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-3.jpg",
         "alt": "Randonnée village côtier",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "baignade-plage-du-golfe-bleu",
+        "nom": "Baignade à la plage du Golfe Bleu",
+        "badge": "gratuit",
+        "duree": "2h",
+        "prix": "Accès libre",
+        "url": "https://provence-alpes-cotedazur.com/en/things-to-do/leisure-relaxation/all-relaxation-and-leisure-activities/golfe-bleu-beach-roquebrune-cap-martin-en-5026848/",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-4.jpg",
+        "alt": "Plage de galets du Golfe Bleu à Roquebrune-Cap-Martin, au pied du village",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-la-grotte-et-lolivier",
+        "nom": "Déjeuner à La Grotte et l'Olivier",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "25–40 € / pers.",
+        "url": "https://www.lagrotte-lolivier.fr/",
+        "image": "../assets/images/lieux/roquebrune-cap-martin-village/act-5.jpg",
+        "alt": "Place au cœur du vieux village de Roquebrune-Cap-Martin",
+        "linkText": "Réserver →"
       }
     ],
     "related": [

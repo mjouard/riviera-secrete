@@ -56,6 +56,8 @@ const CREDITS: Credit[] = [
   { titre: "Vignoble de l'abbaye de Lérins (restaurant La Tonnelle)", auteur: "Tangopaso", fileUrl: "https://commons.wikimedia.org/wiki/File:Vignoble_de_l%27abbaye_de_L%C3%A9rins.jpg", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
   { titre: "Chemin du Paradis, entre Gourdon et Bar-sur-Loup", auteur: "Gilbert Bochenek", fileUrl: "https://commons.wikimedia.org/wiki/File:Gourdon-Chemin_du_Paradis-PACA-gb.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
   { titre: "Restaurant Au Vieux Four, Gourdon", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Gourdon_(Alpes-Maritimes)_09.jpg", licenceLabel: "CC0 1.0", licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.fr" },
+  { titre: "Plage du Buse (baignade, Roquebrune-Cap-Martin)", auteur: "Renek78", fileUrl: "https://commons.wikimedia.org/wiki/File:Plage_du_Buse,_Roquebrune-Cap-Martin_in_July_2020.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Place du vieux village (restaurant La Grotte et l'Olivier)", auteur: "Leon petrosyan", fileUrl: "https://commons.wikimedia.org/wiki/File:In_the_center_of_Roquebrune.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
