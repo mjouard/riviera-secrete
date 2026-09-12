@@ -108,8 +108,10 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       lien "Réserver" pointe maintenant vers l'URL réelle de l'activité au lieu de la fiche lieu
 - [x] Section "Autres itinéraires" (suggestions) en bas d'une page itinéraire (2026-09-12) —
       grille 3 colonnes, href converti en route Next.js (même pattern que `lieu.related`)
-- [ ] Lien `?itin=<slug>` sur les stops + breadcrumb contextuel retour-vers-l'itinéraire —
-      absent sur Next.js (comportement présent sur le site statique, voir CLAUDE.md)
+- [x] Lien `?itin=<slug>` sur les stops + breadcrumb contextuel retour-vers-l'itinéraire
+      (2026-09-12) — corrige au passage le crumb par défaut de la fiche lieu (pointait vers
+      la liste générique `/lieux`, pointe maintenant vers la ville). `/lieux/[slug]` passe de
+      statique à dynamique (rendu à la demande) suite à l'usage de `searchParams`
 - [ ] Hero carrousel sur la homepage (8 images) — absent sur Next.js (le composant
       `HeroCarousel.tsx` existe et est utilisé sur les pages lieu/itinéraire, juste pas monté
       sur la homepage elle-même)
