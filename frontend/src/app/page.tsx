@@ -4,7 +4,7 @@ import HomeMapWrapper from "@/components/HomeMapWrapper";
 import HomeActivities from "@/components/HomeActivities";
 import HomeLieuxGrid from "@/components/HomeLieuxGrid";
 import HomeHero from "@/components/HomeHero";
-import ItineraireCard from "@/components/ItineraireCard";
+import HomeItineraires from "@/components/HomeItineraires";
 
 export const revalidate = 3600;
 
@@ -61,14 +61,14 @@ export default async function HomePage() {
           </p>
           <div className="flex gap-4 justify-center mt-8">
             <Link
-              href="/lieux"
+              href="#lieux"
               className="px-6 py-3 rounded-full text-sm font-medium transition-colors"
               style={{ background: "var(--azure)", color: "#0C1116" }}
             >
               Explorer les lieux
             </Link>
             <Link
-              href="/itineraires"
+              href="#itineraires"
               className="px-6 py-3 rounded-full text-sm font-medium border transition-colors hover:bg-white/5"
               style={{ borderColor: "var(--line)", color: "var(--text)" }}
             >
@@ -79,23 +79,10 @@ export default async function HomePage() {
       </section>
 
       {/* Itinéraires */}
-      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+      <section id="itineraires" className="py-12 px-6 border-t scroll-mt-20" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-baseline justify-between mb-8">
-            <h2 className="text-2xl font-bold">Itinéraires</h2>
-            <Link
-              href="/itineraires"
-              className="text-sm transition-colors"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Voir tous →
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {itineraires.map((itin) => (
-              <ItineraireCard key={itin.id} itin={itin} lieuBySlug={lieuBySlug} />
-            ))}
-          </div>
+          <h2 className="text-2xl font-bold mb-8">Itinéraires</h2>
+          <HomeItineraires itineraires={itineraires} lieuBySlug={lieuBySlug} />
         </div>
       </section>
 
@@ -128,7 +115,7 @@ export default async function HomePage() {
       </section>
 
       {/* Lieux */}
-      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+      <section id="lieux" className="py-12 px-6 border-t scroll-mt-20" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
           <HomeLieuxGrid lieux={lieux} />
         </div>

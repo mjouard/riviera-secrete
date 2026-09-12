@@ -5,9 +5,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 const CONTENT_LINKS = [
-  { href: "/lieux", label: "Lieux" },
   { href: "/villes", label: "Villes" },
-  { href: "/itineraires", label: "Itinéraires" },
 ];
 
 const ACCOUNT_LINKS = [

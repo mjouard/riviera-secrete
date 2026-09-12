@@ -72,7 +72,7 @@ export default function MesFavorisPage() {
             Aucun favori pour l&apos;instant.
           </p>
           <Link
-            href="/lieux"
+            href="/#lieux"
             className="text-sm"
             style={{ color: "var(--azure)" }}
           >

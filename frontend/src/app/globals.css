@@ -59,10 +59,24 @@ button:not(:disabled) { cursor: pointer; }
   .booking-extra { display: block !important; }
 }
 
+/* Cartes au-dela de 3 repliees derriere "Voir plus" (mobile uniquement, utilise par la
+   section itineraires de l'accueil) - inverse de .booking-extra ci-dessus : ici c'est le
+   desktop qui montre tout par defaut, et le mobile qui limite. */
+@media (max-width: 639.98px) {
+  .home-itin-extra { display: none; }
+  .home-itin-grid.expanded .home-itin-extra { display: block; }
+}
+
 /* ---------- SCROLL REVEAL (grille lieux homepage) ---------- */
-.card-reveal { opacity: 0; transform: translateY(16px); transition: transform 0.25s ease; }
-.card-reveal.visible { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) {
+/* Uniquement au-dela de 640px (grille desktop) : sur mobile la grille est un carrousel a
+   defilement horizontal (voir .hscroll) et ce fondu/translateY vertical, declenche par
+   l'IntersectionObserver au fil du scroll horizontal, faisait visiblement "sauter" les
+   cartes de haut en bas pendant le swipe - retire pour ce viewport. */
+@media (min-width: 640px) {
+  .card-reveal { opacity: 0; transform: translateY(16px); transition: transform 0.25s ease; }
+  .card-reveal.visible { opacity: 1; transform: translateY(0); }
+}
+@media (min-width: 640px) and (prefers-reduced-motion: reduce) {
   .card-reveal { transition: none; opacity: 1; transform: none; }
 }
 

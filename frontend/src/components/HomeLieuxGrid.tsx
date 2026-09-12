@@ -9,7 +9,7 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
-      className="card-reveal group block rounded-xl overflow-hidden flex-shrink-0 snap-start w-[46%] sm:w-auto transition-transform hover:-translate-y-1"
+      className="card-reveal group block rounded-xl overflow-hidden flex-shrink-0 snap-start w-[62%] sm:w-auto transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
       <div className="aspect-[4/3] overflow-hidden">
