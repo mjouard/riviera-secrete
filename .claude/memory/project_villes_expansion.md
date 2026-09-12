@@ -140,7 +140,7 @@ Pour rester dans l'esprit "petit à petit" demandé :
 | Menton, Monaco & la frontière | en cours | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). D'autres trous possibles dans cette région (Cap-Martin, Sainte-Agnès est côté arrière-pays) mais non traités cette nuit — voir "Prochaine étape". |
 | Nice et ses environs immédiats | fait | `falicon` (lieu `falicon-village`) + `parc-mont-boron` (nouveau lieu sur la ville `nice` existante) | Commits `51b7c12`/`840cabc`, syncés en DB. Autres candidats envisagés et écartés pour cette nuit : Aspremont (redondant avec Falicon — même angle "village perché vue sur Nice"), Bellet/Cimiez (gardés pour une session future, moins prioritaires). |
 | L'arrière-pays : villages perchés & gorges | à faire | — | Candidats pressentis à vérifier : Sainte-Agnès, Coaraze, Sospel, Saorge, Lucéram, Gorbio, Vence (centre), Castellar |
-| Antibes, Cannes & le massif de l'Estérel | à faire | — | |
+| Antibes, Cannes & le massif de l'Estérel | fait | `mougins` (lieu `vieux-mougins`), `vallauris` (lieu `vieux-vallauris-ceramique`) | Commits `1eb2386`/`22ff6e4`, syncés en DB. Angle éditorial : art vivant/artisanat plutôt que le seul nom "Picasso" (déjà connu partout) — galeries habitées à Mougins, ateliers de céramistes à Vallauris. |
 | Grasse & le golfe de Saint-Tropez | à faire | — | Candidats pressentis : Mougins, Valbonne, Ramatuelle |
 
 *(Mettre à jour "Statut" en `en cours` / `fait` / `interrompu — voir note`, et lister les
@@ -157,6 +157,10 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 | `falicon` (ville) | Falicon | thumb |
 | `falicon-village` | Falicon | hero + thumb |
 | `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb |
+| `mougins` (ville) | Mougins | thumb |
+| `vieux-mougins` | Le Vieux Mougins | hero + thumb |
+| `vallauris` (ville) | Vallauris | thumb |
+| `vieux-vallauris-ceramique` | Le Vieux Vallauris, cité de la céramique | hero + thumb |
 
 ## Si le travail s'arrête en cours de route
 
