@@ -8,9 +8,12 @@ metadata:
 
 ## Statut
 
-Plan établi le 2026-09-12, **rien implémenté**. Item déjà présent dans `ROADMAP.md`
-("Audience & engagement") depuis l'audit produit du 2026-09-12 — ce fichier ajoute le
-détail derrière l'entrée résumée là-bas.
+Plan établi le 2026-09-12. **Phase 0 (fondations) terminée et déployée en prod le
+2026-09-13** : les deux décisions ci-dessous ont été confirmées par l'utilisateur
+(routing `/en` + next-intl, colonnes jumelles nullables), puis implémentées intégralement
+dans la même session — voir "Phase 0 — ce qui a été fait" plus bas pour le détail exact
+(fichiers, commits, vérifications). Phases 1+ (traduction réelle du contenu) pas encore
+démarrées.
 
 ## État des lieux au moment du plan
 
@@ -45,16 +48,83 @@ lignes, `data/villes.json` = 244, `data/itineraires.json` = 985).
 ## Phasage proposé
 
 0. **Fondations** — migration EF (colonnes `*En` nullable), routing `[locale]`, `next-intl`
-   pour la chrome, `hreflang` + sitemap par langue.
-1. **MVP anglais** — homepage, nav, footer, `/lieux`, `/villes`, `/itineraires` (pages
-   listes) traduits : assez pour être indexé et utile à un visiteur anglophone.
+   pour la chrome, `hreflang` + sitemap par langue. **Fait le 2026-09-13**, voir détail
+   ci-dessous.
+1. **MVP anglais** — homepage (hero, sections), nav (déjà fait en phase 0), footer (déjà
+   fait), `/villes` (page liste) traduits : assez pour être indexé et utile à un visiteur
+   anglophone. **Note 2026-09-13** : `/lieux` et `/itineraires` (pages listes) ont été
+   supprimées du site le même jour que ce plan a été écrit à l'origine — elles dupliquaient
+   pure la homepage et le lien "voir tous" a été retiré. Donc pas de page liste à traduire
+   pour ces deux-là : c'est la homepage elle-même (sections `#lieux`/`#itineraires`) qui
+   fait office de page liste et qu'il faut traduire.
 2. **Contenu éditorial** — traduction des 27 lieux + 22 villes + 6 itinéraires
    (descriptions/tips), lot par lot au même rythme que le chantier "activités par badge".
 3. **Activités** — traduction des ~109 `activites[].nom`/`alt`, intégrable directement à la
    phase 2 lieu par lieu.
 4. **Auth & transactionnel** — `/connexion`, `/confirmer-email`, emails Resend en anglais.
-5. **Polish SEO** — `hreflang` croisés, `og:locale`, sitemap complet, vérifier Search
-   Console après mise en ligne.
+   **Note 2026-09-13** : `NextAuth.pages.signIn` (`src/lib/auth.ts`) reste codé en dur sur
+   `/connexion` (sans locale) — un visiteur anglophone non connecté qui doit se
+   ré-authentifier atterrit sur la page française. Limitation connue, acceptée pour
+   l'instant, à corriger dans cette phase (probablement via un callback dynamique ou une
+   page de redirection par locale).
+5. **Polish SEO** — `hreflang` croisés (pas encore ajoutés, voir note ci-dessous), sitemap
+   complet (le sitemap actuel ne liste que le français, volontaire tant que `/en` n'a pas de
+   contenu réel — voir ci-dessous), `og:locale` (déjà fait en phase 0, varie par locale),
+   vérifier Search Console après mise en ligne.
+
+## Phase 0 — ce qui a été fait (2026-09-13)
+
+**Backend** (commit `bb82324`) — migration EF `AddEnglishTranslationColumns`, 13 colonnes
+`text` nullable, appliquée en prod via `railway run`/`dotnet ef database update` avec la
+connection string publique (`DATABASE_PUBLIC_URL` du service Postgres — la variable interne
+`DATABASE_URL`/`postgres.railway.internal` n'est résolvable que depuis l'intérieur du réseau
+Railway, pas depuis une commande locale), puis backend redéployé (`railway up --service
+api`) pour que l'API expose réellement les nouveaux champs. Colonnes ajoutées : `Lieu.{NomEn,
+DescriptionEn, Description2En}`, `Ville.{NomEn, DescriptionEn}`, `Activite.{NomEn, AltEn}`,
+`Itineraire.{TitreEn, BadgeEn, DescriptionEn, IntroEn, MapLabelEn}` — champs scalaires
+uniquement ; les libellés imbriqués dans `Itineraire.Items`/`Booking`/`Suggestions` (JSON)
+seront traduits directement dans leur structure JSON en phase 2/3, sans nouvelle migration.
+Vérifié via `curl` sur l'API prod que les champs apparaissent (valeur `null`).
+
+**Frontend** (commit `da6fdf1`) — `next-intl` installé et configuré :
+- `src/i18n/routing.ts` (`locales: ["fr","en"]`, `defaultLocale: "fr"`,
+  `localePrefix: "as-needed"` → le français reste sans préfixe, l'anglais est sous `/en/...`
+  avec les mêmes slugs), `src/i18n/navigation.ts` (`Link`/`useRouter`/etc. locale-aware via
+  `createNavigation`), `src/i18n/request.ts` (charge `messages/{locale}.json`).
+- **Toutes les routes déplacées sous `src/app/[locale]/`** (`git mv` de chaque dossier +
+  `page.tsx`/`layout.tsx` racine) — sauf `src/app/api/` (routes NextAuth, non localisées),
+  `src/app/sitemap.ts` et `favicon.ico` (restent au niveau racine, hors segment de langue).
+- `src/proxy.ts` (pas `middleware.ts` — **Next.js 16 a renommé cette convention en "proxy"**,
+  fichier + export ; utiliser l'ancien nom produit un avertissement de dépréciation au build,
+  voir `node_modules/next/dist/docs/.../file-conventions/proxy.md`) — appelle
+  `createMiddleware(routing)` de next-intl, `matcher` exclut `/api`, `_next`, et tout chemin
+  avec une extension.
+- **Tous les `<Link>` et `useRouter` internes (21 fichiers) basculés** de `next/link`/
+  `next/navigation` vers `@/i18n/navigation` — sans ça, un lien interne sur `/en/...`
+  retomberait sur la page française (`next/link` ne connaît pas la locale courante). `notFound`
+  reste importé de `next/navigation` (agnostique à la locale, pas concerné).
+- Chrome traduit : `messages/fr.json`/`en.json` (clés `meta.*`, `nav.*`, `footer.*`),
+  `NavHeader.tsx` et `src/app/[locale]/layout.tsx` (footer + `generateMetadata` par locale,
+  `<html lang>` dynamique, `openGraph.locale` fr_FR/en_US) convertis en `useTranslations`/
+  `getTranslations`. **Rien d'autre n'est traduit** — homepage, `/villes`, fiches lieu/
+  itinéraire/ville affichent encore le contenu français sur `/en/*` (phase 1+).
+- **`/en/*` marqué `robots: noindex, follow`** (dans `generateMetadata` du layout) tant que
+  son contenu reste identique au français — évite un signal de duplicate content à Google.
+  **À retirer explicitement en phase 1** une fois le contenu anglais réel en ligne, sinon
+  `/en` restera invisible de Google indéfiniment.
+- Pas de `alternates.languages` (hreflang) ajouté : le layout racine s'applique à toutes les
+  pages, un hreflang générique `"/" <-> "/en"` y serait faux sur toute page qui n'est pas la
+  homepage. À faire page par page en phase 1+ quand chaque page aura un vrai équivalent
+  anglais.
+- `sitemap.ts` non modifié : ne liste toujours que les URLs françaises, cohérent avec le
+  `noindex` sur `/en`.
+- Vérifié : build de prod (`next build`) propre, `/` et `/en` répondent 200 avec le bon
+  `<html lang>`, nav/footer traduits sur `/en`, liens internes préfixés `/en/...`
+  automatiquement, `robots: noindex, follow` présent uniquement sur `/en` (confirmé en prod
+  via `curl` après déploiement).
+
+**Limitation connue laissée telle quelle** : `NextAuth.pages.signIn` (`src/lib/auth.ts`)
+reste `/connexion` fixe, sans locale — voir phase 4 ci-dessus.
 
 ## Explicitement déconseillé
 

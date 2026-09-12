@@ -112,10 +112,15 @@
 
 - [ ] Newsletter — "Un lieu secret par semaine" via Brevo ou Mailchimp (formulaire embed,
       aucun backend requis) ; meilleur levier de rétention avant le backend (30 min)
-- [ ] Version anglaise du site — gros chantier (contenu à dupliquer/traduire, routing
-      bilingue) mais probablement le plus gros levier d'audience disponible. **Plan établi le
-      2026-09-12** (pas encore démarré, deux décisions à valider avant la phase 0 — voir
-      `.claude/memory/project_version_anglaise.md` pour le détail complet) :
+- [~] Version anglaise du site — gros chantier (contenu à dupliquer/traduire, routing
+      bilingue) mais probablement le plus gros levier d'audience disponible. **Phase 0
+      (fondations) faite et déployée le 2026-09-13** — routing `/en` (next-intl, slugs
+      identiques FR/EN), colonnes `*En` nullables côté backend (migration appliquée en prod),
+      chrome (nav/footer) traduit, `/en` en `noindex` tant que le contenu réel n'y est pas.
+      Phases 1+ (traduction homepage/villes puis 27 lieux/22 villes/6 itinéraires/~109
+      activités) pas encore démarrées. Détail complet dans
+      `.claude/memory/project_version_anglaise.md`. Plan initial établi le 2026-09-12, deux
+      décisions validées par l'utilisateur avant de commencer (routing + stockage) :
       1. Routing en `frontend/src/app/[locale]/...` + `next-intl` pour la UI chrome, slugs
          de lieux/villes **identiques** dans les deux langues (pas de slug anglais dédié).
       2. Contenu traduit stocké en **colonnes jumelles nullable** sur les entités backend
