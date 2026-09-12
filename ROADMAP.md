@@ -120,7 +120,8 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
       standard (`transition: opacity`)
 - [x] JSON-LD `ItemList` sur la homepage Next.js (2026-09-12) — 22 `ListItem` (une par
       ville), même structure que le site statique, urls vers les routes Next.js
-- [ ] JSON-LD `TouristDestination` sur les pages ville Next.js — absent
+- [x] JSON-LD `TouristDestination` sur les pages ville Next.js (2026-09-12) — même structure
+      que `ville.mjs`, image du premier lieu de la ville, urls vers les routes Next.js
 - [ ] `noindex` sur les pages user-generated (`/creer-itineraire`, `/mes-itineraires`,
       `/mes-favoris`) — pas confirmé posé sur Next.js, existe sur le site statique
 - [ ] Apparition au scroll (IntersectionObserver) sur la grille homepage — cosmétique, non
