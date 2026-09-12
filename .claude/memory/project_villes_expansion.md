@@ -138,7 +138,7 @@ Pour rester dans l'esprit "petit à petit" demandé :
 | Région | Statut | Villes ajoutées | Notes |
 |---|---|---|---|
 | Menton, Monaco & la frontière | en cours | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). D'autres trous possibles dans cette région (Cap-Martin, Sainte-Agnès est côté arrière-pays) mais non traités cette nuit — voir "Prochaine étape". |
-| Nice et ses environs immédiats | à faire | — | 1 seule ville existante (Nice) aujourd'hui, probablement le plus gros trou |
+| Nice et ses environs immédiats | fait | `falicon` (lieu `falicon-village`) + `parc-mont-boron` (nouveau lieu sur la ville `nice` existante) | Commits `51b7c12`/`840cabc`, syncés en DB. Autres candidats envisagés et écartés pour cette nuit : Aspremont (redondant avec Falicon — même angle "village perché vue sur Nice"), Bellet/Cimiez (gardés pour une session future, moins prioritaires). |
 | L'arrière-pays : villages perchés & gorges | à faire | — | Candidats pressentis à vérifier : Sainte-Agnès, Coaraze, Sospel, Saorge, Lucéram, Gorbio, Vence (centre), Castellar |
 | Antibes, Cannes & le massif de l'Estérel | à faire | — | |
 | Grasse & le golfe de Saint-Tropez | à faire | — | Candidats pressentis : Mougins, Valbonne, Ramatuelle |
@@ -154,6 +154,9 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 |---|---|---|
 | `menton` (ville) | Menton | thumb |
 | `cimetiere-vieux-chateau-menton` | Le Cimetière du Vieux-Château | hero + thumb |
+| `falicon` (ville) | Falicon | thumb |
+| `falicon-village` | Falicon | hero + thumb |
+| `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb |
 
 ## Si le travail s'arrête en cours de route
 
