@@ -1049,6 +1049,28 @@
         "image": "../assets/images/lieux/colline-du-chateau-nice/act-3.jpg",
         "alt": "Montée en ascenseur (Colline)",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "baignade-plage-des-ponchettes",
+        "nom": "Baignade à la plage des Ponchettes",
+        "badge": "gratuit",
+        "duree": "1h30",
+        "prix": "Accès libre",
+        "url": "https://www.explorenicecotedazur.com/en/out-and-about/beaches/",
+        "image": "../assets/images/lieux/colline-du-chateau-nice/act-4.jpg",
+        "alt": "Plage des Ponchettes à Nice, au pied de la Colline du Château",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "montee-escalier-rossetti",
+        "nom": "Montée par l'escalier Rossetti",
+        "badge": "gratuit",
+        "duree": "20min",
+        "prix": "Accès libre",
+        "url": "https://www.decathlon-outdoor.com/fr-fr/explore/france/balade-sur-la-colline-du-chateau-de-nice-6058d7067dd02",
+        "image": "../assets/images/lieux/colline-du-chateau-nice/act-5.jpg",
+        "alt": "Vue sur le Vieux Nice depuis l'escalier Rossetti, qui monte vers la Colline du Château",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
