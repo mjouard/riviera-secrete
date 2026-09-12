@@ -14,6 +14,14 @@ import ResultsView from "./_components/ResultsView";
 
 type View = "picker" | "results";
 
+/** Brouillon non sauvegardé, préservé le temps d'un aller-retour par /connexion. */
+const DRAFT_KEY = "creer-itineraire:draft-before-login";
+interface Draft {
+  nom: string;
+  dureeKey: DureeKey;
+  daySlugs: string[][];
+}
+
 // ─── Main page ───────────────────────────────────────────────────────────────
 
 export default function CreerItinerairePage() {
@@ -41,6 +49,7 @@ export default function CreerItinerairePage() {
   // Drag-and-drop
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
   const dbIdAttempted = useRef<string | null>(null);
+  const draftRestoreAttempted = useRef(false);
 
   const lieuBySlug = useMemo(() => new Map(lieux.map((l) => [l.slug, l])), [lieux]);
 
@@ -94,6 +103,38 @@ export default function CreerItinerairePage() {
       })
       .catch(() => {});
   }, [loading, status, session, lieux, view]);
+
+  // Restaure un brouillon perdu au moment de se connecter pour sauvegarder
+  useEffect(() => {
+    function restoreDraft() {
+      if (loading) return;
+      if (status === "loading") return;
+      if (!session?.apiToken) return;
+      if (draftRestoreAttempted.current) return;
+      draftRestoreAttempted.current = true;
+
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      sessionStorage.removeItem(DRAFT_KEY);
+      try {
+        const draft = JSON.parse(raw) as Draft;
+        const map = new Map(lieux.map((l) => [l.slug, l]));
+        const days = draft.daySlugs.map(
+          (day) => day.map((slug) => map.get(slug)).filter(Boolean) as Lieu[]
+        );
+        if (days.flat().length === 0) return;
+        setCurrentDays(days);
+        setDureeKey(draft.dureeKey);
+        setCurrentNom(draft.nom);
+        setSaveInput(draft.nom);
+        setView("results");
+        setShowSaveModal(true);
+      } catch {
+        // brouillon corrompu — on l'ignore silencieusement
+      }
+    }
+    restoreDraft();
+  }, [loading, status, session, lieux]);
 
   // ─── Picker logic ──────────────────────────────────────────────────────────
 
@@ -195,6 +236,12 @@ export default function CreerItinerairePage() {
     const nom = saveInput.trim();
     if (!nom) return;
     if (!session?.apiToken) {
+      const draft: Draft = {
+        nom,
+        dureeKey,
+        daySlugs: currentDays.map((day) => day.map((l) => l.slug)),
+      };
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
       redirectToConnexion();
       return;
     }

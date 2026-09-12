@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
 import type { UserItineraire } from "@/lib/types";
-import { redirectToConnexion } from "@/lib/utils";
 
 export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
   const { data: session } = useSession();
+  const router = useRouter();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<UserItineraire[] | null>(null);
@@ -25,7 +26,8 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
 
   async function toggle() {
     if (!session?.apiToken) {
-      redirectToConnexion();
+      // Pas besoin de compte pour composer un itinéraire — seule la sauvegarde en exige un.
+      router.push(`/creer-itineraire?add=${encodeURIComponent(lieuSlug)}`);
       return;
     }
     if (!open) {

@@ -67,18 +67,16 @@ export default function MesItinerairesPage() {
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
             {session
               ? "Sauvegardés sur ton compte."
-              : "Connecte-toi pour créer et retrouver tes itinéraires."}
+              : "Compose un itinéraire librement — connecte-toi pour le sauvegarder."}
           </p>
         </div>
-        {session && (
-          <Link
-            href="/creer-itineraire"
-            className="text-sm px-4 py-2 rounded-xl font-semibold flex-shrink-0"
-            style={{ background: "var(--terracotta)", color: "#0c1116" }}
-          >
-            + Créer
-          </Link>
-        )}
+        <Link
+          href="/creer-itineraire"
+          className="text-sm px-4 py-2 rounded-xl font-semibold flex-shrink-0"
+          style={{ background: "var(--terracotta)", color: "#0c1116" }}
+        >
+          + Créer
+        </Link>
       </div>
 
       {!session && (
@@ -87,7 +85,7 @@ export default function MesItinerairesPage() {
           style={{ background: "var(--surface)", borderLeft: "3px solid var(--azure)" }}
         >
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-            Connecte-toi pour créer et synchroniser tes itinéraires sur tous tes appareils.
+            Connecte-toi pour sauvegarder et retrouver tes itinéraires sur tous tes appareils.
           </p>
           <Link
             href="/connexion?callbackUrl=/mes-itineraires"

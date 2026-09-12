@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: "/lieux", label: "Lieux" },
   { href: "/villes", label: "Villes" },
   { href: "/itineraires", label: "Itinéraires" },
+  { href: "/creer-itineraire", label: "Créer un itinéraire" },
   { href: "/mes-itineraires", label: "Mes itinéraires" },
   { href: "/mes-favoris", label: "Mes favoris" },
 ];
