@@ -1,7 +1,5 @@
 import type { Lieu, Activite } from "./types";
 
-export const STORAGE_KEY = "riviera-secrete:itineraires-custom";
-
 export const DUREE_META = {
   "demi-journee": { label: "Demi-journée", dayBudgets: [240] },
   journee: { label: "Journée", dayBudgets: [480] },
@@ -10,22 +8,6 @@ export const DUREE_META = {
 } as const;
 
 export type DureeKey = keyof typeof DUREE_META;
-
-export const BADGE_DEFS: Record<string, { icon: string; label: string }> = {
-  plage: { icon: "🏖️", label: "Plage" },
-  randonnee: { icon: "🥾", label: "Randonnée" },
-  vtt: { icon: "🚵", label: "VTT" },
-  plongee: { icon: "🤿", label: "Plongée" },
-  restaurant: { icon: "🍽️", label: "Restaurant" },
-};
-
-export const REGION_ORDER = [
-  "menton-monaco",
-  "nice",
-  "arriere-pays",
-  "antibes-cannes",
-  "golfe-st-tropez",
-];
 
 export function parseVisitMinutes(lieu: Lieu): number {
   const pill = (lieu.metaPills || []).find((p) => /urée/.test(p.label));
@@ -111,40 +93,4 @@ export function buildBookingActivites(days: Lieu[][]): Array<{ lieu: Lieu; activ
     }
   }
   return result;
-}
-
-export interface SavedItineraire {
-  id: string;
-  nom: string;
-  dureeKey: DureeKey;
-  days: string[][];
-  createdAt: string;
-}
-
-export function listSaved(): SavedItineraire[] {
-  if (typeof window === "undefined") return [];
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]") || []; }
-  catch { return []; }
-}
-
-export function getSaved(id: string): SavedItineraire | null {
-  return listSaved().find((it) => it.id === id) || null;
-}
-
-export function saveItineraire({ id, nom, dureeKey, days }: { id: string | null; nom: string; dureeKey: DureeKey; days: Lieu[][] }): string {
-  const all = listSaved();
-  const daySlugs = days.map((day) => day.map((l) => l.slug));
-  const idx = id ? all.findIndex((it) => it.id === id) : -1;
-  const finalId = id || crypto.randomUUID();
-  const entry: SavedItineraire = {
-    id: finalId, nom, dureeKey, days: daySlugs,
-    createdAt: idx >= 0 ? all[idx].createdAt : new Date().toISOString(),
-  };
-  if (idx >= 0) all[idx] = entry; else all.push(entry);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  return finalId;
-}
-
-export function deleteSaved(id: string): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(listSaved().filter((it) => it.id !== id)));
 }

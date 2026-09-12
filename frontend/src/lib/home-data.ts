@@ -30,6 +30,10 @@ export const BADGE_DEFS: { slug: string; label: string; emoji: string }[] = [
   { slug: "restaurant", label: "Restaurant", emoji: "🍽️" },
 ];
 
+/** BADGE_DEFS indexé par slug, pour un lookup direct (ex. badges d'un lieu donné). */
+export const BADGE_DEFS_BY_SLUG: Record<string, { slug: string; label: string; emoji: string }> =
+  Object.fromEntries(BADGE_DEFS.map((b) => [b.slug, b]));
+
 export const ACTIVITY_CATEGORIES = [
   { slug: "outdoor", label: "🥾 Outdoor" },
   { slug: "culture", label: "🏛 Culture & Visites" },

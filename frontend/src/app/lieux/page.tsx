@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { imgUrl } from "@/lib/utils";
+import { REGION_ORDER } from "@/lib/home-data";
 
 export const metadata: Metadata = {
   title: "Lieux — Riviera Secrète",
@@ -9,14 +10,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 3600;
-
-const REGION_ORDER = [
-  "menton-monaco",
-  "nice",
-  "arriere-pays",
-  "antibes-cannes",
-  "golfe-st-tropez",
-] as const;
 
 export default async function LieuxPage() {
   const lieux = await api.lieux.list();
