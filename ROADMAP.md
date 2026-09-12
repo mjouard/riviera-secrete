@@ -106,8 +106,8 @@ décodage des entités HTML (`&amp;` → `&`), bascule des 4 cartes Leaflet sur 
 - [x] Booking cards "À réserver" avec image + prix + durée (2026-09-12) — croise
       `b.lieuSlug`/`b.activiteId` avec l'activité réelle (déjà chargée via `lieuBySlug`),
       lien "Réserver" pointe maintenant vers l'URL réelle de l'activité au lieu de la fiche lieu
-- [ ] Section "Autres itinéraires" (suggestions) en bas d'une page itinéraire — absente sur
-      Next.js, les données `suggestions[]` existent déjà côté API
+- [x] Section "Autres itinéraires" (suggestions) en bas d'une page itinéraire (2026-09-12) —
+      grille 3 colonnes, href converti en route Next.js (même pattern que `lieu.related`)
 - [ ] Lien `?itin=<slug>` sur les stops + breadcrumb contextuel retour-vers-l'itinéraire —
       absent sur Next.js (comportement présent sur le site statique, voir CLAUDE.md)
 - [ ] Hero carrousel sur la homepage (8 images) — absent sur Next.js (le composant
