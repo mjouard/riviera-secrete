@@ -2672,6 +2672,17 @@
         "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-3.jpg",
         "alt": "Plage de Juan-les-Pins",
         "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-le-bistrot",
+        "nom": "Déjeuner au Bistrot Juan-les-Pins",
+        "badge": "payant",
+        "duree": "1h30",
+        "prix": "21–39 € / pers.",
+        "url": "https://lebistrotjuan.com/",
+        "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-4.jpg",
+        "alt": "Jardin ombragé de palmiers dans le centre de Juan-les-Pins",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
