@@ -3245,6 +3245,28 @@
         "image": "../assets/images/lieux/citadelle-saint-tropez/act-2.jpg",
         "alt": "Location de bateau",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "randonnee-sentier-du-littoral",
+        "nom": "Randonnée du sentier du littoral",
+        "badge": "gratuit",
+        "duree": "3h à 4h",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/en/walk-saint-tropez-sur-le-sentier-du-littoral/",
+        "image": "../assets/images/lieux/citadelle-saint-tropez/act-4.jpg",
+        "alt": "Crique le long du sentier du littoral, qui passe par la plage des Graniers juste avant la Citadelle",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "restaurant-le-goustado-tropezien",
+        "nom": "Déjeuner au Goustado Tropézien",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "13–20 € / pers.",
+        "url": "https://provence-alpes-cotedazur.com/en/plan-your-stay/restaurants/all-restaurants/le-goustado-tropezien-saint-tropez-en-3312968/",
+        "image": "../assets/images/lieux/citadelle-saint-tropez/act-5.jpg",
+        "alt": "Ruelle de la vieille ville de Saint-Tropez, à deux pas de la Citadelle",
+        "linkText": "Réserver →"
       }
     ],
     "related": [
