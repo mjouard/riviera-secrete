@@ -48,6 +48,24 @@ entrées :
 - Activités : angle éditorial "secret/atypique", pas les incontournables déjà sur tous les
   guides (voir la règle du skill `/add-activities`).
 
+## Ville vs. lieu — bien distinguer avant d'ajouter
+
+Un candidat n'est pas forcément une nouvelle **ville** :
+- Si c'est une **commune distincte** qui n'a aucune entrée dans `data/villes.json` → nouvelle
+  `Ville` + au moins un `Lieu` dedans.
+- Si c'est un **endroit physique dans une commune qui a déjà une ville** (ex. un hameau, un
+  quartier, un site à part comme "Èze-sur-Mer" qui est dans la commune d'Èze mais un lieu
+  totalement différent d'`eze-village`) → **juste un nouveau `Lieu`** avec le `villeSlug`
+  existant, pas une ville en double. Vérifier `regionSlug` de la ville existante concernée
+  (`menton-monaco`, `nice`, `arriere-pays`, `antibes-cannes`, `golfe-st-tropez`) avant de
+  choisir.
+
+**Trou déjà repéré, à traiter en priorité** : la région "Menton, Monaco & la frontière"
+(`menton-monaco`) n'a **aucune ville nommée "Menton"** dans `data/villes.json` — 7 villes
+alentour (Villefranche, Saint-Jean-Cap-Ferrat, Beaulieu, Èze, La Turbie, Monaco,
+Roquebrune-Cap-Martin) mais pas Menton elle-même, alors que c'est la ville qui donne son nom
+au site entier ("de Menton à Saint-Tropez"). À combler en premier.
+
 ## Politique photo — placeholders assumés
 
 Pour chaque nouveau lieu :
