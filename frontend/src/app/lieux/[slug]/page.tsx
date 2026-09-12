@@ -37,12 +37,26 @@ export async function generateMetadata({
 
 export default async function LieuPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ itin?: string }>;
 }) {
   const { slug } = await params;
+  const { itin: itinSlug } = await searchParams;
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
+
+  const [ville, itin] = await Promise.all([
+    api.villes.bySlug(lieu.villeSlug).catch(() => null),
+    itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
+  ]);
+
+  const parentCrumb = itin
+    ? { href: `/itineraires/${itin.slug}`, label: itin.titre }
+    : ville
+      ? { href: `/villes/${ville.slug}`, label: ville.nom }
+      : { href: "/lieux", label: "Lieux" };
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
@@ -50,7 +64,9 @@ export default async function LieuPage({
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
         <span>/</span>
-        <Link href="/lieux" className="hover:text-white transition-colors">Lieux</Link>
+        <Link href={parentCrumb.href} className="hover:text-white transition-colors">
+          {parentCrumb.label}
+        </Link>
         <span>/</span>
         <span style={{ color: "var(--text)" }}>{lieu.nom}</span>
       </nav>

@@ -172,7 +172,7 @@ export default async function ItinerairePage({
                   </div>
                   {item.lieuSlug && (
                     <Link
-                      href={`/lieux/${item.lieuSlug}`}
+                      href={`/lieux/${item.lieuSlug}?itin=${itin.slug}`}
                       className="text-xs hover:underline flex-shrink-0"
                       style={{ color: "var(--azure)" }}
                     >
