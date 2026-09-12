@@ -69,7 +69,7 @@ export default function MesFavorisPage() {
       ) : lieux.length === 0 ? (
         <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>
           <p className="mb-4" style={{ color: "var(--text-muted)" }}>
-            Aucun favori pour l'instant.
+            Aucun favori pour l&apos;instant.
           </p>
           <Link
             href="/lieux"

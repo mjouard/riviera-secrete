@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
-import type { Lieu, Activite } from "@/lib/types";
+import type { Lieu } from "@/lib/types";
 import { imgUrl, buildMapLinks } from "@/lib/utils";
 import {
   DUREE_META, BADGE_DEFS, REGION_ORDER,
@@ -239,10 +239,6 @@ export default function CreerItinerairePage() {
   };
 
   // ─── Render ────────────────────────────────────────────────────────────────
-
-  const dureeLabels: Record<DureeKey, string> = {
-    "demi-journee": "Demi-journée", journee: "1 journée", "2-jours": "2 jours", "3-jours": "3 jours",
-  };
 
   if (loading) {
     return (

@@ -36,7 +36,9 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
   const stopsRef = useRef(stops);
   const [ready, setReady] = useState(false);
 
-  stopsRef.current = stops;
+  useEffect(() => {
+    stopsRef.current = stops;
+  }, [stops]);
 
   useEffect(() => {
     if (!ref.current) return;

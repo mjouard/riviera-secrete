@@ -13,9 +13,12 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
 
   useEffect(() => {
     if (!ref.current) return;
-    let map: import("leaflet").Map;
+    let cancelled = false;
+    let map: import("leaflet").Map | undefined;
 
     import("leaflet").then((L) => {
+      if (cancelled || !ref.current) return;
+
       // Fix default icon path broken by bundlers
       delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
       L.Icon.Default.mergeOptions({
@@ -24,7 +27,7 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
         shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
       });
 
-      map = L.map(ref.current!, { zoomControl: true, scrollWheelZoom: false }).setView(
+      map = L.map(ref.current, { zoomControl: true, scrollWheelZoom: false }).setView(
         [lat, lng],
         14
       );
@@ -39,6 +42,7 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
     });
 
     return () => {
+      cancelled = true;
       map?.remove();
     };
   }, [lat, lng, nom]);

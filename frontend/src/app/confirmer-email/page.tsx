@@ -12,19 +12,20 @@ export default function ConfirmerEmailPage() {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("token");
-    if (!token) {
-      setStatus("error");
-      setMessage("Lien de confirmation invalide.");
-      return;
-    }
+    async function confirm() {
+      const token = new URLSearchParams(window.location.search).get("token");
+      if (!token) {
+        setStatus("error");
+        setMessage("Lien de confirmation invalide.");
+        return;
+      }
 
-    fetch(`${API_URL}/api/auth/confirm-email`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token }),
-    })
-      .then(async (res) => {
+      try {
+        const res = await fetch(`${API_URL}/api/auth/confirm-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
         const data = await res.json().catch(() => null);
         if (res.ok) {
           setStatus("success");
@@ -32,11 +33,12 @@ export default function ConfirmerEmailPage() {
           setStatus("error");
           setMessage(data?.error ?? "Impossible de confirmer cet email.");
         }
-      })
-      .catch(() => {
+      } catch {
         setStatus("error");
         setMessage("Une erreur est survenue. Réessaie.");
-      });
+      }
+    }
+    confirm();
   }, []);
 
   return (

@@ -40,7 +40,10 @@ export default function MesItinerairesPage() {
   }, [session]);
 
   useEffect(() => {
-    if (status !== "loading") loadItems();
+    function run() {
+      if (status !== "loading") loadItems();
+    }
+    run();
   }, [loadItems, status]);
 
   async function handleDelete(id: string, nom: string) {

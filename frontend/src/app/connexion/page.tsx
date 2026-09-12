@@ -24,8 +24,11 @@ export default function ConnexionPage() {
   const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setCallbackUrl(params.get("callbackUrl") || "/");
+    function readCallbackUrl() {
+      const params = new URLSearchParams(window.location.search);
+      setCallbackUrl(params.get("callbackUrl") || "/");
+    }
+    readCallbackUrl();
   }, []);
 
   function switchMode(next: Mode) {

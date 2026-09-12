@@ -62,10 +62,16 @@ for the full entity/endpoint reference):
 - **`data/villes.json`** — source of truth for 22 villes (`slug`, `nom`,
   `regionSlug`/`regionLabel`, `lat`/`lng`, `description`, `thumbImage`, and `lieux: []` — a
   list of lieu slugs it owns, same by-reference pattern as everywhere else in this file). A
-  lieu references its ville via `villeSlug`. **No validation catches an unresolved
-  `villeSlug`** at seed time (`DatabaseSeeder.cs` reads the field directly, no throw-if-missing
+  lieu references its ville via `villeSlug`. **No application-level validation catches an
+  unresolved `villeSlug`** (`DatabaseSeeder.cs` reads the field directly, no throw-if-missing
   guard) — the old static-site build script used to hard-fail on this, that safety net is
-  gone, so double-check a new lieu's `villeSlug` by hand against `data/villes.json`.
+  gone. There is a real DB-level backstop (`LieuConfiguration.cs` declares an FK from
+  `Lieu.VilleSlug` to `Ville.Slug`, checked 2026-09-12), so a bad slug on a genuinely fresh,
+  never-seeded database would hard-fail loudly at `SaveChangesAsync()` rather than silently
+  seed broken data — but seeding is a no-op once `Villes` has any rows (see below), so on the
+  actual running prod DB an edit with a bad `villeSlug` today produces **no error of any
+  kind**, it just never takes effect. Double-check a new lieu's `villeSlug` by hand against
+  `data/villes.json` regardless of which of these safety nets does or doesn't apply.
 - **`data/lieux.json`** — source of truth for the 27 lieux, including `lat`/`lng`
   (WebSearch-verified against real-world coordinates, 2026-08-27 — 3 were found off by
   2–6km and corrected: `peille-village`, `peillon-village`,
@@ -299,10 +305,11 @@ visitor picks Google vs. email/password.
   site's dark theme on top of OSM's light tiles. When adding a `useEffect`-based Leaflet
   init (the pattern all of these follow: `import("leaflet").then(L => { ... })`), guard
   against React Strict Mode's double-invoke in dev with a `cancelled` flag checked at the
-  top of the `.then()` callback and set in the effect's cleanup — `HomeMap.tsx` has this
-  guard (added when the "Map container is already initialized" error surfaced there), but
-  `LeafletLieuMap.tsx`/`LeafletItinMap.tsx` still don't, so the same latent bug likely exists
-  on lieu/itinéraire pages too — apply the same fix there if it surfaces.
+  top of the `.then()` callback and set in the effect's cleanup — all four Leaflet
+  components (`HomeMap.tsx`, `BuilderMap.tsx`, `LeafletLieuMap.tsx`, `LeafletItinMap.tsx`)
+  have this guard as of 2026-09-12 (the last two were missing it — found and fixed during a
+  full code audit, having never actually thrown in production since Strict Mode's
+  double-invoke only fires in dev).
 - **Homepage** (`src/app/page.tsx`) renders: a hero (`HomeHero.tsx` — ambient auto-crossfade
   of 8 images, 5s interval, no controls; distinct from `HeroCarousel.tsx` which is
   manual/click-driven and used on lieu/itinéraire pages), itinéraire cards (thumbnail from
