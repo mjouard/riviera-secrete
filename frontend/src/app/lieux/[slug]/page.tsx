@@ -189,14 +189,14 @@ export default async function LieuPage({
       {lieu.activites.length > 0 && (
         <section className="mb-10">
           <h2 className="text-lg font-semibold mb-4">À faire sur place</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2">
             {lieu.activites.map((act) => (
               <a
                 key={act.activiteId}
                 href={act.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-xl overflow-hidden flex flex-col transition-transform hover:-translate-y-0.5"
+                className="group rounded-xl overflow-hidden flex flex-col flex-shrink-0 snap-start w-[70%] sm:w-auto transition-transform hover:-translate-y-0.5"
                 style={{ background: "var(--surface)" }}
               >
                 <div className="aspect-video overflow-hidden">

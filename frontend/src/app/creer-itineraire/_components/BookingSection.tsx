@@ -21,7 +21,7 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
         Ces expériences demandent un peu d&apos;anticipation, surtout en haute saison.
       </p>
       <div
-        className={`booking-grid booking-scroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 lg:grid-cols-3 ${expanded ? "expanded" : ""}`}
+        className={`booking-grid hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 lg:grid-cols-3 ${expanded ? "expanded" : ""}`}
       >
         {bookings.map(({ lieu, activite: act }, i) => (
           <div

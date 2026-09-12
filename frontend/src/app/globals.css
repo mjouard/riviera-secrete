@@ -42,12 +42,15 @@ button:not(:disabled) { cursor: pointer; }
 .builder-stop-card.dragging { opacity: 0.4; }
 .builder-day-stops { min-height: 60px; }
 
-/* ---------- BOOKING CAROUSEL (créateur d'itinéraire) ---------- */
-/* Mobile : défilement horizontal natif, toutes les cartes visibles au scroll, pas de
-   barre de scroll visible (indice de swipe via la carte suivante qui dépasse). Desktop
-   (sm+) : grille classique, cartes au-delà de VISIBLE_COUNT repliées derrière "Voir plus". */
-.booking-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-.booking-scroll::-webkit-scrollbar { display: none; }
+/* ---------- CARROUSEL HORIZONTAL MOBILE (reservation, activites de lieu, ...) ---------- */
+/* Mobile : defilement horizontal natif, toutes les cartes visibles au scroll, pas de
+   barre de scroll visible (indice de swipe via la carte suivante qui depasse). Desktop
+   (sm+) : grille classique (retour au layout normal, plus de scroll horizontal). */
+.hscroll { scrollbar-width: none; -ms-overflow-style: none; }
+.hscroll::-webkit-scrollbar { display: none; }
+
+/* Cartes au-dela de VISIBLE_COUNT repliees derriere "Voir plus" (desktop uniquement,
+   utilise par la section reservation du createur d'itineraire). */
 @media (min-width: 640px) {
   .booking-extra { display: none; }
   .booking-grid.expanded .booking-extra { display: block; }
