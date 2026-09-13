@@ -119,12 +119,33 @@
       pont entre contenu éditorial et créateur custom (~1h)
 - [ ] Créateur d'itinéraire : partage par URL — encoder la sélection dans les query params
       pour partager sans compte ni backend (sera mieux fait côté backend)
-- [ ] PWA — manifest + service worker pour usage hors ligne sur le terrain. **Renforcé par
-      l'audit produit du 2026-09-12** : ironie du positionnement — les lieux "hors des
-      sentiers battus" sont statistiquement ceux où la couverture mobile est la plus faible
-      (sentiers côtiers, villages perchés, arrière-pays), et le site dépend entièrement d'une
-      connexion live (API, cartes) sans aucun mode hors-ligne — au moment précis où l'usage
-      terrain en aurait le plus besoin
+- [~] PWA — **paliers 0 et 1 faits le 2026-09-13**, répond au constat de l'audit produit du
+      2026-09-12 (les lieux "hors des sentiers battus" sont ceux où la couverture mobile est
+      la plus faible, et le site dépendait entièrement d'une connexion live).
+      - **Palier 0 — installable** : `src/app/manifest.ts` (hors `[locale]`, comme
+        `sitemap.ts`), icônes 192/512/maskable + apple-touch-icon générées aux couleurs du
+        site via `sharp` (déjà livré avec Next), `themeColor`.
+      - **Palier 1 — "ce que tu as consulté reste consultable"** : `public/sw.js`, quatre
+        caches plafonnés avec éviction FIFO (pages 80, images 120, tuiles OSM 250, assets
+        120), page de secours `public/hors-ligne.html`. **Cache à l'usage, jamais par
+        anticipation** : les images pèsent 58 Mo (37 Mo rien qu'en vignettes d'activités),
+        précacher serait hostile sur un forfait mobile. Les pages étant en SSG/ISR, le HTML
+        caché contient déjà le contenu — inutile de cacher l'API en plus.
+      - **Écrit à la main, pas avec Serwist/next-pwa** : l'apport de ces outils est de
+        générer un manifeste de précache, soit exactement ce dont cette stratégie n'a pas
+        besoin, et `@serwist/next` ne supporte pas Turbopack (défaut de Next 16 au build).
+        Le SW est un fichier statique : aucune étape de build, aucune dépendance.
+      - Jamais mis en cache : `/api/auth`, `/api/favorites`, `/api/my-itineraires`.
+      - Deux pièges rencontrés, documentés dans `public/sw.js` : le proxy next-intl localise
+        toute route sans extension (d'où la page de secours en `.html` statique), et il
+        redirige `/lieux/x` vers `/en/lieux/x` — seul ce dernier finit en cache, d'où une
+        recherche tolérante au préfixe de locale.
+      **Reste à faire (palier 2, optionnel)** : bouton "télécharger cet itinéraire" pour
+      mettre en cache explicitement les N fiches + leurs photos (~2-3 Mo annoncés) avant de
+      partir. Et côté carte, la Tile Usage Policy d'OSM **interdit le téléchargement en
+      masse** : seules les tuiles réellement affichées sont gardées. Une vraie carte hors
+      ligne demanderait de changer de fournisseur (MapTiler payant, ou auto-héberger du
+      Protomaps `.pmtiles`) — décision séparée, avec un coût
 
 ## Maillage interne & SEO éditorial
 
