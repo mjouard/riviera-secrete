@@ -88,6 +88,13 @@ RivieraSecrete.Api/
 | POST | `/api/auth/confirm-email` | Body: `{ token }` → 400 si invalide/expiré, sinon `EmailConfirmed=true` + token effacé (usage unique), renvoie `{ status: "confirmed" }` |
 | POST | `/api/auth/resend-confirmation` | Body: `{ email }` → régénère un token si le compte existe et n'est pas confirmé, renvoie toujours `{ status: "sent" }` (ne révèle jamais si l'email existe) |
 
+**Énumération de comptes encore possible sur `register`** : il répond `409 "Un compte existe
+déjà avec cet email."`, ce qui confirme qu'une adresse est inscrite. `login` et
+`resend-confirmation` sont eux génériques (et `login` calcule toujours un BCrypt, même
+compte inexistant, pour ne pas trahir la réponse par son temps d'exécution — voir la section
+Validation). Corriger `register` demanderait de basculer sur un flux « on t'a envoyé un
+email » indifférencié, ce qui change l'UX du frontend : arbitrage produit non tranché.
+
 ### Protégés (`.RequireAuthorization()` — JWT Bearer requis)
 
 | Méthode | Route | Description |
@@ -119,6 +126,53 @@ La réponse `google-signin` retourne `{ Token, User: { Id, Email, Nom } }` (casi
 - Claims : `sub` (User.Id), `email`, `nom`, `jti`
 - Config dans `appsettings.json` : `Jwt.Secret`, `Jwt.Issuer = "riviera-secrete-api"`, `Jwt.Audience = "riviera-secrete-frontend"`, `Jwt.ExpiryDays = 30`
 - `GetUserId(ClaimsPrincipal)` → parse `sub` → `Guid`
+- **`Program.cs` refuse de démarrer si `Jwt:Secret` est vide** (audit sécu 2026-09-13) : sans
+  secret, l'API signait et acceptait des tokens avec une clé vide, donc forgeables. Un
+  avertissement console est loggué si la clé fait moins de 32 octets.
+- **Pas de révocation** : durée de vie 30 jours, aucune denylist de `jti`, aucun refresh
+  token. Un JWT volé reste valable 30 jours et une rotation de `Jwt:Secret` déconnecte tout
+  le monde d'un coup — arbitrage produit à trancher, pas encore fait.
+
+## Rate limiting (audit sécu 2026-09-13)
+
+`builder.Services.AddRateLimiter(...)` + `app.UseRateLimiter()` dans `Program.cs`, avec
+`Microsoft.AspNetCore.RateLimiting` (dans le framework, aucun package NuGet ajouté). Deux
+politiques appliquées via `.RequireRateLimiting("...")` :
+
+| Politique | Limite | Endpoints |
+|---|---|---|
+| `auth` | 20 req/min par IP | `login`, `google-signin`, `confirm-email` |
+| `auth-email` | 10 req/15 min par IP | `register`, `resend-confirmation` (ils déclenchent un envoi Resend) |
+
+**Clé de partitionnement = `ClientKey(HttpContext)`, qui lit la *dernière* entrée de
+`X-Forwarded-For`**, pas `RemoteIpAddress`. Derrière le proxy Railway, `RemoteIpAddress` est
+celle du proxy, identique pour tout le monde : partitionner dessus ferait partager un quota
+unique à tous les visiteurs (tout le site rate-limité dès qu'une personne dépasse). Les
+proxies ajoutent en fin de chaîne, donc la dernière entrée est celle écrite par Railway — la
+seule que l'appelant ne contrôle pas (un client peut envoyer son propre `X-Forwarded-For`,
+il se retrouvera en début de chaîne). Fallback sur `RemoteIpAddress` en local, où l'en-tête
+est absent. **Si Railway change de comportement sur cet en-tête, le rate limiting devient
+soit global soit contournable — c'est le point à revérifier en premier.**
+
+## Validation des entrées (audit sécu 2026-09-13)
+
+Les records DTO ne sont **pas** validés par le binder minimal-API : un JSON sans la clé
+arrive avec un `string` à `null` malgré `<Nullable>enable</Nullable>`, et faisait planter les
+`.Trim()` en 500. Tous les endpoints d'auth gardent désormais leurs champs, et les bornes de
+longueur sont alignées sur les colonnes (dépasser la colonne = 500 à l'INSERT, pas 400) :
+
+- `Email` ≤ 256, `Nom` ≤ 200, mot de passe ≥ 8 caractères et ≤ 72 **octets** (au-delà BCrypt
+  tronque silencieusement — mieux vaut refuser)
+- `UserFavorite.LieuSlug` : `[a-z0-9-]{1,100}` **et** doit exister dans `Lieux`
+- `ItineraireUpsertRequest` : ≤ 10 jours, ≤ 200 étapes, slugs validés, `Nom` ≤ 200,
+  `DureeKey` ≤ 20 ; ≤ 100 itinéraires par compte. `Days` part en jsonb sans aucune limite
+  côté base, donc sans ces bornes un compte authentifié pouvait y stocker des mégaoctets.
+- `confirm-email` refuse un token vide/null en amont : `EmailConfirmationToken == null` se
+  traduit par un `WHERE ... IS NULL` côté EF, qui matche tous les comptes déjà confirmés.
+
+`google-signin` refuse un `id_token` dont `email_verified` est faux — sinon un tel token
+permettait de se lier automatiquement sur un compte email/mot de passe de même adresse
+(le code lie par email quand le `GoogleId` est inconnu), donc d'en prendre le contrôle.
 
 ## Email transactionnel — Resend (2026-09-12)
 
