@@ -20,10 +20,14 @@
 
 - [~] Chantier "villes manquantes" (2026-09-13) — deux suites actées par l'utilisateur le
       2026-09-14, détail complet dans `.claude/memory/project_villes_expansion.md` :
-      1. [x] **Vraies photos** — terminé le 2026-09-14, les 13 lieux + 12 villes ajoutés
-         cette nuit-là ont maintenant une vraie photo Wikimedia Commons (plus aucun
-         placeholder `picsum.photos` sur le site), créditées dans `credits/page.tsx`,
-         synchronisées en DB prod et vérifiées en direct.
+      1. [x] **Vraies photos** — terminé le 2026-09-14 pour les hero/thumb des 13 lieux + 12
+         villes, puis le 2026-09-13 (même session, chantier séparé) pour les 56 vignettes
+         `activites[].image` des mêmes 13 lieux — `grep -c picsum data/lieux.json` renvoie
+         désormais 0, plus aucun placeholder nulle part sur le site (lieux, villes,
+         activités). Toutes créditées dans `credits/page.tsx`, synchronisées en DB prod et
+         vérifiées en direct. Au passage : vérification systématique des 56 URLs
+         d'activités de ces 13 lieux, 4 liens cassés trouvés et corrigés (domaine squatté,
+         boucle de redirection, page déplacée, 404 réel).
       2. [ ] **Enrichissement** — chacune des 12 villes n'a qu'un seul lieu, et chaque lieu
          seulement 4-5 activités (bas de la fourchette du reste du site) : ajouter des lieux
          supplémentaires là où ça a du sens, et étoffer le panel d'activités de chaque lieu
