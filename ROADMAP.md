@@ -128,9 +128,14 @@
 - [x] Bouton "Ajouter à mon itinéraire" directement sur chaque fiche lieu — mini-panneau
       déroulant listant les itinéraires sauvegardés, clic pour ajouter le lieu au dernier
       jour de l'itinéraire sans quitter la page
-- [ ] "Partir de cet itinéraire" — bouton sur chaque page `/itineraires/[slug]` qui ouvre
-      `/creer-itineraire` en pré-cochant les lieux de cet itinéraire éditorial ;
-      pont entre contenu éditorial et créateur custom (~1h)
+- [x] "Partir de cet itinéraire" — **fait le 2026-09-13** (FR + EN). Le bouton ouvre
+      `/creer-itineraire` avec les étapes pré-cochées **et** la durée pré-sélectionnée
+      (déduite du badge via `dureeKeyDepuisBadge()`). `?add=` accepte maintenant plusieurs
+      slugs séparés par des virgules, en restant rétrocompatible avec le slug unique du
+      bouton "Ajouter à un itinéraire" des fiches lieu (vérifié). Slugs inconnus ignorés
+      silencieusement. **Piège** : `/creer-itineraire` charge ses lieux côté client et le
+      CORS de l'API prod n'autorise que l'origine de prod — cette page ne peut pas être
+      testée en local, il faut déployer d'abord
 - [ ] Créateur d'itinéraire : partage par URL — encoder la sélection dans les query params
       pour partager sans compte ni backend (sera mieux fait côté backend)
 - [~] PWA — **paliers 0 et 1 faits le 2026-09-13**, répond au constat de l'audit produit du
@@ -163,9 +168,10 @@
 
 ## Maillage interne & SEO éditorial
 
-- [ ] Liens croisés itinéraire ↔ ville — une page ville liste les itinéraires qui la
-      traversent ; une page itinéraire renvoie vers les pages ville de ses stops ; améliore
-      le maillage interne (SEO) et la navigation (~1h dans les templates + build)
+- [x] Liens croisés itinéraire ↔ ville — **constaté déjà fait le 2026-09-13** (entrée
+      périmée, jamais cochée) : `villes/[slug]` liste les itinéraires qui la traversent via
+      `itinerairesIci`, `itineraires/[slug]` renvoie vers la page ville de chaque étape, et
+      le fil d'ariane d'une fiche lieu pointe vers sa ville
 - [ ] Structured data enrichi — schéma `Activity` sur les activités payantes pour apparaître
       dans Google Things to do ; il n'y a actuellement aucun JSON-LD sur les pages lieu
       (seulement homepage `ItemList` et ville `TouristDestination`, voir CLAUDE.md) — à
