@@ -96,6 +96,10 @@ export default async function RootLayout({
               <div className="max-w-6xl mx-auto px-6">
                 <p>{t("tagline")}</p>
                 <p className="mt-1">
+                  <Link href="/a-propos" className="hover:text-white transition-colors">
+                    {t("aPropos")}
+                  </Link>
+                  <span className="mx-2" aria-hidden="true">·</span>
                   {t("photos")}{" "}
                   <Link href="/credits" className="hover:text-white transition-colors">
                     {t("credits")}

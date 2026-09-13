@@ -11,12 +11,14 @@
     "mesFavoris": "Mes favoris",
     "connexion": "Connexion",
     "deconnexion": "Déconnexion",
-    "menu": "Menu"
+    "menu": "Menu",
+    "aPropos": "À propos"
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
     "photos": "Photos :",
-    "credits": "crédits & licences"
+    "credits": "crédits & licences",
+    "aPropos": "À propos"
   },
   "common": {
     "accueil": "Accueil",
@@ -266,5 +268,25 @@
     "ajoute": "✓ Ajouté !",
     "dejaPresent": "✓ Déjà présent",
     "nouvelItineraire": "+ Nouvel itinéraire"
+  },
+  "aPropos": {
+    "title": "À propos",
+    "metaDescription": "Qui écrit Riviera Secrète, comment les lieux sont choisis et vérifiés, et comment signaler une erreur.",
+    "intro": "Riviera Secrète est un carnet de repérage personnel sur la Côte d'Azur, pas un guide officiel. L'idée de départ : la plupart des guides envoient tout le monde aux mêmes dix endroits, alors que la région en compte beaucoup d'autres qui méritent le détour et où on est encore tranquille.",
+    "quoiTitle": "Ce qu'il y a dedans",
+    "quoiTexte": "{lieux} lieux répartis sur {villes} communes, de Menton à Saint-Tropez, regroupés en {itineraires} itinéraires prêts à suivre — plus un créateur d'itinéraire si tu préfères composer le tien. Chaque lieu liste les activités qu'on peut y faire ({activites} en tout), avec durée, prix indicatif et lien vers la source.",
+    "choixTitle": "Comment les lieux sont choisis",
+    "choixTexte": "Le critère est simple : est-ce que l'endroit vaut le déplacement sans être déjà sur toutes les listes ? Un village perché où les cars ne montent pas, un sentier côtier qu'on a pour soi hors saison, une chapelle ouverte sur demande. Quelques incontournables restent (difficile de parler d'Èze sans Èze), mais l'angle reste le même : ce qu'on y fait vraiment, et quand y aller pour éviter la foule.",
+    "methodeTitle": "Comment c'est vérifié",
+    "methodeIntro": "Le site est écrit et maintenu à la main. Concrètement :",
+    "methodePoint1": "Les coordonnées GPS de chaque lieu sont vérifiées une par une contre des sources réelles — plusieurs étaient fausses de quelques kilomètres au départ.",
+    "methodePoint2": "Les badges (plage, randonnée, VTT, plongée, restaurant) décrivent ce qui est praticable à cet endroit précis, pas quelque part dans la commune. Èze village n'a pas le badge plage : la plage est en bas, à Èze-sur-Mer, c'est un autre lieu.",
+    "methodePoint3": "Les photos sont soit personnelles, soit sous licence Creative Commons trouvées sur Wikimedia Commons — chacune est créditée avec son auteur et sa licence.",
+    "methodePoint4": "Aucun lien affilié, aucune commission, aucun contenu sponsorisé. Les liens de réservation pointent vers l'office de tourisme, le site du lieu, ou une plateforme de réservation, sans identifiant de parrainage.",
+    "limitesTitle": "Ce que ce site n'est pas",
+    "limitesTexte": "Les prix et les horaires changent, surtout hors saison, et un site de repérage tenu à la main prend du retard. Vérifie toujours auprès du lieu avant de te déplacer, en particulier pour les visites payantes et les jours de fermeture. Si un lieu t'a déçu ou si une info est fausse, ce n'est pas un oubli volontaire — juste une page qui a vieilli.",
+    "contactTitle": "Signaler une erreur",
+    "contactTexte": "Un formulaire de signalement arrivera avec le nom de domaine définitif. En attendant, si tu repères un prix obsolète, un horaire faux ou un lieu qui a fermé, note-le — ça sera corrigé au prochain passage.",
+    "creditsLien": "Voir les crédits photo"
   }
 }

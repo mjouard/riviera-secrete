@@ -11,12 +11,14 @@
     "mesFavoris": "My favorites",
     "connexion": "Log in",
     "deconnexion": "Log out",
-    "menu": "Menu"
+    "menu": "Menu",
+    "aPropos": "About"
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
     "photos": "Photos:",
-    "credits": "credits & licenses"
+    "credits": "credits & licenses",
+    "aPropos": "About"
   },
   "common": {
     "accueil": "Home",
@@ -266,5 +268,25 @@
     "ajoute": "✓ Added!",
     "dejaPresent": "✓ Already in there",
     "nouvelItineraire": "+ New itinerary"
+  },
+  "aPropos": {
+    "title": "About",
+    "metaDescription": "Who writes Riviera Secrète, how places are chosen and verified, and how to report an error.",
+    "intro": "Riviera Secrète is a personal scouting notebook on the French Riviera, not an official guide. The starting point: most guides send everyone to the same ten places, while the region has plenty of others worth the detour where you still get some peace.",
+    "quoiTitle": "What's in it",
+    "quoiTexte": "{lieux} places across {villes} towns, from Menton to Saint-Tropez, grouped into {itineraires} ready-made itineraries — plus an itinerary builder if you'd rather put together your own. Each place lists what you can actually do there ({activites} activities in total), with duration, indicative price and a link to the source.",
+    "choixTitle": "How places are chosen",
+    "choixTexte": "The criterion is simple: is the place worth the trip without already being on every list? A perched village the tour coaches don't climb to, a coastal path you get to yourself off-season, a chapel you can visit on request. A few unmissable spots remain (hard to talk about Èze without Èze), but the angle stays the same: what you actually do there, and when to go to avoid the crowds.",
+    "methodeTitle": "How it's verified",
+    "methodeIntro": "The site is written and maintained by hand. In practice:",
+    "methodePoint1": "Each place's GPS coordinates are checked one by one against real sources — several were off by a few kilometres to begin with.",
+    "methodePoint2": "The badges (beach, hiking, mountain biking, diving, restaurant) describe what's practicable at that exact spot, not somewhere in the same town. Èze village has no beach badge: the beach is down below, at Èze-sur-Mer, which is a different place.",
+    "methodePoint3": "Photos are either personal or Creative Commons-licensed, found on Wikimedia Commons — each one credited with its author and licence.",
+    "methodePoint4": "No affiliate links, no commission, no sponsored content. Booking links point to the tourist office, the venue's own site, or a booking platform, with no referral ID attached.",
+    "limitesTitle": "What this site isn't",
+    "limitesTexte": "Prices and opening hours change, especially off-season, and a hand-maintained scouting site falls behind. Always check with the venue before travelling, particularly for paid visits and closing days. If a place disappointed you or a detail is wrong, it isn't a deliberate omission — just a page that has aged.",
+    "contactTitle": "Reporting an error",
+    "contactTexte": "A reporting form will arrive along with the final domain name. In the meantime, if you spot an outdated price, a wrong opening time or a place that has closed, make a note of it — it'll be fixed on the next pass.",
+    "creditsLien": "See photo credits"
   }
 }
