@@ -4868,6 +4868,17 @@
         "image": "assets/images/lieux/coaraze-cadrans-solaires/act-4.jpg",
         "alt": "Terrasse ombragée du restaurant Lo Castel sur la place du château à Coaraze",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "chapelle-saint-sebastien-coaraze",
+        "nom": "Chapelle Saint-Sébastien et ses fresques du XVIe siècle",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://fr.wikipedia.org/wiki/Chapelle_Saint-S%C3%A9bastien_de_Coaraze",
+        "image": "assets/images/lieux/coaraze-cadrans-solaires/act-5.jpg",
+        "alt": "Façade en pierre de la chapelle Saint-Sébastien à Coaraze",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -4983,6 +4994,17 @@
         "image": "assets/images/lieux/vieille-ville-sospel/act-4.jpg",
         "alt": "Terrasse du restaurant Le Picoun au bord de la Bévéra à Sospel",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "cathedrale-saint-michel-sospel",
+        "nom": "Cathédrale Saint-Michel et sa façade baroque",
+        "badge": "gratuit",
+        "duree": "20-30 min",
+        "prix": "Accès libre",
+        "url": "https://provence-alpes-cotedazur.com/en/things-to-do/culture-and-heritage/places/saint-michel-cathedral-sospel-en-2863957/",
+        "image": "assets/images/lieux/vieille-ville-sospel/act-5.jpg",
+        "alt": "Façade baroque de la cathédrale Saint-Michel de Sospel et son clocher roman",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -5098,6 +5120,17 @@
         "image": "assets/images/lieux/gorbio-village/act-4.jpg",
         "alt": "Terrasse du Bistrot de l'Orme sous l'orme tricentenaire de Gorbio",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "chateau-musee-lascaris-gorbio",
+        "nom": "Château-Musée Lascaris, tour du XIIe siècle",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre (juillet-automne)",
+        "url": "https://www.gorbio.fr/chateau/",
+        "image": "assets/images/lieux/gorbio-village/act-5.jpg",
+        "alt": "Tour Lascaris du XIIe siècle avec sa fenêtre géminée romane à Gorbio",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -5213,6 +5246,17 @@
         "image": "assets/images/lieux/luceram-village/act-4.jpg",
         "alt": "Cuisine niçoise traditionnelle servie chez Mumu à Lucéram",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "remparts-tour-luceram",
+        "nom": "Les remparts et la tour à mâchicoulis du XIIIe siècle",
+        "badge": "gratuit",
+        "duree": "30 min",
+        "prix": "Accès libre",
+        "url": "https://www.grandsudinsolite.fr/1079-06-alpes-maritimes-luceram--village-medieval-haut-perche.html",
+        "image": "assets/images/lieux/luceram-village/act-5.jpg",
+        "alt": "Tour à mâchicoulis et chemin de ronde des remparts de Lucéram",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -5454,6 +5498,17 @@
         "image": "assets/images/lieux/saorge-village/act-4.jpg",
         "alt": "Terrasse de la Petite Épicerie au cœur du village de Saorge",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "madone-del-poggio-saorge",
+        "nom": "Église romane de la Madone del Poggio",
+        "badge": "gratuit",
+        "duree": "45 min aller-retour",
+        "prix": "Extérieur en accès libre, intérieur lors des Journées du Patrimoine",
+        "url": "https://randoxygene.departement06.fr/annuaire-general/eglise-de-la-madone-del-poggio-saorge",
+        "image": "assets/images/lieux/saorge-village/act-5.jpg",
+        "alt": "Chevet roman et clocher lombard de l'église de la Madone del Poggio près de Saorge",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
