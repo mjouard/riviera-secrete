@@ -87,7 +87,9 @@
     "autresItineraires": "Autres itinéraires",
     "voirLeLieu": "Voir le lieu →",
     "ouvrirGoogleMaps": "🗺️ Ouvrir l'itinéraire dans Google Maps",
-    "dormirA": "Dormir à {commune}"
+    "dormirA": "Dormir à {commune}",
+    "partirDeCetItineraire": "🧭 Partir de cet itinéraire",
+    "partirDeCetItineraireTitre": "Ouvrir le créateur avec les étapes de cet itinéraire pré-cochées"
   },
   "activite": {
     "reserver": "Réserver →",

@@ -12,6 +12,21 @@ export const DUREE_META = {
 
 export type DureeKey = keyof typeof DUREE_META;
 
+/**
+ * Déduit la durée du créateur depuis le badge d'un itinéraire éditorial
+ * ("6 étapes · 2 jours", "3 étapes · Journée complète") pour pré-sélectionner le bon
+ * préréglage sur "Partir de cet itinéraire". Analyse le français (`badge`), jamais
+ * `badgeEn` : c'est le champ canonique. Retombe sur "journee" si rien ne correspond —
+ * le visiteur peut de toute façon changer, mieux vaut un préréglage plausible que rien.
+ */
+export function dureeKeyDepuisBadge(badge: string): DureeKey {
+  const s = badge.toLowerCase();
+  if (/3\s*jours/.test(s)) return "3-jours";
+  if (/2\s*jours/.test(s)) return "2-jours";
+  if (/demi-journ/.test(s)) return "demi-journee";
+  return "journee";
+}
+
 export function parseVisitMinutes(lieu: Lieu): number {
   const pill = (lieu.metaPills || []).find((p) => /urée/.test(p.label));
   const val = pill ? pill.valeur || "" : "";

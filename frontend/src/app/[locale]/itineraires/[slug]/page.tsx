@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc } from "@/lib/utils";
+import { dureeKeyDepuisBadge } from "@/lib/itineraire-logic";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 
@@ -131,7 +132,7 @@ export default async function ItinerairePage({
         )}
 
         {routeStops.length > 0 && (
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-2">
             <a
               href={buildGoogleMapsRouteUrl(routeStops)}
               target="_blank"
@@ -141,6 +142,16 @@ export default async function ItinerairePage({
             >
               {t("ouvrirGoogleMaps")}
             </a>
+            {/* Pont entre l'itinéraire éditorial et le créateur : on pré-coche les étapes
+                et on devine la durée depuis le badge, le visiteur ajuste ensuite. */}
+            <Link
+              href={`/creer-itineraire?add=${routeStops.map((l) => l.slug).join(",")}&duree=${dureeKeyDepuisBadge(itin.badge)}`}
+              title={t("partirDeCetItineraireTitre")}
+              className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border font-medium transition-colors hover:bg-white/5"
+              style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
+            >
+              {t("partirDeCetItineraire")}
+            </Link>
           </div>
         )}
       </div>

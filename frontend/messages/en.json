@@ -87,7 +87,9 @@
     "autresItineraires": "Other itineraries",
     "voirLeLieu": "See this place →",
     "ouvrirGoogleMaps": "🗺️ Open this itinerary in Google Maps",
-    "dormirA": "Stay overnight in {commune}"
+    "dormirA": "Stay overnight in {commune}",
+    "partirDeCetItineraire": "🧭 Start from this itinerary",
+    "partirDeCetItineraireTitre": "Open the builder with this itinerary's stops pre-selected"
   },
   "activite": {
     "reserver": "Book →",

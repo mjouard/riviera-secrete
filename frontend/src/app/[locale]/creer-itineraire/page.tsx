@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import type { Lieu } from "@/lib/types";
 import { redirectToConnexion } from "@/lib/utils";
-import { type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
+import { DUREE_META, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
 import PickerView from "./_components/PickerView";
 import ResultsView from "./_components/ResultsView";
 
@@ -66,14 +66,24 @@ export default function CreerItinerairePage() {
       setLoading(false);
 
       const params = new URLSearchParams(window.location.search);
+
+      // `?add=` accepte un slug seul (bouton "Ajouter à un itinéraire" d'une fiche lieu) ou
+      // plusieurs séparés par des virgules (bouton "Partir de cet itinéraire" d'un
+      // itinéraire éditorial). Les slugs inconnus sont ignorés silencieusement : une URL
+      // partagée après un renommage de lieu doit pré-remplir ce qui reste valide plutôt que
+      // de ne rien faire.
       const add = params.get("add");
       if (add) {
         const map = new Map(data.map((l) => [l.slug, l]));
-        if (map.has(add)) {
-          setSelectedSlugs(new Set([add]));
-          setExpandedRegions(new Set([map.get(add)!.regionSlug]));
+        const valides = add.split(",").map((s) => s.trim()).filter((s) => map.has(s));
+        if (valides.length > 0) {
+          setSelectedSlugs(new Set(valides));
+          setExpandedRegions(new Set(valides.map((s) => map.get(s)!.regionSlug)));
         }
       }
+
+      const duree = params.get("duree");
+      if (duree && duree in DUREE_META) setDureeKey(duree as DureeKey);
     }).catch(() => setLoading(false));
   }, []);
 
