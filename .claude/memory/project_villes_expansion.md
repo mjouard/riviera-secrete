@@ -150,13 +150,29 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 
 *(Table à remplir au fil de l'ajout — un lieu par ligne, slug + nom.)*
 
-| Slug lieu | Nom | Type (hero/thumb) |
-|---|---|---|
-| `menton` (ville) | Menton | thumb |
-| `vieux-menton` | Le Vieux Menton et ses jardins | hero + thumb |
-| `falicon` (ville) | Falicon | thumb |
-| `falicon-village` | Falicon | hero + thumb |
-| `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb |
+**Lieu/ville-level (hero + thumb) — statut au 2026-09-14** : lot 1 de 3 fait (photos réelles
+Wikimedia sourcées, créditées dans `frontend/src/app/[locale]/credits/page.tsx`, synced en
+DB, déployées, vérifiées en direct). Reste 10 lieux + 10 villes à traiter en suivant le même
+processus (voir méthode plus haut : rechercher sur Commons/Wikipedia, télécharger, **voir**
+l'image avant de choisir, cropper `hero.jpg` 1200×800 et `thumb.jpg` 500×375 avec `sips`,
+placer dans `frontend/public/assets/images/lieux/<slug>/`, créditer, `refresh-lieu-fields`/
+`refresh-ville-fields` + déploiement + `vercel cache purge` — un simple redeploy ne suffit
+**pas** à invalider les pages déjà générées, voir le fix Menton du 2026-09-14).
+
+**Activités (niveau secondaire, pas encore commencé)** : chaque activité des 13 lieux garde
+sa petite image `picsum.photos/seed/.../200/200` (ex. `jardin-serre-de-la-madone`,
+`webb-ellis-menton`...) — contrairement aux lieux originaux qui ont aussi des `act-N.jpg`
+par activité (voir `eze-village`). Scope volontairement mis de côté pour ce premier chantier
+photo (impact visuel bien moindre que le hero/thumb du lieu) — à traiter dans une passe
+séparée, décision de l'utilisateur du 2026-09-14.
+
+| Slug lieu | Nom | Type (hero/thumb) | Statut |
+|---|---|---|---|
+| `menton` (ville) | Menton | thumb | ✅ fait |
+| `vieux-menton` | Le Vieux Menton et ses jardins | hero + thumb | ✅ fait — Jorge Franganillo, CC BY 4.0 |
+| `falicon` (ville) | Falicon | thumb | ✅ fait |
+| `falicon-village` | Falicon | hero + thumb | ✅ fait — Jpchevreau, CC BY-SA 4.0 |
+| `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb | ✅ fait — FrancoisMignard, CC BY-SA 3.0 (photo du Fort du Mont Alban, dans le parc) |
 | `mougins` (ville) | Mougins | thumb |
 | `vieux-mougins` | Le Vieux Mougins | hero + thumb |
 | `vallauris` (ville) | Vallauris | thumb |

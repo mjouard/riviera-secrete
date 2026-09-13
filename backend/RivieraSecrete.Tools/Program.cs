@@ -91,6 +91,18 @@ if (args is ["refresh-lieu-fields", var refreshSlug])
     return ok ? 0 : 1;
 }
 
+// `refresh-ville-fields <slug>` : équivalent de refresh-lieu-fields pour une ville
+// (typiquement son ThumbImage après remplacement d'un placeholder par une vraie photo).
+if (args is ["refresh-ville-fields", var refreshVilleSlug])
+{
+    var refreshVilleDataDir = FindDataDir();
+    var ok = await DatabaseSeeder.RefreshVilleFieldsAsync(db, refreshVilleDataDir, refreshVilleSlug);
+    Console.WriteLine(ok
+        ? $"Champs de la ville '{refreshVilleSlug}' rafraîchis depuis le JSON."
+        : $"Ville '{refreshVilleSlug}' introuvable en DB ou dans data/villes.json — rien fait.");
+    return ok ? 0 : 1;
+}
+
 var dataDir = FindDataDir();
 Console.WriteLine($"Data dir: {dataDir}");
 var (villes, lieux, activites) = await DatabaseSeeder.SyncNewContentAsync(db, dataDir);

@@ -3528,8 +3528,8 @@
     "lat": 43.7781,
     "lng": 7.5054,
     "description": "Entre le cimetière-belvédère du Vieux-Château, les ruelles pastel de la vieille ville et les jardins exotiques de Garavan, un condensé du Menton loin des foules du bord de mer.",
-    "ogImage": "https://picsum.photos/seed/vieux-menton/1200/800",
-    "heroImage": "https://picsum.photos/seed/vieux-menton/1200/800",
+    "ogImage": "assets/images/lieux/vieux-menton/hero.jpg",
+    "heroImage": "assets/images/lieux/vieux-menton/hero.jpg",
     "heroAlt": "Vue panoramique sur la baie de Menton depuis le cimetière du Vieux-Château",
     "metaPills": [
       {
@@ -3642,7 +3642,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/vieux-menton/500/375"
+    "thumbImage": "assets/images/lieux/vieux-menton/thumb.jpg"
   },
   {
     "slug": "falicon-village",
@@ -3654,9 +3654,9 @@
     "lat": 43.7488,
     "lng": 7.2786,
     "description": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
-    "ogImage": "https://picsum.photos/seed/falicon-village/1200/800",
-    "heroImage": "https://picsum.photos/seed/falicon-village/1200/800",
-    "heroAlt": "Ruelles pastel et façades en trompe-l'œil du village perché de Falicon",
+    "ogImage": "assets/images/lieux/falicon-village/hero.jpg",
+    "heroImage": "assets/images/lieux/falicon-village/hero.jpg",
+    "heroAlt": "Le village perché de Falicon niché sur sa colline, vu depuis la route de l'Aire Saint-Michel",
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -3757,7 +3757,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/falicon-village/500/375"
+    "thumbImage": "assets/images/lieux/falicon-village/thumb.jpg"
   },
   {
     "slug": "parc-mont-boron",
@@ -3769,9 +3769,9 @@
     "lat": 43.7013,
     "lng": 7.3002,
     "description": "Une colline boisée de 57 hectares entre le port de Nice et Villefranche, avec 11 km de sentiers, un fort du XVIe siècle et une crique de rochers en contrebas — méconnue des visiteurs qui restent sur la Promenade des Anglais.",
-    "ogImage": "https://picsum.photos/seed/parc-mont-boron/1200/800",
-    "heroImage": "https://picsum.photos/seed/parc-mont-boron/1200/800",
-    "heroAlt": "Sentier boisé du Parc du Mont Boron surplombant la baie de Villefranche",
+    "ogImage": "assets/images/lieux/parc-mont-boron/hero.jpg",
+    "heroImage": "assets/images/lieux/parc-mont-boron/hero.jpg",
+    "heroAlt": "Le Fort du Mont Alban au lever du soleil, dans le Parc du Mont Boron",
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
@@ -3874,7 +3874,7 @@
       "plongee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/parc-mont-boron/500/375"
+    "thumbImage": "assets/images/lieux/parc-mont-boron/thumb.jpg"
   },
   {
     "slug": "vieux-mougins",

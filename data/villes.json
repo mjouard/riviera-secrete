@@ -249,7 +249,7 @@
     "lat": 43.7781,
     "lng": 7.5054,
     "description": "La ville-jardin des citrons à la frontière italienne, entre vieille ville baroque et cimetière belvédère sur la mer.",
-    "thumbImage": "https://picsum.photos/seed/menton/500/375",
+    "thumbImage": "assets/images/lieux/vieux-menton/thumb.jpg",
     "lieux": [
       "vieux-menton"
     ]
@@ -262,7 +262,7 @@
     "lat": 43.7488,
     "lng": 7.2786,
     "description": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
-    "thumbImage": "https://picsum.photos/seed/falicon/500/375",
+    "thumbImage": "assets/images/lieux/falicon-village/thumb.jpg",
     "lieux": [
       "falicon-village"
     ]

@@ -195,4 +195,25 @@ public static class DatabaseSeeder
         await db.SaveChangesAsync();
         return true;
     }
+
+    /// <summary>
+    /// Équivalent de <see cref="RefreshLieuFieldsAsync"/> pour une Ville (seul son
+    /// ThumbImage change habituellement, ex. après avoir remplacé le placeholder picsum par
+    /// une vraie photo — voir data/villes.json). Ne touche jamais Id/Slug/Lieux.
+    /// </summary>
+    public static async Task<bool> RefreshVilleFieldsAsync(AppDbContext db, string dataDir, string slug)
+    {
+        var dbVille = await db.Villes.FirstOrDefaultAsync(v => v.Slug == slug);
+        if (dbVille is null) return false;
+
+        var villesRaw = JsonNode.Parse(await File.ReadAllTextAsync(Path.Combine(dataDir, "villes.json")))!.AsArray();
+        var jsonVille = villesRaw.Select(v => v!).FirstOrDefault(v => v["slug"]!.GetValue<string>() == slug);
+        if (jsonVille is null) return false;
+
+        dbVille.Description = jsonVille["description"]!.GetValue<string>();
+        dbVille.ThumbImage  = jsonVille["thumbImage"]!.GetValue<string>();
+
+        await db.SaveChangesAsync();
+        return true;
+    }
 }

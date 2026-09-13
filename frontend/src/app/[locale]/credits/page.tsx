@@ -81,6 +81,9 @@ const CREDITS: Credit[] = [
   { titre: "Place de la Foux, Grasse (restaurant Le Petit Caboulot)", auteur: "Abxbay", fileUrl: "https://commons.wikimedia.org/wiki/File:Place_de_la_foux_grasse_04.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Sentiers forestiers de Gassin (VTT)", auteur: "Office de tourisme de Gassin", fileUrl: "https://commons.wikimedia.org/wiki/File:Panneaux_d%27orientation_sur_les_boucles_de_l%E2%80%99Arlatane_%C3%A0_Gassin.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "L'Androuno, Gassin (restaurant Au Vieux Gassin)", auteur: "Office de tourisme de Gassin", fileUrl: "https://commons.wikimedia.org/wiki/File:L%27Androuno_%C3%A0_Gassin,_dite_%22la_plus_petite_rue_du_monde%22.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Le Vieux Menton et ses jardins (cimetière du Vieux-Château)", auteur: "Jorge Franganillo", fileUrl: "https://commons.wikimedia.org/wiki/File:Menton_-_Cimeti%C3%A8re_du_Vieux_Ch%C3%A2teau.jpg", licenceLabel: "CC BY 4.0", licenceUrl: "https://creativecommons.org/licenses/by/4.0/deed.fr" },
+  { titre: "Falicon, village perché", auteur: "Jpchevreau", fileUrl: "https://commons.wikimedia.org/wiki/File:Vue_du_village_de_Falicon_depuis_la_route_de_l%E2%80%99Aire_Saint-Michel.JPG", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Le Parc du Mont Boron (Fort du Mont Alban)", auteur: "FrancoisMignard", fileUrl: "https://commons.wikimedia.org/wiki/File:Mt-Alban-Face-Est-sunrise.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {
@@ -94,8 +97,10 @@ export default function CreditsPage() {
 
       <h1 className="text-3xl font-bold mb-4">Crédits photo</h1>
       <p className="mb-10" style={{ color: "var(--text-muted)" }}>
-        Les 27 lieux ont tous une vraie photo — une partie personnelle, une partie sous
-        licence Creative Commons trouvée sur Wikimedia Commons (crédits ci-dessous).
+        La plupart des lieux ont une vraie photo — une partie personnelle, une partie sous
+        licence Creative Commons trouvée sur Wikimedia Commons (crédits ci-dessous). Les
+        lieux ajoutés le plus récemment sont en cours de traitement et affichent
+        temporairement une image de substitution.
       </p>
 
       <h2 className="text-lg font-semibold mb-1">Photos sous licence Creative Commons</h2>
