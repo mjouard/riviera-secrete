@@ -4407,7 +4407,7 @@
       },
       {
         "label": "À combiner",
-        "texte": "Le village de Gassin, à 10 minutes en voiture, ou la citadelle de Saint-Tropez."
+        "texte": "La plage de Pampelonne (secteur Bonne Terrasse) et le Cap Taillat, à 15 minutes en voiture."
       }
     ],
     "activites": [
@@ -4485,6 +4485,15 @@
         "region": "Saint-Tropez",
         "titre": "Citadelle de Saint-Tropez",
         "blurb": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart comp…"
+      },
+      {
+        "href": "plage-pampelonne.html",
+        "img": "assets/images/lieux/plage-pampelonne/thumb.jpg",
+        "alt": "Plage de sable sauvage de Pampelonne côté sud",
+        "stamp": "43.21°N<br>6.66°E",
+        "region": "Ramatuelle",
+        "titre": "Plage de Pampelonne",
+        "blurb": "4,5 km de sable entre Cap Camarat et Cap Taillat, avec un secteur sud resté sauvage loin des c…"
       }
     ],
     "badges": [
@@ -4492,6 +4501,125 @@
       "restaurant"
     ],
     "thumbImage": "assets/images/lieux/vieux-village-ramatuelle/thumb.jpg"
+  },
+  {
+    "slug": "plage-pampelonne",
+    "villeSlug": "ramatuelle",
+    "nom": "Plage de Pampelonne",
+    "commune": "Ramatuelle",
+    "regionSlug": "golfe-st-tropez",
+    "regionLabel": "Grasse & le golfe de Saint-Tropez",
+    "lat": 43.212,
+    "lng": 6.6643,
+    "description": "4,5 km de sable entre Cap Camarat et Cap Taillat, mondialement associés au jet-set des clubs de plage — mais le secteur sud, Bonne Terrasse et l'Escalet, reste un vrai littoral sauvage à quelques encablures des transats hors de prix.",
+    "ogImage": "assets/images/lieux/plage-pampelonne/hero.jpg",
+    "heroImage": "assets/images/lieux/plage-pampelonne/hero.jpg",
+    "heroAlt": "Plage de sable sauvage de Pampelonne côté sud avec bois flotté",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Avril à octobre"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "Demi-journée à journée"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "4,5 km de sable entre Cap Camarat et Cap Taillat, mondialement associés au jet-set des clubs de plage — mais le secteur sud, Bonne Terrasse et l'Escalet, reste un vrai littoral sauvage à quelques encablures des transats hors de prix.",
+    "description2": "Le nom Pampelonne évoque immédiatement les clubs mythiques du côté nord (Tahiti, Moulins) où Bardot a lancé la légende tropézienne dans les années 60. Mais la plage a sept secteurs, et le plus au sud, Bonne Terrasse, reste moins fréquenté et moins huppé — la même eau turquoise, sans le ticket d'entrée. Un vignoble familial, le Château de Pampelonne, borde même le sable côté terres, et le sentier du littoral prolonge la plage vers les criques sauvages de l'Escalet.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Parking payant en saison (route de Bonne Terrasse, chemin de l'Escalet) ; navette estivale depuis Ramatuelle village."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Le kitesurf est interdit sur Pampelonne en été — la plage reste bondée de baigneurs sur ses 4,5 km."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Ramatuelle et ses ruelles, à 15 minutes en voiture sur les hauteurs."
+      }
+    ],
+    "activites": [
+      {
+        "id": "baignade-bonne-terrasse-pampelonne",
+        "nom": "Baignade au secteur Bonne Terrasse",
+        "badge": "gratuit",
+        "duree": "2h-3h",
+        "prix": "Accès libre",
+        "url": "https://www.ramatuelle.fr/vivre-a-ramatuelle/mer-et-littoral/plage-de-pampelonne/",
+        "image": "assets/images/lieux/plage-pampelonne/act-1.jpg",
+        "alt": "Plage de sable sauvage du secteur Bonne Terrasse à Pampelonne",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "snorkeling-criques-escalet-pampelonne",
+        "nom": "Snorkeling dans les criques de l'Escalet",
+        "badge": "gratuit",
+        "duree": "1h-2h",
+        "prix": "Accès libre (matériel non fourni)",
+        "url": "https://franceplages.fr/provence-alpes-cote-dazur/var/ramatuelle/lescalet/",
+        "image": "assets/images/lieux/plage-pampelonne/act-2.jpg",
+        "alt": "Crique aux eaux turquoise de l'Escalet vue depuis la falaise",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "sentier-douaniers-escalet-camarat",
+        "nom": "Sentier des douaniers vers le phare de Camarat",
+        "badge": "gratuit",
+        "duree": "1h30 aller-retour",
+        "prix": "Accès libre",
+        "url": "https://www.ramatuelle-tourisme.com/fr/decouvrir-la-presquile/cote-mer/plages-et-criques-secretes/",
+        "image": "assets/images/lieux/plage-pampelonne/act-3.jpg",
+        "alt": "Phare du cap Camarat dominant la presqu'île de Saint-Tropez",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "degustation-chateau-pampelonne",
+        "nom": "Dégustation au Château de Pampelonne",
+        "badge": "payant",
+        "duree": "45 min",
+        "prix": "Dégustation gratuite, bouteilles dès 17,50 €",
+        "url": "https://www.chateaupampelonne.fr/",
+        "image": "assets/images/lieux/plage-pampelonne/act-4.jpg",
+        "alt": "Vignoble du Château de Pampelonne en bordure de la plage",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "dejeuner-moulins-ramatuelle-pampelonne",
+        "nom": "Déjeuner aux Moulins de Ramatuelle",
+        "badge": "payant",
+        "duree": "1h-1h30",
+        "prix": "30-50 € / pers.",
+        "url": "https://www.lesmoulinsderamatuelle.com/en",
+        "image": "assets/images/lieux/plage-pampelonne/act-5.jpg",
+        "alt": "Ancienne ferme abritant le restaurant Les Moulins de Ramatuelle près de Pampelonne",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieux-village-ramatuelle.html",
+        "img": "assets/images/lieux/vieux-village-ramatuelle/thumb.jpg",
+        "alt": "Ruelles en colimaçon du vieux village de Ramatuelle",
+        "stamp": "43.22°N<br>6.62°E",
+        "region": "Ramatuelle",
+        "titre": "Le Vieux Village de Ramatuelle",
+        "blurb": "Un village perché roulé en colimaçon autour de son église, à l'écart de la presqu'île balnéaire…"
+      }
+    ],
+    "badges": [
+      "plage",
+      "plongee",
+      "randonnee",
+      "restaurant"
+    ],
+    "thumbImage": "assets/images/lieux/plage-pampelonne/thumb.jpg"
   },
   {
     "slug": "sainte-agnes-village",
