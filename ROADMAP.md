@@ -78,7 +78,13 @@
       trouvées et corrigées au passage, cf. commit). Choix documentés : "Facile à modéré"
       compte dans les deux niveaux, "Demi-journée" vient du mot-clé explicite et non d'un
       seuil, un lieu "toute l'année" ressort sur les quatre saisons.
-      **Reste** : le filtre "Gratuit seulement" (badge activité), non fait
+      **Filtre "Gratuit seulement" fait le 2026-09-13, mais déplacé sur la section
+      activités** : au niveau du lieu il ne discriminait rien (42 lieux sur 43 ont au moins
+      une activité gratuite, et aucun n'est entièrement gratuit). Au niveau des activités il
+      sépare réellement — 12 gratuites / 24 payantes, avec de gros écarts par catégorie
+      (outdoor 7/9, culture 1/10). Au passage, les trois sélecteurs ont été rhabillés
+      (`appearance:none` + chevron maison, `colorScheme:dark` pour que la liste native ne
+      s'ouvre pas en blanc sur mobile, état actif en terracotta, grille 2×2 en mobile)
 - [x] "Surprends-moi" — **fait le 2026-09-13**. Pioche parmi les résultats courants (donc
       respecte recherche + badge + saison/durée/niveau), désactivé quand il n'y a aucun
       résultat, navigue via le router next-intl pour rester dans la locale
