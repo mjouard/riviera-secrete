@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import { api } from "@/lib/api";
 import NavHeader from "@/components/NavHeader";
 import Providers from "@/components/Providers";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,6 +25,15 @@ const SITE_URL =
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+/**
+ * `themeColor` colore la barre d'adresse mobile et l'écran de démarrage de la PWA.
+ * Le site n'ayant qu'un thème sombre côté chrome, une seule valeur suffit — elle doit
+ * rester alignée sur --bg (globals.css) et sur background_color/theme_color du manifest.
+ */
+export const viewport: Viewport = {
+  themeColor: "#0C1116",
+};
 
 export async function generateMetadata({
   params,
@@ -48,6 +58,9 @@ export async function generateMetadata({
       locale: locale === "en" ? "en_US" : "fr_FR",
       type: "website",
     },
+    // iOS ignore les icônes du manifest et lit uniquement apple-touch-icon.
+    icons: { apple: "/icons/apple-touch-icon.png" },
+    appleWebApp: { capable: true, title: "Riviera Secrète", statusBarStyle: "black-translucent" },
     // Pas de `alternates.languages` ici : ce layout racine s'applique à toutes les pages,
     // et un hreflang générique pointant "/" <-> "/en" serait faux sur toute page qui n'est
     // pas la homepage — chaque page déclare son propre alternate (voir generateMetadata sur
@@ -85,6 +98,7 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider>
           <Providers>
+            <ServiceWorkerRegistrar />
             <NavHeader />
 
             <main className="flex-1">{children}</main>
