@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
@@ -12,6 +13,18 @@ export const revalidate = 3600;
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
+export function generateMetadata(): Metadata {
+  return {
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/`,
+        en: `${SITE_URL}/en`,
+        "x-default": `${SITE_URL}/`,
+      },
+    },
+  };
+}
 
 export default async function HomePage({
   params,
@@ -30,7 +43,7 @@ export default async function HomePage({
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "27 lieux insolites de la Côte d'Azur",
+    name: t("itemListName", { count: lieux.length }),
     itemListElement: villes.map((v, i) => ({
       "@type": "ListItem",
       position: i + 1,

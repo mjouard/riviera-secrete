@@ -46,14 +46,14 @@ export async function generateMetadata({
     },
     // Pas de `alternates.languages` ici : ce layout racine s'applique à toutes les pages,
     // et un hreflang générique pointant "/" <-> "/en" serait faux sur toute page qui n'est
-    // pas la homepage (chaque page devra déclarer son propre alternate au fil de la phase 1+,
-    // voir .claude/memory/project_version_anglaise.md).
-    // La traduction du contenu éditorial n'a pas encore démarré (voir
-    // .claude/memory/project_version_anglaise.md, phase 1+) : les pages /en/* existent déjà
-    // techniquement mais affichent pour l'instant le contenu français en attendant leur
-    // traduction. Pas d'indexation tant que le contenu réel n'y est pas — à retirer une fois
-    // la phase 1 (MVP anglais) livrée.
-    robots: locale === "en" ? { index: false, follow: true } : undefined,
+    // pas la homepage — chaque page déclare son propre alternate (voir generateMetadata sur
+    // page.tsx, villes/page.tsx, villes/[slug]/page.tsx, lieux/[slug]/page.tsx,
+    // itineraires/[slug]/page.tsx, credits/page.tsx).
+    // Le `noindex` sur /en a été retiré le 2026-09-13 : le contenu éditorial (43 lieux, 34
+    // villes, 6 itinéraires, 205 activités) est maintenant réellement traduit — voir
+    // .claude/memory/project_version_anglaise.md. Les pages compte/outil
+    // (creer-itineraire, mes-itineraires, mes-favoris, connexion, confirmer-email) restent
+    // noindex indépendamment de la locale, via leur propre layout.tsx.
   };
 }
 

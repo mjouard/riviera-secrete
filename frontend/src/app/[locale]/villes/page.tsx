@@ -6,6 +6,9 @@ import { imgUrl, loc } from "@/lib/utils";
 
 export const revalidate = 3600;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 export async function generateMetadata({
   params,
 }: {
@@ -19,6 +22,13 @@ export async function generateMetadata({
       locale === "en"
         ? "The towns and villages of the French Riviera to explore — from Menton to Saint-Tropez."
         : "Les villes et villages de la Côte d'Azur à explorer — de Menton à Saint-Tropez.",
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/villes`,
+        en: `${SITE_URL}/en/villes`,
+        "x-default": `${SITE_URL}/villes`,
+      },
+    },
   };
 }
 

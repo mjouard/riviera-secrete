@@ -35,6 +35,13 @@ export async function generateMetadata({
       description,
       images: ville.thumbImage ? [{ url: imgUrl(ville.thumbImage), width: 500, height: 375 }] : [],
     },
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/villes/${slug}`,
+        en: `${SITE_URL}/en/villes/${slug}`,
+        "x-default": `${SITE_URL}/villes/${slug}`,
+      },
+    },
   };
 }
 
