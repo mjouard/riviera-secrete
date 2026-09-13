@@ -51,13 +51,14 @@ export default async function LieuPage({
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
 
-  const [ville, itin, t, tCommon, tActivite, tBadges] = await Promise.all([
+  const [ville, itin, t, tCommon, tActivite, tBadges, tRegionFull] = await Promise.all([
     api.villes.bySlug(lieu.villeSlug).catch(() => null),
     itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
     getTranslations("lieu"),
     getTranslations("common"),
     getTranslations("activite"),
     getTranslations("badges"),
+    getTranslations("regionFull"),
   ]);
 
   const nom = loc(locale, lieu.nomEn, lieu.nom);
@@ -98,7 +99,7 @@ export default async function LieuPage({
       {/* Header */}
       <div className="mb-8">
         <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
-          {lieu.commune} · {lieu.regionLabel}
+          {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
         </p>
         <h1 className="font-display text-3xl font-bold mb-4">{nom}</h1>
 
