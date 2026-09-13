@@ -4419,7 +4419,7 @@
         "duree": "1h30",
         "prix": "7 € / adulte",
         "url": "https://www.sainteagnes.fr/le-fort-de-la-ligne-maginot/",
-        "image": "https://picsum.photos/seed/fort-sainte-agnes/200/200",
+        "image": "assets/images/lieux/sainte-agnes-village/act-1.jpg",
         "alt": "Galerie souterraine du fort de la ligne Maginot à Sainte-Agnès",
         "linkText": "Réserver →"
       },
@@ -4430,7 +4430,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/menton-and-its-coastline/the-riviera-and-its-hilltop-villages/sainte-agnes/",
-        "image": "https://picsum.photos/seed/jardin-medieval-sainte-agnes/200/200",
+        "image": "assets/images/lieux/sainte-agnes-village/act-2.jpg",
         "alt": "Jardin médiéval abrité derrière les remparts de Sainte-Agnès",
         "linkText": "En savoir plus →"
       },
@@ -4441,7 +4441,7 @@
         "duree": "30 min",
         "prix": "Accès libre",
         "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/sainte-agnes/",
-        "image": "https://picsum.photos/seed/chateau-sainte-agnes/200/200",
+        "image": "assets/images/lieux/sainte-agnes-village/act-3.jpg",
         "alt": "Vue depuis les ruines du château de Sainte-Agnès sur la Méditerranée",
         "linkText": "En savoir plus →"
       },
@@ -4452,7 +4452,7 @@
         "duree": "1h30",
         "prix": "25-40 € / pers.",
         "url": "https://restaurant-lerighi.fr/",
-        "image": "https://picsum.photos/seed/le-righi-sainte-agnes/200/200",
+        "image": "assets/images/lieux/sainte-agnes-village/act-4.jpg",
         "alt": "Terrasse panoramique du restaurant Le Righi à Sainte-Agnès",
         "linkText": "Réserver →"
       }
@@ -4534,7 +4534,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.les-plus-beaux-villages-de-france.org/fr/nos-villages/coaraze/",
-        "image": "https://picsum.photos/seed/cadrans-solaires-coaraze/200/200",
+        "image": "assets/images/lieux/coaraze-cadrans-solaires/act-1.jpg",
         "alt": "Cadran solaire peint signé sur une façade de Coaraze",
         "linkText": "En savoir plus →"
       },
@@ -4545,7 +4545,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://coaraze.fr/cadre-de-vie/patrimoine/",
-        "image": "https://picsum.photos/seed/chapelle-bleue-coaraze/200/200",
+        "image": "assets/images/lieux/coaraze-cadrans-solaires/act-2.jpg",
         "alt": "Fresques bleues de la Chapelle Bleue de Coaraze",
         "linkText": "En savoir plus →"
       },
@@ -4556,7 +4556,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://coaraze.fr/cadre-de-vie/patrimoine/",
-        "image": "https://picsum.photos/seed/eglise-coaraze/200/200",
+        "image": "assets/images/lieux/coaraze-cadrans-solaires/act-3.jpg",
         "alt": "Stucs et trompe-l'œil baroques de l'église Saint-Jean-Baptiste de Coaraze",
         "linkText": "En savoir plus →"
       },
@@ -4567,7 +4567,7 @@
         "duree": "1h30",
         "prix": "20-35 € / pers.",
         "url": "https://lalouchedelouisxiv.fr/lo-castel",
-        "image": "https://picsum.photos/seed/lo-castel-coaraze/200/200",
+        "image": "assets/images/lieux/coaraze-cadrans-solaires/act-4.jpg",
         "alt": "Terrasse ombragée du restaurant Lo Castel sur la place du château à Coaraze",
         "linkText": "Réserver →"
       }
@@ -4649,7 +4649,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://fr.wikipedia.org/wiki/Vieux_Pont_de_Sospel",
-        "image": "https://picsum.photos/seed/pont-vieux-sospel/200/200",
+        "image": "assets/images/lieux/vieille-ville-sospel/act-1.jpg",
         "alt": "Tour fortifiée du Pont Vieux de Sospel enjambant la Bévéra",
         "linkText": "En savoir plus →"
       },
@@ -4660,7 +4660,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/the-bevera-valley/sospel/",
-        "image": "https://picsum.photos/seed/vieille-ville-sospel/200/200",
+        "image": "assets/images/lieux/vieille-ville-sospel/act-2.jpg",
         "alt": "Façades en trompe-l'œil ocre et brun le long de la Bévéra à Sospel",
         "linkText": "En savoir plus →"
       },
@@ -4671,7 +4671,7 @@
         "duree": "1h30-2h",
         "prix": "9 € / adulte",
         "url": "https://www.cheminsdememoire.gouv.fr/fr/fort-saint-roch-sospel",
-        "image": "https://picsum.photos/seed/fort-saint-roch-sospel/200/200",
+        "image": "assets/images/lieux/vieille-ville-sospel/act-3.jpg",
         "alt": "Galeries souterraines en béton du Fort Saint-Roch à Sospel",
         "linkText": "Réserver →"
       },
@@ -4682,7 +4682,7 @@
         "duree": "1h30",
         "prix": "20-35 € / pers.",
         "url": "https://www.sospel.fr/commerce/restaurant-le-picoun/",
-        "image": "https://picsum.photos/seed/le-picoun-sospel/200/200",
+        "image": "assets/images/lieux/vieille-ville-sospel/act-4.jpg",
         "alt": "Terrasse du restaurant Le Picoun au bord de la Bévéra à Sospel",
         "linkText": "Réserver →"
       }
@@ -4764,7 +4764,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/offers/gorbio-medieval-village-gorbio-en-3099249/",
-        "image": "https://picsum.photos/seed/ruelles-gorbio/200/200",
+        "image": "assets/images/lieux/gorbio-village/act-1.jpg",
         "alt": "Fontaine ancienne et ruelle pavée du village de Gorbio",
         "linkText": "En savoir plus →"
       },
@@ -4775,7 +4775,7 @@
         "duree": "10 min",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/offers/the-tercentenary-elm-of-gorbio-village-gorbio-en-3110266/",
-        "image": "https://picsum.photos/seed/orme-gorbio/200/200",
+        "image": "assets/images/lieux/gorbio-village/act-2.jpg",
         "alt": "L'orme tricentenaire planté en 1713 sur la place de la République à Gorbio",
         "linkText": "En savoir plus →"
       },
@@ -4786,7 +4786,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://diocese.mc/service/tourisme/actualites/les-escapades-de-jean-pierre-leglise-saint-barthelemy-de-gorbio",
-        "image": "https://picsum.photos/seed/eglise-gorbio/200/200",
+        "image": "assets/images/lieux/gorbio-village/act-3.jpg",
         "alt": "Façade de l'église Saint-Barthélemy de Gorbio",
         "linkText": "En savoir plus →"
       },
@@ -4797,7 +4797,7 @@
         "duree": "1h30",
         "prix": "20-35 € / pers.",
         "url": "https://www.menton-riviera-merveilles.fr/offres/bar-restaurant-bistrot-de-lorme-gorbio-fr-6078161/",
-        "image": "https://picsum.photos/seed/bistrot-orme-gorbio/200/200",
+        "image": "assets/images/lieux/gorbio-village/act-4.jpg",
         "alt": "Terrasse du Bistrot de l'Orme sous l'orme tricentenaire de Gorbio",
         "linkText": "Réserver →"
       }
