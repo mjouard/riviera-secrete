@@ -62,7 +62,14 @@
     "aucunResultat": "Aucun lieu ne correspond à « {query} ».",
     "reinitialiser": "Tout afficher",
     "gratuitSeulement": "Gratuit seulement",
-    "aucuneGratuite": "Aucune activité gratuite dans cette catégorie."
+    "aucuneGratuite": "Aucune activité gratuite dans cette catégorie.",
+    "presDeMoi": "📍 Près de moi",
+    "presDeMoiActif": "📍 Trié par distance",
+    "presDeMoiTitre": "Trier les lieux du plus proche au plus loin",
+    "localisationEnCours": "Localisation…",
+    "localisationRefusee": "Accès à la position refusé — autorise-le dans ton navigateur pour trier par distance.",
+    "localisationIndisponible": "Localisation indisponible sur cet appareil.",
+    "distanceVolOiseau": "à vol d'oiseau"
   },
   "villes": {
     "title": "Villes & villages",

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc, normalizeSearch } from "@/lib/utils";
+import { distanceKm, formatDistanceKm, imgUrl, loc, normalizeSearch } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";
 import {
   DUREES,
@@ -78,7 +78,7 @@ function FilterSelect({
   );
 }
 
-function LieuCard({ lieu }: { lieu: Lieu }) {
+function LieuCard({ lieu, distance }: { lieu: Lieu; distance?: number }) {
   const locale = useLocale();
   return (
     <Link
@@ -86,13 +86,21 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
       className="card-reveal group block rounded-xl overflow-hidden flex-shrink-0 snap-start w-[62%] sm:w-auto transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={imgUrl(lieu.thumbImage)}
           alt={lieu.heroAlt}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
           loading="lazy"
         />
+        {distance !== undefined && (
+          <span
+            className="absolute top-2 right-2 text-[10px] px-2 py-0.5 rounded-full font-medium"
+            style={{ background: "rgba(12,17,22,0.78)", color: "var(--azure)" }}
+          >
+            {formatDistanceKm(distance)}
+          </span>
+        )}
       </div>
       <div className="p-4">
         <p className="text-xs mb-1" style={{ color: "var(--azure)" }}>
@@ -118,6 +126,8 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const [saison, setSaison] = useState<Saison | "">("");
   const [duree, setDuree] = useState<Duree | "">("");
   const [niveau, setNiveau] = useState<Niveau | "">("");
+  const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoEtat, setGeoEtat] = useState<"idle" | "chargement" | "refuse" | "indisponible">("idle");
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Index de recherche pré-calculé une fois par lieu (43 aujourd'hui) plutôt qu'à chaque
@@ -157,7 +167,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
 
   const filtered = useMemo(() => {
     const q = normalizeSearch(query);
-    return searchIndex
+    const retenus = searchIndex
       .filter((entry) => {
         if (activeBadge && !entry.lieu.badges?.includes(activeBadge)) return false;
         if (saison && !entry.saisons.includes(saison)) return false;
@@ -165,8 +175,16 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         if (niveau && !entry.niveaux.includes(niveau)) return false;
         return q === "" || entry.haystack.includes(q);
       })
-      .map(({ lieu }) => lieu);
-  }, [searchIndex, activeBadge, query, saison, duree, niveau]);
+      .map(({ lieu }) => ({
+        lieu,
+        distance: position ? distanceKm(position.lat, position.lng, lieu.lat, lieu.lng) : undefined,
+      }));
+
+    // Le tri par distance ne s'applique que si une position est connue : sinon on conserve
+    // l'ordre éditorial d'origine.
+    if (position) retenus.sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0));
+    return retenus;
+  }, [searchIndex, activeBadge, query, saison, duree, niveau, position]);
 
   function toggle(badge: string) {
     setActiveBadge((prev) => (prev === badge ? "" : badge));
@@ -180,11 +198,37 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
     setNiveau("");
   }
 
+  /**
+   * Géolocalisation à la demande, jamais au chargement : demander la position sans que le
+   * visiteur l'ait sollicitée est intrusif, et un refus initial est difficile à rattraper.
+   * Un second clic désactive le tri sans redemander la permission.
+   */
+  function toggleProximite() {
+    if (position) {
+      setPosition(null);
+      setGeoEtat("idle");
+      return;
+    }
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      setGeoEtat("indisponible");
+      return;
+    }
+    setGeoEtat("chargement");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setGeoEtat("idle");
+      },
+      (err) => setGeoEtat(err.code === err.PERMISSION_DENIED ? "refuse" : "indisponible"),
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 5 * 60 * 1000 }
+    );
+  }
+
   /** Pioche parmi les résultats courants : « au hasard » doit respecter les filtres actifs. */
   function surprendsMoi() {
     if (filtered.length === 0) return;
     const pick = filtered[Math.floor(Math.random() * filtered.length)];
-    router.push(`/lieux/${pick.slug}`);
+    router.push(`/lieux/${pick.lieu.slug}`);
   }
 
   // Apparition douce des cartes au scroll — même comportement que le site statique
@@ -301,6 +345,26 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
 
         <button
           type="button"
+          onClick={toggleProximite}
+          disabled={geoEtat === "chargement"}
+          title={t("presDeMoiTitre")}
+          aria-pressed={position !== null}
+          className="h-10 px-4 rounded-full border text-xs font-medium transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-60 disabled:cursor-default"
+          style={
+            position
+              ? { borderColor: "var(--azure)", background: "rgba(79,195,201,0.12)", color: "var(--azure)" }
+              : { borderColor: "var(--line)", color: "var(--text-muted)" }
+          }
+        >
+          {geoEtat === "chargement"
+            ? t("localisationEnCours")
+            : position
+              ? t("presDeMoiActif")
+              : t("presDeMoi")}
+        </button>
+
+        <button
+          type="button"
           onClick={surprendsMoi}
           disabled={filtered.length === 0}
           title={tFiltres("surprendsMoiTitre")}
@@ -310,6 +374,12 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           {tFiltres("surprendsMoi")}
         </button>
       </div>
+
+      {(geoEtat === "refuse" || geoEtat === "indisponible") && (
+        <p className="-mt-6 mb-8 text-xs" style={{ color: "var(--terracotta)" }}>
+          {geoEtat === "refuse" ? t("localisationRefusee") : t("localisationIndisponible")}
+        </p>
+      )}
 
       <div className="flex items-baseline justify-between mb-8">
         <h2 className="text-2xl font-bold">{t("tousLesLieux")}</h2>
@@ -336,8 +406,8 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           ref={gridRef}
           className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-6 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
-          {filtered.map((lieu) => (
-            <LieuCard key={lieu.id} lieu={lieu} />
+          {filtered.map(({ lieu, distance }) => (
+            <LieuCard key={lieu.id} lieu={lieu} distance={distance} />
           ))}
         </div>
       )}

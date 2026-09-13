@@ -62,7 +62,14 @@
     "aucunResultat": "No place matches “{query}”.",
     "reinitialiser": "Show everything",
     "gratuitSeulement": "Free only",
-    "aucuneGratuite": "No free activity in this category."
+    "aucuneGratuite": "No free activity in this category.",
+    "presDeMoi": "📍 Near me",
+    "presDeMoiActif": "📍 Sorted by distance",
+    "presDeMoiTitre": "Sort places from nearest to farthest",
+    "localisationEnCours": "Locating…",
+    "localisationRefusee": "Location access denied — allow it in your browser to sort by distance.",
+    "localisationIndisponible": "Location unavailable on this device.",
+    "distanceVolOiseau": "as the crow flies"
   },
   "villes": {
     "title": "Towns & villages",

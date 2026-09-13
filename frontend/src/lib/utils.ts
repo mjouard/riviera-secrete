@@ -41,6 +41,30 @@ export function decodeEntities(str: string): string {
   });
 }
 
+/**
+ * Distance à vol d'oiseau entre deux points GPS, en kilomètres (formule de haversine).
+ *
+ * À vol d'oiseau et non par la route, volontairement : calculer un trajet réel demanderait
+ * une API de routage, alors que sur la Côte d'Azur l'intérêt ici est de répondre à « qu'est-ce
+ * qu'il y a près de moi », pas « en combien de temps j'y suis ». À afficher comme un ordre
+ * de grandeur — en montagne ou sur la corniche, la route est toujours plus longue.
+ */
+export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371; // rayon moyen de la Terre, km
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+/** Arrondi lisible : sous 10 km on garde une décimale, au-delà elle n'apporte rien. */
+export function formatDistanceKm(km: number): string {
+  return km < 10 ? `${km.toFixed(1).replace(".", ",")} km` : `${Math.round(km)} km`;
+}
+
 export function imgUrl(path: string): string {
   if (!path) return "";
   if (/^https?:\/\/|^data:/.test(path)) return path;
