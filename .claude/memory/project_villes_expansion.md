@@ -159,12 +159,9 @@ placer dans `frontend/public/assets/images/lieux/<slug>/`, créditer, `refresh-l
 `refresh-ville-fields` + déploiement + `vercel cache purge` — un simple redeploy ne suffit
 **pas** à invalider les pages déjà générées, voir le fix Menton du 2026-09-14).
 
-**Activités (niveau secondaire, pas encore commencé)** : chaque activité des 13 lieux garde
-sa petite image `picsum.photos/seed/.../200/200` (ex. `jardin-serre-de-la-madone`,
-`webb-ellis-menton`...) — contrairement aux lieux originaux qui ont aussi des `act-N.jpg`
-par activité (voir `eze-village`). Scope volontairement mis de côté pour ce premier chantier
-photo (impact visuel bien moindre que le hero/thumb du lieu) — à traiter dans une passe
-séparée, décision de l'utilisateur du 2026-09-14.
+**Activités** : traité dans un chantier séparé le 2026-09-13, terminé — voir plus bas
+("Chantier vignettes d'activités terminé"). Les 56 `activites[].image` des 13 lieux ont
+maintenant de vraies photos `act-N.jpg`, plus de placeholder picsum.
 
 | Slug lieu | Nom | Type (hero/thumb) | Statut |
 |---|---|---|---|
@@ -198,9 +195,25 @@ séparée, décision de l'utilisateur du 2026-09-14.
 photo Wikimedia Commons** (créditée dans `frontend/src/app/[locale]/credits/page.tsx`),
 plus de placeholder `picsum.photos` nulle part sur le site. Chaque photo synchronisée en DB
 prod via `refresh-lieu-fields`/`refresh-ville-fields`, déployée, et vérifiée en direct
-(`curl` 200 sur chaque `hero.jpg` + contenu de page). Seule image encore en placeholder :
-les petites vignettes individuelles des activités (`activites[].image`, niveau secondaire,
-volontairement hors scope — voir "Enrichissement" ci-dessous).
+(`curl` 200 sur chaque `hero.jpg` + contenu de page).
+
+**Chantier vignettes d'activités terminé le 2026-09-13 — 56/56 `activites[].image` ont
+maintenant une vraie photo** (5 lots : Menton/Falicon/Mont Boron, Mougins/Vallauris,
+Grimaud/Ramatuelle, Sainte-Agnès/Coaraze/Sospel/Gorbio, Lucéram/Saorge). Stratégie utilisée
+partout : réutilisation en recadrage carré de la photo du lieu déjà sourcée quand l'activité
+EST le même lieu physique (ruelles, panoramas, restaurants sans photo dédiée), sinon
+recherche Wikimedia Commons dédiée. `grep -c picsum data/lieux.json` renvoie 0 — plus aucun
+placeholder nulle part sur le site (lieux, villes, activités). Au passage : vérification
+systématique des 56 URLs d'activités (curl + navigateur réel), 4 liens cassés trouvés et
+corrigés (domaine squatté, boucle de redirection, page déplacée, 404 authentique).
+**Piège copyright rencontré 2 fois** (Vallauris "L'Homme au mouton" de Picasso, Coaraze
+fresques/cadran solaire signés par Ponce de León) : la France n'étend pas la liberté de
+panorama aux œuvres d'art dans l'espace public/les intérieurs — dans les deux cas, réutilisé
+une photo du bâtiment/lieu plutôt que de l'œuvre elle-même. Les entrées `credits/page.tsx`
+manquantes des lots 1-2 (oubliées au moment des commits initiaux) ont été rattrapées
+rétroactivement en retrouvant le fichier Commons exact via son SHA1 (`action=allimages` sur
+l'API Commons) plutôt qu'en devinant parmi des dizaines de photos similaires du même
+photographe.
 
 ## Enrichissement à faire — les 12 villes ajoutées sont trop légères (confirmé 2026-09-14)
 
