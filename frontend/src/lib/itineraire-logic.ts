@@ -90,11 +90,12 @@ export function formatTime(minutesSinceMidnight: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
-export function formatTransitDesc(minutes: number): string {
-  if (minutes < 60) return `~${minutes} min de trajet estimé`;
+export function formatTransitDesc(minutes: number, locale: string = "fr"): string {
+  const suffix = locale === "en" ? "estimated travel time" : "de trajet estimé";
+  if (minutes < 60) return `~${minutes} min ${suffix}`;
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
-  return m ? `~${h} h ${m} min de trajet estimé` : `~${h} h de trajet estimé`;
+  return m ? `~${h} h ${m} min ${suffix}` : `~${h} h ${suffix}`;
 }
 
 export function buildBookingActivites(days: Lieu[][]): Array<{ lieu: Lieu; activite: Activite }> {

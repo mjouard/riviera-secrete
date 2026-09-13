@@ -64,7 +64,7 @@ export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; d
           if (item.type === "transit") {
             return (
               <div key={i} className="print-stop text-sm py-2 px-4 rounded-lg" style={{ color: "var(--text-muted)", background: "var(--surface)" }}>
-                🚗 {formatTransitDesc(item.minutes)}
+                🚗 {formatTransitDesc(item.minutes, locale)}
               </div>
             );
           }
