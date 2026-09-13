@@ -139,8 +139,8 @@ export default async function LieuPage({
         <div className="flex flex-wrap gap-3">
           {lieu.metaPills.map((pill, i) => (
             <span key={i} className="text-sm" style={{ color: "var(--text-muted)" }}>
-              <span>{pill.label}</span>{" "}
-              <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
+              <span>{loc(locale, pill.labelEn, pill.label)}</span>{" "}
+              <span style={{ color: "var(--text)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
             </span>
           ))}
           <span className="text-sm" style={{ color: "var(--text-muted)" }}>

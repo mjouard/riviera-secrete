@@ -18,15 +18,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "15-20 min"
+        "valeur": "15-20 min",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "15-20 min"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Une rue entièrement couverte depuis le XIIIe siècle, qui traverse la vieille ville de Villefranche-sur-Mer sous les maisons elles-mêmes.",
@@ -196,15 +202,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / automne"
+        "valeur": "Printemps / automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 à 3 h pour le tour complet"
+        "valeur": "2 à 3 h pour le tour complet",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 to 3 h for the full loop"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile à modéré"
+        "valeur": "Facile à modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy to moderate"
       }
     ],
     "description1": "Un sentier côtier qui fait presque tout le tour de la presqu'île, offrant des vues continues sur la Méditerranée entre pins parasols et rochers.",
@@ -375,15 +387,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h"
+        "valeur": "1 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Une reconstitution fidèle d'une villa grecque antique, construite au début du XXe siècle directement sur les rochers de la baie de Beaulieu.",
@@ -522,15 +540,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année, tôt le matin pour éviter la foule"
+        "valeur": "Toute l'année, tôt le matin pour éviter la foule",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round, early morning to avoid the crowds"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h"
+        "valeur": "1 h 30 à 2 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30 to 2 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, mais pentu"
+        "valeur": "Facile, mais pentu",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, but steep"
       }
     ],
     "description1": "Un village médiéval accroché à un piton rocheux à 400 mètres au-dessus de la mer, avec des ruelles si étroites que certaines maisons se touchent au-dessus de la tête.",
@@ -697,15 +721,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h"
+        "valeur": "1 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un monument romain colossal érigé en 6 avant J.-C. pour célébrer la soumission des peuples alpins, perché à plus de 480 mètres au-dessus de la principauté de Monaco.",
@@ -859,15 +889,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, quelques escaliers"
+        "valeur": "Facile, quelques escaliers",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, a few stairs"
       }
     ],
     "description1": "Un jardin de cactus et plantes succulentes accroché à flanc de falaise calcaire, avec l'une des plus belles vues plongeantes sur Monaco et son port.",
@@ -1005,15 +1041,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "Un village médiéval qui grimpe en cercles concentriques autour de son donjon carolingien, l'un des plus anciens châteaux de France encore debout.",
@@ -1153,15 +1195,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / automne"
+        "valeur": "Printemps / automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h aller-retour"
+        "valeur": "1 h 30 à 2 h aller-retour",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30 to 2 h round trip"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile à modéré"
+        "valeur": "Facile à modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy to moderate"
       }
     ],
     "description1": "Un sentier côtier qui longe le Cap Martin là où l'architecte Le Corbusier avait sa cabanon de vacances, et où il s'est noyé en 1965.",
@@ -1269,15 +1317,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année, coucher de soleil recommandé"
+        "valeur": "Toute l'année, coucher de soleil recommandé",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round, sunset recommended"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h"
+        "valeur": "1 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile (ascenseur disponible) à modéré (escaliers)"
+        "valeur": "Facile (ascenseur disponible) à modéré (escaliers)",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy (lift available) to moderate (stairs)"
       }
     ],
     "description1": "Le point le plus haut du Vieux Nice, où se dressait autrefois une forteresse aujourd'hui disparue, remplacée par un parc ombragé et un des meilleurs points de vue de la ville.",
@@ -1443,15 +1497,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année, matin pour le marché"
+        "valeur": "Toute l'année, matin pour le marché",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round, morning for the market"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h de balade"
+        "valeur": "1 h 30 à 2 h de balade",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30 to 2 h walk"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Le cœur battant du Vieux Nice, où marché aux fleurs, façades ocre et ruelles en dédale composent l'image la plus photographiée de la ville après la Promenade des Anglais.",
@@ -1601,15 +1661,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h à 1 h 30"
+        "valeur": "1 h à 1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h to 1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu"
+        "valeur": "Facile, pentu",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep"
       }
     ],
     "description1": "Un village médiéval construit en pyramide sur un piton rocheux isolé, si photogénique qu'il apparaît régulièrement dans des campagnes publicitaires sans que personne ne le reconnaisse.",
@@ -1760,15 +1826,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / automne"
+        "valeur": "Printemps / automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec un enchevêtrement de ruelles voûtées et de passages couverts.",
@@ -1935,15 +2007,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année, éviter les jours de mistral"
+        "valeur": "Toute l'année, éviter les jours de mistral",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round, avoid mistral wind days"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte, par temps clair, jusqu'à la mer.",
@@ -2094,15 +2172,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps (débit maximal)"
+        "valeur": "Printemps (débit maximal)",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring (peak water flow)"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 à 3 h selon les points visités"
+        "valeur": "2 à 3 h selon les points visités",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 to 3 h depending on the stops visited"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Modéré, sentier escarpé pour la cascade"
+        "valeur": "Modéré, sentier escarpé pour la cascade",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Moderate, steep path to the waterfall"
       }
     ],
     "description1": "Un canyon calcaire creusé par la rivière Loup, ponctué de cascades et de marmites de géants sculptées dans la roche.",
@@ -2269,15 +2353,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "30 min à 1 h"
+        "valeur": "30 min à 1 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "30 min to 1 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un hameau niché au confluent de deux vallées, dominé par les arches en ruine d'un viaduc ferroviaire détruit pendant la Seconde Guerre mondiale.",
@@ -2428,15 +2518,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Février-mars (floraison des violettes)"
+        "valeur": "Février-mars (floraison des violettes)",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "February–March (violets in bloom)"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village médiéval construit en arc de cercle au bord d'un plateau rocheux, célèbre pour la culture de la violette qui borde ses environs depuis le début du XXe siècle.",
@@ -2618,15 +2714,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 à 3 h avec la fondation Maeght"
+        "valeur": "2 à 3 h avec la fondation Maeght",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 to 3 h with the Fondation Maeght"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, devenu l'un des hauts lieux de l'art moderne en Provence.",
@@ -2822,15 +2924,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h"
+        "valeur": "1 h 30 à 2 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30 to 2 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village perché connu depuis les années 1950 pour sa verrerie artisanale, reconnaissable à ses bulles caractéristiques piégées dans le verre soufflé.",
@@ -2996,15 +3104,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30 à 2 h avec le musée"
+        "valeur": "1 h 30 à 2 h avec le musée",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30 to 2 h with the museum"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu"
+        "valeur": "Facile, pentu",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep"
       }
     ],
     "description1": "Un village médiéval qui surplombe directement la zone balnéaire moderne de Cagnes-sur-Mer, contraste saisissant entre pierre ancienne et béton du littoral.",
@@ -3154,15 +3268,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / automne"
+        "valeur": "Printemps / automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 h 30 pour le tour complet"
+        "valeur": "2 h 30 pour le tour complet",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 h 30 for the full loop"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Modéré, rochers glissants par endroits"
+        "valeur": "Modéré, rochers glissants par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Moderate, slippery rocks in places"
       }
     ],
     "description1": "Un sentier côtier appelé aussi Tirepoil, qui fait le tour de la pointe du Cap d'Antibes entre criques sauvages et villas discrètes.",
@@ -3329,15 +3449,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Été (festival) ou toute l'année pour la tranquillité"
+        "valeur": "Été (festival) ou toute l'année pour la tranquillité",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Summer (festival) or year-round for peace and quiet"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "30 min à 1 h"
+        "valeur": "30 min à 1 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "30 min to 1 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anciens festivals de jazz d'Europe.",
@@ -3488,15 +3614,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / été"
+        "valeur": "Printemps / été",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / summer"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "Demi-journée par île"
+        "valeur": "Demi-journée par île",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "Half day per island"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Deux îles au large de Cannes, accessibles en une vingtaine de minutes de bateau, qui semblent appartenir à un autre siècle que la ville qui leur fait face.",
@@ -3679,15 +3811,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Automne à printemps, éviter la chaleur estivale (risque incendie)"
+        "valeur": "Automne à printemps, éviter la chaleur estivale (risque incendie)",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Autumn to spring, avoid summer heat (fire risk)"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 h aller-retour"
+        "valeur": "2 h aller-retour",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 h round trip"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Modéré"
+        "valeur": "Modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Moderate"
       }
     ],
     "description1": "Un sommet de 452 mètres dans le massif volcanique de l'Estérel, dont la roche rouge tranche violemment avec le bleu de la Méditerranée en contrebas.",
@@ -3823,15 +3961,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps / automne"
+        "valeur": "Printemps / automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring / autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 à 4 h selon le nombre de calanques visitées"
+        "valeur": "2 à 4 h selon le nombre de calanques visitées",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 to 4 h depending on the number of calanques visited"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Modéré"
+        "valeur": "Modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Moderate"
       }
     ],
     "description1": "Une succession de criques encaissées entre les roches rouges de l'Estérel, bien moins connues que les calanques marseillaises mais tout aussi spectaculaires.",
@@ -3999,15 +4143,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2 h"
+        "valeur": "2 h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2 h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "La capitale mondiale du parfum, dont la vieille ville en escalier cache un dédale de ruelles et de passages voûtés bien moins visités que ses parfumeries.",
@@ -4157,15 +4307,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h 30"
+        "valeur": "1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Une forteresse du XVIe siècle qui domine le port et tout le golfe de Saint-Tropez, à l'écart complet de l'agitation des quais en contrebas.",
@@ -4331,15 +4487,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1 h à 1 h 30"
+        "valeur": "1 h à 1 h 30",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1 h to 1 h 30"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village perché classé parmi les plus beaux villages de France, à quelques kilomètres seulement de l'agitation de Saint-Tropez mais qui semble appartenir à un autre monde.",
@@ -4505,15 +4667,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "30-45 min"
+        "valeur": "30-45 min",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "30-45 min"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Entre le cimetière-belvédère du Vieux-Château, les ruelles pastel de la vieille ville et les jardins exotiques de Garavan, un condensé du Menton loin des foules du bord de mer.",
@@ -4666,15 +4834,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village perché à 10 km de Nice, sur une colline d'oliviers et de figuiers, avec ses ruelles pastel en trompe-l'œil que même beaucoup de Niçois ignorent.",
@@ -4827,15 +5001,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Modéré"
+        "valeur": "Modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Moderate"
       }
     ],
     "description1": "Une colline boisée de 57 hectares entre le port de Nice et Villefranche, avec 11 km de sentiers, un fort du XVIe siècle et une crique de rochers en contrebas — méconnue des visiteurs qui restent sur la Promenade des Anglais.",
@@ -4975,15 +5155,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "Un village perché en colimaçon entre Cannes et Grasse, refuge d'artistes au XXe siècle — Picasso y vécut ses douze dernières années — resté à l'écart de la foule de la Croisette.",
@@ -5136,15 +5322,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
@@ -5309,15 +5501,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "La façade balnéaire de Vallauris, où Napoléon a rembarqué pour reconquérir la France en 1815 — un vieux port de pêcheurs et une plage de sable que la réputation céramique du bourg perché juste au-dessus éclipse complètement.",
@@ -5471,15 +5669,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "Un village médiéval accroché au massif des Maures, sur l'autre rive du golfe par rapport à Saint-Tropez, avec un château en ruine et un moulin à vent qui dominent toute la baie.",
@@ -5632,15 +5836,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "Demi-journée"
+        "valeur": "Demi-journée",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "Half day"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile à modéré"
+        "valeur": "Facile à modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy to moderate"
       }
     ],
     "description1": "Un village en colimaçon sur la presqu'île de Saint-Tropez, entre moulins à vent sur la crête et crique sauvage accessible seulement à pied.",
@@ -5805,15 +6015,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Avril à octobre"
+        "valeur": "Avril à octobre",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "April to October"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "Demi-journée à journée"
+        "valeur": "Demi-journée à journée",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "Half day to full day"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "4,5 km de sable entre Cap Camarat et Cap Taillat, mondialement associés au jet-set des clubs de plage — mais le secteur sud, Bonne Terrasse et l'Escalet, reste un vrai littoral sauvage à quelques encablures des transats hors de prix.",
@@ -5956,15 +6172,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
@@ -6117,15 +6339,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1h30-2h"
+        "valeur": "1h30-2h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1h30-2h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
@@ -6278,15 +6506,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
@@ -6439,15 +6673,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "1h30-2h"
+        "valeur": "1h30-2h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "1h30-2h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile"
+        "valeur": "Facile",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy"
       }
     ],
     "description1": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
@@ -6600,15 +6840,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année (crèches en hiver)"
+        "valeur": "Toute l'année (crèches en hiver)",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round (nativity scenes in winter)"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h"
+        "valeur": "2h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, quelques escaliers"
+        "valeur": "Facile, quelques escaliers",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, a few stairs"
       }
     ],
     "description1": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
@@ -6773,15 +7019,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Toute l'année"
+        "valeur": "Toute l'année",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Year-round"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "Demi-journée à journée"
+        "valeur": "Demi-journée à journée",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "Half day to full day"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile à modéré"
+        "valeur": "Facile à modéré",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy to moderate"
       }
     ],
     "description1": "Une ancienne station de sports d'hiver à 1500 m d'altitude, sur les hauteurs de Lucéram — la première des Alpes-Maritimes, aujourd'hui redevenue un balcon tranquille sur le Mercantour et la Méditerranée que peu associent encore à un village de la vallée du Paillon.",
@@ -6922,15 +7174,21 @@
     "metaPills": [
       {
         "label": "🗓️ Meilleure saison :",
-        "valeur": "Printemps et automne"
+        "valeur": "Printemps et automne",
+        "labelEn": "🗓️ Best season:",
+        "valeurEn": "Spring and autumn"
       },
       {
         "label": "⏱️ Durée :",
-        "valeur": "2h-3h"
+        "valeur": "2h-3h",
+        "labelEn": "⏱️ Duration:",
+        "valeurEn": "2h-3h"
       },
       {
         "label": "🥾 Niveau :",
-        "valeur": "Facile, pentu par endroits"
+        "valeur": "Facile, pentu par endroits",
+        "labelEn": "🥾 Level:",
+        "valeurEn": "Easy, steep in places"
       }
     ],
     "description1": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",

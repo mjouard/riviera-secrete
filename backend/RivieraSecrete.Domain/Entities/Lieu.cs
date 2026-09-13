@@ -37,7 +37,9 @@ public class Lieu
     public Ville? Ville { get; set; }
 }
 
-public record MetaPill(string Label, string Valeur);
+// LabelEn/ValeurEn : traduction anglaise, voir .claude/memory/project_version_anglaise.md.
+// Partagé par Lieu.MetaPills et Itineraire.MetaPills.
+public record MetaPill(string Label, string Valeur, string? LabelEn = null, string? ValeurEn = null);
 
 // LabelEn/TexteEn : traduction anglaise, voir .claude/memory/project_version_anglaise.md.
 // Colonne JSON (jsonb) sérialisée en camelCase via System.Text.Json — ajouter un champ ici

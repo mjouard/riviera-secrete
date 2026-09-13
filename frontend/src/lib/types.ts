@@ -1,6 +1,8 @@
 export interface MetaPill {
   label: string;
   valeur: string;
+  labelEn?: string | null;
+  valeurEn?: string | null;
 }
 
 export interface Tip {

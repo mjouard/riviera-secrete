@@ -124,7 +124,7 @@ export default async function ItinerairePage({
           <div className="flex flex-wrap gap-x-6 gap-y-1 mt-6 text-sm">
             {itin.metaPills.map((pill, i) => (
               <span key={i} style={{ color: "var(--text-muted)" }}>
-                {pill.label} <span style={{ color: "var(--text)" }}>{pill.valeur}</span>
+                {pill.label} <span style={{ color: "var(--text)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
               </span>
             ))}
           </div>
