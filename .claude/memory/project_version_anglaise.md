@@ -1,6 +1,6 @@
 ---
 name: project-version-anglaise
-description: "Plan détaillé pour la version anglaise du site (pas encore démarré) — routing, stockage du contenu traduit, phasage, décisions à valider avant de commencer"
+description: "Version anglaise du site — phases 0-5 terminées et déployées le 2026-09-13 (routing, contenu, pages compte, SEO) ; seul un scope réduit assumé (champs JSON imbriqués non traduits) reste à trancher avec l'utilisateur"
 metadata:
   type: project
   originSessionId: 24767a28-abd9-41f0-9385-80f67dd8db6d
@@ -14,22 +14,19 @@ Plan établi le 2026-09-12. **Phase 0 (fondations) terminée et déployée en pr
 dans la même session — voir "Phase 0 — ce qui a été fait" plus bas pour le détail exact
 (fichiers, commits, vérifications).
 
-**Phases 1-3 (MVP + contenu éditorial + activités) terminées et déployées en prod le
-2026-09-13**, suite à "Finissons la version anglaise" — voir "Phases 1-3 — ce qui a été
-fait" plus bas. Restent : phase 4 (auth/transactionnel) et phase 5 (polish SEO), plus une
-extension de scope à trancher avec l'utilisateur (champs JSON imbriqués non traduits, voir
-"Scope réduit assumé" ci-dessous).
+**Phases 1-5 (MVP, contenu éditorial, activités, pages compte, polish SEO) toutes terminées
+et déployées en prod le 2026-09-13**, en deux passes suite à "Finissons la version anglaise"
+puis "Continuons, faisons tout sur la traduction" — voir "Phases 1-3 — ce qui a été fait" et
+"Phase 4+5 — ce qui a été fait" plus bas. Il ne reste qu'un point de scope non tranché avec
+l'utilisateur (voir "Scope réduit assumé" ci-dessous) ; tout le reste du plan initial est
+livré.
 
-**Trou signalé par l'utilisateur le 2026-09-13, pas encore scopé** : `/creer-itineraire` (le
-constructeur d'itinéraire — `PickerView.tsx` et le reste de `_components/`) n'a jamais été
-touché pour la locale, ni dans la phase 0 ni dans les phases 1-3 (qui ne couvraient que les
-pages de contenu public, pas les pages outil/compte). Probablement le plus visible des
-oublis puisque c'est une page d'action, pas juste de lecture — à traiter avec
-`/mes-itineraires`/`/mes-favoris`/`/connexion`/`/confirmer-email` dans une passe dédiée aux
-pages compte (phase 4 ou une phase 3.5 séparée). Au passage, `PickerView.tsx` a le même bug
-que celui trouvé et corrigé sur la page lieu (regionLabel brut au lieu de
-`tRegionFull(regionSlug)`) — voir la ligne `regionLabel` dans "Phases 1-3" ci-dessous, même
-correctif à répliquer ici.
+**Trou signalé par l'utilisateur le 2026-09-13 ("Il manque aussi la création d'itinéraire en
+anglais"), traité dans la foulée** : `/creer-itineraire` (le constructeur d'itinéraire —
+`PickerView.tsx`/`ResultsView.tsx`/`ProgrammeSection.tsx`/`BookingSection.tsx`) n'avait
+jamais été touché pour la locale, ni en phase 0 ni dans les phases 1-3 (qui ne couvraient
+que les pages de contenu public). Câblé le même jour avec le reste des pages compte, voir
+détail ci-dessous.
 
 ## État des lieux au moment du plan
 
@@ -181,6 +178,68 @@ prop `locale` explicite ; next-intl force alors un préfixe même pour le franç
 `/fr/*` vers l'URL non préfixée puisque `fr` est la locale par défaut — comportement
 intentionnel de next-intl, vérifié en navigateur, pas un bug.
 
+## Phase 4+5 — ce qui a été fait (2026-09-13, suite à "faisons tout sur la traduction")
+
+**Pages compte/outil câblées** (commits `6f9733c`, `09dba46`) : `/creer-itineraire` (page +
+les 4 sous-composants `_components/`), `/mes-itineraires`, `/mes-favoris`, `/connexion`,
+`/confirmer-email`, `/credits` — mêmes namespaces `messages/{fr,en}.json` que le reste du
+site (`creerItineraire`, `mesItineraires`, `mesFavoris`, `connexion`, `confirmerEmail`,
+`credits`, `dureeLabels`, `lieuActions`). `credits/page.tsx` traduit le chrome (intro,
+labels) mais **laisse `CREDITS[].titre` en français** (~90 entrées, page d'attribution
+légale à faible priorité, pas du contenu éditorial — commenté inline dans le fichier).
+
+**Sweep de l'app entière** a trouvé et corrigé des gaps dans des pages déjà marquées "finies"
+plus tôt le même jour — la leçon à retenir : une page "finie" au sens où `loc()`/`t()` sont
+utilisés pour le contenu principal peut quand même avoir des bouts oubliés (boutons d'action
+partagés, fonctions utilitaires qui génèrent du texte, aria-labels). Trouvés cette fois :
+- `buildMapLinks()` (`src/lib/utils.ts`) : le 3e lien ("Plans", nom français d'Apple Maps)
+  restait hardcodé sur toutes les pages qui l'utilisent (lieu, itinéraire, builder) — accepte
+  maintenant un `plansLabel` optionnel, chaque appelant passe `tCommon("plans")`.
+- `FavoriteButton.tsx`/`ShareButton.tsx`/`AddToItinButton.tsx` (utilisés sur la page lieu,
+  jamais câblés dans la passe précédente).
+- `HeroCarousel.tsx` : aria-labels des flèches/points ("Image précédente" etc.) restés bruts.
+- `mes-favoris`/`mes-itineraires` : le `callbackUrl` vers `/connexion` était une chaîne
+  hardcodée sans préfixe `/en` — un login depuis l'anglais renvoyait vers la page française
+  après connexion. `redirectToConnexion()` (utils.ts), lui, était déjà correct (construit
+  depuis `window.location.href`).
+- JSON-LD `ItemList.name` sur la homepage avait un compte de lieux hardcodé ("27") — devenu
+  dynamique (`lieux.length`), même correctif que le meta description ci-dessous.
+
+**Deux bugs trouvés en testant `/creer-itineraire` sur `/en` en prod** (commit `09dba46`,
+donc *après* déploiement — l'un des deux n'était détectable qu'en générant réellement un
+itinéraire, pas en relisant le code) :
+- Pluralisation cassée : `{count} place{plural}` recevait un suffixe `"x"` hardcodé (copié
+  de la convention française "lieu"→"lieux") quel que soit la locale → affichait "5 placex"
+  en anglais au lieu de "5 places". Le suffixe doit être dérivé de `locale`, pas recopié
+  tel quel d'un autre appel.
+- `formatTransitDesc()` (`src/lib/itineraire-logic.ts`) générait "~13 min de trajet estimé"
+  même sur `/en` — à ne pas confondre avec les segments de transit d'un itinéraire éditorial
+  (`itineraire.items[]`, ceux-là restent en français, voir scope réduit ci-dessous) : cette
+  fonction est un **calcul côté client** à partir des coordonnées (pas du contenu JSON), donc
+  traduisible sans toucher au backend. Accepte maintenant un paramètre `locale`.
+
+**Meta description dynamique** (commit `c68d570`) : `messages.meta.description` avait un
+compte de lieux hardcodé ("27") depuis la phase 0, jamais mis à jour malgré le passage à 43
+lieux entre-temps (voir `.claude/memory/project_villes_expansion.md`). Le layout racine
+récupère maintenant `lieux.length` côté serveur et l'interpole — plus de nombre à resynchroniser
+à la main au prochain ajout de lieu.
+
+**Polish SEO** (commit `4d6f8ac`) : `noindex` retiré de `/en` dans le layout racine (le
+contenu réel est maintenant traduit, plus de risque de duplicate content) ; `alternates.
+languages` (hreflang fr/en/x-default) ajouté au `generateMetadata` de la homepage, `/villes`,
+`/villes/[slug]`, `/lieux/[slug]`, `/itineraires/[slug]`, `/credits` ; `sitemap.ts` porte
+l'alternate `/en` sur chaque entrée via son propre champ `alternates.languages` plutôt que de
+dupliquer les URLs. Les pages compte/outil restent `noindex` via leur propre `layout.tsx`,
+indépendamment de ce changement — elles n'ont donc pas reçu de hreflang.
+
+**Vérification** : `npx tsc --noEmit` et `next build` propres après chaque lot, `npm run
+lint` sans nouvelle erreur (seuls les warnings `<img>`/`window.location.href` préexistants
+subsistent). Tout vérifié en navigateur sur la prod déployée
+(`https://frontend-two-plum-92.vercel.app`), pas seulement en local — le local ne peut pas
+tester les pages qui fetchent côté client (`/creer-itineraire`) car l'API prod a son CORS
+verrouillé sur l'origine de prod, pas `localhost:3000` (voir `Cors:AllowedOrigin` dans
+`backend_dotnet.md`).
+
 ## Scope réduit assumé — à trancher avec l'utilisateur
 
 Les champs suivants **n'ont aucune colonne `*En` côté backend** (JSON-mappés, jamais prévus
@@ -193,7 +252,9 @@ restent en français. Chaque occurrence est marquée d'un commentaire inline ren
 Décision prise unilatéralement par Claude (pas demandée par l'utilisateur, qui a répondu "on
 va dire que pour l'instant c'est ok" sans trancher explicitement sur l'extension du backend)
 — si le sujet revient, proposer soit d'étendre le schéma (nouvelle migration EF pour ces
-champs), soit d'assumer cette limitation durablement.
+champs), soit d'assumer cette limitation durablement. **C'est désormais le seul écart entre
+"/en" et le plan initial** — tout le reste (phases 0 à 5) est livré et vérifié en prod au
+2026-09-13.
 
 ## Explicitement déconseillé
 

@@ -132,22 +132,23 @@
 
 - [ ] Newsletter — "Un lieu secret par semaine" via Brevo ou Mailchimp (formulaire embed,
       aucun backend requis) ; meilleur levier de rétention avant le backend (30 min)
-- [~] Version anglaise du site — gros chantier (contenu à dupliquer/traduire, routing
-      bilingue) mais probablement le plus gros levier d'audience disponible. **Phase 0
-      (fondations) faite et déployée le 2026-09-13** — routing `/en` (next-intl, slugs
-      identiques FR/EN), colonnes `*En` nullables côté backend (migration appliquée en prod),
-      chrome (nav/footer) traduit, `/en` en `noindex` tant que le contenu réel n'y est pas.
-      **Phases 1-3 faites et déployées le 2026-09-13** : homepage/villes/lieux/itinéraires
-      câblés sur next-intl, contenu traduit pour les 43 lieux/34 villes/6 itinéraires/205
-      activités (synchronisé en DB prod), bouton FR/EN ajouté au nav. Restent : phase 4
-      (auth/transactionnel), polish SEO (retirer le `noindex`, hreflang, sitemap), **et
-      `/creer-itineraire` (le constructeur d'itinéraire) qui n'a jamais été touché pour la
-      locale — signalé par l'utilisateur le 2026-09-13, pas encore scopé**. Des champs JSON
-      imbriqués sans colonne `*En` (tips/related d'un lieu, items/booking/suggestions d'un
-      itinéraire, durée/prix d'une activité) restent en français sur `/en` par décision
-      assumée mais pas explicitement validée par l'utilisateur — voir
-      `.claude/memory/project_version_anglaise.md` pour le détail complet. Plan initial
-      établi le 2026-09-12, deux
+- [x] Version anglaise du site — **toutes les phases (0 à 5) faites et déployées le
+      2026-09-13**, probablement le plus gros levier d'audience livré à ce jour. Routing
+      `/en` (next-intl, slugs identiques FR/EN), colonnes `*En` nullables côté backend,
+      homepage/villes/lieux/itinéraires/pages compte (`creer-itineraire`, `mes-itineraires`,
+      `mes-favoris`, `connexion`, `confirmer-email`, `credits`) tous câblés et traduits, les
+      43 lieux/34 villes/6 itinéraires/205 activités ont un contenu éditorial réellement
+      traduit (synchronisé en DB prod), bouton FR/EN dans le nav, `noindex` retiré de `/en`,
+      hreflang + sitemap avec alternates `/en`. Un sweep complet de l'app a aussi rattrapé
+      plusieurs oublis dans des pages déjà "finies" (boutons partagés FavoriteButton/
+      ShareButton/AddToItinButton, aria-labels du carrousel, le lien "Plans" d'Apple Maps,
+      un bug de pluralisation anglaise, un compte de lieux hardcodé dans le meta description
+      et le JSON-LD) — détail complet dans `.claude/memory/project_version_anglaise.md`.
+      **Seul écart restant, décision assumée par Claude mais pas explicitement tranchée par
+      l'utilisateur** : des champs JSON imbriqués sans colonne `*En` (tips/related d'un lieu,
+      items/booking/suggestions d'un itinéraire, durée/prix d'une activité) restent en
+      français sur `/en` — étendre le schéma backend si une parité complète est souhaitée un
+      jour. Plan initial établi le 2026-09-12, deux
       décisions validées par l'utilisateur avant de commencer (routing + stockage) :
       1. Routing en `frontend/src/app/[locale]/...` + `next-intl` pour la UI chrome, slugs
          de lieux/villes **identiques** dans les deux langues (pas de slug anglais dédié).
