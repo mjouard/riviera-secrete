@@ -4042,7 +4042,7 @@
       },
       {
         "label": "À combiner",
-        "texte": "La colonne du débarquement de Napoléon à Golfe-Juan, à 2 km, ou les plages de Juan-les-Pins."
+        "texte": "Golfe-Juan, sa plage et son vieux port, à 2 km — où Napoléon a débarqué en 1815."
       }
     ],
     "activites": [
@@ -4080,17 +4080,6 @@
         "linkText": "En savoir plus →"
       },
       {
-        "id": "colonne-debarquement-golfe-juan",
-        "nom": "Colonne du débarquement de Napoléon",
-        "badge": "gratuit",
-        "duree": "20 min",
-        "prix": "Accès libre",
-        "url": "https://www.vallaurisgolfejuan-tourisme.fr/discover/from-land-to-sea/",
-        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-4.jpg",
-        "alt": "Colonne commémorative du débarquement de Napoléon sur la plage de Golfe-Juan",
-        "linkText": "En savoir plus →"
-      },
-      {
         "id": "dejeuner-temps-jadis",
         "nom": "Déjeuner au Temps Jadis",
         "badge": "payant",
@@ -4120,12 +4109,148 @@
         "region": "Juan-les-Pins",
         "titre": "Pinède Gould",
         "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anc…"
+      },
+      {
+        "href": "golfe-juan.html",
+        "img": "assets/images/lieux/golfe-juan/thumb.jpg",
+        "alt": "Plage de sable et parasols jaunes à Golfe-Juan",
+        "stamp": "43.56°N<br>7.07°E",
+        "region": "Vallauris",
+        "titre": "Golfe-Juan",
+        "blurb": "Le vieux port de pêcheurs et la plage où Napoléon a débarqué en 1815, à deux pas du bourg de céram…"
       }
     ],
     "badges": [
       "restaurant"
     ],
     "thumbImage": "assets/images/lieux/vieux-vallauris-ceramique/thumb.jpg"
+  },
+  {
+    "slug": "golfe-juan",
+    "villeSlug": "vallauris",
+    "nom": "Golfe-Juan",
+    "commune": "Vallauris",
+    "regionSlug": "antibes-cannes",
+    "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
+    "lat": 43.565,
+    "lng": 7.0745,
+    "description": "La façade balnéaire de Vallauris, où Napoléon a rembarqué pour reconquérir la France en 1815 — un vieux port de pêcheurs et une plage de sable que la réputation céramique du bourg perché juste au-dessus éclipse complètement.",
+    "ogImage": "assets/images/lieux/golfe-juan/hero.jpg",
+    "heroImage": "assets/images/lieux/golfe-juan/hero.jpg",
+    "heroAlt": "Plage de sable et parasols jaunes à Golfe-Juan avec vue sur le cap d'Antibes",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "2h-3h"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile"
+      }
+    ],
+    "description1": "La façade balnéaire de Vallauris, où Napoléon a rembarqué pour reconquérir la France en 1815 — un vieux port de pêcheurs et une plage de sable que la réputation céramique du bourg perché juste au-dessus éclipse complètement.",
+    "description2": "Le 1er mars 1815, l'Empereur débarque ici avec un millier d'hommes après son évasion de l'île d'Elbe, entamant la route qui portera son nom jusqu'à Grenoble. Aujourd'hui, Golfe-Juan reste un vrai petit port de pêche entre Cannes et Antibes — voiliers amarrés à touche-touche, plage de sable fin plutôt que galets, et une plongée accessible directement depuis le môle sans avoir à prendre le bateau au large.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "Gare SNCF Golfe-Juan-Vallauris sur la ligne Cannes-Nice ; parking payant avenue des Frères-Roustan en saison."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "La plage du Soleil est surnommée \"plage Picasso\" — l'artiste, installé à deux pas à Vallauris, venait s'y baigner."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le vieux Vallauris et ses ateliers de céramistes, à 2 km sur les hauteurs."
+      }
+    ],
+    "activites": [
+      {
+        "id": "colonne-debarquement-napoleon-golfe-juan",
+        "nom": "Colonne du débarquement de Napoléon",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.vallaurisgolfejuan-tourisme.fr/discover/from-land-to-sea/",
+        "image": "assets/images/lieux/golfe-juan/act-1.jpg",
+        "alt": "Colonne commémorative du débarquement de Napoléon sur la plage de Golfe-Juan",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "balade-vieux-port-golfe-juan",
+        "nom": "Balade au vieux port de pêcheurs",
+        "badge": "gratuit",
+        "duree": "45 min",
+        "prix": "Accès libre",
+        "url": "https://www.vallauris-golfe-juan.fr/20757-les-plages-et-le-nautisme.htm",
+        "image": "assets/images/lieux/golfe-juan/act-2.jpg",
+        "alt": "Voiliers amarrés dans le vieux port de Golfe-Juan",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "plage-du-soleil-golfe-juan",
+        "nom": "Baignade à la plage du Soleil, dite \"plage Picasso\"",
+        "badge": "gratuit",
+        "duree": "1h-2h",
+        "prix": "Accès libre (transats payants en saison)",
+        "url": "https://www.plages.tv/detail/plage-du-soleil-golfe-juan-06220",
+        "image": "assets/images/lieux/golfe-juan/act-3.jpg",
+        "alt": "Plage de sable et parasols jaunes à la plage du Soleil de Golfe-Juan",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "plongee-subvision-golfe-juan",
+        "nom": "Baptême de plongée avec Subvision Plongée",
+        "badge": "payant",
+        "duree": "2h-3h",
+        "prix": "À partir de 60 € / pers.",
+        "url": "https://subvision-plongee.com/",
+        "image": "assets/images/lieux/golfe-juan/act-4.jpg",
+        "alt": "Bateau de plongée amarré au vieux port de Golfe-Juan",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "dejeuner-bistrot-du-port-golfe-juan",
+        "nom": "Déjeuner au Bistrot du Port",
+        "badge": "payant",
+        "duree": "1h",
+        "prix": "25-40 € / pers.",
+        "url": "https://www.bistrotduport.com/",
+        "image": "assets/images/lieux/golfe-juan/act-5.jpg",
+        "alt": "Terrasse du Bistrot du Port face au vieux port de Golfe-Juan",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "vieux-vallauris-ceramique.html",
+        "img": "assets/images/lieux/vieux-vallauris-ceramique/thumb.jpg",
+        "alt": "Ateliers de céramistes et poteries exposées dans le vieux Vallauris",
+        "stamp": "43.58°N<br>7.05°E",
+        "region": "Vallauris",
+        "titre": "Le Vieux Vallauris, cité de la céramique",
+        "blurb": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bo…"
+      },
+      {
+        "href": "pinede-gould-juan-les-pins.html",
+        "img": "assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg",
+        "alt": "Pinède Gould en bord de mer à Juan-les-Pins",
+        "stamp": "43.57°N<br>7.11°E",
+        "region": "Juan-les-Pins",
+        "titre": "Pinède Gould",
+        "blurb": "Une pinède centenaire plantée directement sur le sable, où se tient chaque été l'un des plus anc…"
+      }
+    ],
+    "badges": [
+      "plage",
+      "plongee",
+      "restaurant"
+    ],
+    "thumbImage": "assets/images/lieux/golfe-juan/thumb.jpg"
   },
   {
     "slug": "vieux-village-grimaud",

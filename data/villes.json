@@ -8,7 +8,9 @@
     "lng": 7.3103,
     "description": "Un port en eau profonde et une vieille ville médiévale aux façades colorées, escale entre Nice et Monaco.",
     "thumbImage": "assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
-    "lieux": ["rue-obscure-villefranche"]
+    "lieux": [
+      "rue-obscure-villefranche"
+    ]
   },
   {
     "slug": "saint-jean-cap-ferrat",
@@ -19,7 +21,9 @@
     "lng": 7.33,
     "description": "Une presqu'île discrète entre deux baies, connue pour ses villas Belle Époque et son sentier du littoral.",
     "thumbImage": "assets/images/lieux/sentier-cap-ferrat/thumb.jpg",
-    "lieux": ["sentier-cap-ferrat"]
+    "lieux": [
+      "sentier-cap-ferrat"
+    ]
   },
   {
     "slug": "beaulieu-sur-mer",
@@ -30,7 +34,9 @@
     "lng": 7.3308,
     "description": "Un port élégant abrité du vent, surnommé la petite Afrique pour la douceur de son microclimat.",
     "thumbImage": "assets/images/lieux/villa-kerylos/thumb.jpg",
-    "lieux": ["villa-kerylos"]
+    "lieux": [
+      "villa-kerylos"
+    ]
   },
   {
     "slug": "eze",
@@ -41,7 +47,9 @@
     "lng": 7.3616,
     "description": "Un village médiéval accroché à 400 mètres au-dessus de la Méditerranée, avec une vue vertigineuse.",
     "thumbImage": "assets/images/lieux/eze-village/thumb.jpg",
-    "lieux": ["eze-village"]
+    "lieux": [
+      "eze-village"
+    ]
   },
   {
     "slug": "la-turbie",
@@ -52,7 +60,9 @@
     "lng": 7.4014,
     "description": "Un village haut-perché sur la Grande Corniche, dominé par le Trophée d'Auguste, monument romain du Ier siècle.",
     "thumbImage": "assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
-    "lieux": ["trophee-auguste-la-turbie"]
+    "lieux": [
+      "trophee-auguste-la-turbie"
+    ]
   },
   {
     "slug": "monaco",
@@ -63,7 +73,9 @@
     "lng": 7.413,
     "description": "La principauté sur Rocher, entre jardins suspendus, palais et Musée Océanographique.",
     "thumbImage": "assets/images/lieux/jardin-exotique-monaco/thumb.jpg",
-    "lieux": ["jardin-exotique-monaco"]
+    "lieux": [
+      "jardin-exotique-monaco"
+    ]
   },
   {
     "slug": "roquebrune-cap-martin",
@@ -74,7 +86,10 @@
     "lng": 7.452,
     "description": "Un village médiéval surplombant les calanques, avec l'un des plus anciens châteaux de France et un sentier légendaire.",
     "thumbImage": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
-    "lieux": ["roquebrune-cap-martin-village", "sentier-corbusier-cap-martin"]
+    "lieux": [
+      "roquebrune-cap-martin-village",
+      "sentier-corbusier-cap-martin"
+    ]
   },
   {
     "slug": "nice",
@@ -85,7 +100,11 @@
     "lng": 7.2795,
     "description": "La capitale de la Côte d'Azur, entre le Vieux-Nice baroque, la Colline du Château et la baie des Anges.",
     "thumbImage": "assets/images/lieux/colline-du-chateau-nice/thumb.jpg",
-    "lieux": ["colline-du-chateau-nice", "cours-saleya-vieux-nice", "parc-mont-boron"]
+    "lieux": [
+      "colline-du-chateau-nice",
+      "cours-saleya-vieux-nice",
+      "parc-mont-boron"
+    ]
   },
   {
     "slug": "peillon",
@@ -96,7 +115,9 @@
     "lng": 7.3828,
     "description": "Un village suspendu sur un piton rocheux isolé, si photogénique qu'il apparaît dans des campagnes pub sans que personne ne le reconnaisse.",
     "thumbImage": "assets/images/lieux/peillon-village/thumb.jpg",
-    "lieux": ["peillon-village"]
+    "lieux": [
+      "peillon-village"
+    ]
   },
   {
     "slug": "peille",
@@ -107,7 +128,9 @@
     "lng": 7.4025,
     "description": "Un village authentique de l'arrière-pays niçois, moins visité que son voisin Peillon, avec des ruelles voûtées inchangées depuis le Moyen Âge.",
     "thumbImage": "assets/images/lieux/peille-village/thumb.jpg",
-    "lieux": ["peille-village"]
+    "lieux": [
+      "peille-village"
+    ]
   },
   {
     "slug": "gourdon",
@@ -118,7 +141,9 @@
     "lng": 6.9764,
     "description": "Un village accroché à 760 mètres d'altitude au bord d'une falaise verticale, avec une vue qui porte jusqu'à la mer.",
     "thumbImage": "assets/images/lieux/gourdon-village/thumb.jpg",
-    "lieux": ["gourdon-village"]
+    "lieux": [
+      "gourdon-village"
+    ]
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -129,7 +154,11 @@
     "lng": 7.0472,
     "description": "La cité des violettes et porte d'entrée des gorges du Loup, entre village médiéval en arc de cercle et canyons calcaires.",
     "thumbImage": "assets/images/lieux/tourrettes-sur-loup/thumb.jpg",
-    "lieux": ["tourrettes-sur-loup", "gorges-du-loup-cascade-courmes", "pont-du-loup"]
+    "lieux": [
+      "tourrettes-sur-loup",
+      "gorges-du-loup-cascade-courmes",
+      "pont-du-loup"
+    ]
   },
   {
     "slug": "saint-paul-de-vence",
@@ -140,7 +169,9 @@
     "lng": 7.1214,
     "description": "Un village fortifié du XVIe siècle qui a attiré Matisse, Picasso et Chagall, haut lieu de l'art moderne en Provence.",
     "thumbImage": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
-    "lieux": ["saint-paul-de-vence"]
+    "lieux": [
+      "saint-paul-de-vence"
+    ]
   },
   {
     "slug": "biot",
@@ -151,7 +182,9 @@
     "lng": 7.0967,
     "description": "Un village perché connu pour sa verrerie artisanale aux bulles caractéristiques, à deux pas d'Antibes.",
     "thumbImage": "assets/images/lieux/biot-village-verrier/thumb.jpg",
-    "lieux": ["biot-village-verrier"]
+    "lieux": [
+      "biot-village-verrier"
+    ]
   },
   {
     "slug": "cagnes-sur-mer",
@@ -162,7 +195,9 @@
     "lng": 7.1486,
     "description": "Un village médiéval perché surplombant directement la zone balnéaire moderne, entre château Grimaldi et maison-atelier de Renoir.",
     "thumbImage": "assets/images/lieux/haut-de-cagnes/thumb.jpg",
-    "lieux": ["haut-de-cagnes"]
+    "lieux": [
+      "haut-de-cagnes"
+    ]
   },
   {
     "slug": "antibes",
@@ -173,7 +208,9 @@
     "lng": 7.1256,
     "description": "L'ancienne cité grecque et romaine, avec ses remparts maritimes, sa vieille ville et le sentier du littoral du Cap d'Antibes.",
     "thumbImage": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
-    "lieux": ["sentier-cap-antibes"]
+    "lieux": [
+      "sentier-cap-antibes"
+    ]
   },
   {
     "slug": "juan-les-pins",
@@ -184,7 +221,9 @@
     "lng": 7.1067,
     "description": "La station balnéaire des années folles, avec son festival de jazz légendaire et ses pins centenaires plantés sur le sable.",
     "thumbImage": "assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg",
-    "lieux": ["pinede-gould-juan-les-pins"]
+    "lieux": [
+      "pinede-gould-juan-les-pins"
+    ]
   },
   {
     "slug": "cannes",
@@ -195,7 +234,9 @@
     "lng": 7.048,
     "description": "La ville du Festival, dont les îles de Lérins offrent une escapade monastique hors du temps à vingt minutes au large.",
     "thumbImage": "assets/images/lieux/iles-de-lerins/thumb.jpg",
-    "lieux": ["iles-de-lerins"]
+    "lieux": [
+      "iles-de-lerins"
+    ]
   },
   {
     "slug": "theoule-sur-mer",
@@ -206,7 +247,10 @@
     "lng": 6.9364,
     "description": "La porte du massif de l'Estérel, entre roches rouges volcaniques, calanques sauvages et forêt de pins en bord d'eau.",
     "thumbImage": "assets/images/lieux/pic-cap-roux-esterel/thumb.jpg",
-    "lieux": ["pic-cap-roux-esterel", "calanques-esterel-theoule"]
+    "lieux": [
+      "pic-cap-roux-esterel",
+      "calanques-esterel-theoule"
+    ]
   },
   {
     "slug": "grasse",
@@ -217,7 +261,9 @@
     "lng": 6.9228,
     "description": "La capitale mondiale du parfum, avec une vieille ville en escalier et des ateliers de parfumerie ouverts à la visite.",
     "thumbImage": "assets/images/lieux/vieille-ville-grasse/thumb.jpg",
-    "lieux": ["vieille-ville-grasse"]
+    "lieux": [
+      "vieille-ville-grasse"
+    ]
   },
   {
     "slug": "saint-tropez",
@@ -228,7 +274,9 @@
     "lng": 6.6425,
     "description": "Au-delà de la réputation estivale, une cité maritime provençale avec une citadelle médiévale et un port aux façades colorées.",
     "thumbImage": "assets/images/lieux/citadelle-saint-tropez/thumb.jpg",
-    "lieux": ["citadelle-saint-tropez"]
+    "lieux": [
+      "citadelle-saint-tropez"
+    ]
   },
   {
     "slug": "gassin",
@@ -239,7 +287,9 @@
     "lng": 6.5836,
     "description": "Un village perché classé parmi les plus beaux villages de France, dominant les vignobles et le golfe de Saint-Tropez.",
     "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg",
-    "lieux": ["gassin-plus-beau-village"]
+    "lieux": [
+      "gassin-plus-beau-village"
+    ]
   },
   {
     "slug": "menton",
@@ -290,7 +340,8 @@
     "description": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
     "thumbImage": "assets/images/lieux/vieux-vallauris-ceramique/thumb.jpg",
     "lieux": [
-      "vieux-vallauris-ceramique"
+      "vieux-vallauris-ceramique",
+      "golfe-juan"
     ]
   },
   {
