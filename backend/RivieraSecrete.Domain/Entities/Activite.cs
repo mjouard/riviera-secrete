@@ -17,6 +17,8 @@ public class Activite
     // .claude/memory/project_version_anglaise.md.
     public string? NomEn { get; set; }
     public string? AltEn { get; set; }
+    public string? DureeEn { get; set; }
+    public string? PrixEn { get; set; }
 
     // FK
     public int LieuId { get; set; }

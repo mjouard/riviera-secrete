@@ -39,6 +39,14 @@ public class Lieu
 
 public record MetaPill(string Label, string Valeur);
 
-public record Tip(string Label, string Texte);
+// LabelEn/TexteEn : traduction anglaise, voir .claude/memory/project_version_anglaise.md.
+// Colonne JSON (jsonb) sérialisée en camelCase via System.Text.Json — ajouter un champ ici
+// ne nécessite pas de migration EF, seulement de peupler labelEn/texteEn dans data/lieux.json.
+public record Tip(string Label, string Texte, string? LabelEn = null, string? TexteEn = null);
 
-public record RelatedCard(string Href, string Img, string Alt, string Stamp, string Region, string Titre, string Blurb);
+// TitreEn/BlurbEn/AltEn : traduction anglaise. Region reste un nom de commune (nom propre,
+// ex. "Beaulieu-sur-Mer"), jamais traduit — comme Lieu.Commune ailleurs dans l'app.
+public record RelatedCard(
+    string Href, string Img, string Alt, string Stamp, string Region, string Titre, string Blurb,
+    string? TitreEn = null, string? BlurbEn = null, string? AltEn = null
+);

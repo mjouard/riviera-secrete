@@ -66,7 +66,9 @@ public static class DatabaseSeeder
         NomEn      = a["nomEn"]?.GetValue<string>(),
         Badge      = a["badge"]!.GetValue<string>(),
         Duree      = a["duree"]!.GetValue<string>(),
+        DureeEn    = a["dureeEn"]?.GetValue<string>(),
         Prix       = a["prix"]!.GetValue<string>(),
+        PrixEn     = a["prixEn"]?.GetValue<string>(),
         Url        = a["url"]!.GetValue<string>(),
         Image      = a["image"]!.GetValue<string>(),
         Alt        = a["alt"]!.GetValue<string>(),
@@ -258,7 +260,9 @@ public static class DatabaseSeeder
         dbActivite.NomEn    = jsonActivite["nomEn"]?.GetValue<string>();
         dbActivite.Badge    = jsonActivite["badge"]!.GetValue<string>();
         dbActivite.Duree    = jsonActivite["duree"]!.GetValue<string>();
+        dbActivite.DureeEn  = jsonActivite["dureeEn"]?.GetValue<string>();
         dbActivite.Prix     = jsonActivite["prix"]!.GetValue<string>();
+        dbActivite.PrixEn   = jsonActivite["prixEn"]?.GetValue<string>();
         dbActivite.Url      = jsonActivite["url"]!.GetValue<string>();
         dbActivite.Image    = jsonActivite["image"]!.GetValue<string>();
         dbActivite.Alt      = jsonActivite["alt"]!.GetValue<string>();

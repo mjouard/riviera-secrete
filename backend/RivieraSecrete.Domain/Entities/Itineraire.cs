@@ -28,6 +28,9 @@ public class Itineraire
     public List<SuggestCard> Suggestions { get; set; } = [];
 }
 
+// NomEn/DescEn/DormirAEn : traduction anglaise, voir .claude/memory/project_version_anglaise.md.
+// Commune reste un nom propre, jamais traduit. "transit" utilise Desc/DescEn (le texte
+// "🚗 15 min — D2559, bord de mer Juan-les-Pins" affiché tel quel).
 public record ItineraireItem(
     string Type,           // "stop" | "transit" | "sleep"
     string? Heure,
@@ -36,24 +39,40 @@ public record ItineraireItem(
     string? Commune,
     string? Desc,
     List<StopActivite>? Activites,
-    string? DormirA = null
+    string? DormirA = null,
+    string? NomEn = null,
+    string? DescEn = null,
+    string? DormirAEn = null
 );
 
+// LabelEn : traduction anglaise du libellé composite de la pastille (ex. "Sentier Tirepoil ·
+// Libre" → "Tirepoil path · Free"), stockée telle quelle plutôt que recomposée au rendu.
 public record StopActivite(
     string Label,
     string Cls,
     string? LieuSlug,
     string? ActiviteId,
-    string? Url
+    string? Url,
+    string? LabelEn = null
 );
 
+// LieuLabelEn/NomLabelEn/ExtraSpansEn : traduction anglaise des libellés d'affichage de la
+// carte "à réserver" — Duree/Prix de l'activité référencée viennent d'Activite.DureeEn/PrixEn
+// (résolue à l'affichage via lieuSlug+activiteId), pas d'ici.
 public record BookingRef(
     string LieuLabel,
     string NomLabel,
     string LinkText,
     List<string> ExtraSpans,
     string LieuSlug,
-    string ActiviteId
+    string ActiviteId,
+    string? LieuLabelEn = null,
+    string? NomLabelEn = null,
+    List<string>? ExtraSpansEn = null
 );
 
-public record SuggestCard(string Href, string Img, string Alt, string Badge, string Titre);
+// TitreEn/BadgeEn/AltEn : traduction anglaise.
+public record SuggestCard(
+    string Href, string Img, string Alt, string Badge, string Titre,
+    string? TitreEn = null, string? BadgeEn = null, string? AltEn = null
+);
