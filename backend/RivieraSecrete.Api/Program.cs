@@ -304,6 +304,14 @@ app.MapPost("/api/favorites/{lieuSlug}", async (string lieuSlug, ClaimsPrincipal
 {
     var userId = GetUserId(principal);
     if (userId is null) return Results.Unauthorized();
+    // Sans borne, un slug de plus de 100 caractères faisait échouer l'INSERT en 500 ; sans
+    // vérification d'existence, un compte authentifié pouvait remplir la table de slugs
+    // arbitraires (l'index unique est sur (UserId, LieuSlug), donc rien ne l'en empêchait).
+    if (!EstSlugValide(lieuSlug))
+        return Results.BadRequest(new { Error = "Slug de lieu invalide." });
+    if (!await db.Lieux.AnyAsync(l => l.Slug == lieuSlug))
+        return Results.NotFound(new { Error = "Lieu inconnu." });
+
     var exists = await db.UserFavorites.AnyAsync(f => f.UserId == userId && f.LieuSlug == lieuSlug);
     if (exists) return Results.Ok();
     db.UserFavorites.Add(new UserFavorite { UserId = userId.Value, LieuSlug = lieuSlug });
@@ -339,10 +347,16 @@ app.MapPost("/api/my-itineraires", async (ItineraireUpsertRequest req, ClaimsPri
 {
     var userId = GetUserId(principal);
     if (userId is null) return Results.Unauthorized();
+    if (ValiderItineraire(req) is { } erreur) return Results.BadRequest(new { Error = erreur });
+    // Borne le nombre d'itinéraires par compte : rien n'empêchait un compte authentifié d'en
+    // créer en boucle jusqu'à saturer la base.
+    if (await db.UserItineraires.CountAsync(i => i.UserId == userId) >= Limites.MaxItinerairesParUtilisateur)
+        return Results.BadRequest(new { Error = $"Limite de {Limites.MaxItinerairesParUtilisateur} itinéraires atteinte." });
+
     var itin = new UserItineraire
     {
         UserId = userId.Value,
-        Nom = req.Nom,
+        Nom = req.Nom.Trim(),
         DureeKey = req.DureeKey,
         Days = req.Days,
     };
@@ -355,9 +369,10 @@ app.MapPut("/api/my-itineraires/{id:guid}", async (Guid id, ItineraireUpsertRequ
 {
     var userId = GetUserId(principal);
     if (userId is null) return Results.Unauthorized();
+    if (ValiderItineraire(req) is { } erreur) return Results.BadRequest(new { Error = erreur });
     var itin = await db.UserItineraires.FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
     if (itin is null) return Results.NotFound();
-    itin.Nom = req.Nom;
+    itin.Nom = req.Nom.Trim();
     itin.DureeKey = req.DureeKey;
     itin.Days = req.Days;
     itin.UpdatedAt = DateTime.UtcNow;
@@ -421,6 +436,39 @@ static string ClientKey(HttpContext ctx)
     return ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 }
 
+/// <summary>Slugs du site : minuscules, chiffres et tirets, jamais plus de 100 caractères
+/// (taille de la colonne <c>UserFavorite.LieuSlug</c>).</summary>
+static bool EstSlugValide(string? slug) =>
+    !string.IsNullOrEmpty(slug)
+    && slug.Length <= 100
+    && slug.All(c => (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-');
+
+/// <summary>
+/// Valide le payload d'un itinéraire personnalisé. Retourne le message d'erreur, ou null si
+/// tout est bon. Sans ces bornes, le champ <c>Days</c> (jsonb, aucune limite de taille) et
+/// les chaînes plus longues que leurs colonnes permettaient à un compte authentifié soit de
+/// stocker des mégaoctets arbitraires, soit de provoquer un 500 à l'INSERT.
+/// </summary>
+static string? ValiderItineraire(ItineraireUpsertRequest req)
+{
+    var nom = (req.Nom ?? "").Trim();
+    if (string.IsNullOrWhiteSpace(nom) || nom.Length > 200)
+        return "Le nom de l'itinéraire est requis (200 caractères maximum).";
+    if (string.IsNullOrWhiteSpace(req.DureeKey) || req.DureeKey.Length > 20)
+        return "Durée invalide.";
+    if (req.Days is null)
+        return "Le programme est requis.";
+    if (req.Days.Length > Limites.MaxJours)
+        return $"Un itinéraire ne peut pas dépasser {Limites.MaxJours} jours.";
+    if (req.Days.Any(j => j is null))
+        return "Le programme contient un jour invalide.";
+    if (req.Days.Sum(j => j.Length) > Limites.MaxEtapes)
+        return $"Un itinéraire ne peut pas dépasser {Limites.MaxEtapes} étapes.";
+    if (req.Days.SelectMany(j => j).Any(s => !EstSlugValide(s)))
+        return "Le programme contient un slug de lieu invalide.";
+    return null;
+}
+
 static string GenerateToken()
 {
     var bytes = System.Security.Cryptography.RandomNumberGenerator.GetBytes(32);
@@ -463,7 +511,17 @@ record ConfirmEmailRequest(string Token);
 record ResendConfirmationRequest(string Email);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);
 
-// ── Helpers de type ───────────────────────────────────────────────────────────
+// ── Constantes & helpers de type ──────────────────────────────────────────────
+
+/// <summary>Bornes appliquées aux payloads des endpoints protégés. Le générateur côté
+/// frontend produit au plus 3 jours et une poignée d'étapes : ces valeurs laissent de la
+/// marge tout en empêchant qu'un compte authentifié stocke des volumes arbitraires.</summary>
+static class Limites
+{
+    public const int MaxJours = 10;
+    public const int MaxEtapes = 200;
+    public const int MaxItinerairesParUtilisateur = 100;
+}
 
 /// <summary>Hash BCrypt d'un mot de passe aléatoire, jamais connu de personne. Sert
 /// uniquement à faire travailler BCrypt au login quand le compte n'existe pas, pour que le
