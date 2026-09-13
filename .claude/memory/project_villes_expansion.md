@@ -209,23 +209,35 @@ Rien n'est en cours ni à moitié fini. S'il y a une suite à donner :
    l'utilisateur avant de sourcer** (règle habituelle, voir
    `feedback_dont-autopick-photos.md` — le mandat photo placeholder de cette nuit ne vaut
    que pour cette session).
-2. **Candidats restants non traités**, si un futur chantier veut aller plus loin (aucun
-   n'est urgent, la couverture actuelle est déjà solide) :
+2. **Candidats confirmés par l'utilisateur le 2026-09-14, à traiter dans un futur chantier**
+   (pas de date fixée, mais l'intention est actée — ne pas les re-proposer comme "peut-être",
+   juste les faire) :
+   - **Castellar** — petit village au-dessus de Menton, région `arriere-pays`.
+   - **Bellet** (vignoble AOC dans les collines de Nice) et **Cimiez** (arènes romaines,
+     monastère, oliveraie) — à ajouter comme nouveaux lieux sur la ville `nice` déjà
+     existante (même schéma que `parc-mont-boron` cette nuit), pas de nouvelle ville.
+   - Reprendre la même méthodologie que cette nuit (coordonnées vérifiées, badges vérifiés
+     un par un, activités angle secret) — voir le reste de ce document.
+   - Question ouverte pour la session qui fera ce travail : Bellet et Cimiez sont-ils deux
+     lieux séparés ou un seul (ce sont deux endroits assez distincts géographiquement dans
+     Nice) ? À trancher au moment de la recherche, pas figé ici.
+   - Photos : suivre la même politique placeholder que cette nuit sauf indication contraire
+     de l'utilisateur à ce moment-là.
+3. **Candidats non confirmés, mentionnés par l'agent mais pas retenus par l'utilisateur** —
+   à ne traiter que si quelqu'un les redemande explicitement :
    - `arriere-pays` : Vence (centre historique, distinct de Saint-Paul-de-Vence déjà
-     couvert) et Castellar (petit village au-dessus de Menton, jugé moins distinctif que
-     les 6 déjà ajoutés — vérifier s'il apporte vraiment quelque chose avant de l'ajouter).
-   - `golfe-st-tropez` : Valbonne (bastide Renaissance à plan en damier, géographiquement
-     plus proche d'Antibes/Sophia-Antipolis que du golfe — si ajoutée, la rattacher plutôt à
-     `antibes-cannes` par cohérence géographique, comme Mougins l'a été cette nuit).
-   - Autres pistes jamais vérifiées : Bellet (vignoble AOC dans les collines de Nice) et
-     Cimiez (arènes romaines, monastère, oliveraie) comme lieux supplémentaires sur la ville
-     `nice` déjà existante.
-3. **Aucune ville/lieu/activité existant(e) n'a été modifié(e) ou supprimé(e)** cette nuit —
+     couvert) — jugé moins prioritaire que Castellar par l'utilisateur (implicitement, en ne
+     le citant pas).
+   - `golfe-st-tropez`/`antibes-cannes` : Valbonne (bastide Renaissance à plan en damier,
+     géographiquement plus proche d'Antibes/Sophia-Antipolis que du golfe — si ajoutée un
+     jour, la rattacher à `antibes-cannes` par cohérence géographique, comme Mougins l'a été
+     cette nuit).
+4. **Aucune ville/lieu/activité existant(e) n'a été modifié(e) ou supprimé(e)** cette nuit —
    uniquement des ajouts, conformément au garde-fou. Seule exception au sens strict :
    l'ajout de `"parc-mont-boron"` au tableau `lieux` de la ville `nice` déjà existante dans
    `data/villes.json` (append pur, aucun champ existant touché — ce tableau n'est de toute
    façon pas consommé par le backend, voir `BuildVille` dans `DatabaseSeeder.cs`).
-4. **Vérification prod faite** : chaque lieu ajouté a été testé avec un `curl` sur
+5. **Vérification prod faite** : chaque lieu ajouté a été testé avec un `curl` sur
    `https://frontend-two-plum-92.vercel.app/lieux/<slug>` (200 partout) après chaque
    déploiement Vercel. Le dernier déploiement date de la fin de la région Antibes-Cannes ;
    un déploiement final a eu lieu après le lot golfe-St-Tropez et arrière-pays — revérifier
