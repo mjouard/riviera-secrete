@@ -55,7 +55,12 @@
     "rienPourInstant": "Rien pour l'instant dans cette catégorie.",
     "fermer": "Fermer",
     "voirLaFiche": "Voir la fiche →",
-    "itemListName": "{count} lieux insolites de la Côte d'Azur"
+    "itemListName": "{count} lieux insolites de la Côte d'Azur",
+    "rechercheLabel": "Rechercher un lieu",
+    "recherchePlaceholder": "Rechercher un lieu, une commune, une activité…",
+    "rechercheEffacer": "Effacer la recherche",
+    "aucunResultat": "Aucun lieu ne correspond à « {query} ».",
+    "reinitialiser": "Tout afficher"
   },
   "villes": {
     "title": "Villes & villages",

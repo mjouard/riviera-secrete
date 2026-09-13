@@ -12,6 +12,20 @@ export function loc(locale: string, en: string | null | undefined, fr: string): 
   return locale === "en" && en ? en : fr;
 }
 
+/**
+ * Minuscule + sans accents, pour comparer une saisie utilisateur à du contenu français
+ * ("eze" doit matcher "Èze", "luceram" → "Lucéram"). La plage ̀-ͯ (combining
+ * diacritical marks) est utilisée plutôt que \p{Diacritic} : la cible TS est ES2017, les
+ * property escapes Unicode sont ES2018.
+ */
+export function normalizeSearch(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 /** Décode les entités HTML restées littérales dans les données (ex. "&amp;" venu du site statique). Ne touche jamais document/DOM — utilisable côté serveur. */
 export function decodeEntities(str: string): string {
   if (!str || !str.includes("&")) return str;

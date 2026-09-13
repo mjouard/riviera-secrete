@@ -55,7 +55,12 @@
     "rienPourInstant": "Nothing here yet in this category.",
     "fermer": "Close",
     "voirLaFiche": "See this town →",
-    "itemListName": "{count} hidden spots on the French Riviera"
+    "itemListName": "{count} hidden spots on the French Riviera",
+    "rechercheLabel": "Search for a place",
+    "recherchePlaceholder": "Search a place, a town, an activity…",
+    "rechercheEffacer": "Clear search",
+    "aucunResultat": "No place matches “{query}”.",
+    "reinitialiser": "Show everything"
   },
   "villes": {
     "title": "Towns & villages",
