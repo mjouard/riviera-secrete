@@ -88,8 +88,15 @@
 - [x] "Surprends-moi" — **fait le 2026-09-13**. Pioche parmi les résultats courants (donc
       respecte recherche + badge + saison/durée/niveau), désactivé quand il n'y a aucun
       résultat, navigue via le router next-intl pour rester dans la locale
-- [ ] Géolocalisation sur la carte homepage — "lieux près de moi" via l'API Geolocation
-      native, aucun backend requis ; utile en situation terrain (~1h)
+- [x] Géolocalisation "Près de moi" — **faite le 2026-09-13** (FR + EN). Trie les 43 lieux
+      du plus proche au plus loin et affiche la distance sur chaque vignette. **Placée sur la
+      grille et non sur la carte** comme le disait cette ligne : la carte homepage affiche
+      les villes (34), or "lieux près de moi" concerne les lieux (43) — et la grille est
+      l'endroit où le tri a du sens et où vivent déjà les filtres. Distance à vol d'oiseau
+      (`distanceKm()` haversine dans `utils.ts`), assumée : un trajet réel demanderait une
+      API de routage. Position demandée **au clic uniquement**, jamais au chargement ; second
+      clic désactive sans redemander la permission ; trois états d'erreur distincts. Le tri
+      s'applique dans le sous-ensemble filtré, donc se combine avec tous les autres filtres
 - [ ] "Depuis Nice / Cannes / Monaco en X min" — stocker une durée de trajet approximative
       par lieu dans le JSON, exposer un filtre "moins de 45 min de [ville de départ]" ;
       pas d'appel API routage, estimation manuelle à la saisie (~data + 2h)
