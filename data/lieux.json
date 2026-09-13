@@ -4879,7 +4879,7 @@
         "duree": "30 min",
         "prix": "Accès libre",
         "url": "https://fr.wikipedia.org/wiki/%C3%89glise_Sainte-Marguerite_de_Luc%C3%A9ram",
-        "image": "https://picsum.photos/seed/eglise-luceram/200/200",
+        "image": "assets/images/lieux/luceram-village/act-1.jpg",
         "alt": "Retable de Louis Bréa dans l'église Sainte-Marguerite de Lucéram",
         "linkText": "En savoir plus →"
       },
@@ -4890,7 +4890,7 @@
         "duree": "45 min",
         "prix": "2 € / adulte",
         "url": "https://www.maisondepaysdeluceram.fr/musee-des-creches/",
-        "image": "https://picsum.photos/seed/musee-creche-luceram/200/200",
+        "image": "assets/images/lieux/luceram-village/act-2.jpg",
         "alt": "Crèche napolitaine de collection au Musée de la Crèche de Lucéram",
         "linkText": "Réserver →"
       },
@@ -4901,7 +4901,7 @@
         "duree": "1h-1h30",
         "prix": "Accès libre (novembre-janvier)",
         "url": "https://recreanice.fr/circuit-creche-luceram-village-noel-programme",
-        "image": "https://picsum.photos/seed/circuit-creches-luceram/200/200",
+        "image": "assets/images/lieux/luceram-village/act-3.jpg",
         "alt": "Crèche installée dans un passage voûté du village de Lucéram",
         "linkText": "En savoir plus →"
       },
@@ -4912,7 +4912,7 @@
         "duree": "1h30",
         "prix": "20-30 € / pers.",
         "url": "https://lavantoura.fr/chez-mumu/",
-        "image": "https://picsum.photos/seed/chez-mumu-luceram/200/200",
+        "image": "assets/images/lieux/luceram-village/act-4.jpg",
         "alt": "Cuisine niçoise traditionnelle servie chez Mumu à Lucéram",
         "linkText": "Réserver →"
       }
@@ -4994,7 +4994,7 @@
         "duree": "1h",
         "prix": "7 € / adulte",
         "url": "https://www.monastere-saorge.fr/",
-        "image": "https://picsum.photos/seed/monastere-saorge/200/200",
+        "image": "assets/images/lieux/saorge-village/act-1.jpg",
         "alt": "Cloître et fresques du XVIIe siècle du monastère franciscain de Saorge",
         "linkText": "Réserver →"
       },
@@ -5005,7 +5005,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/roya-valley/saorge/",
-        "image": "https://picsum.photos/seed/amphitheatre-saorge/200/200",
+        "image": "assets/images/lieux/saorge-village/act-2.jpg",
         "alt": "Toits en lauzes du village de Saorge accroché à flanc de montagne",
         "linkText": "En savoir plus →"
       },
@@ -5016,7 +5016,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://www.menton-riviera-merveilles.co.uk/offers/parish-church-saint-sauveur-saorge-en-3051628/",
-        "image": "https://picsum.photos/seed/eglise-saorge/200/200",
+        "image": "assets/images/lieux/saorge-village/act-3.jpg",
         "alt": "Clocher lombard à six étages de l'église Saint-Sauveur de Saorge",
         "linkText": "En savoir plus →"
       },
@@ -5027,7 +5027,7 @@
         "duree": "1h30",
         "prix": "20-35 € / pers.",
         "url": "https://www.menton-riviera-merveilles.co.uk/the-mercantour-roya-bevera/roya-valley/saorge/",
-        "image": "https://picsum.photos/seed/petite-epicerie-saorge/200/200",
+        "image": "assets/images/lieux/saorge-village/act-4.jpg",
         "alt": "Terrasse de la Petite Épicerie au cœur du village de Saorge",
         "linkText": "Réserver →"
       }
