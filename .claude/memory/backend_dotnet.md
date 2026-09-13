@@ -144,15 +144,23 @@ politiques appliquées via `.RequireRateLimiting("...")` :
 | `auth` | 20 req/min par IP | `login`, `google-signin`, `confirm-email` |
 | `auth-email` | 10 req/15 min par IP | `register`, `resend-confirmation` (ils déclenchent un envoi Resend) |
 
-**Clé de partitionnement = `ClientKey(HttpContext)`, qui lit la *dernière* entrée de
+**Clé de partitionnement = `ClientKey(HttpContext)`, qui lit la *première* entrée de
 `X-Forwarded-For`**, pas `RemoteIpAddress`. Derrière le proxy Railway, `RemoteIpAddress` est
 celle du proxy, identique pour tout le monde : partitionner dessus ferait partager un quota
-unique à tous les visiteurs (tout le site rate-limité dès qu'une personne dépasse). Les
-proxies ajoutent en fin de chaîne, donc la dernière entrée est celle écrite par Railway — la
-seule que l'appelant ne contrôle pas (un client peut envoyer son propre `X-Forwarded-For`,
-il se retrouvera en début de chaîne). Fallback sur `RemoteIpAddress` en local, où l'en-tête
-est absent. **Si Railway change de comportement sur cet en-tête, le rate limiting devient
-soit global soit contournable — c'est le point à revérifier en premier.**
+unique à tous les visiteurs (tout le site rate-limité dès qu'une personne dépasse).
+
+**Piège — ne pas appliquer ici la règle générale « le client peut spoofer le début de la
+chaîne, donc lis la fin ».** Elle vaut pour un proxy qui se contente d'ajouter à une chaîne
+existante ; l'edge Railway, lui, *supprime* le `X-Forwarded-For` envoyé par le client avant
+d'écrire le sien, donc la première entrée est déjà l'IP réelle et n'est pas falsifiable.
+Railway peut en revanche ajouter un second hop interne : lire la dernière entrée renverrait
+alors l'IP du proxy, la même pour tout le monde — exactement le quota global qu'on cherche à
+éviter, et 20 req/min depuis n'importe où suffiraient à bloquer les connexions de tout le
+site. La première version de ce code faisait ce contre-sens (corrigé le 2026-09-13 après
+vérification de la doc Railway ; `x-real-ip` existe aussi mais est documenté comme non
+fiable tant que le CDN est actif). Fallback sur `RemoteIpAddress` en local, sans l'en-tête.
+**Si Railway change de comportement sur cet en-tête, le rate limiting devient soit global
+soit contournable — c'est le point à revérifier en premier.**
 
 ## Validation des entrées (audit sécu 2026-09-13)
 
