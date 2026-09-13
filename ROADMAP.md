@@ -49,15 +49,29 @@
 - [ ] Système d'images formalisé — ratios/dimensions par composant (`heroImage`,
       `thumbImage`, cartes homepage, strip itinéraire…), résolution minimale, export
       WebP/AVIF + `srcset` ; chantier technique indépendant du choix des photos elles-mêmes
-- [ ] Horaires et jours de fermeture des activités payantes — **trouvé par l'audit produit du
-      2026-09-12** : un lieu (village, sentier…) n'a pas d'horaire propre, mais ses activités
-      payantes/visitables (musée, villa, jardin…) si — et beaucoup de sites français ferment
-      un jour fixe (souvent lundi ou mardi) ou réduisent/ferment hors-saison. Les `tips[]`
-      actuels restent qualitatifs (« Accès », « Billetterie »…), rien de structuré. Risque
-      concret qu'un visiteur se déplace pour une porte close, en particulier sur les
-      itinéraires qui recommandent d'y aller tôt/hors-saison. Nouveau champ sur chaque entrée
-      de `lieu.activites[]` dans `data/lieux.json` (et donc l'entité `Activite` + une
-      migration EF), pas sur le `Lieu` lui-même
+- [~] Horaires et jours de fermeture des activités payantes — **fait le 2026-09-13 pour les
+      22 sites à visiter** (musées, villas, jardins, monuments), FR + EN, 21 renseignés.
+      **Périmètre volontairement restreint** : sur les 88 activités payantes, 37 sont des
+      restaurants (horaires trop volatils — les figer donnerait une info périmée en quelques
+      mois, pire que rien) et 12 des locations/sorties sur réservation. Le risque de porte
+      close porte sur les sites qui ferment un jour fixe.
+      Modèle : `fermeJours` (jsonb, 0=dimanche…6=samedi) exploitable par la machine +
+      `horaires`/`horairesEn` en texte libre pour la saisonnalité. Migration EF
+      `AddActiviteHoraires`. Le modèle "fermé le lundi" ne suffisait pas : Villa Ephrussi n'a
+      aucun jour fixe, le fort de Sainte-Agnès n'ouvre que mercredi-dimanche, le fort
+      Saint-Roch seulement les week-ends une partie de l'année.
+      Affichage : horaires sous le prix + avertissement "⚠️ Fermé aujourd'hui" calculé
+      **côté client** (la page est en ISR, un jour calculé serveur serait figé dans le cache)
+      via `useSyncExternalStore`.
+      **Trouvé au passage, à trancher** : le **Château de Gourdon est fermé au public**
+      (confirmé sur chateau-gourdon.com, privatisé pour événements depuis 2015) alors que le
+      site le recommande à 6 €/adulte — et son `url` pointe vers `chateaudegourdon.com`, un
+      **domaine viticole de la vallée du Rhône** sans aucun rapport. L'activité
+      `chateau-musee-de-gourdon` est laissée sans horaires en attendant : soit la retirer
+      (elle est aussi référencée dans le `booking[]` de l'itinéraire `villages-perches`),
+      soit la remplacer par autre chose à Gourdon.
+      **Reste aussi** : les 37 restaurants et les 12 locations/sorties, si on juge un jour
+      que ça vaut le coup malgré la volatilité
 
 ## Découverte & navigation
 
