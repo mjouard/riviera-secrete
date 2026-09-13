@@ -49,8 +49,8 @@
     "nom": "Èze",
     "regionSlug": "menton-monaco",
     "regionLabel": "Menton, Monaco & la frontière",
-    "lat": 43.6579,
-    "lng": 7.3616,
+    "lat": 43.7298,
+    "lng": 7.3619,
     "description": "Un village médiéval accroché à 400 mètres au-dessus de la Méditerranée, avec une vue vertigineuse.",
     "thumbImage": "assets/images/lieux/eze-village/thumb.jpg",
     "lieux": [
@@ -264,8 +264,8 @@
     "nom": "Cannes",
     "regionSlug": "antibes-cannes",
     "regionLabel": "Antibes, Cannes & le massif de l'Estérel",
-    "lat": 43.515,
-    "lng": 7.048,
+    "lat": 43.5515,
+    "lng": 7.0134,
     "description": "La ville du Festival, dont les îles de Lérins offrent une escapade monastique hors du temps à vingt minutes au large.",
     "thumbImage": "assets/images/lieux/iles-de-lerins/thumb.jpg",
     "lieux": [

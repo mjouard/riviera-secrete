@@ -76,10 +76,18 @@ for the full entity/endpoint reference):
   kind**, it just never takes effect. Double-check a new lieu's `villeSlug` by hand against
   `data/villes.json` regardless of which of these safety nets does or doesn't apply.
 - **`data/lieux.json`** — source of truth for the 27 lieux, including `lat`/`lng`
-  (WebSearch-verified against real-world coordinates, 2026-08-27 — 3 were found off by
-  2–6km and corrected: `peille-village`, `peillon-village`,
-  `roquebrune-cap-martin-village`; if you ever add a lieu, verify its coordinates the same
-  way rather than eyeballing a map). Each lieu also owns an `activites[]` array (`id`,
+  — **run `python3 scripts/verifie-coordonnees.py` after adding or moving any lieu or
+  ville, and never trust a manual check instead.** Coordinates were "WebSearch-verified"
+  by hand twice (2026-08-27, then again) and both passes still left `eze-village` **8 km
+  out in the Mediterranean** — with `villes.json`'s `eze` carrying the identical wrong
+  point, so the commune marker was in the sea too — plus `cannes` sitting on the Lérins
+  islands, and three lieux 2,5–3,6 km off (found by the 2026-09-13 UX audit + the script
+  itself; all six corrected). The script runs two checks that a human eye does not: a
+  reverse-geocode of every point (Nominatim answers `addresstype: region` for a point in
+  the sea — that is the exact Èze signature) and the distance from each lieu to its own
+  ville. Both files are now clean. Note `ELOIGNES_LEGITIMES` in the script: four lieux
+  (a massif peak, an altitude hamlet, gorges, a 4,5 km beach) sit legitimately >5 km from
+  their commune centre. Each lieu also owns an `activites[]` array (`id`,
   `nom`, `badge` (`gratuit`/`payant`), `duree`, `prix`, `url`, `image`, `alt`, `linkText`).
   Price/duration/url/image for a given activité exist **only here**. `metaPills` holds only
   the saison/durée/niveau pills — the 📍 coordinates pill is never stored, always computed
