@@ -71,9 +71,15 @@
       **supprimée** : retirée de `data/lieux.json`, du `booking[]` de l'itinéraire
       `villages-perches`, de la DB prod (`remove-activite`), et son image orpheline
       `act-1.jpg` supprimée. Les badges du lieu restent cohérents (`randonnee` et
-      `restaurant` ont toujours leur activité). **`gourdon-village` n'a plus que 3
-      activités**, sous le minimum de 4 retenu ailleurs sur le site — une activité de
-      remplacement à Gourdon reste à trouver.
+      `restaurant` ont toujours leur activité). **Gourdon a été réenrichi le 2026-09-13** :
+      4 activités ajoutées (baptême de parapente 80–90 €, La Source Parfumée / distillerie
+      Galimard gratuite, église Saint-Vincent, Verrerie d'Art et ateliers du village), soit
+      7 au total. Écartés volontairement : la via ferrata (existe déjà sur le lieu
+      `gorges-du-loup-cascade-courmes`, qui a sa propre fiche — doublon interdit), les
+      remparts (les sources décrivant des remparts et une église gothique concernent
+      **Gourdon dans le Lot**, autre village à 500 km — piège de recherche à connaître), le
+      panorama place Victoria (déjà couvert par `panorama-depuis-la-falaise`) et les jardins
+      Le Nôtre (ils appartiennent au château, donc fermés).
       **Reste aussi** : les 37 restaurants et les 12 locations/sorties, si on juge un jour
       que ça vaut le coup malgré la volatilité
 
@@ -376,6 +382,14 @@ Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
       `feedback_vercel_deploy.md`) car elle re-déployait depuis la racine du repo au lieu de
       `frontend/`. Ne pas la reconnecter.
 - [ ] Configurer une branche `staging` (ou Vercel Preview Deployments)
+- [ ] **Déploiement frontend en attente (2026-09-13)** — la limite Vercel du plan gratuit a
+      été atteinte (100 déploiements/jour, `api-deployments-free-per-day`). Les données sont
+      en ligne (elles transitent par l'API, pas par le build), mais **3 photos d'activités de
+      Gourdon (`act-5/6/7.jpg`), le renommage `act-8.jpg` et les 4 crédits photo n'arriveront
+      qu'au prochain `vercel --prod`**. Rien d'autre à faire que relancer le déploiement une
+      fois la limite réinitialisée. Piège à retenir : une édition de `data/*.json` synchronisée
+      en base est visible immédiatement, alors qu'un fichier ajouté dans `public/` exige un
+      déploiement — les deux ne vont pas au même rythme.
 
 ## SEO / technique
 
