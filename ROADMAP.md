@@ -167,8 +167,20 @@
       silencieusement. **Piège** : `/creer-itineraire` charge ses lieux côté client et le
       CORS de l'API prod n'autorise que l'origine de prod — cette page ne peut pas être
       testée en local, il faut déployer d'abord
-- [ ] Créateur d'itinéraire : partage par URL — encoder la sélection dans les query params
-      pour partager sans compte ni backend (sera mieux fait côté backend)
+- [x] Créateur d'itinéraire : partage par URL — **fait le 2026-09-13** (FR + EN). Bouton
+      "Partager le lien" sur la vue résultat ; le lien rouvre l'itinéraire tel quel chez le
+      destinataire, sans connexion. **Partage l'arrangement et pas seulement la sélection**
+      (que `?add=` couvrait déjà) : l'ordre des étapes et la répartition par jour sont ce que
+      le visiteur ajuste à la main, les régénérer retomberait sur l'algorithme glouton. Format
+      `?jours=slugA,slugB|slugC` (+ `duree`, `nom`), lisible plutôt que base64 — les slugs sont
+      déjà URL-safe et un lien tronqué se diagnostique. Priorité `?id=` > `?jours=` > `?add=`,
+      slugs inconnus filtrés, lien invalide → retour au sélecteur. `encodeJours`/`decodeJours`
+      dans `src/lib/itineraire-logic.ts`.
+      **Piège de test** : `/creer-itineraire` charge ses lieux côté client et le CORS de l'API
+      prod n'autorise que l'origine de prod — la page n'est donc pas testable en local tant
+      qu'on n'a pas lancé le backend localement (`Jwt__Secret` bidon + `Cors__AllowedOrigin=
+      http://localhost:3000` + connection string de prod), en repointant `.env.local` puis en
+      le restaurant.
 - [~] PWA — **paliers 0 et 1 faits le 2026-09-13**, répond au constat de l'audit produit du
       2026-09-12 (les lieux "hors des sentiers battus" sont ceux où la couverture mobile est
       la plus faible, et le site dépendait entièrement d'une connexion live).
