@@ -85,15 +85,20 @@
       activité depuis les fiches lieu et les pages ville, page `mes-favoris.html`)
 - [x] Bouton de partage natif (`navigator.share`) sur les fiches lieu
 - [x] Carte homepage : panneau latéral en desktop, bottom-sheet en mobile au clic marqueur
-- [ ] Page `/a-propos` + contact/signalement d'erreur — angle éditorial du site ("carnet de
-      repérage, pas un guide officiel"), aide le SEO et donne confiance aux premiers
-      visiteurs (30 min). **Renforcé par l'audit produit du 2026-09-12** : c'est le trou de
-      confiance le plus cité — aucune page du site n'explique qui écrit, comment les lieux
-      sont choisis, ni comment signaler un prix/horaire obsolète ; à une époque où le contenu
-      générique par IA inonde les résultats de recherche voyage, l'absence totale de signal
-      de crédibilité (bio, méthode, contact) joue contre un site qui a pourtant fait un vrai
-      travail éditorial. Prévoir un lien de contact/signalement, pas seulement un texte
-      éditorial
+- [~] Page `/a-propos` — **faite le 2026-09-13** (FR + EN), comble le trou de confiance le
+      plus cité par l'audit produit du 2026-09-12 (aucune page n'expliquait qui écrit, comment
+      les lieux sont choisis, ni comment signaler une info obsolète). Contient l'angle
+      éditorial ("carnet de repérage, pas un guide officiel"), le critère de sélection, la
+      méthode de vérification (coordonnées GPS vérifiées une par une, badges praticables au
+      lieu précis et non dans la commune, photos CC créditées, aucun lien affilié — vérifié,
+      les URLs de réservation n'ont pas d'identifiant de parrainage) et une section honnête
+      sur les limites (prix/horaires qui vieillissent). Comptes dérivés de l'API, pas écrits
+      en dur. Liée depuis le footer, dans le sitemap avec hreflang.
+      **Reste à faire** : le formulaire de contact/signalement lui-même — volontairement
+      différé (décision utilisateur du 2026-09-13) pour ne pas exposer une adresse perso au
+      scraping ; à ajouter une fois le nom de domaine acheté (voir "Mise en production
+      réelle"), avec une adresse sur ce domaine. La section "Signaler une erreur" de la page
+      annonce déjà ce formulaire à venir.
 
 ## Features différenciantes
 
@@ -270,8 +275,10 @@ Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
       `main`, `vercel.json` configuré avec cache et headers de sécurité)
 - [ ] Acheter un nom de domaine (ex. `riviera-secrete.fr` ou `.com`) et le configurer sur
       Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine
-      pointé. Sert aussi à vérifier un domaine sur Resend (resend.com/domains) pour lever la
-      limitation d'envoi sandbox des emails de confirmation (voir "Communauté / comptes")
+      pointé. **Débloque deux choses en attente** : (1) vérifier un domaine sur Resend
+      (resend.com/domains) pour lever la limitation d'envoi sandbox des emails de
+      confirmation (voir "Communauté / comptes") ; (2) le formulaire de contact/signalement
+      de `/a-propos`, différé pour éviter d'exposer une adresse perso (voir "Features UX")
 - [x] Purger le champ `ogImage` de `data/lieux.json`/la DB — **fait le 2026-09-13**. Retiré
       des 43 lieux dans `data/lieux.json`, de l'entité `Lieu` et de `DatabaseSeeder.cs`, et du
       type `Lieu` côté frontend. Migration EF `RemoveLieuOgImage` (`DROP COLUMN`) appliquée en
