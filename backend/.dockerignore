@@ -1,0 +1,17 @@
+# Le Dockerfile fait `COPY . .` depuis backend/ : sans ce fichier, tout ce qui traîne
+# localement part dans l'image. `railway up` envoie le dossier local, pas le contenu de git.
+
+# Secrets locaux — ne doivent jamais se retrouver dans une couche d'image.
+appsettings.Development.json
+**/appsettings.Development.json
+.env
+**/.env
+
+# Artefacts de build de la machine hôte : inutiles (le Dockerfile restore et publish
+# lui-même) et potentiellement incompatibles avec l'image Linux.
+**/bin/
+**/obj/
+
+**/.vs/
+**/.idea/
+.DS_Store
