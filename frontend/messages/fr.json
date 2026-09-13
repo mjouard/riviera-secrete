@@ -81,7 +81,8 @@
     "gratuit": "gratuit",
     "payant": "payant",
     "Gratuit": "Gratuit",
-    "Payant": "Payant"
+    "Payant": "Payant",
+    "verifierHoraires": "Vérifier les horaires →"
   },
   "badges": {
     "plage": "Plage",

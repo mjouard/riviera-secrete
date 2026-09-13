@@ -59,11 +59,12 @@ export default async function ItinerairePage({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const [itin, lieux, t, tCommon] = await Promise.all([
+  const [itin, lieux, t, tCommon, tActivite] = await Promise.all([
     api.itineraires.bySlug(slug).catch(() => null),
     api.lieux.list(),
     getTranslations("itineraire"),
     getTranslations("common"),
+    getTranslations("activite"),
   ]);
   if (!itin) notFound();
 
@@ -319,7 +320,11 @@ export default async function ItinerairePage({
                       className="text-sm mt-auto self-start"
                       style={{ color: "var(--azure)" }}
                     >
-                      {b.linkText}
+                      {b.linkText === "Réserver →"
+                        ? tActivite("reserver")
+                        : b.linkText === "Vérifier les horaires →"
+                          ? tActivite("verifierHoraires")
+                          : b.linkText}
                     </a>
                   </div>
                 </div>

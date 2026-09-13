@@ -81,7 +81,8 @@
     "gratuit": "free",
     "payant": "paid",
     "Gratuit": "Free",
-    "Payant": "Paid"
+    "Payant": "Paid",
+    "verifierHoraires": "Check schedule →"
   },
   "badges": {
     "plage": "Beach",
