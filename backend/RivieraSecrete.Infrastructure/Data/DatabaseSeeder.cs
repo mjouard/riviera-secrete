@@ -40,7 +40,6 @@ public static class DatabaseSeeder
             DescriptionEn = l["descriptionEn"]?.GetValue<string>(),
             Description2  = l["description2"]?.GetValue<string>(),
             Description2En= l["description2En"]?.GetValue<string>(),
-            OgImage     = l["ogImage"]!.GetValue<string>(),
             HeroImage   = l["heroImage"]!.GetValue<string>(),
             HeroAlt     = l["heroAlt"]!.GetValue<string>(),
             HeroSlides  = l["heroSlides"]?.GetValue<int>(),
@@ -203,7 +202,6 @@ public static class DatabaseSeeder
         dbLieu.HeroAlt      = jsonLieu["heroAlt"]!.GetValue<string>();
         dbLieu.HeroImage    = jsonLieu["heroImage"]!.GetValue<string>();
         dbLieu.ThumbImage   = jsonLieu["thumbImage"]!.GetValue<string>();
-        dbLieu.OgImage      = jsonLieu["ogImage"]!.GetValue<string>();
         dbLieu.Badges       = jsonLieu["badges"]?.Deserialize<List<string>>(JsonOpts) ?? [];
         dbLieu.MetaPills    = jsonLieu["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [];
         dbLieu.Tips         = jsonLieu["tips"]?.Deserialize<List<Tip>>(JsonOpts) ?? [];

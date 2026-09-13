@@ -62,7 +62,6 @@ export interface Lieu {
   heroAlt: string;
   heroSlides?: number;
   thumbImage: string;
-  ogImage: string;
   badges: string[];
   metaPills: MetaPill[];
   tips: Tip[];

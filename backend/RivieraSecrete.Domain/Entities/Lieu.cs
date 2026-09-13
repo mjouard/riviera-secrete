@@ -24,7 +24,6 @@ public class Lieu
     public string HeroAlt { get; set; } = default!;
     public int? HeroSlides { get; set; }
     public string ThumbImage { get; set; } = default!;
-    public string OgImage { get; set; } = default!;
 
     // Stored as JSON columns
     public List<string> Badges { get; set; } = [];
