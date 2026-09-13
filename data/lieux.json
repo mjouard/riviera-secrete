@@ -3569,7 +3569,7 @@
         "duree": "30 min",
         "prix": "Accès libre",
         "url": "https://www.menton.fr/Admirez-le-panorama-depuis-le-cimetiere-du-Vieux-Chateau-et-le-Boulevard-de.html",
-        "image": "https://picsum.photos/seed/webb-ellis-menton/200/200",
+        "image": "assets/images/lieux/vieux-menton/act-1.jpg",
         "alt": "Tombes du cimetière du Vieux-Château, dont celle du supposé inventeur du rugby",
         "linkText": "En savoir plus →"
       },
@@ -3580,7 +3580,7 @@
         "duree": "1h-1h30",
         "prix": "Accès libre",
         "url": "https://www.menton.fr/-A-Voir-.html",
-        "image": "https://picsum.photos/seed/vieux-menton-balade/200/200",
+        "image": "assets/images/lieux/vieux-menton/act-5.jpg",
         "alt": "Ruelles colorées et escaliers du Vieux Menton",
         "linkText": "En savoir plus →"
       },
@@ -3591,7 +3591,7 @@
         "duree": "1h30",
         "prix": "10 € / adulte",
         "url": "https://serredelamadone.fr/",
-        "image": "https://picsum.photos/seed/serre-madone/200/200",
+        "image": "assets/images/lieux/vieux-menton/act-2.jpg",
         "alt": "Bassins en terrasses et plantes rares du Jardin Serre de la Madone",
         "linkText": "Réserver →"
       },
@@ -3602,7 +3602,7 @@
         "duree": "1h",
         "prix": "8 € / adulte",
         "url": "https://www.jardinbotaniquevalrahmehmenton.fr/",
-        "image": "https://picsum.photos/seed/val-rahmeh/200/200",
+        "image": "assets/images/lieux/vieux-menton/act-3.jpg",
         "alt": "Palmiers centenaires et plantes tropicales du jardin Val Rahmeh",
         "linkText": "Réserver →"
       },
@@ -3613,7 +3613,7 @@
         "duree": "1h30",
         "prix": "25-45 € / pers.",
         "url": "https://le-petit-port.hey-restaurants.com/",
-        "image": "https://picsum.photos/seed/petit-port-menton/200/200",
+        "image": "assets/images/lieux/vieux-menton/act-4.jpg",
         "alt": "Terrasse du restaurant Le Petit Port au pied du Vieux Menton",
         "linkText": "Réserver →"
       }
@@ -3695,7 +3695,7 @@
         "duree": "45 min",
         "prix": "Accès libre",
         "url": "https://www.falicon.fr/visiter-falicon/",
-        "image": "https://picsum.photos/seed/ruelles-falicon/200/200",
+        "image": "assets/images/lieux/falicon-village/act-1.jpg",
         "alt": "Ruelle voûtée et façade peinte en trompe-l'œil à Falicon",
         "linkText": "En savoir plus →"
       },
@@ -3706,7 +3706,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://www.explorenicecotedazur.com/en/explore/towns-villages/mid-country/falicon/",
-        "image": "https://picsum.photos/seed/bellevue-falicon/200/200",
+        "image": "assets/images/lieux/falicon-village/act-2.jpg",
         "alt": "Panorama sur Nice et la baie des Anges depuis le plateau Bellevue de Falicon",
         "linkText": "En savoir plus →"
       },
@@ -3717,7 +3717,7 @@
         "duree": "1h30-2h",
         "prix": "Accès libre",
         "url": "https://www.decathlon-outdoor.com/fr-fr/explore/france/autour-du-mont-chauve-et-son-insolite-pyramide-de-falicon-60127af56c0d8",
-        "image": "https://picsum.photos/seed/mont-chauve-falicon/200/200",
+        "image": "assets/images/lieux/falicon-village/act-3.jpg",
         "alt": "Sentier de randonnée vers le Mont Chauve depuis Falicon",
         "linkText": "En savoir plus →"
       },
@@ -3728,7 +3728,7 @@
         "duree": "1h30",
         "prix": "25-70 € / pers.",
         "url": "https://www.facebook.com/parcoursliverestaurant/",
-        "image": "https://picsum.photos/seed/parcours-live-falicon/200/200",
+        "image": "assets/images/lieux/falicon-village/act-4.jpg",
         "alt": "Terrasse panoramique du restaurant Parcours Live à Falicon",
         "linkText": "Réserver →"
       }
@@ -3810,7 +3810,7 @@
         "duree": "1h30-2h",
         "prix": "Accès libre",
         "url": "https://recreanice.fr/mont-boron-fort-alban-nice-balade",
-        "image": "https://picsum.photos/seed/sentier-mont-boron/200/200",
+        "image": "assets/images/lieux/parc-mont-boron/act-1.jpg",
         "alt": "Sentier boisé le long des crêtes du Mont Boron",
         "linkText": "En savoir plus →"
       },
@@ -3821,7 +3821,7 @@
         "duree": "30 min",
         "prix": "Accès libre",
         "url": "https://monumentum.fr/monument-historique/pa00080795/nice-fort-du-mont-alban",
-        "image": "https://picsum.photos/seed/fort-mont-alban/200/200",
+        "image": "assets/images/lieux/parc-mont-boron/act-2.jpg",
         "alt": "Remparts du Fort du Mont Alban surplombant la baie de Villefranche",
         "linkText": "En savoir plus →"
       },
@@ -3832,7 +3832,7 @@
         "duree": "1h-2h",
         "prix": "Accès libre",
         "url": "https://www.plages.tv/detail/plage-de-coco-beach-nice-06000",
-        "image": "https://picsum.photos/seed/coco-beach-nice/200/200",
+        "image": "assets/images/lieux/parc-mont-boron/act-3.jpg",
         "alt": "Rochers aménagés pour la baignade à Coco Beach, au pied du Mont Boron",
         "linkText": "En savoir plus →"
       },
@@ -3843,7 +3843,7 @@
         "duree": "1h30",
         "prix": "30-70 € / pers.",
         "url": "https://www.leplongeoir.com/",
-        "image": "https://picsum.photos/seed/le-plongeoir-nice/200/200",
+        "image": "assets/images/lieux/parc-mont-boron/act-4.jpg",
         "alt": "Terrasse du restaurant Le Plongeoir posé sur les rochers du Cap de Nice",
         "linkText": "Réserver →"
       }
