@@ -1,9 +1,10 @@
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl, loc } from "@/lib/utils";
-import { parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
+import { encodeJours, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
@@ -40,7 +41,38 @@ export default function ResultsView({
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
   const tDuree = useTranslations("dureeLabels");
+  const [lienCopie, setLienCopie] = useState(false);
   const nbLieux = currentDays.flat().length;
+
+  /**
+   * Construit un lien qui rouvre l'itinéraire tel quel — arrangement par jour compris —
+   * sans compte ni backend (voir encodeJours). L'URL est bâtie depuis `window.location`
+   * pour rester dans la locale courante (/creer-itineraire ou /en/creer-itineraire).
+   */
+  async function partager() {
+    const url = new URL(window.location.origin + window.location.pathname);
+    url.searchParams.set("jours", encodeJours(currentDays));
+    url.searchParams.set("duree", dureeKey);
+    if (currentNom) url.searchParams.set("nom", currentNom);
+    const lien = url.toString();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: currentNom || t("partagerLien"), url: lien });
+        return;
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") return; // annulé par l'utilisateur
+      }
+    }
+    if (!navigator.clipboard) return;
+    try {
+      await navigator.clipboard.writeText(lien);
+      setLienCopie(true);
+      setTimeout(() => setLienCopie(false), 2000);
+    } catch {
+      // silent — rien de mieux à proposer si le presse-papiers est refusé
+    }
+  }
   const title = currentNom || t("itineraireFallback", { duree: tDuree(dureeKey) });
   const meta = `${currentDays.length} ${currentDays.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
 
@@ -63,6 +95,14 @@ export default function ResultsView({
           </button>
           <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
             {t("exporterPdf")}
+          </button>
+          <button
+            onClick={partager}
+            title={t("partagerTitre")}
+            className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+            style={{ borderColor: "var(--line)", color: lienCopie ? "var(--azure)" : "var(--text-muted)" }}
+          >
+            {lienCopie ? t("lienCopie") : t("partagerLien")}
           </button>
           {editMode ? (
             <button onClick={onSaveClick} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>

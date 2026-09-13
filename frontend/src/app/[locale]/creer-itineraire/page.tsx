@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import type { Lieu } from "@/lib/types";
 import { redirectToConnexion } from "@/lib/utils";
-import { DUREE_META, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
+import { DUREE_META, decodeJours, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
 import PickerView from "./_components/PickerView";
 import ResultsView from "./_components/ResultsView";
 
@@ -67,6 +67,27 @@ export default function CreerItinerairePage() {
 
       const params = new URLSearchParams(window.location.search);
 
+      const map = new Map(data.map((l) => [l.slug, l]));
+
+      const duree = params.get("duree");
+      if (duree && duree in DUREE_META) setDureeKey(duree as DureeKey);
+
+      // `?jours=` : itinéraire déjà composé, partagé par lien. Prioritaire sur `?add=`,
+      // qui n'exprime qu'une pré-sélection — on ouvre directement le résultat, en
+      // conservant la répartition par jour telle que l'expéditeur l'avait arrangée.
+      const jours = params.get("jours");
+      if (jours) {
+        const parJour = decodeJours(jours, new Set(map.keys()));
+        if (parJour.flat().length > 0) {
+          setCurrentDays(parJour.map((j) => j.map((s) => map.get(s)!) ));
+          setSelectedSlugs(new Set(parJour.flat()));
+          setCurrentNom(params.get("nom") ?? "");
+          setEditMode(true);
+          setView("results");
+          return;
+        }
+      }
+
       // `?add=` accepte un slug seul (bouton "Ajouter à un itinéraire" d'une fiche lieu) ou
       // plusieurs séparés par des virgules (bouton "Partir de cet itinéraire" d'un
       // itinéraire éditorial). Les slugs inconnus sont ignorés silencieusement : une URL
@@ -74,16 +95,12 @@ export default function CreerItinerairePage() {
       // de ne rien faire.
       const add = params.get("add");
       if (add) {
-        const map = new Map(data.map((l) => [l.slug, l]));
         const valides = add.split(",").map((s) => s.trim()).filter((s) => map.has(s));
         if (valides.length > 0) {
           setSelectedSlugs(new Set(valides));
           setExpandedRegions(new Set(valides.map((s) => map.get(s)!.regionSlug)));
         }
       }
-
-      const duree = params.get("duree");
-      if (duree && duree in DUREE_META) setDureeKey(duree as DureeKey);
     }).catch(() => setLoading(false));
   }, []);
 

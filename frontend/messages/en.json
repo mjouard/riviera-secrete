@@ -179,7 +179,10 @@
     "nomPlaceholder": "My itinerary…",
     "annuler": "Cancel",
     "sauvegardeEnCours": "Saving…",
-    "connexionRequise": "Login required"
+    "connexionRequise": "Login required",
+    "partagerLien": "🔗 Share link",
+    "lienCopie": "Link copied ✓",
+    "partagerTitre": "Copy a link that reopens this itinerary as-is, no account needed"
   },
   "mesItineraires": {
     "breadcrumb": "My itineraries",

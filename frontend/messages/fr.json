@@ -179,7 +179,10 @@
     "nomPlaceholder": "Mon itinéraire…",
     "annuler": "Annuler",
     "sauvegardeEnCours": "Sauvegarde…",
-    "connexionRequise": "Connexion requise"
+    "connexionRequise": "Connexion requise",
+    "partagerLien": "🔗 Partager le lien",
+    "lienCopie": "Lien copié ✓",
+    "partagerTitre": "Copier un lien qui rouvre cet itinéraire tel quel, sans compte"
   },
   "mesItineraires": {
     "breadcrumb": "Mes itinéraires",

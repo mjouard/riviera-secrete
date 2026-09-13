@@ -13,6 +13,41 @@ export const DUREE_META = {
 export type DureeKey = keyof typeof DUREE_META;
 
 /**
+ * Encode/décode la répartition par jour dans l'URL, pour partager un itinéraire composé
+ * sans compte ni backend.
+ *
+ * Format lisible (`slugA,slugB|slugC`) plutôt que du base64 : les slugs sont déjà URL-safe,
+ * l'URL reste compréhensible et débogable à l'œil, et un lien tronqué se diagnostique.
+ *
+ * On partage l'**arrangement** et pas seulement la sélection (que `?add=` couvre déjà) :
+ * l'ordre des étapes et leur répartition par jour sont justement ce que le visiteur a
+ * ajusté à la main, et les régénérer ferait retomber sur l'algorithme glouton.
+ */
+export const SEPARATEUR_JOUR = "|";
+
+export function encodeJours(days: { slug: string }[][]): string {
+  return days
+    .map((jour) => jour.map((l) => l.slug).join(","))
+    .join(SEPARATEUR_JOUR);
+}
+
+/**
+ * Les slugs inconnus sont filtrés silencieusement (lieu renommé ou retiré depuis le
+ * partage), et un jour devenu vide est conservé : supprimer le jour décalerait tous les
+ * suivants, alors qu'une journée vide reste compréhensible et modifiable.
+ */
+export function decodeJours(param: string, slugsConnus: Set<string>): string[][] {
+  return param
+    .split(SEPARATEUR_JOUR)
+    .map((jour) =>
+      jour
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s !== "" && slugsConnus.has(s))
+    );
+}
+
+/**
  * Déduit la durée du créateur depuis le badge d'un itinéraire éditorial
  * ("6 étapes · 2 jours", "3 étapes · Journée complète") pour pré-sélectionner le bon
  * préréglage sur "Partir de cet itinéraire". Analyse le français (`badge`), jamais
