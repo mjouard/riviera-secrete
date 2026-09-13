@@ -13,6 +13,9 @@ import AddToItinButton from "@/components/AddToItinButton";
 
 export const revalidate = 3600;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 export async function generateStaticParams() {
   const lieux = await api.lieux.list();
   return lieux.map((l) => ({ slug: l.slug }));
@@ -35,6 +38,13 @@ export async function generateMetadata({
       title: nom,
       description,
       images: lieu.heroImage ? [{ url: imgUrl(lieu.heroImage), width: 1200, height: 800 }] : [],
+    },
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/lieux/${slug}`,
+        en: `${SITE_URL}/en/lieux/${slug}`,
+        "x-default": `${SITE_URL}/lieux/${slug}`,
+      },
     },
   };
 }
@@ -141,7 +151,7 @@ export default async function LieuPage({
 
         {/* Liens Maps/Waze/Plans — quittent le site, traitement discret */}
         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
-          {buildMapLinks(lieu.lat, lieu.lng, nom).map((link) => (
+          {buildMapLinks(lieu.lat, lieu.lng, nom, tCommon("plans")).map((link) => (
             <a
               key={link.label}
               href={link.url}

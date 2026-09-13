@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ShareButton({ title }: { title: string }) {
+  const t = useTranslations("lieuActions");
   const [copied, setCopied] = useState(false);
 
   async function handleClick() {
@@ -33,7 +35,7 @@ export default function ShareButton({ title }: { title: string }) {
       className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
       style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
     >
-      {copied ? "Lien copié ✓" : "🔗 Partager"}
+      {copied ? t("lienCopie") : t("partager")}
     </button>
   );
 }

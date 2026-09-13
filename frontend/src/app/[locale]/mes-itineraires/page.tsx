@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { DUREE_META } from "@/lib/itineraire-logic";
@@ -8,6 +9,10 @@ import { authFetch } from "@/lib/api";
 import type { UserItineraire } from "@/lib/types";
 
 export default function MesItinerairesPage() {
+  const locale = useLocale();
+  const t = useTranslations("mesItineraires");
+  const tCommon = useTranslations("common");
+  const tDuree = useTranslations("dureeLabels");
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -39,7 +44,7 @@ export default function MesItinerairesPage() {
   }, [loadItems, status]);
 
   async function handleDelete(id: string, nom: string) {
-    if (!confirm(`Supprimer « ${nom} » ?`)) return;
+    if (!confirm(t("confirmSuppression", { nom }))) return;
     if (!session?.apiToken) return;
     setDeleting(id);
     try {
@@ -55,18 +60,16 @@ export default function MesItinerairesPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>Mes itinéraires</span>
+        <span style={{ color: "var(--text)" }}>{t("breadcrumb")}</span>
       </nav>
 
       <div className="flex items-center justify-between mb-6 gap-4">
         <div>
-          <h1 className="text-3xl font-bold mb-1">Mes itinéraires</h1>
+          <h1 className="text-3xl font-bold mb-1">{t("title")}</h1>
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-            {session
-              ? "Sauvegardés sur ton compte."
-              : "Compose un itinéraire librement — connecte-toi pour le sauvegarder."}
+            {session ? t("subtitleConnecte") : t("subtitleDeconnecte")}
           </p>
         </div>
         <Link
@@ -74,7 +77,7 @@ export default function MesItinerairesPage() {
           className="text-sm px-4 py-2 rounded-xl font-semibold flex-shrink-0"
           style={{ background: "var(--terracotta)", color: "#0c1116" }}
         >
-          + Créer
+          {t("creer")}
         </Link>
       </div>
 
@@ -84,30 +87,30 @@ export default function MesItinerairesPage() {
           style={{ background: "var(--surface)", borderLeft: "3px solid var(--azure)" }}
         >
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-            Connecte-toi pour sauvegarder et retrouver tes itinéraires sur tous tes appareils.
+            {t("connecteToiBanner")}
           </p>
           <Link
-            href="/connexion?callbackUrl=/mes-itineraires"
+            href={`/connexion?callbackUrl=${encodeURIComponent(locale === "en" ? "/en/mes-itineraires" : "/mes-itineraires")}`}
             className="text-sm px-3 py-1.5 rounded-lg border flex-shrink-0 transition-colors hover:bg-white/5"
             style={{ borderColor: "var(--line)", color: "var(--text)" }}
           >
-            Connexion
+            {t("connexion")}
           </Link>
         </div>
       )}
 
       {session && items.length === 0 && (
         <div className="rounded-2xl p-12 text-center" style={{ background: "var(--surface)" }}>
-          <p className="text-lg font-semibold mb-2">Aucun itinéraire sauvegardé</p>
+          <p className="text-lg font-semibold mb-2">{t("aucunItineraire")}</p>
           <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
-            Compose ton premier itinéraire sur mesure.
+            {t("composePremier")}
           </p>
           <Link
             href="/creer-itineraire"
             className="inline-block text-sm px-5 py-2.5 rounded-xl font-semibold"
             style={{ background: "var(--terracotta)", color: "#0c1116" }}
           >
-            Créer un itinéraire →
+            {t("creerItineraire")}
           </Link>
         </div>
       )}
@@ -117,8 +120,8 @@ export default function MesItinerairesPage() {
           {items.map((it) => {
             const nbLieux = it.days.reduce((n, day) => n + day.length, 0);
             const dureeLabel =
-              DUREE_META[it.dureeKey as keyof typeof DUREE_META]?.label ?? it.dureeKey;
-            const date = new Date(it.createdAt).toLocaleDateString("fr-FR", {
+              it.dureeKey in DUREE_META ? tDuree(it.dureeKey as keyof typeof DUREE_META) : it.dureeKey;
+            const date = new Date(it.createdAt).toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
               day: "numeric",
               month: "long",
               year: "numeric",
@@ -137,7 +140,7 @@ export default function MesItinerairesPage() {
                     style={{ color: "var(--text-muted)" }}
                   >
                     <span>{dureeLabel}</span>
-                    <span>📍 {nbLieux} lieu{nbLieux > 1 ? "x" : ""}</span>
+                    <span>📍 {nbLieux} {nbLieux > 1 ? t("lieux") : t("lieu")}</span>
                     <span>{date}</span>
                   </div>
                 </div>
@@ -149,7 +152,7 @@ export default function MesItinerairesPage() {
                     className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
                     style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                   >
-                    Voir
+                    {t("voir")}
                   </button>
                   <button
                     onClick={() => handleDelete(it.id, it.nom)}
@@ -157,7 +160,7 @@ export default function MesItinerairesPage() {
                     className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-50 disabled:cursor-default"
                     style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                   >
-                    {deleting === it.id ? "…" : "Supprimer"}
+                    {deleting === it.id ? "…" : t("supprimer")}
                   </button>
                 </div>
               </div>

@@ -1,6 +1,8 @@
+import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
 import { REGION_ORDER } from "@/lib/home-data";
+import { loc } from "@/lib/utils";
 
 export default function PickerView({
   byRegion, selectedSlugs, expandedRegions, dureeKey, showEmptyNote,
@@ -18,18 +20,23 @@ export default function PickerView({
   onGenerate: () => void;
   regionCheckState: (slug: string) => { checked: boolean; indeterminate: boolean };
 }) {
+  const locale = useLocale();
+  const t = useTranslations("creerItineraire");
+  const tDuree = useTranslations("dureeLabels");
+  const tRegionFull = useTranslations("regionFull");
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-2">Créer mon itinéraire</h1>
+      <h1 className="text-3xl font-bold mb-2">{t("title")}</h1>
       <p className="mb-8" style={{ color: "var(--text-muted)" }}>
-        Choisis une durée et les lieux qui t&apos;intéressent — l&apos;algorithme compose le meilleur itinéraire possible.
+        {t("subtitle")}
       </p>
 
       {/* Duration */}
       <section className="mb-8">
-        <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>Durée</h2>
+        <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>{t("duree")}</h2>
         <div className="flex flex-wrap gap-3">
-          {(Object.entries(DUREE_META) as [DureeKey, { label: string }][]).map(([key, { label }]) => (
+          {(Object.keys(DUREE_META) as DureeKey[]).map((key) => (
             <label key={key} className="cursor-pointer">
               <input type="radio" name="duree" value={key} checked={dureeKey === key} onChange={() => onDureeChange(key)} className="sr-only" />
               <span
@@ -40,7 +47,7 @@ export default function PickerView({
                   background: dureeKey === key ? "rgba(79,195,201,0.08)" : "transparent",
                 }}
               >
-                {label}
+                {tDuree(key)}
               </span>
             </label>
           ))}
@@ -50,12 +57,12 @@ export default function PickerView({
       {/* Zones */}
       <section className="mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
-          Lieux ({selectedSlugs.size} sélectionné{selectedSlugs.size !== 1 ? "s" : ""})
+          {t("lieuxSection", { count: selectedSlugs.size, plural: selectedSlugs.size !== 1 ? "s" : "" })}
         </h2>
         <div className="space-y-2">
           {REGION_ORDER.filter((r) => byRegion.has(r)).map((regionSlug) => {
             const regionLieux = byRegion.get(regionSlug)!;
-            const regionLabel = regionLieux[0].regionLabel;
+            const regionLabel = tRegionFull(regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez");
             const open = expandedRegions.has(regionSlug);
             const { checked, indeterminate } = regionCheckState(regionSlug);
 
@@ -76,7 +83,7 @@ export default function PickerView({
                   >
                     <span>{regionLabel}</span>
                     <span className="text-xs font-normal ml-2" style={{ color: "var(--text-muted)" }}>
-                      {regionLieux.length} lieux {open ? "▴" : "▾"}
+                      {t("lieuxCount", { count: regionLieux.length })} {open ? "▴" : "▾"}
                     </span>
                   </button>
                 </div>
@@ -90,7 +97,7 @@ export default function PickerView({
                           onChange={() => onToggleLieu(l.slug)}
                           className="w-4 h-4 cursor-pointer flex-shrink-0"
                         />
-                        <span className="text-sm" style={{ color: "var(--text-muted)" }}>{l.nom}</span>
+                        <span className="text-sm" style={{ color: "var(--text-muted)" }}>{loc(locale, l.nomEn, l.nom)}</span>
                       </label>
                     ))}
                   </div>
@@ -103,7 +110,7 @@ export default function PickerView({
 
       {showEmptyNote && (
         <p className="mb-4 text-sm" style={{ color: "var(--terracotta)" }}>
-          Sélectionne au moins un lieu.
+          {t("emptyNote")}
         </p>
       )}
 
@@ -112,7 +119,7 @@ export default function PickerView({
         className="px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
         style={{ background: "var(--terracotta)", color: "#0c1116" }}
       >
-        Générer mon itinéraire →
+        {t("generer")}
       </button>
     </div>
   );

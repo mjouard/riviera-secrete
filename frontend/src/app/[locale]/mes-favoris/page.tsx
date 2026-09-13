@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, loc } from "@/lib/utils";
 import type { Lieu } from "@/lib/types";
 
 export default function MesFavorisPage() {
+  const locale = useLocale();
+  const t = useTranslations("mesFavoris");
+  const tCommon = useTranslations("common");
+  const tRegionFull = useTranslations("regionFull");
   const { data: session, status } = useSession();
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,42 +46,42 @@ export default function MesFavorisPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>Mes favoris</span>
+        <span style={{ color: "var(--text)" }}>{t("breadcrumb")}</span>
       </nav>
 
-      <h1 className="text-3xl font-bold mb-2">Mes favoris</h1>
+      <h1 className="text-3xl font-bold mb-2">{t("title")}</h1>
       <p className="mb-10 text-sm" style={{ color: "var(--text-muted)" }}>
-        Les lieux que tu as épinglés.
+        {t("subtitle")}
       </p>
 
       {status === "loading" || (session && loading) ? (
-        <p style={{ color: "var(--text-muted)" }}>Chargement…</p>
+        <p style={{ color: "var(--text-muted)" }}>{t("chargement")}</p>
       ) : !session ? (
         <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>
           <p className="mb-4" style={{ color: "var(--text-muted)" }}>
-            Connecte-toi pour retrouver tes lieux favoris.
+            {t("connecteToi")}
           </p>
           <Link
-            href="/connexion?callbackUrl=/mes-favoris"
+            href={`/connexion?callbackUrl=${encodeURIComponent(locale === "en" ? "/en/mes-favoris" : "/mes-favoris")}`}
             className="inline-block text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/10"
             style={{ borderColor: "var(--line)", color: "var(--text)" }}
           >
-            Se connecter
+            {t("seConnecter")}
           </Link>
         </div>
       ) : lieux.length === 0 ? (
         <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>
           <p className="mb-4" style={{ color: "var(--text-muted)" }}>
-            Aucun favori pour l&apos;instant.
+            {t("aucunFavori")}
           </p>
           <Link
             href="/#lieux"
             className="text-sm"
             style={{ color: "var(--azure)" }}
           >
-            Parcourir les lieux →
+            {t("parcourirLesLieux")}
           </Link>
         </div>
       ) : (
@@ -98,19 +103,19 @@ export default function MesFavorisPage() {
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <div>
                   <p className="text-xs mb-1" style={{ color: "var(--azure)" }}>
-                    {lieu.commune} · {lieu.regionLabel}
+                    {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
                   </p>
                   <Link
                     href={`/lieux/${lieu.slug}`}
                     className="font-semibold hover:underline"
                   >
-                    {lieu.nom}
+                    {loc(locale, lieu.nomEn, lieu.nom)}
                   </Link>
                   <p
                     className="text-sm mt-1 line-clamp-2"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    {lieu.description}
+                    {loc(locale, lieu.descriptionEn, lieu.description)}
                   </p>
                 </div>
                 <button
@@ -120,7 +125,7 @@ export default function MesFavorisPage() {
                   style={{ color: "var(--terracotta)" }}
                 >
                   <span>♥</span>
-                  <span>{removing === lieu.slug ? "Suppression…" : "Retirer des favoris"}</span>
+                  <span>{removing === lieu.slug ? t("suppression") : t("retirerDesFavoris")}</span>
                 </button>
               </div>
             </div>

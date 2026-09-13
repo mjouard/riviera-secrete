@@ -33,12 +33,12 @@ export function imgUrl(path: string): string {
   return "/" + path.replace(/^(\.\.\/)+/, "");
 }
 
-export function buildMapLinks(lat: number, lng: number, nom: string) {
+export function buildMapLinks(lat: number, lng: number, nom: string, plansLabel = "Plans") {
   const coords = `${lat},${lng}`;
   return [
     { label: "Google Maps", icon: "🗺️", url: `https://www.google.com/maps/search/?api=1&query=${coords}` },
     { label: "Waze",        icon: "🚗", url: `https://waze.com/ul?ll=${coords}&navigate=yes` },
-    { label: "Plans",       icon: "📍", url: `https://maps.apple.com/?ll=${coords}&q=${encodeURIComponent(nom)}` },
+    { label: plansLabel,    icon: "📍", url: `https://maps.apple.com/?ll=${coords}&q=${encodeURIComponent(nom)}` },
   ];
 }
 

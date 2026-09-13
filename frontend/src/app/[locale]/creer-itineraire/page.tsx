@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
@@ -25,6 +26,8 @@ interface Draft {
 // ─── Main page ───────────────────────────────────────────────────────────────
 
 export default function CreerItinerairePage() {
+  const t = useTranslations("creerItineraire");
+  const tCommon = useTranslations("common");
   const { data: session, status } = useSession();
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(true);
@@ -245,12 +248,14 @@ export default function CreerItinerairePage() {
     if (excluded.length > 0) {
       return {
         mode: "excluded" as const,
-        items: excluded.map((l) => ({ slug: l.slug, nom: l.nom, thumbImage: l.thumbImage })),
+        items: excluded.map((l) => ({ slug: l.slug, nom: l.nom, nomEn: l.nomEn, thumbImage: l.thumbImage })),
       };
     }
     const includedSlugs = new Set(currentDays.flat().map((l) => l.slug));
     const seen = new Set<string>();
-    const items: Array<{ slug: string; nom: string; thumbImage: string }> = [];
+    // related[] est un snapshot JSON sans variante *En (voir project_version_anglaise.md) —
+    // nomEn reste undefined ici, loc() retombe sur le français côté ResultsView.
+    const items: Array<{ slug: string; nom: string; nomEn?: string | null; thumbImage: string }> = [];
     for (const lieu of currentDays.flat()) {
       for (const rel of lieu.related || []) {
         const slug = rel.href.replace(/\.html$/, "");
@@ -312,7 +317,7 @@ export default function CreerItinerairePage() {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto px-6 py-12 text-center" style={{ color: "var(--text-muted)" }}>
-        Chargement…
+        {t("chargement")}
       </div>
     );
   }
@@ -320,9 +325,9 @@ export default function CreerItinerairePage() {
   return (
     <div className="print-page max-w-4xl mx-auto px-6 py-12">
       <nav className="no-print text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>Créer un itinéraire</span>
+        <span style={{ color: "var(--text)" }}>{t("breadcrumb")}</span>
       </nav>
 
       {view === "picker" ? (
@@ -370,19 +375,19 @@ export default function CreerItinerairePage() {
           onClick={(e) => { if (e.target === e.currentTarget) setShowSaveModal(false); }}
         >
           <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "var(--surface)" }}>
-            <h2 className="text-lg font-semibold mb-4">Nommer l&apos;itinéraire</h2>
+            <h2 className="text-lg font-semibold mb-4">{t("nommerItineraire")}</h2>
             <input
               className="w-full rounded-lg px-3 py-2 text-sm mb-4 outline-none"
               style={{ background: "var(--surface-hover)", color: "var(--text)", border: "1px solid var(--line)" }}
               value={saveInput}
               onChange={(e) => setSaveInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") void handleSave(); }}
-              placeholder="Mon itinéraire…"
+              placeholder={t("nomPlaceholder")}
               autoFocus
             />
             <div className="flex gap-3 justify-end">
               <button onClick={() => setShowSaveModal(false)} className="text-sm px-4 py-2 rounded-lg transition-colors hover:bg-white/5" style={{ color: "var(--text-muted)" }}>
-                Annuler
+                {t("annuler")}
               </button>
               <button
                 onClick={() => void handleSave()}
@@ -390,7 +395,7 @@ export default function CreerItinerairePage() {
                 className="text-sm px-4 py-2 rounded-lg font-semibold disabled:opacity-50 cursor-pointer disabled:cursor-default"
                 style={{ background: "var(--azure)", color: "#0c1116" }}
               >
-                {saving ? "Sauvegarde…" : session ? "Sauvegarder" : "Connexion requise"}
+                {saving ? t("sauvegardeEnCours") : session ? t("sauvegarder") : t("connexionRequise")}
               </button>
             </div>
           </div>

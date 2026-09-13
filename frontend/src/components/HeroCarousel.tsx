@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 interface Slide {
   src: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function HeroCarousel({ slides, className = "" }: Props) {
+  const t = useTranslations("common");
   const [index, setIndex] = useState(0);
 
   const prev = useCallback(() => setIndex((i) => (i - 1 + slides.length) % slides.length), [slides.length]);
@@ -34,10 +36,10 @@ export default function HeroCarousel({ slides, className = "" }: Props) {
         ))}
       </div>
 
-      <button className="carousel-btn carousel-prev" onClick={prev} aria-label="Image précédente">
+      <button className="carousel-btn carousel-prev" onClick={prev} aria-label={t("imagePrecedente")}>
         &#8249;
       </button>
-      <button className="carousel-btn carousel-next" onClick={next} aria-label="Image suivante">
+      <button className="carousel-btn carousel-next" onClick={next} aria-label={t("imageSuivante")}>
         &#8250;
       </button>
 
@@ -46,7 +48,7 @@ export default function HeroCarousel({ slides, className = "" }: Props) {
           <button
             key={i}
             className={`carousel-dot${i === index ? " active" : ""}`}
-            aria-label={`Image ${i + 1}`}
+            aria-label={t("imageN", { n: i + 1 })}
             onClick={() => setIndex(i)}
           />
         ))}

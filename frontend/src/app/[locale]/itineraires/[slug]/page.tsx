@@ -19,6 +19,9 @@ function parseHeroImgTag(tag: string): { srcs: string[]; alt: string } {
 
 export const revalidate = 3600;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
+
 export async function generateStaticParams() {
   const itineraires = await api.itineraires.list();
   return itineraires.map((i) => ({ slug: i.slug }));
@@ -49,6 +52,13 @@ export async function generateMetadata({
       title: titre,
       description,
       ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 800 }] } : {}),
+    },
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/itineraires/${slug}`,
+        en: `${SITE_URL}/en/itineraires/${slug}`,
+        "x-default": `${SITE_URL}/itineraires/${slug}`,
+      },
     },
   };
 }
@@ -230,7 +240,8 @@ export default async function ItinerairePage({
                     {buildMapLinks(
                       lieuBySlug.get(item.lieuSlug)!.lat,
                       lieuBySlug.get(item.lieuSlug)!.lng,
-                      item.nom ?? item.lieuSlug
+                      item.nom ?? item.lieuSlug,
+                      tCommon("plans")
                     ).map((link) => (
                       <a
                         key={link.label}

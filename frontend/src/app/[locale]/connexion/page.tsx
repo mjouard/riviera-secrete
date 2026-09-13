@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signIn } from "next-auth/react";
 
@@ -9,6 +10,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
 type Mode = "login" | "register";
 
 export default function ConnexionPage() {
+  const t = useTranslations("connexion");
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("login");
   const [callbackUrl, setCallbackUrl] = useState("/");
@@ -65,7 +67,7 @@ export default function ConnexionPage() {
         });
         const data = await res.json().catch(() => null);
         if (!res.ok) {
-          setError(data?.error ?? "Impossible de créer le compte.");
+          setError(data?.error ?? t("erreurCreationCompte"));
           setLoading(false);
           return;
         }
@@ -91,7 +93,7 @@ export default function ConnexionPage() {
           setNeedsConfirmation(true);
           setPendingEmail(email);
         } else {
-          setError(data?.error ?? "Email ou mot de passe incorrect.");
+          setError(data?.error ?? t("erreurIdentifiants"));
         }
         setLoading(false);
         return;
@@ -105,7 +107,7 @@ export default function ConnexionPage() {
       });
 
       if (result?.error) {
-        setError("Email ou mot de passe incorrect.");
+        setError(t("erreurIdentifiants"));
         setLoading(false);
         return;
       }
@@ -113,7 +115,7 @@ export default function ConnexionPage() {
       router.push(callbackUrl);
       router.refresh();
     } catch {
-      setError("Une erreur est survenue. Réessaie.");
+      setError(t("erreurGenerique"));
       setLoading(false);
     }
   }
@@ -121,10 +123,12 @@ export default function ConnexionPage() {
   if (pendingEmail && !needsConfirmation) {
     return (
       <div className="max-w-sm mx-auto px-6 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-3">Vérifie ta boîte mail</h1>
+        <h1 className="text-2xl font-bold mb-3">{t("verifieTaBoiteMail")}</h1>
         <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
-          On a envoyé un lien de confirmation à <strong style={{ color: "var(--text)" }}>{pendingEmail}</strong>.
-          Clique dessus pour activer ton compte.
+          {t.rich("lienEnvoyeA", {
+            email: pendingEmail,
+            bold: (chunks) => <strong style={{ color: "var(--text)" }}>{chunks}</strong>,
+          })}
         </p>
         <button
           onClick={() => resendConfirmation(pendingEmail)}
@@ -132,11 +136,11 @@ export default function ConnexionPage() {
           className="text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-default"
           style={{ borderColor: "var(--line)", color: "var(--text)" }}
         >
-          {resendStatus === "sent" ? "Email renvoyé ✓" : resendStatus === "sending" ? "Envoi…" : "Renvoyer l'email"}
+          {resendStatus === "sent" ? t("emailRenvoye") : resendStatus === "sending" ? t("envoi") : t("renvoyerLEmail")}
         </button>
         <p className="text-xs text-center mt-8">
           <Link href="/" className="hover:text-white transition-colors" style={{ color: "var(--text-muted)" }}>
-            ← Retour à l&apos;accueil
+            {t("retourAccueil")}
           </Link>
         </p>
       </div>
@@ -146,12 +150,10 @@ export default function ConnexionPage() {
   return (
     <div className="max-w-sm mx-auto px-6 py-16">
       <h1 className="text-2xl font-bold mb-1 text-center">
-        {mode === "login" ? "Connexion" : "Créer un compte"}
+        {mode === "login" ? t("connexionTitle") : t("creerCompteTitle")}
       </h1>
       <p className="text-sm text-center mb-8" style={{ color: "var(--text-muted)" }}>
-        {mode === "login"
-          ? "Retrouve tes favoris et tes itinéraires."
-          : "Pour sauvegarder tes favoris et itinéraires."}
+        {mode === "login" ? t("subtitleLogin") : t("subtitleRegister")}
       </p>
 
       <button
@@ -165,12 +167,12 @@ export default function ConnexionPage() {
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
         </svg>
-        Continuer avec Google
+        {t("continuerAvecGoogle")}
       </button>
 
       <div className="flex items-center gap-3 my-6">
         <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
-        <span className="text-xs" style={{ color: "var(--text-muted)" }}>ou</span>
+        <span className="text-xs" style={{ color: "var(--text-muted)" }}>{t("ou")}</span>
         <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
       </div>
 
@@ -178,7 +180,7 @@ export default function ConnexionPage() {
         {mode === "register" && (
           <div>
             <label className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
-              Nom
+              {t("nom")}
             </label>
             <input
               type="text"
@@ -187,14 +189,14 @@ export default function ConnexionPage() {
               onChange={(e) => setNom(e.target.value)}
               className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
               style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
-              placeholder="Ton prénom"
+              placeholder={t("nomPlaceholder")}
             />
           </div>
         )}
 
         <div>
           <label className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
-            Email
+            {t("email")}
           </label>
           <input
             type="email"
@@ -204,14 +206,14 @@ export default function ConnexionPage() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
-            placeholder="toi@exemple.com"
+            placeholder={t("emailPlaceholder")}
           />
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1">
             <label className="text-xs" style={{ color: "var(--text-muted)" }}>
-              Mot de passe
+              {t("motDePasse")}
             </label>
             <button
               type="button"
@@ -219,7 +221,7 @@ export default function ConnexionPage() {
               className="text-xs cursor-pointer"
               style={{ color: "var(--text-muted)" }}
             >
-              {showPassword ? "Masquer" : "Afficher"}
+              {showPassword ? t("masquer") : t("afficher")}
             </button>
           </div>
           <input
@@ -231,7 +233,7 @@ export default function ConnexionPage() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
-            placeholder={mode === "register" ? "8 caractères minimum" : "••••••••"}
+            placeholder={mode === "register" ? t("motDePassePlaceholderRegister") : "••••••••"}
           />
         </div>
 
@@ -246,14 +248,14 @@ export default function ConnexionPage() {
             className="text-xs px-3 py-2.5 rounded-lg flex items-center justify-between gap-3"
             style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}
           >
-            <span>Ton email n&apos;est pas encore confirmé.</span>
+            <span>{t("emailNonConfirme")}</span>
             <button
               type="button"
               onClick={() => resendConfirmation(pendingEmail)}
               disabled={resendStatus !== "idle"}
               className="underline whitespace-nowrap cursor-pointer disabled:opacity-50"
             >
-              {resendStatus === "sent" ? "Renvoyé ✓" : resendStatus === "sending" ? "Envoi…" : "Renvoyer"}
+              {resendStatus === "sent" ? t("renvoye") : resendStatus === "sending" ? t("envoi") : t("renvoyer")}
             </button>
           </div>
         )}
@@ -265,26 +267,26 @@ export default function ConnexionPage() {
           style={{ background: "var(--azure)", color: "#0C1116" }}
         >
           {loading
-            ? "Un instant…"
+            ? t("unInstant")
             : mode === "login"
-              ? "Se connecter"
-              : "Créer mon compte"}
+              ? t("seConnecter")
+              : t("creerMonCompte")}
         </button>
       </form>
 
       <p className="text-sm text-center mt-6" style={{ color: "var(--text-muted)" }}>
         {mode === "login" ? (
           <>
-            Pas encore de compte ?{" "}
+            {t("pasEncoreDeCompte")}{" "}
             <button onClick={() => switchMode("register")} className="cursor-pointer" style={{ color: "var(--azure)" }}>
-              Créer un compte
+              {t("creerUnCompte")}
             </button>
           </>
         ) : (
           <>
-            Déjà un compte ?{" "}
+            {t("dejaUnCompte")}{" "}
             <button onClick={() => switchMode("login")} className="cursor-pointer" style={{ color: "var(--azure)" }}>
-              Se connecter
+              {t("seConnecter")}
             </button>
           </>
         )}
@@ -292,7 +294,7 @@ export default function ConnexionPage() {
 
       <p className="text-xs text-center mt-8">
         <Link href="/" className="hover:text-white transition-colors" style={{ color: "var(--text-muted)" }}>
-          ← Retour à l&apos;accueil
+          {t("retourAccueil")}
         </Link>
       </p>
     </div>

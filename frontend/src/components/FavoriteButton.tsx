@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
 import { redirectToConnexion } from "@/lib/utils";
 
 export default function FavoriteButton({ slug }: { slug: string }) {
+  const t = useTranslations("lieuActions");
   const { data: session, status } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -47,13 +49,7 @@ export default function FavoriteButton({ slug }: { slug: string }) {
     <button
       onClick={toggle}
       disabled={loading}
-      title={
-        !session
-          ? "Connexion requise"
-          : isFavorite
-          ? "Retirer des favoris"
-          : "Ajouter aux favoris"
-      }
+      title={!session ? t("connexionRequise") : isFavorite ? t("retirerDesFavoris") : t("ajouterAuxFavoris")}
       className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5 disabled:opacity-50 cursor-pointer disabled:cursor-default"
       style={{
         borderColor: isFavorite ? "var(--terracotta)" : "var(--line)",
@@ -61,7 +57,7 @@ export default function FavoriteButton({ slug }: { slug: string }) {
       }}
     >
       <span>{isFavorite ? "♥" : "♡"}</span>
-      <span>{isFavorite ? "Favori" : "Ajouter aux favoris"}</span>
+      <span>{isFavorite ? t("favori") : t("ajouterAuxFavoris")}</span>
     </button>
   );
 }

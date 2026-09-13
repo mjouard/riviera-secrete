@@ -1,12 +1,34 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
-export const metadata: Metadata = {
-  title: "Crédits photo",
-  description: "Crédits des photos sous licence Creative Commons utilisées sur Riviera Secrète.",
-  robots: { index: false, follow: true },
-};
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "credits" });
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    robots: { index: false, follow: true },
+    alternates: {
+      languages: {
+        fr: `${SITE_URL}/credits`,
+        en: `${SITE_URL}/en/credits`,
+        "x-default": `${SITE_URL}/credits`,
+      },
+    },
+  };
+}
+
+/** `titre` (sujet de la photo, ~90 entrées) reste en français sur /en — page d'attribution
+ * légale à faible priorité, pas du contenu éditorial du site. Le reste (intro, libellés) est
+ * traduit via le namespace `credits` de messages/{fr,en}.json. */
 interface Credit {
   titre: string;
   auteur: string;
@@ -138,26 +160,33 @@ const CREDITS: Credit[] = [
   { titre: "Clocher lombard de l'église Saint-Sauveur, Saorge", auteur: "rene boulay", fileUrl: "https://commons.wikimedia.org/wiki/File:La_Roya_Saorge_Eglise_Saint-Sauveur_Clocher_-_panoramio.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
-export default function CreditsPage() {
+export default async function CreditsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const [t, tCommon] = await Promise.all([
+    getTranslations({ locale, namespace: "credits" }),
+    getTranslations({ locale, namespace: "common" }),
+  ]);
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>Crédits photo</span>
+        <span style={{ color: "var(--text)" }}>{t("title")}</span>
       </nav>
 
-      <h1 className="text-3xl font-bold mb-4">Crédits photo</h1>
+      <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
       <p className="mb-10" style={{ color: "var(--text-muted)" }}>
-        La plupart des lieux ont une vraie photo — une partie personnelle, une partie sous
-        licence Creative Commons trouvée sur Wikimedia Commons (crédits ci-dessous). Les
-        lieux ajoutés le plus récemment sont en cours de traitement et affichent
-        temporairement une image de substitution.
+        {t("intro")}
       </p>
 
-      <h2 className="text-lg font-semibold mb-1">Photos sous licence Creative Commons</h2>
+      <h2 className="text-lg font-semibold mb-1">{t("sectionTitle")}</h2>
       <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
-        Groupées par zone, comme le reste du site.
+        {t("sectionSubtitle")}
       </p>
       <ul>
         {CREDITS.map((c, i) => (
@@ -170,7 +199,9 @@ export default function CreditsPage() {
             }}
           >
             <strong style={{ color: "var(--text)", fontWeight: 500 }}>{c.titre}</strong>
-            {" — photo par "}
+            {" "}
+            {t("photoPar")}
+            {" "}
             {c.auteur}
             {", "}
             <a
@@ -179,9 +210,9 @@ export default function CreditsPage() {
               rel="noopener noreferrer"
               style={{ color: "var(--terracotta)" }}
             >
-              via Wikimedia Commons
+              {t("viaWikimedia")}
             </a>
-            {", sous licence "}
+            {`, ${t("sousLicence")} `}
             <a
               href={c.licenceUrl}
               target="_blank"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
@@ -8,6 +9,8 @@ import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
 import type { UserItineraire } from "@/lib/types";
 
 export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
+  const t = useTranslations("lieuActions");
+  const tDuree = useTranslations("dureeLabels");
   const { data: session } = useSession();
   const router = useRouter();
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -59,7 +62,7 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
         className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
         style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
       >
-        ➕ Ajouter à un itinéraire
+        {t("ajouterAUnItineraire")}
       </button>
 
       {open && (
@@ -68,17 +71,17 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
           style={{ background: "var(--surface)", border: "1px solid var(--line)" }}
         >
           {items === null ? (
-            <p className="text-xs p-4" style={{ color: "var(--text-muted)" }}>Chargement…</p>
+            <p className="text-xs p-4" style={{ color: "var(--text-muted)" }}>{t("chargement")}</p>
           ) : items.length === 0 ? (
             <p className="text-xs p-4" style={{ color: "var(--text-muted)" }}>
-              Aucun itinéraire sauvegardé.
+              {t("aucunItineraireSauvegarde")}
               <br />
               <Link
                 href={`/creer-itineraire?add=${encodeURIComponent(lieuSlug)}`}
                 className="underline"
                 style={{ color: "var(--azure)" }}
               >
-                Créer un itinéraire →
+                {t("creerUnItineraire")}
               </Link>
             </p>
           ) : (
@@ -86,7 +89,7 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
               <ul>
                 {items.map((it) => {
                   const alreadyIn = it.days.some((d) => d.includes(lieuSlug));
-                  const dureeLabel = DUREE_META[it.dureeKey as DureeKey]?.label ?? it.dureeKey;
+                  const dureeLabel = it.dureeKey in DUREE_META ? tDuree(it.dureeKey as DureeKey) : it.dureeKey;
                   return (
                     <li key={it.id} style={{ borderBottom: "1px solid var(--line)" }}>
                       <button
@@ -101,9 +104,9 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
                           </span>
                         </span>
                         {addedId === it.id ? (
-                          <span className="text-xs flex-shrink-0" style={{ color: "var(--azure)" }}>✓ Ajouté !</span>
+                          <span className="text-xs flex-shrink-0" style={{ color: "var(--azure)" }}>{t("ajoute")}</span>
                         ) : alreadyIn ? (
-                          <span className="text-xs flex-shrink-0" style={{ color: "var(--text-muted)" }}>✓ Déjà présent</span>
+                          <span className="text-xs flex-shrink-0" style={{ color: "var(--text-muted)" }}>{t("dejaPresent")}</span>
                         ) : null}
                       </button>
                     </li>
@@ -115,7 +118,7 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
                 className="block text-xs px-4 py-2.5 text-center transition-colors hover:bg-white/5"
                 style={{ color: "var(--azure)" }}
               >
-                + Nouvel itinéraire
+                {t("nouvelItineraire")}
               </Link>
             </>
           )}
