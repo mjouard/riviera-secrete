@@ -7,6 +7,11 @@ const HTML_ENTITIES: Record<string, string> = {
   nbsp: " ",
 };
 
+/** Retombe sur le français quand la traduction anglaise d'un champ n'existe pas encore (colonne `*En` nullable côté backend, voir project_version_anglaise.md) — jamais de champ vide côté /en. */
+export function loc(locale: string, en: string | null | undefined, fr: string): string {
+  return locale === "en" && en ? en : fr;
+}
+
 /** Décode les entités HTML restées littérales dans les données (ex. "&amp;" venu du site statique). Ne touche jamais document/DOM — utilisable côté serveur. */
 export function decodeEntities(str: string): string {
   if (!str || !str.includes("&")) return str;

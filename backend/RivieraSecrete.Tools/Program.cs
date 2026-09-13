@@ -116,6 +116,21 @@ if (args is ["refresh-activite", var refreshLieuSlug, var refreshActiviteId])
     return ok ? 0 : 1;
 }
 
+// `refresh-itineraire-fields <slug>` : recopie tous les champs mutables d'un itinéraire déjà
+// synchronisé (Titre/Badge/Description/Intro/MapLabel + leurs variantes *En, MetaPills,
+// Items, Booking, Suggestions) depuis data/itineraires.json. Aucune commande de sync
+// n'existant pour les itinéraires (voir SyncNewContentAsync), c'est le seul chemin pour
+// répercuter une traduction anglaise ou toute autre correction de contenu.
+if (args is ["refresh-itineraire-fields", var refreshItinSlug])
+{
+    var refreshItinDataDir = FindDataDir();
+    var ok = await DatabaseSeeder.RefreshItineraireFieldsAsync(db, refreshItinDataDir, refreshItinSlug);
+    Console.WriteLine(ok
+        ? $"Champs de l'itinéraire '{refreshItinSlug}' rafraîchis depuis le JSON."
+        : $"Itinéraire '{refreshItinSlug}' introuvable en DB ou dans data/itineraires.json — rien fait.");
+    return ok ? 0 : 1;
+}
+
 var dataDir = FindDataDir();
 Console.WriteLine($"Data dir: {dataDir}");
 var (villes, lieux, activites) = await DatabaseSeeder.SyncNewContentAsync(db, dataDir);

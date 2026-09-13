@@ -10,7 +10,9 @@
     "thumbImage": "assets/images/lieux/rue-obscure-villefranche/thumb.jpg",
     "lieux": [
       "rue-obscure-villefranche"
-    ]
+    ],
+    "nomEn": "Villefranche-sur-Mer",
+    "descriptionEn": "A deep-water harbour and a medieval old town with colourful façades, a stop between Nice and Monaco."
   },
   {
     "slug": "saint-jean-cap-ferrat",
@@ -23,7 +25,9 @@
     "thumbImage": "assets/images/lieux/sentier-cap-ferrat/thumb.jpg",
     "lieux": [
       "sentier-cap-ferrat"
-    ]
+    ],
+    "nomEn": "Saint-Jean-Cap-Ferrat",
+    "descriptionEn": "A discreet peninsula between two bays, known for its Belle Époque villas and coastal footpath."
   },
   {
     "slug": "beaulieu-sur-mer",
@@ -36,7 +40,9 @@
     "thumbImage": "assets/images/lieux/villa-kerylos/thumb.jpg",
     "lieux": [
       "villa-kerylos"
-    ]
+    ],
+    "nomEn": "Beaulieu-sur-Mer",
+    "descriptionEn": "An elegant, wind-sheltered harbour nicknamed \"little Africa\" for its mild microclimate."
   },
   {
     "slug": "eze",
@@ -49,7 +55,9 @@
     "thumbImage": "assets/images/lieux/eze-village/thumb.jpg",
     "lieux": [
       "eze-village"
-    ]
+    ],
+    "nomEn": "Èze",
+    "descriptionEn": "A medieval village clinging to a cliff 400 metres above the Mediterranean, with a dizzying view."
   },
   {
     "slug": "la-turbie",
@@ -62,7 +70,9 @@
     "thumbImage": "assets/images/lieux/trophee-auguste-la-turbie/thumb.jpg",
     "lieux": [
       "trophee-auguste-la-turbie"
-    ]
+    ],
+    "nomEn": "La Turbie",
+    "descriptionEn": "A high-perched village on the Grande Corniche, dominated by the Trophy of Augustus, a 1st-century Roman monument."
   },
   {
     "slug": "monaco",
@@ -75,7 +85,9 @@
     "thumbImage": "assets/images/lieux/jardin-exotique-monaco/thumb.jpg",
     "lieux": [
       "jardin-exotique-monaco"
-    ]
+    ],
+    "nomEn": "Monaco",
+    "descriptionEn": "The principality on the Rock, between hanging gardens, the Prince's Palace and the Oceanographic Museum."
   },
   {
     "slug": "roquebrune-cap-martin",
@@ -89,7 +101,9 @@
     "lieux": [
       "roquebrune-cap-martin-village",
       "sentier-corbusier-cap-martin"
-    ]
+    ],
+    "nomEn": "Roquebrune-Cap-Martin",
+    "descriptionEn": "A medieval village overlooking rocky coves, with one of the oldest castles in France and a legendary coastal path."
   },
   {
     "slug": "nice",
@@ -104,7 +118,9 @@
       "colline-du-chateau-nice",
       "cours-saleya-vieux-nice",
       "parc-mont-boron"
-    ]
+    ],
+    "nomEn": "Nice",
+    "descriptionEn": "The capital of the French Riviera, between baroque Old Nice, Castle Hill and the Bay of Angels."
   },
   {
     "slug": "peillon",
@@ -117,7 +133,9 @@
     "thumbImage": "assets/images/lieux/peillon-village/thumb.jpg",
     "lieux": [
       "peillon-village"
-    ]
+    ],
+    "nomEn": "Peillon",
+    "descriptionEn": "A village suspended on an isolated rocky outcrop, so photogenic it appears in ad campaigns no one recognises."
   },
   {
     "slug": "peille",
@@ -130,7 +148,9 @@
     "thumbImage": "assets/images/lieux/peille-village/thumb.jpg",
     "lieux": [
       "peille-village"
-    ]
+    ],
+    "nomEn": "Peille",
+    "descriptionEn": "An authentic village in the Nice hinterland, less visited than its neighbour Peillon, with vaulted lanes unchanged since the Middle Ages."
   },
   {
     "slug": "gourdon",
@@ -143,7 +163,9 @@
     "thumbImage": "assets/images/lieux/gourdon-village/thumb.jpg",
     "lieux": [
       "gourdon-village"
-    ]
+    ],
+    "nomEn": "Gourdon",
+    "descriptionEn": "A village clinging to a sheer cliff at 760 metres, with a view that reaches all the way to the sea."
   },
   {
     "slug": "tourrettes-sur-loup",
@@ -158,7 +180,9 @@
       "tourrettes-sur-loup",
       "gorges-du-loup-cascade-courmes",
       "pont-du-loup"
-    ]
+    ],
+    "nomEn": "Tourrettes-sur-Loup",
+    "descriptionEn": "The city of violets and gateway to the Loup gorges, between a crescent-shaped medieval village and limestone canyons."
   },
   {
     "slug": "saint-paul-de-vence",
@@ -171,7 +195,9 @@
     "thumbImage": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
     "lieux": [
       "saint-paul-de-vence"
-    ]
+    ],
+    "nomEn": "Saint-Paul-de-Vence",
+    "descriptionEn": "A 16th-century fortified village that drew Matisse, Picasso and Chagall — a haven of modern art in Provence."
   },
   {
     "slug": "biot",
@@ -184,7 +210,9 @@
     "thumbImage": "assets/images/lieux/biot-village-verrier/thumb.jpg",
     "lieux": [
       "biot-village-verrier"
-    ]
+    ],
+    "nomEn": "Biot",
+    "descriptionEn": "A perched village known for its handcrafted bubble glass, a stone's throw from Antibes."
   },
   {
     "slug": "cagnes-sur-mer",
@@ -197,7 +225,9 @@
     "thumbImage": "assets/images/lieux/haut-de-cagnes/thumb.jpg",
     "lieux": [
       "haut-de-cagnes"
-    ]
+    ],
+    "nomEn": "Cagnes-sur-Mer",
+    "descriptionEn": "A perched medieval village overlooking the modern seafront directly below, between the Grimaldi castle and Renoir's house-studio."
   },
   {
     "slug": "antibes",
@@ -210,7 +240,9 @@
     "thumbImage": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
     "lieux": [
       "sentier-cap-antibes"
-    ]
+    ],
+    "nomEn": "Antibes",
+    "descriptionEn": "The old Greek and Roman city, with its sea ramparts, old town and the Cap d'Antibes coastal path."
   },
   {
     "slug": "juan-les-pins",
@@ -223,7 +255,9 @@
     "thumbImage": "assets/images/lieux/pinede-gould-juan-les-pins/thumb.jpg",
     "lieux": [
       "pinede-gould-juan-les-pins"
-    ]
+    ],
+    "nomEn": "Juan-les-Pins",
+    "descriptionEn": "The Roaring Twenties seaside resort, with its legendary jazz festival and century-old pines planted right on the sand."
   },
   {
     "slug": "cannes",
@@ -236,7 +270,9 @@
     "thumbImage": "assets/images/lieux/iles-de-lerins/thumb.jpg",
     "lieux": [
       "iles-de-lerins"
-    ]
+    ],
+    "nomEn": "Cannes",
+    "descriptionEn": "The city of the Festival, whose Lérins Islands offer a timeless monastic escape twenty minutes offshore."
   },
   {
     "slug": "theoule-sur-mer",
@@ -250,7 +286,9 @@
     "lieux": [
       "pic-cap-roux-esterel",
       "calanques-esterel-theoule"
-    ]
+    ],
+    "nomEn": "Théoule-sur-Mer",
+    "descriptionEn": "The gateway to the Estérel massif, between red volcanic rock, wild coves and a pine forest by the water."
   },
   {
     "slug": "grasse",
@@ -263,7 +301,9 @@
     "thumbImage": "assets/images/lieux/vieille-ville-grasse/thumb.jpg",
     "lieux": [
       "vieille-ville-grasse"
-    ]
+    ],
+    "nomEn": "Grasse",
+    "descriptionEn": "The world capital of perfume, with a stepped old town and perfumeries open for visits."
   },
   {
     "slug": "saint-tropez",
@@ -276,7 +316,9 @@
     "thumbImage": "assets/images/lieux/citadelle-saint-tropez/thumb.jpg",
     "lieux": [
       "citadelle-saint-tropez"
-    ]
+    ],
+    "nomEn": "Saint-Tropez",
+    "descriptionEn": "Beyond its summer reputation, a Provençal maritime town with a medieval citadel and a harbour of colourful façades."
   },
   {
     "slug": "gassin",
@@ -289,7 +331,9 @@
     "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg",
     "lieux": [
       "gassin-plus-beau-village"
-    ]
+    ],
+    "nomEn": "Gassin",
+    "descriptionEn": "A perched village ranked among the most beautiful in France, overlooking the vineyards and the Gulf of Saint-Tropez."
   },
   {
     "slug": "menton",
@@ -302,7 +346,9 @@
     "thumbImage": "assets/images/lieux/vieux-menton/thumb.jpg",
     "lieux": [
       "vieux-menton"
-    ]
+    ],
+    "nomEn": "Menton",
+    "descriptionEn": "The lemon garden-town on the Italian border, between a baroque old town and a hilltop cemetery overlooking the sea."
   },
   {
     "slug": "falicon",
@@ -315,7 +361,9 @@
     "thumbImage": "assets/images/lieux/falicon-village/thumb.jpg",
     "lieux": [
       "falicon-village"
-    ]
+    ],
+    "nomEn": "Falicon",
+    "descriptionEn": "A perched village 10km from Nice, on a hill of olive and fig trees, with pastel trompe-l'œil lanes that even many people from Nice don't know about."
   },
   {
     "slug": "mougins",
@@ -328,7 +376,9 @@
     "thumbImage": "assets/images/lieux/vieux-mougins/thumb.jpg",
     "lieux": [
       "vieux-mougins"
-    ]
+    ],
+    "nomEn": "Mougins",
+    "descriptionEn": "A spiral-shaped perched village between Cannes and Grasse, an artists' refuge in the 20th century — Picasso spent his last twelve years here — that has stayed clear of the Croisette crowds."
   },
   {
     "slug": "vallauris",
@@ -342,7 +392,9 @@
     "lieux": [
       "vieux-vallauris-ceramique",
       "golfe-juan"
-    ]
+    ],
+    "nomEn": "Vallauris",
+    "descriptionEn": "The Mediterranean capital of ceramics, where Picasso reinvented pottery in an old craftsmen's town its seaside neighbours completely overshadow."
   },
   {
     "slug": "grimaud",
@@ -355,7 +407,9 @@
     "thumbImage": "assets/images/lieux/vieux-village-grimaud/thumb.jpg",
     "lieux": [
       "vieux-village-grimaud"
-    ]
+    ],
+    "nomEn": "Grimaud",
+    "descriptionEn": "A medieval village clinging to the Maures massif, on the opposite shore of the gulf from Saint-Tropez, with a ruined castle and windmill overlooking the whole bay."
   },
   {
     "slug": "ramatuelle",
@@ -369,7 +423,9 @@
     "lieux": [
       "vieux-village-ramatuelle",
       "plage-pampelonne"
-    ]
+    ],
+    "nomEn": "Ramatuelle",
+    "descriptionEn": "A spiral-shaped village on the Saint-Tropez peninsula, between windmills on the ridge and a wild cove reachable only on foot."
   },
   {
     "slug": "sainte-agnes",
@@ -382,7 +438,9 @@
     "thumbImage": "assets/images/lieux/sainte-agnes-village/thumb.jpg",
     "lieux": [
       "sainte-agnes-village"
-    ]
+    ],
+    "nomEn": "Sainte-Agnès",
+    "descriptionEn": "The highest coastal village in Europe, 780 metres above Menton, with a Maginot Line fort carved straight into the rock."
   },
   {
     "slug": "coaraze",
@@ -395,7 +453,9 @@
     "thumbImage": "assets/images/lieux/coaraze-cadrans-solaires/thumb.jpg",
     "lieux": [
       "coaraze-cadrans-solaires"
-    ]
+    ],
+    "nomEn": "Coaraze",
+    "descriptionEn": "The \"village of the sun\", officially labelled by Météo France, whose façades carry eleven sundials signed by Cocteau, Ben and Sosno."
   },
   {
     "slug": "sospel",
@@ -408,7 +468,9 @@
     "thumbImage": "assets/images/lieux/vieille-ville-sospel/thumb.jpg",
     "lieux": [
       "vieille-ville-sospel"
-    ]
+    ],
+    "nomEn": "Sospel",
+    "descriptionEn": "A medieval episcopal city on the salt route between Nice and Turin, crossed by one of the last fortified bridges still standing in Europe."
   },
   {
     "slug": "gorbio",
@@ -421,7 +483,9 @@
     "thumbImage": "assets/images/lieux/gorbio-village/thumb.jpg",
     "lieux": [
       "gorbio-village"
-    ]
+    ],
+    "nomEn": "Gorbio",
+    "descriptionEn": "A medieval village of 300 souls above Menton, with its old fountains and an elm planted in 1713 still standing on the main square."
   },
   {
     "slug": "luceram",
@@ -435,7 +499,9 @@
     "lieux": [
       "luceram-village",
       "peira-cava"
-    ]
+    ],
+    "nomEn": "Lucéram",
+    "descriptionEn": "A medieval village at 650 metres in the Paillon valley, famous for its Louis Bréa altarpiece and the hundreds of nativity scenes scattered through its lanes each winter."
   },
   {
     "slug": "saorge",
@@ -448,6 +514,8 @@
     "thumbImage": "assets/images/lieux/saorge-village/thumb.jpg",
     "lieux": [
       "saorge-village"
-    ]
+    ],
+    "nomEn": "Saorge",
+    "descriptionEn": "An amphitheatre village built into the mountainside in the Roya gorges, overlooked by a 17th-century baroque Franciscan monastery."
   }
 ]

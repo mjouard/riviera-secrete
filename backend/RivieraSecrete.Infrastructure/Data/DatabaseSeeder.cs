@@ -11,30 +11,35 @@ public static class DatabaseSeeder
 
     private static Ville BuildVille(JsonNode v) => new()
     {
-        Slug        = v["slug"]!.GetValue<string>(),
-        Nom         = v["nom"]!.GetValue<string>(),
-        RegionSlug  = v["regionSlug"]!.GetValue<string>(),
-        RegionLabel = v["regionLabel"]!.GetValue<string>(),
-        Lat         = v["lat"]!.GetValue<double>(),
-        Lng         = v["lng"]!.GetValue<double>(),
-        Description = v["description"]!.GetValue<string>(),
-        ThumbImage  = v["thumbImage"]!.GetValue<string>(),
+        Slug          = v["slug"]!.GetValue<string>(),
+        Nom           = v["nom"]!.GetValue<string>(),
+        NomEn         = v["nomEn"]?.GetValue<string>(),
+        RegionSlug    = v["regionSlug"]!.GetValue<string>(),
+        RegionLabel   = v["regionLabel"]!.GetValue<string>(),
+        Lat           = v["lat"]!.GetValue<double>(),
+        Lng           = v["lng"]!.GetValue<double>(),
+        Description   = v["description"]!.GetValue<string>(),
+        DescriptionEn = v["descriptionEn"]?.GetValue<string>(),
+        ThumbImage    = v["thumbImage"]!.GetValue<string>(),
     };
 
     private static Lieu BuildLieu(JsonNode l)
     {
         var lieu = new Lieu
         {
-            Slug        = l["slug"]!.GetValue<string>(),
-            VilleSlug   = l["villeSlug"]!.GetValue<string>(),
-            Nom         = l["nom"]!.GetValue<string>(),
-            Commune     = l["commune"]!.GetValue<string>(),
-            RegionSlug  = l["regionSlug"]!.GetValue<string>(),
-            RegionLabel = l["regionLabel"]!.GetValue<string>(),
-            Lat         = l["lat"]!.GetValue<double>(),
-            Lng         = l["lng"]!.GetValue<double>(),
-            Description = l["description"]!.GetValue<string>(),
-            Description2= l["description2"]?.GetValue<string>(),
+            Slug          = l["slug"]!.GetValue<string>(),
+            VilleSlug     = l["villeSlug"]!.GetValue<string>(),
+            Nom           = l["nom"]!.GetValue<string>(),
+            NomEn         = l["nomEn"]?.GetValue<string>(),
+            Commune       = l["commune"]!.GetValue<string>(),
+            RegionSlug    = l["regionSlug"]!.GetValue<string>(),
+            RegionLabel   = l["regionLabel"]!.GetValue<string>(),
+            Lat           = l["lat"]!.GetValue<double>(),
+            Lng           = l["lng"]!.GetValue<double>(),
+            Description   = l["description"]!.GetValue<string>(),
+            DescriptionEn = l["descriptionEn"]?.GetValue<string>(),
+            Description2  = l["description2"]?.GetValue<string>(),
+            Description2En= l["description2En"]?.GetValue<string>(),
             OgImage     = l["ogImage"]!.GetValue<string>(),
             HeroImage   = l["heroImage"]!.GetValue<string>(),
             HeroAlt     = l["heroAlt"]!.GetValue<string>(),
@@ -58,24 +63,31 @@ public static class DatabaseSeeder
     {
         ActiviteId = a["id"]!.GetValue<string>(),
         Nom        = a["nom"]!.GetValue<string>(),
+        NomEn      = a["nomEn"]?.GetValue<string>(),
         Badge      = a["badge"]!.GetValue<string>(),
         Duree      = a["duree"]!.GetValue<string>(),
         Prix       = a["prix"]!.GetValue<string>(),
         Url        = a["url"]!.GetValue<string>(),
         Image      = a["image"]!.GetValue<string>(),
         Alt        = a["alt"]!.GetValue<string>(),
+        AltEn      = a["altEn"]?.GetValue<string>(),
         LinkText   = a["linkText"]!.GetValue<string>(),
     };
 
     private static Itineraire BuildItineraire(JsonNode i) => new()
     {
-        Slug        = i["slug"]!.GetValue<string>(),
-        Titre       = i["titre"]!.GetValue<string>(),
-        Badge       = i["badge"]!.GetValue<string>(),
-        Description = i["description"]!.GetValue<string>(),
-        Intro       = i["intro"]?.GetValue<string>() ?? i["description"]!.GetValue<string>(),
-        HeroImgTag  = i["heroImgTag"]!.GetValue<string>(),
-        MapLabel    = i["mapLabel"]?.GetValue<string>() ?? "",
+        Slug          = i["slug"]!.GetValue<string>(),
+        Titre         = i["titre"]!.GetValue<string>(),
+        TitreEn       = i["titreEn"]?.GetValue<string>(),
+        Badge         = i["badge"]!.GetValue<string>(),
+        BadgeEn       = i["badgeEn"]?.GetValue<string>(),
+        Description   = i["description"]!.GetValue<string>(),
+        DescriptionEn = i["descriptionEn"]?.GetValue<string>(),
+        Intro         = i["intro"]?.GetValue<string>() ?? i["description"]!.GetValue<string>(),
+        IntroEn       = i["introEn"]?.GetValue<string>(),
+        HeroImgTag    = i["heroImgTag"]!.GetValue<string>(),
+        MapLabel      = i["mapLabel"]?.GetValue<string>() ?? "",
+        MapLabelEn    = i["mapLabelEn"]?.GetValue<string>(),
         MetaPills   = i["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [],
         Items       = i["items"]?.Deserialize<List<ItineraireItem>>(JsonOpts) ?? [],
         Booking     = i["booking"]?.Deserialize<List<BookingRef>>(JsonOpts) ?? [],
@@ -181,8 +193,11 @@ public static class DatabaseSeeder
         var jsonLieu = lieuxRaw.Select(l => l!).FirstOrDefault(l => l["slug"]!.GetValue<string>() == slug);
         if (jsonLieu is null) return false;
 
-        dbLieu.Description  = jsonLieu["description"]!.GetValue<string>();
-        dbLieu.Description2 = jsonLieu["description2"]?.GetValue<string>();
+        dbLieu.Description    = jsonLieu["description"]!.GetValue<string>();
+        dbLieu.DescriptionEn  = jsonLieu["descriptionEn"]?.GetValue<string>();
+        dbLieu.Description2   = jsonLieu["description2"]?.GetValue<string>();
+        dbLieu.Description2En = jsonLieu["description2En"]?.GetValue<string>();
+        dbLieu.NomEn        = jsonLieu["nomEn"]?.GetValue<string>();
         dbLieu.HeroAlt      = jsonLieu["heroAlt"]!.GetValue<string>();
         dbLieu.HeroImage    = jsonLieu["heroImage"]!.GetValue<string>();
         dbLieu.ThumbImage   = jsonLieu["thumbImage"]!.GetValue<string>();
@@ -210,8 +225,10 @@ public static class DatabaseSeeder
         var jsonVille = villesRaw.Select(v => v!).FirstOrDefault(v => v["slug"]!.GetValue<string>() == slug);
         if (jsonVille is null) return false;
 
-        dbVille.Description = jsonVille["description"]!.GetValue<string>();
-        dbVille.ThumbImage  = jsonVille["thumbImage"]!.GetValue<string>();
+        dbVille.Description   = jsonVille["description"]!.GetValue<string>();
+        dbVille.DescriptionEn = jsonVille["descriptionEn"]?.GetValue<string>();
+        dbVille.NomEn         = jsonVille["nomEn"]?.GetValue<string>();
+        dbVille.ThumbImage    = jsonVille["thumbImage"]!.GetValue<string>();
 
         await db.SaveChangesAsync();
         return true;
@@ -238,13 +255,52 @@ public static class DatabaseSeeder
         if (jsonActivite is null) return false;
 
         dbActivite.Nom      = jsonActivite["nom"]!.GetValue<string>();
+        dbActivite.NomEn    = jsonActivite["nomEn"]?.GetValue<string>();
         dbActivite.Badge    = jsonActivite["badge"]!.GetValue<string>();
         dbActivite.Duree    = jsonActivite["duree"]!.GetValue<string>();
         dbActivite.Prix     = jsonActivite["prix"]!.GetValue<string>();
         dbActivite.Url      = jsonActivite["url"]!.GetValue<string>();
         dbActivite.Image    = jsonActivite["image"]!.GetValue<string>();
         dbActivite.Alt      = jsonActivite["alt"]!.GetValue<string>();
+        dbActivite.AltEn    = jsonActivite["altEn"]?.GetValue<string>();
         dbActivite.LinkText = jsonActivite["linkText"]!.GetValue<string>();
+
+        await db.SaveChangesAsync();
+        return true;
+    }
+
+    /// <summary>
+    /// Recopie depuis data/itineraires.json tous les champs mutables d'un itinéraire
+    /// EXISTANT (Titre, Badge, Description, Intro, MapLabel + leurs variantes *En, MetaPills,
+    /// Items, Booking, Suggestions) sur la ligne DB correspondante — jamais Id/Slug. Les
+    /// itinéraires ne sont pas couverts par `SyncNewContentAsync` (aucun nouvel itinéraire
+    /// créé depuis le seed initial), donc c'est le seul chemin pour répercuter une
+    /// traduction anglaise ou toute autre correction de contenu déjà en DB (voir
+    /// .claude/memory/project_version_anglaise.md).
+    /// </summary>
+    public static async Task<bool> RefreshItineraireFieldsAsync(AppDbContext db, string dataDir, string slug)
+    {
+        var dbItin = await db.Itineraires.FirstOrDefaultAsync(i => i.Slug == slug);
+        if (dbItin is null) return false;
+
+        var itinRaw = JsonNode.Parse(await File.ReadAllTextAsync(Path.Combine(dataDir, "itineraires.json")))!.AsArray();
+        var jsonItin = itinRaw.Select(i => i!).FirstOrDefault(i => i["slug"]!.GetValue<string>() == slug);
+        if (jsonItin is null) return false;
+
+        dbItin.Titre         = jsonItin["titre"]!.GetValue<string>();
+        dbItin.TitreEn       = jsonItin["titreEn"]?.GetValue<string>();
+        dbItin.Badge         = jsonItin["badge"]!.GetValue<string>();
+        dbItin.BadgeEn       = jsonItin["badgeEn"]?.GetValue<string>();
+        dbItin.Description   = jsonItin["description"]!.GetValue<string>();
+        dbItin.DescriptionEn = jsonItin["descriptionEn"]?.GetValue<string>();
+        dbItin.Intro         = jsonItin["intro"]?.GetValue<string>() ?? jsonItin["description"]!.GetValue<string>();
+        dbItin.IntroEn       = jsonItin["introEn"]?.GetValue<string>();
+        dbItin.MapLabel      = jsonItin["mapLabel"]?.GetValue<string>() ?? "";
+        dbItin.MapLabelEn    = jsonItin["mapLabelEn"]?.GetValue<string>();
+        dbItin.MetaPills     = jsonItin["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [];
+        dbItin.Items         = jsonItin["items"]?.Deserialize<List<ItineraireItem>>(JsonOpts) ?? [];
+        dbItin.Booking       = jsonItin["booking"]?.Deserialize<List<BookingRef>>(JsonOpts) ?? [];
+        dbItin.Suggestions   = jsonItin["suggestions"]?.Deserialize<List<SuggestCard>>(JsonOpts) ?? [];
 
         await db.SaveChangesAsync();
         return true;

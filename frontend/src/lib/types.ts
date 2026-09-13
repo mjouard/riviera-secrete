@@ -22,12 +22,14 @@ export interface Activite {
   id: number;
   activiteId: string;
   nom: string;
+  nomEn?: string | null;
   badge: "gratuit" | "payant";
   duree: string;
   prix: string;
   url: string;
   image: string;
   alt: string;
+  altEn?: string | null;
   linkText: string;
   lieuId: number;
 }
@@ -36,8 +38,11 @@ export interface Lieu {
   id: number;
   slug: string;
   nom: string;
+  nomEn?: string | null;
   description: string;
+  descriptionEn?: string | null;
   description2?: string;
+  description2En?: string | null;
   commune: string;
   regionSlug: string;
   regionLabel: string;
@@ -60,11 +65,13 @@ export interface Ville {
   id: number;
   slug: string;
   nom: string;
+  nomEn?: string | null;
   regionSlug: string;
   regionLabel: string;
   lat: number;
   lng: number;
   description: string;
+  descriptionEn?: string | null;
   thumbImage: string;
   lieux: Lieu[];
 }
@@ -109,11 +116,16 @@ export interface Itineraire {
   id: number;
   slug: string;
   titre: string;
+  titreEn?: string | null;
   badge: string;
+  badgeEn?: string | null;
   description: string;
+  descriptionEn?: string | null;
   intro: string;
+  introEn?: string | null;
   heroImgTag: string;
   mapLabel: string;
+  mapLabelEn?: string | null;
   metaPills: MetaPill[];
   items: ItineraireItem[];
   booking: BookingRef[];
