@@ -293,5 +293,25 @@
     "contactTitle": "Reporting an error",
     "contactTexte": "A reporting form will arrive along with the final domain name. In the meantime, if you spot an outdated price, a wrong opening time or a place that has closed, make a note of it — it'll be fixed on the next pass.",
     "creditsLien": "See photo credits"
+  },
+  "filtres": {
+    "saison": "Season",
+    "saisonToutes": "Any season",
+    "printemps": "Spring",
+    "ete": "Summer",
+    "automne": "Autumn",
+    "hiver": "Winter",
+    "duree": "Duration",
+    "dureeToutes": "Any duration",
+    "court": "Under 1 h",
+    "moyen": "1 to 2 h",
+    "long": "2 h or more",
+    "demi-journee": "Half day",
+    "niveau": "Level",
+    "niveauTous": "Any level",
+    "facile": "Easy",
+    "modere": "Moderate",
+    "surprendsMoi": "🎲 Surprise me",
+    "surprendsMoiTitre": "Open a random place from the results"
   }
 }

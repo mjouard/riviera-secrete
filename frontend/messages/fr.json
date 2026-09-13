@@ -293,5 +293,25 @@
     "contactTitle": "Signaler une erreur",
     "contactTexte": "Un formulaire de signalement arrivera avec le nom de domaine définitif. En attendant, si tu repères un prix obsolète, un horaire faux ou un lieu qui a fermé, note-le — ça sera corrigé au prochain passage.",
     "creditsLien": "Voir les crédits photo"
+  },
+  "filtres": {
+    "saison": "Saison",
+    "saisonToutes": "Toute saison",
+    "printemps": "Printemps",
+    "ete": "Été",
+    "automne": "Automne",
+    "hiver": "Hiver",
+    "duree": "Durée",
+    "dureeToutes": "Toute durée",
+    "court": "Moins d'1 h",
+    "moyen": "1 à 2 h",
+    "long": "2 h et plus",
+    "demi-journee": "Demi-journée",
+    "niveau": "Niveau",
+    "niveauTous": "Tout niveau",
+    "facile": "Facile",
+    "modere": "Modéré",
+    "surprendsMoi": "🎲 Surprends-moi",
+    "surprendsMoiTitre": "Ouvrir un lieu au hasard parmi les résultats"
   }
 }

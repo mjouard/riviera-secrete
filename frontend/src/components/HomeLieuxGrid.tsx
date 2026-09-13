@@ -1,10 +1,21 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl, loc, normalizeSearch } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";
+import {
+  DUREES,
+  NIVEAUX,
+  SAISONS,
+  dureeDuLieu,
+  niveauxDuLieu,
+  saisonsDuLieu,
+  type Duree,
+  type Niveau,
+  type Saison,
+} from "@/lib/lieu-filters";
 
 function LieuCard({ lieu }: { lieu: Lieu }) {
   const locale = useLocale();
@@ -37,10 +48,15 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
 
 export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const locale = useLocale();
+  const router = useRouter();
   const t = useTranslations("home");
   const tBadges = useTranslations("badges");
+  const tFiltres = useTranslations("filtres");
   const [activeBadge, setActiveBadge] = useState<string>("");
   const [query, setQuery] = useState("");
+  const [saison, setSaison] = useState<Saison | "">("");
+  const [duree, setDuree] = useState<Duree | "">("");
+  const [niveau, setNiveau] = useState<Niveau | "">("");
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Index de recherche pré-calculé une fois par lieu (43 aujourd'hui) plutôt qu'à chaque
@@ -58,6 +74,11 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         });
         return {
           lieu: l,
+          // Catégories dérivées ici plutôt qu'à chaque frappe : l'analyse du texte libre
+          // des metaPills (voir lieu-filters.ts) est la partie coûteuse.
+          saisons: saisonsDuLieu(l),
+          duree: dureeDuLieu(l),
+          niveaux: niveauxDuLieu(l),
           haystack: normalizeSearch(
             [
               loc(locale, l.nomEn, l.nom),
@@ -76,12 +97,15 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const filtered = useMemo(() => {
     const q = normalizeSearch(query);
     return searchIndex
-      .filter(({ lieu, haystack }) => {
-        if (activeBadge && !lieu.badges?.includes(activeBadge)) return false;
-        return q === "" || haystack.includes(q);
+      .filter((entry) => {
+        if (activeBadge && !entry.lieu.badges?.includes(activeBadge)) return false;
+        if (saison && !entry.saisons.includes(saison)) return false;
+        if (duree && entry.duree !== duree) return false;
+        if (niveau && !entry.niveaux.includes(niveau)) return false;
+        return q === "" || entry.haystack.includes(q);
       })
       .map(({ lieu }) => lieu);
-  }, [searchIndex, activeBadge, query]);
+  }, [searchIndex, activeBadge, query, saison, duree, niveau]);
 
   function toggle(badge: string) {
     setActiveBadge((prev) => (prev === badge ? "" : badge));
@@ -90,6 +114,16 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   function resetAll() {
     setActiveBadge("");
     setQuery("");
+    setSaison("");
+    setDuree("");
+    setNiveau("");
+  }
+
+  /** Pioche parmi les résultats courants : « au hasard » doit respecter les filtres actifs. */
+  function surprendsMoi() {
+    if (filtered.length === 0) return;
+    const pick = filtered[Math.floor(Math.random() * filtered.length)];
+    router.push(`/lieux/${pick.slug}`);
   }
 
   // Apparition douce des cartes au scroll — même comportement que le site statique
@@ -178,6 +212,60 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           </button>
         ))}
       </div>
+      {/* Saison / durée / niveau : des <select> plutôt que des pastilles — 10 options de
+          plus en pastilles noieraient les 5 badges au-dessus. */}
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        <select
+          value={saison}
+          onChange={(e) => setSaison(e.target.value as Saison | "")}
+          aria-label={tFiltres("saison")}
+          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
+          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
+        >
+          <option value="">{tFiltres("saisonToutes")}</option>
+          {SAISONS.map((s) => (
+            <option key={s} value={s}>{tFiltres(s)}</option>
+          ))}
+        </select>
+
+        <select
+          value={duree}
+          onChange={(e) => setDuree(e.target.value as Duree | "")}
+          aria-label={tFiltres("duree")}
+          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
+          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
+        >
+          <option value="">{tFiltres("dureeToutes")}</option>
+          {DUREES.map((d) => (
+            <option key={d} value={d}>{tFiltres(d)}</option>
+          ))}
+        </select>
+
+        <select
+          value={niveau}
+          onChange={(e) => setNiveau(e.target.value as Niveau | "")}
+          aria-label={tFiltres("niveau")}
+          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
+          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
+        >
+          <option value="">{tFiltres("niveauTous")}</option>
+          {NIVEAUX.map((n) => (
+            <option key={n} value={n}>{tFiltres(n)}</option>
+          ))}
+        </select>
+
+        <button
+          type="button"
+          onClick={surprendsMoi}
+          disabled={filtered.length === 0}
+          title={tFiltres("surprendsMoiTitre")}
+          className="text-xs px-4 py-2 rounded-full border transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-40 disabled:cursor-default"
+          style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
+        >
+          {tFiltres("surprendsMoi")}
+        </button>
+      </div>
+
       <div className="flex items-baseline justify-between mb-8">
         <h2 className="text-2xl font-bold">{t("tousLesLieux")}</h2>
         <span className="text-sm" style={{ color: "var(--text-muted)" }}>
