@@ -181,18 +181,26 @@ séparée, décision de l'utilisateur du 2026-09-14.
 | `vieux-village-grimaud` | Le Vieux Village de Grimaud | hero + thumb | ✅ fait — Grimaud Tourisme, CC BY-SA 4.0 (léger logo de l'office de tourisme visible en coin bas-gauche) |
 | `ramatuelle` (ville) | Ramatuelle | thumb | ✅ fait |
 | `vieux-village-ramatuelle` | Le Vieux Village de Ramatuelle | hero + thumb | ✅ fait — Uwe Worm, CC BY-SA 3.0 |
-| `sainte-agnes` (ville) | Sainte-Agnès | thumb |
-| `sainte-agnes-village` | Sainte-Agnès | hero + thumb |
-| `coaraze` (ville) | Coaraze | thumb |
-| `coaraze-cadrans-solaires` | Coaraze, le village aux cadrans solaires | hero + thumb |
-| `sospel` (ville) | Sospel | thumb |
-| `vieille-ville-sospel` | La Vieille Ville de Sospel | hero + thumb |
-| `gorbio` (ville) | Gorbio | thumb |
-| `gorbio-village` | Gorbio | hero + thumb |
-| `luceram` (ville) | Lucéram | thumb |
-| `luceram-village` | Lucéram | hero + thumb |
-| `saorge` (ville) | Saorge | thumb |
-| `saorge-village` | Saorge | hero + thumb |
+| `sainte-agnes` (ville) | Sainte-Agnès | thumb | ✅ fait |
+| `sainte-agnes-village` | Sainte-Agnès | hero + thumb | ✅ fait — Espirat, CC BY-SA 4.0 |
+| `coaraze` (ville) | Coaraze | thumb | ✅ fait |
+| `coaraze-cadrans-solaires` | Coaraze, le village aux cadrans solaires | hero + thumb | ✅ fait — Jpchevreau, CC BY-SA 4.0 |
+| `sospel` (ville) | Sospel | thumb | ✅ fait |
+| `vieille-ville-sospel` | La Vieille Ville de Sospel | hero + thumb | ✅ fait — Promeneuse7, CC BY-SA 3.0 |
+| `gorbio` (ville) | Gorbio | thumb | ✅ fait |
+| `gorbio-village` | Gorbio | hero + thumb | ✅ fait — Gilbert Bochenek, CC BY-SA 3.0 (photo basse résolution 850×528, légèrement upscalée) |
+| `luceram` (ville) | Lucéram | thumb | ✅ fait |
+| `luceram-village` | Lucéram | hero + thumb | ✅ fait — Jpmgir, domaine public |
+| `saorge` (ville) | Saorge | thumb | ✅ fait |
+| `saorge-village` | Saorge | hero + thumb | ✅ fait — Patrick Rouzet, CC BY-SA 3.0 |
+
+**Chantier photo terminé le 2026-09-14 — 13/13 lieux + 12/12 villes ont maintenant une vraie
+photo Wikimedia Commons** (créditée dans `frontend/src/app/[locale]/credits/page.tsx`),
+plus de placeholder `picsum.photos` nulle part sur le site. Chaque photo synchronisée en DB
+prod via `refresh-lieu-fields`/`refresh-ville-fields`, déployée, et vérifiée en direct
+(`curl` 200 sur chaque `hero.jpg` + contenu de page). Seule image encore en placeholder :
+les petites vignettes individuelles des activités (`activites[].image`, niveau secondaire,
+volontairement hors scope — voir "Enrichissement" ci-dessous).
 
 ## Enrichissement à faire — les 12 villes ajoutées sont trop légères (confirmé 2026-09-14)
 

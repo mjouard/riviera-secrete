@@ -88,6 +88,12 @@ const CREDITS: Credit[] = [
   { titre: "Le Vieux Vallauris, cité de la céramique", auteur: "François de Dijon", fileUrl: "https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Vallauris_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Le Vieux Village de Grimaud", auteur: "Grimaud Tourisme", fileUrl: "https://commons.wikimedia.org/wiki/File:Village_m%C3%A9di%C3%A9val_et_proven%C3%A7al_de_Grimaud.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Le Vieux Village de Ramatuelle", auteur: "Uwe Worm", fileUrl: "https://commons.wikimedia.org/wiki/File:%C3%9Cber_den_D%C3%A4chern_von_Ramatuelle_03.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Sainte-Agnès, le village du littoral le plus haut d'Europe", auteur: "Espirat", fileUrl: "https://commons.wikimedia.org/wiki/File:Sainte_Agn%C3%A8s_vu_depuis_les_ruines_du_ch%C3%A2teau.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Coaraze, le village aux cadrans solaires", auteur: "Jpchevreau", fileUrl: "https://commons.wikimedia.org/wiki/File:Vue_automnale_du_village_de_Coaraze_depuis_le_chemin_du_Calempaou.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "La Vieille Ville de Sospel (Pont Vieux)", auteur: "Promeneuse7", fileUrl: "https://commons.wikimedia.org/wiki/File:SOSPEL_Le_Pont_Vieux_(5).JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Gorbio, village médiéval au-dessus de Menton", auteur: "Gilbert Bochenek", fileUrl: "https://commons.wikimedia.org/wiki/File:Gorbio-France-2012-gb.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Lucéram, village médiéval du Paillon", auteur: "Jpmgir", fileUrl: "https://commons.wikimedia.org/wiki/File:Luceram.JPG", licenceLabel: "Domaine public", licenceUrl: "https://creativecommons.org/publicdomain/mark/1.0/deed.fr" },
+  { titre: "Saorge, village-amphithéâtre des gorges de la Roya", auteur: "Patrick Rouzet", fileUrl: "https://commons.wikimedia.org/wiki/File:Saorge_vue_generale.jpg", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

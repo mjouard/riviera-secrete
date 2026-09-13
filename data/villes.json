@@ -327,7 +327,7 @@
     "lat": 43.8014,
     "lng": 7.4622,
     "description": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
-    "thumbImage": "https://picsum.photos/seed/sainte-agnes/500/375",
+    "thumbImage": "assets/images/lieux/sainte-agnes-village/thumb.jpg",
     "lieux": [
       "sainte-agnes-village"
     ]
@@ -340,7 +340,7 @@
     "lat": 43.865,
     "lng": 7.2937,
     "description": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
-    "thumbImage": "https://picsum.photos/seed/coaraze/500/375",
+    "thumbImage": "assets/images/lieux/coaraze-cadrans-solaires/thumb.jpg",
     "lieux": [
       "coaraze-cadrans-solaires"
     ]
@@ -353,7 +353,7 @@
     "lat": 43.879,
     "lng": 7.449,
     "description": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
-    "thumbImage": "https://picsum.photos/seed/sospel/500/375",
+    "thumbImage": "assets/images/lieux/vieille-ville-sospel/thumb.jpg",
     "lieux": [
       "vieille-ville-sospel"
     ]
@@ -366,7 +366,7 @@
     "lat": 43.787,
     "lng": 7.445,
     "description": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
-    "thumbImage": "https://picsum.photos/seed/gorbio/500/375",
+    "thumbImage": "assets/images/lieux/gorbio-village/thumb.jpg",
     "lieux": [
       "gorbio-village"
     ]
@@ -379,7 +379,7 @@
     "lat": 43.884,
     "lng": 7.361,
     "description": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
-    "thumbImage": "https://picsum.photos/seed/luceram/500/375",
+    "thumbImage": "assets/images/lieux/luceram-village/thumb.jpg",
     "lieux": [
       "luceram-village"
     ]
@@ -392,7 +392,7 @@
     "lat": 43.999,
     "lng": 7.517,
     "description": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",
-    "thumbImage": "https://picsum.photos/seed/saorge/500/375",
+    "thumbImage": "assets/images/lieux/saorge-village/thumb.jpg",
     "lieux": [
       "saorge-village"
     ]

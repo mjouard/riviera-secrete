@@ -4378,8 +4378,8 @@
     "lat": 43.8014,
     "lng": 7.4622,
     "description": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de la ligne Maginot creusé à même la roche.",
-    "ogImage": "https://picsum.photos/seed/sainte-agnes-village/1200/800",
-    "heroImage": "https://picsum.photos/seed/sainte-agnes-village/1200/800",
+    "ogImage": "assets/images/lieux/sainte-agnes-village/hero.jpg",
+    "heroImage": "assets/images/lieux/sainte-agnes-village/hero.jpg",
     "heroAlt": "Ruelles pavées de Sainte-Agnès surplombant la Méditerranée depuis 780 mètres d'altitude",
     "metaPills": [
       {
@@ -4481,7 +4481,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/sainte-agnes-village/500/375"
+    "thumbImage": "assets/images/lieux/sainte-agnes-village/thumb.jpg"
   },
   {
     "slug": "coaraze-cadrans-solaires",
@@ -4493,8 +4493,8 @@
     "lat": 43.865,
     "lng": 7.2937,
     "description": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaires signés Cocteau, Ben et Sosno.",
-    "ogImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/1200/800",
-    "heroImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/1200/800",
+    "ogImage": "assets/images/lieux/coaraze-cadrans-solaires/hero.jpg",
+    "heroImage": "assets/images/lieux/coaraze-cadrans-solaires/hero.jpg",
     "heroAlt": "Cadran solaire peint sur une façade du village de Coaraze",
     "metaPills": [
       {
@@ -4596,7 +4596,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/coaraze-cadrans-solaires/500/375"
+    "thumbImage": "assets/images/lieux/coaraze-cadrans-solaires/thumb.jpg"
   },
   {
     "slug": "vieille-ville-sospel",
@@ -4608,8 +4608,8 @@
     "lat": 43.879,
     "lng": 7.449,
     "description": "Une cité épiscopale médiévale sur la route du sel entre Nice et Turin, franchie par un des derniers ponts fortifiés d'Europe encore debout.",
-    "ogImage": "https://picsum.photos/seed/vieille-ville-sospel/1200/800",
-    "heroImage": "https://picsum.photos/seed/vieille-ville-sospel/1200/800",
+    "ogImage": "assets/images/lieux/vieille-ville-sospel/hero.jpg",
+    "heroImage": "assets/images/lieux/vieille-ville-sospel/hero.jpg",
     "heroAlt": "Le Pont Vieux fortifié de Sospel enjambant la Bévéra",
     "metaPills": [
       {
@@ -4711,7 +4711,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/vieille-ville-sospel/500/375"
+    "thumbImage": "assets/images/lieux/vieille-ville-sospel/thumb.jpg"
   },
   {
     "slug": "gorbio-village",
@@ -4723,8 +4723,8 @@
     "lat": 43.787,
     "lng": 7.445,
     "description": "Un village médiéval de 300 âmes au-dessus de Menton, avec ses fontaines anciennes et un orme planté en 1713 encore debout sur la place principale.",
-    "ogImage": "https://picsum.photos/seed/gorbio-village/1200/800",
-    "heroImage": "https://picsum.photos/seed/gorbio-village/1200/800",
+    "ogImage": "assets/images/lieux/gorbio-village/hero.jpg",
+    "heroImage": "assets/images/lieux/gorbio-village/hero.jpg",
     "heroAlt": "Ruelles pavées et passages voûtés du village médiéval de Gorbio",
     "metaPills": [
       {
@@ -4826,7 +4826,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/gorbio-village/500/375"
+    "thumbImage": "assets/images/lieux/gorbio-village/thumb.jpg"
   },
   {
     "slug": "luceram-village",
@@ -4838,8 +4838,8 @@
     "lat": 43.884,
     "lng": 7.361,
     "description": "Un village médiéval à 650 mètres d'altitude dans la vallée du Paillon, célèbre pour son retable de Louis Bréa et ses centaines de crèches disséminées dans les ruelles chaque hiver.",
-    "ogImage": "https://picsum.photos/seed/luceram-village/1200/800",
-    "heroImage": "https://picsum.photos/seed/luceram-village/1200/800",
+    "ogImage": "assets/images/lieux/luceram-village/hero.jpg",
+    "heroImage": "assets/images/lieux/luceram-village/hero.jpg",
     "heroAlt": "Ruelles en escalier et façades de pierre grise du village de Lucéram",
     "metaPills": [
       {
@@ -4941,7 +4941,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/luceram-village/500/375"
+    "thumbImage": "assets/images/lieux/luceram-village/thumb.jpg"
   },
   {
     "slug": "saorge-village",
@@ -4953,8 +4953,8 @@
     "lat": 43.999,
     "lng": 7.517,
     "description": "Un village-amphithéâtre bâti à flanc de montagne dans les gorges de la Roya, dominé par un monastère franciscain baroque du XVIIe siècle.",
-    "ogImage": "https://picsum.photos/seed/saorge-village/1200/800",
-    "heroImage": "https://picsum.photos/seed/saorge-village/1200/800",
+    "ogImage": "assets/images/lieux/saorge-village/hero.jpg",
+    "heroImage": "assets/images/lieux/saorge-village/hero.jpg",
     "heroAlt": "Toits en lauzes du village-amphithéâtre de Saorge dans les gorges de la Roya",
     "metaPills": [
       {
@@ -5056,6 +5056,6 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/saorge-village/500/375"
+    "thumbImage": "assets/images/lieux/saorge-village/thumb.jpg"
   }
 ]

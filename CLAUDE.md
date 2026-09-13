@@ -392,13 +392,14 @@ ruleset (pill/label formatting conventions, day-rhythm philosophy for itinerarie
   origin/destination/waypoints built from the stop lieux in order, sleep markers skipped
   (they carry no coordinates of their own). Google Maps only; don't add a matching
   Waze/Plans button next to it — that's the whole reason the per-stop links exist instead.
-- Hero images: the original 27 lieux got real photography on 2026-08-28. **13 lieux added
-  during the 2026-09-13 villes-expansion chantier are back on `picsum.photos` placeholders**
-  (deliberately, to let that chantier run unsupervised — see
-  `.claude/memory/project_villes_expansion.md`'s "Photos à remplacer" table for the exact
-  list) and still need the real-photo pass below; don't assume "all lieux have real photos"
-  without checking that table first. The process that worked, worth repeating whenever a
-  placeholder needs replacing or a new lieu is added: search Wikimedia Commons (a Wikipedia
+- Hero images: all 40 lieux have real photography — the original 27 since 2026-08-28, and
+  the 13 added during the 2026-09-13 villes-expansion chantier since 2026-09-14 (they ran
+  on `picsum.photos` placeholders in between, deliberately, to let that chantier run
+  unsupervised — see `.claude/memory/project_villes_expansion.md` for that history). No
+  `picsum.photos` placeholder remains anywhere on the site as of 2026-09-14 — except the
+  small per-activité images (`activites[].image`) on those same 13 lieux, a separate,
+  lower-priority pass not yet done (same doc). The process that worked, worth repeating
+  whenever a photo needs replacing or a new lieu is added: search Wikimedia Commons (a Wikipedia
   article's own infobox image is often already well-curated — check that first), view the
   actual candidate image before picking, not just its filename/license (composition/coherence
   matters — a technically-licensed but poorly-framed photo, like a blank wall or a blown-out
