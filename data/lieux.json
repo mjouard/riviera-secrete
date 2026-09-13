@@ -3731,6 +3731,17 @@
         "image": "assets/images/lieux/falicon-village/act-4.jpg",
         "alt": "Terrasse panoramique du restaurant Parcours Live à Falicon",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "porte-saint-francois-falicon",
+        "nom": "La Porte Saint-François, dernier vestige des remparts",
+        "badge": "gratuit",
+        "duree": "15 min",
+        "prix": "Accès libre",
+        "url": "https://provence-alpes-cotedazur.com/en/things-to-do/culture-and-heritage/places/falicon-falicon-en-3015456/",
+        "image": "assets/images/lieux/falicon-village/act-5.jpg",
+        "alt": "Porte Saint-François, arche gothique vestige des remparts de Falicon",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -4089,6 +4100,17 @@
         "image": "assets/images/lieux/vieux-vallauris-ceramique/act-5.jpg",
         "alt": "Salle du restaurant Le Temps Jadis avenue Clemenceau à Vallauris",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "oppidum-encourdoules-vallauris",
+        "nom": "Randonnée à l'oppidum ligure des Encourdoules",
+        "badge": "gratuit",
+        "duree": "1h30-2h aller-retour",
+        "prix": "Accès libre",
+        "url": "https://www.decathlon-outdoor.com/fr-fr/explore/france/vallauris-viree-hors-du-temps-a-l-oppidum-des-encourdoules-616e921e8514d",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-6.jpg",
+        "alt": "Vestiges de murs antiques sur le site de l'oppidum des Encourdoules à Vallauris",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -4121,7 +4143,8 @@
       }
     ],
     "badges": [
-      "restaurant"
+      "restaurant",
+      "randonnee"
     ],
     "thumbImage": "assets/images/lieux/vieux-vallauris-ceramique/thumb.jpg"
   },
@@ -4339,6 +4362,17 @@
         "image": "assets/images/lieux/vieux-village-grimaud/act-4.jpg",
         "alt": "Salle gastronomique du restaurant Les Santons au cœur du village de Grimaud",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "musee-patrimoine-grimaud",
+        "nom": "Musée du Patrimoine, dans un ancien moulin à huile",
+        "badge": "gratuit",
+        "duree": "30-45 min",
+        "prix": "Accès libre",
+        "url": "https://www.grimaud-provence.com/decouvrez/le-charme-dun-village/le-patrimoine-et-les-monuments/le-musee-du-patrimoine/",
+        "image": "assets/images/lieux/vieux-village-grimaud/act-5.jpg",
+        "alt": "Façade en pierre du Musée du Patrimoine de Grimaud, installé dans un ancien moulin à huile",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
@@ -4708,6 +4742,17 @@
         "image": "assets/images/lieux/sainte-agnes-village/act-4.jpg",
         "alt": "Terrasse panoramique du restaurant Le Righi à Sainte-Agnès",
         "linkText": "Réserver →"
+      },
+      {
+        "id": "eglise-notre-dame-neiges-sainte-agnes",
+        "nom": "Église Notre-Dame-des-Neiges et son retable baroque",
+        "badge": "gratuit",
+        "duree": "20 min",
+        "prix": "Accès libre",
+        "url": "https://www.alovelyworld.com/webfranc/htmfr/village-de-sainte-agnes-eglise-notre-dame-des-neiges.htm",
+        "image": "assets/images/lieux/sainte-agnes-village/act-5.jpg",
+        "alt": "Façade jaune de l'église Notre-Dame-des-Neiges à Sainte-Agnès",
+        "linkText": "En savoir plus →"
       }
     ],
     "related": [
