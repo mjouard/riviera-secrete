@@ -152,7 +152,12 @@
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
       }
-    ]
+    ],
+    "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+    "badgeEn": "4 stops · Day trip",
+    "descriptionEn": "Coastal path, a nap in the shade of pine trees and glassblowing — a day that alternates between the sea and craftsmanship.",
+    "introEn": "Coastal path, a nap in the shade of pine trees and glassblowing — a day that alternates between the sea and craftsmanship.",
+    "mapLabelEn": "Map of the Antibes, Biot & Juan-les-Pins pine grove itinerary"
   },
   {
     "slug": "grasse-saint-tropez",
@@ -281,7 +286,12 @@
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
       }
-    ]
+    ],
+    "titreEn": "Grasse and the Saint-Tropez peninsula",
+    "badgeEn": "3 stops · Day trip",
+    "descriptionEn": "Grasse's perfumeries in the morning, one of France's most beautiful villages and the gulf's citadel in the afternoon.",
+    "introEn": "Grasse's perfumeries in the morning, one of France's most beautiful villages and the gulf's citadel in the afternoon.",
+    "mapLabelEn": "Map of the Grasse and Saint-Tropez peninsula itinerary"
   },
   {
     "slug": "lerins-esterel",
@@ -404,7 +414,12 @@
         "badge": "5 étapes",
         "titre": "La route des villages perchés"
       }
-    ]
+    ],
+    "titreEn": "Lérins Islands & the wild Estérel",
+    "badgeEn": "3 stops · Full day",
+    "descriptionEn": "A morning off the coast of Cannes, an afternoon on the red rocks of the Riviera's most photogenic volcanic massif.",
+    "introEn": "A morning off the coast of Cannes, an afternoon on the red rocks of the Riviera's most photogenic volcanic massif.",
+    "mapLabelEn": "Map of the Lérins Islands & wild Estérel itinerary"
   },
   {
     "slug": "menton-eze-monaco",
@@ -640,7 +655,12 @@
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
       }
-    ]
+    ],
+    "titreEn": "Menton, Èze & Monaco: the classic route",
+    "badgeEn": "6 stops · 2 days",
+    "descriptionEn": "Two days between perched villages, panoramas and Belle Époque villas: Grande Corniche, Monaco, Cap Ferrat and Villefranche-sur-Mer.",
+    "introEn": "Two days from east to west: Grande Corniche and perched villages on the first day, an overnight stay in Monaco, then Cap Ferrat and Villefranche at a gentler pace on the second.",
+    "mapLabelEn": "Map of the Menton, Èze & Monaco itinerary"
   },
   {
     "slug": "nice-peillon-peille",
@@ -790,7 +810,12 @@
         "badge": "4 étapes",
         "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
       }
-    ]
+    ],
+    "titreEn": "Nice, Peillon & Peille: town and hinterland express",
+    "badgeEn": "4 stops · Day trip",
+    "descriptionEn": "The best of Vieux Nice in the morning, two suspended villages in the afternoon — without spending the whole day on the road.",
+    "introEn": "The best of Vieux Nice in the morning, two suspended villages in the afternoon — without spending the whole day on the road.",
+    "mapLabelEn": "Map of the Nice, Peillon & Peille itinerary"
   },
   {
     "slug": "villages-perches",
@@ -981,6 +1006,11 @@
         "badge": "4 étapes",
         "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
       }
-    ]
+    ],
+    "titreEn": "The perched villages route",
+    "badgeEn": "5 stops · Full day",
+    "descriptionEn": "Saint-Paul-de-Vence, Tourrettes, the Loup gorges and Gourdon at sunset — the best of the hinterland in a single day.",
+    "introEn": "Saint-Paul-de-Vence, Tourrettes, the Loup gorges and Gourdon at sunset — the best of the hinterland in a single day.",
+    "mapLabelEn": "Map of the perched villages route"
   }
 ]
