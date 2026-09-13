@@ -28,11 +28,13 @@
          vérifiées en direct. Au passage : vérification systématique des 56 URLs
          d'activités de ces 13 lieux, 4 liens cassés trouvés et corrigés (domaine squatté,
          boucle de redirection, page déplacée, 404 réel).
-      2. [ ] **Enrichissement** — chacune des 12 villes n'a qu'un seul lieu, et chaque lieu
-         seulement 4-5 activités (bas de la fourchette du reste du site) : ajouter des lieux
-         supplémentaires là où ça a du sens, et étoffer le panel d'activités de chaque lieu
-         déjà créé, même logique que le chantier "activités par badge" ci-dessus. Pas encore
-         démarré.
+      2. [x] **Enrichissement** — terminé le 2026-09-13. 3 nouveaux lieux distincts ajoutés
+         (`golfe-juan` sur Vallauris, `plage-pampelonne` sur Ramatuelle, `peira-cava` sur
+         Lucéram), chacun avec vraies photos Wikimedia et badges/coordonnées vérifiés ;
+         `port-grimaud` explicitement écarté (architecture encore protégée par le droit
+         d'auteur, voir `.claude/memory/project_villes_expansion.md`). 9 lieux qui n'avaient
+         que le minimum (4 activités) ont reçu une 5e activité secrète/atypique avec vraie
+         photo créditée. Détail complet dans `.claude/memory/project_villes_expansion.md`.
 - [x] Finir les vraies images — les 27 lieux originaux ont une vraie photo (terminé le
       28/08 ; les 21 sourcées sur Wikimedia Commons cette session-là sont créditées sur
       `credits.html`, licences CC BY/CC BY-SA). Les 13 lieux ajoutés le 2026-09-13 ont

@@ -215,35 +215,58 @@ rétroactivement en retrouvant le fichier Commons exact via son SHA1 (`action=al
 l'API Commons) plutôt qu'en devinant parmi des dizaines de photos similaires du même
 photographe.
 
-## Enrichissement à faire — les 12 villes ajoutées sont trop légères (confirmé 2026-09-14)
+## Enrichissement — état au 2026-09-13 (les deux volets bien avancés)
 
-Constat de l'utilisateur, vérifié chiffres à l'appui : **les 12 villes ajoutées cette nuit
-ont chacune exactement 1 seul lieu**, et chaque lieu a 4-5 activités (4 pour la plupart, 5
-pour `menton`/`mougins`/`vallauris`/`ramatuelle`) — la borne basse de la fourchette du reste
-du site (2 à 7 activités par lieu, moyenne ~4.7). Plusieurs villes originales ont 2-3 lieux
-(`roquebrune-cap-martin`: 2, `theoule-sur-mer`: 2, `nice`: 3 avec l'ajout de cette nuit,
-`tourrettes-sur-loup`: 3) — ces 12 nouvelles villes n'ont pas eu cette profondeur.
+Constat initial de l'utilisateur (2026-09-14), vérifié chiffres à l'appui : **les 12 villes
+ajoutées cette nuit-là avaient chacune exactement 1 seul lieu**, et chaque lieu 4-5
+activités — la borne basse de la fourchette du reste du site (2 à 7 activités par lieu,
+moyenne ~4.7). Deux volets actés, tous deux traités le 2026-09-13 dans une session dédiée
+"enrichissement" (carte blanche photo Wikimedia accordée pour cette session, cf. politique
+habituelle `feedback_dont-autopick-photos.md`) :
 
-**À faire dans une session future (pas d'urgence, mais action actée, ne pas re-proposer
-comme "peut-être")** :
-- Pour chacune des 12 villes ajoutées (`falicon`, `mougins`, `vallauris`, `grimaud`,
-  `ramatuelle`, `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`, `saorge` — **`menton`
-  exclue de cette liste**, déjà traitée différemment, voir la ligne "Menton" de la table de
-  progression ci-dessus : son lieu unique a été élargi en scope plutôt que scindé, à la
-  demande explicite de l'utilisateur, donc pas besoin d'y chercher des lieux
-  supplémentaires sauf si un vrai site distinct s'impose plus tard) : rechercher si un ou
-  plusieurs lieux supplémentaires méritent leur propre fiche (un point de vue, un sentier,
-  un site distinct dans la même commune — voir la distinction ville/lieu plus haut dans ce
-  document) plutôt que de tout concentrer sur le lieu unique déjà créé.
-- Pour les 13 lieux déjà créés (les 12 + `parc-mont-boron`) : compléter le panel
-  d'activités au-delà du minimum actuel (4-5), même logique que le chantier
-  "activités par badge" (voir [[project-activites-par-badge]]) — angle secret/atypique, pas
-  les incontournables.
-- Même politique photo que le reste de ce chantier tant que la session photo dédiée n'a pas
-  eu lieu (placeholder picsum pour tout nouveau lieu, ajouté à la table "Photos à
-  remplacer" ci-dessus).
-- Suivre la même méthodologie que cette nuit (coordonnées vérifiées, badges vérifiés un par
-  un, sync DB via `RivieraSecrete.Tools`, commit/push/deploy au fil de l'eau).
+**Volet 1 — nouveaux lieux distincts, terminé (3 ajoutés, 8 communes jugées sans candidat) :**
+- `golfe-juan` (nouveau lieu sur la ville `vallauris` déjà existante) — la façade balnéaire
+  de Vallauris, à 2 km du bourg de céramistes, où Napoléon a débarqué en 1815. A récupéré
+  l'activité "colonne du débarquement" qui était jusque-là mal rattachée sur
+  `vieux-vallauris-ceramique` (elle décrivait déjà un site à 2 km, le tips l'admettait).
+- `plage-pampelonne` (nouveau lieu sur `ramatuelle`) — angle volontairement à l'écart des
+  clubs mythiques (Tahiti, Moulins) déjà connus de tous les guides : le secteur sud Bonne
+  Terrasse/Escalet, plus sauvage.
+- `peira-cava` (nouveau lieu sur `luceram`) — ancienne station de sports d'hiver à 1500 m
+  d'altitude, premier lieu du chantier dans un registre montagne/rando (badges randonnee +
+  vtt) plutôt que village perché ou plage.
+- **`port-grimaud` explicitement écarté** : sa catégorie Wikimedia Commons porte un bandeau
+  NoFoP (architecture de François Spoerry, mort en 1999, encore protégée) — contrairement au
+  cas Picasso/Vallauris où un seul élément posait problème, ici c'est l'identité visuelle
+  entière du lieu (les façades canal) qui est concernée. Décision utilisateur : abandonner
+  plutôt que publier une page sans la moindre photo de ce qui fait l'intérêt du lieu.
+- Les 8 autres communes (`falicon`, `mougins`, `sainte-agnes`, `coaraze`, `sospel`, `gorbio`,
+  `saorge`) : aucun second site jugé assez distinct pour mériter sa propre fiche (candidats
+  écartés en cours de route : Col de Braus à Sospel — plutôt une activité qu'un lieu à part ;
+  gorges de Bergue près de Saorge — rattachées à Fontan, pas Saorge).
+
+**Volet 2 — étoffer le panel d'activités, terminé pour les lieux qui n'avaient que le
+minimum (4) :** `falicon-village`, `vieux-vallauris-ceramique`, `vieux-village-grimaud`,
+`sainte-agnes-village`, `coaraze-cadrans-solaires`, `vieille-ville-sospel`, `gorbio-village`,
+`luceram-village`, `saorge-village` ont chacun reçu une 5e activité (angle secret/atypique :
+oppidum ligure, musée dans un ancien moulin, chapelle méconnue, tour médiévale...), toutes
+avec vraie photo Wikimedia créditée. `vieux-mougins`/`vieux-village-ramatuelle` (déjà à 5) et
+`parc-mont-boron` (déjà à 4 mais ses 4 badges sont tous couverts par une activité dédiée) pas
+retouchés — pas de valeur ajoutée claire trouvée à les pousser plus loin pour l'instant.
+
+**Piège trouvé et corrigé en cours de route** : la première activité ajoutée à
+`vieux-vallauris-ceramique` (l'oppidum) avait été placée sur `act-5.jpg`, qui était déjà le
+fichier du restaurant `dejeuner-temps-jadis` — écrasé par erreur puis restauré depuis git,
+oppidum déplacé sur `act-6.jpg`. Depuis, toujours lister les fichiers existants
+(`ls frontend/public/assets/images/lieux/<slug>/`) avant d'assigner un nouveau nom de
+fichier `act-N.jpg` à une activité ajoutée après coup — le prochain numéro n'est pas toujours
+évident quand des activités ont déjà été retirées/déplacées.
+
+**Reste ouvert, pas urgent** : `parc-mont-boron` pourrait recevoir un 5e point (un belvédère
+distinct type Castel des Deux Rois a été envisagé puis écarté — parc municipal séparé à ~1km,
+pas dans le périmètre du Mont Boron) si un bon candidat se présente plus tard. Les 3 lieux
+créés dans le volet 1 pourraient eux aussi recevoir plus d'activités un jour, mais ils
+partent déjà à 5, pas prioritaire.
 
 ## Si le travail s'arrête en cours de route
 
