@@ -2,8 +2,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RivieraSecrete.Api;
@@ -28,7 +30,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ── JWT Auth ──────────────────────────────────────────────────────────────────
-var jwtSecret = builder.Configuration["Jwt:Secret"]!;
+// Un secret vide signerait et accepterait des tokens avec une clé vide, donc forgeables par
+// n'importe qui : on refuse de démarrer plutôt que de tourner dans cet état.
+var jwtSecret = builder.Configuration["Jwt:Secret"];
+if (string.IsNullOrWhiteSpace(jwtSecret))
+    throw new InvalidOperationException(
+        "Jwt:Secret n'est pas configuré (variable d'environnement Jwt__Secret) — démarrage refusé.");
+if (Encoding.UTF8.GetByteCount(jwtSecret) < 32)
+    Console.WriteLine("[Auth] ATTENTION : Jwt:Secret fait moins de 32 octets — HMAC-SHA256 attend une clé d'au moins 256 bits.");
+
 var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
 var jwtAudience = builder.Configuration["Jwt:Audience"]!;
 
@@ -50,12 +60,38 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// ── Rate limiting sur les endpoints d'auth ────────────────────────────────────
+// Sans ça, /login est brute-forçable sans limite et /register + /resend-confirmation
+// permettent d'inonder la base de comptes et de faire envoyer des emails en masse depuis
+// notre domaine Resend. Deux politiques : une générale pour les endpoints qui ne font que
+// vérifier des identifiants, une plus stricte pour ceux qui déclenchent un envoi d'email.
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.OnRejected = async (ctx, ct) =>
+    {
+        if (ctx.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+            ctx.HttpContext.Response.Headers.RetryAfter = ((int)retryAfter.TotalSeconds).ToString();
+        await ctx.HttpContext.Response.WriteAsJsonAsync(
+            new { Error = "Trop de tentatives. Réessaie dans quelques minutes." }, ct);
+    };
+
+    options.AddPolicy("auth", ctx => RateLimitPartition.GetFixedWindowLimiter(
+        ClientKey(ctx),
+        _ => new FixedWindowRateLimiterOptions { PermitLimit = 20, Window = TimeSpan.FromMinutes(1) }));
+
+    options.AddPolicy("auth-email", ctx => RateLimitPartition.GetFixedWindowLimiter(
+        ClientKey(ctx),
+        _ => new FixedWindowRateLimiterOptions { PermitLimit = 10, Window = TimeSpan.FromMinutes(15) }));
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 
 app.UseCors();
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -106,7 +142,19 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
         return Results.Unauthorized();
     }
 
+    // Google peut émettre un id_token valide pour un compte dont l'email n'est pas vérifié
+    // (certains comptes Workspace). Sans ce contrôle, un tel token suffirait à se lier
+    // automatiquement (ci-dessous) sur un compte email/mot de passe existant qui porte la
+    // même adresse — donc à en prendre le contrôle. On refuse.
+    if (string.IsNullOrWhiteSpace(payload.Email) || payload.EmailVerified != true)
+        return Results.Unauthorized();
+
     var email = payload.Email.Trim().ToLowerInvariant();
+    if (email.Length > 256)
+        return Results.Unauthorized();
+    // Colonne Nom limitée à 200 : on tronque plutôt que de laisser l'INSERT partir en 500.
+    var nomGoogle = (payload.Name ?? email) is { Length: > 200 } trop ? trop[..200] : payload.Name ?? email;
+
     var user = await db.Users.FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
     if (user is null)
     {
@@ -123,7 +171,7 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
             {
                 GoogleId = payload.Subject,
                 Email = email,
-                Nom = payload.Name ?? email,
+                Nom = nomGoogle,
                 EmailConfirmed = true, // Google a déjà vérifié la propriété de l'email
             };
             db.Users.Add(user);
@@ -135,19 +183,28 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
 
     var token = GenerateJwt(user, config);
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
-});
+}).RequireRateLimiting("auth");
 
 app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, IConfiguration config) =>
 {
-    var email = req.Email.Trim().ToLowerInvariant();
-    var nom = req.Nom.Trim();
+    // Les champs d'un record ne sont pas validés par le binder : un JSON sans clé (ou avec
+    // null) arrive ici en null et faisait planter le .Trim() en 500. Les bornes de longueur
+    // reprennent celles des colonnes (Email 256 / Nom 200) : sans elles, une chaîne plus
+    // longue passait la validation puis faisait échouer l'INSERT en 500.
+    var email = (req.Email ?? "").Trim().ToLowerInvariant();
+    var nom = (req.Nom ?? "").Trim();
+    var password = req.Password ?? "";
 
-    if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
+    if (string.IsNullOrWhiteSpace(email) || !email.Contains('@') || email.Length > 256)
         return Results.BadRequest(new { Error = "Adresse email invalide." });
-    if (string.IsNullOrWhiteSpace(nom))
-        return Results.BadRequest(new { Error = "Le nom est requis." });
-    if (req.Password.Length < 8)
+    if (string.IsNullOrWhiteSpace(nom) || nom.Length > 200)
+        return Results.BadRequest(new { Error = "Le nom est requis (200 caractères maximum)." });
+    if (password.Length < 8)
         return Results.BadRequest(new { Error = "Le mot de passe doit faire au moins 8 caractères." });
+    // BCrypt ne considère que les 72 premiers octets ; au-delà on refuse plutôt que de
+    // tronquer silencieusement, et ça borne le coût du hachage.
+    if (Encoding.UTF8.GetByteCount(password) > 72)
+        return Results.BadRequest(new { Error = "Le mot de passe ne doit pas dépasser 72 octets." });
 
     if (await db.Users.AnyAsync(u => u.Email == email))
         return Results.Conflict(new { Error = "Un compte existe déjà avec cet email." });
@@ -156,7 +213,7 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
     {
         Email = email,
         Nom = nom,
-        PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+        PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
         EmailConfirmed = false,
         EmailConfirmationToken = GenerateToken(),
         EmailConfirmationTokenExpiry = DateTime.UtcNow.AddHours(24),
@@ -167,26 +224,37 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
     await EmailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!, config);
 
     return Results.Ok(new { Status = "confirmation_required", Email = user.Email });
-});
+}).RequireRateLimiting("auth-email");
 
 app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfiguration config) =>
 {
-    var email = req.Email.Trim().ToLowerInvariant();
+    var email = (req.Email ?? "").Trim().ToLowerInvariant();
+    var password = req.Password ?? "";
     var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-    if (user is null || user.PasswordHash is null)
-        return Results.Json(new { Error = "Email ou mot de passe incorrect." }, statusCode: 401);
-    if (!BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
+    // On vérifie toujours un hash, même quand le compte n'existe pas (ou n'a pas de mot de
+    // passe, cas d'un compte Google pur) : sinon la réponse revient en ~1 ms au lieu des
+    // ~100 ms d'un BCrypt, et cet écart suffit à énumérer les comptes existants.
+    var hashToCheck = user?.PasswordHash ?? DummyHash.Value;
+    var passwordOk = BCrypt.Net.BCrypt.Verify(password, hashToCheck);
+
+    if (user is null || user.PasswordHash is null || !passwordOk)
         return Results.Json(new { Error = "Email ou mot de passe incorrect." }, statusCode: 401);
     if (!user.EmailConfirmed)
         return Results.Json(new { Error = "Confirme ton email avant de te connecter.", Code = "email_not_confirmed" }, statusCode: 403);
 
     var token = GenerateJwt(user, config);
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
-});
+}).RequireRateLimiting("auth");
 
 app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbContext db, IConfiguration config) =>
 {
+    // Un token null se traduirait par un `WHERE "EmailConfirmationToken" IS NULL` côté EF,
+    // qui matche tous les comptes déjà confirmés. L'expiry null les sauve aujourd'hui, mais
+    // la requête n'a aucune raison d'être exécutée : on refuse en amont.
+    if (string.IsNullOrWhiteSpace(req.Token))
+        return Results.BadRequest(new { Error = "Lien de confirmation invalide." });
+
     var user = await db.Users.FirstOrDefaultAsync(u => u.EmailConfirmationToken == req.Token);
     if (user is null)
         return Results.BadRequest(new { Error = "Lien de confirmation invalide." });
@@ -199,11 +267,11 @@ app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbCont
     await db.SaveChangesAsync();
 
     return Results.Ok(new { Status = "confirmed" });
-});
+}).RequireRateLimiting("auth");
 
 app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest req, AppDbContext db, IConfiguration config) =>
 {
-    var email = req.Email.Trim().ToLowerInvariant();
+    var email = (req.Email ?? "").Trim().ToLowerInvariant();
     var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
 
     // Réponse générique dans tous les cas pour ne pas révéler si l'email existe.
@@ -216,7 +284,7 @@ app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest re
     }
 
     return Results.Ok(new { Status = "sent" });
-});
+}).RequireRateLimiting("auth-email");
 
 // ── Protected: Favoris ────────────────────────────────────────────────────────
 
@@ -333,6 +401,26 @@ static Guid? GetUserId(ClaimsPrincipal principal)
     return Guid.TryParse(sub, out var id) ? id : null;
 }
 
+/// <summary>
+/// Clé de partitionnement du rate limiter : l'IP réelle du client.
+/// Derrière le proxy Railway, <c>RemoteIpAddress</c> est celle du proxy (identique pour tout
+/// le monde), ce qui ferait partager un seul quota à tous les visiteurs. On prend donc la
+/// **dernière** entrée de X-Forwarded-For : les proxies ajoutent en fin de chaîne, donc c'est
+/// celle écrite par Railway, la seule non contrôlée par l'appelant (un client peut envoyer
+/// son propre X-Forwarded-For, mais il sera en début de chaîne). Fallback sur RemoteIpAddress
+/// en local où l'en-tête est absent.
+/// </summary>
+static string ClientKey(HttpContext ctx)
+{
+    var forwarded = ctx.Request.Headers["X-Forwarded-For"].ToString();
+    if (!string.IsNullOrWhiteSpace(forwarded))
+    {
+        var hops = forwarded.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (hops.Length > 0) return hops[^1];
+    }
+    return ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+}
+
 static string GenerateToken()
 {
     var bytes = System.Security.Cryptography.RandomNumberGenerator.GetBytes(32);
@@ -374,3 +462,13 @@ record LoginRequest(string Email, string Password);
 record ConfirmEmailRequest(string Token);
 record ResendConfirmationRequest(string Email);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);
+
+// ── Helpers de type ───────────────────────────────────────────────────────────
+
+/// <summary>Hash BCrypt d'un mot de passe aléatoire, jamais connu de personne. Sert
+/// uniquement à faire travailler BCrypt au login quand le compte n'existe pas, pour que le
+/// temps de réponse ne trahisse pas l'existence d'un compte.</summary>
+static class DummyHash
+{
+    public static readonly string Value = BCrypt.Net.BCrypt.HashPassword(Guid.NewGuid().ToString());
+}
