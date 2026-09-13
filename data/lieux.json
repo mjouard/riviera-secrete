@@ -5188,6 +5188,15 @@
         "region": "Coaraze",
         "titre": "Coaraze, le village aux cadrans solaires",
         "blurb": "Le \"village du soleil\" labellisé par Météo France, dont les façades portent onze cadrans solaire…"
+      },
+      {
+        "href": "peira-cava.html",
+        "img": "assets/images/lieux/peira-cava/thumb.jpg",
+        "alt": "Panorama depuis Peïra-Cava sur le Mercantour",
+        "stamp": "43.93°N<br>7.36°E",
+        "region": "Lucéram",
+        "titre": "Peïra-Cava",
+        "blurb": "Une ancienne station de sports d'hiver à 1500 m d'altitude, sur les hauteurs de Lucéram, avec…"
       }
     ],
     "badges": [
@@ -5195,6 +5204,123 @@
       "restaurant"
     ],
     "thumbImage": "assets/images/lieux/luceram-village/thumb.jpg"
+  },
+  {
+    "slug": "peira-cava",
+    "villeSlug": "luceram",
+    "nom": "Peïra-Cava",
+    "commune": "Lucéram",
+    "regionSlug": "arriere-pays",
+    "regionLabel": "L'arrière-pays : villages perchés & gorges",
+    "lat": 43.932,
+    "lng": 7.3604,
+    "description": "Une ancienne station de sports d'hiver à 1500 m d'altitude, sur les hauteurs de Lucéram — la première des Alpes-Maritimes, aujourd'hui redevenue un balcon tranquille sur le Mercantour et la Méditerranée que peu associent encore à un village de la vallée du Paillon.",
+    "ogImage": "assets/images/lieux/peira-cava/hero.jpg",
+    "heroImage": "assets/images/lieux/peira-cava/hero.jpg",
+    "heroAlt": "Panorama depuis Peïra-Cava sur les crêtes du Mercantour et la mer Méditerranée au loin",
+    "metaPills": [
+      {
+        "label": "🗓️ Meilleure saison :",
+        "valeur": "Toute l'année"
+      },
+      {
+        "label": "⏱️ Durée :",
+        "valeur": "Demi-journée à journée"
+      },
+      {
+        "label": "🥾 Niveau :",
+        "valeur": "Facile à modéré"
+      }
+    ],
+    "description1": "Une ancienne station de sports d'hiver à 1500 m d'altitude, sur les hauteurs de Lucéram — la première des Alpes-Maritimes, aujourd'hui redevenue un balcon tranquille sur le Mercantour et la Méditerranée que peu associent encore à un village de la vallée du Paillon.",
+    "description2": "Créée au début du XXe siècle à l'initiative de Victor de Cessole, Peïra-Cava fut la toute première station de sports d'hiver des Alpes-Maritimes et reste la doyenne du ski de fond dans le département. Le téléski a disparu dans les années 1990, mais le village-belvédère, planté sur une crête entre les vallées de la Vésubie, de la Bévéra et du Paillon, garde ses points de vue à 360° : par temps clair, on voit le Mercantour d'un côté et la mer, voire la Corse, de l'autre.",
+    "tips": [
+      {
+        "label": "Accès",
+        "texte": "30 minutes de route depuis Lucéram village par la D2566 (col de Turini) ; parking gratuit à l'entrée du hameau."
+      },
+      {
+        "label": "Anecdote",
+        "texte": "Peïra-Cava a longtemps organisé des concours de ski et des rassemblements militaires — les Chasseurs Alpins y avaient une caserne."
+      },
+      {
+        "label": "À combiner",
+        "texte": "Le village de Lucéram et son retable de Louis Bréa, à 30 minutes en voiture."
+      }
+    ],
+    "activites": [
+      {
+        "id": "pierre-plate-peira-cava",
+        "nom": "Pierre Plate et sa table d'orientation",
+        "badge": "gratuit",
+        "duree": "30 min aller-retour",
+        "prix": "Accès libre",
+        "url": "https://www.cityzeum.com/pierre-plate",
+        "image": "assets/images/lieux/peira-cava/act-1.jpg",
+        "alt": "Panorama depuis la table d'orientation de la Pierre Plate à Peïra-Cava",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "cime-peira-cava-randonnee",
+        "nom": "Randonnée à la cime de Peïra-Cava (1581 m)",
+        "badge": "gratuit",
+        "duree": "2h-3h aller-retour",
+        "prix": "Accès libre",
+        "url": "https://www.visorando.com/randonnee-la-cime-de-peira-cava/",
+        "image": "assets/images/lieux/peira-cava/act-2.jpg",
+        "alt": "Sentier de randonnée vers la cime de Peïra-Cava avec vue sur le Mercantour",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "vtt-baisse-beasse-peira-cava",
+        "nom": "VTT vers la Baisse de Béasse par les Granges du Lac",
+        "badge": "gratuit",
+        "duree": "2h-3h",
+        "prix": "Accès libre (VTT non fourni)",
+        "url": "https://vttour.fr/sentiers/8149",
+        "image": "assets/images/lieux/peira-cava/act-3.jpg",
+        "alt": "Piste VTT en sous-bois entre Peïra-Cava et la Baisse de Béasse",
+        "linkText": "En savoir plus →"
+      },
+      {
+        "id": "accrobranche-peira-cava-aventures",
+        "nom": "Accrobranche à Peïra Cava Aventures",
+        "badge": "payant",
+        "duree": "3h",
+        "prix": "18 € / adulte, 13 € / enfant",
+        "url": "https://peiracava-aventures.fr/",
+        "image": "assets/images/lieux/peira-cava/act-4.jpg",
+        "alt": "Parcours acrobatique dans les arbres centenaires de Peïra-Cava",
+        "linkText": "Réserver →"
+      },
+      {
+        "id": "dejeuner-refuge-peira-cava",
+        "nom": "Déjeuner au Refuge Peïra Cava",
+        "badge": "payant",
+        "duree": "1h-1h30",
+        "prix": "20-35 € / pers.",
+        "url": "https://www.lerefugepeiracava.com/",
+        "image": "assets/images/lieux/peira-cava/act-5.jpg",
+        "alt": "Terrasse d'un restaurant de Peïra-Cava avec vue sur les montagnes",
+        "linkText": "Réserver →"
+      }
+    ],
+    "related": [
+      {
+        "href": "luceram-village.html",
+        "img": "assets/images/lieux/luceram-village/thumb.jpg",
+        "alt": "Ruelles du village médiéval de Lucéram",
+        "stamp": "43.87°N<br>7.36°E",
+        "region": "Lucéram",
+        "titre": "Lucéram",
+        "blurb": "Un village médiéval du Paillon célèbre pour son retable de Louis Bréa et son circuit des crèches…"
+      }
+    ],
+    "badges": [
+      "randonnee",
+      "vtt"
+    ],
+    "thumbImage": "assets/images/lieux/peira-cava/thumb.jpg"
   },
   {
     "slug": "saorge-village",
