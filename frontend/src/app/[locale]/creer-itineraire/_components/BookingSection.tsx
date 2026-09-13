@@ -45,7 +45,7 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
               <div className="p-4">
                 <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>{loc(locale, lieu.nomEn, lieu.nom)}</p>
                 <p className="font-semibold text-sm mb-1">{loc(locale, act.nomEn, act.nom)}</p>
-                <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>⏱ {act.duree} · 💶 {act.prix}</p>
+                <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>⏱ {loc(locale, act.dureeEn, act.duree)} · 💶 {loc(locale, act.prixEn, act.prix)}</p>
                 <a href={act.url} target="_blank" rel="noopener noreferrer" className="no-print text-xs" style={{ color: "var(--azure)" }}>
                   {linkText}
                 </a>

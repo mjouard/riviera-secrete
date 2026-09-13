@@ -188,8 +188,7 @@ export default async function LieuPage({
         )}
       </div>
 
-      {/* Tips — pas encore de variante anglaise (champ JSON sans colonne *En), reste en
-          français sur /en en attendant, voir project_version_anglaise.md */}
+      {/* Tips */}
       {lieu.tips.length > 0 && (
         <section className="mb-10">
           <h2 className="text-lg font-semibold mb-4">{t("conseilsPratiques")}</h2>
@@ -201,10 +200,10 @@ export default async function LieuPage({
                 style={{ background: "var(--surface)" }}
               >
                 <p className="text-xs font-semibold mb-1" style={{ color: "var(--azure)" }}>
-                  {tip.label}
+                  {loc(locale, tip.labelEn, tip.label)}
                 </p>
                 <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                  {tip.texte}
+                  {loc(locale, tip.texteEn, tip.texte)}
                 </p>
               </div>
             ))}
@@ -249,7 +248,7 @@ export default async function LieuPage({
                     </span>
                     <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
                     <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-                      {act.duree} · {act.prix}
+                      {loc(locale, act.dureeEn, act.duree)} · {loc(locale, act.prixEn, act.prix)}
                     </p>
                   </div>
                   <span
@@ -265,8 +264,7 @@ export default async function LieuPage({
         </section>
       )}
 
-      {/* Related — pas encore de variante anglaise (JSON sans colonne *En), reste en
-          français sur /en en attendant, voir project_version_anglaise.md */}
+      {/* Related — region reste un nom de commune (nom propre), jamais traduit */}
       {lieu.related.length > 0 && (
         <section>
           <h2 className="text-lg font-semibold mb-4">{t("aDecouvrirAussi")}</h2>
@@ -281,7 +279,7 @@ export default async function LieuPage({
                 <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
                   <img
                     src={imgUrl(r.img)}
-                    alt={r.alt}
+                    alt={loc(locale, r.altEn, r.alt)}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -290,9 +288,9 @@ export default async function LieuPage({
                   <p className="text-xs mb-0.5" style={{ color: "var(--text-muted)" }}>
                     {r.region}
                   </p>
-                  <p className="text-sm font-semibold line-clamp-2">{r.titre}</p>
+                  <p className="text-sm font-semibold line-clamp-2">{loc(locale, r.titreEn, r.titre)}</p>
                   <p className="text-xs line-clamp-1" style={{ color: "var(--text-muted)" }}>
-                    {r.blurb}
+                    {loc(locale, r.blurbEn, r.blurb)}
                   </p>
                 </div>
               </Link>

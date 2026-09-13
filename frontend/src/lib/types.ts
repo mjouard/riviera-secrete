@@ -6,6 +6,8 @@ export interface MetaPill {
 export interface Tip {
   label: string;
   texte: string;
+  labelEn?: string | null;
+  texteEn?: string | null;
 }
 
 export interface RelatedCard {
@@ -16,6 +18,9 @@ export interface RelatedCard {
   region: string;
   titre: string;
   blurb: string;
+  titreEn?: string | null;
+  blurbEn?: string | null;
+  altEn?: string | null;
 }
 
 export interface Activite {
@@ -25,7 +30,9 @@ export interface Activite {
   nomEn?: string | null;
   badge: "gratuit" | "payant";
   duree: string;
+  dureeEn?: string | null;
   prix: string;
+  prixEn?: string | null;
   url: string;
   image: string;
   alt: string;
@@ -82,6 +89,7 @@ export interface StopActivite {
   lieuSlug?: string;
   activiteId?: string;
   url?: string;
+  labelEn?: string | null;
 }
 
 export interface ItineraireItem {
@@ -93,6 +101,9 @@ export interface ItineraireItem {
   desc?: string;
   activites?: StopActivite[];
   dormirA?: string;
+  nomEn?: string | null;
+  descEn?: string | null;
+  dormirAEn?: string | null;
 }
 
 export interface BookingRef {
@@ -102,6 +113,9 @@ export interface BookingRef {
   extraSpans: string[];
   lieuSlug: string;
   activiteId: string;
+  lieuLabelEn?: string | null;
+  nomLabelEn?: string | null;
+  extraSpansEn?: string[] | null;
 }
 
 export interface SuggestCard {
@@ -110,6 +124,9 @@ export interface SuggestCard {
   alt: string;
   badge: string;
   titre: string;
+  titreEn?: string | null;
+  badgeEn?: string | null;
+  altEn?: string | null;
 }
 
 export interface Itineraire {

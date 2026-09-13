@@ -154,8 +154,7 @@ export default async function ItinerairePage({
         </div>
       )}
 
-      {/* Programme — items[] pas encore de variante anglaise (JSON sans colonne *En), reste
-          en français sur /en en attendant, voir project_version_anglaise.md */}
+      {/* Programme */}
       <section className="mb-12">
         <h2 className="text-xl font-bold mb-6">{t("programmeDetaille")}</h2>
         <div className="space-y-2">
@@ -167,7 +166,7 @@ export default async function ItinerairePage({
                   className="text-sm py-3 px-4 rounded-lg"
                   style={{ color: "var(--text-muted)", background: "var(--surface)" }}
                 >
-                  {item.desc}
+                  {loc(locale, item.descEn, item.desc ?? "")}
                 </div>
               );
             }
@@ -179,11 +178,11 @@ export default async function ItinerairePage({
                   style={{ background: "var(--surface)", borderColor: "var(--line)" }}
                 >
                   <h3 className="font-semibold mb-1">
-                    🌙 {item.dormirA ?? t("dormirA", { commune: item.commune ?? "" })}
+                    🌙 {loc(locale, item.dormirAEn, item.dormirA ?? "") || t("dormirA", { commune: item.commune ?? "" })}
                   </h3>
                   {item.desc && (
                     <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                      {item.desc}
+                      {loc(locale, item.descEn, item.desc)}
                     </p>
                   )}
                 </div>
@@ -229,10 +228,10 @@ export default async function ItinerairePage({
                     </Link>
                   )}
                 </div>
-                <h3 className="font-semibold mb-1">{item.nom}</h3>
+                <h3 className="font-semibold mb-1">{loc(locale, item.nomEn, item.nom ?? "")}</h3>
                 {item.desc && (
                   <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                    {item.desc}
+                    {loc(locale, item.descEn, item.desc)}
                   </p>
                 )}
                 {item.lieuSlug && lieuBySlug.get(item.lieuSlug) && (
@@ -240,7 +239,7 @@ export default async function ItinerairePage({
                     {buildMapLinks(
                       lieuBySlug.get(item.lieuSlug)!.lat,
                       lieuBySlug.get(item.lieuSlug)!.lng,
-                      item.nom ?? item.lieuSlug,
+                      loc(locale, item.nomEn, item.nom ?? item.lieuSlug),
                       tCommon("plans")
                     ).map((link) => (
                       <a
@@ -270,7 +269,7 @@ export default async function ItinerairePage({
                               : "var(--terracotta)",
                         }}
                       >
-                        {act.label}
+                        {loc(locale, act.labelEn, act.label)}
                       </span>
                     ))}
                   </div>
@@ -281,7 +280,7 @@ export default async function ItinerairePage({
         </div>
       </section>
 
-      {/* À réserver — booking[] pas encore de variante anglaise, reste en français sur /en */}
+      {/* À réserver */}
       {itin.booking.length > 0 && (
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-6">{t("aReserver")}</h2>
@@ -301,7 +300,7 @@ export default async function ItinerairePage({
                     <div className="aspect-[4/3] overflow-hidden">
                       <img
                         src={imgUrl(activite.image)}
-                        alt={activite.alt}
+                        alt={loc(locale, activite.altEn, activite.alt)}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -309,18 +308,18 @@ export default async function ItinerairePage({
                   )}
                   <div className="p-5 flex flex-col gap-1 flex-1">
                     <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                      {b.lieuLabel}
+                      {loc(locale, b.lieuLabelEn, b.lieuLabel)}
                     </p>
-                    <p className="font-semibold mb-1">{b.nomLabel}</p>
+                    <p className="font-semibold mb-1">{loc(locale, b.nomLabelEn, b.nomLabel)}</p>
                     {activite && (
                       <div
                         className="flex flex-wrap gap-x-3 gap-y-0.5 text-sm mb-3"
                         style={{ color: "var(--text-muted)" }}
                       >
-                        <span>⏱ {activite.duree}</span>
-                        <span>💶 {activite.prix}</span>
+                        <span>⏱ {loc(locale, activite.dureeEn, activite.duree)}</span>
+                        <span>💶 {loc(locale, activite.prixEn, activite.prix)}</span>
                         {b.extraSpans.map((s, j) => (
-                          <span key={j}>{s}</span>
+                          <span key={j}>{locale === "en" && b.extraSpansEn?.[j] ? b.extraSpansEn[j] : s}</span>
                         ))}
                       </div>
                     )}
@@ -382,8 +381,7 @@ export default async function ItinerairePage({
         </section>
       )}
 
-      {/* Autres itinéraires — suggestions[] pas encore de variante anglaise, reste en
-          français sur /en en attendant, voir project_version_anglaise.md */}
+      {/* Autres itinéraires */}
       {itin.suggestions.length > 0 && (
         <section className="pt-12 mt-8 border-t" style={{ borderColor: "var(--line)" }}>
           <h2 className="text-xl font-bold mb-6">{t("autresItineraires")}</h2>
@@ -398,16 +396,16 @@ export default async function ItinerairePage({
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={imgUrl(s.img)}
-                    alt={s.alt}
+                    alt={loc(locale, s.altEn, s.alt)}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
                 <div className="p-4">
                   <p className="text-xs font-semibold mb-1" style={{ color: "var(--azure)" }}>
-                    {s.badge}
+                    {loc(locale, s.badgeEn, s.badge)}
                   </p>
-                  <h3 className="text-sm font-semibold leading-snug">{s.titre}</h3>
+                  <h3 className="text-sm font-semibold leading-snug">{loc(locale, s.titreEn, s.titre)}</h3>
                 </div>
               </Link>
             ))}

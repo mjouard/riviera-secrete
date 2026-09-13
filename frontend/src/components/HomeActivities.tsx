@@ -11,7 +11,9 @@ interface CardData {
   nom: string;
   badge: "gratuit" | "payant";
   duree: string;
+  dureeEn?: string | null;
   prix: string;
+  prixEn?: string | null;
   image: string;
   commune: string;
   lieuSlug: string;
@@ -35,7 +37,9 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
         nom: loc(locale, act.nomEn, act.nom),
         badge: act.badge,
         duree: act.duree,
+        dureeEn: act.dureeEn,
         prix: act.prix,
+        prixEn: act.prixEn,
         image: act.image,
         commune: lieu.commune,
         lieuSlug: lieu.slug,
@@ -110,8 +114,8 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
                     📍 {card.commune}
                   </p>
                   <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
-                    ⏱ {card.duree}
-                    {card.badge === "payant" ? ` · ${card.prix}` : ""}
+                    ⏱ {loc(locale, card.dureeEn, card.duree)}
+                    {card.badge === "payant" ? ` · ${loc(locale, card.prixEn, card.prix)}` : ""}
                   </p>
                 </div>
               </Link>
