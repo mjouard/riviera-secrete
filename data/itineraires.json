@@ -34,13 +34,17 @@
             "label": "Sentier Tirepoil · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "sentier-cap-antibes",
-            "activiteId": "sentier-du-littoral-tirepoil"
+            "activiteId": "sentier-du-littoral-tirepoil",
+            "labelEn": "Tirepoil path · Free"
           }
-        ]
+        ],
+        "descEn": "A good stretch of the coastal path before the midday heat.",
+        "nomEn": "The Cap d'Antibes coastal path"
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — D2559, bord de mer Juan-les-Pins"
+        "desc": "🚗 15 min — D2559, bord de mer Juan-les-Pins",
+        "descEn": "🚗 15 min — D2559, Juan-les-Pins seafront"
       },
       {
         "type": "stop",
@@ -53,19 +57,24 @@
           {
             "label": "Plage &amp; pins · Libre",
             "cls": "stop-act--free",
-            "url": "../lieux/pinede-gould-juan-les-pins.html"
+            "url": "../lieux/pinede-gould-juan-les-pins.html",
+            "labelEn": "Beach &amp; pines · Free"
           },
           {
             "label": "Paddle / SUP · 15–20 € · 1 h",
             "cls": "stop-act--paid",
             "lieuSlug": "pinede-gould-juan-les-pins",
-            "activiteId": "location-paddle-sup"
+            "activiteId": "location-paddle-sup",
+            "labelEn": "Paddleboarding / SUP · €15–20 · 1 h"
           }
-        ]
+        ],
+        "descEn": "Picnic in the shade, feet almost in the sand.",
+        "nomEn": "The Gould pine grove"
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — montée vers le village de Biot"
+        "desc": "🚗 15 min — montée vers le village de Biot",
+        "descEn": "🚗 15 min — up to the village of Biot"
       },
       {
         "type": "stop",
@@ -79,13 +88,17 @@
             "label": "Verrerie Biot · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "biot-village-verrier",
-            "activiteId": "verrerie-de-biot-demonstration"
+            "activiteId": "verrerie-de-biot-demonstration",
+            "labelEn": "Biot glassworks · Free"
           }
-        ]
+        ],
+        "descEn": "Glassblowing demonstration and a stroll through the lanes.",
+        "nomEn": "Biot, the glassmakers' village"
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — D18 puis D6007"
+        "desc": "🚗 15 min — D18 puis D6007",
+        "descEn": "🚗 15 min — D18 then D6007"
       },
       {
         "type": "stop",
@@ -99,9 +112,12 @@
             "label": "Musée Renoir · 9 € · 1 h",
             "cls": "stop-act--paid",
             "lieuSlug": "haut-de-cagnes",
-            "activiteId": "musee-renoir"
+            "activiteId": "musee-renoir",
+            "labelEn": "Musée Renoir · €9 · 1 h"
           }
-        ]
+        ],
+        "descEn": "End the day at the Château-Musée Grimaldi, with a view over the Bay of Cagnes.",
+        "nomEn": "The Haut-de-Cagnes"
       }
     ],
     "booking": [
@@ -111,7 +127,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "sentier-cap-antibes",
-        "activiteId": "musee-picasso-d-antibes"
+        "activiteId": "musee-picasso-d-antibes",
+        "lieuLabelEn": "Antibes",
+        "nomLabelEn": "Picasso Museum"
       },
       {
         "lieuLabel": "Biot",
@@ -119,7 +137,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "biot-village-verrier",
-        "activiteId": "atelier-soufflage-de-verre"
+        "activiteId": "atelier-soufflage-de-verre",
+        "lieuLabelEn": "Biot",
+        "nomLabelEn": "Glassblowing workshop"
       },
       {
         "lieuLabel": "Cagnes-sur-Mer",
@@ -127,7 +147,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "haut-de-cagnes",
-        "activiteId": "chateau-musee-grimaldi"
+        "activiteId": "chateau-musee-grimaldi",
+        "lieuLabelEn": "Cagnes-sur-Mer",
+        "nomLabelEn": "Château-Musée Grimaldi"
       }
     ],
     "suggestions": [
@@ -136,21 +158,30 @@
         "img": "assets/images/lieux/iles-de-lerins/thumb.jpg",
         "alt": "Îles de Lérins &amp; Estérel sauvage",
         "badge": "3 étapes",
-        "titre": "Îles de Lérins &amp; Estérel sauvage"
+        "titre": "Îles de Lérins &amp; Estérel sauvage",
+        "titreEn": "Lérins Islands & the wild Estérel",
+        "altEn": "Lérins Islands & the wild Estérel",
+        "badgeEn": "3 stops"
       },
       {
         "href": "villages-perches.html",
         "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
-        "titre": "La route des villages perchés"
+        "titre": "La route des villages perchés",
+        "titreEn": "The perched villages route",
+        "altEn": "The perched villages route",
+        "badgeEn": "5 stops"
       },
       {
         "href": "nice-peillon-peille.html",
         "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
-        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "titreEn": "Nice, Peillon & Peille: town and hinterland express",
+        "altEn": "Nice, Peillon & Peille: town and hinterland express",
+        "badgeEn": "4 stops"
       }
     ],
     "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
@@ -194,13 +225,17 @@
             "label": "Parfumerie Fragonard · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "vieille-ville-grasse",
-            "activiteId": "visite-parfumerie-fragonard"
+            "activiteId": "visite-parfumerie-fragonard",
+            "labelEn": "Fragonard perfumery · Free"
           }
-        ]
+        ],
+        "descEn": "Stepped lanes and a free visit to a historic perfumery workshop.",
+        "nomEn": "The old town of Grasse"
       },
       {
         "type": "transit",
-        "desc": "🚗 60 min — A8 puis D98a, traversée du golfe de Saint-Tropez"
+        "desc": "🚗 60 min — A8 puis D98a, traversée du golfe de Saint-Tropez",
+        "descEn": "🚗 60 min — A8 then D98a, crossing the Gulf of Saint-Tropez"
       },
       {
         "type": "stop",
@@ -214,13 +249,17 @@
             "label": "Panorama des Barri · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "gassin-plus-beau-village",
-            "activiteId": "randonnee-panorama-des-barri"
+            "activiteId": "randonnee-panorama-des-barri",
+            "labelEn": "Barri panorama · Free"
           }
-        ]
+        ],
+        "descEn": "Lunch on site, then the Barri viewpoint over the whole gulf.",
+        "nomEn": "Gassin, one of the most beautiful villages in France"
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — D559, descente vers Saint-Tropez"
+        "desc": "🚗 15 min — D559, descente vers Saint-Tropez",
+        "descEn": "🚗 15 min — D559, down to Saint-Tropez"
       },
       {
         "type": "stop",
@@ -233,9 +272,12 @@
           {
             "label": "Balade au port · Libre",
             "cls": "stop-act--free",
-            "url": "../lieux/citadelle-saint-tropez.html"
+            "url": "../lieux/citadelle-saint-tropez.html",
+            "labelEn": "Harbour stroll · Free"
           }
-        ]
+        ],
+        "descEn": "End the day within the ramparts, away from the bustle of the harbour.",
+        "nomEn": "The Saint-Tropez Citadel"
       }
     ],
     "booking": [
@@ -245,7 +287,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "vieille-ville-grasse",
-        "activiteId": "atelier-creation-de-parfum"
+        "activiteId": "atelier-creation-de-parfum",
+        "lieuLabelEn": "Grasse",
+        "nomLabelEn": "Perfume-making workshop"
       },
       {
         "lieuLabel": "Gassin",
@@ -253,7 +297,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "gassin-plus-beau-village",
-        "activiteId": "degustation-vins-du-golfe"
+        "activiteId": "degustation-vins-du-golfe",
+        "lieuLabelEn": "Gassin",
+        "nomLabelEn": "Provençal wine tasting"
       },
       {
         "lieuLabel": "Saint-Tropez",
@@ -261,7 +307,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "citadelle-saint-tropez",
-        "activiteId": "citadelle-amp-musee-naval"
+        "activiteId": "citadelle-amp-musee-naval",
+        "lieuLabelEn": "Saint-Tropez",
+        "nomLabelEn": "Citadel &amp; naval museum"
       }
     ],
     "suggestions": [
@@ -270,21 +318,30 @@
         "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
         "alt": "Menton, Èze &amp; Monaco : la route des classiques",
         "badge": "6 étapes",
-        "titre": "Menton, Èze &amp; Monaco : la route des classiques"
+        "titre": "Menton, Èze &amp; Monaco : la route des classiques",
+        "titreEn": "Menton, Èze & Monaco: the classic route",
+        "altEn": "Menton, Èze & Monaco: the classic route",
+        "badgeEn": "6 stops"
       },
       {
         "href": "nice-peillon-peille.html",
         "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
-        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "titreEn": "Nice, Peillon & Peille: town and hinterland express",
+        "altEn": "Nice, Peillon & Peille: town and hinterland express",
+        "badgeEn": "4 stops"
       },
       {
         "href": "villages-perches.html",
         "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
-        "titre": "La route des villages perchés"
+        "titre": "La route des villages perchés",
+        "titreEn": "The perched villages route",
+        "altEn": "The perched villages route",
+        "badgeEn": "5 stops"
       }
     ],
     "titreEn": "Grasse and the Saint-Tropez peninsula",
@@ -328,13 +385,17 @@
             "label": "Abbaye Saint-Honorat · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "iles-de-lerins",
-            "activiteId": "abbaye-de-lerins-saint-honorat"
+            "activiteId": "abbaye-de-lerins-saint-honorat",
+            "labelEn": "Saint-Honorat Abbey · Free"
           }
-        ]
+        ],
+        "descEn": "Boat crossing from Cannes, morning on Sainte-Marguerite or Saint-Honorat.",
+        "nomEn": "The Lérins Islands"
       },
       {
         "type": "transit",
-        "desc": "⛵ retour navette 30 min + 🚗 45 min — A8 puis D559 Estérel"
+        "desc": "⛵ retour navette 30 min + 🚗 45 min — A8 puis D559 Estérel",
+        "descEn": "⛵ 30 min shuttle back + 🚗 45 min — A8 then D559 Estérel"
       },
       {
         "type": "stop",
@@ -348,13 +409,17 @@
             "label": "Randonnée Cap Roux · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "pic-cap-roux-esterel",
-            "activiteId": "randonnee-pic-du-cap-roux"
+            "activiteId": "randonnee-pic-du-cap-roux",
+            "labelEn": "Cap Roux hike · Free"
           }
-        ]
+        ],
+        "descEn": "A short but steep climb for a panorama over the whole massif.",
+        "nomEn": "The Cap Roux Peak"
       },
       {
         "type": "transit",
-        "desc": "🚗 20 min — descente vers Théoule-sur-Mer"
+        "desc": "🚗 20 min — descente vers Théoule-sur-Mer",
+        "descEn": "🚗 20 min — down to Théoule-sur-Mer"
       },
       {
         "type": "stop",
@@ -363,7 +428,9 @@
         "nom": "Les calanques de l'Estérel",
         "commune": "Théoule-sur-Mer",
         "desc": "Fin d'après-midi les pieds dans l'eau, entre les roches rouges.",
-        "activites": []
+        "activites": [],
+        "descEn": "Late afternoon with your feet in the water, among the red rocks.",
+        "nomEn": "The Estérel coves"
       }
     ],
     "booking": [
@@ -373,7 +440,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "iles-de-lerins",
-        "activiteId": "traversee-en-bateau-depuis-cannes"
+        "activiteId": "traversee-en-bateau-depuis-cannes",
+        "lieuLabelEn": "Cannes",
+        "nomLabelEn": "Cannes–Lérins crossing"
       },
       {
         "lieuLabel": "Théoule-sur-Mer",
@@ -381,7 +450,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "calanques-esterel-theoule",
-        "activiteId": "kayak-de-mer-calanques"
+        "activiteId": "kayak-de-mer-calanques",
+        "lieuLabelEn": "Théoule-sur-Mer",
+        "nomLabelEn": "Sea kayaking in the calanques"
       },
       {
         "lieuLabel": "Théoule-sur-Mer",
@@ -389,7 +460,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "calanques-esterel-theoule",
-        "activiteId": "snorkeling-calanques-rouges"
+        "activiteId": "snorkeling-calanques-rouges",
+        "lieuLabelEn": "Théoule-sur-Mer",
+        "nomLabelEn": "Guided snorkeling in the Estérel"
       }
     ],
     "suggestions": [
@@ -398,21 +471,30 @@
         "img": "assets/images/lieux/vieille-ville-grasse/thumb.jpg",
         "alt": "Grasse et la presqu'île de Saint-Tropez",
         "badge": "3 étapes",
-        "titre": "Grasse et la presqu'île de Saint-Tropez"
+        "titre": "Grasse et la presqu'île de Saint-Tropez",
+        "titreEn": "Grasse and the Saint-Tropez peninsula",
+        "altEn": "Grasse and the Saint-Tropez peninsula",
+        "badgeEn": "3 stops"
       },
       {
         "href": "antibes-biot-juan.html",
         "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
-        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "altEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "badgeEn": "4 stops"
       },
       {
         "href": "villages-perches.html",
         "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
-        "titre": "La route des villages perchés"
+        "titre": "La route des villages perchés",
+        "titreEn": "The perched villages route",
+        "altEn": "The perched villages route",
+        "badgeEn": "5 stops"
       }
     ],
     "titreEn": "Lérins Islands & the wild Estérel",
@@ -456,19 +538,24 @@
             "label": "Château médiéval · 5 € · 1 h",
             "cls": "stop-act--paid",
             "lieuSlug": "roquebrune-cap-martin-village",
-            "activiteId": "visite-du-chateau-medieval"
+            "activiteId": "visite-du-chateau-medieval",
+            "labelEn": "Medieval castle · €5 · 1 h"
           },
           {
             "label": "Sentier Le Corbusier · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "sentier-corbusier-cap-martin",
-            "activiteId": "sentier-le-corbusier"
+            "activiteId": "sentier-le-corbusier",
+            "labelEn": "Le Corbusier path · Free"
           }
-        ]
+        ],
+        "descEn": "Stroll through the vaulted lanes before the tour groups arrive.",
+        "nomEn": "The village of Roquebrune-Cap-Martin"
       },
       {
         "type": "transit",
-        "desc": "🚗 20 min — Grande Corniche (montée sinueuse)"
+        "desc": "🚗 20 min — Grande Corniche (montée sinueuse)",
+        "descEn": "🚗 20 min — Grande Corniche (winding climb)"
       },
       {
         "type": "stop",
@@ -482,19 +569,24 @@
             "label": "Trophée d'Auguste · 7 € · 1 h",
             "cls": "stop-act--paid",
             "lieuSlug": "trophee-auguste-la-turbie",
-            "activiteId": "visite-du-trophee-d-auguste"
+            "activiteId": "visite-du-trophee-d-auguste",
+            "labelEn": "Trophy of Augustus · €7 · 1 h"
           },
           {
             "label": "Panorama Monaco · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "trophee-auguste-la-turbie",
-            "activiteId": "panorama-sur-monaco"
+            "activiteId": "panorama-sur-monaco",
+            "labelEn": "Monaco panorama · Free"
           }
-        ]
+        ],
+        "descEn": "Unbeatable view over Monaco from the Roman monument, perched on the Grande Corniche at 480 m.",
+        "nomEn": "The Trophy of Augustus"
       },
       {
         "type": "transit",
-        "desc": "🚗 15 min — descente vers Èze (Moyenne Corniche)"
+        "desc": "🚗 15 min — descente vers Èze (Moyenne Corniche)",
+        "descEn": "🚗 15 min — down to Èze (Moyenne Corniche)"
       },
       {
         "type": "stop",
@@ -508,19 +600,24 @@
             "label": "Jardin exotique · 8–10 € · 45 min",
             "cls": "stop-act--paid",
             "lieuSlug": "eze-village",
-            "activiteId": "le-jardin-exotique"
+            "activiteId": "le-jardin-exotique",
+            "labelEn": "Jardin Exotique · €8–10 · 45 min"
           },
           {
             "label": "Chemin Nietzsche · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "eze-village",
-            "activiteId": "chemin-de-nietzsche"
+            "activiteId": "chemin-de-nietzsche",
+            "labelEn": "Nietzsche Path · Free"
           }
-        ]
+        ],
+        "descEn": "Lunch on a terrace in the village, then up to the Jardin Exotique for the most dizzying panoramas.",
+        "nomEn": "Èze, the perched village"
       },
       {
         "type": "transit",
-        "desc": "🚗 20 min — D6007 puis entrée Monaco"
+        "desc": "🚗 20 min — D6007 puis entrée Monaco",
+        "descEn": "🚗 20 min — D6007 then into Monaco"
       },
       {
         "type": "stop",
@@ -534,21 +631,27 @@
             "label": "Musée Océanographique · 18 € · 2 h",
             "cls": "stop-act--paid",
             "lieuSlug": "jardin-exotique-monaco",
-            "activiteId": "musee-oceanographique"
+            "activiteId": "musee-oceanographique",
+            "labelEn": "Musée Océanographique · €18 · 2 h"
           },
           {
             "label": "Jardin exotique Monaco · 8 €",
             "cls": "stop-act--paid",
             "lieuSlug": "jardin-exotique-monaco",
-            "activiteId": "jardin-exotique-de-monaco"
+            "activiteId": "jardin-exotique-de-monaco",
+            "labelEn": "Monaco's Jardin Exotique · €8"
           }
-        ]
+        ],
+        "descEn": "Jardin Exotique, Musée Océanographique, the Rock of Monaco — with an overnight stay, no need to rush.",
+        "nomEn": "The Jardin Exotique of Monaco"
       },
       {
         "type": "sleep",
         "dormirA": "Dormir à Beaulieu-sur-Mer",
         "commune": "Beaulieu-sur-Mer",
-        "desc": "Village élégant entre Monaco et le Cap Ferrat, idéal pour attaquer la Villa Ephrussi à l'ouverture. Bonne table au port le soir."
+        "desc": "Village élégant entre Monaco et le Cap Ferrat, idéal pour attaquer la Villa Ephrussi à l'ouverture. Bonne table au port le soir.",
+        "descEn": "An elegant village between Monaco and Cap Ferrat, ideal for arriving at Villa Ephrussi when it opens. Good dining at the port in the evening.",
+        "dormirAEn": "Stay overnight in Beaulieu-sur-Mer"
       },
       {
         "type": "stop",
@@ -562,19 +665,24 @@
             "label": "Villa & jardins · 18 € · 1 h 30",
             "cls": "stop-act--paid",
             "lieuSlug": "sentier-cap-ferrat",
-            "activiteId": "villa-ephrussi-de-rothschild"
+            "activiteId": "villa-ephrussi-de-rothschild",
+            "labelEn": "Villa & gardens · €18 · 1 h 30"
           },
           {
             "label": "Villa Kerylos · 14 €",
             "cls": "stop-act--paid",
             "lieuSlug": "villa-kerylos",
-            "activiteId": "visite-villa-kerylos"
+            "activiteId": "visite-villa-kerylos",
+            "labelEn": "Villa Kerylos · €14"
           }
-        ]
+        ],
+        "descEn": "Morning walk on the coastal path, then the gardens of Villa Ephrussi at opening time, without the crowds.",
+        "nomEn": "The Cap Ferrat coastal path"
       },
       {
         "type": "transit",
-        "desc": "🚗 10 min — D125 vers Villefranche"
+        "desc": "🚗 10 min — D125 vers Villefranche",
+        "descEn": "🚗 10 min — D125 towards Villefranche"
       },
       {
         "type": "stop",
@@ -588,15 +696,19 @@
             "label": "Kayak de mer · 35–50 € · 2 h",
             "cls": "stop-act--paid",
             "lieuSlug": "rue-obscure-villefranche",
-            "activiteId": "sortie-kayak-de-mer"
+            "activiteId": "sortie-kayak-de-mer",
+            "labelEn": "Sea kayaking · €35–50 · 2 h"
           },
           {
             "label": "Citadelle Saint-Elme · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "rue-obscure-villefranche",
-            "activiteId": "citadelle-saint-elme"
+            "activiteId": "citadelle-saint-elme",
+            "labelEn": "Citadelle Saint-Elme · Free"
           }
-        ]
+        ],
+        "descEn": "Rue Obscure in the morning, lunch facing the harbour, free afternoon for kayaking or the beach.",
+        "nomEn": "The Rue Obscure"
       }
     ],
     "booking": [
@@ -606,7 +718,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "roquebrune-cap-martin-village",
-        "activiteId": "visite-du-chateau-medieval"
+        "activiteId": "visite-du-chateau-medieval",
+        "lieuLabelEn": "Roquebrune-Cap-Martin",
+        "nomLabelEn": "Medieval castle"
       },
       {
         "lieuLabel": "Èze",
@@ -614,7 +728,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "eze-village",
-        "activiteId": "le-jardin-exotique"
+        "activiteId": "le-jardin-exotique",
+        "lieuLabelEn": "Èze",
+        "nomLabelEn": "Èze's Jardin Exotique"
       },
       {
         "lieuLabel": "Monaco",
@@ -622,7 +738,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "jardin-exotique-monaco",
-        "activiteId": "musee-oceanographique"
+        "activiteId": "musee-oceanographique",
+        "lieuLabelEn": "Monaco",
+        "nomLabelEn": "Oceanographic Museum"
       },
       {
         "lieuLabel": "Saint-Jean-Cap-Ferrat",
@@ -630,7 +748,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "sentier-cap-ferrat",
-        "activiteId": "villa-ephrussi-de-rothschild"
+        "activiteId": "villa-ephrussi-de-rothschild",
+        "lieuLabelEn": "Saint-Jean-Cap-Ferrat",
+        "nomLabelEn": "Villa Ephrussi de Rothschild"
       }
     ],
     "suggestions": [
@@ -639,21 +759,30 @@
         "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
-        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "titreEn": "Nice, Peillon & Peille: town and hinterland express",
+        "altEn": "Nice, Peillon & Peille: town and hinterland express",
+        "badgeEn": "4 stops"
       },
       {
         "href": "villages-perches.html",
         "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
-        "titre": "La route des villages perchés"
+        "titre": "La route des villages perchés",
+        "titreEn": "The perched villages route",
+        "altEn": "The perched villages route",
+        "badgeEn": "5 stops"
       },
       {
         "href": "antibes-biot-juan.html",
         "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
-        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "altEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "badgeEn": "4 stops"
       }
     ],
     "titreEn": "Menton, Èze & Monaco: the classic route",
@@ -697,13 +826,17 @@
             "label": "Marché Saleya · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "cours-saleya-vieux-nice",
-            "activiteId": "marche-du-cours-saleya"
+            "activiteId": "marche-du-cours-saleya",
+            "labelEn": "Cours Saleya market · Free"
           }
-        ]
+        ],
+        "descEn": "The flower market while it's still quiet, before the midday terraces fill up.",
+        "nomEn": "Cours Saleya and the lanes of Old Nice"
       },
       {
         "type": "transit",
-        "desc": "🚶 5 min — Vieux Nice, rue de la Préfecture"
+        "desc": "🚶 5 min — Vieux Nice, rue de la Préfecture",
+        "descEn": "🚶 5 min — Vieux Nice, rue de la Préfecture"
       },
       {
         "type": "stop",
@@ -717,13 +850,17 @@
             "label": "Parc &amp; cascade · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "colline-du-chateau-nice",
-            "activiteId": "cascade-et-parc-du-chateau"
+            "activiteId": "cascade-et-parc-du-chateau",
+            "labelEn": "Park &amp; waterfall · Free"
           }
-        ]
+        ],
+        "descEn": "Climb up for the view over the Baie des Anges in full morning light.",
+        "nomEn": "Castle Hill"
       },
       {
         "type": "transit",
-        "desc": "🚗 30 min — D2204, vallée du Paillon"
+        "desc": "🚗 30 min — D2204, vallée du Paillon",
+        "descEn": "🚗 30 min — D2204, Paillon valley"
       },
       {
         "type": "stop",
@@ -737,13 +874,17 @@
             "label": "Explorer le village · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "peillon-village",
-            "activiteId": "explorer-le-vieux-village"
+            "activiteId": "explorer-le-vieux-village",
+            "labelEn": "Explore the village · Free"
           }
-        ]
+        ],
+        "descEn": "Lunch on site, then a walk through the pyramid-shaped village.",
+        "nomEn": "Peillon, the suspended village"
       },
       {
         "type": "transit",
-        "desc": "🚗 20 min — route de montagne, lacets serrés"
+        "desc": "🚗 20 min — route de montagne, lacets serrés",
+        "descEn": "🚗 20 min — mountain road, tight hairpins"
       },
       {
         "type": "stop",
@@ -757,9 +898,12 @@
             "label": "Village médiéval · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "peille-village",
-            "activiteId": "exploration-du-village-medieval"
+            "activiteId": "exploration-du-village-medieval",
+            "labelEn": "Medieval village · Free"
           }
-        ]
+        ],
+        "descEn": "A second, quieter village to end the day away from the crowds.",
+        "nomEn": "Peille, a hinterland village"
       }
     ],
     "booking": [
@@ -769,7 +913,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "cours-saleya-vieux-nice",
-        "activiteId": "tour-gastronomique-vieux-nice"
+        "activiteId": "tour-gastronomique-vieux-nice",
+        "lieuLabelEn": "Nice",
+        "nomLabelEn": "Vieux Nice food tour"
       },
       {
         "lieuLabel": "Nice",
@@ -777,7 +923,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "colline-du-chateau-nice",
-        "activiteId": "vieux-nice-visite-guidee"
+        "activiteId": "vieux-nice-visite-guidee",
+        "lieuLabelEn": "Nice",
+        "nomLabelEn": "Guided tour of Vieux Nice"
       },
       {
         "lieuLabel": "Peillon",
@@ -785,7 +933,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "peillon-village",
-        "activiteId": "dejeuner-sur-la-plage-arnulf"
+        "activiteId": "dejeuner-sur-la-plage-arnulf",
+        "lieuLabelEn": "Peillon",
+        "nomLabelEn": "Lunch in Peillon (reservation required)"
       }
     ],
     "suggestions": [
@@ -794,21 +944,30 @@
         "img": "assets/images/lieux/roquebrune-cap-martin-village/thumb.jpg",
         "alt": "Menton, Èze &amp; Monaco : la route des classiques",
         "badge": "6 étapes",
-        "titre": "Menton, Èze &amp; Monaco : la route des classiques"
+        "titre": "Menton, Èze &amp; Monaco : la route des classiques",
+        "titreEn": "Menton, Èze & Monaco: the classic route",
+        "altEn": "Menton, Èze & Monaco: the classic route",
+        "badgeEn": "6 stops"
       },
       {
         "href": "villages-perches.html",
         "img": "assets/images/lieux/saint-paul-de-vence/thumb.jpg",
         "alt": "La route des villages perchés",
         "badge": "5 étapes",
-        "titre": "La route des villages perchés"
+        "titre": "La route des villages perchés",
+        "titreEn": "The perched villages route",
+        "altEn": "The perched villages route",
+        "badgeEn": "5 stops"
       },
       {
         "href": "antibes-biot-juan.html",
         "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
-        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "altEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "badgeEn": "4 stops"
       }
     ],
     "titreEn": "Nice, Peillon & Peille: town and hinterland express",
@@ -852,19 +1011,24 @@
             "label": "Remparts &amp; galeries · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "saint-paul-de-vence",
-            "activiteId": "balade-sur-les-remparts"
+            "activiteId": "balade-sur-les-remparts",
+            "labelEn": "Ramparts &amp; galleries · Free"
           },
           {
             "label": "Chapelle Matisse · 7 € · 1 h",
             "cls": "stop-act--paid",
             "lieuSlug": "saint-paul-de-vence",
-            "activiteId": "chapelle-du-rosaire-matisse"
+            "activiteId": "chapelle-du-rosaire-matisse",
+            "labelEn": "Matisse Chapel · €7 · 1 h"
           }
-        ]
+        ],
+        "descEn": "Ramparts, galleries and Matisse's Chapelle du Rosaire, before the midday crowds.",
+        "nomEn": "Saint-Paul-de-Vence"
       },
       {
         "type": "transit",
-        "desc": "🚗 20 min — D2 puis D2210 via Vence, direction Tourrettes"
+        "desc": "🚗 20 min — D2 puis D2210 via Vence, direction Tourrettes",
+        "descEn": "🚗 20 min — D2 then D2210 via Vence, towards Tourrettes"
       },
       {
         "type": "stop",
@@ -878,13 +1042,17 @@
             "label": "Cité des violettes · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "tourrettes-sur-loup",
-            "activiteId": "visite-de-la-cite-des-violettes"
+            "activiteId": "visite-de-la-cite-des-violettes",
+            "labelEn": "City of violets · Free"
           }
-        ]
+        ],
+        "descEn": "Lunch in the village, flower-lined lanes curving round the hillside.",
+        "nomEn": "Tourrettes-sur-Loup, the city of violets"
       },
       {
         "type": "transit",
-        "desc": "🚗 10 min — D2210 puis D3"
+        "desc": "🚗 10 min — D2210 puis D3",
+        "descEn": "🚗 10 min — D2210 then D3"
       },
       {
         "type": "stop",
@@ -898,13 +1066,17 @@
             "label": "Confiserie Florian · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "pont-du-loup",
-            "activiteId": "confiserie-florian-visite-gratuite"
+            "activiteId": "confiserie-florian-visite-gratuite",
+            "labelEn": "Confiserie Florian · Free"
           }
-        ]
+        ],
+        "descEn": "Quick stop at the ruined viaduct, maybe a candied-fruit workshop too.",
+        "nomEn": "Pont du Loup and its viaduct"
       },
       {
         "type": "transit",
-        "desc": "🚗 5 min — D3, début des gorges"
+        "desc": "🚗 5 min — D3, début des gorges",
+        "descEn": "🚗 5 min — D3, start of the gorges"
       },
       {
         "type": "stop",
@@ -918,19 +1090,24 @@
             "label": "Randonnée gorges · Libre",
             "cls": "stop-act--free",
             "lieuSlug": "gorges-du-loup-cascade-courmes",
-            "activiteId": "randonnee-gorges-du-loup"
+            "activiteId": "randonnee-gorges-du-loup",
+            "labelEn": "Gorges hike · Free"
           },
           {
             "label": "Escalade &amp; via ferrata · 50–80 €",
             "cls": "stop-act--paid",
             "lieuSlug": "gorges-du-loup-cascade-courmes",
-            "activiteId": "escalade-et-via-ferrata"
+            "activiteId": "escalade-et-via-ferrata",
+            "labelEn": "Climbing &amp; via ferrata · €50–80"
           }
-        ]
+        ],
+        "descEn": "Walk to the waterfall, or just stop at the fitted-out viewpoints.",
+        "nomEn": "The Loup Gorges and the Courmes waterfall"
       },
       {
         "type": "transit",
-        "desc": "🚗 8 min — D3, montée sinueuse vers le sommet"
+        "desc": "🚗 8 min — D3, montée sinueuse vers le sommet",
+        "descEn": "🚗 8 min — D3, winding climb to the top"
       },
       {
         "type": "stop",
@@ -943,9 +1120,12 @@
           {
             "label": "Panorama falaise · Libre",
             "cls": "stop-act--free",
-            "url": "https://www.gourdon-village.fr/"
+            "url": "https://www.gourdon-village.fr/",
+            "labelEn": "Cliff panorama · Free"
           }
-        ]
+        ],
+        "descEn": "The final stop, for sunset over the gorges from the eagle's nest.",
+        "nomEn": "Gourdon, the eagle's nest"
       }
     ],
     "booking": [
@@ -955,7 +1135,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "saint-paul-de-vence",
-        "activiteId": "fondation-maeght"
+        "activiteId": "fondation-maeght",
+        "lieuLabelEn": "Saint-Paul-de-Vence",
+        "nomLabelEn": "Fondation Maeght"
       },
       {
         "lieuLabel": "Vence",
@@ -965,7 +1147,12 @@
           "Mardi &amp; jeudi"
         ],
         "lieuSlug": "saint-paul-de-vence",
-        "activiteId": "chapelle-du-rosaire-matisse"
+        "activiteId": "chapelle-du-rosaire-matisse",
+        "lieuLabelEn": "Vence",
+        "nomLabelEn": "Chapelle du Rosaire (Matisse)",
+        "extraSpansEn": [
+          "Mardi &amp; jeudi"
+        ]
       },
       {
         "lieuLabel": "Tourrettes-sur-Loup",
@@ -973,7 +1160,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "tourrettes-sur-loup",
-        "activiteId": "atelier-ceramique-artisanale"
+        "activiteId": "atelier-ceramique-artisanale",
+        "lieuLabelEn": "Tourrettes-sur-Loup",
+        "nomLabelEn": "Ceramics workshop"
       },
       {
         "lieuLabel": "Gourdon",
@@ -981,7 +1170,9 @@
         "linkText": "Réserver →",
         "extraSpans": [],
         "lieuSlug": "gourdon-village",
-        "activiteId": "chateau-musee-de-gourdon"
+        "activiteId": "chateau-musee-de-gourdon",
+        "lieuLabelEn": "Gourdon",
+        "nomLabelEn": "Gourdon Castle-Museum"
       }
     ],
     "suggestions": [
@@ -990,21 +1181,30 @@
         "img": "assets/images/lieux/sentier-cap-antibes/thumb.jpg",
         "alt": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
         "badge": "4 étapes",
-        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins"
+        "titre": "Antibes, Biot &amp; la pinède de Juan-les-Pins",
+        "titreEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "altEn": "Antibes, Biot & the Juan-les-Pins pine grove",
+        "badgeEn": "4 stops"
       },
       {
         "href": "lerins-esterel.html",
         "img": "assets/images/lieux/iles-de-lerins/thumb.jpg",
         "alt": "Îles de Lérins &amp; Estérel sauvage",
         "badge": "3 étapes",
-        "titre": "Îles de Lérins &amp; Estérel sauvage"
+        "titre": "Îles de Lérins &amp; Estérel sauvage",
+        "titreEn": "Lérins Islands & the wild Estérel",
+        "altEn": "Lérins Islands & the wild Estérel",
+        "badgeEn": "3 stops"
       },
       {
         "href": "nice-peillon-peille.html",
         "img": "assets/images/lieux/cours-saleya-vieux-nice/thumb.jpg",
         "alt": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
         "badge": "4 étapes",
-        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express"
+        "titre": "Nice, Peillon &amp; Peille : ville et arrière-pays express",
+        "titreEn": "Nice, Peillon & Peille: town and hinterland express",
+        "altEn": "Nice, Peillon & Peille: town and hinterland express",
+        "badgeEn": "4 stops"
       }
     ],
     "titreEn": "The perched villages route",
