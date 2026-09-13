@@ -69,11 +69,19 @@
       via `normalizeSearch()` (`src/lib/utils.ts`) : "eze" trouve "Èze". Se combine en ET
       avec les filtres badge existants, index mémoïsé par lieu, état vide distinct selon la
       cause avec bouton "Tout afficher"
-- [ ] Filtres supplémentaires sur la grille — exploiter les `metaPills` déjà présents dans
-      `data/lieux.json` (saison, durée, niveau) et ajouter un filtre "Gratuit seulement"
-      (badge activité) — données disponibles, juste un filtre JS à câbler (~2h)
-- [ ] "Surprends-moi" — bouton qui pioche un lieu au hasard parmi les filtres actifs ;
-      petit, fun, différenciant (30 min)
+- [~] Filtres supplémentaires sur la grille — **saison / durée / niveau faits le
+      2026-09-13** (FR + EN), en `<select>` sous les badges. Attention au raccourci "données
+      déjà disponibles, juste un filtre à câbler" : les `metaPills` ne sont **pas** des
+      énumérations mais du texte libre (46 valeurs distinctes sur 43 lieux, du type "1 h 30
+      à 2 h avec le musée"), il a fallu en dériver des catégories — règles dans
+      `src/lib/lieu-filters.ts`, classement des 46 valeurs vérifié une par une (deux erreurs
+      trouvées et corrigées au passage, cf. commit). Choix documentés : "Facile à modéré"
+      compte dans les deux niveaux, "Demi-journée" vient du mot-clé explicite et non d'un
+      seuil, un lieu "toute l'année" ressort sur les quatre saisons.
+      **Reste** : le filtre "Gratuit seulement" (badge activité), non fait
+- [x] "Surprends-moi" — **fait le 2026-09-13**. Pioche parmi les résultats courants (donc
+      respecte recherche + badge + saison/durée/niveau), désactivé quand il n'y a aucun
+      résultat, navigue via le router next-intl pour rester dans la locale
 - [ ] Géolocalisation sur la carte homepage — "lieux près de moi" via l'API Geolocation
       native, aucun backend requis ; utile en situation terrain (~1h)
 - [ ] "Depuis Nice / Cannes / Monaco en X min" — stocker une durée de trajet approximative
