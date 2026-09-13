@@ -61,11 +61,14 @@
 
 ## Découverte & navigation
 
-- [ ] Recherche textuelle client-side — input qui filtre la grille des lieux en temps réel
-      par nom / commune / badge ; toutes les données sont déjà chargées sur la homepage,
-      zéro backend requis ; levier UX le plus impactant actuellement (~2h). **Confirmé par
-      l'audit produit du 2026-09-12** : c'est la première frustration concrète qu'un visiteur
-      pressé remarquerait, avant même le contenu
+- [x] Recherche textuelle client-side — **faite le 2026-09-13** (FR + EN). Input qui filtre
+      la grille des lieux en temps réel, 100% client (les lieux sont déjà chargés sur la
+      homepage). Cherche dans nom + commune + description + libellés de badges, dans la
+      locale affichée ("plage" sur /fr et "beach" sur /en renvoient les mêmes 12 lieux) ;
+      le nom français reste indexé même sur /en. Insensible aux accents dans les deux sens
+      via `normalizeSearch()` (`src/lib/utils.ts`) : "eze" trouve "Èze". Se combine en ET
+      avec les filtres badge existants, index mémoïsé par lieu, état vide distinct selon la
+      cause avec bouton "Tout afficher"
 - [ ] Filtres supplémentaires sur la grille — exploiter les `metaPills` déjà présents dans
       `data/lieux.json` (saison, durée, niveau) et ajouter un filtre "Gratuit seulement"
       (badge activité) — données disponibles, juste un filtre JS à câbler (~2h)
