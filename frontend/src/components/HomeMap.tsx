@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Ville } from "@/lib/types";
-import { imgUrl } from "@/lib/utils";
-import { REGION_COLORS, REGION_LABELS, REGION_ORDER, truncate } from "@/lib/home-data";
+import { imgUrl, loc } from "@/lib/utils";
+import { REGION_COLORS, REGION_ORDER, truncate } from "@/lib/home-data";
 import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
 
 interface Props {
@@ -11,6 +12,10 @@ interface Props {
 }
 
 export default function HomeMap({ villes }: Props) {
+  const locale = useLocale();
+  const t = useTranslations("home");
+  const tRegionShort = useTranslations("regionShort");
+  const tRegionFull = useTranslations("regionFull");
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<import("leaflet").Map | null>(null);
   const groupsRef = useRef<Record<string, import("leaflet").LayerGroup>>({});
@@ -103,7 +108,7 @@ export default function HomeMap({ villes }: Props) {
                 className="w-2.5 h-2.5 rounded-full inline-block"
                 style={{ background: REGION_COLORS[region] }}
               />
-              {REGION_LABELS[region]}
+              {tRegionShort(region as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
             </button>
           );
         })}
@@ -128,31 +133,31 @@ export default function HomeMap({ villes }: Props) {
               onClick={() => setSelected(null)}
               className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full flex items-center justify-center text-sm"
               style={{ background: "rgba(12,17,22,0.7)", color: "#fff" }}
-              aria-label="Fermer"
+              aria-label={t("fermer")}
             >
               ×
             </button>
             <div className="aspect-[16/9] overflow-hidden">
               <img
                 src={imgUrl(selected.thumbImage)}
-                alt={selected.nom}
+                alt={loc(locale, selected.nomEn, selected.nom)}
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="p-4">
               <p className="text-xs mb-1" style={{ color: "var(--azure)" }}>
-                {selected.regionLabel}
+                {tRegionFull(selected.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
               </p>
-              <h3 className="font-semibold mb-1">{selected.nom}</h3>
+              <h3 className="font-semibold mb-1">{loc(locale, selected.nomEn, selected.nom)}</h3>
               <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>
-                {truncate(selected.description, 130)}
+                {truncate(loc(locale, selected.descriptionEn, selected.description), 130)}
               </p>
               <Link
                 href={`/villes/${selected.slug}`}
                 className="text-xs"
                 style={{ color: "var(--terracotta)" }}
               >
-                Voir la fiche →
+                {t("voirLaFiche")}
               </Link>
             </div>
           </div>

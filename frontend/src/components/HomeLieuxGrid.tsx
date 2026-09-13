@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, loc } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";
 
 function LieuCard({ lieu }: { lieu: Lieu }) {
+  const locale = useLocale();
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
@@ -24,9 +26,9 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
         <p className="text-xs mb-1" style={{ color: "var(--azure)" }}>
           {lieu.commune}
         </p>
-        <h3 className="font-semibold text-sm leading-snug mb-1">{lieu.nom}</h3>
+        <h3 className="font-semibold text-sm leading-snug mb-1">{loc(locale, lieu.nomEn, lieu.nom)}</h3>
         <p className="text-xs line-clamp-2" style={{ color: "var(--text-muted)" }}>
-          {lieu.description}
+          {loc(locale, lieu.descriptionEn, lieu.description)}
         </p>
       </div>
     </Link>
@@ -34,6 +36,8 @@ function LieuCard({ lieu }: { lieu: Lieu }) {
 }
 
 export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
+  const t = useTranslations("home");
+  const tBadges = useTranslations("badges");
   const [activeBadge, setActiveBadge] = useState<string>("");
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -68,7 +72,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filtrer par activité">
+      <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label={t("filtrerParActivite")}>
         <button
           onClick={() => setActiveBadge("")}
           className="text-xs px-4 py-2 rounded-full border transition-colors"
@@ -78,7 +82,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
               : { borderColor: "var(--line)", color: "var(--text-muted)" }
           }
         >
-          Tous
+          {t("tous")}
         </button>
         {BADGE_DEFS.map((b) => (
           <button
@@ -91,19 +95,19 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
                 : { borderColor: "var(--line)", color: "var(--text-muted)" }
             }
           >
-            {b.emoji} {b.label}
+            {b.emoji} {tBadges(b.slug as "plage" | "randonnee" | "vtt" | "plongee" | "restaurant")}
           </button>
         ))}
       </div>
       <div className="flex items-baseline justify-between mb-8">
-        <h2 className="text-2xl font-bold">Tous les lieux</h2>
+        <h2 className="text-2xl font-bold">{t("tousLesLieux")}</h2>
         <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-          {filtered.length} spot{filtered.length > 1 ? "s" : ""}
+          {filtered.length} {filtered.length > 1 ? t("spots") : t("spot")}
         </span>
       </div>
       {filtered.length === 0 ? (
         <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-          Aucun lieu pour ce filtre.
+          {t("aucunLieuFiltre")}
         </p>
       ) : (
         <div

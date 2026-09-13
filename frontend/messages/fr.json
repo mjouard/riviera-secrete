@@ -17,5 +17,97 @@
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
     "photos": "Photos :",
     "credits": "crédits & licences"
+  },
+  "common": {
+    "accueil": "Accueil",
+    "lieux": "Lieux",
+    "itineraires": "Itinéraires",
+    "villes": "Villes"
+  },
+  "home": {
+    "heroTitleStart": "La Côte d'Azur",
+    "heroTitleEm": "hors des sentiers battus",
+    "heroSubtitle": "{lieuxCount} lieux confidentiels de Menton à Saint-Tropez, groupés en {itinCount} itinéraires.",
+    "exploreLieux": "Explorer les lieux",
+    "seeItineraires": "Voir les itinéraires",
+    "itinerairesTitle": "Itinéraires",
+    "activitesTitleStart": "Activités,",
+    "activitesTitleEm": "loin de l'ordinaire",
+    "activitesSubtitle": "Des idées pour chaque profil — à pied, en mer, à table ou en visite.",
+    "mapTitle": "La carte des {count} villes",
+    "mapSubtitle": "Clique sur un marqueur pour ouvrir la fiche. Filtre par zone :",
+    "tousLesLieux": "Tous les lieux",
+    "spot": "spot",
+    "spots": "spots",
+    "aucunLieuFiltre": "Aucun lieu pour ce filtre.",
+    "filtrerParActivite": "Filtrer par activité",
+    "tous": "Tous",
+    "voirMoins": "Voir moins ↑",
+    "voirLesAutres": "Voir les {count} autres →",
+    "creerMonItineraire": "✨ Créer mon itinéraire",
+    "categoriesActivites": "Catégories d'activités",
+    "rienPourInstant": "Rien pour l'instant dans cette catégorie.",
+    "fermer": "Fermer",
+    "voirLaFiche": "Voir la fiche →"
+  },
+  "villes": {
+    "title": "Villes & villages",
+    "subtitle": "{count} communes sur la Côte d'Azur",
+    "lieu": "lieu",
+    "lieux": "lieux",
+    "lieuADecouvrir": "lieu à découvrir",
+    "lieuxADecouvrir": "lieux à découvrir",
+    "itineraireIci": "itinéraire qui passe par ici",
+    "itinerairesIci": "itinéraires qui passent par ici"
+  },
+  "lieu": {
+    "conseilsPratiques": "Conseils pratiques",
+    "aFaireSurPlace": "À faire sur place",
+    "aDecouvrirAussi": "À découvrir aussi"
+  },
+  "itineraire": {
+    "programmeDetaille": "Programme détaillé",
+    "aReserver": "À réserver",
+    "etape": "étape",
+    "etapes": "étapes",
+    "autresItineraires": "Autres itinéraires",
+    "voirLeLieu": "Voir le lieu →",
+    "ouvrirGoogleMaps": "🗺️ Ouvrir l'itinéraire dans Google Maps",
+    "dormirA": "Dormir à {commune}"
+  },
+  "activite": {
+    "reserver": "Réserver →",
+    "enSavoirPlus": "En savoir plus →",
+    "gratuit": "gratuit",
+    "payant": "payant",
+    "Gratuit": "Gratuit",
+    "Payant": "Payant"
+  },
+  "badges": {
+    "plage": "Plage",
+    "randonnee": "Randonnée",
+    "vtt": "VTT",
+    "plongee": "Plongée",
+    "restaurant": "Restaurant"
+  },
+  "categories": {
+    "outdoor": "🥾 Outdoor",
+    "culture": "🏛 Culture & Visites",
+    "gastronomie": "🍽️ Gastronomie",
+    "loisirs": "⛵ Loisirs & Mer"
+  },
+  "regionShort": {
+    "menton-monaco": "Menton · Monaco",
+    "nice": "Nice",
+    "arriere-pays": "Arrière-pays",
+    "antibes-cannes": "Antibes · Cannes",
+    "golfe-st-tropez": "Grasse · Saint-Tropez"
+  },
+  "regionFull": {
+    "menton-monaco": "Menton, Monaco & la frontière",
+    "nice": "Nice et ses environs immédiats",
+    "arriere-pays": "L'arrière-pays : villages perchés & gorges",
+    "antibes-cannes": "Antibes, Cannes & le massif de l'Estérel",
+    "golfe-st-tropez": "Grasse & le golfe de Saint-Tropez"
   }
 }

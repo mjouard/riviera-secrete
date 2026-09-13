@@ -1,5 +1,6 @@
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, loc } from "@/lib/utils";
 import type { Itineraire, Lieu } from "@/lib/types";
 
 export default function ItineraireCard({
@@ -9,8 +10,10 @@ export default function ItineraireCard({
   itin: Itineraire;
   lieuBySlug: Map<string, Lieu>;
 }) {
+  const locale = useLocale();
   const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
   const thumb = firstStop?.lieuSlug ? lieuBySlug.get(firstStop.lieuSlug)?.thumbImage : undefined;
+  const titre = loc(locale, itin.titreEn, itin.titre);
 
   return (
     <Link
@@ -22,7 +25,7 @@ export default function ItineraireCard({
         <div className="w-28 flex-shrink-0 overflow-hidden">
           <img
             src={imgUrl(thumb)}
-            alt={itin.titre}
+            alt={titre}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
             loading="lazy"
           />
@@ -30,11 +33,11 @@ export default function ItineraireCard({
       )}
       <div className="flex-1 min-w-0 py-4 pr-4">
         <p className="text-xs mb-1" style={{ color: "var(--terracotta)" }}>
-          {itin.badge}
+          {loc(locale, itin.badgeEn, itin.badge)}
         </p>
-        <h3 className="font-semibold text-sm leading-snug">{itin.titre}</h3>
+        <h3 className="font-semibold text-sm leading-snug">{titre}</h3>
         <p className="text-xs mt-1 line-clamp-2" style={{ color: "var(--text-muted)" }}>
-          {itin.description}
+          {loc(locale, itin.descriptionEn, itin.description)}
         </p>
       </div>
     </Link>

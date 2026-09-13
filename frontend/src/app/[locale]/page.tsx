@@ -1,5 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
+import { loc } from "@/lib/utils";
 import HomeMapWrapper from "@/components/HomeMapWrapper";
 import HomeActivities from "@/components/HomeActivities";
 import HomeLieuxGrid from "@/components/HomeLieuxGrid";
@@ -11,11 +13,17 @@ export const revalidate = 3600;
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 
-export default async function HomePage() {
-  const [lieux, itineraires, villes] = await Promise.all([
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const [lieux, itineraires, villes, t] = await Promise.all([
     api.lieux.list(),
     api.itineraires.list(),
     api.villes.list(),
+    getTranslations("home"),
   ]);
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
 
@@ -27,7 +35,7 @@ export default async function HomePage() {
       "@type": "ListItem",
       position: i + 1,
       url: `${SITE_URL}/villes/${v.slug}`,
-      name: v.nom,
+      name: loc(locale, v.nomEn, v.nom),
     })),
   };
 
@@ -50,14 +58,13 @@ export default async function HomePage() {
         />
         <div className="relative z-[2] max-w-2xl mx-auto">
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-            La Côte d&apos;Azur{" "}
+            {t("heroTitleStart")}{" "}
             <em className="not-italic" style={{ color: "var(--terracotta)" }}>
-              hors des sentiers battus
+              {t("heroTitleEm")}
             </em>
           </h1>
           <p className="text-lg" style={{ color: "var(--text-muted)" }}>
-            {lieux.length} lieux confidentiels de Menton à Saint-Tropez, groupés en{" "}
-            {itineraires.length} itinéraires.
+            {t("heroSubtitle", { lieuxCount: lieux.length, itinCount: itineraires.length })}
           </p>
           <div className="flex gap-4 justify-center mt-8">
             <Link
@@ -65,14 +72,14 @@ export default async function HomePage() {
               className="px-6 py-3 rounded-full text-sm font-medium transition-colors"
               style={{ background: "var(--azure)", color: "#0C1116" }}
             >
-              Explorer les lieux
+              {t("exploreLieux")}
             </Link>
             <Link
               href="#itineraires"
               className="px-6 py-3 rounded-full text-sm font-medium border transition-colors hover:bg-white/5"
               style={{ borderColor: "var(--line)", color: "var(--text)" }}
             >
-              Voir les itinéraires
+              {t("seeItineraires")}
             </Link>
           </div>
         </div>
@@ -81,7 +88,7 @@ export default async function HomePage() {
       {/* Itinéraires */}
       <section id="itineraires" className="py-12 px-6 border-t scroll-mt-20" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8">Itinéraires</h2>
+          <h2 className="text-2xl font-bold mb-8">{t("itinerairesTitle")}</h2>
           <HomeItineraires itineraires={itineraires} lieuBySlug={lieuBySlug} />
         </div>
       </section>
@@ -91,10 +98,10 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <h2 className="text-2xl font-bold mb-1">
-              Activités, <em className="not-italic" style={{ color: "var(--terracotta)" }}>loin de l&apos;ordinaire</em>
+              {t("activitesTitleStart")} <em className="not-italic" style={{ color: "var(--terracotta)" }}>{t("activitesTitleEm")}</em>
             </h2>
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Des idées pour chaque profil — à pied, en mer, à table ou en visite.
+              {t("activitesSubtitle")}
             </p>
           </div>
           <HomeActivities lieux={lieux} />
@@ -105,9 +112,9 @@ export default async function HomePage() {
       <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-1">La carte des {villes.length} villes</h2>
+            <h2 className="text-2xl font-bold mb-1">{t("mapTitle", { count: villes.length })}</h2>
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Clique sur un marqueur pour ouvrir la fiche. Filtre par zone :
+              {t("mapSubtitle")}
             </p>
           </div>
           <HomeMapWrapper villes={villes} />

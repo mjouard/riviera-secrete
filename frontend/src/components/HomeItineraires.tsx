@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Itineraire, Lieu } from "@/lib/types";
 import ItineraireCard from "./ItineraireCard";
@@ -14,6 +15,7 @@ export default function HomeItineraires({
   itineraires: Itineraire[];
   lieuBySlug: Map<string, Lieu>;
 }) {
+  const t = useTranslations("home");
   const [expanded, setExpanded] = useState(false);
   const hiddenCount = itineraires.length - VISIBLE_COUNT_MOBILE;
 
@@ -35,7 +37,7 @@ export default function HomeItineraires({
             className="sm:hidden text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/5"
             style={{ borderColor: "var(--line)", color: "var(--text)" }}
           >
-            {expanded ? "Voir moins ↑" : `Voir les ${hiddenCount} autres →`}
+            {expanded ? t("voirMoins") : t("voirLesAutres", { count: hiddenCount })}
           </button>
         )}
         <Link
@@ -43,7 +45,7 @@ export default function HomeItineraires({
           className="text-sm px-4 py-2 rounded-lg font-semibold transition-colors"
           style={{ background: "var(--azure)", color: "#0c1116" }}
         >
-          ✨ Créer mon itinéraire
+          {t("creerMonItineraire")}
         </Link>
       </div>
     </div>

@@ -17,5 +17,97 @@
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
     "photos": "Photos:",
     "credits": "credits & licenses"
+  },
+  "common": {
+    "accueil": "Home",
+    "lieux": "Places",
+    "itineraires": "Itineraries",
+    "villes": "Towns"
+  },
+  "home": {
+    "heroTitleStart": "The French Riviera",
+    "heroTitleEm": "off the beaten path",
+    "heroSubtitle": "{lieuxCount} hidden spots from Menton to Saint-Tropez, grouped into {itinCount} itineraries.",
+    "exploreLieux": "Explore the places",
+    "seeItineraires": "See the itineraries",
+    "itinerairesTitle": "Itineraries",
+    "activitesTitleStart": "Activities,",
+    "activitesTitleEm": "far from ordinary",
+    "activitesSubtitle": "Ideas for every kind of trip — on foot, at sea, at the table or on a visit.",
+    "mapTitle": "The map of {count} towns",
+    "mapSubtitle": "Click a marker to open its page. Filter by area:",
+    "tousLesLieux": "All the places",
+    "spot": "spot",
+    "spots": "spots",
+    "aucunLieuFiltre": "No place matches this filter.",
+    "filtrerParActivite": "Filter by activity",
+    "tous": "All",
+    "voirMoins": "Show less ↑",
+    "voirLesAutres": "Show {count} more →",
+    "creerMonItineraire": "✨ Build my itinerary",
+    "categoriesActivites": "Activity categories",
+    "rienPourInstant": "Nothing here yet in this category.",
+    "fermer": "Close",
+    "voirLaFiche": "See this town →"
+  },
+  "villes": {
+    "title": "Towns & villages",
+    "subtitle": "{count} communes on the French Riviera",
+    "lieu": "place",
+    "lieux": "places",
+    "lieuADecouvrir": "place to discover",
+    "lieuxADecouvrir": "places to discover",
+    "itineraireIci": "itinerary passes through here",
+    "itinerairesIci": "itineraries pass through here"
+  },
+  "lieu": {
+    "conseilsPratiques": "Practical tips",
+    "aFaireSurPlace": "Things to do here",
+    "aDecouvrirAussi": "You might also like"
+  },
+  "itineraire": {
+    "programmeDetaille": "Detailed itinerary",
+    "aReserver": "To book",
+    "etape": "stop",
+    "etapes": "stops",
+    "autresItineraires": "Other itineraries",
+    "voirLeLieu": "See this place →",
+    "ouvrirGoogleMaps": "🗺️ Open this itinerary in Google Maps",
+    "dormirA": "Stay overnight in {commune}"
+  },
+  "activite": {
+    "reserver": "Book →",
+    "enSavoirPlus": "Learn more →",
+    "gratuit": "free",
+    "payant": "paid",
+    "Gratuit": "Free",
+    "Payant": "Paid"
+  },
+  "badges": {
+    "plage": "Beach",
+    "randonnee": "Hiking",
+    "vtt": "Mountain biking",
+    "plongee": "Diving",
+    "restaurant": "Restaurant"
+  },
+  "categories": {
+    "outdoor": "🥾 Outdoors",
+    "culture": "🏛 Culture & Sights",
+    "gastronomie": "🍽️ Food & Drink",
+    "loisirs": "⛵ Leisure & Sea"
+  },
+  "regionShort": {
+    "menton-monaco": "Menton · Monaco",
+    "nice": "Nice",
+    "arriere-pays": "Hinterland",
+    "antibes-cannes": "Antibes · Cannes",
+    "golfe-st-tropez": "Grasse · Saint-Tropez"
+  },
+  "regionFull": {
+    "menton-monaco": "Menton, Monaco & the border",
+    "nice": "Nice and its immediate surroundings",
+    "arriere-pays": "The hinterland: perched villages & gorges",
+    "antibes-cannes": "Antibes, Cannes & the Estérel massif",
+    "golfe-st-tropez": "Grasse & the Gulf of Saint-Tropez"
   }
 }

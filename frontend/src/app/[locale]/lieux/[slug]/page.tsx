@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks } from "@/lib/utils";
+import { imgUrl, buildMapLinks, loc } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -20,17 +21,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) return {};
+  const nom = loc(locale, lieu.nomEn, lieu.nom);
+  const description = loc(locale, lieu.descriptionEn, lieu.description);
   return {
-    title: lieu.nom,
-    description: lieu.description,
+    title: nom,
+    description,
     openGraph: {
-      title: lieu.nom,
-      description: lieu.description,
+      title: nom,
+      description,
       images: lieu.heroImage ? [{ url: imgUrl(lieu.heroImage), width: 1200, height: 800 }] : [],
     },
   };
@@ -40,36 +43,44 @@ export default async function LieuPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
   searchParams: Promise<{ itin?: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const { itin: itinSlug } = await searchParams;
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
 
-  const [ville, itin] = await Promise.all([
+  const [ville, itin, t, tCommon, tActivite, tBadges] = await Promise.all([
     api.villes.bySlug(lieu.villeSlug).catch(() => null),
     itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
+    getTranslations("lieu"),
+    getTranslations("common"),
+    getTranslations("activite"),
+    getTranslations("badges"),
   ]);
 
+  const nom = loc(locale, lieu.nomEn, lieu.nom);
+  const description = loc(locale, lieu.descriptionEn, lieu.description);
+  const description2 = loc(locale, lieu.description2En, lieu.description2 ?? "") || undefined;
+
   const parentCrumb = itin
-    ? { href: `/itineraires/${itin.slug}`, label: itin.titre }
+    ? { href: `/itineraires/${itin.slug}`, label: loc(locale, itin.titreEn, itin.titre) }
     : ville
-      ? { href: `/villes/${ville.slug}`, label: ville.nom }
-      : { href: "/#lieux", label: "Lieux" };
+      ? { href: `/villes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
+      : { href: "/#lieux", label: tCommon("lieux") };
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
         <Link href={parentCrumb.href} className="hover:text-white transition-colors">
           {parentCrumb.label}
         </Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>{lieu.nom}</span>
+        <span style={{ color: "var(--text)" }}>{nom}</span>
       </nav>
 
       {/* Hero */}
@@ -89,20 +100,24 @@ export default async function LieuPage({
         <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
           {lieu.commune} · {lieu.regionLabel}
         </p>
-        <h1 className="font-display text-3xl font-bold mb-4">{lieu.nom}</h1>
+        <h1 className="font-display text-3xl font-bold mb-4">{nom}</h1>
 
         {/* Badges */}
         {lieu.badges.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {lieu.badges.map((b) => {
               const def = BADGE_DEFS_BY_SLUG[b];
+              const known = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
+              const badgeLabel = (known as readonly string[]).includes(b)
+                ? tBadges(b as (typeof known)[number])
+                : def?.label;
               return (
                 <span
                   key={b}
                   className="text-xs px-3 py-1 rounded-full border"
                   style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                 >
-                  {def ? `${def.emoji} ${def.label}` : b}
+                  {def ? `${def.emoji} ${badgeLabel}` : b}
                 </span>
               );
             })}
@@ -125,7 +140,7 @@ export default async function LieuPage({
 
         {/* Liens Maps/Waze/Plans — quittent le site, traitement discret */}
         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
-          {buildMapLinks(lieu.lat, lieu.lng, lieu.nom).map((link) => (
+          {buildMapLinks(lieu.lat, lieu.lng, nom).map((link) => (
             <a
               key={link.label}
               href={link.url}
@@ -142,30 +157,31 @@ export default async function LieuPage({
         {/* Favori / Partager / Itinéraire — actions sur le site */}
         <div className="flex flex-wrap gap-2 mt-3">
           <FavoriteButton slug={lieu.slug} />
-          <ShareButton title={lieu.nom} />
+          <ShareButton title={nom} />
           <AddToItinButton lieuSlug={lieu.slug} />
         </div>
       </div>
 
       {/* Carte */}
       <div className="mb-10">
-        <MapLieuWrapper lat={lieu.lat} lng={lieu.lng} nom={lieu.nom} />
+        <MapLieuWrapper lat={lieu.lat} lng={lieu.lng} nom={nom} />
       </div>
 
       {/* Description */}
       <div className="prose max-w-none mb-10">
-        <p className="text-base leading-relaxed mb-4">{lieu.description}</p>
-        {lieu.description2 && (
+        <p className="text-base leading-relaxed mb-4">{description}</p>
+        {description2 && (
           <p className="text-base leading-relaxed" style={{ color: "var(--text-muted)" }}>
-            {lieu.description2}
+            {description2}
           </p>
         )}
       </div>
 
-      {/* Tips */}
+      {/* Tips — pas encore de variante anglaise (champ JSON sans colonne *En), reste en
+          français sur /en en attendant, voir project_version_anglaise.md */}
       {lieu.tips.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">Conseils pratiques</h2>
+          <h2 className="text-lg font-semibold mb-4">{t("conseilsPratiques")}</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {lieu.tips.map((tip, i) => (
               <div
@@ -188,7 +204,7 @@ export default async function LieuPage({
       {/* Activités */}
       {lieu.activites.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">À faire sur place</h2>
+          <h2 className="text-lg font-semibold mb-4">{t("aFaireSurPlace")}</h2>
           <div className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2">
             {lieu.activites.map((act) => (
               <a
@@ -202,7 +218,7 @@ export default async function LieuPage({
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={imgUrl(act.image)}
-                    alt={act.alt}
+                    alt={loc(locale, act.altEn, act.alt)}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"
                   />
@@ -218,9 +234,9 @@ export default async function LieuPage({
                             : "var(--terracotta)",
                       }}
                     >
-                      {act.badge}
+                      {act.badge === "gratuit" ? tActivite("gratuit") : tActivite("payant")}
                     </span>
-                    <h3 className="font-semibold text-sm mt-1">{act.nom}</h3>
+                    <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
                     <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
                       {act.duree} · {act.prix}
                     </p>
@@ -229,7 +245,7 @@ export default async function LieuPage({
                     className="text-xs mt-3"
                     style={{ color: "var(--azure)" }}
                   >
-                    {act.linkText}
+                    {act.linkText === "Réserver →" ? tActivite("reserver") : tActivite("enSavoirPlus")}
                   </span>
                 </div>
               </a>
@@ -238,10 +254,11 @@ export default async function LieuPage({
         </section>
       )}
 
-      {/* Related */}
+      {/* Related — pas encore de variante anglaise (JSON sans colonne *En), reste en
+          français sur /en en attendant, voir project_version_anglaise.md */}
       {lieu.related.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold mb-4">À découvrir aussi</h2>
+          <h2 className="text-lg font-semibold mb-4">{t("aDecouvrirAussi")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {lieu.related.map((r, i) => (
               <Link

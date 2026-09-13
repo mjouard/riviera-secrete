@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl } from "@/lib/utils";
+import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc } from "@/lib/utils";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 
@@ -26,9 +27,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const [itin, lieux] = await Promise.all([
     api.itineraires.bySlug(slug).catch(() => null),
     api.lieux.list().catch(() => []),
@@ -39,12 +40,14 @@ export async function generateMetadata({
     ? lieux.find((l) => l.slug === firstStop.lieuSlug)
     : undefined;
   const ogImage = firstLieu?.heroImage ? imgUrl(firstLieu.heroImage) : undefined;
+  const titre = loc(locale, itin.titreEn, itin.titre);
+  const description = loc(locale, itin.descriptionEn, itin.description);
   return {
-    title: itin.titre,
-    description: itin.description,
+    title: titre,
+    description,
     openGraph: {
-      title: itin.titre,
-      description: itin.description,
+      title: titre,
+      description,
       ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 800 }] } : {}),
     },
   };
@@ -53,14 +56,20 @@ export async function generateMetadata({
 export default async function ItinerairePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
-  const [itin, lieux] = await Promise.all([
+  const { slug, locale } = await params;
+  const [itin, lieux, t, tCommon] = await Promise.all([
     api.itineraires.bySlug(slug).catch(() => null),
     api.lieux.list(),
+    getTranslations("itineraire"),
+    getTranslations("common"),
   ]);
   if (!itin) notFound();
+
+  const titre = loc(locale, itin.titreEn, itin.titre);
+  const badge = loc(locale, itin.badgeEn, itin.badge);
+  const description = loc(locale, itin.descriptionEn, itin.description);
 
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
   const stops = itin.items.filter((item) => item.type === "stop");
@@ -83,21 +92,21 @@ export default async function ItinerairePage({
 
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <Link href="/#itineraires" className="hover:text-white transition-colors">Itinéraires</Link>
+        <Link href="/#itineraires" className="hover:text-white transition-colors">{tCommon("itineraires")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>{itin.titre}</span>
+        <span style={{ color: "var(--text)" }}>{titre}</span>
       </nav>
 
       {/* Header */}
       <div className="mb-10">
         <p className="text-sm font-semibold mb-2" style={{ color: "var(--terracotta)" }}>
-          {itin.badge}
+          {badge}
         </p>
-        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 leading-tight">{itin.titre}</h1>
+        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 leading-tight">{titre}</h1>
         <p className="text-lg" style={{ color: "var(--text-muted)" }}>
-          {itin.description}
+          {description}
         </p>
 
         {itin.metaPills.length > 0 && (
@@ -119,7 +128,7 @@ export default async function ItinerairePage({
               className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border transition-colors hover:bg-white/5"
               style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
             >
-              🗺️ Ouvrir l&apos;itinéraire dans Google Maps
+              {t("ouvrirGoogleMaps")}
             </a>
           </div>
         )}
@@ -134,9 +143,10 @@ export default async function ItinerairePage({
         </div>
       )}
 
-      {/* Programme */}
+      {/* Programme — items[] pas encore de variante anglaise (JSON sans colonne *En), reste
+          en français sur /en en attendant, voir project_version_anglaise.md */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-6">Programme détaillé</h2>
+        <h2 className="text-xl font-bold mb-6">{t("programmeDetaille")}</h2>
         <div className="space-y-2">
           {itin.items.map((item, i) => {
             if (item.type === "transit") {
@@ -158,7 +168,7 @@ export default async function ItinerairePage({
                   style={{ background: "var(--surface)", borderColor: "var(--line)" }}
                 >
                   <h3 className="font-semibold mb-1">
-                    🌙 {item.dormirA ?? `Dormir à ${item.commune ?? ""}`}
+                    🌙 {item.dormirA ?? t("dormirA", { commune: item.commune ?? "" })}
                   </h3>
                   {item.desc && (
                     <p className="text-sm" style={{ color: "var(--text-muted)" }}>
@@ -204,7 +214,7 @@ export default async function ItinerairePage({
                       className="text-xs hover:underline flex-shrink-0"
                       style={{ color: "var(--azure)" }}
                     >
-                      Voir le lieu →
+                      {t("voirLeLieu")}
                     </Link>
                   )}
                 </div>
@@ -259,10 +269,10 @@ export default async function ItinerairePage({
         </div>
       </section>
 
-      {/* À réserver */}
+      {/* À réserver — booking[] pas encore de variante anglaise, reste en français sur /en */}
       {itin.booking.length > 0 && (
         <section className="mb-12">
-          <h2 className="text-xl font-bold mb-6">À réserver</h2>
+          <h2 className="text-xl font-bold mb-6">{t("aReserver")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {itin.booking.map((b, i) => {
               const activite = lieuBySlug
@@ -326,18 +336,21 @@ export default async function ItinerairePage({
           style={{ borderColor: "var(--line)" }}
         >
           <h2 className="text-lg font-semibold mb-4">
-            {stops.length} étapes
+            {stops.length} {stops.length > 1 ? t("etapes") : t("etape")}
           </h2>
           <div className="flex flex-wrap gap-2">
-            {stops.map((s, i) => (
-              s.lieuSlug ? (
+            {stops.map((s, i) => {
+              const stopNom = s.lieuSlug
+                ? loc(locale, lieuBySlug.get(s.lieuSlug)?.nomEn, s.nom ?? s.lieuSlug)
+                : s.nom;
+              return s.lieuSlug ? (
                 <Link
                   key={i}
                   href={`/lieux/${s.lieuSlug}`}
                   className="text-sm px-3 py-1 rounded-full border transition-colors hover:bg-white/5"
                   style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                 >
-                  {s.nom ?? s.lieuSlug}
+                  {stopNom}
                 </Link>
               ) : (
                 <span
@@ -345,18 +358,19 @@ export default async function ItinerairePage({
                   className="text-sm px-3 py-1 rounded-full border"
                   style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                 >
-                  {s.nom}
+                  {stopNom}
                 </span>
-              )
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
 
-      {/* Autres itinéraires */}
+      {/* Autres itinéraires — suggestions[] pas encore de variante anglaise, reste en
+          français sur /en en attendant, voir project_version_anglaise.md */}
       {itin.suggestions.length > 0 && (
         <section className="pt-12 mt-8 border-t" style={{ borderColor: "var(--line)" }}>
-          <h2 className="text-xl font-bold mb-6">Autres itinéraires</h2>
+          <h2 className="text-xl font-bold mb-6">{t("autresItineraires")}</h2>
           <div className="grid gap-4 sm:grid-cols-3">
             {itin.suggestions.map((s, i) => (
               <Link

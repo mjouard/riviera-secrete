@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, loc } from "@/lib/utils";
 import { ACTIVITY_CATEGORIES, FEATURED_ACTIVITIES } from "@/lib/home-data";
 
 interface CardData {
@@ -17,6 +18,10 @@ interface CardData {
 }
 
 export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
+  const locale = useLocale();
+  const t = useTranslations("home");
+  const tCategories = useTranslations("categories");
+  const tActivite = useTranslations("activite");
   const [active, setActive] = useState<string>(ACTIVITY_CATEGORIES[0].slug);
 
   const byCategory: Record<string, CardData[]> = {};
@@ -27,7 +32,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
       if (!cat || !byCategory[cat]) return;
       byCategory[cat].push({
         key: `${lieu.slug}-${act.activiteId}`,
-        nom: act.nom,
+        nom: loc(locale, act.nomEn, act.nom),
         badge: act.badge,
         duree: act.duree,
         prix: act.prix,
@@ -43,7 +48,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
       <div
         className="flex gap-2 flex-wrap mb-6"
         role="tablist"
-        aria-label="Catégories d'activités"
+        aria-label={t("categoriesActivites")}
       >
         {ACTIVITY_CATEGORIES.map((cat) => (
           <button
@@ -58,7 +63,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
                 : { borderColor: "var(--line)", color: "var(--text-muted)" }
             }
           >
-            {cat.label}
+            {tCategories(cat.slug as "outdoor" | "culture" | "gastronomie" | "loisirs")}
           </button>
         ))}
       </div>
@@ -71,7 +76,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
         >
           {byCategory[cat.slug].length === 0 ? (
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Rien pour l&apos;instant dans cette catégorie.
+              {t("rienPourInstant")}
             </p>
           ) : (
             byCategory[cat.slug].map((card) => (
@@ -96,7 +101,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
                         : { background: "rgba(12,17,22,0.75)", color: "#fff" }
                     }
                   >
-                    {card.badge === "gratuit" ? "Gratuit" : "Payant"}
+                    {card.badge === "gratuit" ? tActivite("Gratuit") : tActivite("Payant")}
                   </span>
                 </div>
                 <div className="p-3">

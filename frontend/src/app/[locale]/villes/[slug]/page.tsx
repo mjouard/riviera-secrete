@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl } from "@/lib/utils";
+import { imgUrl, loc } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import ItineraireCard from "@/components/ItineraireCard";
 
@@ -19,17 +20,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const ville = await api.villes.bySlug(slug).catch(() => null);
   if (!ville) return {};
+  const nom = loc(locale, ville.nomEn, ville.nom);
+  const description = loc(locale, ville.descriptionEn, ville.description);
   return {
-    title: ville.nom,
-    description: ville.description,
+    title: nom,
+    description,
     openGraph: {
-      title: ville.nom,
-      description: ville.description,
+      title: nom,
+      description,
       images: ville.thumbImage ? [{ url: imgUrl(ville.thumbImage), width: 500, height: 375 }] : [],
     },
   };
@@ -38,15 +41,21 @@ export async function generateMetadata({
 export default async function VillePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
-  const [ville, itineraires, lieux] = await Promise.all([
+  const { slug, locale } = await params;
+  const [ville, itineraires, lieux, t, tCommon, tRegionFull] = await Promise.all([
     api.villes.bySlug(slug).catch(() => null),
     api.itineraires.list().catch(() => []),
     api.lieux.list().catch(() => []),
+    getTranslations("villes"),
+    getTranslations("common"),
+    getTranslations("regionFull"),
   ]);
   if (!ville) notFound();
+
+  const nom = loc(locale, ville.nomEn, ville.nom);
+  const description = loc(locale, ville.descriptionEn, ville.description);
 
   const villeLieuSlugs = new Set(ville.lieux.map((l) => l.slug));
   const itinerairesIci = itineraires.filter((it) =>
@@ -58,8 +67,8 @@ export default async function VillePage({
   const touristDestinationJsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristDestination",
-    name: ville.nom,
-    description: ville.description,
+    name: nom,
+    description,
     image: `${SITE_URL}${imgUrl(heroImage)}`,
     geo: {
       "@type": "GeoCoordinates",
@@ -78,18 +87,18 @@ export default async function VillePage({
 
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
-        <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
+        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <Link href="/villes" className="hover:text-white transition-colors">Villes</Link>
+        <Link href="/villes" className="hover:text-white transition-colors">{tCommon("villes")}</Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>{ville.nom}</span>
+        <span style={{ color: "var(--text)" }}>{nom}</span>
       </nav>
 
       {/* Hero */}
       <div className="rounded-2xl overflow-hidden mb-8 aspect-[4/3]">
         <img
           src={imgUrl(ville.thumbImage)}
-          alt={ville.nom}
+          alt={nom}
           className="w-full h-full object-cover"
         />
       </div>
@@ -97,24 +106,24 @@ export default async function VillePage({
       {/* Header */}
       <div className="mb-8">
         <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
-          {ville.regionLabel}
+          {tRegionFull(ville.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
         </p>
-        <h1 className="font-display text-3xl font-bold mb-4">{ville.nom}</h1>
+        <h1 className="font-display text-3xl font-bold mb-4">{nom}</h1>
         <p className="text-base leading-relaxed" style={{ color: "var(--text-muted)" }}>
-          {ville.description}
+          {description}
         </p>
       </div>
 
       {/* Carte */}
       <div className="mb-10">
-        <MapLieuWrapper lat={ville.lat} lng={ville.lng} nom={ville.nom} />
+        <MapLieuWrapper lat={ville.lat} lng={ville.lng} nom={nom} />
       </div>
 
       {/* Lieux */}
       {ville.lieux.length > 0 && (
         <section>
           <h2 className="text-lg font-semibold mb-4">
-            {ville.lieux.length} lieu{ville.lieux.length > 1 ? "x" : ""} à découvrir
+            {ville.lieux.length} {ville.lieux.length > 1 ? t("lieuxADecouvrir") : t("lieuADecouvrir")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {ville.lieux.map((lieu) => (
@@ -133,9 +142,9 @@ export default async function VillePage({
                   />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold line-clamp-2">{lieu.nom}</p>
+                  <p className="text-sm font-semibold line-clamp-2">{loc(locale, lieu.nomEn, lieu.nom)}</p>
                   <p className="text-xs mt-1 line-clamp-2" style={{ color: "var(--text-muted)" }}>
-                    {lieu.description}
+                    {loc(locale, lieu.descriptionEn, lieu.description)}
                   </p>
                 </div>
               </Link>
@@ -148,8 +157,7 @@ export default async function VillePage({
       {itinerairesIci.length > 0 && (
         <section className="mt-10">
           <h2 className="text-lg font-semibold mb-4">
-            {itinerairesIci.length} itinéraire{itinerairesIci.length > 1 ? "s" : ""} qui passe
-            {itinerairesIci.length > 1 ? "nt" : ""} par ici
+            {itinerairesIci.length} {itinerairesIci.length > 1 ? t("itinerairesIci") : t("itineraireIci")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {itinerairesIci.map((it) => (
