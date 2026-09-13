@@ -2,7 +2,7 @@
   "meta": {
     "title": "Riviera Secrète — Les spots confidentiels de la Côte d'Azur",
     "titleTemplate": "%s — Riviera Secrète",
-    "description": "27 lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez."
+    "description": "{count} lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez."
   },
   "nav": {
     "villes": "Villes",

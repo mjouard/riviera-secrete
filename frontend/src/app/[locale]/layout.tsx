@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { api } from "@/lib/api";
 import NavHeader from "@/components/NavHeader";
 import Providers from "@/components/Providers";
 import "../globals.css";
@@ -30,7 +31,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "meta" });
+  const [t, lieux] = await Promise.all([
+    getTranslations({ locale, namespace: "meta" }),
+    api.lieux.list().catch(() => []),
+  ]);
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -38,7 +42,7 @@ export async function generateMetadata({
       default: t("title"),
       template: t("titleTemplate"),
     },
-    description: t("description"),
+    description: t("description", { count: lieux.length }),
     openGraph: {
       siteName: "Riviera Secrète",
       locale: locale === "en" ? "en_US" : "fr_FR",

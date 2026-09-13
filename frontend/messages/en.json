@@ -2,7 +2,7 @@
   "meta": {
     "title": "Riviera Secrète — Hidden gems of the French Riviera",
     "titleTemplate": "%s — Riviera Secrète",
-    "description": "27 off-the-beaten-path spots on the French Riviera, from Menton to Saint-Tropez."
+    "description": "{count} off-the-beaten-path spots on the French Riviera, from Menton to Saint-Tropez."
   },
   "nav": {
     "villes": "Towns",
