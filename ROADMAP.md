@@ -18,8 +18,9 @@
       integration Vercel désactivée, voir `feedback_vercel_deploy.md`) — un
       `cd frontend && npx vercel --prod --yes` est nécessaire après chaque sync DB.
 
-- [~] Chantier "villes manquantes" (2026-09-13) — deux suites actées par l'utilisateur le
-      2026-09-14, détail complet dans `.claude/memory/project_villes_expansion.md` :
+- [x] Chantier "villes manquantes" (2026-09-13) — deux suites actées par l'utilisateur le
+      2026-09-14, toutes deux terminées le 2026-09-13, détail complet dans
+      `.claude/memory/project_villes_expansion.md` :
       1. [x] **Vraies photos** — terminé le 2026-09-14 pour les hero/thumb des 13 lieux + 12
          villes, puis le 2026-09-13 (même session, chantier séparé) pour les 56 vignettes
          `activites[].image` des mêmes 13 lieux — `grep -c picsum data/lieux.json` renvoie
