@@ -4178,7 +4178,7 @@
         "duree": "1h-1h30",
         "prix": "Accès libre",
         "url": "https://www.grimaud-provence.com/decouvrez/grimaud-et-son-patrimoine-provencal/un-patrimoine-riche-et-diversifie/le-chateau/",
-        "image": "https://picsum.photos/seed/chateau-grimaud/200/200",
+        "image": "assets/images/lieux/vieux-village-grimaud/act-1.jpg",
         "alt": "Ruines médiévales du château de Grimaud dominant le golfe de Saint-Tropez",
         "linkText": "En savoir plus →"
       },
@@ -4189,7 +4189,7 @@
         "duree": "30 min",
         "prix": "Accès libre",
         "url": "https://www.grimaud-provence.com/decouvrez/le-charme-dun-village/le-patrimoine-et-les-monuments/le-moulin-saint-roch/",
-        "image": "https://picsum.photos/seed/moulin-saint-roch/200/200",
+        "image": "assets/images/lieux/vieux-village-grimaud/act-2.jpg",
         "alt": "Moulin Saint-Roch du XVIe siècle surplombant le golfe de Saint-Tropez",
         "linkText": "En savoir plus →"
       },
@@ -4200,7 +4200,7 @@
         "duree": "45 min",
         "prix": "Accès libre",
         "url": "https://www.grimaud-provence.com/decouvrez/le-charme-dun-village/",
-        "image": "https://picsum.photos/seed/ruelles-grimaud/200/200",
+        "image": "assets/images/lieux/vieux-village-grimaud/act-3.jpg",
         "alt": "Ruelle pavée aux volets pastel et bougainvillées dans le vieux Grimaud",
         "linkText": "En savoir plus →"
       },
@@ -4211,7 +4211,7 @@
         "duree": "2h",
         "prix": "65-120 € / pers.",
         "url": "https://restaurant-les-santons.fr/",
-        "image": "https://picsum.photos/seed/les-santons-grimaud/200/200",
+        "image": "assets/images/lieux/vieux-village-grimaud/act-4.jpg",
         "alt": "Salle gastronomique du restaurant Les Santons au cœur du village de Grimaud",
         "linkText": "Réserver →"
       }
@@ -4293,7 +4293,7 @@
         "duree": "2h",
         "prix": "Accès libre",
         "url": "https://www.ramatuelle-tourisme.com/fr/animation/distractions-et-loisirs/ramatuelle/randonnee-le-chemin-du-meunier-du-village-au-moulin-de-paillas-7839967/",
-        "image": "https://picsum.photos/seed/moulins-paillas/200/200",
+        "image": "assets/images/lieux/vieux-village-ramatuelle/act-1.jpg",
         "alt": "Moulins à vent de Paillas surplombant la baie de Pampelonne",
         "linkText": "En savoir plus →"
       },
@@ -4304,7 +4304,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://www.ramatuelle-tourisme.com/fr/decouvrir-la-presquile/cote-village/les-monuments/leglise-notre-dame/",
-        "image": "https://picsum.photos/seed/eglise-ramatuelle/200/200",
+        "image": "assets/images/lieux/vieux-village-ramatuelle/act-2.jpg",
         "alt": "Portail de serpentinite verte de l'église Notre-Dame de Ramatuelle",
         "linkText": "En savoir plus →"
       },
@@ -4315,7 +4315,7 @@
         "duree": "45 min",
         "prix": "Accès libre",
         "url": "https://www.ramatuelle-tourisme.com/fr/decouvrir-la-presquile/cote-village/",
-        "image": "https://picsum.photos/seed/ruelles-ramatuelle/200/200",
+        "image": "assets/images/lieux/vieux-village-ramatuelle/act-3.jpg",
         "alt": "Ruelle en colimaçon du village de Ramatuelle",
         "linkText": "En savoir plus →"
       },
@@ -4326,7 +4326,7 @@
         "duree": "2h-3h",
         "prix": "Accès libre",
         "url": "https://www.camping-var-ramatuelle.com/actualites/cap-taillat/",
-        "image": "https://picsum.photos/seed/cap-taillat/200/200",
+        "image": "assets/images/lieux/vieux-village-ramatuelle/act-4.jpg",
         "alt": "Isthme sauvage et eaux turquoise du Cap Taillat, accessible uniquement à pied",
         "linkText": "En savoir plus →"
       },
@@ -4337,7 +4337,7 @@
         "duree": "2h",
         "prix": "25-130 € / pers.",
         "url": "https://www.chezcamille.fr/",
-        "image": "https://picsum.photos/seed/chez-camille-ramatuelle/200/200",
+        "image": "assets/images/lieux/vieux-village-ramatuelle/act-5.jpg",
         "alt": "Bouillabaisse au feu de bois servie sur la plage de Bonne Terrasse chez Camille",
         "linkText": "Réserver →"
       }
