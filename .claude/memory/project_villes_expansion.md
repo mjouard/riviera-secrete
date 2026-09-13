@@ -137,7 +137,7 @@ Pour rester dans l'esprit "petit à petit" demandé :
 
 | Région | Statut | Villes ajoutées | Notes |
 |---|---|---|---|
-| Menton, Monaco & la frontière | fait | `menton` (lieu `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). |
+| Menton, Monaco & la frontière | fait | `menton` (lieu `vieux-menton`, renommé le 2026-09-14 depuis `cimetiere-vieux-chateau-menton`) | Trou du nom du site comblé. Commit `beca24a`, syncé en DB (1 ville/1 lieu/5 activités). **Corrigé le 2026-09-14** : le lieu était scopé trop étroitement (juste le cimetière) pour 3 de ses 5 activités (les 2 jardins de Garavan, à plusieurs km). Les activités étaient bonnes, c'est le lieu qui était trop sélectif — élargi en "Le Vieux Menton et ses jardins" plutôt que de couper du contenu ou créer des lieux séparés (choix explicite de l'utilisateur). Voir `remove-activite`/`rename-lieu` dans `RivieraSecrete.Tools` pour l'outillage utilisé. |
 | Nice et ses environs immédiats | fait | `falicon` (lieu `falicon-village`) + `parc-mont-boron` (nouveau lieu sur la ville `nice` existante) | Commits `51b7c12`/`840cabc`, syncés en DB. Autres candidats envisagés et écartés pour cette nuit : Aspremont (redondant avec Falicon — même angle "village perché vue sur Nice"), Bellet/Cimiez (gardés pour une session future, moins prioritaires). |
 | L'arrière-pays : villages perchés & gorges | fait | `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`, `saorge` (un lieu chacun) | Commits `50baf07`/`e97cde1`/`c45e7a8`, syncés en DB. Vence (centre) et Castellar non traités cette nuit (candidats restants, voir "Prochaine étape") — le reste de la liste pressentie est fait. |
 | Antibes, Cannes & le massif de l'Estérel | fait | `mougins` (lieu `vieux-mougins`), `vallauris` (lieu `vieux-vallauris-ceramique`) | Commits `1eb2386`/`22ff6e4`, syncés en DB. Angle éditorial : art vivant/artisanat plutôt que le seul nom "Picasso" (déjà connu partout) — galeries habitées à Mougins, ateliers de céramistes à Vallauris. |
@@ -153,7 +153,7 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 | Slug lieu | Nom | Type (hero/thumb) |
 |---|---|---|
 | `menton` (ville) | Menton | thumb |
-| `cimetiere-vieux-chateau-menton` | Le Cimetière du Vieux-Château | hero + thumb |
+| `vieux-menton` | Le Vieux Menton et ses jardins | hero + thumb |
 | `falicon` (ville) | Falicon | thumb |
 | `falicon-village` | Falicon | hero + thumb |
 | `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb |
@@ -189,12 +189,15 @@ du site (2 à 7 activités par lieu, moyenne ~4.7). Plusieurs villes originales 
 
 **À faire dans une session future (pas d'urgence, mais action actée, ne pas re-proposer
 comme "peut-être")** :
-- Pour chacune des 12 villes ajoutées (`menton`, `falicon`, `mougins`, `vallauris`,
-  `grimaud`, `ramatuelle`, `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`,
-  `saorge`) : rechercher si un ou plusieurs lieux supplémentaires méritent leur propre
-  fiche (un point de vue, un sentier, un site distinct dans la même commune — voir la
-  distinction ville/lieu plus haut dans ce document) plutôt que de tout concentrer sur le
-  lieu unique déjà créé.
+- Pour chacune des 12 villes ajoutées (`falicon`, `mougins`, `vallauris`, `grimaud`,
+  `ramatuelle`, `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`, `saorge` — **`menton`
+  exclue de cette liste**, déjà traitée différemment, voir la ligne "Menton" de la table de
+  progression ci-dessus : son lieu unique a été élargi en scope plutôt que scindé, à la
+  demande explicite de l'utilisateur, donc pas besoin d'y chercher des lieux
+  supplémentaires sauf si un vrai site distinct s'impose plus tard) : rechercher si un ou
+  plusieurs lieux supplémentaires méritent leur propre fiche (un point de vue, un sentier,
+  un site distinct dans la même commune — voir la distinction ville/lieu plus haut dans ce
+  document) plutôt que de tout concentrer sur le lieu unique déjà créé.
 - Pour les 13 lieux déjà créés (les 12 + `parc-mont-boron`) : compléter le panel
   d'activités au-delà du minimum actuel (4-5), même logique que le chantier
   "activités par badge" (voir [[project-activites-par-badge]]) — angle secret/atypique, pas

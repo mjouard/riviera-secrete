@@ -3519,17 +3519,17 @@
     "thumbImage": "assets/images/lieux/gassin-plus-beau-village/thumb.jpg"
   },
   {
-    "slug": "cimetiere-vieux-chateau-menton",
+    "slug": "vieux-menton",
     "villeSlug": "menton",
-    "nom": "Le Cimetière du Vieux-Château",
+    "nom": "Le Vieux Menton et ses jardins",
     "commune": "Menton",
     "regionSlug": "menton-monaco",
     "regionLabel": "Menton, Monaco & la frontière",
     "lat": 43.7781,
     "lng": 7.5054,
-    "description": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure d'aristocrates russes et britanniques, avec vue jusqu'à l'Italie.",
-    "ogImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/1200/800",
-    "heroImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/1200/800",
+    "description": "Entre le cimetière-belvédère du Vieux-Château, les ruelles pastel de la vieille ville et les jardins exotiques de Garavan, un condensé du Menton loin des foules du bord de mer.",
+    "ogImage": "https://picsum.photos/seed/vieux-menton/1200/800",
+    "heroImage": "https://picsum.photos/seed/vieux-menton/1200/800",
     "heroAlt": "Vue panoramique sur la baie de Menton depuis le cimetière du Vieux-Château",
     "metaPills": [
       {
@@ -3545,7 +3545,7 @@
         "valeur": "Facile"
       }
     ],
-    "description1": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure d'aristocrates russes et britanniques, avec vue jusqu'à l'Italie.",
+    "description1": "Entre le cimetière-belvédère du Vieux-Château, les ruelles pastel de la vieille ville et les jardins exotiques de Garavan, un condensé du Menton loin des foules du bord de mer.",
     "description2": "Construit en 1807 sur les ruines du château détruit trois ans plus tôt, le cimetière du Vieux-Château est devenu au XIXe siècle le dernier repos d'une clientèle européenne huppée venue hiverner à Menton — mausoleums russes à coupole, tombes britanniques et polonaises se côtoient sur quatre terrasses. On y vient surtout pour le panorama à 360°, de l'Italie au cap Martin, largement méconnu des visiteurs qui s'arrêtent au Vieux Port en contrebas.",
     "tips": [
       {
@@ -3642,7 +3642,7 @@
       "randonnee",
       "restaurant"
     ],
-    "thumbImage": "https://picsum.photos/seed/cimetiere-vieux-chateau-menton/500/375"
+    "thumbImage": "https://picsum.photos/seed/vieux-menton/500/375"
   },
   {
     "slug": "falicon-village",
@@ -4813,13 +4813,13 @@
         "blurb": "Le village du littoral le plus haut d'Europe, à 780 mètres au-dessus de Menton, avec un fort de …"
       },
       {
-        "href": "cimetiere-vieux-chateau-menton.html",
-        "img": "assets/images/lieux/cimetiere-vieux-chateau-menton/thumb.jpg",
+        "href": "vieux-menton.html",
+        "img": "assets/images/lieux/vieux-menton/thumb.jpg",
         "alt": "Vue panoramique sur la baie de Menton depuis le cimetière du Vieux-Château",
         "stamp": "43.78°N<br>7.51°E",
         "region": "Menton",
-        "titre": "Le Cimetière du Vieux-Château",
-        "blurb": "Un cimetière-belvédère perché sur la colline de l'ancien château des Grimaldi, dernière demeure …"
+        "titre": "Le Vieux Menton et ses jardins",
+        "blurb": "Entre le cimetière-belvédère du Vieux-Château, les ruelles pastel de la vieille ville et les jar…"
       }
     ],
     "badges": [

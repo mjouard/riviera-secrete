@@ -162,4 +162,37 @@ public static class DatabaseSeeder
 
         return (newVilles.Count, newLieux.Count, addedActivitesCount);
     }
+
+    /// <summary>
+    /// Recopie depuis data/lieux.json les champs descriptifs mutables d'un lieu EXISTANT
+    /// (Description, Description2, HeroAlt, images, Badges, MetaPills, Tips, Related) sur
+    /// la ligne DB correspondante — jamais Id/Slug/VilleSlug/Activites (gérés par
+    /// SyncNewContentAsync / rename-lieu / remove-activite). Utile quand une correction de
+    /// contenu (ex. un `related[]` qui pointait vers un slug renommé/supprimé) doit être
+    /// répercutée sur un lieu déjà synchronisé. Retourne false si le slug n'existe ni en
+    /// DB ni dans le JSON.
+    /// </summary>
+    public static async Task<bool> RefreshLieuFieldsAsync(AppDbContext db, string dataDir, string slug)
+    {
+        var dbLieu = await db.Lieux.FirstOrDefaultAsync(l => l.Slug == slug);
+        if (dbLieu is null) return false;
+
+        var lieuxRaw = JsonNode.Parse(await File.ReadAllTextAsync(Path.Combine(dataDir, "lieux.json")))!.AsArray();
+        var jsonLieu = lieuxRaw.Select(l => l!).FirstOrDefault(l => l["slug"]!.GetValue<string>() == slug);
+        if (jsonLieu is null) return false;
+
+        dbLieu.Description  = jsonLieu["description"]!.GetValue<string>();
+        dbLieu.Description2 = jsonLieu["description2"]?.GetValue<string>();
+        dbLieu.HeroAlt      = jsonLieu["heroAlt"]!.GetValue<string>();
+        dbLieu.HeroImage    = jsonLieu["heroImage"]!.GetValue<string>();
+        dbLieu.ThumbImage   = jsonLieu["thumbImage"]!.GetValue<string>();
+        dbLieu.OgImage      = jsonLieu["ogImage"]!.GetValue<string>();
+        dbLieu.Badges       = jsonLieu["badges"]?.Deserialize<List<string>>(JsonOpts) ?? [];
+        dbLieu.MetaPills    = jsonLieu["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [];
+        dbLieu.Tips         = jsonLieu["tips"]?.Deserialize<List<Tip>>(JsonOpts) ?? [];
+        dbLieu.Related      = jsonLieu["related"]?.Deserialize<List<RelatedCard>>(JsonOpts) ?? [];
+
+        await db.SaveChangesAsync();
+        return true;
+    }
 }
