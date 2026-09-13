@@ -272,13 +272,11 @@ Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
       Vercel — HTTPS Let's Encrypt activé automatiquement par Vercel une fois le domaine
       pointé. Sert aussi à vérifier un domaine sur Resend (resend.com/domains) pour lever la
       limitation d'envoi sandbox des emails de confirmation (voir "Communauté / comptes")
-- [ ] Purger le champ `ogImage` de `data/lieux.json`/la DB — hardcodé sur
-      `riviera-secrete.netlify.app` (domaine mort, l'ancien site statique n'existe plus).
-      **Trouvé mort le 2026-09-12** : le frontend Next.js ne le lit jamais — les pages lieu/
-      itinéraire calculent leur propre `openGraph.images` à partir de `heroImage`/
-      `firstLieu.heroImage` via `imgUrl()` (voir `lieux/[slug]/page.tsx`,
-      `itineraires/[slug]/page.tsx`). Pas un bug visible aujourd'hui, mais de la donnée morte
-      à nettoyer (retirer le champ du JSON + colonne EF + migration) plutôt qu'à corriger
+- [x] Purger le champ `ogImage` de `data/lieux.json`/la DB — **fait le 2026-09-13**. Retiré
+      des 43 lieux dans `data/lieux.json`, de l'entité `Lieu` et de `DatabaseSeeder.cs`, et du
+      type `Lieu` côté frontend. Migration EF `RemoveLieuOgImage` (`DROP COLUMN`) appliquée en
+      prod, backend redéployé, `og:image` toujours correctement dérivé de `heroImage` côté
+      frontend (vérifié en prod — inchangé, comme attendu puisque ce champ n'était jamais lu).
 
 ### SEO & indexation
 - [ ] Soumettre `sitemap.xml` dans Google Search Console après enregistrement du vrai domaine
