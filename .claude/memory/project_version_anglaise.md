@@ -1,6 +1,6 @@
 ---
 name: project-version-anglaise
-description: "Version anglaise du site — phases 0-5 terminées et déployées le 2026-09-13 (routing, contenu, pages compte, SEO) ; seul un scope réduit assumé (champs JSON imbriqués non traduits) reste à trancher avec l'utilisateur"
+description: "Version anglaise du site — TERMINÉE et déployée le 2026-09-13 : routing, tout le contenu (y compris les champs JSON imbriqués via une migration backend dédiée), pages compte, SEO. Aucun écart de scope restant."
 metadata:
   type: project
   originSessionId: 24767a28-abd9-41f0-9385-80f67dd8db6d
@@ -17,9 +17,14 @@ dans la même session — voir "Phase 0 — ce qui a été fait" plus bas pour l
 **Phases 1-5 (MVP, contenu éditorial, activités, pages compte, polish SEO) toutes terminées
 et déployées en prod le 2026-09-13**, en deux passes suite à "Finissons la version anglaise"
 puis "Continuons, faisons tout sur la traduction" — voir "Phases 1-3 — ce qui a été fait" et
-"Phase 4+5 — ce qui a été fait" plus bas. Il ne reste qu'un point de scope non tranché avec
-l'utilisateur (voir "Scope réduit assumé" ci-dessous) ; tout le reste du plan initial est
-livré.
+"Phase 4+5 — ce qui a été fait" plus bas.
+
+**Scope réduit fermé le 2026-09-13** : suite à "Faisons une migration backend pour fix tout
+ça", le dernier écart documenté (tips/related d'un lieu, programme détaillé/réservations
+d'un itinéraire, durée/prix d'une activité, et — trouvé au passage, jamais documenté avant —
+les MetaPills saison/durée/niveau) a été entièrement traduit et branché. Voir "Phase 6 —
+fermeture du scope réduit" plus bas pour le détail complet. **Il n'y a plus aucun écart de
+scope connu entre `/en` et le contenu français** au 2026-09-13.
 
 **Trou signalé par l'utilisateur le 2026-09-13 ("Il manque aussi la création d'itinéraire en
 anglais"), traité dans la foulée** : `/creer-itineraire` (le constructeur d'itinéraire —
@@ -240,21 +245,80 @@ tester les pages qui fetchent côté client (`/creer-itineraire`) car l'API prod
 verrouillé sur l'origine de prod, pas `localhost:3000` (voir `Cors:AllowedOrigin` dans
 `backend_dotnet.md`).
 
-## Scope réduit assumé — à trancher avec l'utilisateur
+## Phase 6 — fermeture du scope réduit (2026-09-13, suite à "Faisons une migration backend pour fix tout ça")
 
-Les champs suivants **n'ont aucune colonne `*En` côté backend** (JSON-mappés, jamais prévus
-pour la traduction en phase 0) et restent donc en français sur `/en` même après les phases
-1-3 : `Lieu.tips[]`/`related[]`, `Activite.duree`/`prix` (dans `activites[]`),
-`Itineraire.items[]`/`booking[]`/`suggestions[]`. Concrètement sur `/en` aujourd'hui : les
-conseils pratiques d'un lieu, les cartes "à découvrir aussi", le programme détaillé
-jour-par-jour d'un itinéraire (horaires/durées/prix), et les cartes "autres itinéraires"
-restent en français. Chaque occurrence est marquée d'un commentaire inline renvoyant ici.
-Décision prise unilatéralement par Claude (pas demandée par l'utilisateur, qui a répondu "on
-va dire que pour l'instant c'est ok" sans trancher explicitement sur l'extension du backend)
-— si le sujet revient, proposer soit d'étendre le schéma (nouvelle migration EF pour ces
-champs), soit d'assumer cette limitation durablement. **C'est désormais le seul écart entre
-"/en" et le plan initial** — tout le reste (phases 0 à 5) est livré et vérifié en prod au
-2026-09-13.
+Le scope déféré en phases 1-5 (`Lieu.tips[]`/`related[]`, `Activite.duree`/`prix`,
+`Itineraire.items[]`/`booking[]`/`suggestions[]`) a été entièrement fermé, plus un gap
+jamais documenté trouvé au passage : `MetaPill` (saison/durée/niveau d'un lieu, méta d'un
+itinéraire), qui n'avait figuré dans aucune liste de scope précédente — pur oubli, pas une
+décision. **Leçon pour la prochaine fois qu'un scope "champs restants" est établi : lister
+les champs en parcourant le schéma des entités (`grep` les `record`/JSON columns), pas en
+se fiant à un inventaire fait de mémoire** — c'est exactement comme ça que MetaPill est
+passé sous le radar deux fois de suite.
+
+**Schéma backend** (commits `70c9e2a`, `8a45105`) : `Activite.DureeEn`/`PrixEn` sont de
+vraies colonnes scalaires → migration EF `AddActiviteDureeEnPrixEn`, générée avec
+`dotnet ef migrations add --project RivieraSecrete.Infrastructure --startup-project
+RivieraSecrete.Api` (la config de connexion peut être vide dans `appsettings.json`, la
+génération de migration n'a pas besoin de se connecter) puis appliquée en prod avec
+`dotnet ef database update` + `ConnectionStrings__DefaultConnection` en variable d'env
+(format `Host=...;Port=...;...`, pas une URL `postgresql://`). Tous les autres champs
+(`Tip.LabelEn/TexteEn`, `RelatedCard.TitreEn/BlurbEn/AltEn`,
+`ItineraireItem.NomEn/DescEn/DormirAEn`, `StopActivite.LabelEn`,
+`BookingRef.LieuLabelEn/NomLabelEn/ExtraSpansEn`, `SuggestCard.TitreEn/BadgeEn/AltEn`,
+`MetaPill.LabelEn/ValeurEn`) sont des propriétés ajoutées à des `record` C# stockés dans des
+colonnes `jsonb` via `System.Text.Json` (`LieuConfiguration`/`ItineraireConfiguration`,
+`HasConversion` avec sérialisation manuelle) — **aucune migration requise** pour ceux-là, et
+`DatabaseSeeder.cs` n'a pas eu besoin d'être modifié non plus (`Deserialize<List<T>>(JsonOpts)`
+générique déjà en place, `JsonSerializerDefaults.Web` fait le matching case-insensitive).
+`RelatedCard.Region` et `ItineraireItem.Commune` restent volontairement sans `*En` : ce sont
+des noms de commune (noms propres).
+
+**Contenu** (commits `4ad65eb`, `9b395b5`, `8a45105`, `0732dc4`) — stratégie mixte pour
+limiter le volume de traduction fraîche :
+- **Dérivé programmatiquement depuis du contenu déjà traduit**, zéro traduction fraîche :
+  `related[].titreEn`/`altEn` (= `nomEn` du lieu cible, 107/107), `related[].blurbEn`
+  (`descriptionEn` du lieu cible tronqué au même gabarit ~97 car. que le `blurb` FR
+  original), `suggestions[].titreEn`/`altEn`/`badgeEn` (= `titreEn` de l'itinéraire cible,
+  badge reformaté "{n} stops" par pattern, 18/18), `items[].nomEn` (= `nomEn` du lieu
+  référencé, 25/25 correspondance exacte confirmée avant de dériver), `booking[].lieuLabelEn`
+  (= `lieuLabel` tel quel, toujours un nom de commune), `booking[].nomLabelEn` (9/20 dérivés
+  de l'activité référencée quand `nomLabel` matche exactement son `nom`).
+- **Dérivé par substitution de mots/regex**, zéro traduction fraîche par activité :
+  `activites[].dureeEn`/`prixEn` (205×2) — la plupart des durées sont déjà language-neutre
+  ("1h30", "2h"), seuls quelques mots français ("aller-retour"→"round trip",
+  "Demi-journée"→"Half day", **"à"→"to" — raté au premier passage, un mot de 1 caractère ne
+  matchait pas le regex de détection `{3,}` lettres, corrigé après avoir trouvé "2h à 3h"
+  non traduit en vérifiant /en en prod, voir commit `0732dc4`**) et les unités de prix
+  ("adulte"→"adult", "pers."→"person", "jour"→"day", "groupe"→"group"…) sont substitués.
+  `metaPills[].labelEn` (3 libellés fixes) et `valeurEn` (47 valeurs lieu + 18 valeurs
+  itinéraire) traduits à la main mais par table de correspondance vu le nombre de valeurs
+  distinctes limité.
+- **Traduction fraîche à la main** (volume restreint après dérivation) : `items[].descEn`/
+  `dormirAEn` (44), `items[].activites[].labelEn` (33 pastilles composites type "Nom · Prix ·
+  Durée"), `booking[].nomLabelEn` pour les 11 qui ne matchaient pas l'activité,
+  `extraSpansEn` (1 occurrence réelle dans tout le dataset).
+- **Délégué à un subagent en tâche de fond** (contenu trop volumineux et nécessitant du
+  jugement éditorial pour être scripté) : `tips[].texteEn` (129, `tips[].labelEn` fait à la
+  main juste avant via une table de 38 libellés fixes réutilisables).
+
+**Sync + déploiement** : deux passes de sync complètes vers la DB prod via les commandes
+`refresh-lieu-fields`/`refresh-activite`/`refresh-itineraire-fields` de
+`RivieraSecrete.Tools` (43+205+6 = 254 appels la première fois pour tips/related/duree/prix/
+items/booking/suggestions, 43+6 = 49 la seconde pour metaPills, 8 appels ciblés la troisième
+pour le correctif "à"), zéro échec à chaque fois. Backend redéployé deux fois
+(`railway up --service api`) pour exposer les nouveaux champs JSON avant de pouvoir
+synchroniser (le champ doit exister dans le modèle EF de l'API en cours d'exécution).
+Frontend redéployé trois fois (`vercel --prod --yes` + `vercel cache purge`). Toute la
+vérification a été faite en lisant le texte réellement rendu sur la prod déployée avec
+`get_page_text`/`javascript_tool`, pas en supposant depuis le code — c'est ce qui a fait
+trouver le bug "à"/"to" qu'aucune relecture de code n'aurait révélé.
+
+**Un sweep de QA final** (regex cherchant des mots-outils français isolés dans tous les
+champs `*En` du dataset) a remonté ~236 faux positifs, tous des noms propres qui gardent
+légitimement leurs articles/prépositions français en anglais (ex. "Villa Ephrussi de
+Rothschild", "Villefranche-sur-Mer", "Plage des Marinières") — confirmé un par un, aucun
+autre bug réel trouvé après le correctif "à"/"to".
 
 ## Explicitement déconseillé
 

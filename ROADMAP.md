@@ -144,11 +144,14 @@
       ShareButton/AddToItinButton, aria-labels du carrousel, le lien "Plans" d'Apple Maps,
       un bug de pluralisation anglaise, un compte de lieux hardcodé dans le meta description
       et le JSON-LD) — détail complet dans `.claude/memory/project_version_anglaise.md`.
-      **Seul écart restant, décision assumée par Claude mais pas explicitement tranchée par
-      l'utilisateur** : des champs JSON imbriqués sans colonne `*En` (tips/related d'un lieu,
-      items/booking/suggestions d'un itinéraire, durée/prix d'une activité) restent en
-      français sur `/en` — étendre le schéma backend si une parité complète est souhaitée un
-      jour. Plan initial établi le 2026-09-12, deux
+      **Chantier entièrement terminé le 2026-09-13** — suite à "Faisons une migration
+      backend pour fix tout ça", le dernier écart (tips/related d'un lieu, programme
+      détaillé/réservations d'un itinéraire, durée/prix d'une activité) a été fermé, plus un
+      gap jamais documenté trouvé au passage (les MetaPills saison/durée/niveau). Plus aucun
+      champ backend n'est déféré — `/en` a une parité de contenu complète avec le français.
+      Détail complet (migration, stratégie de traduction, bug "2h à 3h" trouvé en vérifiant
+      la prod) dans `.claude/memory/project_version_anglaise.md`. Plan initial établi le
+      2026-09-12, deux
       décisions validées par l'utilisateur avant de commencer (routing + stockage) :
       1. Routing en `frontend/src/app/[locale]/...` + `next-intl` pour la UI chrome, slugs
          de lieux/villes **identiques** dans les deux langues (pas de slug anglais dédié).
