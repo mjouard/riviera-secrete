@@ -171,7 +171,12 @@ Les colonnes complexes sont en **JSONB** via `HasConversion()` + `System.Text.Js
 
 ## Connexion DB
 
-- **Dev local** : `appsettings.Development.json` → `Host=altaria.proxy.rlwy.net;Port=45165;Database=railway;Username=postgres;Password=VhelpxjudMIFKpApfRxrsYzcxIxlbJCS`
+- **Dev local** : `appsettings.Development.json` (gitignored) → connection string vers le proxy
+  public Railway. **Ne jamais recopier le mot de passe ici ni dans aucun fichier commité** :
+  le récupérer à la demande via `railway variables --service Postgres` (variable
+  `DATABASE_PUBLIC_URL`, à convertir au format Npgsql). Ce dépôt est **public** sur GitHub —
+  tout secret écrit dans un fichier suivi par git est immédiatement compromis et doit être
+  révoqué, pas seulement supprimé du fichier (l'historique reste lisible).
 - **Railway prod** : var env `ConnectionStrings__DefaultConnection` → `Host=postgres.railway.internal;Port=5432;...`
 
 ## Seeder
