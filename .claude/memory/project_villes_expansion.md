@@ -178,6 +178,33 @@ villes réellement ajoutées avec leur slug au fil de l'eau.)*
 | `saorge` (ville) | Saorge | thumb |
 | `saorge-village` | Saorge | hero + thumb |
 
+## Enrichissement à faire — les 12 villes ajoutées sont trop légères (confirmé 2026-09-14)
+
+Constat de l'utilisateur, vérifié chiffres à l'appui : **les 12 villes ajoutées cette nuit
+ont chacune exactement 1 seul lieu**, et chaque lieu a 4-5 activités (4 pour la plupart, 5
+pour `menton`/`mougins`/`vallauris`/`ramatuelle`) — la borne basse de la fourchette du reste
+du site (2 à 7 activités par lieu, moyenne ~4.7). Plusieurs villes originales ont 2-3 lieux
+(`roquebrune-cap-martin`: 2, `theoule-sur-mer`: 2, `nice`: 3 avec l'ajout de cette nuit,
+`tourrettes-sur-loup`: 3) — ces 12 nouvelles villes n'ont pas eu cette profondeur.
+
+**À faire dans une session future (pas d'urgence, mais action actée, ne pas re-proposer
+comme "peut-être")** :
+- Pour chacune des 12 villes ajoutées (`menton`, `falicon`, `mougins`, `vallauris`,
+  `grimaud`, `ramatuelle`, `sainte-agnes`, `coaraze`, `sospel`, `gorbio`, `luceram`,
+  `saorge`) : rechercher si un ou plusieurs lieux supplémentaires méritent leur propre
+  fiche (un point de vue, un sentier, un site distinct dans la même commune — voir la
+  distinction ville/lieu plus haut dans ce document) plutôt que de tout concentrer sur le
+  lieu unique déjà créé.
+- Pour les 13 lieux déjà créés (les 12 + `parc-mont-boron`) : compléter le panel
+  d'activités au-delà du minimum actuel (4-5), même logique que le chantier
+  "activités par badge" (voir [[project-activites-par-badge]]) — angle secret/atypique, pas
+  les incontournables.
+- Même politique photo que le reste de ce chantier tant que la session photo dédiée n'a pas
+  eu lieu (placeholder picsum pour tout nouveau lieu, ajouté à la table "Photos à
+  remplacer" ci-dessus).
+- Suivre la même méthodologie que cette nuit (coordonnées vérifiées, badges vérifiés un par
+  un, sync DB via `RivieraSecrete.Tools`, commit/push/deploy au fil de l'eau).
+
 ## Si le travail s'arrête en cours de route
 
 Avant de stopper (contexte épuisé, erreur bloquante, fin de nuit) :

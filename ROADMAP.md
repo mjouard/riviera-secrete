@@ -18,9 +18,20 @@
       integration Vercel désactivée, voir `feedback_vercel_deploy.md`) — un
       `cd frontend && npx vercel --prod --yes` est nécessaire après chaque sync DB.
 
-- [x] Finir les vraies images — les 27 lieux ont une vraie photo (terminé le 28/08 ; les 21
-      sourcées sur Wikimedia Commons cette session-là sont créditées sur `credits.html`,
-      licences CC BY/CC BY-SA)
+- [ ] Chantier "villes manquantes" (2026-09-13) — deux suites actées par l'utilisateur le
+      2026-09-14, détail complet dans `.claude/memory/project_villes_expansion.md` :
+      1. **Vraies photos** pour les 12 villes + 13 lieux ajoutés cette nuit-là (actuellement
+         en placeholder `picsum.photos`, volontairement — voir "Politique photo" dans le doc
+         du chantier) — même process que le chantier photo du 28/08 ci-dessous, en
+         redemandant l'autorisation de sourcer au moment venu.
+      2. **Enrichissement** — chacune des 12 villes n'a qu'un seul lieu, et chaque lieu
+         seulement 4-5 activités (bas de la fourchette du reste du site) : ajouter des lieux
+         supplémentaires là où ça a du sens, et étoffer le panel d'activités de chaque lieu
+         déjà créé, même logique que le chantier "activités par badge" ci-dessus.
+- [x] Finir les vraies images — les 27 lieux originaux ont une vraie photo (terminé le
+      28/08 ; les 21 sourcées sur Wikimedia Commons cette session-là sont créditées sur
+      `credits.html`, licences CC BY/CC BY-SA) — voir l'item ci-dessus pour les 13 lieux
+      ajoutés depuis, encore en placeholder
 - [x] Lien "Ouvrir dans Google Maps / Waze / Plans" sur chaque fiche lieu
 - [x] Photo sur chaque carte `itin-preview-card` de la homepage — utilise le `thumbImage`
       du premier lieu de chaque itinéraire
