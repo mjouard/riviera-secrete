@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function useNavLinks() {
   const t = useTranslations("nav");
@@ -78,6 +79,7 @@ export default function NavHeader() {
               {label}
             </Link>
           ))}
+          <LanguageSwitcher />
           <AuthButton />
         </nav>
 
@@ -122,7 +124,8 @@ export default function NavHeader() {
                 {label}
               </Link>
             ))}
-            <div className="px-6 py-4">
+            <div className="px-6 py-4 flex items-center justify-between">
+              <LanguageSwitcher onClick={close} />
               <AuthButton onClose={close} />
             </div>
           </div>
