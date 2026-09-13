@@ -103,6 +103,19 @@ if (args is ["refresh-ville-fields", var refreshVilleSlug])
     return ok ? 0 : 1;
 }
 
+// `refresh-activite <lieuSlug> <activiteId>` : recopie tous les champs mutables d'une
+// activité existante (nom, badge, duree, prix, url, image, alt, linkText) depuis le JSON.
+// Nécessaire car refresh-lieu-fields ne touche pas aux activités d'un lieu.
+if (args is ["refresh-activite", var refreshLieuSlug, var refreshActiviteId])
+{
+    var refreshActiviteDataDir = FindDataDir();
+    var ok = await DatabaseSeeder.RefreshActiviteAsync(db, refreshActiviteDataDir, refreshLieuSlug, refreshActiviteId);
+    Console.WriteLine(ok
+        ? $"Activité '{refreshActiviteId}' (lieu '{refreshLieuSlug}') rafraîchie depuis le JSON."
+        : $"Activité '{refreshActiviteId}' ou lieu '{refreshLieuSlug}' introuvable — rien fait.");
+    return ok ? 0 : 1;
+}
+
 var dataDir = FindDataDir();
 Console.WriteLine($"Data dir: {dataDir}");
 var (villes, lieux, activites) = await DatabaseSeeder.SyncNewContentAsync(db, dataDir);

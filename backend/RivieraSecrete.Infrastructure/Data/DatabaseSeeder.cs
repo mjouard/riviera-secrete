@@ -216,4 +216,37 @@ public static class DatabaseSeeder
         await db.SaveChangesAsync();
         return true;
     }
+
+    /// <summary>
+    /// Recopie depuis data/lieux.json tous les champs mutables d'une activité EXISTANTE
+    /// (Nom, Badge, Duree, Prix, Url, Image, Alt, LinkText) sur la ligne DB correspondante —
+    /// jamais Id/ActiviteId/LieuId. `RefreshLieuFieldsAsync` ne touche pas aux activités
+    /// d'un lieu, donc c'est le seul chemin pour corriger une URL cassée ou remplacer le
+    /// placeholder image d'une activité déjà synchronisée (voir le chantier vignettes
+    /// d'activités, .claude/memory/project_villes_expansion.md).
+    /// </summary>
+    public static async Task<bool> RefreshActiviteAsync(AppDbContext db, string dataDir, string lieuSlug, string activiteId)
+    {
+        var dbLieu = await db.Lieux.Include(l => l.Activites).FirstOrDefaultAsync(l => l.Slug == lieuSlug);
+        var dbActivite = dbLieu?.Activites.FirstOrDefault(a => a.ActiviteId == activiteId);
+        if (dbActivite is null) return false;
+
+        var lieuxRaw = JsonNode.Parse(await File.ReadAllTextAsync(Path.Combine(dataDir, "lieux.json")))!.AsArray();
+        var jsonLieu = lieuxRaw.Select(l => l!).FirstOrDefault(l => l["slug"]!.GetValue<string>() == lieuSlug);
+        var jsonActivite = jsonLieu?["activites"]?.AsArray().Select(a => a!)
+            .FirstOrDefault(a => a["id"]!.GetValue<string>() == activiteId);
+        if (jsonActivite is null) return false;
+
+        dbActivite.Nom      = jsonActivite["nom"]!.GetValue<string>();
+        dbActivite.Badge    = jsonActivite["badge"]!.GetValue<string>();
+        dbActivite.Duree    = jsonActivite["duree"]!.GetValue<string>();
+        dbActivite.Prix     = jsonActivite["prix"]!.GetValue<string>();
+        dbActivite.Url      = jsonActivite["url"]!.GetValue<string>();
+        dbActivite.Image    = jsonActivite["image"]!.GetValue<string>();
+        dbActivite.Alt      = jsonActivite["alt"]!.GetValue<string>();
+        dbActivite.LinkText = jsonActivite["linkText"]!.GetValue<string>();
+
+        await db.SaveChangesAsync();
+        return true;
+    }
 }
