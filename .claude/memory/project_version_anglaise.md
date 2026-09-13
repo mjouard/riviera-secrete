@@ -12,8 +12,13 @@ Plan établi le 2026-09-12. **Phase 0 (fondations) terminée et déployée en pr
 2026-09-13** : les deux décisions ci-dessous ont été confirmées par l'utilisateur
 (routing `/en` + next-intl, colonnes jumelles nullables), puis implémentées intégralement
 dans la même session — voir "Phase 0 — ce qui a été fait" plus bas pour le détail exact
-(fichiers, commits, vérifications). Phases 1+ (traduction réelle du contenu) pas encore
-démarrées.
+(fichiers, commits, vérifications).
+
+**Phases 1-3 (MVP + contenu éditorial + activités) terminées et déployées en prod le
+2026-09-13**, suite à "Finissons la version anglaise" — voir "Phases 1-3 — ce qui a été
+fait" plus bas. Restent : phase 4 (auth/transactionnel) et phase 5 (polish SEO), plus une
+extension de scope à trancher avec l'utilisateur (champs JSON imbriqués non traduits, voir
+"Scope réduit assumé" ci-dessous).
 
 ## État des lieux au moment du plan
 
@@ -125,6 +130,59 @@ Vérifié via `curl` sur l'API prod que les champs apparaissent (valeur `null`).
 
 **Limitation connue laissée telle quelle** : `NextAuth.pages.signIn` (`src/lib/auth.ts`)
 reste `/connexion` fixe, sans locale — voir phase 4 ci-dessus.
+
+## Phases 1-3 — ce qui a été fait (2026-09-13)
+
+Suite au message utilisateur "Finissons la version anglaise". Tout commité sur `main` et
+déployé (frontend `vercel --prod` + purge cache, backend inchangé — pas de nouvelle
+migration).
+
+**Frontend câblé sur next-intl** (commit `6daf58e`, puis fixes `e054693`/`30bf778`) : la
+homepage, `/villes`, `/villes/[slug]`, `/lieux/[slug]`, `/itineraires/[slug]` et leurs
+composants client (`HomeMap`, `HomeLieuxGrid`, `HomeActivities`, `HomeItineraires`,
+`ItineraireCard`) lisent la locale courante et affichent nom/description/badges/régions
+traduits via `loc(locale, champEn, champFr)` (`src/lib/utils.ts`) + `messages/{fr,en}.json`
+(namespaces `home`, `villes`, `lieu`, `itineraire`, `activite`, `badges`, `categories`,
+`regionShort`, `regionFull`, `common`). Deux bugs trouvés et corrigés en vérifiant `/en` en
+navigateur après coup (pas au premier passage) : le `linkText` des cartes "à réserver" d'un
+itinéraire (`b.linkText`, JSON `booking[]`) restait en français faute d'être mappé sur les
+clés `activite.reserver`/`verifierHoraires` déjà utilisées ailleurs ; la page lieu affichait
+`lieu.regionLabel` brut au lieu de `tRegionFull(lieu.regionSlug)` comme les pages ville —
+**si un futur passage retrouve du texte français non voulu sur `/en`, chercher spécifiquement
+les champs affichés bruts depuis l'API sans passer par `loc()`/`t()`, c'est la même classe de
+bug les deux fois**.
+
+**Contenu éditorial traduit** (commits `93f42cd`, `bd5651f`) : les 6 itinéraires
+(`titreEn`/`badgeEn`/`descriptionEn`/`introEn`/`mapLabelEn`, traduits directement par
+Claude) et les 43 lieux + 205 activités (`nomEn`/`descriptionEn`/`description2En` par lieu,
+`nomEn`/`altEn` par activité — traduits par un subagent dédié, relu par échantillonnage
+avant commit) ont leurs champs `*En` remplis dans `data/lieux.json`/`itineraires.json`.
+Synchronisés en prod via `refresh-lieu-fields`/`refresh-activite`/`refresh-itineraire-fields`
+(RivieraSecrete.Tools, connection string `SYNC_CONNECTION_STRING` — pas
+`ConnectionStrings__DefaultConnection`, piège rencontré) — 43 lieux + 205 activités + 6
+itinéraires, zéro échec, vérifié via `curl` sur l'API prod après coup.
+
+**Bouton de switch de langue ajouté** (commit `377cb96`, `LanguageSwitcher.tsx`) : la phase 0
+avait traduit le texte du nav mais jamais ajouté de contrôle UI pour changer de locale —
+`/en` n'était accessible qu'en tapant l'URL à la main. Utilise le `Link` de next-intl avec un
+prop `locale` explicite ; next-intl force alors un préfixe même pour le français
+(`/fr/lieux/...`) côté clic, mais `src/proxy.ts` (middleware next-intl) redirige
+`/fr/*` vers l'URL non préfixée puisque `fr` est la locale par défaut — comportement
+intentionnel de next-intl, vérifié en navigateur, pas un bug.
+
+## Scope réduit assumé — à trancher avec l'utilisateur
+
+Les champs suivants **n'ont aucune colonne `*En` côté backend** (JSON-mappés, jamais prévus
+pour la traduction en phase 0) et restent donc en français sur `/en` même après les phases
+1-3 : `Lieu.tips[]`/`related[]`, `Activite.duree`/`prix` (dans `activites[]`),
+`Itineraire.items[]`/`booking[]`/`suggestions[]`. Concrètement sur `/en` aujourd'hui : les
+conseils pratiques d'un lieu, les cartes "à découvrir aussi", le programme détaillé
+jour-par-jour d'un itinéraire (horaires/durées/prix), et les cartes "autres itinéraires"
+restent en français. Chaque occurrence est marquée d'un commentaire inline renvoyant ici.
+Décision prise unilatéralement par Claude (pas demandée par l'utilisateur, qui a répondu "on
+va dire que pour l'instant c'est ok" sans trancher explicitement sur l'extension du backend)
+— si le sujet revient, proposer soit d'étendre le schéma (nouvelle migration EF pour ces
+champs), soit d'assumer cette limitation durablement.
 
 ## Explicitement déconseillé
 
