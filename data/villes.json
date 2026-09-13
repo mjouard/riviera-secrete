@@ -275,7 +275,7 @@
     "lat": 43.6004,
     "lng": 6.9953,
     "description": "Un village perché en colimaçon entre Cannes et Grasse, refuge d'artistes au XXe siècle — Picasso y vécut ses douze dernières années — resté à l'écart de la foule de la Croisette.",
-    "thumbImage": "https://picsum.photos/seed/mougins/500/375",
+    "thumbImage": "assets/images/lieux/vieux-mougins/thumb.jpg",
     "lieux": [
       "vieux-mougins"
     ]
@@ -288,7 +288,7 @@
     "lat": 43.5798,
     "lng": 7.0531,
     "description": "La capitale méditerranéenne de la céramique, où Picasso a réinventé la poterie dans un vieux bourg d'artisans que ses voisins balnéaires éclipsent complètement.",
-    "thumbImage": "https://picsum.photos/seed/vallauris/500/375",
+    "thumbImage": "assets/images/lieux/vieux-vallauris-ceramique/thumb.jpg",
     "lieux": [
       "vieux-vallauris-ceramique"
     ]
@@ -301,7 +301,7 @@
     "lat": 43.274,
     "lng": 6.525,
     "description": "Un village médiéval accroché au massif des Maures, sur l'autre rive du golfe par rapport à Saint-Tropez, avec un château en ruine et un moulin à vent qui dominent toute la baie.",
-    "thumbImage": "https://picsum.photos/seed/grimaud/500/375",
+    "thumbImage": "assets/images/lieux/vieux-village-grimaud/thumb.jpg",
     "lieux": [
       "vieux-village-grimaud"
     ]
@@ -314,7 +314,7 @@
     "lat": 43.215,
     "lng": 6.614,
     "description": "Un village en colimaçon sur la presqu'île de Saint-Tropez, entre moulins à vent sur la crête et crique sauvage accessible seulement à pied.",
-    "thumbImage": "https://picsum.photos/seed/ramatuelle/500/375",
+    "thumbImage": "assets/images/lieux/vieux-village-ramatuelle/thumb.jpg",
     "lieux": [
       "vieux-village-ramatuelle"
     ]

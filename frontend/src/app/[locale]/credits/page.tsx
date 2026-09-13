@@ -84,6 +84,10 @@ const CREDITS: Credit[] = [
   { titre: "Le Vieux Menton et ses jardins (cimetière du Vieux-Château)", auteur: "Jorge Franganillo", fileUrl: "https://commons.wikimedia.org/wiki/File:Menton_-_Cimeti%C3%A8re_du_Vieux_Ch%C3%A2teau.jpg", licenceLabel: "CC BY 4.0", licenceUrl: "https://creativecommons.org/licenses/by/4.0/deed.fr" },
   { titre: "Falicon, village perché", auteur: "Jpchevreau", fileUrl: "https://commons.wikimedia.org/wiki/File:Vue_du_village_de_Falicon_depuis_la_route_de_l%E2%80%99Aire_Saint-Michel.JPG", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
   { titre: "Le Parc du Mont Boron (Fort du Mont Alban)", auteur: "FrancoisMignard", fileUrl: "https://commons.wikimedia.org/wiki/File:Mt-Alban-Face-Est-sunrise.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
+  { titre: "Le Vieux Mougins", auteur: "Olivier Cleynen", fileUrl: "https://commons.wikimedia.org/wiki/File:Mougins_01.jpg", licenceLabel: "CC BY 4.0", licenceUrl: "https://creativecommons.org/licenses/by/4.0/deed.fr" },
+  { titre: "Le Vieux Vallauris, cité de la céramique", auteur: "François de Dijon", fileUrl: "https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Vallauris_01.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Le Vieux Village de Grimaud", auteur: "Grimaud Tourisme", fileUrl: "https://commons.wikimedia.org/wiki/File:Village_m%C3%A9di%C3%A9val_et_proven%C3%A7al_de_Grimaud.jpg", licenceLabel: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr" },
+  { titre: "Le Vieux Village de Ramatuelle", auteur: "Uwe Worm", fileUrl: "https://commons.wikimedia.org/wiki/File:%C3%9Cber_den_D%C3%A4chern_von_Ramatuelle_03.JPG", licenceLabel: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0/deed.fr" },
 ];
 
 export default function CreditsPage() {

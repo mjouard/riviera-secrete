@@ -173,14 +173,14 @@ séparée, décision de l'utilisateur du 2026-09-14.
 | `falicon` (ville) | Falicon | thumb | ✅ fait |
 | `falicon-village` | Falicon | hero + thumb | ✅ fait — Jpchevreau, CC BY-SA 4.0 |
 | `parc-mont-boron` | Le Parc du Mont Boron | hero + thumb | ✅ fait — FrancoisMignard, CC BY-SA 3.0 (photo du Fort du Mont Alban, dans le parc) |
-| `mougins` (ville) | Mougins | thumb |
-| `vieux-mougins` | Le Vieux Mougins | hero + thumb |
-| `vallauris` (ville) | Vallauris | thumb |
-| `vieux-vallauris-ceramique` | Le Vieux Vallauris, cité de la céramique | hero + thumb |
-| `grimaud` (ville) | Grimaud | thumb |
-| `vieux-village-grimaud` | Le Vieux Village de Grimaud | hero + thumb |
-| `ramatuelle` (ville) | Ramatuelle | thumb |
-| `vieux-village-ramatuelle` | Le Vieux Village de Ramatuelle | hero + thumb |
+| `mougins` (ville) | Mougins | thumb | ✅ fait |
+| `vieux-mougins` | Le Vieux Mougins | hero + thumb | ✅ fait — Olivier Cleynen, CC BY 4.0 |
+| `vallauris` (ville) | Vallauris | thumb | ✅ fait |
+| `vieux-vallauris-ceramique` | Le Vieux Vallauris, cité de la céramique | hero + thumb | ✅ fait — François de Dijon, CC BY-SA 4.0 |
+| `grimaud` (ville) | Grimaud | thumb | ✅ fait |
+| `vieux-village-grimaud` | Le Vieux Village de Grimaud | hero + thumb | ✅ fait — Grimaud Tourisme, CC BY-SA 4.0 (léger logo de l'office de tourisme visible en coin bas-gauche) |
+| `ramatuelle` (ville) | Ramatuelle | thumb | ✅ fait |
+| `vieux-village-ramatuelle` | Le Vieux Village de Ramatuelle | hero + thumb | ✅ fait — Uwe Worm, CC BY-SA 3.0 |
 | `sainte-agnes` (ville) | Sainte-Agnès | thumb |
 | `sainte-agnes-village` | Sainte-Agnès | hero + thumb |
 | `coaraze` (ville) | Coaraze | thumb |
