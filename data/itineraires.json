@@ -1181,16 +1181,6 @@
         "activiteId": "atelier-ceramique-artisanale",
         "lieuLabelEn": "Tourrettes-sur-Loup",
         "nomLabelEn": "Ceramics workshop"
-      },
-      {
-        "lieuLabel": "Gourdon",
-        "nomLabel": "Château-musée de Gourdon",
-        "linkText": "Réserver →",
-        "extraSpans": [],
-        "lieuSlug": "gourdon-village",
-        "activiteId": "chateau-musee-de-gourdon",
-        "lieuLabelEn": "Gourdon",
-        "nomLabelEn": "Gourdon Castle-Museum"
       }
     ],
     "suggestions": [

@@ -63,13 +63,17 @@
       Affichage : horaires sous le prix + avertissement "⚠️ Fermé aujourd'hui" calculé
       **côté client** (la page est en ISR, un jour calculé serveur serait figé dans le cache)
       via `useSyncExternalStore`.
-      **Trouvé au passage, à trancher** : le **Château de Gourdon est fermé au public**
-      (confirmé sur chateau-gourdon.com, privatisé pour événements depuis 2015) alors que le
-      site le recommande à 6 €/adulte — et son `url` pointe vers `chateaudegourdon.com`, un
-      **domaine viticole de la vallée du Rhône** sans aucun rapport. L'activité
-      `chateau-musee-de-gourdon` est laissée sans horaires en attendant : soit la retirer
-      (elle est aussi référencée dans le `booking[]` de l'itinéraire `villages-perches`),
-      soit la remplacer par autre chose à Gourdon.
+      **Trouvé au passage et corrigé le 2026-09-13** : le **Château de Gourdon est fermé au
+      public** (confirmé sur chateau-gourdon.com, privatisé pour événements depuis 2015)
+      alors que le site le recommandait à 6 €/adulte — et son `url` pointait vers
+      `chateaudegourdon.com`, un **domaine viticole de la vallée du Rhône** sans aucun
+      rapport. Sur décision de l'utilisateur, l'activité `chateau-musee-de-gourdon` a été
+      **supprimée** : retirée de `data/lieux.json`, du `booking[]` de l'itinéraire
+      `villages-perches`, de la DB prod (`remove-activite`), et son image orpheline
+      `act-1.jpg` supprimée. Les badges du lieu restent cohérents (`randonnee` et
+      `restaurant` ont toujours leur activité). **`gourdon-village` n'a plus que 3
+      activités**, sous le minimum de 4 retenu ailleurs sur le site — une activité de
+      remplacement à Gourdon reste à trouver.
       **Reste aussi** : les 37 restaurants et les 12 locations/sorties, si on juge un jour
       que ça vaut le coup malgré la volatilité
 

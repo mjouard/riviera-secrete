@@ -2074,21 +2074,6 @@
         "prixEn": "Free access"
       },
       {
-        "id": "chateau-musee-de-gourdon",
-        "nom": "Château-musée de Gourdon",
-        "nomEn": "Gourdon Castle-Museum",
-        "badge": "payant",
-        "duree": "1h",
-        "prix": "6 € / adulte",
-        "url": "https://www.chateaudegourdon.com/",
-        "image": "../assets/images/lieux/gourdon-village/act-1.jpg",
-        "alt": "Château-musée de Gourdon",
-        "altEn": "Gourdon Castle-Museum",
-        "linkText": "Réserver →",
-        "dureeEn": "1h",
-        "prixEn": "6 € / adult"
-      },
-      {
         "id": "randonnee-chemin-du-paradis",
         "nom": "Randonnée du Chemin du Paradis",
         "nomEn": "Chemin du Paradis hike",
