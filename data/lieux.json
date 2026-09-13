@@ -3927,7 +3927,7 @@
         "duree": "1h-1h30",
         "prix": "Accès libre",
         "url": "https://mouginstourisme.com/culture-et-patrimoine/",
-        "image": "https://picsum.photos/seed/galeries-mougins/200/200",
+        "image": "assets/images/lieux/vieux-mougins/act-1.jpg",
         "alt": "Galerie d'art dans une ruelle du Vieux Mougins",
         "linkText": "En savoir plus →"
       },
@@ -3938,7 +3938,7 @@
         "duree": "45 min",
         "prix": "Accès libre",
         "url": "https://mougins.fr/decouvrir/ville-verte/etang-fontmerle/",
-        "image": "https://picsum.photos/seed/fontmerle-mougins/200/200",
+        "image": "assets/images/lieux/vieux-mougins/act-2.jpg",
         "alt": "Lotus géants en fleur sur l'étang de Fontmerle à Mougins",
         "linkText": "En savoir plus →"
       },
@@ -3949,7 +3949,7 @@
         "duree": "1h",
         "prix": "6 € / adulte",
         "url": "https://centrephotographiemougins.com/",
-        "image": "https://picsum.photos/seed/centre-photo-mougins/200/200",
+        "image": "assets/images/lieux/vieux-mougins/act-3.jpg",
         "alt": "Exposition au Centre de la photographie de Mougins",
         "linkText": "Réserver →"
       },
@@ -3960,7 +3960,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://mouginstourisme.com/culture-et-patrimoine/eglises-et-chapelles/notre-dame-de-vie/",
-        "image": "https://picsum.photos/seed/notre-dame-de-vie-mougins/200/200",
+        "image": "assets/images/lieux/vieux-mougins/act-4.jpg",
         "alt": "Chapelle Notre-Dame-de-Vie entourée de cyprès, ancien voisinage de Picasso",
         "linkText": "En savoir plus →"
       },
@@ -3971,7 +3971,7 @@
         "duree": "1h30",
         "prix": "30-50 € / pers.",
         "url": "https://www.lebistrotdemougins.fr/",
-        "image": "https://picsum.photos/seed/bistrot-mougins/200/200",
+        "image": "assets/images/lieux/vieux-mougins/act-5.jpg",
         "alt": "Ancienne écurie du XVIIIe siècle transformée en salle du Bistrot de Mougins",
         "linkText": "Réserver →"
       }
@@ -4053,7 +4053,7 @@
         "duree": "1h",
         "prix": "Accès libre",
         "url": "https://www.vallaurisgolfejuan-tourisme.fr/picasso-ceramic/ceramic/pottery-workshop-tours/",
-        "image": "https://picsum.photos/seed/ateliers-vallauris/200/200",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-1.jpg",
         "alt": "Tournage de poterie dans un atelier de céramiste à Vallauris",
         "linkText": "En savoir plus →"
       },
@@ -4064,7 +4064,7 @@
         "duree": "1h-1h30",
         "prix": "6 € / adulte",
         "url": "https://www.vallaurisgolfejuan-tourisme.fr/lieux-touristique/chateau-musee-de-vallauris/",
-        "image": "https://picsum.photos/seed/chateau-musee-vallauris/200/200",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-2.jpg",
         "alt": "Chapelle romane du château de Vallauris abritant La Guerre et la Paix de Picasso",
         "linkText": "Réserver →"
       },
@@ -4075,7 +4075,7 @@
         "duree": "10 min",
         "prix": "Accès libre",
         "url": "https://www.vallauris-golfe-juan.fr/20737-la-ville.htm",
-        "image": "https://picsum.photos/seed/homme-mouton-vallauris/200/200",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-3.jpg",
         "alt": "Statue de bronze L'Homme au mouton de Picasso sur la place du marché de Vallauris",
         "linkText": "En savoir plus →"
       },
@@ -4086,7 +4086,7 @@
         "duree": "20 min",
         "prix": "Accès libre",
         "url": "https://www.vallaurisgolfejuan-tourisme.fr/discover/from-land-to-sea/",
-        "image": "https://picsum.photos/seed/colonne-golfe-juan/200/200",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-4.jpg",
         "alt": "Colonne commémorative du débarquement de Napoléon sur la plage de Golfe-Juan",
         "linkText": "En savoir plus →"
       },
@@ -4097,7 +4097,7 @@
         "duree": "1h",
         "prix": "16-23 € / pers.",
         "url": "https://www.thefork.fr/restaurant/le-temps-jadis-r669613",
-        "image": "https://picsum.photos/seed/temps-jadis-vallauris/200/200",
+        "image": "assets/images/lieux/vieux-vallauris-ceramique/act-5.jpg",
         "alt": "Salle du restaurant Le Temps Jadis avenue Clemenceau à Vallauris",
         "linkText": "Réserver →"
       }
