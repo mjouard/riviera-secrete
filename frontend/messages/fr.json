@@ -60,7 +60,9 @@
     "recherchePlaceholder": "Rechercher un lieu, une commune, une activité…",
     "rechercheEffacer": "Effacer la recherche",
     "aucunResultat": "Aucun lieu ne correspond à « {query} ».",
-    "reinitialiser": "Tout afficher"
+    "reinitialiser": "Tout afficher",
+    "gratuitSeulement": "Gratuit seulement",
+    "aucuneGratuite": "Aucune activité gratuite dans cette catégorie."
   },
   "villes": {
     "title": "Villes & villages",

@@ -60,7 +60,9 @@
     "recherchePlaceholder": "Search a place, a town, an activity…",
     "rechercheEffacer": "Clear search",
     "aucunResultat": "No place matches “{query}”.",
-    "reinitialiser": "Show everything"
+    "reinitialiser": "Show everything",
+    "gratuitSeulement": "Free only",
+    "aucuneGratuite": "No free activity in this category."
   },
   "villes": {
     "title": "Towns & villages",

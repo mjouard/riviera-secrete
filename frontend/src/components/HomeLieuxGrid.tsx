@@ -17,6 +17,67 @@ import {
   type Saison,
 } from "@/lib/lieu-filters";
 
+/**
+ * Sélecteur de filtre stylé.
+ *
+ * Un <select> natif reste le bon choix (le picker natif est bien plus agréable au pouce
+ * qu'un menu maison, et l'accessibilité est gratuite), mais il faut neutraliser son
+ * habillage par défaut, franchement laid en mobile :
+ * - `appearance: none` + chevron dessiné nous-mêmes, sinon chaque OS impose sa flèche ;
+ * - `colorScheme: dark` pour que la **liste déroulante native** s'affiche en sombre — sans
+ *   ça, iOS et Android ouvrent un panneau blanc au milieu d'un site sombre ;
+ * - hauteur fixe (h-10) alignée sur le bouton voisin, les hauteurs natives variant d'un OS
+ *   à l'autre ;
+ * - quand un filtre est actif, la pastille passe en terracotta comme les badges au-dessus :
+ *   c'est le même langage visuel, et ça rend un filtre actif repérable d'un coup d'œil.
+ */
+function FilterSelect({
+  label,
+  value,
+  onChange,
+  placeholder,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  options: { value: string; label: string }[];
+}) {
+  const active = value !== "";
+  return (
+    <span className="relative inline-flex w-full sm:w-auto">
+      <select
+        aria-label={label}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full h-10 appearance-none rounded-full border pl-4 pr-9 text-xs font-medium cursor-pointer outline-none transition-colors focus:border-white/40 sm:w-auto"
+        style={{
+          colorScheme: "dark",
+          borderColor: active ? "var(--terracotta)" : "var(--line)",
+          background: active ? "rgba(232,163,61,0.12)" : "var(--surface)",
+          color: active ? "var(--terracotta)" : "var(--text-muted)",
+        }}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 12 12"
+        className="pointer-events-none absolute right-3.5 top-1/2 h-3 w-3 -translate-y-1/2"
+        style={{ color: active ? "var(--terracotta)" : "var(--text-muted)" }}
+      >
+        <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
 function LieuCard({ lieu }: { lieu: Lieu }) {
   const locale = useLocale();
   return (
@@ -213,53 +274,37 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         ))}
       </div>
       {/* Saison / durée / niveau : des <select> plutôt que des pastilles — 10 options de
-          plus en pastilles noieraient les 5 badges au-dessus. */}
-      <div className="flex flex-wrap items-center gap-2 mb-8">
-        <select
+          plus en pastilles noieraient les 5 badges au-dessus. Grille 2×2 en mobile (3
+          sélecteurs + le bouton), rangée simple dès sm. */}
+      <div className="grid grid-cols-2 gap-2 mb-8 sm:flex sm:flex-wrap sm:items-center">
+        <FilterSelect
+          label={tFiltres("saison")}
           value={saison}
-          onChange={(e) => setSaison(e.target.value as Saison | "")}
-          aria-label={tFiltres("saison")}
-          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
-          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
-        >
-          <option value="">{tFiltres("saisonToutes")}</option>
-          {SAISONS.map((s) => (
-            <option key={s} value={s}>{tFiltres(s)}</option>
-          ))}
-        </select>
-
-        <select
+          onChange={(v) => setSaison(v as Saison | "")}
+          placeholder={tFiltres("saisonToutes")}
+          options={SAISONS.map((s) => ({ value: s, label: tFiltres(s) }))}
+        />
+        <FilterSelect
+          label={tFiltres("duree")}
           value={duree}
-          onChange={(e) => setDuree(e.target.value as Duree | "")}
-          aria-label={tFiltres("duree")}
-          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
-          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
-        >
-          <option value="">{tFiltres("dureeToutes")}</option>
-          {DUREES.map((d) => (
-            <option key={d} value={d}>{tFiltres(d)}</option>
-          ))}
-        </select>
-
-        <select
+          onChange={(v) => setDuree(v as Duree | "")}
+          placeholder={tFiltres("dureeToutes")}
+          options={DUREES.map((d) => ({ value: d, label: tFiltres(d) }))}
+        />
+        <FilterSelect
+          label={tFiltres("niveau")}
           value={niveau}
-          onChange={(e) => setNiveau(e.target.value as Niveau | "")}
-          aria-label={tFiltres("niveau")}
-          className="text-xs px-3 py-2 rounded-full border cursor-pointer outline-none focus:border-white/30 transition-colors"
-          style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text-muted)" }}
-        >
-          <option value="">{tFiltres("niveauTous")}</option>
-          {NIVEAUX.map((n) => (
-            <option key={n} value={n}>{tFiltres(n)}</option>
-          ))}
-        </select>
+          onChange={(v) => setNiveau(v as Niveau | "")}
+          placeholder={tFiltres("niveauTous")}
+          options={NIVEAUX.map((n) => ({ value: n, label: tFiltres(n) }))}
+        />
 
         <button
           type="button"
           onClick={surprendsMoi}
           disabled={filtered.length === 0}
           title={tFiltres("surprendsMoiTitre")}
-          className="text-xs px-4 py-2 rounded-full border transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-40 disabled:cursor-default"
+          className="col-span-2 h-10 px-4 rounded-full border text-xs font-medium transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-40 disabled:cursor-default sm:col-span-1"
           style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
         >
           {tFiltres("surprendsMoi")}

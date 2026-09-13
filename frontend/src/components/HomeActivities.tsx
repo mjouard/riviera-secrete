@@ -25,6 +25,11 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
   const tCategories = useTranslations("categories");
   const tActivite = useTranslations("activite");
   const [active, setActive] = useState<string>(ACTIVITY_CATEGORIES[0].slug);
+  // Filtre "gratuit" placé ici et non sur la grille des lieux : 42 lieux sur 43 ont au
+  // moins une activité gratuite et aucun n'est entièrement gratuit, donc au niveau du lieu
+  // le filtre ne discriminerait rien. Au niveau des activités il sépare réellement
+  // (12 gratuites / 24 payantes dans la sélection mise en avant).
+  const [gratuitSeulement, setGratuitSeulement] = useState(false);
 
   const byCategory: Record<string, CardData[]> = {};
   ACTIVITY_CATEGORIES.forEach((c) => (byCategory[c.slug] = []));
@@ -70,20 +75,38 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
             {tCategories(cat.slug as "outdoor" | "culture" | "gastronomie" | "loisirs")}
           </button>
         ))}
+
+        <button
+          type="button"
+          onClick={() => setGratuitSeulement((v) => !v)}
+          aria-pressed={gratuitSeulement}
+          className="text-xs px-4 py-2 rounded-full border transition-colors cursor-pointer"
+          style={
+            gratuitSeulement
+              ? { background: "var(--azure)", color: "#0C1116", borderColor: "var(--azure)" }
+              : { borderColor: "var(--line)", color: "var(--text-muted)" }
+          }
+        >
+          {t("gratuitSeulement")}
+        </button>
       </div>
-      {ACTIVITY_CATEGORIES.map((cat) => (
+      {ACTIVITY_CATEGORIES.map((cat) => {
+        const cards = gratuitSeulement
+          ? byCategory[cat.slug].filter((c) => c.badge === "gratuit")
+          : byCategory[cat.slug];
+        return (
         <div
           key={cat.slug}
           role="tabpanel"
           hidden={active !== cat.slug}
           className="flex gap-4 overflow-x-auto pb-2"
         >
-          {byCategory[cat.slug].length === 0 ? (
+          {cards.length === 0 ? (
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              {t("rienPourInstant")}
+              {gratuitSeulement ? t("aucuneGratuite") : t("rienPourInstant")}
             </p>
           ) : (
-            byCategory[cat.slug].map((card) => (
+            cards.map((card) => (
               <Link
                 key={card.key}
                 href={`/lieux/${card.lieuSlug}`}
@@ -122,7 +145,8 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
             ))
           )}
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
