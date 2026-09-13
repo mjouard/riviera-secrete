@@ -137,9 +137,17 @@
       (fondations) faite et déployée le 2026-09-13** — routing `/en` (next-intl, slugs
       identiques FR/EN), colonnes `*En` nullables côté backend (migration appliquée en prod),
       chrome (nav/footer) traduit, `/en` en `noindex` tant que le contenu réel n'y est pas.
-      Phases 1+ (traduction homepage/villes puis 27 lieux/22 villes/6 itinéraires/~109
-      activités) pas encore démarrées. Détail complet dans
-      `.claude/memory/project_version_anglaise.md`. Plan initial établi le 2026-09-12, deux
+      **Phases 1-3 faites et déployées le 2026-09-13** : homepage/villes/lieux/itinéraires
+      câblés sur next-intl, contenu traduit pour les 43 lieux/34 villes/6 itinéraires/205
+      activités (synchronisé en DB prod), bouton FR/EN ajouté au nav. Restent : phase 4
+      (auth/transactionnel), polish SEO (retirer le `noindex`, hreflang, sitemap), **et
+      `/creer-itineraire` (le constructeur d'itinéraire) qui n'a jamais été touché pour la
+      locale — signalé par l'utilisateur le 2026-09-13, pas encore scopé**. Des champs JSON
+      imbriqués sans colonne `*En` (tips/related d'un lieu, items/booking/suggestions d'un
+      itinéraire, durée/prix d'une activité) restent en français sur `/en` par décision
+      assumée mais pas explicitement validée par l'utilisateur — voir
+      `.claude/memory/project_version_anglaise.md` pour le détail complet. Plan initial
+      établi le 2026-09-12, deux
       décisions validées par l'utilisateur avant de commencer (routing + stockage) :
       1. Routing en `frontend/src/app/[locale]/...` + `next-intl` pour la UI chrome, slugs
          de lieux/villes **identiques** dans les deux langues (pas de slug anglais dédié).

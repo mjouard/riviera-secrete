@@ -20,6 +20,17 @@ fait" plus bas. Restent : phase 4 (auth/transactionnel) et phase 5 (polish SEO),
 extension de scope à trancher avec l'utilisateur (champs JSON imbriqués non traduits, voir
 "Scope réduit assumé" ci-dessous).
 
+**Trou signalé par l'utilisateur le 2026-09-13, pas encore scopé** : `/creer-itineraire` (le
+constructeur d'itinéraire — `PickerView.tsx` et le reste de `_components/`) n'a jamais été
+touché pour la locale, ni dans la phase 0 ni dans les phases 1-3 (qui ne couvraient que les
+pages de contenu public, pas les pages outil/compte). Probablement le plus visible des
+oublis puisque c'est une page d'action, pas juste de lecture — à traiter avec
+`/mes-itineraires`/`/mes-favoris`/`/connexion`/`/confirmer-email` dans une passe dédiée aux
+pages compte (phase 4 ou une phase 3.5 séparée). Au passage, `PickerView.tsx` a le même bug
+que celui trouvé et corrigé sur la page lieu (regionLabel brut au lieu de
+`tRegionFull(regionSlug)`) — voir la ligne `regionLabel` dans "Phases 1-3" ci-dessous, même
+correctif à répliquer ici.
+
 ## État des lieux au moment du plan
 
 Aucune infra i18n n'existe : pas de `next-intl` ni équivalent dans
