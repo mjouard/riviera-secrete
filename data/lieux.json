@@ -284,7 +284,10 @@
         "altEn": "Visit to the villa & gardens",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "18 € / adult"
+        "prixEn": "18 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–18h (19h en juillet-août) ; horaires réduits en hiver. Ouvert tous les jours, quelques fermetures ponctuelles pour privatisation.",
+        "horairesEn": "10am–6pm (7pm in July–August); reduced hours in winter. Open daily, with occasional closures for private events."
       },
       {
         "id": "criques-pointe-sainte-hospice",
@@ -438,7 +441,10 @@
         "altEn": "Visit to Villa Kerylos",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "14 € / adult"
+        "prixEn": "14 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–17h (18h de mai à août). Ouvert tous les jours sauf 1er janvier, 1er mai, 1er et 11 novembre, 25 décembre.",
+        "horairesEn": "10am–5pm (6pm May–August). Open daily except 1 January, 1 May, 1 and 11 November, 25 December."
       },
       {
         "id": "promenade-gustave-eiffel",
@@ -590,7 +596,10 @@
         "altEn": "Jardin Exotique of Èze",
         "linkText": "Réserver →",
         "dureeEn": "45 min – 1 h 15",
-        "prixEn": "8 – 10 € / adult"
+        "prixEn": "8 – 10 € / adult",
+        "fermeJours": [],
+        "horaires": "9h–16h30 en hiver, 9h–18h30 au printemps et en octobre, 9h–19h30 de juillet à septembre. Billet en ligne obligatoire.",
+        "horairesEn": "9am–4.30pm in winter, 9am–6.30pm in spring and October, 9am–7.30pm July–September. Online ticket required."
       },
       {
         "id": "atelier-de-creation-de-parfum",
@@ -770,7 +779,12 @@
         "altEn": "Visit to the Trophy of Augustus",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "7 € / adult"
+        "prixEn": "7 € / adult",
+        "fermeJours": [
+          1
+        ],
+        "horaires": "Fermé le lundi. 10h–18h de mai à août, 10h–13h et 14h–17h le reste de l'année.",
+        "horairesEn": "Closed Mondays. 10am–6pm May–August, 10am–1pm and 2pm–5pm the rest of the year."
       },
       {
         "id": "panorama-sur-monaco",
@@ -937,7 +951,10 @@
         "altEn": "Jardin Exotique of Monaco",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult"
+        "prixEn": "8 € / adult",
+        "fermeJours": [],
+        "horaires": "Rouvert en mars 2026 après six ans de travaux. 9h–17h en hiver, 9h–19h de mai à septembre. Fermé pendant le Grand Prix, le 19 novembre et le 25 décembre.",
+        "horairesEn": "Reopened in March 2026 after six years of works. 9am–5pm in winter, 9am–7pm May–September. Closed during the Grand Prix, on 19 November and 25 December."
       },
       {
         "id": "musee-oceanographique",
@@ -952,7 +969,10 @@
         "altEn": "Oceanographic Museum",
         "linkText": "Réserver →",
         "dureeEn": "2h",
-        "prixEn": "18 € / adult"
+        "prixEn": "18 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–18h en hiver, 10h–19h au printemps, 9h30–20h en juillet-août. Fermé le week-end du Grand Prix et le 25 décembre.",
+        "horairesEn": "10am–6pm in winter, 10am–7pm in spring, 9.30am–8pm in July–August. Closed on Grand Prix weekend and 25 December."
       },
       {
         "id": "rocher-de-monaco-amp-palais",
@@ -1088,7 +1108,10 @@
         "altEn": "Visit to the medieval castle",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "5 € / adult"
+        "prixEn": "5 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–12h30 et 14h–17h ou 18h selon la saison. Fermé les 1er mai, 1er et 11 novembre, 25 décembre et 1er janvier.",
+        "horairesEn": "10am–12.30pm and 2pm–5 or 6pm depending on the season. Closed 1 May, 1 and 11 November, 25 December and 1 January."
       },
       {
         "id": "randonnee-village-cotier",
@@ -2796,7 +2819,13 @@
         "altEn": "Chapelle du Rosaire (Matisse)",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "7 € / adult"
+        "prixEn": "7 € / adult",
+        "fermeJours": [
+          0,
+          1
+        ],
+        "horaires": "Fermée le dimanche et le lundi, ainsi que les jours fériés. Fermeture annuelle de mi-novembre à mi-décembre. Horaires restreints, dernier billet à 16h30.",
+        "horairesEn": "Closed Sundays and Mondays, and on public holidays. Annual closure from mid-November to mid-December. Limited hours, last ticket at 4.30pm."
       },
       {
         "id": "vieille-ville-de-vence",
@@ -2990,7 +3019,12 @@
         "altEn": "Musée National Fernand Léger",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "11 € / adult"
+        "prixEn": "11 € / adult",
+        "fermeJours": [
+          2
+        ],
+        "horaires": "Fermé le mardi. 10h–17h de novembre à avril, 10h–18h de mai à octobre.",
+        "horairesEn": "Closed Tuesdays. 10am–5pm November–April, 10am–6pm May–October."
       },
       {
         "id": "randonnee-parc-de-la-brague",
@@ -3139,7 +3173,12 @@
         "altEn": "Château-Musée Grimaldi",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "7 € / adult"
+        "prixEn": "7 € / adult",
+        "fermeJours": [
+          2
+        ],
+        "horaires": "Fermé le mardi et les jours fériés. 10h–12h et 14h–18h, horaires élargis en juillet-août.",
+        "horairesEn": "Closed Tuesdays and on public holidays. 10am–12pm and 2pm–6pm, extended hours in July–August."
       },
       {
         "id": "musee-renoir",
@@ -3154,7 +3193,12 @@
         "altEn": "Musée Renoir",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "9 € / adult"
+        "prixEn": "9 € / adult",
+        "fermeJours": [
+          2
+        ],
+        "horaires": "Fermé le mardi et les jours fériés. 10h–12h et 14h–18h, horaires élargis en juillet-août.",
+        "horairesEn": "Closed Tuesdays and on public holidays. 10am–12pm and 2pm–6pm, extended hours in July–August."
       },
       {
         "id": "balade-village-medieval",
@@ -3317,7 +3361,12 @@
         "altEn": "Musée Picasso d'Antibes",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult"
+        "prixEn": "8 € / adult",
+        "fermeJours": [
+          1
+        ],
+        "horaires": "Fermé le lundi. 10h–18h du 15 juin au 15 septembre, 10h–12h et 14h–18h le reste de l'année.",
+        "horairesEn": "Closed Mondays. 10am–6pm from 15 June to 15 September, 10am–12pm and 2pm–6pm the rest of the year."
       },
       {
         "id": "location-de-velos-electriques",
@@ -4187,7 +4236,10 @@
         "altEn": "Musée International de la Parfumerie",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult"
+        "prixEn": "8 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–18h (19h en juillet-août). Fermé le 1er lundi de plusieurs mois d'hiver, le 1er mai, le 25 décembre et le 1er janvier.",
+        "horairesEn": "10am–6pm (7pm in July–August). Closed on the first Monday of several winter months, 1 May, 25 December and 1 January."
       },
       {
         "id": "atelier-creation-de-parfum",
@@ -4335,7 +4387,10 @@
         "altEn": "Citadel & naval museum",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "9 € / adult"
+        "prixEn": "9 € / adult",
+        "fermeJours": [],
+        "horaires": "10h–18h30 d'avril à septembre, 10h–17h30 d'octobre à mars. Fermée les 1er mai, 17 mai, 11 novembre, 25 décembre et 1er janvier.",
+        "horairesEn": "10am–6.30pm April–September, 10am–5.30pm October–March. Closed 1 May, 17 May, 11 November, 25 December and 1 January."
       },
       {
         "id": "balade-au-port-de-saint-tropez",
@@ -4723,7 +4778,12 @@
         "altEn": "Terraced pools and rare plants of Jardin Serre de la Madone",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "10 € / adult"
+        "prixEn": "10 € / adult",
+        "fermeJours": [
+          1
+        ],
+        "horaires": "Fermé le lundi et les jours fériés, ainsi qu'en novembre et décembre.",
+        "horairesEn": "Closed Mondays and public holidays, and throughout November and December."
       },
       {
         "id": "jardin-botanique-val-rahmeh",
@@ -4738,7 +4798,12 @@
         "altEn": "Century-old palms and tropical plants of the Val Rahmeh garden",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "8 € / adult"
+        "prixEn": "8 € / adult",
+        "fermeJours": [
+          2
+        ],
+        "horaires": "Fermé le mardi. 10h–18h d'avril à octobre, 10h–17h de novembre à mars. Fermé les 1er mai et 25 décembre.",
+        "horairesEn": "Closed Tuesdays. 10am–6pm April–October, 10am–5pm November–March. Closed 1 May and 25 December."
       },
       {
         "id": "diner-petit-port",
@@ -5359,7 +5424,12 @@
         "altEn": "Romanesque chapel of Vallauris castle, home to Picasso's War and Peace",
         "linkText": "Réserver →",
         "dureeEn": "1h-1h30",
-        "prixEn": "6 € / adult"
+        "prixEn": "6 € / adult",
+        "fermeJours": [
+          2
+        ],
+        "horaires": "Fermé le mardi. 10h–12h15 et 14h–17h, 10h–12h30 et 14h–18h du 1er juillet au 15 septembre.",
+        "horairesEn": "Closed Tuesdays. 10am–12.15pm and 2pm–5pm, 10am–12.30pm and 2pm–6pm from 1 July to 15 September."
       },
       {
         "id": "homme-au-mouton-place",
@@ -6078,7 +6148,10 @@
         "altEn": "Vineyard of Château de Pampelonne bordering the beach",
         "linkText": "En savoir plus →",
         "dureeEn": "45 min",
-        "prixEn": "Free tasting, bottles from €17.50"
+        "prixEn": "Free tasting, bottles from €17.50",
+        "fermeJours": [],
+        "horaires": "Caveau ouvert tous les jours de 9h30 à 18h en continu ; sur rendez-vous en dehors de ces horaires.",
+        "horairesEn": "Cellar open daily from 9.30am to 6pm; by appointment outside those hours."
       },
       {
         "id": "dejeuner-moulins-ramatuelle-pampelonne",
@@ -6189,7 +6262,13 @@
         "altEn": "Underground gallery of the Maginot Line fort in Sainte-Agnès",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "7 € / adult"
+        "prixEn": "7 € / adult",
+        "fermeJours": [
+          1,
+          2
+        ],
+        "horaires": "Ouvert du mercredi au dimanche de mi-février à fin septembre, week-ends seulement d'octobre à mi-février. Visites guidées à 10h, 14h et 16h.",
+        "horairesEn": "Open Wednesday to Sunday from mid-February to late September, weekends only from October to mid-February. Guided tours at 10am, 2pm and 4pm."
       },
       {
         "id": "jardin-medieval-sainte-agnes",
@@ -6551,7 +6630,10 @@
         "altEn": "Concrete underground galleries of Fort Saint-Roch in Sospel",
         "linkText": "Réserver →",
         "dureeEn": "1h30-2h",
-        "prixEn": "9 € / adult"
+        "prixEn": "9 € / adult",
+        "fermeJours": [],
+        "horaires": "Week-ends seulement en avril, mai, juin et septembre (13h30–18h) ; tous les jours sauf lundi en juillet-août. Fermé le reste de l'année — vérifier avant de s'y rendre.",
+        "horairesEn": "Weekends only in April, May, June and September (1.30pm–6pm); daily except Mondays in July–August. Closed the rest of the year — check before travelling."
       },
       {
         "id": "dejeuner-le-picoun-sospel",
@@ -6868,7 +6950,10 @@
         "altEn": "Collector's Neapolitan nativity scene at the Musée de la Crèche in Lucéram",
         "linkText": "Réserver →",
         "dureeEn": "45 min",
-        "prixEn": "2 € / adult"
+        "prixEn": "2 € / adult",
+        "fermeJours": [],
+        "horaires": "Ouvert tous les jours de 14h à 17h. Horaires élargis et entrée libre pendant le Circuit des crèches, de fin novembre à début janvier.",
+        "horairesEn": "Open daily from 2pm to 5pm. Extended hours and free entry during the Circuit des crèches, from late November to early January."
       },
       {
         "id": "circuit-creches-village-luceram",

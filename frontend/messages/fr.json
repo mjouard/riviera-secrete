@@ -105,7 +105,8 @@
     "payant": "payant",
     "Gratuit": "Gratuit",
     "Payant": "Payant",
-    "verifierHoraires": "Vérifier les horaires →"
+    "verifierHoraires": "Vérifier les horaires →",
+    "fermeAujourdhui": "⚠️ Fermé aujourd'hui"
   },
   "badges": {
     "plage": "Plage",

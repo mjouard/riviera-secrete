@@ -73,6 +73,9 @@ public static class DatabaseSeeder
         Alt        = a["alt"]!.GetValue<string>(),
         AltEn      = a["altEn"]?.GetValue<string>(),
         LinkText   = a["linkText"]!.GetValue<string>(),
+        Horaires   = a["horaires"]?.GetValue<string>(),
+        HorairesEn = a["horairesEn"]?.GetValue<string>(),
+        FermeJours = a["fermeJours"]?.Deserialize<List<int>>(JsonOpts) ?? [],
     };
 
     private static Itineraire BuildItineraire(JsonNode i) => new()
@@ -266,6 +269,9 @@ public static class DatabaseSeeder
         dbActivite.Alt      = jsonActivite["alt"]!.GetValue<string>();
         dbActivite.AltEn    = jsonActivite["altEn"]?.GetValue<string>();
         dbActivite.LinkText = jsonActivite["linkText"]!.GetValue<string>();
+        dbActivite.Horaires   = jsonActivite["horaires"]?.GetValue<string>();
+        dbActivite.HorairesEn = jsonActivite["horairesEn"]?.GetValue<string>();
+        dbActivite.FermeJours = jsonActivite["fermeJours"]?.Deserialize<List<int>>(JsonOpts) ?? [];
 
         await db.SaveChangesAsync();
         return true;

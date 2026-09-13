@@ -10,6 +10,7 @@ import HeroCarousel from "@/components/HeroCarousel";
 import FavoriteButton from "@/components/FavoriteButton";
 import ShareButton from "@/components/ShareButton";
 import AddToItinButton from "@/components/AddToItinButton";
+import FermeAujourdhui from "@/components/FermeAujourdhui";
 
 export const revalidate = 3600;
 
@@ -250,6 +251,12 @@ export default async function LieuPage({
                     <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
                       {loc(locale, act.dureeEn, act.duree)} · {loc(locale, act.prixEn, act.prix)}
                     </p>
+                    {act.horaires && (
+                      <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                        🕒 {loc(locale, act.horairesEn, act.horaires)}
+                      </p>
+                    )}
+                    <FermeAujourdhui fermeJours={act.fermeJours} />
                   </div>
                   <span
                     className="text-xs mt-3"

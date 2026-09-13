@@ -105,7 +105,8 @@
     "payant": "paid",
     "Gratuit": "Free",
     "Payant": "Paid",
-    "verifierHoraires": "Check schedule →"
+    "verifierHoraires": "Check schedule →",
+    "fermeAujourdhui": "⚠️ Closed today"
   },
   "badges": {
     "plage": "Beach",

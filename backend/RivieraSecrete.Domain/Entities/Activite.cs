@@ -20,6 +20,23 @@ public class Activite
     public string? DureeEn { get; set; }
     public string? PrixEn { get; set; }
 
+    /// <summary>
+    /// Horaires en texte libre ("10h-18h, 19h en juillet-août"), null si non sourcé.
+    /// Volontairement du texte : les horaires réels sont saisonniers et pleins d'exceptions,
+    /// les figer dans une structure rigide donnerait une fausse précision.
+    /// </summary>
+    public string? Horaires { get; set; }
+    public string? HorairesEn { get; set; }
+
+    /// <summary>
+    /// Jours de fermeture hebdomadaire (0 = dimanche … 6 = samedi), colonne jsonb.
+    /// Liste vide = ouvert tous les jours ; null impossible (défaut []), l'absence
+    /// d'information se lit sur <see cref="Horaires"/> qui vaut alors null.
+    /// C'est la partie exploitable par la machine : elle permet d'avertir « fermé
+    /// aujourd'hui », seul affichage qui empêche réellement un déplacement pour rien.
+    /// </summary>
+    public List<int> FermeJours { get; set; } = [];
+
     // FK
     public int LieuId { get; set; }
     public Lieu Lieu { get; set; } = default!;

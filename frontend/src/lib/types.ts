@@ -40,6 +40,11 @@ export interface Activite {
   alt: string;
   altEn?: string | null;
   linkText: string;
+  /** Horaires en texte libre ; null tant que non sourcé (voir ROADMAP "Horaires"). */
+  horaires?: string | null;
+  horairesEn?: string | null;
+  /** Jours de fermeture hebdomadaire, 0 = dimanche … 6 = samedi. */
+  fermeJours?: number[] | null;
   lieuId: number;
 }
 
