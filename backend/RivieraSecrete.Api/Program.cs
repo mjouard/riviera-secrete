@@ -419,11 +419,16 @@ static Guid? GetUserId(ClaimsPrincipal principal)
 /// <summary>
 /// Clé de partitionnement du rate limiter : l'IP réelle du client.
 /// Derrière le proxy Railway, <c>RemoteIpAddress</c> est celle du proxy (identique pour tout
-/// le monde), ce qui ferait partager un seul quota à tous les visiteurs. On prend donc la
-/// **dernière** entrée de X-Forwarded-For : les proxies ajoutent en fin de chaîne, donc c'est
-/// celle écrite par Railway, la seule non contrôlée par l'appelant (un client peut envoyer
-/// son propre X-Forwarded-For, mais il sera en début de chaîne). Fallback sur RemoteIpAddress
-/// en local où l'en-tête est absent.
+/// le monde), donc on lit X-Forwarded-For et on prend la **première** entrée.
+///
+/// Attention au contre-sens : la règle générale « un client peut spoofer le début de la
+/// chaîne, donc prends la fin » ne s'applique pas ici. L'edge Railway *supprime* le
+/// X-Forwarded-For envoyé par le client avant d'écrire le sien, donc la première entrée est
+/// toujours l'IP réelle et n'est pas contrôlable par l'appelant. Railway peut par ailleurs
+/// ajouter un second hop interne : prendre la dernière entrée renverrait alors l'IP du proxy,
+/// identique pour tout le monde — un seul quota partagé par tous les visiteurs, qui
+/// transformerait le rate limiter en déni de service (20 requêtes/min suffiraient à bloquer
+/// les connexions de tout le site). Fallback sur RemoteIpAddress en local, sans l'en-tête.
 /// </summary>
 static string ClientKey(HttpContext ctx)
 {
@@ -431,7 +436,7 @@ static string ClientKey(HttpContext ctx)
     if (!string.IsNullOrWhiteSpace(forwarded))
     {
         var hops = forwarded.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        if (hops.Length > 0) return hops[^1];
+        if (hops.Length > 0) return hops[0];
     }
     return ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 }
