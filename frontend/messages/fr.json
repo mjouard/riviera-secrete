@@ -273,8 +273,11 @@
     "erreurGenerique": "Une erreur est survenue. Réessaie.",
     "mentionRgpd": "En créant un compte, tu nous confies ton adresse e-mail et ton prénom, utilisés uniquement pour retrouver tes favoris et tes itinéraires. Aucune publicité, aucune revente. Tu peux demander leur suppression à tout moment —",
     "motDePasseOublie": "Mot de passe oublié ?",
-    "oubliSaisirEmail": "Saisis d'abord ton adresse e-mail ci-dessus.",
-    "oubliEnvoye": "Si un compte existe avec cette adresse, un lien de réinitialisation vient d'être envoyé. Il expire dans 1 h."
+    "oubliEnvoye": "Si un compte existe avec cette adresse, un lien de réinitialisation vient d'être envoyé. Il expire dans 1 h.",
+    "metaTitreInscription": "Créer un compte",
+    "oubliTitre": "Mot de passe oublié",
+    "oubliSousTitre": "Saisis ton adresse, on t'envoie un lien pour choisir un nouveau mot de passe.",
+    "oubliEnvoyerLeLien": "Envoyer le lien"
   },
   "confirmerEmail": {
     "metaTitre": "Confirmation de l'adresse email",

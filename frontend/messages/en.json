@@ -273,8 +273,11 @@
     "erreurGenerique": "Something went wrong. Try again.",
     "mentionRgpd": "By creating an account you give us your email address and first name, used only to find your favourites and itineraries again. No advertising, no reselling. You can ask for their deletion at any time —",
     "motDePasseOublie": "Forgot your password?",
-    "oubliSaisirEmail": "Enter your email address above first.",
-    "oubliEnvoye": "If an account exists with this address, a reset link has just been sent. It expires in 1 hr."
+    "oubliEnvoye": "If an account exists with this address, a reset link has just been sent. It expires in 1 hr.",
+    "metaTitreInscription": "Create an account",
+    "oubliTitre": "Forgotten password",
+    "oubliSousTitre": "Enter your address and we'll send you a link to choose a new password.",
+    "oubliEnvoyerLeLien": "Send the link"
   },
   "confirmerEmail": {
     "metaTitre": "Email confirmation",

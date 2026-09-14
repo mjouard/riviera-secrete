@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./globals.css";
 
 /**
@@ -11,8 +12,8 @@ import "./globals.css";
  * en page. C'est le second fichier que next-intl demande pour cette raison.
  *
  * Il vit hors de `[locale]`, donc sans contexte de langue : impossible de traduire, la locale
- * est précisément ce qui manque. Texte en français, langue par défaut du site, et pas de
- * `Link` de `@/i18n/navigation` (qui exige ce contexte) — des ancres simples.
+ * est précisément ce qui manque. Texte en français, langue par défaut du site, et le `Link`
+ * de `next/link` et non celui de `@/i18n/navigation`, qui exige ce contexte.
  *
  * Il porte son propre `<html>` : le layout racine de l'application est `[locale]/layout.tsx`,
  * qu'on ne traverse pas ici.
@@ -32,12 +33,12 @@ export default function NotFoundRacine() {
             Le lien est peut-être périmé, ou l&apos;adresse comporte une faute.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="/" className="btn btn-primaire focus-ring-aube">
+            <Link href="/" className="btn btn-primaire focus-ring-aube">
               Retour à l&apos;accueil
-            </a>
-            <a href="/#lieux" className="btn btn-secondaire focus-ring-aube">
+            </Link>
+            <Link href="/#lieux" className="btn btn-secondaire focus-ring-aube">
               Voir tous les lieux
-            </a>
+            </Link>
           </div>
         </div>
       </body>

@@ -23,6 +23,9 @@ export default async function NotFound() {
   // Une 404 n'a pas à tomber en erreur si l'API est indisponible : sans lieux, on garde le
   // message et les deux liens de sortie.
   const lieux = await api.lieux.list().catch(() => []);
+  // Tirage côté serveur : ce composant ne se re-rend jamais dans le navigateur, le risque de
+  // résultat instable entre deux rendus que vise la règle de pureté ne s'applique pas ici.
+  // eslint-disable-next-line react-hooks/purity
   const suggestions = [...lieux].sort(() => Math.random() - 0.5).slice(0, 3);
 
   return (
