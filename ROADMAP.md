@@ -60,16 +60,28 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       est un outil de planification interne alors que le visiteur juge à l'heure de fin ; et
       le calcul horaire est remonté dans `construirePlanning()` pour que l'avertissement et
       le programme détaillé ne puissent pas diverger.
-- [ ] **Le générateur reste trop conservateur hors itinéraire source** — constaté en
-      corrigeant le point ci-dessus : `antibes-biot-juan` tient largement dans la journée
-      (fin 17h55 pour un budget de 8 h) et perdait pourtant une étape. La coupure gloutonne
-      se déclenche sur le budget *restant* d'une étape isolée, sans voir que le total passe.
-      Même racine que l'item suivant.
-- [ ] **« N lieux non inclus faute de temps » n'est pas crédible** — sur un 2 jours /
-      13 lieux, 5 exclus alors que les journées finissent vers 16h et qu'Èze et le Cap
-      Ferrat, exclus, sont *géographiquement entre* les étapes retenues. L'algorithme est
-      glouton et dépendant de l'ordre. Piste : seconde passe d'insertion dans les créneaux
-      restants, ou reformuler (« mis de côté pour garder le rythme »).
+- [x] **Générateur moins conservateur** — **fait le 2026-09-14**. Deux causes traitées
+      ensemble : la coupure gloutonne s'arrêtait au **premier** candidat qui ne rentrait pas,
+      or c'est le plus proche géographiquement, pas le moins coûteux — un lieu suivant, plus
+      court, aurait tenu. Et le budget de `DUREE_META` était traité comme une limite dure
+      alors que c'est un repère de planification : une étape était écartée à quinze minutes
+      près, sur une journée qui se terminait à **15h10**.
+
+      Une seconde passe replace désormais chaque exclu dans la journée où il coûte le moins
+      de trajet supplémentaire — en l'insérant entre deux arrêts voisins quand c'est moins
+      cher que de rallonger la fin de journée — avec une tolérance d'un quart de budget.
+      Au-delà, c'est l'avertissement « journée dense », exprimé à l'horloge, qui prend le
+      relais plutôt qu'un retrait silencieux.
+
+      Mesuré sur les données réelles : `antibes-biot-juan` 3/4 → **4/4**,
+      `grasse-saint-tropez` 2/3 → **3/3**, `villages-perches` 3/5 → **4/5**. Sur une sélection
+      libre de 13 lieux : 3 jours passe de 11 à **13/13**, 2 jours de 8 à 10. La journée la
+      plus tardive jamais générée finit à 18h50, donc sous le seuil d'avertissement — les
+      deux mécanismes restent cohérents. Vérifié aussi : aucun doublon, aucun lieu perdu.
+- [x] **« N lieux non inclus faute de temps » redevenu crédible** — corrigé par la seconde
+      passe ci-dessus. Sur le cas exact de l'audit (2 jours, 13 lieux) : **5 exclus → 3**, et
+      les journées se terminent maintenant vers 17h25 et 18h20 au lieu de 16h. Le message dit
+      donc quelque chose de vrai, ce qui n'était pas le cas.
 
 ### Fiabilité — contredit `/a-propos`, donc prioritaire
 

@@ -154,6 +154,7 @@ export function generateItineraire(
   const meta = DUREE_META[dureeKey];
   const pool = candidates.slice();
   const days: Lieu[][] = [];
+  const restants: number[] = [];
   let currentPos = pool.reduce((a, b) => (b.lng > a.lng ? b : a));
 
   const numDays = meta.dayBudgets.length;
@@ -188,8 +189,81 @@ export function generateItineraire(
       currentPos = best!;
     }
     days.push(day);
+    restants.push(budget);
   }
+
+  // ── Seconde passe : replacer ce que la première a laissé de côté ────────────
+  //
+  // La coupure ci-dessus s'arrête au **premier** candidat qui ne rentre pas, or c'est le
+  // plus proche géographiquement, pas le moins coûteux : un lieu suivant, plus court, aurait
+  // pu tenir. `antibes-biot-juan` perdait ainsi une étape alors que sa journée se termine à
+  // 17h55 pour un budget de 8 h. D'où cette passe, qui tente de replacer chaque exclu dans
+  // la journée où il coûte le moins de trajet supplémentaire, tant qu'il y reste du budget.
+  //
+  // Elle explique aussi le message « N lieux non inclus faute de temps », que l'audit jugeait
+  // à raison peu crédible : il s'affichait sur des journées finissant vers 16h.
+  if (!garderTous) {
+    // Le budget de `DUREE_META` est un repère de planification, pas une limite dure : il
+    // fixe une journée type de 9h à 17h. S'arrêter pile dessus faisait écarter une étape à
+    // quinze minutes près, sur une journée qui se terminait à 15h10. On tolère donc un quart
+    // de budget en plus — une journée complète peut finir vers 19h, une demi-journée vers
+    // 14h — et c'est l'avertissement « journée dense », exprimé à l'horloge, qui prend le
+    // relais au-delà plutôt qu'un retrait silencieux.
+    const avecTolerance = restants.map(
+      (r, d) => r + Math.round(meta.dayBudgets[d] * TOLERANCE_JOURNEE)
+    );
+    placerLesRestants(pool, days, avecTolerance);
+  }
+
   return { days, excluded: pool };
+}
+
+/**
+ * Insère les lieux non placés là où ils tiennent, en mutant `days`, `restants` et `pool`.
+ *
+ * Pour chaque candidat on essaie toutes les positions de toutes les journées et on retient
+ * celle qui ajoute le moins de trajet — insérer entre deux arrêts voisins coûte souvent bien
+ * moins que de rallonger la fin de journée. On boucle tant qu'un placement a réussi : caser
+ * un lieu peut raccourcir le détour d'un autre.
+ */
+function placerLesRestants(pool: Lieu[], days: Lieu[][], restants: number[]): void {
+  let placeAuMoinsUn = true;
+  while (pool.length && placeAuMoinsUn) {
+    placeAuMoinsUn = false;
+
+    for (let i = 0; i < pool.length; i++) {
+      const lieu = pool[i];
+      const visite = parseVisitMinutes(lieu);
+      let meilleur: { jour: number; position: number; surcout: number } | null = null;
+
+      for (let j = 0; j < days.length; j++) {
+        const jour = days[j];
+        if (jour.length === 0) continue; // une journée vide n'a pas d'ancrage géographique
+
+        for (let k = 0; k <= jour.length; k++) {
+          // Surcoût de trajet réel de l'insertion : ce qu'on ajoute, moins le tronçon
+          // qu'on remplace. En fin de journée il n'y a rien à remplacer.
+          const avant = k > 0 ? jour[k - 1] : null;
+          const apres = k < jour.length ? jour[k] : null;
+          const ajoute =
+            (avant ? travelMinutes(avant, lieu) : 0) + (apres ? travelMinutes(lieu, apres) : 0);
+          const retire = avant && apres ? travelMinutes(avant, apres) : 0;
+          const surcout = ajoute - retire + visite;
+
+          if (surcout > restants[j]) continue;
+          if (!meilleur || surcout < meilleur.surcout) meilleur = { jour: j, position: k, surcout };
+        }
+      }
+
+      if (meilleur) {
+        days[meilleur.jour].splice(meilleur.position, 0, lieu);
+        restants[meilleur.jour] -= meilleur.surcout;
+        pool.splice(i, 1);
+        placeAuMoinsUn = true;
+        break; // le pool a changé : on repart proprement plutôt que d'ajuster les indices
+      }
+    }
+  }
 }
 
 /** Heure de départ de chaque journée dans le programme généré. */
@@ -205,6 +279,13 @@ export const SEUIL_DEJEUNER_MINUTES = 12 * 60 + 30;
  * une qui finit à 20h05 le mérite, budget ou pas.
  */
 export const FIN_JOURNEE_RAISONNABLE_MINUTES = 19 * 60;
+
+/**
+ * Dépassement toléré du budget d'une journée quand on replace les étapes écartées, en part
+ * du budget. Un quart laisse une journée complète finir vers 19h et une demi-journée vers
+ * 14h — au-delà, c'est l'avertissement « journée dense » qui parle.
+ */
+const TOLERANCE_JOURNEE = 0.25;
 
 export type ElementPlanning =
   | { type: "transit"; minutes: number }
