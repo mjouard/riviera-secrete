@@ -144,6 +144,7 @@
     "duree": "Duration",
     "lieuxSection": "Places ({count} selected)",
     "lieuxCount": "{count} places",
+    "toutSelectionnerZone": "Select all — {zone}",
     "emptyNote": "Select at least one place.",
     "generer": "Build my itinerary →",
     "chargement": "Loading…",

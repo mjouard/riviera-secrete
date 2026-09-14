@@ -69,12 +69,16 @@ export default function PickerView({
             return (
               <div key={regionSlug} className="rounded-xl overflow-hidden" style={{ background: "var(--surface)" }}>
                 <div className="flex items-center gap-3 px-4 py-3">
+                  {/* Cette case n'a aucun texte à côté d'elle (le libellé de zone appartient
+                      au bouton de dépliage voisin) : sans aria-label, elle s'annonçait
+                      « case à cocher, on », sans dire de quelle zone il s'agit. */}
                   <input
                     type="checkbox"
                     checked={checked}
+                    aria-label={t("toutSelectionnerZone", { zone: regionLabel })}
                     ref={(el) => { if (el) el.indeterminate = indeterminate; }}
                     onChange={(e) => onToggleRegion(regionSlug, e.target.checked)}
-                    className="w-4 h-4 cursor-pointer flex-shrink-0"
+                    className="focus-ring w-4 h-4 cursor-pointer flex-shrink-0"
                     onClick={(e) => e.stopPropagation()}
                   />
                   <button

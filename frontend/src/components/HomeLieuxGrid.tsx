@@ -51,7 +51,7 @@ function FilterSelect({
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-10 appearance-none rounded-full border pl-4 pr-9 text-xs font-medium cursor-pointer outline-none transition-colors focus:border-white/40 sm:w-auto"
+        className="focus-ring w-full h-10 appearance-none rounded-full border pl-4 pr-9 text-xs font-medium cursor-pointer transition-colors sm:w-auto"
         style={{
           colorScheme: "dark",
           borderColor: active ? "var(--terracotta)" : "var(--line)",
@@ -316,7 +316,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("recherchePlaceholder")}
           autoComplete="off"
-          className="w-full text-sm rounded-full border outline-none transition-colors focus:border-white/30 py-2.5 pl-11 pr-11"
+          className="focus-ring w-full text-sm rounded-full border transition-colors py-2.5 pl-11 pr-11"
           style={{
             borderColor: "var(--line)",
             background: "var(--surface)",

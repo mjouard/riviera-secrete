@@ -144,6 +144,7 @@
     "duree": "Durée",
     "lieuxSection": "Lieux ({count} sélectionné{plural})",
     "lieuxCount": "{count} lieux",
+    "toutSelectionnerZone": "Tout sélectionner — {zone}",
     "emptyNote": "Sélectionne au moins un lieu.",
     "generer": "Générer mon itinéraire →",
     "chargement": "Chargement…",

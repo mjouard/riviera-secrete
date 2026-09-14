@@ -38,6 +38,18 @@ button:not(:disabled) { cursor: pointer; }
   .carousel-dots { bottom: 12px; right: 14px; }
 }
 
+/* ---------- FOCUS CLAVIER ---------- */
+/* Les champs du site portaient `outline-none` avec, pour seul remplacement, un
+   `focus:border-white/30` (~1,7:1) - lui-meme neutralise par le style inline borderColor
+   present sur chacun d'eux : en pratique, aucun indicateur de focus. Anneau unique ici,
+   --azure sur --surface = 8,1:1, bien au-dela des 3:1 exiges. :focus-visible et non
+   :focus, pour ne pas l'afficher au clic souris. */
+.focus-ring { outline: none; }
+.focus-ring:focus-visible {
+  outline: 2px solid var(--azure);
+  outline-offset: 2px;
+}
+
 /* ---------- CARTES LEAFLET ---------- */
 /* Sur ecran tactile, Leaflet pose touch-action:none sur son conteneur : un touchmove
    vertical demarre sur la carte etait absorbe, la page ne defilait pas, et comme la carte

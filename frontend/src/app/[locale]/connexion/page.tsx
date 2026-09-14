@@ -179,15 +179,16 @@ export default function ConnexionPage() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {mode === "register" && (
           <div>
-            <label className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
+            <label htmlFor="connexion-nom" className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
               {t("nom")}
             </label>
             <input
+              id="connexion-nom"
               type="text"
               required
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
+              className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
               style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
               placeholder={t("nomPlaceholder")}
             />
@@ -195,16 +196,17 @@ export default function ConnexionPage() {
         )}
 
         <div>
-          <label className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
+          <label htmlFor="connexion-email" className="text-xs mb-1 block" style={{ color: "var(--text-muted)" }}>
             {t("email")}
           </label>
           <input
+            id="connexion-email"
             type="email"
             required
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
+            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={t("emailPlaceholder")}
           />
@@ -212,7 +214,7 @@ export default function ConnexionPage() {
 
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="text-xs" style={{ color: "var(--text-muted)" }}>
+            <label htmlFor="connexion-mot-de-passe" className="text-xs" style={{ color: "var(--text-muted)" }}>
               {t("motDePasse")}
             </label>
             <button
@@ -225,13 +227,14 @@ export default function ConnexionPage() {
             </button>
           </div>
           <input
+            id="connexion-mot-de-passe"
             type={showPassword ? "text" : "password"}
             required
             minLength={mode === "register" ? 8 : undefined}
             autoComplete={mode === "login" ? "current-password" : "new-password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full text-sm px-3 py-2.5 rounded-lg border outline-none focus:border-white/30 transition-colors"
+            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={mode === "register" ? t("motDePassePlaceholderRegister") : "••••••••"}
           />
