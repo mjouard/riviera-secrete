@@ -11,6 +11,7 @@ type Mode = "login" | "register";
 
 export default function ConnexionPage() {
   const t = useTranslations("connexion");
+  const tLegal = useTranslations("legal");
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("login");
   const [callbackUrl, setCallbackUrl] = useState("/");
@@ -275,6 +276,19 @@ export default function ConnexionPage() {
               ? t("seConnecter")
               : t("creerMonCompte")}
         </button>
+
+        {/* Information RGPD au moment de la collecte, et non seulement en pied de page :
+            c'est ici que le visiteur confie son adresse. Formulé en une phrase qui dit ce
+            qui est réellement fait de la donnée, plutôt qu'un renvoi sec au texte. */}
+        {mode === "register" && (
+          <p className="text-xs mt-4 leading-relaxed" style={{ color: "var(--text-muted)" }}>
+            {t("mentionRgpd")}{" "}
+            <Link href="/confidentialite" className="underline focus-ring rounded" style={{ color: "var(--azure)" }}>
+              {tLegal("confidentialiteTitre")}
+            </Link>
+            .
+          </p>
+        )}
       </form>
 
       <p className="text-sm text-center mt-6" style={{ color: "var(--text-muted)" }}>

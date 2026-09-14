@@ -264,7 +264,8 @@
     "renvoyer": "Renvoyer",
     "erreurCreationCompte": "Impossible de créer le compte.",
     "erreurIdentifiants": "Email ou mot de passe incorrect.",
-    "erreurGenerique": "Une erreur est survenue. Réessaie."
+    "erreurGenerique": "Une erreur est survenue. Réessaie.",
+    "mentionRgpd": "En créant un compte, tu nous confies ton adresse e-mail et ton prénom, utilisés uniquement pour retrouver tes favoris et tes itinéraires. Aucune publicité, aucune revente. Tu peux demander leur suppression à tout moment —"
   },
   "confirmerEmail": {
     "metaTitre": "Confirmation de l'adresse email",

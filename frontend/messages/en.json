@@ -264,7 +264,8 @@
     "renvoyer": "Resend",
     "erreurCreationCompte": "Couldn't create the account.",
     "erreurIdentifiants": "Wrong email or password.",
-    "erreurGenerique": "Something went wrong. Try again."
+    "erreurGenerique": "Something went wrong. Try again.",
+    "mentionRgpd": "By creating an account you give us your email address and first name, used only to find your favourites and itineraries again. No advertising, no reselling. You can ask for their deletion at any time —"
   },
   "confirmerEmail": {
     "metaTitre": "Email confirmation",
