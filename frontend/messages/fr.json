@@ -434,5 +434,11 @@
     "slug_invalide": "Référence de lieu invalide.",
     "lieu_inconnu": "Ce lieu n'existe pas.",
     "generique": "Une erreur est survenue. Réessaie dans un instant."
+  },
+  "nonTrouve": {
+    "titre": "Cette page n'existe pas",
+    "explication": "Le lien est peut-être périmé, ou l'adresse comporte une faute. Voici trois lieux à découvrir en attendant.",
+    "retourAccueil": "Retour à l'accueil",
+    "explorer": "Voir tous les lieux"
   }
 }

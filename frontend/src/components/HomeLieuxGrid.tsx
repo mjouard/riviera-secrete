@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { distanceKm, formatDistanceKm, loc, normalizeSearch } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";
+import { ecrireFiltres, lireParam, lireTexte, useSearchString } from "@/lib/url-filtres";
 import FilterSelect from "@/components/FilterSelect";
 import Photo from "@/components/Photo";
 import {
@@ -14,9 +15,6 @@ import {
   dureeDuLieu,
   niveauxDuLieu,
   saisonsDuLieu,
-  type Duree,
-  type Niveau,
-  type Saison,
 } from "@/lib/lieu-filters";
 
 /**
@@ -103,8 +101,6 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const t = useTranslations("home");
   const tBadges = useTranslations("badges");
   const tFiltres = useTranslations("filtres");
-  const [activeBadge, setActiveBadge] = useState<string>("");
-  const [query, setQuery] = useState("");
   const champRecherche = useRef<HTMLInputElement>(null);
 
   // L'en-tête propose « Rechercher » parce que le champ vivait à trois écrans et demi du
@@ -134,12 +130,40 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
       window.removeEventListener("load", viser);
     };
   }, []);
-  const [saison, setSaison] = useState<Saison | "">("");
-  const [duree, setDuree] = useState<Duree | "">("");
-  const [niveau, setNiveau] = useState<Niveau | "">("");
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
   const [geoEtat, setGeoEtat] = useState<"idle" | "chargement" | "refuse" | "indisponible">("idle");
   const gridRef = useRef<HTMLDivElement>(null);
+
+  // ─── Contrat d'URL (refonte Lot 2) ─────────────────────────────────────────
+  //
+  // Les filtres vivaient uniquement en mémoire : un rechargement, un partage de lien ou un
+  // retour arrière repartaient de la grille nue, alors que réduire 43 lieux à ceux qui valent
+  // le détour est précisément le travail que le visiteur venait de faire.
+  //
+  // Ils sont désormais **dérivés de l'URL** plutôt que copiés dans un état local tenu en
+  // parallèle — voir url-filtres.ts pour le détail du choix. La géolocalisation, elle, reste
+  // un état local : c'est une permission de session, pas un filtre qu'on partage dans un lien.
+  const search = useSearchString();
+  const activeBadge = lireParam(search, "badge", BADGE_DEFS.map((b) => b.slug));
+  const query = lireTexte(search, "q");
+  const saison = lireParam(search, "saison", SAISONS);
+  const duree = lireParam(search, "duree", DUREES);
+  const niveau = lireParam(search, "niveau", NIVEAUX);
+
+  const majFiltres = useCallback(
+    (patch: Partial<{ badge: string; q: string; saison: string; duree: string; niveau: string }>) => {
+      const courant = window.location.search;
+      ecrireFiltres({
+        badge: lireParam(courant, "badge", BADGE_DEFS.map((b) => b.slug)),
+        q: lireTexte(courant, "q"),
+        saison: lireParam(courant, "saison", SAISONS),
+        duree: lireParam(courant, "duree", DUREES),
+        niveau: lireParam(courant, "niveau", NIVEAUX),
+        ...patch,
+      });
+    },
+    []
+  );
 
   // Index de recherche pré-calculé une fois par lieu (43 aujourd'hui) plutôt qu'à chaque
   // frappe : nom, commune, description, libellés de badges et **noms d'activités**, dans la
@@ -216,15 +240,11 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   }, [searchIndex, activeBadge, query, saison, duree, niveau, position]);
 
   function toggle(badge: string) {
-    setActiveBadge((prev) => (prev === badge ? "" : badge));
+    majFiltres({ badge: activeBadge === badge ? "" : badge });
   }
 
   function resetAll() {
-    setActiveBadge("");
-    setQuery("");
-    setSaison("");
-    setDuree("");
-    setNiveau("");
+    majFiltres({ badge: "", q: "", saison: "", duree: "", niveau: "" });
   }
 
   /**
@@ -298,7 +318,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           ref={champRecherche}
           type="search"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => majFiltres({ q: e.target.value })}
           placeholder={t("recherchePlaceholder")}
           autoComplete="off"
           className="focus-ring w-full text-sm rounded-full border transition-colors py-2.5 pl-11 pr-11 scroll-mt-24"
@@ -311,7 +331,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         {query && (
           <button
             type="button"
-            onClick={() => setQuery("")}
+            onClick={() => majFiltres({ q: "" })}
             aria-label={t("rechercheEffacer")}
             className="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full flex items-center justify-center text-sm transition-colors hover:bg-white/10 cursor-pointer"
             style={{ color: "var(--text-muted)" }}
@@ -322,7 +342,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
       </div>
       <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label={t("filtrerParActivite")}>
         <button
-          onClick={() => setActiveBadge("")}
+          onClick={() => majFiltres({ badge: "" })}
           className="text-xs px-4 py-2 rounded-full border transition-colors"
           style={
             activeBadge === ""
@@ -354,21 +374,21 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         <FilterSelect
           label={tFiltres("saison")}
           value={saison}
-          onChange={(v) => setSaison(v as Saison | "")}
+          onChange={(v) => majFiltres({ saison: v })}
           placeholder={tFiltres("saisonToutes")}
           options={SAISONS.map((s) => ({ value: s, label: tFiltres(s) }))}
         />
         <FilterSelect
           label={tFiltres("duree")}
           value={duree}
-          onChange={(v) => setDuree(v as Duree | "")}
+          onChange={(v) => majFiltres({ duree: v })}
           placeholder={tFiltres("dureeToutes")}
           options={DUREES.map((d) => ({ value: d, label: tFiltres(d) }))}
         />
         <FilterSelect
           label={tFiltres("niveau")}
           value={niveau}
-          onChange={(v) => setNiveau(v as Niveau | "")}
+          onChange={(v) => majFiltres({ niveau: v })}
           placeholder={tFiltres("niveauTous")}
           options={NIVEAUX.map((n) => ({ value: n, label: tFiltres(n) }))}
         />

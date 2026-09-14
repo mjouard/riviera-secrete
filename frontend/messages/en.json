@@ -434,5 +434,11 @@
     "slug_invalide": "Invalid place reference.",
     "lieu_inconnu": "This place does not exist.",
     "generique": "Something went wrong. Please try again in a moment."
+  },
+  "nonTrouve": {
+    "titre": "This page doesn't exist",
+    "explication": "The link may be outdated, or the address contains a typo. Here are three places to discover in the meantime.",
+    "retourAccueil": "Back to home",
+    "explorer": "See all places"
   }
 }
