@@ -333,10 +333,21 @@ sur du sable.
       annonce déjà ce formulaire à venir — **une section qui promet un canal sans en offrir
       un est pire que pas de section** (constat de l'audit du 2026-09-13).
 
-- [ ] **Mentions légales + politique de confidentialité** — `/mentions-legales`,
-      `/confidentialite` et `/cgu` renvoient 404, alors que le site collecte email et
-      prénom, dépose un cookie de session et charge Plausible. Le formulaire d'inscription
-      ne présente aucune mention RGPD. **À régler avant l'achat du domaine, pas après.**
+- [~] **Mentions légales + politique de confidentialité** — **pages créées le 2026-09-14**
+      (FR + EN), liées depuis le pied de page et dans le sitemap. Le contenu décrit ce que le
+      code fait réellement, vérifié avant d'écrire : champs de la table `User`, cookies
+      strictement nécessaires (d'où l'absence de bannière, qui est une dispense et non un
+      oubli), stockage de session, cache du service worker, Plausible sans cookie, IP du rate
+      limiter jamais écrites en base, et géolocalisation de « Près de moi » qui ne quitte
+      jamais le navigateur.
+
+      **Reste à faire, et seul l'éditeur peut le faire** : renseigner les trois champs marqués
+      `[À compléter]` et surlignés dans la page — identité de l'éditeur, directeur de la
+      publication, adresse de contact. Tant qu'ils y sont, les mentions ne sont pas conformes.
+      L'adresse de contact dépend du domaine (voir « Acheter un nom de domaine »), pour ne pas
+      exposer une adresse personnelle au moissonnage.
+- [ ] **Mention RGPD sur le formulaire d'inscription** — un lien vers la politique de
+      confidentialité au moment de la création de compte, qui manque encore.
 - [x] **Page `/activites` filtrable** — **faite le 2026-09-14**. Les 208 activités sont
       parcourables et cherchables : recherche libre, catégorie, durée, zone, tarif, et
       « masquer ce qui est fermé aujourd'hui ». Liée depuis la nav et depuis l'accueil, dont
