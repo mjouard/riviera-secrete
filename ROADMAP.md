@@ -370,9 +370,22 @@ sur du sable.
       mentionnent les enfants, et rien ne décrit l'accès en transports ni l'affluence.
       Proposer ces filtres aujourd'hui donnerait des résultats faux. À rouvrir seulement si
       la donnée est ajoutée (un champ par activité, pas une heuristique sur le nom).
-- [ ] **« Mot de passe oublié »** — ni page ni endpoint. Un compte créé par mot de passe et
-      oublié est **définitivement perdu**, avec ses favoris et ses itinéraires. Le mécanisme
-      de jeton à expiration de la confirmation d'email est réutilisable tel quel.
+- [x] **« Mot de passe oublié »** — **fait le 2026-09-14**. `POST /api/auth/forgot-password`
+      et `/reset-password`, migration `AddPasswordReset` appliquée en prod, page
+      `/reinitialiser-mot-de-passe`, lien depuis `/connexion`, FR + EN.
+      Expiry **1 h** et non 24 h comme la confirmation : un lien de réinitialisation est une
+      clé d'accès au compte. Réponse générique même pour une adresse inconnue, pour ne pas
+      faire de l'endpoint un oracle d'existence de comptes. Un compte Google pur ne reçoit
+      rien, faute de mot de passe à réinitialiser. `EmailConfirmed` passe à `true` au passage,
+      sans quoi un compte non confirmé buterait ensuite sur le 403.
+      **Non vérifié de bout en bout** : le chemin nominal (jeton valide → nouveau mot de
+      passe) demanderait d'envoyer un vrai email et de modifier le mot de passe d'un compte
+      réel. Les tests ont tourné avec `Resend__ApiKey` vide. À faire une fois le domaine
+      branché, en une minute depuis un compte de test.
+- [ ] **Les messages d'erreur du backend sont uniquement en français** — ils s'affichent tels
+      quels sur `/en`. Trouvé en testant la réinitialisation, où c'est corrigé par un `code`
+      machine que le frontend traduit ; le reste des endpoints d'auth (`register`, `login`,
+      `confirm-email`) renvoie encore du français brut. Même remède à généraliser.
 - [ ] **Coordonnées et horaires dans l'export PDF** — `.no-print` masque la carte *et*
       toutes les rangées de liens de navigation, donc le PDF ne contient ni adresse, ni
       coordonnées, ni horaires. Or il est présenté comme l'artefact « hors ligne sur le
