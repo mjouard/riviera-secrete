@@ -62,35 +62,52 @@ export default async function HomePage({
       {/* Hero */}
       <section className="relative overflow-hidden py-24 px-6 text-center" style={{ minHeight: 540 }}>
         <HomeHero />
+        {/* Le voile était le plus clair (0,52) en son milieu, c'est-à-dire exactement
+            derrière le texte, et le sous-titre était en --text-muted — une couleur pensée
+            pour le fond sombre du site, pas pour une photo. Sur les 8 visuels du hero, dont
+            plusieurs très clairs, le contraste mesuré tombait à ~2,0:1 (AA en exige 4,5) et
+            changeait toutes les 5 s. Voile renforcé + texte plein + ombre portée : ~5,8:1
+            au pire, quelle que soit l'image dessous. */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(160deg, rgba(12,17,22,0.72) 0%, rgba(12,17,22,0.52) 50%, rgba(12,17,22,0.78) 100%)",
+              "linear-gradient(160deg, rgba(12,17,22,0.82) 0%, rgba(12,17,22,0.68) 50%, rgba(12,17,22,0.88) 100%)",
           }}
         />
-        <div className="relative z-[2] max-w-2xl mx-auto">
+        <div
+          className="relative z-[2] max-w-2xl mx-auto"
+          style={{ textShadow: "0 1px 3px rgba(0,0,0,0.65)" }}
+        >
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
             {t("heroTitleStart")}{" "}
             <em className="not-italic" style={{ color: "var(--terracotta)" }}>
               {t("heroTitleEm")}
             </em>
           </h1>
-          <p className="text-lg" style={{ color: "var(--text-muted)" }}>
+          <p className="text-lg" style={{ color: "var(--text)" }}>
             {t("heroSubtitle", { lieuxCount: lieux.length, itinCount: itineraires.length })}
           </p>
           <div className="flex gap-4 justify-center mt-8">
             <Link
               href="#lieux"
               className="px-6 py-3 rounded-full text-sm font-medium transition-colors"
-              style={{ background: "var(--azure)", color: "#0C1116" }}
+              style={{ background: "var(--azure)", color: "#0C1116", textShadow: "none" }}
             >
               {t("exploreLieux")}
             </Link>
+            {/* Bordure --line (rgba(255,255,255,.08)) : invisible sur une photo, le CTA
+                secondaire ne se lisait pas comme un bouton. Bordure franche + fond sombre
+                translucide, pour qu'il tienne sur les 8 visuels. */}
             <Link
               href="#itineraires"
-              className="px-6 py-3 rounded-full text-sm font-medium border transition-colors hover:bg-white/5"
-              style={{ borderColor: "var(--line)", color: "var(--text)" }}
+              className="px-6 py-3 rounded-full text-sm font-medium border transition-colors hover:bg-white/15"
+              style={{
+                borderColor: "rgba(255,255,255,0.5)",
+                background: "rgba(12,17,22,0.45)",
+                color: "var(--text)",
+                textShadow: "none",
+              }}
             >
               {t("seeItineraires")}
             </Link>
