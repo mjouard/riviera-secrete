@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Fraunces, Bodoni_Moda, Karla, IBM_Plex_Mono } from "next/font/google";
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -17,6 +17,27 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["600", "700"],
   variable: "--font-fraunces",
+});
+
+// Refonte UI Lot 1 — polices du nouveau système visuel (docs/design-refonte-2026-09-14.md).
+// Chargées comme variables CSS uniquement : elles n'alimentent que les classes .text-*
+// (globals.css) et les nouveaux composants ui/*, pas la police par défaut du body — aucune
+// page existante ne doit changer d'apparence tant que rien ne consomme ces variables.
+const bodoniModa = Bodoni_Moda({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-bodoni",
+});
+const karla = Karla({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-karla",
+});
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
 });
 
 const SITE_URL =
@@ -109,7 +130,10 @@ export default async function RootLayout({
   const tLegal = await getTranslations("legal");
 
   return (
-    <html lang={locale} className={`${inter.className} ${fraunces.variable}`}>
+    <html
+      lang={locale}
+      className={`${inter.className} ${fraunces.variable} ${bodoniModa.variable} ${karla.variable} ${ibmPlexMono.variable}`}
+    >
       <head>
         <script async src={plausibleScript} />
       </head>

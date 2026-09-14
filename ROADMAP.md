@@ -285,12 +285,46 @@ Migration en **5 lots indépendants**, chacun livrable seul. Ordre imposé : les
 
 ### Lot 1 — Fondations *(aucun changement visible pour l'utilisateur)*
 
-- [ ] **Tokens CSS** (`01-tokens.md`) — variables `--rs-nuit` `--rs-nuit-haute` `--rs-nuit-3` `--rs-trait` `--rs-calcaire` `--rs-brume` `--rs-aube` `--rs-aube-presse` `--rs-pin` ; zones `--rs-zone-{1-5}` ; polices `--rs-font-display` (Bodoni Moda) / `--rs-font-ui` (Karla) / `--rs-font-mono` (IBM Plex Mono) ; `--rs-radius: 3px` `--rs-control-h: 44px`. Bloc CSS prêt dans `01-tokens.md` § 5, config Tailwind dans le même fichier. Charger Bodoni Moda + Karla + IBM Plex Mono depuis Google Fonts avec leurs piles de repli.
-- [ ] **Typographie** — échelle à 7 crans (display-xl 74/44 px, display-l 40/30, display-m 38/30, title 20/18, body 16/16, meta 14/14, data 12/12) ; `text-wrap: balance` sur les titres Bodoni ; 16 px plancher absolu du texte courant. Retirer `text-xs` du code applicatif sauf derrière la classe mono étiquetée `.lbl`. Corrige : 204 nœuds de texte sur 224 en 12 ou 14 px (→ SV-01).
-- [ ] **Rayons et ombres** — `border-radius: 3px` valeur par défaut ; 2 px pour badges et vignettes ; 50 % pour marqueurs/pastilles/avatars. Retirer `rounded-lg` et `rounded-full` du code applicatif. Une seule ombre (`0 24px 60px rgba(6,14,24,.55)`) uniquement sur les éléments flottants. Corrige : 59 éléments à 12 px + 39 pilules = plus rien ne ressort (→ SV-05).
-- [ ] **Composants** (`02-composants.md`) — 3 variantes de bouton (primaire/secondaire/discret) × 2 tailles (44/52 px) ; chips de filtre hauteur 44, sélectionné en `--rs-calcaire` jamais en aube ; badges (gratuit/prix/fermé/amas) ; champs hauteur 44 px, 16 px minimum absolu (< 16 px = zoom Safari iOS → MO-02) ; cartes de liste/contenu/sélection ; modale native `<dialog>` + `showModal()` (Échap et piège à focus gratuits) ; toast `role="status"` 4 s, 7 s avec « Annuler » après suppression. Remplace les 12 variantes de bouton et 5 hauteurs actuelles (→ SV-03).
+**Les fichiers `01-tokens.md`/`02-composants.md` cités ci-dessous n'existent plus sur disque**
+(ils vivaient dans `Downloads/riviera-refonte-specs/`, jamais versionnés) — la seule spec
+encore disponible est `docs/design-refonte-2026-09-14.md`, extraite des maquettes le même
+jour. **Écart réel constaté entre les deux** : `01-tokens.md` décrivait une échelle
+typographique à 7 crans (`--rs-` préfixés) alors que `docs/design-refonte-2026-09-14.md`
+n'en décrit que 6, non préfixés (Nuit/Calcaire/Aube/…, Display/Section/Card/Body/Meta/Data).
+Le sous-lot ci-dessous suit `docs/design-refonte-2026-09-14.md` (seule source disponible) —
+si les 7 crans de `01-tokens.md` reflétaient une décision plus récente, il faudra réconcilier
+au moment du Lot 4.
+
+- [~] **Tokens CSS + composants partagés** — **fait le 2026-09-14, système visuel seulement**
+      (le cache CDN et la sécurité `apiToken` ci-dessous restent à faire, traités à part —
+      voir aussi `.claude/plans/luminous-hugging-sundae.md`). Palette Nuit/Nuit haute/
+      Calcaire/Brume/Aube/Pin + 5 teintes Mer (provisoires, faute du fichier maquette
+      source), rayons (`--radius` 3px / `--radius-sm` 2px / `--radius-full` 50%), ombre
+      `--shadow-float`, typographie à 6 crans (`.text-display/-section/-card-title/-body/
+      -meta/-data`, Bodoni Moda + Karla + IBM Plex Mono chargées via `next/font/google`) —
+      tout dans `frontend/src/app/globals.css`, **additif** : les anciens tokens
+      (`--azure`, `--terracotta`, `.focus-ring`) restent inchangés et pilotent encore toutes
+      les pages existantes, `--azure`/`--terracotta` étant chacun surchargés de 2-3 sens
+      différents sans équivalent 1:1 dans la nouvelle palette (migration écran par écran au
+      Lot 4). Composants neufs dans `frontend/src/components/ui/` : `Button` (3 variantes),
+      `Chip`, `Badge` (gratuit/prix/fermé), `Field`/`SelectField`/`TextareaField`, `Modal`
+      (natif `<dialog>`, Échap + piège à focus gratuits — vérifié par dispatch d'événement,
+      l'appui clavier simulé par l'outil de navigation ne déclenchant pas l'action native du
+      navigateur), `Toast`, plus un jeu minimal de 8 icônes SVG (`frontend/src/components/ui/
+      Icons.tsx`) en remplacement futur des emojis d'interface — non substituées dans le code
+      existant. Mapping zones carte dans `frontend/src/lib/mer-colors.ts` (non
+      branché sur `HomeMap.tsx`). Aucune page existante n'a changé d'apparence, à une
+      exception : la modale de sauvegarde de `creer-itineraire/page.tsx` migrée sur `Modal`
+      (décision explicite, gain réel — Échap/piège à focus manquaient avant).
+      **Reste hors périmètre** (voir le plan pour le détail) : migration `rounded-lg`/
+      `rounded-full` sur les ~25 fichiers existants (74 occurrences), application de
+      `.focus-ring`/`.focus-ring-aube` aux 44 fichiers qui n'en ont aucune, les deux cibles
+      tactiles de 28px trouvées (`HomeMap.tsx:140`, `HomeLieuxGrid.tsx:316`), branchement de
+      `mer-colors.ts` sur la carte, règle de rareté du bouton primaire, accessibilité (hors
+      Modal), cibles tactiles générales — tout ça suppose de toucher des écrans existants,
+      donc réservé au Lot 4.
+- [ ] **Rayons et ombres — application aux ~25 fichiers existants** — tokens posés (ci-dessus), reste à retirer `rounded-lg`/`rounded-full` du code applicatif (74 occurrences) et les remplacer par les tokens/composants. Corrige : 59 éléments à 12 px + 39 pilules = plus rien ne ressort (→ SV-05).
 - [ ] **Règle de rareté** — un seul bouton primaire ambre visible par zone d'écran. Si deux boutons primaires cohabitent, l'un passe en secondaire. C'est ce qui libère l'aube pour l'action seule (→ SV-02).
-- [ ] **Icônes inline SVG** — remplacer les emojis d'interface (🥾 🏛 🍽️ ⛵ 🔎 📍) par des SVG grille 20 × 20, `fill: none`, `stroke: currentColor`, `stroke-width: 1.6`. Les emojis restent dans le contenu éditorial seulement. Jeu minimal listé dans `01-tokens.md` § 4.
 - [ ] **Accessibilité** — `aria-pressed` sur chips et cœurs de favori ; `role="alert"` sur les messages d'erreur de formulaire ; `alt` sur toutes les images, `alt=""` explicite sur le décoratif (30 images sur 115 sans `alt` → AC-02) ; lien « Aller au contenu » en tête de `<body>` (nav de 9 entrées répétée partout, absent → AC-02) ; `.focus-ring` appliqué sur tous les éléments (la classe existe dans le CSS mais n'est posée sur aucun élément, → AC-02) ; focus `outline: 2px solid var(--rs-aube)` ; Échap ferme menu/modale/panneau (→ EC-07).
 - [ ] **Cibles tactiles** — 44 px minimum pour tout élément interactif, 8 px d'écart entre deux cibles voisines. 20 boutons sur 20 sous ce seuil sur l'accueil mobile actuel (→ MO-01).
 - [ ] **Cache CDN** (`09-donnees-api-migration.md` § 2.3) — sortir la lecture de session du layout racine (composant client sur l'en-tête uniquement), rendre les routes éditoriales statiques avec ISR. Cible : `x-vercel-cache: HIT` sur `/lieux/*` au lieu de TTFB 1 960 ms à froid (→ PF-01). Meilleur rapport effort/gain de toute la liste.

@@ -10,6 +10,9 @@ import { redirectToConnexion } from "@/lib/utils";
 import { DUREE_META, decodeJours, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
 import PickerView from "./_components/PickerView";
 import ResultsView from "./_components/ResultsView";
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
+import { Field } from "@/components/ui/Field";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -436,69 +439,53 @@ export default function CreerItinerairePage() {
       )}
 
       {showSaveModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.6)" }}
-          onClick={(e) => { if (e.target === e.currentTarget) setShowSaveModal(false); }}
-        >
-          <div
-            className="rounded-2xl p-6 w-full max-w-sm mx-4"
-            style={{ background: "var(--surface)" }}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="save-modal-titre"
+        <Modal open={showSaveModal} onClose={() => setShowSaveModal(false)} titleId="save-modal-titre">
+          <h2 id="save-modal-titre" className="text-lg font-semibold mb-2">{t("nommerItineraire")}</h2>
+          <label htmlFor="save-modal-nom" className="block text-xs mb-2" style={{ color: "var(--text-muted)" }}>
+            {t("nomLabel")}
+          </label>
+          <Field
+            id="save-modal-nom"
+            className="text-sm"
+            style={{ borderColor: nomErreur ? "var(--terracotta)" : undefined }}
+            value={saveInput}
+            onChange={(e) => { setSaveInput(e.target.value); if (nomErreur) setNomErreur(false); }}
+            onKeyDown={(e) => { if (e.key === "Enter") void handleSave(); }}
+            placeholder={t("nomPlaceholder")}
+            aria-invalid={nomErreur}
+            aria-describedby={nomErreur ? "save-modal-erreur" : undefined}
+            autoFocus
+          />
+          <p
+            id="save-modal-erreur"
+            role="alert"
+            className="text-xs mt-2 min-h-4"
+            style={{ color: "var(--terracotta)" }}
           >
-            <h2 id="save-modal-titre" className="text-lg font-semibold mb-2">{t("nommerItineraire")}</h2>
-            <label htmlFor="save-modal-nom" className="block text-xs mb-2" style={{ color: "var(--text-muted)" }}>
-              {t("nomLabel")}
-            </label>
-            <input
-              id="save-modal-nom"
-              className="focus-ring w-full rounded-lg px-3 py-2 text-sm"
-              style={{
-                background: "var(--surface-hover)",
-                color: "var(--text)",
-                border: `1px solid ${nomErreur ? "var(--terracotta)" : "var(--line)"}`,
-              }}
-              value={saveInput}
-              onChange={(e) => { setSaveInput(e.target.value); if (nomErreur) setNomErreur(false); }}
-              onKeyDown={(e) => { if (e.key === "Enter") void handleSave(); }}
-              placeholder={t("nomPlaceholder")}
-              aria-invalid={nomErreur}
-              aria-describedby={nomErreur ? "save-modal-erreur" : undefined}
-              autoFocus
-            />
-            <p
-              id="save-modal-erreur"
-              role="alert"
-              className="text-xs mt-2 min-h-4"
-              style={{ color: "var(--terracotta)" }}
-            >
-              {nomErreur ? t("nomRequis") : ""}
+            {nomErreur ? t("nomRequis") : ""}
+          </p>
+          {!session && (
+            <p className="text-xs mt-1 mb-2" style={{ color: "var(--text-muted)" }}>
+              {t("connexionExplication")}
             </p>
-            {!session && (
-              <p className="text-xs mt-1 mb-2" style={{ color: "var(--text-muted)" }}>
-                {t("connexionExplication")}
-              </p>
-            )}
-            <div className="flex gap-3 justify-end mt-3">
-              <button onClick={() => setShowSaveModal(false)} className="text-sm px-4 py-2 rounded-lg transition-colors hover:bg-white/5 cursor-pointer" style={{ color: "var(--text-muted)" }}>
-                {t("annuler")}
-              </button>
-              {/* Le libellé décrit l'action, jamais l'état : « Connexion requise » se lisait
-                  comme un bouton qui mène à la connexion, alors qu'il ne bougeait pas tant
-                  que le champ était vide. */}
-              <button
-                onClick={() => void handleSave()}
-                disabled={saving}
-                className="text-sm px-4 py-2 rounded-lg font-semibold disabled:opacity-50 cursor-pointer disabled:cursor-default"
-                style={{ background: "var(--azure)", color: "#0c1116" }}
-              >
-                {saving ? t("sauvegardeEnCours") : session ? t("sauvegarder") : t("seConnecterEtSauvegarder")}
-              </button>
-            </div>
+          )}
+          <div className="flex gap-3 justify-end mt-3">
+            <Button type="button" variant="discret" onClick={() => setShowSaveModal(false)}>
+              {t("annuler")}
+            </Button>
+            {/* Le libellé décrit l'action, jamais l'état : « Connexion requise » se lisait
+                comme un bouton qui mène à la connexion, alors qu'il ne bougeait pas tant
+                que le champ était vide. */}
+            <Button
+              type="button"
+              variant="primaire"
+              onClick={() => void handleSave()}
+              disabled={saving}
+            >
+              {saving ? t("sauvegardeEnCours") : session ? t("sauvegarder") : t("seConnecterEtSauvegarder")}
+            </Button>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );
