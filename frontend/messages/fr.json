@@ -17,7 +17,8 @@
     "connexion": "Connexion",
     "deconnexion": "Déconnexion",
     "menu": "Menu",
-    "aPropos": "À propos"
+    "aPropos": "À propos",
+    "activites": "Activités"
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
@@ -76,7 +77,8 @@
     "localisationEnCours": "Localisation…",
     "localisationRefusee": "Accès à la position refusé — autorise-le dans ton navigateur pour trier par distance.",
     "localisationIndisponible": "Localisation indisponible sur cet appareil.",
-    "distanceVolOiseau": "à vol d'oiseau"
+    "distanceVolOiseau": "à vol d'oiseau",
+    "voirToutesLesActivites": "Voir les {total} activités →"
   },
   "villes": {
     "title": "Villes & villages",
@@ -345,5 +347,43 @@
     "modere": "Modéré",
     "surprendsMoi": "🎲 Surprends-moi",
     "surprendsMoiTitre": "Ouvrir un lieu au hasard parmi les résultats"
+  },
+  "activites": {
+    "title": "Toutes les activités",
+    "metaDescription": "Plus de 200 activités sur la Côte d'Azur, filtrables par catégorie, durée, zone et tarif — dont une majorité de gratuites.",
+    "titre": "Toutes les activités",
+    "accueil": "Accueil",
+    "filAriane": "Fil d'Ariane",
+    "intro": "{total} choses à faire sur la Côte d'Azur, des randonnées confidentielles aux tables de village. Filtre par ce dont tu disposes : du temps, un budget, une envie.",
+    "rechercherPlaceholder": "Rechercher une activité, un lieu, une commune…",
+    "rechercherLabel": "Rechercher une activité",
+    "filtreCategorie": "Filtrer par catégorie",
+    "filtreDuree": "Filtrer par durée",
+    "filtreZone": "Filtrer par zone",
+    "filtreTarif": "Filtrer par tarif",
+    "toutesCategories": "Toutes catégories",
+    "toutesDurees": "Toutes durées",
+    "toutesZones": "Toutes les zones",
+    "tousTarifs": "Tous tarifs",
+    "gratuit": "Gratuit",
+    "payant": "Payant",
+    "masquerFermees": "Masquer ce qui est fermé aujourd'hui",
+    "fermeAujourdhui": "Fermé aujourd'hui",
+    "resultats": "{count} sur {total}",
+    "toutEffacer": "Tout effacer",
+    "aucunResultat": "Aucune activité ne correspond à ces filtres.",
+    "toutAfficher": "Tout afficher"
+  },
+  "categoriesActivite": {
+    "outdoor": "Outdoor",
+    "culture": "Culture & Visites",
+    "gastronomie": "Gastronomie",
+    "loisirs": "Loisirs & Mer"
+  },
+  "tranchesDuree": {
+    "court": "Moins d'1 h",
+    "moyen": "1 à 2 h",
+    "long": "2 à 4 h",
+    "journee": "Une demi-journée ou plus"
   }
 }

@@ -8,7 +8,13 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 function useNavLinks() {
   const t = useTranslations("nav");
-  const contentLinks = [{ href: "/villes", label: t("villes") }];
+  // "Activités" ouvre le catalogue complet des 208 activités : c'était la donnée la plus
+  // actionnable du site et la seule façon de l'atteindre était d'ouvrir les fiches lieu une
+  // par une.
+  const contentLinks = [
+    { href: "/activites", label: t("activites") },
+    { href: "/villes", label: t("villes") },
+  ];
   const accountLinks = [
     { href: "/creer-itineraire", label: t("creerItineraire") },
     { href: "/mes-itineraires", label: t("mesItineraires") },

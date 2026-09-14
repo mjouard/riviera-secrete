@@ -24,6 +24,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
   const t = useTranslations("home");
   const tCategories = useTranslations("categories");
   const tActivite = useTranslations("activite");
+  const totalActivites = lieux.reduce((n, l) => n + (l.activites?.length || 0), 0);
   const [active, setActive] = useState<string>(ACTIVITY_CATEGORIES[0].slug);
   // Filtre "gratuit" placé ici et non sur la grille des lieux : 42 lieux sur 43 ont au
   // moins une activité gratuite et aucun n'est entièrement gratuit, donc au niveau du lieu
@@ -147,6 +148,19 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
         </div>
         );
       })}
+
+      {/* La section n'affiche qu'une sélection curée (FEATURED_ACTIVITIES), pas le catalogue.
+          Le dire, et donner la sortie : sans ça le visiteur croyait que le site proposait une
+          poignée d'activités, alors qu'il y en a plus de deux cents. */}
+      <div className="mt-6 text-center">
+        <Link
+          href="/activites"
+          className="inline-block text-sm px-5 py-2.5 rounded-full border font-medium transition-colors hover:bg-white/5"
+          style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
+        >
+          {t("voirToutesLesActivites", { total: totalActivites })}
+        </Link>
+      </div>
     </div>
   );
 }

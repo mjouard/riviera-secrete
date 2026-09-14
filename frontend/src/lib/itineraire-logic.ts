@@ -86,9 +86,18 @@ function completeUnitesFourchette(val: string): string {
   );
 }
 
-export function parseVisitMinutes(lieu: Lieu): number {
-  const pill = (lieu.metaPills || []).find((p) => /urée/.test(p.label));
-  const val = pill ? pill.valeur || "" : "";
+/**
+ * Convertit une durée écrite en toutes lettres en minutes — « 1h30 », « 2h à 3h »,
+ * « 20 min de vol », « 1h15–1h45 », « Demi-journée ». Une fourchette donne sa moyenne.
+ *
+ * Renvoie `null` quand rien n'est reconnaissable, pour que l'appelant décide quoi en faire :
+ * le générateur d'itinéraire retombe sur une estimation par défaut, alors qu'un filtre de
+ * durée doit pouvoir dire « on ne sait pas » plutôt que d'inventer une valeur et de ranger
+ * l'activité dans la mauvaise tranche.
+ *
+ * Analyse toujours le libellé **français**, jamais sa traduction : c'est le champ canonique.
+ */
+export function parseDureeTexte(val: string): number | null {
   if (/journée/i.test(val)) return /demi/i.test(val) ? 240 : 480;
   const nums: number[] = [];
   const re = /(\d+)\s*h(?:\s*(\d+))?|(\d+)\s*min/gi;
@@ -97,8 +106,15 @@ export function parseVisitMinutes(lieu: Lieu): number {
   while ((m = re.exec(normalise))) {
     nums.push(m[3] ? parseInt(m[3], 10) : parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0));
   }
-  if (!nums.length) return 90;
+  if (!nums.length) return null;
   return Math.round(nums.reduce((a, b) => a + b, 0) / nums.length);
+}
+
+export function parseVisitMinutes(lieu: Lieu): number {
+  const pill = (lieu.metaPills || []).find((p) => /urée/.test(p.label));
+  // 90 min : estimation de repli quand la pastille est absente ou illisible. Le générateur a
+  // besoin d'un nombre pour boucler, contrairement au filtre de durée de /activites.
+  return parseDureeTexte(pill ? pill.valeur || "" : "") ?? 90;
 }
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {

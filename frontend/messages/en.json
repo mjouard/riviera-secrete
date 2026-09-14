@@ -17,7 +17,8 @@
     "connexion": "Log in",
     "deconnexion": "Log out",
     "menu": "Menu",
-    "aPropos": "About"
+    "aPropos": "About",
+    "activites": "Activities"
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
@@ -76,7 +77,8 @@
     "localisationEnCours": "Locating…",
     "localisationRefusee": "Location access denied — allow it in your browser to sort by distance.",
     "localisationIndisponible": "Location unavailable on this device.",
-    "distanceVolOiseau": "as the crow flies"
+    "distanceVolOiseau": "as the crow flies",
+    "voirToutesLesActivites": "See all {total} activities →"
   },
   "villes": {
     "title": "Towns & villages",
@@ -345,5 +347,43 @@
     "modere": "Moderate",
     "surprendsMoi": "🎲 Surprise me",
     "surprendsMoiTitre": "Open a random place from the results"
+  },
+  "activites": {
+    "title": "All activities",
+    "metaDescription": "Over 200 things to do on the French Riviera, filtered by category, duration, area and price — most of them free.",
+    "titre": "All activities",
+    "accueil": "Home",
+    "filAriane": "Breadcrumb",
+    "intro": "{total} things to do on the French Riviera, from quiet hikes to village tables. Filter by what you actually have: time, a budget, a mood.",
+    "rechercherPlaceholder": "Search an activity, a place, a town…",
+    "rechercherLabel": "Search an activity",
+    "filtreCategorie": "Filter by category",
+    "filtreDuree": "Filter by duration",
+    "filtreZone": "Filter by area",
+    "filtreTarif": "Filter by price",
+    "toutesCategories": "All categories",
+    "toutesDurees": "Any duration",
+    "toutesZones": "All areas",
+    "tousTarifs": "Any price",
+    "gratuit": "Free",
+    "payant": "Paid",
+    "masquerFermees": "Hide what's closed today",
+    "fermeAujourdhui": "Closed today",
+    "resultats": "{count} of {total}",
+    "toutEffacer": "Clear all",
+    "aucunResultat": "No activity matches these filters.",
+    "toutAfficher": "Show all"
+  },
+  "categoriesActivite": {
+    "outdoor": "Outdoor",
+    "culture": "Culture & Sights",
+    "gastronomie": "Food & Drink",
+    "loisirs": "Leisure & Sea"
+  },
+  "tranchesDuree": {
+    "court": "Under 1 hr",
+    "moyen": "1 to 2 hrs",
+    "long": "2 to 4 hrs",
+    "journee": "Half a day or more"
   }
 }
