@@ -177,9 +177,12 @@
     "aProximiteSubtitle": "Other places to discover near your itinerary.",
     "nommerItineraire": "Name your itinerary",
     "nomPlaceholder": "My itinerary…",
+    "nomLabel": "Itinerary name",
+    "nomRequis": "Give your itinerary a name so you can find it again.",
     "annuler": "Cancel",
     "sauvegardeEnCours": "Saving…",
-    "connexionRequise": "Login required",
+    "seConnecterEtSauvegarder": "Sign in and save",
+    "connexionExplication": "Saving an itinerary needs an account — what you just put together is kept.",
     "partagerLien": "🔗 Share link",
     "lienCopie": "Link copied ✓",
     "partagerTitre": "Copy a link that reopens this itinerary as-is, no account needed"

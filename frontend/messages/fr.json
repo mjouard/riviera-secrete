@@ -177,9 +177,12 @@
     "aProximiteSubtitle": "D'autres lieux à découvrir près de ton itinéraire.",
     "nommerItineraire": "Nommer l'itinéraire",
     "nomPlaceholder": "Mon itinéraire…",
+    "nomLabel": "Nom de l'itinéraire",
+    "nomRequis": "Donne un nom à ton itinéraire pour le retrouver.",
     "annuler": "Annuler",
     "sauvegardeEnCours": "Sauvegarde…",
-    "connexionRequise": "Connexion requise",
+    "seConnecterEtSauvegarder": "Se connecter et sauvegarder",
+    "connexionExplication": "Sauvegarder un itinéraire demande un compte — on garde ce que tu viens de composer.",
     "partagerLien": "🔗 Partager le lien",
     "lienCopie": "Lien copié ✓",
     "partagerTitre": "Copier un lien qui rouvre cet itinéraire tel quel, sans compte"

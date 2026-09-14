@@ -108,15 +108,18 @@ export default function PickerView({
         </div>
       </section>
 
+      {/* `role="alert"` : sans lui, le message apparaissait à l'écran mais n'était jamais
+          annoncé — un lecteur d'écran donnait bien l'impression d'un bouton sans effet. */}
       {showEmptyNote && (
-        <p className="mb-4 text-sm" style={{ color: "var(--terracotta)" }}>
-          {t("emptyNote")}
+        <p id="generer-erreur" role="alert" className="mb-4 text-sm" style={{ color: "var(--terracotta)" }}>
+          ⚠️ {t("emptyNote")}
         </p>
       )}
 
       <button
         onClick={onGenerate}
-        className="px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
+        aria-describedby={showEmptyNote ? "generer-erreur" : undefined}
+        className="px-6 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer"
         style={{ background: "var(--terracotta)", color: "#0c1116" }}
       >
         {t("generer")}

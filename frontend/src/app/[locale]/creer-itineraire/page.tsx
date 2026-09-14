@@ -28,6 +28,7 @@ interface Draft {
 export default function CreerItinerairePage() {
   const t = useTranslations("creerItineraire");
   const tCommon = useTranslations("common");
+  const tDuree = useTranslations("dureeLabels");
   const { data: session, status } = useSession();
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,8 @@ export default function CreerItinerairePage() {
   const [currentNom, setCurrentNom] = useState("");
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [saveInput, setSaveInput] = useState("");
+  /** Affiché quand on valide la modale avec un nom vide — sans quoi le bouton ne fait rien. */
+  const [nomErreur, setNomErreur] = useState(false);
   const [savedBanner, setSavedBanner] = useState(false);
   const [saving, setSaving] = useState(false);
   /** Lecture seule à l'ouverture d'un itinéraire déjà sauvegardé (gagne en lisibilité) —
@@ -296,9 +299,23 @@ export default function CreerItinerairePage() {
     return { mode: "related" as const, items };
   }, [excluded, currentDays]);
 
+  /**
+   * Nom proposé par défaut dans la modale de sauvegarde. Un champ vide en fin de parcours
+   * (6-7 étapes) est un cul-de-sac : rien n'indique que nommer est obligatoire, et le
+   * bouton reste sans effet tant qu'on n'a pas tapé quelque chose. On pré-remplit donc
+   * avec le titre déjà affiché en haut du résultat, précisé par la commune de la première
+   * étape pour distinguer deux itinéraires de même durée dans /mes-itineraires.
+   */
+  const nomParDefaut = () => {
+    const base = t("itineraireFallback", { duree: tDuree(dureeKey) });
+    const premier = currentDays.flat()[0];
+    return premier ? `${base} — ${premier.commune}` : base;
+  };
+
   const handleSave = async () => {
     const nom = saveInput.trim();
-    if (!nom) return;
+    if (!nom) { setNomErreur(true); return; }
+    setNomErreur(false);
     if (!session?.apiToken) {
       const draft: Draft = {
         nom,
@@ -389,7 +406,7 @@ export default function CreerItinerairePage() {
           onRemoveStop={removeStop}
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
-          onSaveClick={() => { setSaveInput(currentNom); setShowSaveModal(true); }}
+          onSaveClick={() => { setSaveInput(currentNom || nomParDefaut()); setNomErreur(false); setShowSaveModal(true); }}
           editMode={editMode}
           onToggleEdit={() => setEditMode(true)}
         />
@@ -401,28 +418,60 @@ export default function CreerItinerairePage() {
           style={{ background: "rgba(0,0,0,0.6)" }}
           onClick={(e) => { if (e.target === e.currentTarget) setShowSaveModal(false); }}
         >
-          <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "var(--surface)" }}>
-            <h2 className="text-lg font-semibold mb-4">{t("nommerItineraire")}</h2>
+          <div
+            className="rounded-2xl p-6 w-full max-w-sm mx-4"
+            style={{ background: "var(--surface)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="save-modal-titre"
+          >
+            <h2 id="save-modal-titre" className="text-lg font-semibold mb-2">{t("nommerItineraire")}</h2>
+            <label htmlFor="save-modal-nom" className="block text-xs mb-2" style={{ color: "var(--text-muted)" }}>
+              {t("nomLabel")}
+            </label>
             <input
-              className="w-full rounded-lg px-3 py-2 text-sm mb-4 outline-none"
-              style={{ background: "var(--surface-hover)", color: "var(--text)", border: "1px solid var(--line)" }}
+              id="save-modal-nom"
+              className="w-full rounded-lg px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--azure)]"
+              style={{
+                background: "var(--surface-hover)",
+                color: "var(--text)",
+                border: `1px solid ${nomErreur ? "var(--terracotta)" : "var(--line)"}`,
+              }}
               value={saveInput}
-              onChange={(e) => setSaveInput(e.target.value)}
+              onChange={(e) => { setSaveInput(e.target.value); if (nomErreur) setNomErreur(false); }}
               onKeyDown={(e) => { if (e.key === "Enter") void handleSave(); }}
               placeholder={t("nomPlaceholder")}
+              aria-invalid={nomErreur}
+              aria-describedby={nomErreur ? "save-modal-erreur" : undefined}
               autoFocus
             />
-            <div className="flex gap-3 justify-end">
-              <button onClick={() => setShowSaveModal(false)} className="text-sm px-4 py-2 rounded-lg transition-colors hover:bg-white/5" style={{ color: "var(--text-muted)" }}>
+            <p
+              id="save-modal-erreur"
+              role="alert"
+              className="text-xs mt-2 min-h-4"
+              style={{ color: "var(--terracotta)" }}
+            >
+              {nomErreur ? t("nomRequis") : ""}
+            </p>
+            {!session && (
+              <p className="text-xs mt-1 mb-2" style={{ color: "var(--text-muted)" }}>
+                {t("connexionExplication")}
+              </p>
+            )}
+            <div className="flex gap-3 justify-end mt-3">
+              <button onClick={() => setShowSaveModal(false)} className="text-sm px-4 py-2 rounded-lg transition-colors hover:bg-white/5 cursor-pointer" style={{ color: "var(--text-muted)" }}>
                 {t("annuler")}
               </button>
+              {/* Le libellé décrit l'action, jamais l'état : « Connexion requise » se lisait
+                  comme un bouton qui mène à la connexion, alors qu'il ne bougeait pas tant
+                  que le champ était vide. */}
               <button
                 onClick={() => void handleSave()}
                 disabled={saving}
                 className="text-sm px-4 py-2 rounded-lg font-semibold disabled:opacity-50 cursor-pointer disabled:cursor-default"
                 style={{ background: "var(--azure)", color: "#0c1116" }}
               >
-                {saving ? t("sauvegardeEnCours") : session ? t("sauvegarder") : t("connexionRequise")}
+                {saving ? t("sauvegardeEnCours") : session ? t("sauvegarder") : t("seConnecterEtSauvegarder")}
               </button>
             </div>
           </div>
