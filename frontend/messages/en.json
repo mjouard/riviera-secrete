@@ -448,5 +448,22 @@
     "explication": "The link may be outdated, or the address contains a typo. Here are three places to discover in the meantime.",
     "retourAccueil": "Back to home",
     "explorer": "See all places"
+  },
+  "explorer": {
+    "accueil": "Home",
+    "filAriane": "Breadcrumb",
+    "metaTitre": "Explore",
+    "metaDescription": "Map and list of the {count} hidden gems of the French Riviera, filterable by zone, season, duration, level and activity type.",
+    "titre": "Explore",
+    "rechercheLabel": "Search a place",
+    "recherchePlaceholder": "Name, town, activity…",
+    "zone": "Zone",
+    "touteZone": "All of the Riviera",
+    "toutEffacer": "Clear all",
+    "resultats": "{count} of {total} places",
+    "aucunResultat": "No place matches these filters.",
+    "voirPlus": "See {count} more places",
+    "voirCarte": "View on map",
+    "voirListe": "View list"
   }
 }

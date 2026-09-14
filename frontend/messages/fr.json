@@ -448,5 +448,22 @@
     "explication": "Le lien est peut-être périmé, ou l'adresse comporte une faute. Voici trois lieux à découvrir en attendant.",
     "retourAccueil": "Retour à l'accueil",
     "explorer": "Voir tous les lieux"
+  },
+  "explorer": {
+    "accueil": "Accueil",
+    "filAriane": "Fil d'Ariane",
+    "metaTitre": "Explorer",
+    "metaDescription": "Carte et liste des {count} lieux confidentiels de la Côte d'Azur, filtrables par zone, saison, durée, niveau et type d'activité.",
+    "titre": "Explorer",
+    "rechercheLabel": "Rechercher un lieu",
+    "recherchePlaceholder": "Nom, commune, activité…",
+    "zone": "Zone",
+    "touteZone": "Toute la Côte d'Azur",
+    "toutEffacer": "Tout effacer",
+    "resultats": "{count} sur {total} lieux",
+    "aucunResultat": "Aucun lieu ne correspond à ces filtres.",
+    "voirPlus": "Voir {count} lieux de plus",
+    "voirCarte": "Voir sur la carte",
+    "voirListe": "Voir la liste"
   }
 }
