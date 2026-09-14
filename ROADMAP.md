@@ -346,8 +346,10 @@ sur du sable.
       publication, adresse de contact. Tant qu'ils y sont, les mentions ne sont pas conformes.
       L'adresse de contact dépend du domaine (voir « Acheter un nom de domaine »), pour ne pas
       exposer une adresse personnelle au moissonnage.
-- [ ] **Mention RGPD sur le formulaire d'inscription** — un lien vers la politique de
-      confidentialité au moment de la création de compte, qui manque encore.
+- [x] **Mention RGPD sur le formulaire d'inscription** — faite le 2026-09-14. Affichée
+      uniquement en mode inscription (en mode connexion il n'y a pas de collecte nouvelle, et
+      une mention permanente devient un décor qu'on ne lit plus), formulée en une phrase qui
+      dit ce qui est réellement fait de la donnée plutôt qu'en renvoi sec au texte légal.
 - [x] **Page `/activites` filtrable** — **faite le 2026-09-14**. Les 208 activités sont
       parcourables et cherchables : recherche libre, catégorie, durée, zone, tarif, et
       « masquer ce qui est fermé aujourd'hui ». Liée depuis la nav et depuis l'accueil, dont
