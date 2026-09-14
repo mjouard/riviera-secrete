@@ -62,6 +62,30 @@ export function dureeKeyDepuisBadge(badge: string): DureeKey {
   return "journee";
 }
 
+/**
+ * Rétablit l'unité omise sur la borne basse d'une fourchette : « 2 à 4 h » → « 2 h à 4 h »,
+ * « 15-20 min » → « 15 min-20 min ».
+ *
+ * Sans ça, `parseVisitMinutes` ne voyait que la borne **haute** (son motif exige une unité),
+ * donc toute fourchette écrite de cette façon était surestimée — « 2 à 4 h » comptait pour
+ * 4 h au lieu de 3 h. Les formes « 1 h 30 à 2 h », où les deux bornes portent leur unité,
+ * étaient correctes, ce qui explique que le biais soit passé inaperçu. Il suffisait pourtant
+ * à faire déborder les deux itinéraires « Journée complète » du budget et à leur faire
+ * perdre des étapes à la génération.
+ *
+ * Le groupe optionnel `(h\s*)` en tête distingue une vraie borne basse des minutes d'une
+ * heure composée : dans « 1 h 30 à 2 h », le « 30 » est précédé d'un « h » et ne doit surtout
+ * pas devenir « 30 h ». On repère ce cas plutôt que d'utiliser un lookbehind, non disponible
+ * sur la cible ES2017 de ce projet.
+ */
+function completeUnitesFourchette(val: string): string {
+  return val.replace(
+    /(h\s*)?(\d+)\s*(à|-|–)\s*(\d+)\s*(h|min)\b/gi,
+    (tout, apresHeure: string | undefined, basse: string, sep: string, haute: string, unite: string) =>
+      apresHeure ? tout : `${basse} ${unite} ${sep} ${haute} ${unite}`
+  );
+}
+
 export function parseVisitMinutes(lieu: Lieu): number {
   const pill = (lieu.metaPills || []).find((p) => /urée/.test(p.label));
   const val = pill ? pill.valeur || "" : "";
@@ -69,7 +93,8 @@ export function parseVisitMinutes(lieu: Lieu): number {
   const nums: number[] = [];
   const re = /(\d+)\s*h(?:\s*(\d+))?|(\d+)\s*min/gi;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(val))) {
+  const normalise = completeUnitesFourchette(val);
+  while ((m = re.exec(normalise))) {
     nums.push(m[3] ? parseInt(m[3], 10) : parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0));
   }
   if (!nums.length) return 90;
