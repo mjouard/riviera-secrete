@@ -386,5 +386,13 @@
     "moyen": "1 à 2 h",
     "long": "2 à 4 h",
     "journee": "Une demi-journée ou plus"
+  },
+  "legal": {
+    "mentionsTitre": "Mentions légales",
+    "mentionsDescription": "Éditeur, hébergement, propriété intellectuelle et signalement d'erreur.",
+    "confidentialiteTitre": "Politique de confidentialité",
+    "confidentialiteDescription": "Quelles données Riviera Secrète collecte, pourquoi, et comment exercer vos droits.",
+    "accueil": "Accueil",
+    "filAriane": "Fil d'Ariane"
   }
 }

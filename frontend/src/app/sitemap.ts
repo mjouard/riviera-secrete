@@ -25,6 +25,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/villes`, priority: 0.8, changeFrequency: "weekly", alternates: withEn("/villes") },
     { url: `${SITE_URL}/activites`, priority: 0.8, changeFrequency: "weekly", alternates: withEn("/activites") },
     { url: `${SITE_URL}/a-propos`, priority: 0.5, changeFrequency: "yearly", alternates: withEn("/a-propos") },
+    { url: `${SITE_URL}/mentions-legales`, priority: 0.2, changeFrequency: "yearly", alternates: withEn("/mentions-legales") },
+    { url: `${SITE_URL}/confidentialite`, priority: 0.2, changeFrequency: "yearly", alternates: withEn("/confidentialite") },
   ];
 
   const lieuRoutes: MetadataRoute.Sitemap = lieux.map((l) => ({

@@ -106,6 +106,7 @@ export default async function RootLayout({
   setRequestLocale(locale);
 
   const t = await getTranslations("footer");
+  const tLegal = await getTranslations("legal");
 
   return (
     <html lang={locale} className={`${inter.className} ${fraunces.variable}`}>
@@ -134,6 +135,15 @@ export default async function RootLayout({
                   {t("photos")}{" "}
                   <Link href="/credits" className="hover:text-white transition-colors">
                     {t("credits")}
+                  </Link>
+                </p>
+                <p className="mt-1">
+                  <Link href="/mentions-legales" className="hover:text-white transition-colors">
+                    {tLegal("mentionsTitre")}
+                  </Link>
+                  <span className="mx-2" aria-hidden="true">·</span>
+                  <Link href="/confidentialite" className="hover:text-white transition-colors">
+                    {tLegal("confidentialiteTitre")}
                   </Link>
                 </p>
               </div>

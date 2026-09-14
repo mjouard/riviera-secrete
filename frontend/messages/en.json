@@ -386,5 +386,13 @@
     "moyen": "1 to 2 hrs",
     "long": "2 to 4 hrs",
     "journee": "Half a day or more"
+  },
+  "legal": {
+    "mentionsTitre": "Legal notice",
+    "mentionsDescription": "Publisher, hosting, intellectual property and how to report an error.",
+    "confidentialiteTitre": "Privacy policy",
+    "confidentialiteDescription": "What data Riviera Secrète collects, why, and how to exercise your rights.",
+    "accueil": "Home",
+    "filAriane": "Breadcrumb"
   }
 }
