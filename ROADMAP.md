@@ -3,9 +3,9 @@
 ## Suites des audits du 2026-09-14
 
 Trois audits menés dans la nuit du 13 au 14 (sécurité backend, tests utilisateurs, UX
-mobile/web) — rapports complets dans **`docs/audits/`**. Ce qui en est ressorti et reste
-à faire. Tout ce qui a été corrigé est déjà poussé (23 commits), **mais rien n'est
-déployé** : aucun de ces correctifs n'est en ligne.
+mobile/web) — rapports complets dans **`docs/audits/`**. **Tout est corrigé, poussé et
+déployé le 2026-09-14** (backend Railway + frontend Vercel + synchro des coordonnées en
+base), sauf ce qui est listé ci-dessous.
 
 ### À faire par l'utilisateur — bloquant
 
@@ -16,20 +16,22 @@ déployé** : aucun de ces correctifs n'est en ligne.
       pas**. Rotation via Railway, puis mise à jour de
       `ConnectionStrings__DefaultConnection` sur le service `api` et de
       l'`appsettings.Development.json` local. Inspecter les lignes de `Users` non reconnues.
-- [ ] **Vérifier `ASPNETCORE_ENVIRONMENT` sur Railway** — si elle vaut `Development`,
-      `POST /api/seed` est exposé publiquement. Non vérifiable depuis le code.
-- [ ] **Synchroniser les coordonnées corrigées en base** (avec la *nouvelle* chaîne de
-      connexion). Sans ça Èze reste à 8 km en pleine mer en prod :
-      ```bash
-      cd backend && SYNC_CONNECTION_STRING="<nouvelle chaîne>" \
-        dotnet run --project RivieraSecrete.Tools -- refresh-lieu-fields eze-village
-      ```
-      à répéter pour `sentier-corbusier-cap-martin`, `saorge-village`,
-      `pic-cap-roux-esterel`, `iles-de-lerins`, puis `refresh-ville-fields` pour `eze` et
-      `cannes`. (`refresh-*-fields` ne recopiait pas `lat`/`lng` avant `1434d41` : la
-      commande annonçait « rafraîchi » sans rien envoyer en base.)
-- [ ] **Déployer** : `cd backend && railway up --service api`, puis
-      `cd frontend && vercel --prod --yes`.
+      `scripts/sync-coordonnees.sh` relit la chaîne à chaque exécution, donc il restera
+      valable après la rotation.
+- [x] **`ASPNETCORE_ENVIRONMENT`** — vérifié le 2026-09-14 : vaut `Production`, donc
+      `POST /api/seed` n'est pas exposé (confirmé en direct, 404). `Jwt__Secret` est bien
+      défini côté Railway, ce qui a permis de déployer le nouveau garde-fou de démarrage
+      sans risque de crash-loop.
+- [x] **Coordonnées synchronisées en base** — fait le 2026-09-14 via
+      `./scripts/sync-coordonnees.sh` (7 points : 5 lieux + 2 villes). Vérifié en prod,
+      `--verifie` renvoie « Prod à jour », et le lien Waze de la fiche Èze pointe désormais
+      sur `43.7298,7.3619` au lieu d'un point en pleine mer.
+- [x] **Déployé** — backend `railway up --service api` puis frontend `vercel --prod --yes`,
+      le 2026-09-14. Vérifié en ligne : `/health` 200, `/api/seed` 404, endpoint protégé 401
+      sans token, **rate limiter actif (20 × 401 puis 429)**, `register` avec payload vide
+      en 400 (et non plus 500), `/robots.txt` 200 avec la ligne `Sitemap:`, `/foo.txt` 404,
+      `rel=canonical` présent, plus aucune chaîne française dans les réservations de
+      `/en/itineraires/villages-perches`, et les 4 photos d'activités de Gourdon en 200.
 
 ### Arbitrages produit en attente
 
@@ -637,7 +639,11 @@ ne démarre pas toute seule.
       `feedback_vercel_deploy.md`) car elle re-déployait depuis la racine du repo au lieu de
       `frontend/`. Ne pas la reconnecter.
 - [ ] Configurer une branche `staging` (ou Vercel Preview Deployments)
-- [ ] **Déploiement frontend en attente (2026-09-13)** — la limite Vercel du plan gratuit a
+- [x] **Déploiement frontend débloqué le 2026-09-14** — la limite avait été atteinte la
+      veille ; déploiement relancé et vérifié en ligne (photos Gourdon, crédits, partage par
+      URL, plus les 14 correctifs UX de la nuit). L'item ci-dessous reste pour mémoire, le
+      piège qu'il décrit étant toujours valable.
+- [ ] ~~**Déploiement frontend en attente (2026-09-13)**~~ — la limite Vercel du plan gratuit a
       été atteinte (100 déploiements/jour, `api-deployments-free-per-day`). Les données sont
       en ligne (elles transitent par l'API, pas par le build), mais **3 photos d'activités de
       Gourdon (`act-5/6/7.jpg`), le renommage `act-8.jpg` et les 4 crédits photo n'arriveront
