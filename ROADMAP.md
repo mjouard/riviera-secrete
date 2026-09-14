@@ -138,6 +138,142 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       exige une saisie d'identifiants) : favoris persistés, `/mes-itineraires` peuplée,
       édition et suppression d'un itinéraire sauvegardé.
 
+## Retours audits UX/UI — 14 septembre 2026
+
+Deux rapports externes reçus le 2026-09-14 : `audit-ux-riviera-secrete.html` («  Un très bon
+fond dans une coquille qui fuit ») et `audit-ux-ui-riviera-secrete.html` (« Coupe de la page
+d'accueil »). Codes de référence entre parenthèses pour retrouver le détail dans les rapports.
+
+### Bugs bloquants — à corriger en priorité
+
+- [ ] **L'itinéraire non sauvegardé disparaît au rechargement** (PR-01) — après génération,
+      l'URL reste `/creer-itineraire` sans paramètre ; un F5 ou un retour arrière efface tout
+      le travail. La mécanique existe déjà pour les itinéraires sauvegardés (`?id=`). **Piste** :
+      encoder la sélection et la durée dans l'URL (`?duree=journee&lieux=eze,la-turbie`) et
+      reconstruire au montage — couvre les visiteurs sans compte, le retour arrière et le
+      bookmark.
+- [ ] **« Ajouter à un itinéraire » efface le lieu précédent** (PR-02) — fiche Èze puis fiche
+      Gourdon : `?add=gourdon-village`, Èze a disparu. Le verbe « ajouter » promet un panier,
+      il n'y en a pas. **Piste** : accumuler dans l'URL ou `sessionStorage`, afficher un
+      compteur visible, retour immédiat sur la fiche (« Ajouté — 3 lieux ») sans naviguer.
+- [ ] **La 404 est celle de Next.js, en anglais** (PR-03) — `/lieux/page-qui-nexiste-pas` →
+      écran noir « 404 — This page could not be found. », sans en-tête ni pied de page.
+      **Piste** : un `not-found.tsx` localisé avec la mise en page du site et deux ou trois
+      suggestions de lieux (le bouton « Surprends-moi » existe déjà).
+- [ ] **« Partager le lien » d'un itinéraire sauvegardé produit un lien privé** (EC-01) —
+      le lien copié est `/creer-itineraire?id=<uuid>` ; sans authentification, l'API renvoie
+      405 et la page retombe silencieusement sur le formulaire vide, sans message. Le partage
+      par `?jours=` (fait le 2026-09-13) couvre les itinéraires non sauvegardés — c'est
+      le cas des sauvegardés qui reste cassé. **Piste** : un endpoint de lecture publique sur
+      un identifiant non devinable, ou encoder le contenu dans l'URL comme pour `?jours=` ;
+      plus un message explicite quand l'itinéraire est introuvable, et un retour visible après
+      copie (toast « Lien copié »).
+- [ ] **Champs de saisie en 12–14 px → zoom automatique Safari iOS** (MO-02) — sous 16 px,
+      Safari iOS zoome à la mise au point d'un champ et ne dézoome pas. **Piste** :
+      `font-size: 16px` sur tous les `input`, `select` et `textarea` — correctif trivial,
+      fort impact mobile.
+
+### Correctifs UX — effort faible à moyen
+
+- [ ] **Suppression d'itinéraire via `window.confirm()`** (EC-03) — la modale de nommage
+      juste à côté est soignée (`role="dialog"`, focus auto, nom pré-rempli) ; la suppression
+      ouvre une boîte système non stylée, boutons en langue du navigateur. **Piste** : réutiliser
+      le composant de modale existant avec « Supprimer » en bouton destructif et « Annuler »
+      par défaut ; ajouter un « Annuler » de quelques secondes après suppression.
+- [ ] **Resauvegarder un itinéraire existant redemande le nom** (EC-04) — modifier un
+      itinéraire déjà sauvegardé et cliquer « Sauvegarder » rouvre la modale de nommage,
+      champ pré-rempli. La mise à jour se fait bien en place, mais l'étape est superflue.
+      **Piste** : ne demander le nom qu'à la première sauvegarde ; ensuite « Enregistrer les
+      modifications » directement, avec un « Renommer » séparé.
+- [ ] **Les cartes `/mes-itineraires` n'ont pas de lien** (EC-05) — « Voir » et « Supprimer »
+      sont des `<button>` ; la carte ne porte aucun `href` vers `?id=…`. Impossible d'ouvrir
+      un itinéraire dans un nouvel onglet ou de le mettre en favori. **Piste** : rendre la
+      carte cliquable via un vrai lien vers `?id=…` ; ajouter renommer / dupliquer.
+- [ ] **Échap ne ferme ni la modale ni le menu burger** (EC-07) — la modale est un
+      `<div role="dialog">` non natif (pas de piège à focus ni d'arrière-plan inerte). **Piste** :
+      `<dialog>` natif avec `showModal()` pour avoir Échap et le piège à focus gratuitement ;
+      écouter `Escape` sur le menu.
+- [ ] **Lieu écarté « faute de temps » non nommé dans l'alerte** (PR-06) — l'alerte dit
+      « 1 lieu non inclus faute de temps — à voir en bas de page » sans nommer le lieu, et sans
+      action proposée. **Piste** : nommer le lieu dans l'alerte et proposer « Étendre à 2 jours »
+      ou « Remplacer une étape » à côté.
+- [ ] **Durées formatées incohérentes dans le générateur** (DC-05) — « ~1 h », « ~18 min »
+      et « ~1.8 h » (point décimal anglais) cohabitent. **Piste** : un seul formateur de durée
+      (`1 h 45`, `20 min`), arrondi au quart d'heure au-delà d'une heure.
+- [ ] **Clic sur « Favoris » éjecte sans contexte** (PR-07) — déconnecté, le cœur redirige
+      vers `/connexion?callbackUrl=…` mais la page de connexion affiche son texte générique.
+      **Piste** : un titre contextuel (« Connecte-toi pour épingler Èze ») et un retour vers
+      la page d'origine plutôt que l'accueil.
+- [ ] **L'inscription n'a pas d'URL propre** (PR-08) — « Créer un compte » est un `<button>`
+      qui bascule le contenu de `/connexion` sans changer l'URL ; idem « Mot de passe
+      oublié ». Impossible d'envoyer un lien direct ni de mesurer le funnel. **Piste** :
+      `/inscription` et `/mot-de-passe-oublie` comme routes à part entière.
+- [ ] **Message d'erreur de connexion non annoncé** (AC-01) — « Email ou mot de passe
+      incorrect. » est dans un `<p class="text-xs">` sans `role="alert"` ni `aria-live` — un
+      lecteur d'écran n'annonce rien. **Piste** : `role="alert"` sur le conteneur, taille de
+      texte alignée sur le corps de page, focus déplacé sur le message après échec.
+- [ ] **Liens Maps/Waze/Plans à 16 px de haut sur mobile** (MO-01) — c'est l'action
+      principale d'un site de destination consulté sur place, et c'est la plus petite cible
+      de la fiche lieu. **Piste** : passer les trois liens en boutons de 44 px minimum avec
+      espacement suffisant entre eux.
+- [ ] **Libellés de sortie des activités inconsistants** (DC-03) — « En savoir plus → »,
+      « Réserver → », « Voir les offres → » cohabitent sans règle ; certains liens « Réserver »
+      ouvrent une page générique de ville ou le site vitrine d'un restaurant sans réservation.
+      **Piste** : deux libellés seulement — « Réserver » quand le lien mène à une page de
+      réservation de cette activité précise, « Site officiel » sinon.
+- [ ] **Carte et liste de lieux filtrées indépendamment** (AI-04 / NF-01) — filtrer une zone
+      sur la carte (34 → 26 marqueurs) ne change pas la liste (reste à 43), et inversement.
+      Les deux systèmes de filtres de la homepage ne se parlent pas. **Piste** : un seul jeu
+      de filtres pilotant carte et liste simultanément, avec un compteur unique.
+- [ ] **Favoris : mise à jour non optimiste et `/mes-favoris` sans lien vers le générateur**
+      (EC-06) — 416 ms entre le clic et le changement de libellé, sans indicateur de
+      chargement ni `aria-busy`. Et un utilisateur qui a épinglé huit lieux a fait exactement
+      la sélection que demande le générateur — rien ne relie les deux pages. **Piste** : mise
+      à jour optimiste + `aria-pressed` sur le bouton cœur ; ajouter « Créer un itinéraire à
+      partir de mes favoris » sur `/mes-favoris`.
+- [ ] **Compte proposé au mauvais moment** (PA-04) — la seule invitation à créer un compte
+      est le redirect au clic sur un cœur. Rien après la génération d'un itinéraire, là où
+      l'utilisateur a quelque chose à perdre. **Piste** : proposer la sauvegarde sous
+      l'itinéraire fraîchement généré, et ajouter « Créer un itinéraire à partir de mes
+      favoris » (voir EC-06 ci-dessus).
+
+### Chantiers structurels — décisions produit à prendre d'abord
+
+- [ ] **Page `/villes` : générer uniquement pour les communes à 2 lieux ou plus** (DC-04) —
+      28 pages villes sur 34 affichent « 1 lieu », une carte et une phrase — un clic de plus
+      pour rien, et deux pages qui se concurrencent sur la même requête. **Piste** : ne
+      générer une page que pour les communes à ≥ 2 lieux, rediriger les autres directement
+      vers la fiche du lieu.
+- [ ] **Sélection de lieux dans le générateur sans vignette ni info** (PR-05) — 43 noms
+      dans des accordéons, sans photo, sans commune, sans durée. Le site vend des lieux
+      confidentiels : le visiteur ne les connaît pas. **Piste** : réutiliser la carte-lieu
+      compacte (photo + commune + durée) dans les accordéons.
+- [ ] **Le générateur ne demande jamais d'où on part** (PR-04) — départ figé à 09:00, voiture
+      implicite, aucune date, aucun point de départ. Les alertes « Fermé aujourd'hui » se
+      calculent sur la date du jour, pas sur la date du voyage. **Piste** : trois champs —
+      commune de départ, date, voiture / transports — la date seule rendrait les alertes
+      d'ouverture honnêtes.
+- [ ] **Rebond manquant sur la fiche lieu : l'itinéraire qui passe par ici** (PA-03) —
+      c'est la page sur laquelle on arrive depuis Google, et celle qui offre le moins de
+      suites. L'information existe (visible sur `/villes/eze` : « 1 itinéraire qui passe par
+      ici »), pas sur la fiche elle-même. **Piste** : trois rebonds sous la fiche — l'itinéraire
+      qui passe par ici, les autres lieux de la commune, « à moins de 20 minutes ».
+- [ ] **Carte Leaflet : regroupement des marqueurs superposés** (NF-03) — 13 paires de
+      marqueurs à moins de 18 px l'une de l'autre au zoom par défaut, sur des pastilles de
+      25 px. Inopérable au doigt autour de Nice et Monaco. **Piste** : `leaflet.markercluster`,
+      `fitBounds` aux marqueurs visibles plutôt qu'un centre fixe.
+- [ ] **Système visuel : hiérarchie typographique et couleurs multi-sens** (SV-01/02/03) —
+      204 nœuds de texte sur 224 en 12 ou 14 px, le gris secondaire plus présent que le blanc ;
+      le même bleu-vert dit « clique ici », « c'est gratuit » et « c'est à Nice » ; 12 variantes
+      de bouton sur la seule page d'accueil. **Piste** : une échelle à cinq crans réellement
+      utilisée (12 / 14 / 16 / 20 / 28), une teinte réservée à l'action, trois variantes de
+      bouton (primaire / secondaire / discret).
+- [ ] **Architecture de l'information : 4 entrées au même poids pour le même contenu** (AI-01)
+      — Lieux / Activités / Itinéraires / Villes sont quatre projections des mêmes objets, avec
+      le même poids dans le menu, mais deux sont des ancres d'accueil et deux sont de vraies
+      pages. **Piste** : deux objets — un espace d'exploration (carte + liste + filtres) et une
+      collection éditoriale (itinéraires) ; communes et activités deviennent des filtres.
+
 ## Priorité contenu
 
 - [x] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,

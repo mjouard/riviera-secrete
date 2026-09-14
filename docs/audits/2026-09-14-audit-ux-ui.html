@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coupe de Riviera Secrète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --paper:#EDF0F2;
+    --surface:#FFFFFF;
+    --surface-2:#DFE5EA;
+    --ink:#10233F;
+    --muted:#57697D;
+    --rule:#C6D0D8;
+    --rule-soft:#DCE3E8;
+    --accent:#0B3B8C;
+    --accent-soft:#C3D2EC;
+    --sev-struct:#A81E16;
+    --sev-maj:#9E5C00;
+    --sev-min:#006247;
+
+    --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0B1420;
+      --surface:#132133;
+      --surface-2:#1C2E44;
+      --ink:#E4EAF1;
+      --muted:#93A6BA;
+      --rule:#273B53;
+      --rule-soft:#1D2E43;
+      --accent:#7FA6E8;
+      --accent-soft:#1F3558;
+      --sev-struct:#F0806F;
+      --sev-maj:#E0A44B;
+      --sev-min:#5FBC9B;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0B1420;
+    --surface:#132133;
+    --surface-2:#1C2E44;
+    --ink:#E4EAF1;
+    --muted:#93A6BA;
+    --rule:#273B53;
+    --rule-soft:#1D2E43;
+    --accent:#7FA6E8;
+    --accent-soft:#1F3558;
+    --sev-struct:#F0806F;
+    --sev-maj:#E0A44B;
+    --sev-min:#5FBC9B;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--f-body);font-size:17px;line-height:1.62;
+    margin:0;padding-inline:20px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;}
+
+  .masthead{padding-block:66px 30px;border-bottom:3px double var(--ink);}
+  .eyebrow{
+    font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;
+    gap:8px 18px;margin:0 0 20px;
+  }
+  h1{
+    font-family:var(--f-display);font-weight:700;
+    font-size:clamp(36px,6.6vw,64px);line-height:1;letter-spacing:-.035em;
+    margin:0 0 16px;text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--accent);}
+  .standfirst{font-size:clamp(18px,2.3vw,21px);line-height:1.5;max-width:62ch;margin:0 0 24px;}
+  .conditions{
+    font-family:var(--f-mono);font-size:12px;line-height:1.85;color:var(--muted);
+    border-left:2px solid var(--rule);padding-left:14px;margin:0;
+  }
+  .conditions b{color:var(--ink);font-weight:600;}
+
+  section{padding-block:52px 6px;}
+  h2{
+    font-family:var(--f-display);font-weight:700;
+    font-size:clamp(24px,3.4vw,33px);line-height:1.08;letter-spacing:-.025em;
+    margin:0 0 6px;text-wrap:balance;
+  }
+  .sect-note{color:var(--muted);margin:0 0 32px;max-width:64ch;font-size:16px;}
+  p{max-width:66ch;}
+
+  /* ---- cross-section diagram ---- */
+  .coupe{
+    display:grid;grid-template-columns:76px 1fr;gap:0 14px;
+    margin:0 0 14px;
+  }
+  .coupe-scale{
+    font-family:var(--f-mono);font-size:11px;color:var(--muted);
+    display:flex;flex-direction:column;text-align:right;
+    font-variant-numeric:tabular-nums;
+  }
+  .coupe-scale span{display:flex;align-items:flex-start;justify-content:flex-end;}
+  .coupe-bands{display:flex;flex-direction:column;border:1px solid var(--rule);}
+  .band{
+    border-bottom:1px solid var(--rule);padding:6px 12px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;
+    background:var(--surface);min-height:0;
+  }
+  .band:last-child{border-bottom:0;}
+  .band b{
+    font-family:var(--f-display);font-weight:700;font-size:13.5px;
+    letter-spacing:-.01em;
+  }
+  .band i{
+    font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);
+  }
+  .band u{display:none;}
+  .band em{
+    font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);
+    flex-basis:100%;margin-top:2px;
+  }
+  .band.hero{background:var(--surface-2);}
+  .band.target{background:var(--accent-soft);}
+  .coupe-legend{
+    font-family:var(--f-mono);font-size:11.5px;color:var(--muted);
+    line-height:1.7;margin:0 0 34px;max-width:none;
+  }
+  .coupe-legend b{color:var(--ink);font-weight:600;}
+
+  /* ---- findings ---- */
+  .finding{
+    display:grid;grid-template-columns:126px 1fr;gap:0 28px;
+    padding-block:26px;border-top:1px solid var(--rule-soft);
+  }
+  .finding:first-of-type{border-top:1px solid var(--rule);}
+  .rail{padding-top:4px;}
+  .sev{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;display:block;}
+  .sev.st{color:var(--sev-struct);}
+  .sev.maj{color:var(--sev-maj);}
+  .sev.min{color:var(--sev-min);}
+  .ref{font-family:var(--f-mono);font-size:11px;color:var(--muted);display:block;margin-top:5px;}
+  .finding h3{
+    font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.22;
+    letter-spacing:-.015em;margin:0 0 10px;text-wrap:balance;
+  }
+  .finding p{margin:0 0 12px;}
+  .finding p:last-child{margin-bottom:0;}
+  .releve{
+    font-family:var(--f-mono);font-size:12.5px;line-height:1.65;color:var(--muted);
+    background:var(--surface);border:1px solid var(--rule-soft);
+    padding:11px 14px;margin:0 0 14px;max-width:none;overflow-x:auto;
+  }
+  .releve b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+  .releve::before{
+    content:"Relevé";display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:5px;font-weight:600;
+  }
+  .fix{border-left:2px solid var(--accent-soft);padding-left:14px;font-size:16.5px;}
+  .fix b{
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent);display:block;margin-bottom:3px;
+  }
+  code{font-family:var(--f-mono);font-size:.87em;background:var(--surface-2);padding:1px 5px;word-break:break-word;}
+
+  /* ---- proposed structure ---- */
+  .plan{list-style:none;margin:0;padding:0;counter-reset:s;}
+  .plan li{
+    counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:0 18px;
+    padding-block:15px;border-top:1px solid var(--rule-soft);align-items:baseline;
+  }
+  .plan li:first-child{border-top:1px solid var(--rule);}
+  .plan li::before{
+    content:counter(s);font-family:var(--f-display);font-weight:700;font-size:23px;
+    color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;
+  }
+  .plan strong{font-family:var(--f-display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;}
+  .plan span{display:block;color:var(--muted);font-size:15.5px;margin-top:2px;}
+
+  .works{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(266px,1fr));gap:0 34px;}
+  .works li{padding-block:14px;border-top:1px solid var(--rule-soft);font-size:16px;}
+  .works li b{display:block;font-family:var(--f-display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin-bottom:2px;}
+  .works li span{color:var(--muted);font-size:14.5px;display:block;}
+
+  footer{
+    border-top:3px double var(--ink);margin-top:58px;padding-block:22px 70px;
+    font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;
+  }
+  a{color:var(--accent);text-underline-offset:2px;}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  @media (max-width:660px){
+    body{font-size:16.5px;}
+    .finding{grid-template-columns:1fr;gap:0;}
+    .rail{padding-top:0;margin-bottom:10px;display:flex;gap:14px;align-items:baseline;}
+    .ref{margin-top:0;}
+    .masthead{padding-block:44px 26px;}
+    .coupe{grid-template-columns:1fr;gap:0;}
+    .coupe-scale{display:none;}
+    .coupe-bands{height:auto!important;}
+    .band{flex:none!important;padding:10px 12px;}
+    .band u{display:inline;text-decoration:none;font-family:var(--f-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow"><span>Audit UX / UI</span><span>Riviera Secrète</span><span>14.09.2026</span></p>
+    <h1>Un catalogue, là où il faudrait <em>un outil</em></h1>
+    <p class="standfirst">Le premier rapport listait ce qui est cassé. Celui-ci regarde ce qui est <em>construit comme ça</em> : le découpage du site, l'ordre des blocs, ce que l'interface demande à l'utilisateur — et ce qu'elle ne lui demande jamais.</p>
+    <p class="conditions">
+      <b>Périmètre</b> architecture de l'information, parcours, composition des pages, système visuel, ergonomie mobile, micro-copie.<br>
+      <b>Mesures</b> prises sur l'accueil, la fiche lieu, l'itinéraire éditorial, le générateur, /activites, /villes et l'espace connecté.<br>
+      <b>Contextes</b> desktop 1280 et 800 px · mobile 375×812 émulé, UA Android tactile · FR et EN.<br>
+      <b>Complément</b> du rapport technique <i>« Un très bon fond dans une coquille qui fuit »</i> — les références PR-, DC-, EC- y renvoient.
+    </p>
+  </header>
+
+  <section>
+    <h2>Coupe de la page d'accueil</h2>
+    <p class="sect-note">Ce que le visiteur traverse, dans l'ordre, avec les positions réelles mesurées sur une page de 7 853 px.</p>
+
+    <div class="coupe">
+      <div class="coupe-scale">
+        <span style="flex:613 613 0">0 px</span>
+        <span style="flex:682 682 0">613</span>
+        <span style="flex:600 600 0">1 295</span>
+        <span style="flex:728 728 0">1 895</span>
+        <span style="flex:2300 2300 0">2 623</span>
+      </div>
+      <div class="coupe-bands" style="height:500px">
+        <div class="band hero" style="flex:613 613 0"><u>0 px —</u> <b>Héros</b> <i>titre, promesse, 2 boutons</i></div>
+        <div class="band" style="flex:682 682 0"><u>613 —</u> <b>Itinéraires</b> <i>6 cartes + « ✨ Créer mon itinéraire »</i></div>
+        <div class="band" style="flex:600 600 0"><u>1 295 —</u> <b>Activités</b> <i>carrousel horizontal, 9 cartes sur 208</i></div>
+        <div class="band" style="flex:728 728 0"><u>1 895 —</u> <b>Carte</b> <i>34 marqueurs + filtres de zone</i></div>
+        <div class="band target" style="flex:2100 2100 0">
+          <u>2 623 —</u> <b>Filtres + Tous les lieux</b> <i>5 230 px — 67 % de la page</i>
+          <em>↑ cible du bouton « Explorer les lieux »<br>barre de filtres (2 672) · titre « Tous les lieux » (2 868) · 43 cartes<br>puis le pied de page, à 7 853 px</em>
+        </div>
+      </div>
+    </div>
+    <p class="coupe-legend">
+      Le CTA primaire du héros pointe vers <b>#lieux</b>, à <b>2 623 px</b> : il saute par-dessus les trois sections intermédiaires.<br>
+      Le premier champ que l'utilisateur peut remplir — la barre de filtres — apparaît à <b>2 672 px</b>, soit au tiers de la page.<br>
+      Sur mobile, la même page fait <b>9 022 px</b>, soit <b>11,1 écrans</b> ; la liste des lieux commence au <b>3,7<sup>e</sup> écran</b>.
+    </p>
+  </section>
+
+  <section>
+    <h2>Architecture de l'information</h2>
+    <p class="sect-note">Le découpage du contenu, et ce qu'il oblige l'utilisateur à comprendre avant de pouvoir s'en servir.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev st">Structurel</span><span class="ref">AI-01</span></div>
+      <div>
+        <h3>Quatre entrées pour le même contenu, sans hiérarchie</h3>
+        <p class="releve">Lieux (43) · Activités (208) · Itinéraires (6) · Villes (34) : quatre projections des mêmes objets. Une activité appartient à un lieu, un lieu à une commune, un itinéraire est une liste de lieux.<br>Dans le menu, elles ont le même poids — et pas la même nature : <b>Lieux</b> et <b>Itinéraires</b> sont des ancres de l'accueil (<code>/#lieux</code>), <b>Activités</b> et <b>Villes</b> sont de vraies pages.</p>
+        <p>Depuis une fiche lieu, cliquer « Lieux » ne mène pas à une liste de lieux : ça quitte la page, recharge l'accueil et saute à 2 623 px. Le même menu change de comportement selon l'entrée, et rien ne dit laquelle répond à quelle question. Quatre portes, aucune enseigne.</p>
+        <p>C'est le choix qui commande tous les autres : tant que le contenu est découpé en quatre silos parallèles, chaque page doit réexpliquer où l'on est, et aucune ne peut être la page principale.</p>
+        <p class="fix"><b>Piste</b>Deux objets seulement : un espace d'exploration (carte + liste + filtres) et une collection éditoriale (les itinéraires). Les communes deviennent un filtre de zone, les activités un filtre d'envie — ce sont des attributs, pas des destinations.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev st">Structurel</span><span class="ref">AI-02</span></div>
+      <div>
+        <h3>L'accueil ne demande jamais rien</h3>
+        <p class="releve">Six blocs empilés, aucun champ avant <b>2 672 px</b>. Le site ne pose pas une seule question à l'utilisateur avant le tiers de la page.</p>
+        <p>Un visiteur arrive avec trois variables en tête : combien de temps il a, où il loge, ce qu'il aime. Le site connaît exactement ces trois axes — durée, zone, type — ils existent déjà dans la barre de filtres. Mais il les enterre sous 2 700 px de vitrine au lieu de les poser en entrée.</p>
+        <p>C'est toute la différence entre un catalogue et un outil. Et ce n'est pas un chantier : c'est le même composant, remonté.</p>
+        <p class="fix"><b>Piste</b>Faire du héros le point de qualification — trois contrôles (durée · zone · envie) et un bouton « Composer mon itinéraire ». Le reste de la page devient ce qu'on voit quand on ne veut pas répondre.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">AI-03</span></div>
+      <div>
+        <h3>Le bouton principal saute par-dessus les trois quarts de la page</h3>
+        <p class="releve">« Explorer les lieux », CTA primaire → <code>#lieux</code>, <b>2 623 px</b> plus bas. Il franchit d'un coup Itinéraires, Activités et Carte.<br>Le second CTA, « Voir les itinéraires » → <code>#itineraires</code>, 613 px. <b>Aucun des deux</b> ne mène au générateur.</p>
+        <p>Le site déclare lui-même que ce qui sépare le héros des 43 lieux n'est pas sur le chemin principal. Soit ces trois sections ne servent pas le parcours, soit le CTA vise le mauvais endroit — les deux ne peuvent pas être vrais.</p>
+        <p class="fix"><b>Piste</b>Trancher. Si l'exploration est le geste central, elle remonte sous le héros et le CTA n'a plus rien à sauter.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">AI-04</span></div>
+      <div>
+        <h3>La carte et la liste sont le même geste, coupé en deux</h3>
+        <p class="releve">Carte à <b>1 895 px</b>, avec ses propres puces de zone. Filtres et liste à <b>2 672 / 2 868 px</b>, avec d'autres filtres. <b>973 px</b> les séparent : on ne peut jamais voir les deux en même temps.</p>
+        <p>Explorer une destination, c'est balayer la carte et lire la liste dans le même mouvement. Ici, choisir une zone sur la carte ne change pas la liste (mesuré : 34 → 26 marqueurs, liste toujours à « 43 spots »), et filtrer la liste ne recadre pas la carte. Deux outils qui font le même travail sans se parler, c'est deux fois le travail pour l'utilisateur.</p>
+        <p class="fix"><b>Piste</b>Un seul bloc « Explorer » : filtres en tête, carte et liste synchronisées côte à côte sur desktop, empilées avec une bascule carte/liste sur mobile.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">AI-05</span></div>
+      <div>
+        <h3>Les activités passent avant ce à quoi elles se rattachent</h3>
+        <p class="releve">Section Activités à <b>1 295 px</b>, avant la carte (1 895) et avant les lieux (2 868). Or chaque carte affiche son lieu parent : « Sortie kayak de mer — <b>La Rue Obscure</b> ».</p>
+        <p>On montre les feuilles avant l'arbre, ce qui rend la mention du lieu parent incompréhensible — et alimente la confusion décrite en DC-02 du rapport technique.</p>
+        <p class="fix"><b>Piste</b>Retirer la section de l'accueil. Les activités sont excellentes <em>dans</em> les fiches lieu, et accessibles par un filtre « envie ».</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">AI-06</span></div>
+      <div>
+        <h3>La recherche n'existe nulle part</h3>
+        <p class="releve">La loupe de l'en-tête est un lien vers <code>/#lieu-search</code> : depuis n'importe quelle page, elle quitte la page en cours, recharge l'accueil et saute à 2 672 px. Aucun champ de recherche dans l'en-tête.</p>
+        <p>Sur un site de 43 lieux, 208 activités et 34 communes, la recherche est le raccourci naturel de l'utilisateur qui sait ce qu'il cherche — « Èze », « kayak », « Menton ». Elle n'est disponible qu'à un endroit, et y accéder coûte un changement de page.</p>
+        <p class="fix"><b>Piste</b>Une recherche globale dans l'en-tête, ouverte en surcouche, qui interroge lieux, communes et activités depuis n'importe où.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Parcours</h2>
+    <p class="sect-note">Le test que je fais passer à tout site de destination : un visiteur arrive avec une question précise — est-ce qu'il trouve ?</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev st">Structurel</span><span class="ref">PA-01</span></div>
+      <div>
+        <h3>« Je suis à Nice, j'ai demain après-midi, il fait beau »</h3>
+        <p class="releve">Réponse du site : aucune entrée directe. <b>« 📍 Près de moi »</b> existe — à 2 672 px, en petit bouton gris, à côté d'un « 🎲 Surprends-moi » plus visible que lui. La notion de « ouvert aujourd'hui » existe — mais seulement sur /activites, en case à cocher discrète. La saison est un filtre ; la date, non.</p>
+        <p>C'est pourtant le cas d'usage le plus fréquent : quelqu'un déjà sur place, avec une demi-journée. Le site a toutes les données pour y répondre — géolocalisation, durée, horaires d'ouverture — et n'en fait jamais un parcours.</p>
+        <p class="fix"><b>Piste</b>Une entrée « J'y suis maintenant » qui combine position, temps disponible et ouvertures du jour. C'est le seul écran qui justifierait une app.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">PA-02</span></div>
+      <div>
+        <h3>Ce qui vous distingue est traité comme un lien de bas de section</h3>
+        <p class="releve">Le générateur apparaît sur l'accueil sous la forme d'un bouton « ✨ Créer mon itinéraire » <b>à la fin</b> de la section Itinéraires, sans une ligne d'explication. Dans le menu, « Créer un itinéraire » est la cinquième entrée sur neuf, au même poids que « Villes ».</p>
+        <p>Composer un parcours avec horaires, temps de trajet, pause déjeuner et alertes d'ouverture : c'est ce que ni les guides ni les offices de tourisme ne font. C'est le produit — présenté comme une note de bas de page.</p>
+        <p class="fix"><b>Piste</b>En faire l'action du héros et un bouton distinct dans le menu, avec une phrase qui dit ce qu'il fait : « Dis-nous combien de temps tu as, on compose le parcours. »</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">PA-03</span></div>
+      <div>
+        <h3>La fiche lieu, page d'atterrissage n°1, est une impasse</h3>
+        <p class="releve">Sorties d'une fiche : trois cartes « À découvrir aussi », les liens Maps/Waze/Plans, et « Ajouter à un itinéraire » (qui écrase la sélection précédente, cf. PR-02).<br>Absent : les autres lieux de la commune, et surtout <b>l'itinéraire qui passe par ce lieu</b> — information qui existe sur la page commune (« 1 itinéraire qui passe par ici » sur /villes/eze) mais pas sur la fiche.</p>
+        <p>C'est la page sur laquelle on arrive depuis Google, et celle qui offre le moins de suites. Le rebond le plus naturel — « ce lieu fait partie de ces 2 jours de corniches » — est justement celui qui manque, alors que la donnée est déjà là.</p>
+        <p class="fix"><b>Piste</b>Trois rebonds sous la fiche : l'itinéraire qui passe par ici, les autres lieux de la commune, et « à moins de 20 minutes ».</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">PA-04</span></div>
+      <div>
+        <h3>Le compte n'est proposé qu'au pire moment</h3>
+        <p class="releve">La seule invitation à créer un compte est la redirection déclenchée par un clic sur « ♡ Ajouter aux favoris ». Rien après la génération d'un itinéraire — c'est-à-dire au seul instant où l'utilisateur a produit quelque chose qu'il peut perdre.</p>
+        <p>Et le pont évident manque dans l'autre sens : quelqu'un qui a épinglé huit lieux vient de faire exactement le travail que demande le générateur, et rien ne relie /mes-favoris au générateur.</p>
+        <p class="fix"><b>Piste</b>Proposer la sauvegarde sous l'itinéraire fraîchement généré, là où la valeur est visible à l'écran — et ajouter « Créer un itinéraire à partir de mes favoris ».</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">PA-05</span></div>
+      <div>
+        <h3>Rien ne dit qui trie</h3>
+        <p class="releve">« 43 lieux confidentiels » — sans auteur, sans date de mise à jour, sans critère de sélection, sans un mot sur la méthode. « À propos » n'existe qu'en pied de page.</p>
+        <p>Quand la promesse est le tri, la crédibilité du trieur <em>est</em> le produit. C'est aussi ce qui sépare le site d'un agrégateur, et ce qui donne une raison de revenir plutôt que de copier la liste une fois.</p>
+        <p class="fix"><b>Piste</b>Une signature, une date de dernière vérification sur chaque fiche, et deux lignes sur le critère d'entrée dans la liste.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Système visuel</h2>
+    <p class="sect-note">Le thème sombre est réussi et les contrastes tiennent (mesuré : 5,76:1 minimum). Ce qui ne tient pas, c'est la hiérarchie : tout est au même niveau.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">SV-01</span></div>
+      <div>
+        <h3>Toute la page tient sur deux tailles de texte</h3>
+        <p class="releve">Répartition des tailles sur l'accueil : <b>12 px × 131</b>, <b>14 px × 73</b>, 10 px × 9, puis 16, 18, 22, 24 et 36 px — une ou deux occurrences chacune.<br>Autrement dit <b>204 nœuds de texte sur 224</b> sont en 12 ou 14 px. Aucun palier entre 14 et 22 px.<br>La couleur de texte la plus utilisée est le gris secondaire <b>#8B96A1 (88×)</b>, devant le blanc cassé #ECEEF1 (66×).</p>
+        <p>La page est majoritairement du gris de 12 px. La hiérarchie ne repose donc ni sur la taille ni sur la couleur — il ne reste que la graisse, ce qui ne suffit pas. Concrètement : un titre de carte, une commune, une durée et un badge de prix ont presque le même poids visuel, et l'œil n'a pas de point d'entrée.</p>
+        <p class="fix"><b>Piste</b>Une échelle à cinq crans réellement utilisée (12 / 14 / 16 / 20 / 28), un corps de texte à 16 px minimum, et le gris secondaire réservé aux métadonnées — pas au contenu.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">SV-02</span></div>
+      <div>
+        <h3>Chaque couleur veut dire cinq choses</h3>
+        <p class="releve"><b>Bleu-vert #4FC3C9</b> : bouton primaire (« Explorer les lieux », « Se connecter », « Sauvegarder »), badge « gratuit », couleur de lien, <em>et</em> zone « Nice » sur la carte.<br><b>Ambre #E8A33D</b> : badge « payant », bouton « Générer mon itinéraire », bouton « + Créer », « Surprends-moi », <em>et</em> zone « Menton · Monaco ».<br>Cinq teintes catégorielles supplémentaires servent aux zones : vert, orange, rose, bleu-vert, ambre.</p>
+        <p>Résultat : aucune couleur n'est réservée à une action. Le même bleu-vert dit « clique ici », « c'est gratuit » et « c'est à Nice ». L'utilisateur ne peut pas apprendre le code, donc il ne s'appuie dessus pour rien.</p>
+        <p class="fix"><b>Piste</b>Réserver une teinte à l'action (une seule), une paire séparée à la sémantique gratuit/payant, et sortir les couleurs de zones du même espace — par exemple en formes ou en aplats sourds plutôt qu'en couleurs vives.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">SV-03</span></div>
+      <div>
+        <h3>Douze variantes de bouton sur la seule page d'accueil</h3>
+        <p class="releve">Cinq hauteurs : <b>34, 36, 40, 42, 46 px</b>. Et deux boutons primaires de la même couleur qui ne se ressemblent pas :<br>« Explorer les lieux » — pilule, <b>46 px</b>, 14 px / graisse 500, padding 12/24.<br>« ✨ Créer mon itinéraire » — rayon <b>8 px</b> (le seul du site qui n'est pas une pilule), <b>36 px</b>, 14 px / graisse <b>600</b>, padding 8/16.<br>Deux systèmes de bordure cohabitent : <code>rgba(255,255,255,.5)</code> sur le héros, <code>rgba(255,255,255,.08)</code> sur les puces.</p>
+        <p>Le bouton le plus important du site est le seul qui casse la règle de forme — et il est aussi le plus petit des deux primaires. La règle n'existe pas assez pour qu'on puisse la casser volontairement ; ça se lit comme une inattention.</p>
+        <p class="fix"><b>Piste</b>Trois variantes, pas douze : primaire, secondaire, discrète. Deux tailles (40 et 48). Une seule famille de bordure.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">SV-04</span></div>
+      <div>
+        <h3>Un gadget au même poids que la porte d'entrée du catalogue</h3>
+        <p class="releve">« Voir les 208 activités » : pilule contour ambre, 14 px, 42 px de haut.<br>« 🎲 Surprends-moi » : pilule contour ambre, 12 px, 40 px de haut.<br>Son voisin immédiat « 📍 Près de moi » : pilule contour <b>gris</b>, 12 px, 40 px.</p>
+        <p>Deux contrôles frères, posés côte à côte, avec deux niveaux d'emphase différents — et c'est le gadget qui gagne. Pendant ce temps « Surprends-moi » rivalise visuellement avec l'accès aux 208 activités.</p>
+        <p class="fix"><b>Piste</b>Aligner les contrôles frères, et réserver l'ambre contour à une seule marche de la hiérarchie.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">SV-05</span></div>
+      <div>
+        <h3>Tout est une carte ou une pilule</h3>
+        <p class="releve">Rayons relevés : <b>12 px sur 59 éléments</b>, pilule (9999 px) sur 39, cercle sur 34, puis 8 px, 4 px et 2 px isolés. Même fond de surface <code>#151B22</code> sur 62 blocs.</p>
+        <p>Bordure, fond, rayon et ombre servent à dire « objet distinct ». Quand ils sont appliqués partout à l'identique, plus rien ne se détache : une carte d'itinéraire de 2 jours, une vignette d'activité et un encadré de conseil pratique ont la même enveloppe. La page est régulière, mais plate.</p>
+        <p class="fix"><b>Piste</b>Dépenser ces effets par rôle : garder la carte pleine pour les objets cliquables, passer les encadrés d'information en simple filet, et laisser respirer ce qui n'a pas besoin d'être un objet.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">SV-06</span></div>
+      <div>
+        <h3>Un carrousel sans commandes sur desktop</h3>
+        <p class="releve">La section Activités est une bande horizontale de 9 cartes pilotée par une <b>barre de défilement native</b>, sans flèches, sans pagination, sans indication du nombre d'éléments. La cinquième carte est coupée au bord droit.</p>
+        <p>La carte coupée est un bon signal d'« il y en a d'autres » ; la barre de défilement horizontale, sur desktop, est un mauvais moyen de les atteindre. Et la section ne montre que 9 des 208 activités sans dire selon quel critère.</p>
+        <p class="fix"><b>Piste</b>Flèches visibles au survol, ou grille de 6 avec un lien « tout voir » — et une règle de sélection annoncée (« les plus courtes », « gratuites », « ouvertes aujourd'hui »).</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ergonomie mobile</h2>
+    <p class="sect-note">La mise en page tient — aucun débordement horizontal, menu et carte corrects. Ce sont la densité et les cibles qui ne suivent pas.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev st">Structurel</span><span class="ref">MO-01</span></div>
+      <div>
+        <h3>Sur l'accueil mobile, aucun bouton n'atteint la taille minimale</h3>
+        <p class="releve"><b>20 boutons sur 20</b> sous 44 px : 34 px × 11, 30 px × 5, 40 px × 3, 38 px × 1.<br>Sur une fiche lieu, 18 éléments interactifs sur 26 — dont les liens <b>Google Maps / Waze / Plans à 16 px</b> de haut (cf. MO-01 du rapport technique).</p>
+        <p>Ce n'est pas un détail d'accessibilité : c'est le confort de base du produit sur l'appareil où il sera le plus utilisé, en marchant, au soleil, d'une main.</p>
+        <p class="fix"><b>Piste</b>44 px de hauteur minimale sur tout ce qui se touche, et 8 px d'écart entre deux cibles voisines.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">MO-02</span></div>
+      <div>
+        <h3>Les champs déclenchent le zoom automatique de Safari iOS</h3>
+        <p class="releve">Champ de recherche : <b>14 px</b>. Les trois listes déroulantes (saison, durée, niveau) : <b>12 px</b>.</p>
+        <p>Sous 16 px, Safari iOS zoome la page à la mise au point d'un champ — et ne dézoome pas ensuite. L'utilisateur qui touche la recherche se retrouve avec une page agrandie qu'il doit repincer pour continuer. C'est un des défauts mobiles les plus visibles et l'un des moins coûteux à corriger.</p>
+        <p class="fix"><b>Piste</b><code>font-size: 16px</code> sur tous les <code>input</code>, <code>select</code> et <code>textarea</code>.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">MO-03</span></div>
+      <div>
+        <h3>L'échelle typographique ne change pas entre desktop et mobile</h3>
+        <p class="releve">Mobile 375 px : <b>12 px × 125</b>, <b>14 px × 71</b> — quasiment la même distribution qu'en desktop. Seul le h1 s'adapte, de 36 à 30 px.</p>
+        <p>Une interface conçue à 12 px pour un écran de bureau à 60 cm devient serrée à bout de bras. Les cartes de lieu, où la commune, la durée et les tags sont tous en 12 px gris, sont les premières à en souffrir.</p>
+        <p class="fix"><b>Piste</b>Remonter le corps à 15–16 px et les métadonnées à 13 px sous 768 px, avec plus d'interligne.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">MO-04</span></div>
+      <div>
+        <h3>Onze écrans de défilement, sans repère</h3>
+        <p class="releve">Accueil mobile : <b>9 022 px</b>, soit <b>11,1 écrans</b>. La liste des lieux commence au 3,7<sup>e</sup>. L'en-tête est collant mais n'indique jamais dans quelle section on se trouve, et il n'y a pas de retour en haut.<br>Sur /activites, c'est <b>56 764 px</b> — environ 70 écrans (cf. NF-04).</p>
+        <p class="fix"><b>Piste</b>Une fois l'accueil recomposé, viser 4 à 5 écrans ; et partout, un retour en haut au-delà de deux écrans.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">MO-05</span></div>
+      <div>
+        <h3>Sur une fiche lieu, l'action « y aller » disparaît au défilement</h3>
+        <p class="releve">Les liens Maps / Waze / Plans et les boutons Favori / Partager / Ajouter à un itinéraire sont dans un bloc statique en haut de la fiche. Passé le premier écran, il n'y a plus aucune action accessible.</p>
+        <p>C'est l'inverse de l'usage : on lit la fiche, on se décide, et c'est <em>à ce moment-là</em> qu'on veut l'itinéraire routier — après avoir lu, pas avant.</p>
+        <p class="fix"><b>Piste</b>Une barre d'action fixe en bas d'écran sur mobile : « Y aller » en primaire, favori et partage en icônes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Micro-copie</h2>
+    <p class="sect-note">Le ton est bon — tutoiement tenu, phrases courtes, aucune familiarité forcée. Ce sont les libellés fonctionnels qui flottent.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">MC-01</span></div>
+      <div>
+        <h3>Quatre mots pour deux objets</h3>
+        <p class="releve">Balise title : « les <b>spots</b> confidentiels ». Héros : « 43 <b>lieux</b> confidentiels ». Compteur : « 43 <b>spots</b> ». Menu : « <b>Lieux</b> ». Section : « Tous les <b>lieux</b> ».<br>Et pour les communes : section « La carte des 34 <b>villes</b> », menu « <b>Villes</b> », page « <b>Villes &amp; villages</b> », sous-titre « 34 <b>communes</b> ».</p>
+        <p>Chaque synonyme oblige le lecteur à vérifier qu'il s'agit bien de la même chose. Sur un site dont l'inventaire <em>est</em> le produit, le nom de l'unité d'inventaire mérite d'être fixé une fois.</p>
+        <p class="fix"><b>Piste</b>Un mot par objet, partout — interface, contenu, balises et URL comprises.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">MC-02</span></div>
+      <div>
+        <h3>Des libellés qui décrivent la mécanique, pas le résultat</h3>
+        <p class="releve">« Choisis une durée et les lieux qui t'intéressent — <b>l'algorithme</b> compose le meilleur itinéraire possible. »<br>« <b>Activités, loin de l'ordinaire</b> » — sous-titre : « Des idées pour tous les voyages ».<br>Deux CTA de héros en verbes faibles : « Explorer les lieux » / « Voir les itinéraires ».</p>
+        <p>« L'algorithme » est le mot du constructeur, pas celui du voyageur — et « le meilleur itinéraire possible » est une promesse invérifiable qui se retourne dès qu'un lieu est écarté « faute de temps » (cf. PR-06). Les titres de section, eux, annoncent un ton plus qu'un contenu.</p>
+        <p class="fix"><b>Piste</b>Dire le résultat : « On place tes lieux dans l'ordre, avec les horaires et les temps de trajet. » Et des titres qui informent : « 208 choses à faire, filtrées par temps et budget ».</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce que je recomposerais</h2>
+    <p class="sect-note">Une proposition d'accueil et de navigation, dans l'ordre. Rien ici ne demande de nouveau contenu — tout existe déjà, ailleurs sur le site.</p>
+    <ol class="plan">
+      <li><strong>Héros de qualification</strong><span>Titre, puis trois contrôles — combien de temps · quelle zone · quelle envie — et « Composer mon itinéraire ». Les deux CTA actuels deviennent des liens discrets dessous.</span></li>
+      <li><strong>Un bloc « Explorer » unique</strong><span>Filtres en tête, carte et liste synchronisées côte à côte. Remplace les deux sections carte et liste, et fait disparaître le double système de filtres.</span></li>
+      <li><strong>« Déjà composés »</strong><span>Les 6 itinéraires éditoriaux, présentés comme le raccourci pour qui ne veut pas répondre aux trois questions. C'est le meilleur contenu du site, il garde sa place — juste après l'outil, pas avant.</span></li>
+      <li><strong>Qui trie, et comment</strong><span>Un bloc court : la méthode, la dernière vérification, la signature. C'est ce qui transforme une liste en recommandation.</span></li>
+      <li><strong>Menu à quatre entrées</strong><span>Explorer · Itinéraires · <em>Composer mon itinéraire</em> (en bouton) · recherche globale · compte. Activités et Villes deviennent des filtres ; les pages communes restent pour le SEO local là où il y a deux lieux ou plus.</span></li>
+      <li><strong>Fiche lieu : trois rebonds</strong><span>L'itinéraire qui passe par ici, les autres lieux de la commune, ce qui est à moins de 20 minutes. Plus une barre d'action fixe sur mobile.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Ce qui est déjà juste</h2>
+    <p class="sect-note">Sur le plan du design et de la conception, pas seulement de l'exécution.</p>
+    <ul class="works">
+      <li><b>La composition de la fiche lieu</b><span>Galerie → identité et tags → infos pratiques → carte → récit → conseils → à faire sur place → rebonds. L'ordre est exemplaire : on sait où on est avant de lire, et on lit avant qu'on ne nous vende quoi que ce soit.</span></li>
+      <li><b>La page itinéraire éditorial</b><span>Programme heure par heure, temps de trajet nommés (« Grande Corniche, montée sinueuse »), « 🌙 Dormir à Beaulieu-sur-Mer » avec sa justification. C'est la meilleure page du site et le modèle que le reste devrait suivre.</span></li>
+      <li><b>Le thème sombre</b><span>Tenu de bout en bout, sans zone plus claire oubliée, avec des contrastes qui passent AA partout (5,76:1 au minimum mesuré). C'est rare.</span></li>
+      <li><b>Les emojis comme repères</b><span>🥾 🏛 🍽️ ⛵ en tête de catégorie : lisibles, universels, et ils font gagner de la place là où il en manque. Employés avec constance.</span></li>
+      <li><b>Les états vides</b><span>« Aucune activité ne correspond à ces filtres » + « Tout afficher », « Aucun itinéraire sauvegardé » + son CTA. Chacun propose une sortie — c'est exactement ce qu'il faut.</span></li>
+      <li><b>Le comportement des cartes</b><span>Zoom molette désactivé, consigne « ✋ Deux doigts » sur mobile, marqueurs colorés par zone. Les bons réglages, appliqués partout.</span></li>
+      <li><b>Le ton</b><span>Tutoiement constant, phrases courtes, aucune emphase marketing dans les textes éditoriaux. Et le texte de confidentialité à l'inscription est un modèle de franchise.</span></li>
+      <li><b>La modale de nommage</b><span><code>role="dialog"</code>, <code>aria-modal</code>, focus automatique sur le champ, nom pré-rempli intelligemment. Le composant est bon — il mérite d'être réutilisé pour la suppression.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Riviera Secrète — audit UX / UI</span>
+    <span>14 septembre 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

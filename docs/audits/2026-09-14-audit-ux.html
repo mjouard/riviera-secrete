@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{color-scheme:light dark}
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Audit UX Riviera Secrète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --surface:#F7F3E9;
+    --surface-2:#E5DECB;
+    --ink:#132A34;
+    --muted:#5C6F77;
+    --rule:#D4C9B0;
+    --rule-soft:#E2D9C4;
+    --accent:#26687F;
+    --accent-soft:#BBD5DD;
+    --sev-bloc:#A82C5C;
+    --sev-maj:#9C6410;
+    --sev-min:#3B6E52;
+    --ok:#3B6E52;
+
+    --f-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+    --f-body:"Newsreader",Georgia,"Times New Roman",serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0C1A21;
+      --surface:#122630;
+      --surface-2:#1A333E;
+      --ink:#E9E2D2;
+      --muted:#94A7AF;
+      --rule:#23404B;
+      --rule-soft:#1B333D;
+      --accent:#79BCD1;
+      --accent-soft:#1E4653;
+      --sev-bloc:#E9739E;
+      --sev-maj:#E0A64A;
+      --sev-min:#6FB78F;
+      --ok:#6FB78F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0C1A21;
+    --surface:#122630;
+    --surface-2:#1A333E;
+    --ink:#E9E2D2;
+    --muted:#94A7AF;
+    --rule:#23404B;
+    --rule-soft:#1B333D;
+    --accent:#79BCD1;
+    --accent-soft:#1E4653;
+    --sev-bloc:#E9739E;
+    --sev-maj:#E0A64A;
+    --sev-min:#6FB78F;
+    --ok:#6FB78F;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:17px;
+    line-height:1.62;
+    margin:0;
+    padding-inline:20px;
+    padding-block:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-block:68px 34px;border-bottom:2px solid var(--ink);}
+  .eyebrow{
+    font-family:var(--f-mono);font-size:11.5px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 22px;
+  }
+  h1{
+    font-family:var(--f-display);font-weight:800;
+    font-size:clamp(38px,7vw,68px);line-height:.98;letter-spacing:-.025em;
+    margin:0 0 18px;text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--accent);}
+  .standfirst{
+    font-size:clamp(18px,2.4vw,21px);line-height:1.5;color:var(--ink);
+    max-width:60ch;margin:0 0 26px;
+  }
+  .conditions{
+    font-family:var(--f-mono);font-size:12px;line-height:1.85;color:var(--muted);
+    border-left:2px solid var(--rule);padding-left:14px;margin:0;
+  }
+  .conditions b{color:var(--ink);font-weight:600;}
+
+  /* ---------- soundings ---------- */
+  .soundings{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:1px;background:var(--rule-soft);
+    border-block:1px solid var(--rule-soft);margin-block:0 0;
+  }
+  .sounding{background:var(--paper);padding:22px 18px 20px;}
+  .sounding .n{
+    font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.6vw,38px);
+    line-height:1;letter-spacing:-.03em;display:block;
+    font-variant-numeric:tabular-nums;
+  }
+  .sounding .n small{font-size:.5em;font-weight:600;letter-spacing:0;color:var(--muted);}
+  .sounding p{
+    font-family:var(--f-mono);font-size:11.5px;line-height:1.5;color:var(--muted);
+    margin:10px 0 0;letter-spacing:.02em;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding-block:54px 8px;}
+  h2{
+    font-family:var(--f-display);font-weight:800;
+    font-size:clamp(25px,3.6vw,34px);line-height:1.08;letter-spacing:-.02em;
+    margin:0 0 6px;text-wrap:balance;
+  }
+  .sect-note{color:var(--muted);margin:0 0 34px;max-width:62ch;font-size:16px;}
+  p{max-width:66ch;}
+
+  /* ---------- findings ---------- */
+  .finding{
+    display:grid;grid-template-columns:132px 1fr;gap:0 28px;
+    padding-block:26px;border-top:1px solid var(--rule-soft);
+  }
+  .finding:first-of-type{border-top:1px solid var(--rule);}
+  .rail{padding-top:4px;}
+  .sev{
+    font-family:var(--f-mono);font-size:10.5px;font-weight:600;
+    letter-spacing:.13em;text-transform:uppercase;display:block;
+  }
+  .sev.bloc{color:var(--sev-bloc);}
+  .sev.maj{color:var(--sev-maj);}
+  .sev.min{color:var(--sev-min);}
+  .ref{
+    font-family:var(--f-mono);font-size:11px;color:var(--muted);
+    display:block;margin-top:5px;font-variant-numeric:tabular-nums;
+  }
+  .finding h3{
+    font-family:var(--f-display);font-weight:600;font-size:20px;line-height:1.24;
+    letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance;
+  }
+  .finding p{margin:0 0 12px;}
+  .finding p:last-child{margin-bottom:0;}
+  .releve{
+    font-family:var(--f-mono);font-size:12.5px;line-height:1.65;
+    color:var(--muted);background:var(--surface);
+    border:1px solid var(--rule-soft);padding:11px 14px;
+    margin:0 0 14px;max-width:none;
+    overflow-x:auto;
+  }
+  .releve b{
+    color:var(--ink);font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .releve::before{
+    content:"Relevé";display:block;font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:5px;font-weight:600;
+  }
+  .fix{
+    border-left:2px solid var(--accent-soft);padding-left:14px;
+    font-size:16.5px;
+  }
+  .fix b{
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--accent);display:block;margin-bottom:3px;
+  }
+  code{
+    font-family:var(--f-mono);font-size:.87em;
+    background:var(--surface-2);padding:1px 5px;border-radius:2px;
+    word-break:break-word;
+  }
+
+  /* ---------- priority list ---------- */
+  .prio{list-style:none;margin:0;padding:0;counter-reset:p;}
+  .prio li{
+    counter-increment:p;display:grid;grid-template-columns:46px 1fr;gap:0 18px;
+    padding-block:16px;border-top:1px solid var(--rule-soft);align-items:baseline;
+  }
+  .prio li:first-child{border-top:1px solid var(--rule);}
+  .prio li::before{
+    content:counter(p);font-family:var(--f-display);font-weight:800;
+    font-size:26px;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;
+  }
+  .prio strong{font-weight:600;}
+  .prio span{display:block;color:var(--muted);font-size:15.5px;margin-top:2px;}
+
+  /* ---------- works ---------- */
+  .works{list-style:none;margin:0;padding:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:0 34px;}
+  .works li{
+    padding-block:14px;border-top:1px solid var(--rule-soft);font-size:16px;
+  }
+  .works li b{
+    display:block;font-family:var(--f-display);font-weight:600;font-size:16.5px;
+    margin-bottom:2px;
+  }
+  .works li span{color:var(--muted);font-size:14.5px;display:block;}
+  .works li::marker{content:none;}
+
+  .untested{
+    background:var(--surface);border:1px solid var(--rule-soft);
+    padding:22px 24px;margin-top:18px;
+  }
+  .untested h2{font-size:20px;margin-bottom:10px;}
+  .untested ul{margin:0;padding-left:20px;}
+  .untested li{margin-bottom:6px;color:var(--muted);}
+  .untested li b{color:var(--ink);font-weight:600;}
+
+  footer{
+    border-top:2px solid var(--ink);margin-top:60px;padding-block:22px 70px;
+    font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;
+  }
+
+  a{color:var(--accent);text-underline-offset:2px;}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  @media (max-width:660px){
+    body{font-size:16.5px;}
+    .finding{grid-template-columns:1fr;gap:0;}
+    .rail{padding-top:0;margin-bottom:10px;display:flex;gap:14px;align-items:baseline;}
+    .ref{margin-top:0;}
+    .masthead{padding-block:46px 28px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow"><span>Audit d'expérience</span><span>frontend-two-plum-92.vercel.app</span><span>14.09.2026</span></p>
+    <h1>Un très bon fond<br>dans une <em>coquille qui fuit</em></h1>
+    <p class="standfirst">Le contenu éditorial et le générateur d'itinéraires de Riviera Secrète sont au-dessus de ce qu'on trouve sur la plupart des sites de destination. Ce qui les entoure — persistance, données de catégorie, poids mobile — les dessert.</p>
+    <p class="conditions">
+      <b>Testé</b> en français et en anglais, sur Chromium.<br>
+      <b>Desktop</b> 1280×820 et 1024×800 &nbsp;·&nbsp; <b>Mobile</b> 375×812 émulé (UA Android, tactile).<br>
+      <b>Parcours joués</b> accueil → carte → filtres → fiche lieu → activités → villes → itinéraire éditorial → générateur → favoris → connexion → inscription → 404.<br>
+      <b>Espace connecté</b> testé sur un compte réel (Google), favoris et itinéraires créés puis supprimés — compte laissé vide.
+    </p>
+  </header>
+
+  <div class="soundings">
+    <div class="sounding">
+      <span class="n">0</span>
+      <p>Itinéraire partageable. Non sauvegardé, un F5 l'efface ; sauvegardé, le lien ne s'ouvre que pour son auteur.</p>
+    </div>
+    <div class="sounding">
+      <span class="n">56 764<small> px</small></span>
+      <p>Hauteur de la page Activités sur mobile. Environ 70 écrans, sans pagination.</p>
+    </div>
+    <div class="sounding">
+      <span class="n">18<small> / 26</small></span>
+      <p>Cibles tactiles sous 44 px sur une fiche lieu en mobile.</p>
+    </div>
+    <div class="sounding">
+      <span class="n">13</span>
+      <p>Paires de marqueurs à moins de 18 px l'une de l'autre sur la carte d'accueil.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>Par où commencer</h2>
+    <p class="sect-note">Dans l'ordre de ce que ça coûte aujourd'hui, pas dans l'ordre de difficulté.</p>
+    <ol class="prio">
+      <li><strong>Donner une URL à l'itinéraire non sauvegardé.</strong><span>Le mécanisme existe déjà : une fois sauvegardé, l'itinéraire vit sous <code>?id=…</code> et se recharge parfaitement. Il ne manque que la même chose avant la sauvegarde, pour les visiteurs sans compte — c'est-à-dire presque tout le monde.</span></li>
+      <li><strong>Réparer « Partager le lien ».</strong><span>Le lien copié n'est lisible que par son auteur, et le destinataire tombe sur un formulaire vide sans message. C'est le partage, pas la sauvegarde, qui fait venir du monde sur un site de voyage.</span></li>
+      <li><strong>Faire de « Ajouter à un itinéraire » un vrai panier.</strong><span>Aujourd'hui le deuxième ajout efface le premier. Le libellé promet quelque chose que le produit ne fait pas.</span></li>
+      <li><strong>Nettoyer les tags de lieux.</strong><span>Une rue couverte du XIII<sup>e</sup> taguée « Plage » et « Plongée » casse la confiance et fausse tous les filtres.</span></li>
+      <li><strong>Paginer les 208 activités et mettre les filtres dans l'URL.</strong><span>Une liste de 57 000 px sans état partageable, c'est une page qu'on ne revient pas voir.</span></li>
+      <li><strong>Mettre les pages éditoriales en cache CDN.</strong><span>43 fiches statiques rendues à la demande, sans cache : ~2 s avant le premier pixel au démarrage à froid.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Parcours &amp; rétention</h2>
+    <p class="sect-note">Les endroits où l'utilisateur perd son travail, son intention ou son chemin.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">PR-01</span></div>
+      <div>
+        <h3>L'itinéraire non sauvegardé n'existe nulle part</h3>
+        <p class="releve">Après génération, l'URL reste <b>/creer-itineraire</b> — aucun paramètre, aucune entrée d'historique. <b>localStorage</b> ne contient qu'une clé NextAuth. Un appui sur Précédent quitte la page : l'itinéraire n'est pas reconstruit.<br>Après sauvegarde (compte requis), l'URL devient <b>/creer-itineraire?id=1fa1f079-…</b> et le rechargement restaure tout, titre et étapes compris.</p>
+        <p>Composer un itinéraire demande de dérouler cinq accordéons et de cocher des lieux. Ce travail disparaît au premier rafraîchissement, au premier retour arrière, au premier « attends, je regarde ce lieu » — sauf si on a un compte et qu'on a pensé à sauvegarder. Autrement dit : le seul état durable est réservé aux inscrits, et le visiteur qui découvre le site perd son travail en silence.</p>
+        <p class="fix"><b>Piste</b>Vous avez déjà la moitié du travail. Encoder aussi la sélection et la durée dans l'URL (<code>?duree=journee&amp;lieux=eze,la-turbie</code>) et reconstruire au montage : ça couvre les visiteurs sans compte, le retour arrière, le rafraîchissement et le bookmark, et ça donne au bouton « Sauvegarder » un vrai rôle (nommer et garder) au lieu d'être le seul filet de sécurité.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">PR-02</span></div>
+      <div>
+        <h3>« Ajouter à un itinéraire » remplace au lieu d'ajouter</h3>
+        <p class="releve">Fiche Èze → bouton : arrivée sur <b>/creer-itineraire?add=eze-village</b>, « LIEUX (1 SÉLECTIONNÉ) ». Fiche Gourdon → bouton : <b>?add=gourdon-village</b>, « LIEUX (<b>1</b> SÉLECTIONNÉ) ». Èze a disparu.</p>
+        <p>Le verbe « ajouter » installe un modèle mental de panier. Il n'y a ni panier, ni compteur dans l'en-tête, ni confirmation. L'utilisateur qui parcourt trois fiches et clique trois fois repart avec un seul lieu — sans qu'on le lui dise.</p>
+        <p class="fix"><b>Piste</b>Même correctif que ci-dessus : une sélection persistée (URL ou <code>sessionStorage</code>), un compteur visible dans l'en-tête, et un retour immédiat sur la fiche (« Ajouté — 3 lieux ») plutôt qu'une navigation qui sort du parcours de lecture.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">PR-03</span></div>
+      <div>
+        <h3>La 404 est celle de Next.js, brute</h3>
+        <p class="releve">/lieux/page-qui-nexiste-pas → écran noir, <b>« 404 — This page could not be found. »</b> En anglais sur un site français. Sans en-tête, sans pied de page, sans un seul lien.</p>
+        <p>Un lien périmé partagé sur un forum ou un vieux post Instagram tombe sur un cul-de-sac total. Sur un site de découverte, la 404 est au contraire l'endroit idéal pour proposer trois lieux au hasard.</p>
+        <p class="fix"><b>Piste</b>Un <code>not-found.tsx</code> localisé, avec la mise en page du site, une recherche, et deux ou trois suggestions. Le bouton « Surprends-moi » existe déjà : il a sa place ici.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">PR-04</span></div>
+      <div>
+        <h3>Le générateur ne demande jamais d'où vous partez</h3>
+        <p class="releve">Entrées proposées : une durée (demi-journée → 3 jours) et une liste de 43 cases à cocher. Départ figé à <b>09:00</b>, voiture implicite (« ~16 min de trajet estimé », « prévoir du stationnement »). Aucune date, aucun point de départ, aucun mode de transport.</p>
+        <p>Deux conséquences concrètes. D'abord un visiteur logé à Saint-Tropez et un visiteur logé à Menton obtiennent le même ordre de visite. Ensuite, les avertissements « ⚠️ Fermé aujourd'hui » se calculent sur la date du jour, pas sur la date du voyage — donc ils sont faux pour à peu près tout le monde.</p>
+        <p class="fix"><b>Piste</b>Trois champs suffiraient : commune de départ, date, et voiture / transports. La date seule débloque des alertes d'ouverture justes, ce qui est l'argument le plus fort du produit.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">PR-05</span></div>
+      <div>
+        <h3>On choisit parmi 43 noms nus</h3>
+        <p class="releve">L'écran de sélection liste « La Rue Obscure », « Le Trophée d'Auguste », « Falicon »… sans vignette, sans commune, sans durée, sans type. Cinq accordéons repliés par défaut, pas de champ de recherche.</p>
+        <p>Le site vend des lieux confidentiels : par définition, le visiteur ne les connaît pas. Lui demander de cocher des noms qu'il découvre, c'est lui demander de choisir à l'aveugle. Les vignettes et les tags existent pourtant partout ailleurs sur le site.</p>
+        <p class="fix"><b>Piste</b>Réutiliser la carte-lieu compacte (photo + commune + durée) dans les accordéons, et permettre la sélection directement depuis la carte de l'accueil.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">PR-06</span></div>
+      <div>
+        <h3>Un lieu écarté « faute de temps » sur une journée qui finit à 16:20</h3>
+        <p class="releve">6 lieux cochés, durée « Journée » → « <b>1 lieu non inclus faute de temps</b> — à voir en bas de page ». Le programme va de <b>09:00</b> à <b>16:20</b>, pause déjeuner comprise. Le lieu écarté n'est pas nommé dans l'alerte.</p>
+        <p>L'arbitrage n'est pas crédible pour l'utilisateur, et il n'a aucune main dessus : pas de « garder quand même », pas de « passer à 2 jours ». Le renvoi « à voir en bas de page » impose de faire défiler tout le programme pour découvrir quel lieu a sauté.</p>
+        <p class="fix"><b>Piste</b>Nommer le lieu dans l'alerte, et proposer l'action à côté : « Étendre à 2 jours » ou « Remplacer une étape ».</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">PR-07</span></div>
+      <div>
+        <h3>Le clic sur « Favoris » éjecte sans explication</h3>
+        <p class="releve">Déconnecté, « ♡ Ajouter aux favoris » redirige immédiatement vers <b>/connexion?callbackUrl=…/lieux/eze-village</b>. Le <code>callbackUrl</code> est bien conservé — mais la page de connexion affiche son texte générique : « Retrouve tes favoris et tes itinéraires. »</p>
+        <p>L'utilisateur a cliqué sur un cœur, il se retrouve devant un formulaire sans savoir s'il a fait une erreur. Le lien « ← Retour à l'accueil » le renverrait d'ailleurs loin du lieu qu'il regardait.</p>
+        <p class="fix"><b>Piste</b>Un titre contextuel (« Connecte-toi pour épingler Èze ») et, à la place du retour à l'accueil, un retour à la page d'origine.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">PR-08</span></div>
+      <div>
+        <h3>L'inscription n'a pas d'adresse</h3>
+        <p class="releve">« Créer un compte » est un <code>&lt;button&gt;</code> qui bascule le contenu de <b>/connexion</b>. L'URL et le titre de l'onglet restent « Connexion ». Même chose pour « Mot de passe oublié ? ».</p>
+        <p>On ne peut ni envoyer un lien d'inscription, ni revenir en arrière depuis le formulaire d'inscription, ni mesurer proprement le funnel. À noter en revanche : le texte de confidentialité affiché à l'inscription est excellent, et rare.</p>
+        <p class="fix"><b>Piste</b><code>/inscription</code> et <code>/mot-de-passe-oublie</code> comme routes à part entière.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Espace connecté</h2>
+    <p class="sect-note">Testé sur un vrai compte : favoris, sauvegarde, modification, suppression. C'est la partie la plus solide du produit sur le fond — et celle qui perd le plus de valeur sur un seul détail, le partage.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">EC-01</span></div>
+      <div>
+        <h3>« Partager le lien » produit un lien privé</h3>
+        <p class="releve">Le lien copié est <b>/creer-itineraire?id=&lt;uuid&gt;</b>. Côté API, aucune lecture publique : <code>GET /api/my-itineraires/{id}</code> sans authentification → <b>405</b>, <code>/api/itineraires/{id}</code> → <b>404</b>.<br>Un <code>?id=</code> inconnu ne produit aucun message : la page retombe silencieusement sur le formulaire vide « Créer mon itinéraire — 0 sélectionné ».<br>Et le clic ne donne aucun retour : le libellé reste « 🔗 Partager le lien », aucun toast, rien dans le DOM.</p>
+        <p>Le scénario complet : on compose un week-end, on l'envoie à la personne avec qui on part, elle ouvre le lien et voit un formulaire vierge. Elle ne saura même pas qu'il fallait être connecté. Sur un site de voyage, le partage est le premier canal d'acquisition — ici il envoie les visiteurs sur une page vide.</p>
+        <p class="fix"><b>Piste</b>Un endpoint de lecture publique sur un identifiant non devinable (ou le contenu encodé dans l'URL, cf. PR-01), un message explicite quand l'itinéraire est introuvable ou privé, et un retour visible après copie (« Lien copié ») — avec <code>navigator.share</code> sur mobile.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">EC-02</span></div>
+      <div>
+        <h3>Un jeton d'API long terme lisible par n'importe quel script</h3>
+        <p class="releve"><code>GET /api/auth/session</code> renvoie, à côté du profil, un champ <b><code>apiToken</code></b> : un JWT valable <b>~30 jours</b>, accessible en JavaScript depuis la page. L'API est sur un domaine séparé (<code>api-production-19623.up.railway.app</code>) appelée directement depuis le navigateur, donc le jeton <em>doit</em> être lisible côté client tel que c'est construit aujourd'hui.</p>
+        <p>Une faille XSS, une dépendance npm compromise ou un script tiers ajouté plus tard suffit à repartir avec un jeton valide un mois. Ce n'est pas exploitable en l'état — il n'y a pas d'injection visible — mais c'est un plafond de sécurité bas pour le jour où vous ajouterez un widget ou une régie.</p>
+        <p class="fix"><b>Piste</b>Passer les appels API par des <em>route handlers</em> Next côté serveur et garder le jeton dans un cookie <code>httpOnly</code>. À défaut, raccourcir fortement sa durée de vie et prévoir un rafraîchissement.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">EC-03</span></div>
+      <div>
+        <h3>La suppression passe par la boîte de dialogue du navigateur</h3>
+        <p class="releve">« Supprimer » sur /mes-itineraires déclenche un <code>window.confirm()</code> natif : « Supprimer « Itinéraire Journée — La Turbie » ? ».</p>
+        <p>Le message est bon — il nomme l'élément, ce qui est déjà mieux que la moyenne. Mais c'est une boîte système : non stylée, boutons « OK / Annuler » dans la langue du navigateur et pas du site, bloquante, et sur mobile elle ressemble à une alerte de l'OS. C'est d'autant plus dommage que la modale « Nommer l'itinéraire », juste à côté, est soignée.</p>
+        <p class="fix"><b>Piste</b>Réutiliser le composant de modale existant, avec « Supprimer » en bouton destructif et « Annuler » en action par défaut. Et tant qu'à faire, un « Annuler » de quelques secondes après suppression.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">EC-04</span></div>
+      <div>
+        <h3>Enregistrer une modification redemande le nom</h3>
+        <p class="releve">Modifier un itinéraire déjà sauvegardé puis cliquer « Sauvegarder » rouvre la modale « Nommer l'itinéraire », champ pré-rempli avec le nom existant. La mise à jour se fait bien en place — même <code>id</code>, pas de doublon dans la liste.</p>
+        <p class="fix"><b>Piste</b>Ne demander le nom qu'à la première sauvegarde ; ensuite « Enregistrer les modifications » directement, avec un « Renommer » séparé.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">EC-05</span></div>
+      <div>
+        <h3>La liste des itinéraires ne contient aucun lien</h3>
+        <p class="releve">Sur /mes-itineraires, « Voir » et « Supprimer » sont deux <code>&lt;button&gt;</code> ; la carte ne porte <b>aucun <code>href</code></b> vers l'itinéraire. Pas de renommage ni de duplication depuis la liste, pas d'aperçu des étapes, pas de compteur.</p>
+        <p>On ne peut pas ouvrir un itinéraire dans un nouvel onglet, ni le mettre en favori navigateur, ni comparer deux itinéraires côte à côte — alors que l'URL <code>?id=…</code> existe et fonctionne.</p>
+        <p class="fix"><b>Piste</b>Rendre la carte cliquable via un vrai lien vers <code>?id=…</code>, et ajouter renommer / dupliquer à côté de supprimer.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">EC-06</span></div>
+      <div>
+        <h3>Le favori met 400 ms sans rien montrer, et Mes favoris est une impasse</h3>
+        <p class="releve">Bascule du favori : <b>416 ms</b> mesurés entre le clic et le changement de libellé (appel direct à l'API Railway). Pendant ce temps le bouton est bien <b>désactivé</b> — pas de double envoi possible — mais il n'affiche ni indicateur, ni <code>aria-busy</code>. Le bouton bascule n'a pas d'<code>aria-pressed</code>.<br>Sur /mes-favoris : pas de compteur, pas de tri, pas de carte, et aucune action au-delà de « Retirer ».</p>
+        <p>Un utilisateur qui a épinglé huit lieux a fait exactement le travail de sélection que demande le générateur — et rien ne relie les deux pages. « Créer un itinéraire à partir de mes favoris » est le bouton manquant le plus évident du site.</p>
+        <p class="fix"><b>Piste</b>Mise à jour optimiste (bascule immédiate, retour arrière en cas d'échec) et <code>aria-pressed</code> sur le cœur ; sur /mes-favoris, un compteur, la carte des favoris et le bouton vers le générateur pré-rempli.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">EC-07</span></div>
+      <div>
+        <h3>Échap ne ferme rien</h3>
+        <p class="releve">Ni la modale « Nommer l'itinéraire » (pourtant correcte par ailleurs : <code>role="dialog"</code>, <code>aria-modal</code>, <code>aria-labelledby</code>, focus automatique sur le champ, nom pré-rempli), ni le menu burger. C'est un <code>&lt;div role="dialog"&gt;</code> et non un <code>&lt;dialog&gt;</code> natif, donc pas de piège à focus ni d'arrière-plan inerte.</p>
+        <p class="fix"><b>Piste</b><code>&lt;dialog&gt;</code> natif avec <code>showModal()</code> : Échap, piège à focus et inertie de l'arrière-plan sont gratuits. Et écouter <code>Escape</code> sur le menu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Données &amp; contenu</h2>
+    <p class="sect-note">Le point le plus abîmé du site, et paradoxalement le plus facile à réparer.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">DC-01</span></div>
+      <div>
+        <h3>Les tags de lieux sont faux</h3>
+        <p class="releve">« La Rue Obscure » — rue couverte du XIII<sup>e</sup> siècle — porte <b>🏖️ Plage</b> et <b>🤿 Plongée</b>.<br>« La Colline du Château » — parc en haut du Vieux Nice — porte <b>🏖️ Plage</b>.<br>Les tags semblent hérités de la <b>commune</b>, pas du lieu.</p>
+        <p>Ces tags alimentent les puces de filtre de l'accueil. Filtrer sur « Plage » remonte donc une rue voûtée et une colline. C'est le genre de détail qui fait douter de tout le reste du contenu — d'autant plus dommage que les textes éditoriaux, eux, sont excellents.</p>
+        <p class="fix"><b>Piste</b>Découpler les tags du lieu de ceux de la commune, et faire une passe manuelle sur les 43 fiches. C'est une demi-journée de travail pour le gain de crédibilité le plus élevé de cette liste.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">DC-02</span></div>
+      <div>
+        <h3>Les activités affichent leur lieu parent comme s'il s'agissait de leur adresse</h3>
+        <p class="releve">Sur /activites : « <b>Sortie kayak de mer</b> · Loisirs &amp; Mer · 2h » suivi de « <b>La Rue Obscure</b> — Villefranche-sur-Mer ». Idem pour « Citadelle Saint-Elme → La Rue Obscure », « Location de vélos → Sentier du littoral du Cap Ferrat ».</p>
+        <p>Le rattachement technique activité → lieu remonte à la surface de l'interface. On ne fait pas de kayak dans une rue couverte. La liste est d'ailleurs triée par lieu parent, ce qui fait se succéder six activités sans rapport sous le même nom.</p>
+        <p class="fix"><b>Piste</b>Afficher la commune (et éventuellement « à proximité de X ») plutôt que le lieu parent, ou rattacher les activités à la commune quand elles ne se déroulent pas sur le site lui-même.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">DC-03</span></div>
+      <div>
+        <h3>Trois libellés de sortie, une seule promesse tenue</h3>
+        <p class="releve">« <b>En savoir plus →</b> », « <b>Réserver →</b> », « <b>Voir les offres →</b> » cohabitent sans règle lisible.<br>« Sortie kayak de mer » → <code>getyourguide.com/villefranche-sur-mer-l1706/</code> : la page générique de la ville, pas l'activité.<br>« Réserver » sur « Déjeuner à la Taverne d'Antan » → le site vitrine du restaurant, sans réservation.<br>Aucun lien ne porte <code>rel="sponsored"</code>, aucune mention d'affiliation.</p>
+        <p>Un bouton doit décrire ce qui va se passer. « Réserver » qui ouvre une page d'accueil, ou « Voir les offres » qui ouvre un catalogue de ville, sont des promesses non tenues — et quand l'utilisateur s'en rend compte deux fois, il arrête de cliquer.</p>
+        <p class="fix"><b>Piste</b>Deux libellés seulement : « Réserver » quand le lien mène à une page de réservation de cette activité précise, « Site officiel » sinon. Et le marquage <code>rel="sponsored nofollow"</code> avec une mention discrète sur les liens partenaires — c'est une obligation, et ça n'a jamais coûté un clic.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">DC-04</span></div>
+      <div>
+        <h3>Les pages Villes sont creuses</h3>
+        <p class="releve">34 communes, dont <b>28 affichent « 1 lieu »</b>. Sur /villes/eze : une carte, une phrase de description, un lieu, un itinéraire. Le lieu et la commune partagent la même photo et un résumé quasi identique.</p>
+        <p>Un clic de plus pour arriver à ce qu'on cherchait, et deux pages qui se concurrencent sur la même requête. Les activités de la commune, qui existent pourtant, n'y sont même pas listées.</p>
+        <p class="fix"><b>Piste</b>Soit enrichir la page commune de ce qu'elle seule peut porter (toutes les activités du coin, où se garer, où déjeuner, la commune voisine), soit ne générer une page que pour les communes à deux lieux ou plus et rediriger les autres vers la fiche du lieu.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">DC-05</span></div>
+      <div>
+        <h3>Des durées formatées en anglais, au milieu de durées en français</h3>
+        <p class="releve">Dans l'itinéraire généré : « Le Trophée d'Auguste ⏱ <b>~1 h</b> », « La Rue Obscure ⏱ <b>~18 min</b> », et entre les deux « Èze, le village perché ⏱ <b>~1.8 h</b> ».</p>
+        <p>Une heure décimale avec un point décimal anglais, affichée à côté de durées correctement formatées. Et « ~18 min » pour une rue à parcourir donne une précision que personne ne peut prendre au sérieux.</p>
+        <p class="fix"><b>Piste</b>Un seul formateur de durée (<code>1 h 45</code>, <code>20 min</code>), arrondi au quart d'heure au-delà d'une heure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Navigation, carte &amp; filtres</h2>
+    <p class="sect-note">Beaucoup d'outils d'exploration, qui ne se parlent pas entre eux.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">NF-01</span></div>
+      <div>
+        <h3>Deux systèmes de filtres sur la même page, indépendants</h3>
+        <p class="releve">Accueil : des puces de zone <b>au-dessus</b> de la carte (Menton·Monaco, Nice, Arrière-pays…), puis <b>en dessous</b> une barre complète (recherche, type, saison, durée, niveau). Clic sur « Menton · Monaco » → les marqueurs passent de <b>34 à 26</b>, la liste reste à <b>43 spots</b>.</p>
+        <p>Filtrer la carte ne filtre pas la liste, et inversement. Les puces de zone ressemblent en plus à une légende de couleurs — rien n'indique que ce sont des interrupteurs, ni qu'ils sont tous actifs au départ.</p>
+        <p class="fix"><b>Piste</b>Un seul jeu de filtres qui pilote carte et liste simultanément, posé entre les deux, avec un compteur unique (« 26 lieux ») et un « Tout effacer » — le motif existe déjà, bien fait, sur /activites.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">NF-02</span></div>
+      <div>
+        <h3>Aucun filtre n'est dans l'URL</h3>
+        <p class="releve">Sur /activites, catégorie « Gastronomie » + durée « demi-journée ou plus » donne bien « 0 sur 208 · Tout effacer » et un état vide propre — mais l'URL reste <b>/activites</b>. Idem pour tous les filtres de l'accueil.</p>
+        <p>On ne peut pas envoyer « les randos gratuites de moins de 2 h autour de Nice » à quelqu'un, ni la mettre en favori, ni y revenir. Le bouton Précédent ne défait pas un filtre, il quitte la page. C'est aussi autant de pages d'atterrissage perdues.</p>
+        <p class="fix"><b>Piste</b>Synchroniser les filtres avec les <em>query params</em> (<code>?cat=outdoor&amp;tarif=gratuit&amp;zone=nice</code>) via <code>router.replace</code>, et lire l'URL au montage.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">NF-03</span></div>
+      <div>
+        <h3>La carte : 34 marqueurs empilés, pas de regroupement</h3>
+        <p class="releve">Au zoom par défaut, <b>13 paires</b> de marqueurs sont à moins de 18 px l'une de l'autre — et les pastilles font 25 px. Sur mobile, la carte ne fait que <b>300 px</b> de haut, avec une grande part de mer et d'arrière-pays vide.</p>
+        <p>« Cliquez sur un marqueur pour ouvrir sa page » n'est pas jouable au doigt autour de Nice et de Monaco, où la moitié des lieux se superposent. La consigne « ✋ Deux doigts pour déplacer la carte » est en revanche exactement la bonne chose à faire.</p>
+        <p class="fix"><b>Piste</b><code>leaflet.markercluster</code>, un cadrage ajusté aux marqueurs visibles (<code>fitBounds</code>) plutôt qu'un centre fixe, et une carte plus haute sur mobile (60&nbsp;vh).</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">NF-04</span></div>
+      <div>
+        <h3>208 activités d'un seul tenant</h3>
+        <p class="releve">/activites rend <b>208 cartes et 208 images</b> en une fois. Hauteur du document : <b>20 049 px</b> en desktop, <b>56 764 px</b> en mobile. La barre de filtres est en <code>position: static</code> : elle disparaît dès le premier écran. Aucun retour en haut.</p>
+        <p>Une fois qu'on est au milieu de la liste, on ne peut plus ni filtrer, ni revenir, sans un très long défilement. Et l'image de chaque carte est chargée en <em>lazy</em> sans placeholder, donc le défilement rapide traverse des blocs vides.</p>
+        <p class="fix"><b>Piste</b>Pagination ou chargement progressif par 24, barre de filtres collante avec le compteur, et un bouton de retour en haut au-delà de deux écrans.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">NF-05</span></div>
+      <div>
+        <h3>Neuf entrées de menu, dont deux impasses pour les nouveaux visiteurs</h3>
+        <p class="releve">Lieux · Activités · Itinéraires · Villes · Créer un itinéraire · Mes itinéraires · Mes favoris · 🔎 · FR/EN · Connexion.<br>« Lieux » et « Itinéraires » sont des ancres de l'accueil (<code>/#lieux</code>), les autres sont des pages. « Mes itinéraires » et « Mes favoris » mènent, déconnecté, à un écran « Connecte-toi ».</p>
+        <p>Le menu mélange trois niveaux — explorer, créer, mon compte — au même poids visuel, et « Créer un itinéraire », qui est la meilleure chose du site, n'y ressort pas plus que le reste.</p>
+        <p class="fix"><b>Piste</b>Quatre entrées d'exploration, « Créer un itinéraire » traité comme bouton d'action, et les deux entrées personnelles regroupées derrière l'avatar une fois connecté.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mobile</h2>
+    <p class="sect-note">La mise en page tient bien — aucun débordement horizontal mesuré, le menu et la carte sont corrects. Ce sont les cibles qui ne suivent pas.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">MO-01</span></div>
+      <div>
+        <h3>Les liens d'itinéraire routier font 16 px de haut</h3>
+        <p class="releve">Fiche lieu en 375 px : <b>18 des 26</b> éléments interactifs sont sous 44 px de haut.<br><b>🗺️ Google Maps / 🚗 Waze / 📍 Plans : 16 px.</b> Favoris et Partager : 34 px. Menu burger : 30×40. Zoom carte : 30×30. Liens de pied de page : 17 px.</p>
+        <p>« Ouvrir dans Waze » est <em>l'action</em> du mobile sur un site de destination : on est devant le lieu, on veut y aller. C'est aujourd'hui la plus petite cible de la page, et les trois liens sont collés les uns aux autres.</p>
+        <p class="fix"><b>Piste</b>Passer les trois liens d'itinéraire en boutons de 44 px minimum avec un vrai espacement, et remonter l'ensemble des cibles interactives à 44×44 (Apple) / 48×48 (Google).</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">MO-02</span></div>
+      <div>
+        <h3>Le bouton « Retirer » est coincé entre les deux flèches, en 20 px</h3>
+        <p class="releve">Contrôles d'étape de l'itinéraire : ▲ « Monter » <b>20×20</b>, ✕ « Retirer » <b>18×20</b>, ▼ « Descendre » <b>20×20</b>, empilés verticalement. Aucune annulation après suppression.</p>
+        <p>Réordonner est l'action fréquente, supprimer est l'action irréversible — et elle est au milieu, à un demi-doigt d'écart. Les <code>aria-label</code> sont corrects, c'est la géométrie qui ne l'est pas.</p>
+        <p class="fix"><b>Piste</b>Séparer physiquement la suppression des flèches, l'agrandir avec les autres, et ajouter un « Annuler » de quelques secondes après retrait.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">MO-03</span></div>
+      <div>
+        <h3>Des vignettes plus petites que leur emplacement</h3>
+        <p class="releve">Sources observées : <b>375×250</b>, <b>375×177</b>, <b>500×769</b> (portrait), <b>678×452</b> — toutes affichées dans un cadre <b>343×128</b>. Aucun <code>srcset</code> sur les 208 vignettes.</p>
+        <p>Un fichier de 375 px de large affiché sur 343 px CSS, c'est déjà flou sur un écran ×2 et franchement mou sur un ×3. Le portrait 500×769 recadré en bandeau donne, pour « Sentier du littoral (tour complet) », un aplat vert illisible.</p>
+        <p class="fix"><b>Piste</b>Normaliser les sources en 3:2 à ~1000 px de large, et servir deux tailles via <code>srcset</code>.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">MO-04</span></div>
+      <div>
+        <h3>Détails du menu et du héros</h3>
+        <p class="releve">Le menu burger expose bien <code>aria-expanded</code>, mais <b>Échap ne le ferme pas</b>. Sur le héros, « Explorer les lieux » passe sur deux lignes dans sa pilule. Le champ de recherche tronque son propre libellé : « Rechercher un lieu, une commune… ».</p>
+        <p class="fix"><b>Piste</b>Écouter <code>Escape</code>, raccourcir le libellé du bouton (« Explorer »), raccourcir le <em>placeholder</em> (« Un lieu, une commune… »).</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Accessibilité</h2>
+    <p class="sect-note">Les fondations sont là — repères sémantiques, libellés de formulaire, contrastes. Ce sont les finitions qui manquent.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev maj">Majeur</span><span class="ref">AC-01</span></div>
+      <div>
+        <h3>L'erreur de connexion n'est pas annoncée</h3>
+        <p class="releve">« Email ou mot de passe incorrect. » est rendu dans un <code>&lt;p class="text-xs"&gt;</code> — <b>12 px</b>, sans <code>role="alert"</code> ni <code>aria-live</code>, ni sur l'élément ni sur son parent.</p>
+        <p>Un lecteur d'écran n'annonce rien : l'utilisateur reste sur un formulaire qui a l'air de ne pas avoir réagi. Et 12 px pour le seul message d'erreur de la page, c'est petit pour tout le monde.</p>
+        <p class="fix"><b>Piste</b><code>role="alert"</code> sur le conteneur du message, taille de texte alignée sur le corps de page, et focus déplacé sur le message après échec.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">AC-02</span></div>
+      <div>
+        <h3>Images sans alternative, et un anneau de focus qui n'est appliqué nulle part</h3>
+        <p class="releve"><b>30 images sur 115</b> sans attribut <code>alt</code> sur l'accueil.<br>Une classe <code>.focus-ring:focus-visible</code> est bien définie dans la feuille de styles, mais <b>0 élément sur 37</b> la porte sur une fiche lieu — le focus retombe sur le contour par défaut du navigateur (1 px), peu visible sur fond sombre.<br>Aucun lien d'évitement, alors que le menu compte neuf entrées répétées sur chaque page.</p>
+        <p class="fix"><b>Piste</b><code>alt=""</code> explicite sur les images décoratives, alternative réelle sur les autres ; appliquer <code>.focus-ring</code> aux éléments interactifs ; ajouter un « Aller au contenu ».</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Performance</h2>
+    <p class="sect-note">Rien de cassé, mais un site 100 % éditorial qui se comporte comme une application.</p>
+
+    <div class="finding">
+      <div class="rail"><span class="sev bloc">Bloquant</span><span class="ref">PF-01</span></div>
+      <div>
+        <h3>Aucune page n'est mise en cache</h3>
+        <p class="releve">GET /lieux/gourdon-village → <code>cache-control: private, no-cache, no-store, max-age=0, must-revalidate</code>, <code>x-vercel-cache: MISS</code>, <b>736 ms</b>. Au premier chargement à froid, TTFB mesuré à <b>1 960 ms</b>.</p>
+        <p>43 fiches de lieux et 6 itinéraires qui ne changent jamais entre deux déploiements sont rendus à la demande, à chaque visite, pour chaque visiteur. Le coupable habituel est la session NextAuth lue dans le <em>layout</em> racine, qui rend tout l'arbre dynamique.</p>
+        <p class="fix"><b>Piste</b>Sortir la lecture de session du layout racine (composant client sur l'en-tête uniquement) pour rendre les routes éditoriales statiques, avec ISR. C'est le meilleur rapport effort / gain de toute cette liste.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="rail"><span class="sev min">Mineur</span><span class="ref">PF-02</span></div>
+      <div>
+        <h3>1,77 Mo et 45 préchargements sur l'accueil</h3>
+        <p class="releve">Accueil : <b>1 768 Ko</b>, <b>142 requêtes</b>, dont <b>73 images (1 222 Ko)</b> et <b>45 requêtes RSC</b> de préchargement — plusieurs fois la même route avec des empreintes différentes (<code>/en/itineraires/antibes-biot-juan</code> apparaît trois fois). Cinq images de héros en <b>1440×960</b> sont chargées d'emblée. Aucune erreur console.</p>
+        <p class="fix"><b>Piste</b>Limiter le <em>prefetch</em> aux liens réellement susceptibles d'être suivis, et ne charger que la première image du carrousel de héros, les suivantes à la demande.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce qui est déjà très bien</h2>
+    <p class="sect-note">À ne pas casser en corrigeant le reste — et, pour plusieurs de ces points, au-dessus de ce que font les concurrents.</p>
+    <ul class="works">
+      <li><b>Les itinéraires éditoriaux</b><span>Horaires, temps de trajet avec le nom de la route (« Grande Corniche, montée sinueuse »), « 🌙 Dormir à Beaulieu-sur-Mer » et sa justification. C'est du vrai travail de guide.</span></li>
+      <li><b>Les alertes d'ouverture</b><span>« ⚠️ Fermé aujourd'hui » sur le Trophée d'Auguste, horaires saisonniers détaillés, « billet en ligne obligatoire ». Presque personne ne fait ça.</span></li>
+      <li><b>Les contrastes</b><span>Minimum mesuré 5,76:1 sur le texte secondaire, 6,3:1 sur les métadonnées. AA partout, sur un thème sombre — ce n'est pas fréquent.</span></li>
+      <li><b>Le comportement des cartes</b><span>Zoom molette désactivé (la page continue de défiler), consigne « deux doigts » sur mobile. Le bon réglage, appliqué partout.</span></li>
+      <li><b>Les formulaires</b><span><code>label</code> associés, <code>autocomplete="current-password"</code>, <code>required</code>, bascule « Afficher », <code>callbackUrl</code> conservé après connexion.</span></li>
+      <li><b>Le texte de confidentialité</b><span>« Aucune publicité, aucune revente. Tu peux demander leur suppression à tout moment. » Court, concret, au bon endroit.</span></li>
+      <li><b>L'internationalisation</b><span><code>hreflang</code> fr/en/x-default corrects, bascule qui reste sur la même fiche, traduction anglaise soignée, détection de langue à la racine.</span></li>
+      <li><b>Les états vides</b><span>« Aucune activité ne correspond à ces filtres » + « Tout afficher », « 0 sur 208 · Tout effacer », « Aucun itinéraire sauvegardé » avec son CTA. Exactement ce qu'il faut, partout.</span></li>
+      <li><b>La sauvegarde d'itinéraire</b><span>Nom pré-rempli intelligemment, mise à jour en place sans doublon, <code>?id=</code> qui se recharge parfaitement, passage propre en mode « ✏️ Modifier ». Le mécanisme est bon — il ne sert juste qu'aux inscrits.</span></li>
+      <li><b>Les favoris</b><span>Persistance vérifiée après rechargement, bouton désactivé pendant l'appel réseau (pas de double envoi), libellé qui bascule clairement entre « Ajouter aux favoris » et « Favori ».</span></li>
+      <li><b>« Surprends-moi »</b><span>Un tirage au sort qui ouvre une fiche au hasard. Sur un site qui vend la découverte, c'est la bonne idée au bon endroit.</span></li>
+      <li><b>Le ton</b><span>Tutoiement tenu de bout en bout, pas d'erreur console, <code>robots.txt</code> et <code>sitemap.xml</code> en place.</span></li>
+    </ul>
+  </section>
+
+  <section class="untested">
+    <h2>Ce que je n'ai pas testé</h2>
+    <ul>
+      <li><b>L'export PDF</b> de l'itinéraire — il déclenche vraisemblablement la boîte d'impression du navigateur, que j'évite en automatisation.</li>
+      <li><b>« 📍 Près de moi »</b> — demande la géolocalisation ; à vérifier de votre côté que le refus de permission est géré proprement.</li>
+      <li><b>Le partage vu du destinataire</b> — vérifié côté API (aucune lecture publique) et via un <code>?id=</code> inconnu, mais pas depuis une seconde session réelle.</li>
+      <li><b>Un compte de test</b> a été créé au début de l'audit sous <code>audit.ux.riviera@mailinator.com</code>, jamais activé faute d'accès à la boîte : à supprimer côté base.</li>
+      <li><b>Les vrais appareils</b> — tout le volet mobile est mesuré en émulation 375×812. Les cibles tactiles et la carte méritent une passe sur un téléphone réel.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Riviera Secrète — audit d'expérience</span>
+    <span>14 septembre 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
