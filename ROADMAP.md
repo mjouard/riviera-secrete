@@ -40,13 +40,30 @@ base), sauf ce qui est listé ci-dessous.
       monde.
 - [ ] **`409` de `register`** — « Un compte existe déjà avec cet email » permet d'énumérer
       les comptes. Le corriger change l'UX du frontend.
-- [ ] **« Partir de cet itinéraire » ampute 4 itinéraires sur 6** — `lerins-esterel` passe
-      de 3 étapes éditoriales à **1** générée, `villages-perches` de 5 à 3. Cause : budget
-      dur de 480 min/jour sans marge, et « Journée complète » mappée sur le même budget que
-      « Journée ». Piste : ne jamais exclure une étape venant d'un itinéraire source —
-      la garder et allonger la journée avec un avertissement ; budget distinct (600 min)
-      pour « Journée complète » ; aller directement à la vue résultat avec un bandeau
-      « Basé sur : … ».
+- [x] **« Partir de cet itinéraire » n'ampute plus rien** — **fait le 2026-09-14**
+      (`03f820c` + `0eb8566`). Les 6 itinéraires conservent désormais 100 % de leurs étapes
+      (4/4, 3/3, 3/3, 6/6, 4/4, 5/5, vérifié sur les données réelles), le clic ouvre
+      directement la vue résultat avec un bandeau « Basé sur : … », et les deux vraies
+      longues journées affichent « Journée dense : fin estimée vers 20h05 ».
+
+      Deux causes, pas une. **(1)** `parseVisitMinutes` surestimait toute durée écrite
+      « X à Y h » : son motif exige une unité, donc « 2 à 4 h » ne lui montrait que « 4 h ».
+      Six libellés sur vingt-trois étaient touchés, tous vers le haut. **(2)** Le budget
+      restait intenable même corrigé — relever « Journée complète » à 600 min n'aurait pas
+      suffi, `lerins-esterel` pesant 540 min de visites *avant* les trajets. D'où l'option
+      `garderTous` : on conserve tout et on annonce une journée dense, plutôt que de
+      prétendre que ça rentre.
+
+      Deux choix de conception à connaître : le seuil de densité est exprimé **à l'horloge**
+      (fin après 19 h) et non en dépassement du budget de `DUREE_META`, parce que ce budget
+      est un outil de planification interne alors que le visiteur juge à l'heure de fin ; et
+      le calcul horaire est remonté dans `construirePlanning()` pour que l'avertissement et
+      le programme détaillé ne puissent pas diverger.
+- [ ] **Le générateur reste trop conservateur hors itinéraire source** — constaté en
+      corrigeant le point ci-dessus : `antibes-biot-juan` tient largement dans la journée
+      (fin 17h55 pour un budget de 8 h) et perdait pourtant une étape. La coupure gloutonne
+      se déclenche sur le budget *restant* d'une étape isolée, sans voir que le total passe.
+      Même racine que l'item suivant.
 - [ ] **« N lieux non inclus faute de temps » n'est pas crédible** — sur un 2 jours /
       13 lieux, 5 exclus alors que les journées finissent vers 16h et qu'Èze et le Cap
       Ferrat, exclus, sont *géographiquement entre* les étapes retenues. L'algorithme est
