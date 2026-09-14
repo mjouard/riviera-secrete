@@ -21,7 +21,14 @@ const jourServeur = () => null;
  * instantané serveur distinct (null, donc rien affiché) du instantané client, ce qui évite
  * à la fois la discordance d'hydratation et le `setState` synchrone dans un effet.
  */
-export default function FermeAujourdhui({ fermeJours }: { fermeJours?: number[] | null }) {
+export default function FermeAujourdhui({
+  fermeJours,
+  compact = false,
+}: {
+  fermeJours?: number[] | null;
+  /** Variante sans marge haute, pour s'insérer dans une pastille d'étape déjà dense. */
+  compact?: boolean;
+}) {
   const t = useTranslations("activite");
   const jour = useSyncExternalStore(neJamaisResouscrire, jourClient, jourServeur);
 
@@ -29,7 +36,7 @@ export default function FermeAujourdhui({ fermeJours }: { fermeJours?: number[] 
 
   return (
     <span
-      className="inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full mt-2"
+      className={`inline-block font-semibold rounded-full ${compact ? "text-[10px] px-1.5 py-0.5 ml-1.5" : "text-[11px] px-2 py-0.5 mt-2"}`}
       style={{ background: "rgba(232,74,74,0.15)", color: "#E8705A" }}
     >
       {t("fermeAujourdhui")}

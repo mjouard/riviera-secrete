@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { imgUrl, loc } from "@/lib/utils";
 import { buildBookingActivites } from "@/lib/itineraire-logic";
+import FermeAujourdhui from "@/components/FermeAujourdhui";
 
 /** Nombre de cartes visibles sur desktop avant de replier le reste derrière "Voir plus". */
 const VISIBLE_COUNT = 4;
@@ -45,7 +46,17 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
               <div className="p-4">
                 <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>{loc(locale, lieu.nomEn, lieu.nom)}</p>
                 <p className="font-semibold text-sm mb-1">{loc(locale, act.nomEn, act.nom)}</p>
-                <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>⏱ {loc(locale, act.dureeEn, act.duree)} · 💶 {loc(locale, act.prixEn, act.prix)}</p>
+                <p className="text-xs" style={{ color: "var(--text-muted)" }}>⏱ {loc(locale, act.dureeEn, act.duree)} · 💶 {loc(locale, act.prixEn, act.prix)}</p>
+                {/* Même information d'ouverture que la fiche lieu et que les itinéraires
+                    éditoriaux : un itinéraire se lit le matin du départ. */}
+                {act.horaires && (
+                  <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                    🕒 {loc(locale, act.horairesEn, act.horaires)}
+                  </p>
+                )}
+                <div className="mb-3">
+                  <FermeAujourdhui fermeJours={act.fermeJours} />
+                </div>
                 <a href={act.url} target="_blank" rel="noopener noreferrer" className="no-print text-xs" style={{ color: "var(--azure)" }}>
                   {linkText}
                 </a>

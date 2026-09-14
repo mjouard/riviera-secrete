@@ -267,23 +267,36 @@ export default async function ItinerairePage({
                     ))}
                   </div>
                 )}
+                {/* Une page itinéraire se consulte le matin même : la pastille d'étape doit
+                    dire si l'activité est fermée aujourd'hui, exactement comme la fiche lieu.
+                    L'info est dérivée de l'activité référencée par {lieuSlug, activiteId} —
+                    aucune donnée de fermeture n'est stockée côté itinéraire. */}
                 {item.activites && item.activites.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {item.activites.map((act, j) => (
-                      <span
-                        key={j}
-                        className="text-xs px-2 py-1 rounded"
-                        style={{
-                          background: "var(--surface-hover)",
-                          color:
-                            act.cls?.includes("free")
-                              ? "var(--azure)"
-                              : "var(--terracotta)",
-                        }}
-                      >
-                        {loc(locale, act.labelEn, act.label)}
-                      </span>
-                    ))}
+                    {item.activites.map((act, j) => {
+                      const ref =
+                        act.lieuSlug && act.activiteId
+                          ? lieuBySlug
+                              .get(act.lieuSlug)
+                              ?.activites.find((a) => a.activiteId === act.activiteId)
+                          : undefined;
+                      return (
+                        <span
+                          key={j}
+                          className="text-xs px-2 py-1 rounded"
+                          style={{
+                            background: "var(--surface-hover)",
+                            color:
+                              act.cls?.includes("free")
+                                ? "var(--azure)"
+                                : "var(--terracotta)",
+                          }}
+                        >
+                          {loc(locale, act.labelEn, act.label)}
+                          <FermeAujourdhui fermeJours={ref?.fermeJours} compact />
+                        </span>
+                      );
+                    })}
                   </div>
                 )}
               </div>
