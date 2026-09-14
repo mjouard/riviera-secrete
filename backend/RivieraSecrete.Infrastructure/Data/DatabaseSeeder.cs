@@ -180,8 +180,8 @@ public static class DatabaseSeeder
     }
 
     /// <summary>
-    /// Recopie depuis data/lieux.json les champs descriptifs mutables d'un lieu EXISTANT
-    /// (Description, Description2, HeroAlt, images, Badges, MetaPills, Tips, Related) sur
+    /// Recopie depuis data/lieux.json les champs mutables d'un lieu EXISTANT (Description,
+    /// Description2, HeroAlt, images, Badges, MetaPills, Tips, Related, **Lat/Lng**) sur
     /// la ligne DB correspondante — jamais Id/Slug/VilleSlug/Activites (gérés par
     /// SyncNewContentAsync / rename-lieu / remove-activite). Utile quand une correction de
     /// contenu (ex. un `related[]` qui pointait vers un slug renommé/supprimé) doit être
@@ -209,15 +209,20 @@ public static class DatabaseSeeder
         dbLieu.MetaPills    = jsonLieu["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [];
         dbLieu.Tips         = jsonLieu["tips"]?.Deserialize<List<Tip>>(JsonOpts) ?? [];
         dbLieu.Related      = jsonLieu["related"]?.Deserialize<List<RelatedCard>>(JsonOpts) ?? [];
+        // Les coordonnées manquaient ici : une correction de lat/lng dans le JSON était donc
+        // signalée « rafraîchie » alors qu'elle ne partait jamais en base. Découvert en
+        // corrigeant Èze, qui pointait 8 km en pleine mer (2026-09-14).
+        dbLieu.Lat          = jsonLieu["lat"]!.GetValue<double>();
+        dbLieu.Lng          = jsonLieu["lng"]!.GetValue<double>();
 
         await db.SaveChangesAsync();
         return true;
     }
 
     /// <summary>
-    /// Équivalent de <see cref="RefreshLieuFieldsAsync"/> pour une Ville (seul son
-    /// ThumbImage change habituellement, ex. après avoir remplacé le placeholder picsum par
-    /// une vraie photo — voir data/villes.json). Ne touche jamais Id/Slug/Lieux.
+    /// Équivalent de <see cref="RefreshLieuFieldsAsync"/> pour une Ville (habituellement son
+    /// ThumbImage, ex. après avoir remplacé le placeholder picsum par une vraie photo, ou
+    /// ses coordonnées — voir data/villes.json). Ne touche jamais Id/Slug/Lieux.
     /// </summary>
     public static async Task<bool> RefreshVilleFieldsAsync(AppDbContext db, string dataDir, string slug)
     {
@@ -232,6 +237,10 @@ public static class DatabaseSeeder
         dbVille.DescriptionEn = jsonVille["descriptionEn"]?.GetValue<string>();
         dbVille.NomEn         = jsonVille["nomEn"]?.GetValue<string>();
         dbVille.ThumbImage    = jsonVille["thumbImage"]!.GetValue<string>();
+        // Mêmes coordonnées manquantes que dans RefreshLieuFieldsAsync — et c'est bien une
+        // ville qui portait le marqueur en mer (`eze`, plus `cannes` posée sur Lérins).
+        dbVille.Lat           = jsonVille["lat"]!.GetValue<double>();
+        dbVille.Lng           = jsonVille["lng"]!.GetValue<double>();
 
         await db.SaveChangesAsync();
         return true;
