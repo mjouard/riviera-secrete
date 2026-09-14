@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, loc, alternatesPage } from "@/lib/utils";
+import { imgUrl, buildMapLinks, loc, alternatesPage, prixAffiche } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -243,7 +243,7 @@ export default async function LieuPage({
                     </span>
                     <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
                     <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-                      {loc(locale, act.dureeEn, act.duree)} · {loc(locale, act.prixEn, act.prix)}
+                      {loc(locale, act.dureeEn, act.duree)} · {prixAffiche(locale, act.prixEn, act.prix)}
                     </p>
                     {act.horaires && (
                       <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>

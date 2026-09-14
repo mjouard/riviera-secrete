@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc, alternatesPage } from "@/lib/utils";
+import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc, alternatesPage, prixAffiche } from "@/lib/utils";
 import { dureeKeyDepuisBadge } from "@/lib/itineraire-logic";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -342,7 +342,7 @@ export default async function ItinerairePage({
                           style={{ color: "var(--text-muted)" }}
                         >
                           <span>⏱ {loc(locale, activite.dureeEn, activite.duree)}</span>
-                          <span>💶 {loc(locale, activite.prixEn, activite.prix)}</span>
+                          <span>💶 {prixAffiche(locale, activite.prixEn, activite.prix)}</span>
                         </div>
                         {activite.horaires && (
                           <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>

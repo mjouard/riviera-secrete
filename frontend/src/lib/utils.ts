@@ -116,3 +116,34 @@ export function alternatesPage(siteUrl: string, locale: string, chemin: string) 
     languages: { fr, en, "x-default": fr },
   };
 }
+
+/**
+ * « 20 € / adult » → « €20 / adult ».
+ *
+ * Les prix anglais de `data/lieux.json` ont été traduits sans changer la place du symbole :
+ * ils gardaient la convention française (montant puis €), là où les pastilles d'étape des
+ * itinéraires — écrites à la main — affichent déjà « €7 » sur la même page. Deux
+ * conventions typographiques coexistaient donc à quelques centimètres l'une de l'autre.
+ *
+ * Correction à l'affichage plutôt que dans les données : le seeder est idempotent, une
+ * édition du JSON ne se propage pas à la base de prod (voir CLAUDE.md). La fonction est
+ * idempotente elle aussi — « from €60 / person », déjà à l'anglaise, n'a pas de € suffixe
+ * et ressort inchangée — donc normaliser un jour les données ne la rendra pas nuisible.
+ */
+const EURO_SUFFIXE = /(\d[\d.,]*(?:\s*[–—-]\s*\d[\d.,]*)?)\s*€/g;
+
+export function formatEuroAnglais(prix: string): string {
+  return prix.replace(EURO_SUFFIXE, (_, montant: string) =>
+    `€${montant.replace(/\s*([–—-])\s*/g, "$1")}`
+  );
+}
+
+/** Prix d'une activité dans la locale affichée, symbole euro placé selon la convention. */
+export function prixAffiche(
+  locale: string,
+  prixEn: string | null | undefined,
+  prix: string
+): string {
+  if (locale === "en" && prixEn) return formatEuroAnglais(prixEn);
+  return loc(locale, prixEn, prix);
+}

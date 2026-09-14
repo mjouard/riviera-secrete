@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc } from "@/lib/utils";
+import { imgUrl, loc, prixAffiche } from "@/lib/utils";
 import { ACTIVITY_CATEGORIES, FEATURED_ACTIVITIES } from "@/lib/home-data";
 
 interface CardData {
@@ -138,7 +138,7 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
                   </p>
                   <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
                     ⏱ {loc(locale, card.dureeEn, card.duree)}
-                    {card.badge === "payant" ? ` · ${loc(locale, card.prixEn, card.prix)}` : ""}
+                    {card.badge === "payant" ? ` · ${prixAffiche(locale, card.prixEn, card.prix)}` : ""}
                   </p>
                 </div>
               </Link>
