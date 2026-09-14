@@ -332,14 +332,41 @@ au moment du Lot 4.
 
 *Recette :* aucun `<input>/<select>` sous 16 px ; aucune cible tactile sous 44 px ; `x-vercel-cache: HIT` sur `/lieux/*` ; `/api/auth/session` ne contient plus `apiToken`.
 
-### Lot 2 — Contrat d'URL
+### Lot 2 — Contrat d'URL — **fait le 2026-09-14**
 
-- [ ] **Filtres dans l'URL sur toutes les listes** (`03-architecture-routes-url.md` § 5.1) — `router.replace(url, { scroll: false })` à chaque changement ; `useSearchParams()` au montage. Un état vide = paramètre absent (jamais `?zone=`). Format : `/explorer?zone=menton-monaco&type=village,sentier&duree=court&niveau=facile&ouvert=1&q=eze&sort=proximite`. Corrige PR-01 pour les filtres.
-- [ ] **`/composer` avec état complet dans l'URL** (`03` § 5.2) — `/composer?duree=journee&depart=nice&date=2026-09-19&transport=voiture&lieux=eze-village,la-turbie,rue-obscure`. Paramètre `lieux` **cumulatif** : « Ajouter à un itinéraire » depuis une fiche *ajoute* le slug, ne le remplace pas. Corrige PR-02 (un lieu écrase le précédent).
-- [ ] **Routes `/inscription` et `/mot-de-passe-oublie`** — deux routes à part entière avec leur propre URL, pas des bascules sur `/connexion` sans changement d'URL. La route `/reinitialiser-mot-de-passe` existe déjà (2026-09-14), garder. Corrige PR-08.
-- [ ] **Page 404 localisée** (`03` § 7) — `app/not-found.tsx` avec la mise en page du site, un champ de recherche et trois lieux tirés au hasard (le bouton « Surprends-moi » existe déjà dans le code). Corrige la 404 Next.js en anglais sans en-tête ni lien (→ PR-03).
+- [x] **Filtres dans l'URL** — faits sur la grille de l'accueil (la page `/explorer` du spec
+      n'existe qu'au Lot 4 ; le helper `frontend/src/lib/url-filtres.ts` est écrit pour être
+      réutilisé tel quel là-bas). L'URL est la **source de vérité** plutôt qu'une copie tenue
+      à côté d'un `useState` — deux exemplaires du même état finissent par diverger.
+      `useSyncExternalStore` et non `useSearchParams` + `router.replace` comme l'écrivait le
+      spec : l'accueil est prérendu (ISR), `useSearchParams` y impose une frontière Suspense,
+      et le filtrage étant entièrement client, faire retraverser le routeur à chaque frappe
+      n'apporte rien. Les valeurs hors vocabulaire sont ignorées. État vide = paramètre absent.
+- [x] **État complet dans l'URL du générateur** — `?lieux=` pendant la sélection, `?jours=`
+      une fois composé (même encodage que le lien de partage existant). `?add=` est devenu
+      **cumulatif** via un relais `sessionStorage` : l'URL seule ne pouvait pas suffire,
+      chaque clic depuis une fiche étant une navigation qui remonte la page, deux ajouts
+      depuis deux fiches n'ayant donc aucune URL commune où s'accumuler.
+      **La route reste `/creer-itineraire`** — le renommage en `/composer` et les champs
+      départ/date/transport appartiennent au Lot 4.
+- [x] **Routes `/inscription` et `/mot-de-passe-oublie`** — le formulaire est extrait en
+      composant partagé (`FormulaireAuth`) dont le mode est une prop, plutôt que dupliqué.
+      La 1re étape de réinitialisation était coincée en troisième état de `/connexion` et
+      réutilisait son champ e-mail ; `/reinitialiser-mot-de-passe` (2e étape) ne bouge pas,
+      et le backend non plus. Le `callbackUrl` se propage d'une route à l'autre.
+- [x] **Page 404 localisée** — **deux** fichiers, pas un : `[locale]/not-found.tsx` (hérite
+      en-tête/pied de page/langue, 3 lieux au hasard) pour les 404 levées *dans* une page, et
+      `not-found.tsx` à la racine pour les URL dont le premier segment n'est pas une locale,
+      rejetées par le routage avant tout rendu — celles-là n'entrent jamais dans `[locale]`.
+      Pas de champ de recherche : il vit dans la grille de l'accueil, vers laquelle pointe le
+      bouton secondaire.
 
-*Recette :* une vue filtrée se partage et se recharge à l'identique ; Précédent défait un filtre ; un F5 sur un itinéraire composé ne perd rien ; ajouter trois lieux depuis trois fiches donne `lieux=lieu1,lieu2,lieu3`.
+*Recette :* ✅ une vue filtrée se partage et se recharge à l'identique ; ✅ un F5 sur un
+itinéraire composé ne perd rien ; ✅ ajouter des lieux depuis plusieurs fiches les cumule.
+❌ **« Précédent défait un filtre » n'est pas satisfait** : `replaceState` n'empile aucune
+entrée. L'obtenir suppose `pushState`, qui entre en conflit avec l'historique que gère le
+routeur de Next — le spec demandait lui-même `router.replace`, les deux exigences se
+contredisent. À trancher si le besoin se confirme à l'usage.
 
 ### Lot 3 — Données
 
