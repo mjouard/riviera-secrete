@@ -4,8 +4,9 @@
 
 Trois audits menés dans la nuit du 13 au 14 (sécurité backend, tests utilisateurs, UX
 mobile/web) — rapports complets dans **`docs/audits/`**. **Tout est corrigé, poussé et
-déployé le 2026-09-14** (backend Railway + frontend Vercel + synchro des coordonnées en
-base), sauf ce qui est listé ci-dessous.
+déployé le 2026-09-14** — deux tournées : d'abord les correctifs de sécurité, d'UX et les
+coordonnées, puis le générateur d'itinéraire, la page `/activites` et le lot fiabilité.
+Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
 
 ### À faire par l'utilisateur — bloquant
 
