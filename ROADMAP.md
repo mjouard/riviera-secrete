@@ -304,13 +304,26 @@ sur du sable.
       `/confidentialite` et `/cgu` renvoient 404, alors que le site collecte email et
       prénom, dépose un cookie de session et charge Plausible. Le formulaire d'inscription
       ne présente aucune mention RGPD. **À régler avant l'achat du domaine, pas après.**
-- [ ] **Page `/activites` filtrable** — les 208 activités (nom, durée, prix, horaires,
-      lien) sont la donnée la plus actionnable du site et ne sont **ni cherchables en tant
-      que telles, ni parcourables** : l'accueil en montre 36 curées sans le dire, et le
-      filtre « Gratuit seulement » renvoie 12 résultats alors qu'il existe **120 activités
-      gratuites**. Filtres proposés : catégorie, gratuit/payant, durée, zone, ouvert
-      aujourd'hui (les données `fermeJours`/`horaires` existent déjà). Remplacer aussi
-      « Voir plus » par un libellé honnête (« 36 idées choisies parmi 208 — tout voir → »).
+- [x] **Page `/activites` filtrable** — **faite le 2026-09-14**. Les 208 activités sont
+      parcourables et cherchables : recherche libre, catégorie, durée, zone, tarif, et
+      « masquer ce qui est fermé aujourd'hui ». Liée depuis la nav et depuis l'accueil, dont
+      la section annonce maintenant « Voir les 208 activités » au lieu de laisser croire que
+      les 36 curées étaient tout le catalogue. Dans le sitemap avec ses alternates.
+
+      Le filtre de fermeture **masque ce qu'on sait fermé** plutôt que de garder « ce qui est
+      ouvert » : seules 10 activités sur 208 déclarent leurs jours de fermeture, donc garder
+      les ouvertes cacherait les 198 dont on ignore l'horaire — ce serait affirmer une
+      fermeture qu'on ne connaît pas. Le jour est lu côté client, la page étant en ISR.
+- [ ] **Enrichir les horaires pour rendre « ouvert maintenant » vraiment utile** — 10
+      activités sur 208 renseignent `fermeJours`, 23 un texte d'horaires. C'est ce qui limite
+      aujourd'hui le filtre le plus demandé par un visiteur sur place. Le périmètre resté de
+      côté en 2026-09-13 (37 restaurants aux horaires trop volatils, 12 locations sur
+      réservation) reste justifié ; ce sont les sites à visiter qu'il faut compléter.
+- [ ] **Filtres situationnels manquants, faute de données** — « avec des enfants », « sans
+      voiture », « éviter la foule » ont été volontairement écartés : 2 activités sur 208
+      mentionnent les enfants, et rien ne décrit l'accès en transports ni l'affluence.
+      Proposer ces filtres aujourd'hui donnerait des résultats faux. À rouvrir seulement si
+      la donnée est ajoutée (un champ par activité, pas une heuristique sur le nom).
 - [ ] **« Mot de passe oublié »** — ni page ni endpoint. Un compte créé par mot de passe et
       oublié est **définitivement perdu**, avec ses favoris et ses itinéraires. Le mécanisme
       de jeton à expiration de la confirmation d'email est réutilisable tel quel.
