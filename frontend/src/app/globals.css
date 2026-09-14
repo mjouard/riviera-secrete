@@ -38,6 +38,35 @@ button:not(:disabled) { cursor: pointer; }
   .carousel-dots { bottom: 12px; right: 14px; }
 }
 
+/* ---------- CARTES LEAFLET ---------- */
+/* Sur ecran tactile, Leaflet pose touch-action:none sur son conteneur : un touchmove
+   vertical demarre sur la carte etait absorbe, la page ne defilait pas, et comme la carte
+   de l'accueil occupe ~60% du viewport le visiteur croyait la page terminee. On rend le
+   defilement vertical au navigateur ; le drag a un doigt est desactive cote Leaflet (voir
+   limiterAuPanDeuxDoigts dans map-tiles.ts) et le deplacement se fait a deux doigts.
+   !important parce que Leaflet applique la regle sur le conteneur ET ses panes. */
+@media (pointer: coarse) {
+  .leaflet-container,
+  .leaflet-container * { touch-action: pan-y !important; }
+}
+.rs-map-hint {
+  background: rgba(12, 17, 22, 0.78);
+  color: #ECEEF1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  line-height: 1.3;
+  margin: 0 0 10px 10px;
+  pointer-events: none;
+}
+/* Carte de l'accueil : 60vh en desktop, nettement plus courte en mobile pour que le
+   contenu qui suit (la recherche et le catalogue) reste visiblement a portee de pouce. */
+.rs-map-home { height: min(60vh, 600px); min-height: 380px; }
+@media (max-width: 639.98px) {
+  .rs-map-home { height: 300px; min-height: 0; }
+}
+
 /* ---------- BUILDER ---------- */
 .builder-stop-card.dragging { opacity: 0.4; }
 .builder-day-stops { min-height: 60px; }

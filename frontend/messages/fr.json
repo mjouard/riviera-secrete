@@ -28,7 +28,8 @@
     "plans": "Plans",
     "imagePrecedente": "Image précédente",
     "imageSuivante": "Image suivante",
-    "imageN": "Image {n}"
+    "imageN": "Image {n}",
+    "carteDeuxDoigts": "✌︎ Deux doigts pour déplacer la carte"
   },
   "home": {
     "heroTitleStart": "La Côte d'Azur",

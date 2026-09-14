@@ -28,7 +28,8 @@
     "plans": "Maps",
     "imagePrecedente": "Previous image",
     "imageSuivante": "Next image",
-    "imageN": "Image {n}"
+    "imageN": "Image {n}",
+    "carteDeuxDoigts": "✌︎ Use two fingers to move the map"
   },
   "home": {
     "heroTitleStart": "The French Riviera",

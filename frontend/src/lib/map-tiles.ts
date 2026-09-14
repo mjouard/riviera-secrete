@@ -23,10 +23,53 @@ export function applyDarkTileFilter(map: import("leaflet").Map): void {
  * `import("leaflet")` — ne fait aucun import du module `leaflet` elle-même (types uniquement),
  * donc reste sans effet sur le bundle SSR.
  */
+/**
+ * Vrai sur un écran tactile (téléphone, tablette). Même condition que le
+ * `@media (pointer: coarse)` de globals.css qui rend le défilement vertical au navigateur —
+ * les deux doivent rester alignés, sinon on désactive le drag sans rendre le scroll, ou
+ * l'inverse.
+ */
+function estTactile(): boolean {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+
+/**
+ * Sur écran tactile, un `touchmove` vertical démarré sur la carte était absorbé par Leaflet
+ * (`touch-action: none` sur le conteneur + drag à un doigt) : la page ne défilait pas, et
+ * comme la carte de l'accueil occupe ~60 % du viewport, on croyait la page terminée.
+ *
+ * On désactive donc le drag à un doigt ; globals.css rend en parallèle le défilement
+ * vertical au navigateur. Déplacer la carte reste possible à deux doigts : le geste n'est
+ * pas un `pan-y`, le navigateur le laisse donc à Leaflet, dont `touchZoom` déplace le
+ * centre en même temps qu'il zoome. D'où l'indication affichée en bas à gauche.
+ */
+function limiterAuPanDeuxDoigts(
+  L: typeof import("leaflet"),
+  map: import("leaflet").Map,
+  indication?: string
+): void {
+  map.dragging.disable();
+  if (!indication) return;
+  const Indication = L.Control.extend({
+    onAdd() {
+      const div = L.DomUtil.create("div", "rs-map-hint");
+      div.textContent = indication;
+      return div;
+    },
+  });
+  new Indication({ position: "bottomleft" }).addTo(map);
+}
+
 export function createBaseMap(
   L: typeof import("leaflet"),
   container: HTMLElement,
-  options: { zoomControl?: boolean; scrollWheelZoom?: boolean } = {}
+  options: {
+    zoomControl?: boolean;
+    scrollWheelZoom?: boolean;
+    /** Libellé traduit de l'indication « deux doigts » (écran tactile uniquement). */
+    indicationTactile?: string;
+  } = {}
 ): import("leaflet").Map {
   delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
   L.Icon.Default.mergeOptions({
@@ -42,6 +85,8 @@ export function createBaseMap(
 
   L.tileLayer(MAP_TILE_URL, { attribution: MAP_TILE_ATTRIBUTION, maxZoom: 19 }).addTo(map);
   applyDarkTileFilter(map);
+
+  if (estTactile()) limiterAuPanDeuxDoigts(L, map, options.indicationTactile);
 
   return map;
 }

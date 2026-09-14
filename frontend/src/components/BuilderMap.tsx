@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
 
 interface Stop { lat: number; lng: number; nom: string; }
@@ -31,6 +32,9 @@ function applyStops(state: MapState, stops: Stop[]) {
 }
 
 export default function BuilderMap({ stops }: { stops: Stop[] }) {
+  // Chaîne (et non la fonction `t`) dans les dépendances de l'effet : stable pour une
+  // locale donnée, la carte n'est donc pas recréée à chaque rendu.
+  const indicationTactile = useTranslations("common")("carteDeuxDoigts");
   const ref = useRef<HTMLDivElement>(null);
   const stateRef = useRef<MapState | null>(null);
   const stopsRef = useRef(stops);
@@ -45,7 +49,7 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
     let cancelled = false;
     import("leaflet").then((L) => {
       if (cancelled || !ref.current) return;
-      const map = createBaseMap(L, ref.current, { scrollWheelZoom: false });
+      const map = createBaseMap(L, ref.current, { scrollWheelZoom: false, indicationTactile });
       const layer = L.layerGroup().addTo(map);
       stateRef.current = { L, map, layer };
       applyStops(stateRef.current, stopsRef.current);
@@ -56,7 +60,7 @@ export default function BuilderMap({ stops }: { stops: Stop[] }) {
       stateRef.current?.map.remove();
       stateRef.current = null;
     };
-  }, []);
+  }, [indicationTactile]);
 
   useEffect(() => {
     if (!ready || !stateRef.current) return;

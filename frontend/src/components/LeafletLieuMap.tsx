@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export default function LeafletLieuMap({ lat, lng, nom }: Props) {
+  // Chaîne (et non la fonction `t`) dans les dépendances de l'effet : stable pour une
+  // locale donnée, la carte n'est donc pas recréée à chaque rendu.
+  const indicationTactile = useTranslations("common")("carteDeuxDoigts");
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
     import("leaflet").then((L) => {
       if (cancelled || !ref.current) return;
 
-      const currentMap = createBaseMap(L, ref.current, { scrollWheelZoom: false });
+      const currentMap = createBaseMap(L, ref.current, { scrollWheelZoom: false, indicationTactile });
       map = currentMap;
       currentMap.setView([lat, lng], 14);
 
@@ -30,7 +34,7 @@ export default function LeafletLieuMap({ lat, lng, nom }: Props) {
       cancelled = true;
       map?.remove();
     };
-  }, [lat, lng, nom]);
+  }, [lat, lng, nom, indicationTactile]);
 
   return (
     <>

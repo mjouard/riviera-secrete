@@ -16,6 +16,9 @@ export default function HomeMap({ villes }: Props) {
   const t = useTranslations("home");
   const tRegionShort = useTranslations("regionShort");
   const tRegionFull = useTranslations("regionFull");
+  // Chaîne (et non la fonction `t`) dans les dépendances de l'effet : elle est stable pour
+  // une locale donnée, la carte n'est donc pas recréée à chaque rendu.
+  const indicationTactile = useTranslations("common")("carteDeuxDoigts");
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<import("leaflet").Map | null>(null);
   const groupsRef = useRef<Record<string, import("leaflet").LayerGroup>>({});
@@ -32,7 +35,10 @@ export default function HomeMap({ villes }: Props) {
     import("leaflet").then((L) => {
       if (cancelled || !mapRef.current) return;
 
-      const currentMap = createBaseMap(L, mapRef.current, { scrollWheelZoom: false });
+      const currentMap = createBaseMap(L, mapRef.current, {
+        scrollWheelZoom: false,
+        indicationTactile,
+      });
       map = currentMap;
       mapInstance.current = currentMap;
 
@@ -68,7 +74,7 @@ export default function HomeMap({ villes }: Props) {
       mapInstance.current = null;
       groupsRef.current = {};
     };
-  }, [villes]);
+  }, [villes, indicationTactile]);
 
   function toggleRegion(region: string) {
     const map = mapInstance.current;
@@ -116,9 +122,8 @@ export default function HomeMap({ villes }: Props) {
       <div className="relative">
         <div
           ref={mapRef}
+          className="rs-map-home"
           style={{
-            height: "min(60vh, 600px)",
-            minHeight: 380,
             borderRadius: 12,
             overflow: "hidden",
             border: "1px solid var(--line)",
