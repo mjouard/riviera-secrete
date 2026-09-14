@@ -95,3 +95,24 @@ export function buildGoogleMapsRouteUrl(stops: Array<{ lat: number; lng: number 
   if (waypoints.length) params.set("waypoints", waypoints.join("|"));
   return `https://www.google.com/maps/dir/?${params}`;
 }
+
+/**
+ * Bloc `alternates` complet d'une page : les hreflang fr/en/x-default **et** le `canonical`
+ * de la locale courante.
+ *
+ * Le site declarait ses hreflang partout, mais aucune page ne declarait de canonical. Toute
+ * variante d'URL etait donc, pour un moteur, une page distincte au contenu identique — au
+ * premier chef `?itin=` sur les fiches lieu : chaque itineraire citant un lieu ajoute le
+ * parametre a son lien, ce qui produit une vingtaine d'URL dupliquees.
+ *
+ * `chemin` est le chemin sans prefixe de langue ("" pour l'accueil, "/villes/nice"...) ; le
+ * francais est la locale par defaut non prefixee, l'anglais vit sous /en.
+ */
+export function alternatesPage(siteUrl: string, locale: string, chemin: string) {
+  const fr = chemin ? `${siteUrl}${chemin}` : `${siteUrl}/`;
+  const en = `${siteUrl}/en${chemin}`;
+  return {
+    canonical: locale === "en" ? en : fr,
+    languages: { fr, en, "x-default": fr },
+  };
+}

@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc } from "@/lib/utils";
+import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc, alternatesPage } from "@/lib/utils";
 import { dureeKeyDepuisBadge } from "@/lib/itineraire-logic";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -55,13 +55,7 @@ export async function generateMetadata({
       description,
       ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 800 }] } : {}),
     },
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/itineraires/${slug}`,
-        en: `${SITE_URL}/en/itineraires/${slug}`,
-        "x-default": `${SITE_URL}/itineraires/${slug}`,
-      },
-    },
+    alternates: alternatesPage(SITE_URL, locale, `/itineraires/${slug}`),
   };
 }
 

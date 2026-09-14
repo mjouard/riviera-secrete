@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, loc } from "@/lib/utils";
+import { imgUrl, loc, alternatesPage } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import ItineraireCard from "@/components/ItineraireCard";
 
@@ -35,13 +35,7 @@ export async function generateMetadata({
       description,
       images: ville.thumbImage ? [{ url: imgUrl(ville.thumbImage), width: 500, height: 375 }] : [],
     },
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/villes/${slug}`,
-        en: `${SITE_URL}/en/villes/${slug}`,
-        "x-default": `${SITE_URL}/villes/${slug}`,
-      },
-    },
+    alternates: alternatesPage(SITE_URL, locale, `/villes/${slug}`),
   };
 }
 

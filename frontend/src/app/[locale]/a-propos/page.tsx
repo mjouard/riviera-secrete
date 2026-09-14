@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
+import { alternatesPage } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -18,13 +19,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("metaDescription"),
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/a-propos`,
-        en: `${SITE_URL}/en/a-propos`,
-        "x-default": `${SITE_URL}/a-propos`,
-      },
-    },
+    alternates: alternatesPage(SITE_URL, locale, "/a-propos"),
   };
 }
 

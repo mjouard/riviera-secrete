@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, loc } from "@/lib/utils";
+import { imgUrl, buildMapLinks, loc, alternatesPage } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -40,13 +40,7 @@ export async function generateMetadata({
       description,
       images: lieu.heroImage ? [{ url: imgUrl(lieu.heroImage), width: 1200, height: 800 }] : [],
     },
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/lieux/${slug}`,
-        en: `${SITE_URL}/en/lieux/${slug}`,
-        "x-default": `${SITE_URL}/lieux/${slug}`,
-      },
-    },
+    alternates: alternatesPage(SITE_URL, locale, `/lieux/${slug}`),
   };
 }
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, loc } from "@/lib/utils";
+import { imgUrl, loc, alternatesPage } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -22,13 +22,7 @@ export async function generateMetadata({
       locale === "en"
         ? "The towns and villages of the French Riviera to explore — from Menton to Saint-Tropez."
         : "Les villes et villages de la Côte d'Azur à explorer — de Menton à Saint-Tropez.",
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/villes`,
-        en: `${SITE_URL}/en/villes`,
-        "x-default": `${SITE_URL}/villes`,
-      },
-    },
+    alternates: alternatesPage(SITE_URL, locale, "/villes"),
   };
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { alternatesPage } from "@/lib/utils";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
@@ -15,14 +16,10 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("metaDescription"),
-    robots: { index: false, follow: true },
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/credits`,
-        en: `${SITE_URL}/en/credits`,
-        "x-default": `${SITE_URL}/credits`,
-      },
-    },
+    // Page d'attribution CC BY / CC BY-SA : ces licences exigent que le credit soit
+    // accessible, la mettre en noindex etait un contresens (probablement herite de l'epoque
+    // ou elle annoncait des images de substitution provisoires).
+    alternates: alternatesPage(SITE_URL, locale, "/credits"),
   };
 }
 

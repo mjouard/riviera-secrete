@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
-import { loc } from "@/lib/utils";
+import { loc, alternatesPage } from "@/lib/utils";
 import HomeMapWrapper from "@/components/HomeMapWrapper";
 import HomeActivities from "@/components/HomeActivities";
 import HomeLieuxGrid from "@/components/HomeLieuxGrid";
@@ -14,16 +14,13 @@ export const revalidate = 3600;
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 
-export function generateMetadata(): Metadata {
-  return {
-    alternates: {
-      languages: {
-        fr: `${SITE_URL}/`,
-        en: `${SITE_URL}/en`,
-        "x-default": `${SITE_URL}/`,
-      },
-    },
-  };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: alternatesPage(SITE_URL, locale, "") };
 }
 
 export default async function HomePage({
