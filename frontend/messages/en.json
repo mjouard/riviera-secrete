@@ -265,7 +265,10 @@
     "erreurCreationCompte": "Couldn't create the account.",
     "erreurIdentifiants": "Wrong email or password.",
     "erreurGenerique": "Something went wrong. Try again.",
-    "mentionRgpd": "By creating an account you give us your email address and first name, used only to find your favourites and itineraries again. No advertising, no reselling. You can ask for their deletion at any time —"
+    "mentionRgpd": "By creating an account you give us your email address and first name, used only to find your favourites and itineraries again. No advertising, no reselling. You can ask for their deletion at any time —",
+    "motDePasseOublie": "Forgot your password?",
+    "oubliSaisirEmail": "Enter your email address above first.",
+    "oubliEnvoye": "If an account exists with this address, a reset link has just been sent. It expires in 1 hr."
   },
   "confirmerEmail": {
     "metaTitre": "Email confirmation",
@@ -395,5 +398,22 @@
     "confidentialiteDescription": "What data Riviera Secrète collects, why, and how to exercise your rights.",
     "accueil": "Home",
     "filAriane": "Breadcrumb"
+  },
+  "reinitialiser": {
+    "titre": "New password",
+    "intro": "Choose a new password for your account. It must be at least 8 characters long.",
+    "nouveauMotDePasse": "New password",
+    "confirmer": "Confirm password",
+    "valider": "Save the new password",
+    "tropCourt": "The password must be at least 8 characters long.",
+    "nonIdentiques": "The two passwords do not match.",
+    "lienInvalide": "Invalid or incomplete reset link.",
+    "echec": "The reset failed. The link may have expired.",
+    "reseau": "Could not reach the server. Please try again in a moment.",
+    "succesTitre": "Password updated",
+    "succesTexte": "You can now sign in with your new password. Redirecting…",
+    "retourConnexion": "Back to sign in",
+    "lienExpire": "This link has expired. Request a new one from the sign-in page.",
+    "tropLong": "The password must not exceed 72 bytes."
   }
 }

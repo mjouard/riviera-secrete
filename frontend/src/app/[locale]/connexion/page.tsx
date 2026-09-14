@@ -24,6 +24,8 @@ export default function ConnexionPage() {
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
   const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent">("idle");
+  /** Demande de réinitialisation : "sent" est affiché même pour une adresse inconnue. */
+  const [oubliStatus, setOubliStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   useEffect(() => {
     function readCallbackUrl() {
@@ -37,6 +39,33 @@ export default function ConnexionPage() {
     setMode(next);
     setError(null);
     setNeedsConfirmation(false);
+  }
+
+  /**
+   * Demande un lien de réinitialisation pour l'adresse déjà saisie dans le formulaire.
+   *
+   * Le retour est volontairement le même que l'adresse existe ou non — c'est ce que répond
+   * le backend, et l'afficher autrement ici annulerait la précaution.
+   */
+  async function demanderReinitialisation() {
+    const cible = email.trim();
+    if (!cible) {
+      setError(t("oubliSaisirEmail"));
+      return;
+    }
+    setError(null);
+    setOubliStatus("sending");
+    try {
+      await fetch(`${API_URL}/api/auth/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: cible }),
+      });
+    } catch {
+      // Même en cas d'échec réseau on affiche le message générique : réessayer est la
+      // seule action utile, et un message d'erreur distinct renseignerait un attaquant.
+    }
+    setOubliStatus("sent");
   }
 
   async function resendConfirmation(targetEmail: string) {
@@ -240,6 +269,24 @@ export default function ConnexionPage() {
             placeholder={mode === "register" ? t("motDePassePlaceholderRegister") : "••••••••"}
           />
         </div>
+
+        {mode === "login" && (
+          oubliStatus === "sent" ? (
+            <p className="text-xs px-3 py-2.5 rounded-lg" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
+              {t("oubliEnvoye")}
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={demanderReinitialisation}
+              disabled={oubliStatus === "sending"}
+              className="self-start text-xs underline focus-ring rounded cursor-pointer disabled:opacity-50"
+              style={{ color: "var(--text-muted)" }}
+            >
+              {oubliStatus === "sending" ? t("envoi") : t("motDePasseOublie")}
+            </button>
+          )
+        )}
 
         {error && (
           <p className="text-xs px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>

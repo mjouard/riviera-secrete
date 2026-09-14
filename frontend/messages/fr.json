@@ -265,7 +265,10 @@
     "erreurCreationCompte": "Impossible de créer le compte.",
     "erreurIdentifiants": "Email ou mot de passe incorrect.",
     "erreurGenerique": "Une erreur est survenue. Réessaie.",
-    "mentionRgpd": "En créant un compte, tu nous confies ton adresse e-mail et ton prénom, utilisés uniquement pour retrouver tes favoris et tes itinéraires. Aucune publicité, aucune revente. Tu peux demander leur suppression à tout moment —"
+    "mentionRgpd": "En créant un compte, tu nous confies ton adresse e-mail et ton prénom, utilisés uniquement pour retrouver tes favoris et tes itinéraires. Aucune publicité, aucune revente. Tu peux demander leur suppression à tout moment —",
+    "motDePasseOublie": "Mot de passe oublié ?",
+    "oubliSaisirEmail": "Saisis d'abord ton adresse e-mail ci-dessus.",
+    "oubliEnvoye": "Si un compte existe avec cette adresse, un lien de réinitialisation vient d'être envoyé. Il expire dans 1 h."
   },
   "confirmerEmail": {
     "metaTitre": "Confirmation de l'adresse email",
@@ -395,5 +398,22 @@
     "confidentialiteDescription": "Quelles données Riviera Secrète collecte, pourquoi, et comment exercer vos droits.",
     "accueil": "Accueil",
     "filAriane": "Fil d'Ariane"
+  },
+  "reinitialiser": {
+    "titre": "Nouveau mot de passe",
+    "intro": "Choisis un nouveau mot de passe pour ton compte. Il doit faire au moins 8 caractères.",
+    "nouveauMotDePasse": "Nouveau mot de passe",
+    "confirmer": "Confirme le mot de passe",
+    "valider": "Enregistrer le nouveau mot de passe",
+    "tropCourt": "Le mot de passe doit faire au moins 8 caractères.",
+    "nonIdentiques": "Les deux mots de passe ne sont pas identiques.",
+    "lienInvalide": "Lien de réinitialisation invalide ou incomplet.",
+    "echec": "La réinitialisation a échoué. Le lien a peut-être expiré.",
+    "reseau": "Impossible de joindre le serveur. Réessaie dans un instant.",
+    "succesTitre": "Mot de passe mis à jour",
+    "succesTexte": "Tu peux maintenant te connecter avec ton nouveau mot de passe. Redirection en cours…",
+    "retourConnexion": "Retour à la connexion",
+    "lienExpire": "Ce lien a expiré. Redemande une réinitialisation depuis la page de connexion.",
+    "tropLong": "Le mot de passe ne doit pas dépasser 72 octets."
   }
 }

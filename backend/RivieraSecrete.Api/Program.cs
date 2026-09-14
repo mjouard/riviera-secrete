@@ -286,6 +286,69 @@ app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest re
     return Results.Ok(new { Status = "sent" });
 }).RequireRateLimiting("auth-email");
 
+app.MapPost("/api/auth/forgot-password", async (ForgotPasswordRequest req, AppDbContext db, IConfiguration config) =>
+{
+    var email = (req.Email ?? "").Trim().ToLowerInvariant();
+    var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+    // Réponse générique dans tous les cas, comme pour resend-confirmation : distinguer
+    // « adresse inconnue » de « email envoyé » transformerait cet endpoint en oracle
+    // d'existence de comptes, que le 409 de register expose déjà bien assez.
+    if (user is not null)
+    {
+        // Un compte créé uniquement via Google n'a pas de mot de passe à réinitialiser.
+        // On n'envoie rien plutôt que de proposer un lien qui ne mènerait nulle part.
+        if (user.PasswordHash is not null)
+        {
+            user.PasswordResetToken = GenerateToken();
+            // 1h et non 24h comme la confirmation : un lien de réinitialisation est une clé
+            // d'accès au compte, il n'a pas à survivre dans une boîte mail.
+            user.PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1);
+            await db.SaveChangesAsync();
+            await EmailService.SendPasswordResetEmailAsync(user.Email, user.Nom, user.PasswordResetToken!, config);
+        }
+    }
+
+    return Results.Ok(new { Status = "sent" });
+}).RequireRateLimiting("auth-email");
+
+app.MapPost("/api/auth/reset-password", async (ResetPasswordRequest req, AppDbContext db, IConfiguration config) =>
+{
+    // Même garde que confirm-email : un token null se traduirait par un
+    // `WHERE "PasswordResetToken" IS NULL`, qui matche tous les comptes sans demande en cours.
+    // Un `Code` machine accompagne chaque erreur : le frontend est bilingue, le backend ne
+    // l'est pas, et afficher tel quel un message français sur /en est exactement le défaut
+    // qu'on vient de corriger partout ailleurs.
+    if (string.IsNullOrWhiteSpace(req.Token))
+        return Results.BadRequest(new { Error = "Lien de réinitialisation invalide.", Code = "token_invalide" });
+
+    var password = req.Password ?? "";
+    if (password.Length < 8)
+        return Results.BadRequest(new { Error = "Le mot de passe doit faire au moins 8 caractères.", Code = "trop_court" });
+    if (Encoding.UTF8.GetByteCount(password) > 72)
+        return Results.BadRequest(new { Error = "Le mot de passe ne doit pas dépasser 72 octets.", Code = "trop_long" });
+
+    var user = await db.Users.FirstOrDefaultAsync(u => u.PasswordResetToken == req.Token);
+    if (user is null)
+        return Results.BadRequest(new { Error = "Lien de réinitialisation invalide.", Code = "token_invalide" });
+    if (user.PasswordResetTokenExpiry < DateTime.UtcNow)
+        return Results.BadRequest(new { Error = "Ce lien a expiré. Redemande une réinitialisation.", Code = "token_expire" });
+
+    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+    user.PasswordResetToken = null;
+    user.PasswordResetTokenExpiry = null;
+    // Recevoir le mail prouve la possession de l'adresse : un compte resté non confirmé
+    // devient confirmé ici, sinon on l'enverrait réinitialiser puis buter sur un 403.
+    user.EmailConfirmed = true;
+    user.EmailConfirmationToken = null;
+    user.EmailConfirmationTokenExpiry = null;
+    await db.SaveChangesAsync();
+
+    // Pas de JWT en retour : on renvoie vers la page de connexion, pour que le nouveau mot
+    // de passe soit saisi une fois de plus et que l'utilisateur reparte d'un état connu.
+    return Results.Ok(new { Status = "reset" });
+}).RequireRateLimiting("auth");
+
 // ── Protected: Favoris ────────────────────────────────────────────────────────
 
 app.MapGet("/api/favorites", async (ClaimsPrincipal principal, AppDbContext db) =>
@@ -514,6 +577,8 @@ record RegisterRequest(string Email, string Password, string Nom);
 record LoginRequest(string Email, string Password);
 record ConfirmEmailRequest(string Token);
 record ResendConfirmationRequest(string Email);
+record ForgotPasswordRequest(string Email);
+record ResetPasswordRequest(string Token, string Password);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);
 
 // ── Constantes & helpers de type ──────────────────────────────────────────────
