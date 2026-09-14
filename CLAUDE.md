@@ -103,7 +103,15 @@ for the full entity/endpoint reference):
   `lieuSlug`; its pills and the "à réserver" booking cards reference an activité by
   `{ lieuSlug, activiteId }` — never by copying its price/duration/url/image. Only a
   display-layer override lives on the itinéraire side (pill `label`, booking card
-  `nomLabel`/`lieuLabel`, optional `extraSpans`/custom `linkText`). At render time
+  `nomLabel`/`lieuLabel`, custom `linkText`). **`booking[].extraSpans`/`extraSpansEn` are
+  dead data since 2026-09-14** — they were the one place that did copy a fact, and it had
+  drifted: the Chapelle du Rosaire card read "Mardi & jeudi" while
+  `/lieux/saint-paul-de-vence` read "Fermée le dimanche et le lundi…". Nothing renders them
+  any more (the booking card derives `horaires`/`fermeJours` from the referenced activité,
+  like the lieu page does, and shows the `FermeAujourdhui` badge), they're emptied in the
+  JSON and `@deprecated` in `BookingRef` — but the prod DB row still holds the old value,
+  seeding being a no-op past the first run. Drop them properly (entity + EF migration)
+  whenever the `ogImage` cleanup above happens. At render time
   (`frontend/src/app/itineraires/[slug]/page.tsx`) looks up the referenced activité in a
   `lieuBySlug` map (built from the already-fetched full lieux list) and pulls the real
   facts from there; the itinerary map's route points (lat/lng per stop) are likewise
@@ -261,8 +269,16 @@ project with HTTP/auth concerns). Deployed as a container (`backend/Dockerfile`,
 `.claude/memory/project_version_anglaise.md`)**: every page route lives under
 `frontend/src/app/[locale]/` (French = default locale, unprefixed — `/`, `/villes`,
 `/lieux/[slug]`… — English prefixed `/en/…`, identical slugs in both languages, no
-translated slugs). `frontend/src/app/api/`, `sitemap.ts`, and `favicon.ico` stay *outside*
-`[locale]` (not localized). `frontend/src/proxy.ts` (not `middleware.ts` — Next.js 16
+translated slugs). `frontend/src/app/api/`, `sitemap.ts`, `robots.ts`, `manifest.ts`,
+`manifest.en.webmanifest/route.ts`, and `favicon.ico` stay *outside* `[locale]` (not
+localized — they live at the domain root). **`[locale]/layout.tsx` exports
+`dynamicParams = false`, and it must stay**: the proxy matcher skips any path containing a
+dot (needed for `/sitemap.xml`, `/assets/…`, `/sw.js`), so a nonexistent URL like
+`/foo.txt` reaches `/[locale]` with `locale = "foo.txt"`; that page being statically
+prerendered for fr/en, Next tried an on-demand render, next-intl read headers for want of a
+valid `setRequestLocale`, and the response was **500 instead of 404** (fixed 2026-09-14 —
+`/robots.txt` was one of the casualties, and a 5xx there makes Google suspend crawling).
+`frontend/src/proxy.ts` (not `middleware.ts` — Next.js 16
 renamed that file convention to `proxy`) runs `next-intl`'s locale middleware.
 `src/i18n/{routing,navigation,request}.ts` hold the next-intl config; every internal
 `<Link>`/`useRouter` in the app imports from `@/i18n/navigation` instead of
@@ -352,7 +368,17 @@ visitor picks Google vs. email/password.
   components (`HomeMap.tsx`, `BuilderMap.tsx`, `LeafletLieuMap.tsx`, `LeafletItinMap.tsx`)
   have this guard as of 2026-09-12 (the last two were missing it — found and fixed during a
   full code audit, having never actually thrown in production since Strict Mode's
-  double-invoke only fires in dev).
+  double-invoke only fires in dev). **On touch screens (`@media (pointer: coarse)`), all
+  four maps disable one-finger dragging** (`limiterAuPanDeuxDoigts` in `map-tiles.ts`) and
+  `globals.css` hands vertical scrolling back to the browser (`touch-action: pan-y
+  !important` on `.leaflet-container` *and* its panes) — Leaflet's own `touch-action: none`
+  was swallowing vertical `touchmove` started on the map, so the page simply didn't scroll
+  and, the homepage map being ~60% of a phone viewport, visitors thought the page ended
+  there (found/fixed 2026-09-14). Panning stays possible with two fingers, via `touchZoom`,
+  which is what the on-map hint says (`common.carteDeuxDoigts`, passed as
+  `indicationTactile` by each component). **The JS check and the CSS media query must stay
+  in sync** — drop one and you either kill dragging without restoring scroll, or the
+  reverse.
 - **Homepage** (`src/app/page.tsx`) renders: a hero (`HomeHero.tsx` — ambient auto-crossfade
   of 8 images, 5s interval, no controls; distinct from `HeroCarousel.tsx` which is
   manual/click-driven and used on lieu/itinéraire pages), itinéraire cards (thumbnail from
@@ -369,6 +395,23 @@ visitor picks Google vs. email/password.
 - **Images** live in `frontend/public/assets/images/` — the only copy now (used to be
   duplicated from a static site's own `assets/images/`, no longer the case since that site
   was removed). A new lieu photo goes straight here, no second location to keep in sync.
+- **`HomeLieuxGrid` is a vertical grid at every viewport** (2 cols < 768px, 3, then 4) since
+  2026-09-14. It used to be a horizontal carousel under 640px: 43 cards over a 9 438px
+  `scrollWidth`, 1.8 card visible, ~25 swipes end to end, no position indicator. The
+  carousel shape (`.hscroll`, `snap-x`, `w-[62%]`) is still right for a secondary row (a
+  lieu's activités, booking cards) — not for the main catalogue. Its search box indexes
+  `nom`/`commune`/`description`/badge labels **and `activites[].nom`+`nomEn`** (both spellings
+  in either locale), and a matching card names the activité that made it match.
+- **Focus & metadata conventions** (2026-09-14): every form field carries the shared
+  `.focus-ring` class (`globals.css`, `outline: 2px solid var(--azure)` on `:focus-visible`)
+  — **never `outline-none` with a `focus:border-*` replacement**, which was the old pattern
+  and silently did nothing, since every one of those fields also sets `borderColor` via an
+  inline style that wins over the Tailwind class. Page metadata builds its `alternates` with
+  `alternatesPage(SITE_URL, locale, chemin)` (`src/lib/utils.ts`), which emits hreflang
+  **and** `canonical` together so the two can't drift — the canonical is what collapses the
+  `?itin=` duplicates on lieu pages. The PWA manifest is per-locale
+  (`src/lib/manifest.ts`'s `construireManifest`, labels from `messages/*.json`'s `pwa`
+  namespace); `[locale]/layout.tsx` points each page at the right file.
 - No `frontend/vercel.json` — relies on Vercel's Next.js framework auto-detection.
 
 ## Custom skills
