@@ -368,12 +368,20 @@ entrée. L'obtenir suppose `pushState`, qui entre en conflit avec l'historique q
 routeur de Next — le spec demandait lui-même `router.replace`, les deux exigences se
 contredisent. À trancher si le besoin se confirme à l'usage.
 
-### Lot 3 — Données
+### Lot 3 — Données — **partiellement fait le 2026-09-14**
 
 - [ ] **Tags des 43 lieux nettoyés** (`09` § 1.1) — passe manuelle sur les 43 fiches, `tags: TagLieu[]` propre au lieu, jamais dérivé de la commune. Vocabulaire figé : `village | sentier | crique | jardin | monument | panorama | table`. Demi-journée de travail, meilleur rapport effort/crédibilité. Tant que ce n'est pas fait, les filtres d'Explorer mentent (→ DC-01).
 - [ ] **`commune_slug` sur les activités** (`09` § 1.2) — nouveau champ ; affichage : commune en sous-titre, « à proximité de X » seulement si `lieu_slug` renseigné et `sur_place === false`. Corrige « Sortie kayak de mer · La Rue Obscure » — on ne fait pas de kayak dans une rue couverte du XIII siècle (→ DC-02).
 - [ ] **`lien_type` et `partenaire`** (`09` § 1.3) — deux libellés seulement : `reservation` → « Réserver », `officiel` → « Site officiel ». Un lien n'est `reservation` que s'il mène à la page de réservation de cette activité précise. Liens partenaires : `rel="sponsored nofollow"` + mention mono 12 `--rs-brume` « lien partenaire ». Corrige DC-03.
-- [ ] **Formateur de durée unique** (`08-ecran-itineraire.md` § 4) — < 60 min → `45 min` arrondi à 5 ; ≥ 60 min → `1 h 45` arrondi au quart d'heure. Jamais de décimale, jamais de `~`. La chaîne `~1.8 h` ne doit plus pouvoir exister (→ DC-05).
+- [x] **Formateur de durée unique** — **fait le 2026-09-14** (`formatDuree` dans
+      `itineraire-logic.ts`, `formatTransitDesc` y délègue). L'arrondi précède le choix de
+      l'unité, sans quoi 58 min sortaient en « 60 min » au lieu de « 1 h ». Les horaires
+      d'ouverture (« 10h–18h ») ne sont pas concernés : texte éditorial, pas une durée calculée.
+      **Les trois autres items de ce lot sont en attente** — ils demandent un nouveau champ
+      (JSON + entité + migration EF), des décisions éditoriales sur 43 lieux et 208 activités,
+      et une écriture dans la base de prod via `RivieraSecrete.Tools` (donc le mot de passe
+      PostgreSQL, toujours pas tourné). Décision du 2026-09-14 : les faire au moment où Explorer
+      (Lot 4b) les consomme réellement, plutôt que d'inventer un schéma sans lecteur.
 - [ ] **Horaires calculés sur la date de visite** (`09` § 3) — `estOuvert(horaires, dateVisite, heureVisite)` ; `dateVisite` vient toujours du paramètre `date` de l'écran Composer, jamais de `new Date()`. Les alertes « Fermé aujourd'hui » deviennent vraies pour un voyage dans le futur.
 
 *Recette :* filtrer « Criques » ne remonte aucun village ; aucune carte d'activité n'affiche un lieu parent comme adresse ; la chaîne `1.8 h` n'existe plus nulle part.
@@ -387,12 +395,35 @@ Dans cet ordre — chacun indépendant. La fiche lieu en premier : c'est la page
 La composition actuelle est bonne (galerie → identité → infos pratiques → carte → récit → conseils → activités → rebonds). Elle change de peau et gagne trois blocs.
 
 - [ ] **Barre d'action fixe mobile** (`02-composants.md` § 7) — ancrée en bas : bouton primaire « Y aller » 52 px `flex-grow` + icône épingle 19 px + 3 carrés 52 × 52 (favori/partage/ajouter). `padding-bottom: max(20px, env(safe-area-inset-bottom))`. Le contenu réserve 112 px en bas. Corrige MO-05 (actions disparaissent au défilement sur mobile) et MO-01 (liens Maps/Waze/Plans à 16 px de haut).
-- [ ] **Trois rebonds sous la fiche** (`06` § 2.6) — ① « Cet itinéraire passe par ici » : carte de liste avec sur-titre `6 ÉTAPES · 2 JOURS` en aube, étape et heure en mono ; ② « À moins de 20 minutes » : 3 lieux en lignes 44 px avec distance estimée en aube ; ③ ligne de confiance mono 12 `VÉRIFIÉ SUR PLACE EN AOÛT 2026 · PHOTO [CRÉDIT]`. Corrige PA-03 (la fiche qui reçoit 100 % du trafic organique offre le moins de suites).
-- [ ] **Favori optimiste** — bascule immédiate, retour arrière en cas d'échec réseau ; `aria-pressed` ; déconnecté → feuille contextuelle « Connecte-toi pour épingler Èze » avec bouton primaire de connexion (pas redirection sèche → PR-07) ; appliquer le favori automatiquement au retour.
-- [ ] **« Ajouter à un itinéraire » sans quitter la page** — ajoute le slug à `lieux=` de `/composer` de façon cumulative ; toast « Ajouté — 3 lieux » avec action « Composer ». Corrige PR-02 (navigue vers `/creer-itineraire?add=<slug>` et remplace la sélection précédente).
+- [~] **Trois rebonds sous la fiche** (`06` § 2.6) — **①  et ② faits le 2026-09-14**, déployés et
+      vérifiés en prod (FR + EN). ① lit `api.itineraires.list()` et affiche le rang de l'étape
+      et son heure ; ② réutilise la conversion distance → temps du générateur (35 km/h + 10 min),
+      pour que les deux ne racontent pas deux histoires du même trajet.
+      **③ la ligne de confiance n'est pas faite et ne peut pas l'être en l'état** : elle affiche
+      « VÉRIFIÉ SUR PLACE EN AOÛT 2026 », affirmation que rien dans les données ne soutient —
+      le champ `verifieSurPlace` n'existe pas (voir `docs/design-refonte-2026-09-14.md` § 5, qui
+      le pose bien comme un champ à créer). L'écrire en dur serait inventer une vérification.
+      À faire quand le champ existera, avec les vraies dates.
+- [x] **Favori optimiste** — **fait le 2026-09-14** : bascule immédiate, retour arrière si
+      l'appel échoue, `aria-pressed`/`aria-busy`. Le bouton reste désactivé pendant l'appel —
+      l'état visible a déjà changé, et deux réponses revenant dans le désordre laisseraient le
+      cœur désaccordé de la base. **La feuille contextuelle « Connecte-toi pour épingler Èze »
+      (PR-07) reste à faire** : c'est toujours une redirection sèche vers `/connexion`.
+- [~] **« Ajouter à un itinéraire »** — **le fond est corrigé au Lot 2** : l'ajout est cumulatif
+      (relais `sessionStorage` + `?lieux=`), le lieu précédent n'est plus écrasé. **Reste la
+      forme** : ça navigue encore vers le créateur au lieu d'ajouter sur place avec un toast.
 - [ ] **Encadré « Le bon moment »** (`06` § 2.3) — reprend les « Conseils pratiques » existants en forme tabulaire scannable (Y aller / Saison / Stationner). Surface `--rs-nuit-haute`, bordure `--rs-trait`, icône horloge aube.
 - [ ] **Composition desktop** (`06` § 3) — deux colonnes ≥ 1024 px : gauche (62 %) galerie/identité/récit, droite (38 %, collante) carte/actions/rebonds. Largeur de lecture du récit : 66 caractères max. Fil d'Ariane : supprimer la redondance quand le nom du lieu commence par le nom de la commune.
-- [ ] **JSON-LD `TouristAttraction`** (`06` § 4) — nom, description, `geo`, `address`, `isAccessibleForFree`, `openingHours` quand la donnée existe. Gain SEO direct sur 43 pages.
+- [x] **JSON-LD `TouristAttraction`** — **fait le 2026-09-14** sur les 43 fiches, qui n'en
+      portaient aucun. `isAccessibleForFree` n'est vrai que sans aucune activité payante : un
+      accès libre avec une visite payante n'est pas gratuit au sens de Google. `openingHours`
+      non déclaré — les horaires sont du texte libre saisonnier (« 9h–16h30 en hiver »), pas
+      convertible sans perte en `OpeningHoursSpecification`.
+- [ ] **Reste aussi** : la refonte visuelle de la page (tokens/composants du Lot 1 posés mais
+      pas encore appliqués ici — la fiche utilise toujours l'ancienne palette), et les cibles
+      tactiles du chrome partagé mesurées sur cette page (burger 40 px, flèches du carrousel
+      36 px, pastilles 7-9 px, zoom Leaflet 30 px, pied de page 37 px) qui relèvent des lots
+      4b et 5.
 
 #### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer`
 
