@@ -1161,16 +1161,12 @@
         "lieuLabel": "Vence",
         "nomLabel": "Chapelle du Rosaire (Matisse)",
         "linkText": "Vérifier les horaires →",
-        "extraSpans": [
-          "Mardi &amp; jeudi"
-        ],
+        "extraSpans": [],
         "lieuSlug": "saint-paul-de-vence",
         "activiteId": "chapelle-du-rosaire-matisse",
         "lieuLabelEn": "Vence",
         "nomLabelEn": "Chapelle du Rosaire (Matisse)",
-        "extraSpansEn": [
-          "Mardi &amp; jeudi"
-        ]
+        "extraSpansEn": []
       },
       {
         "lieuLabel": "Tourrettes-sur-Loup",

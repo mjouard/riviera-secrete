@@ -7,6 +7,7 @@ import { imgUrl, buildMapLinks, buildGoogleMapsRouteUrl, loc } from "@/lib/utils
 import { dureeKeyDepuisBadge } from "@/lib/itineraire-logic";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
+import FermeAujourdhui from "@/components/FermeAujourdhui";
 
 function parseHeroImgTag(tag: string): { srcs: string[]; alt: string } {
   const srcMatch = tag.match(/src="([^"]+)"/);
@@ -322,16 +323,26 @@ export default async function ItinerairePage({
                       {loc(locale, b.lieuLabelEn, b.lieuLabel)}
                     </p>
                     <p className="font-semibold mb-1">{loc(locale, b.nomLabelEn, b.nomLabel)}</p>
+                    {/* Durée, prix et horaires viennent de l'activité référencée, jamais
+                        d'une copie figée côté itinéraire : `booking[].extraSpans` affichait
+                        encore « Mardi & jeudi » pour la Chapelle du Rosaire quand la fiche
+                        lieu dit « Fermée le dimanche et le lundi… ». Les deux étaient
+                        incompatibles et rien ne permettait de trancher. */}
                     {activite && (
-                      <div
-                        className="flex flex-wrap gap-x-3 gap-y-0.5 text-sm mb-3"
-                        style={{ color: "var(--text-muted)" }}
-                      >
-                        <span>⏱ {loc(locale, activite.dureeEn, activite.duree)}</span>
-                        <span>💶 {loc(locale, activite.prixEn, activite.prix)}</span>
-                        {b.extraSpans.map((s, j) => (
-                          <span key={j}>{locale === "en" && b.extraSpansEn?.[j] ? b.extraSpansEn[j] : s}</span>
-                        ))}
+                      <div className="mb-3">
+                        <div
+                          className="flex flex-wrap gap-x-3 gap-y-0.5 text-sm"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          <span>⏱ {loc(locale, activite.dureeEn, activite.duree)}</span>
+                          <span>💶 {loc(locale, activite.prixEn, activite.prix)}</span>
+                        </div>
+                        {activite.horaires && (
+                          <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                            🕒 {loc(locale, activite.horairesEn, activite.horaires)}
+                          </p>
+                        )}
+                        <FermeAujourdhui fermeJours={activite.fermeJours} />
                       </div>
                     )}
                     <a

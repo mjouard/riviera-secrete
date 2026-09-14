@@ -116,11 +116,20 @@ export interface BookingRef {
   lieuLabel: string;
   nomLabel: string;
   linkText: string;
+  /**
+   * @deprecated Snapshot figé, plus jamais affiché : il contredisait les horaires réels de
+   * l'activité référencée (« Mardi & jeudi » pour la Chapelle du Rosaire, là où la fiche
+   * lieu annonce « Fermée le dimanche et le lundi… »). La carte « À réserver » dérive
+   * désormais son affichage de `Activite.horaires`/`fermeJours`. Le champ reste déclaré
+   * parce que l'API le sert encore ; vidé dans data/itineraires.json, à supprimer côté
+   * entité + migration EF quand l'occasion se présentera.
+   */
   extraSpans: string[];
   lieuSlug: string;
   activiteId: string;
   lieuLabelEn?: string | null;
   nomLabelEn?: string | null;
+  /** @deprecated Voir `extraSpans`. */
   extraSpansEn?: string[] | null;
 }
 
