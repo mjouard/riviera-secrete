@@ -425,21 +425,54 @@ La composition actuelle est bonne (galerie → identité → infos pratiques →
       36 px, pastilles 7-9 px, zoom Leaflet 30 px, pied de page 37 px) qui relèvent des lots
       4b et 5.
 
-#### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer`
+#### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer` — **faite le 2026-09-14**
 
-Remplace la section `#lieux` + la carte de l'accueil + `/activites`. Un seul écran, plein viewport, filtres uniques en tête, carte et liste synchronisées.
+Déployée et vérifiée en prod (FR + EN). Ne remplace pas encore `#lieux`/la carte de l'accueil
+ni `/activites` — voir plus bas, c'est du Lot 4e/du hors-périmètre, pas un oubli.
 
-- [ ] **Barre de filtres unique** pilotant carte ET liste — chips de type, chips déroulants durée/niveau, chip bascule « Ouvert aujourd'hui », « Tout effacer » mono 12 aube. Hors zone défilante (pas sticky — elle est fixe, la liste défile). Chaque changement réécrit l'URL. Corrige AI-04/NF-01 (deux jeux de filtres indépendants).
-- [ ] **Corps en grille `1fr 468px`** — carte à gauche (pleine hauteur, pas de défilement propre), liste à droite (zone défilante 24 px, `gap: 10`, cartes compactes).
-- [ ] **Carte et liste synchronisées** — survol carte → marqueur aube + étiquette ; survol marqueur → carte bordurée + scrollée ; clic marqueur → `/lieux/[slug]` ; déplacement/zoom → recalcul liste + `bbox` dans l'URL (débounce 400 ms) ; changement de filtre → `fitBounds`.
-- [ ] **Amas obligatoires** (`leaflet.markercluster`) — pastille 32–36 px, fond `--rs-nuit-3`, bordure `--rs-zone-3`, chiffre 14/700. 13 paires de marqueurs se superposent autour de Nice/Monaco au zoom par défaut (→ NF-03).
-- [ ] **Marqueurs** — 15 px (13 sur mobile), couleur = zone (`--rs-zone-{1-5}`), bordure 2 px `--rs-nuit`. Marqueur sélectionné : aube, étiquette rattachée par un trait 1 px de 16 px, fond aube, texte nuit 15/700.
-- [ ] **Légende d'altitude** — cartouche 40 px ancré en haut à gauche (20 px), mono `ALTITUDE`, barre dégradé 92 × 8 (`--rs-zone-1` → `--rs-zone-5`), mono `0 — 800 m`.
-- [ ] **Contrôles de zoom** — 44 × 44 (actuellement 30 × 30), fond `--rs-nuit`, bordure `--rs-trait`, rayon 3, en bas à gauche. Bouton « Recentrer sur ma position » en bas à droite, secondaire 44. Corrige MO-01.
-- [ ] **Pagination** — chargement progressif par 24 au défilement + bouton secondaire « Voir 24 lieux de plus ».
-- [ ] **Mobile** — vue liste par défaut avec filtres collants (`position: sticky; top: 0`, corrige NF-04) ; bouton flottant primaire 52 « Voir sur la carte » sur dégradé 96 px ; tap sur un marqueur → feuille basse (hauteur ≈ 180) avec bouton « Voir la fiche ».
-- [ ] **États** — squelettes sans animation de brillance pendant le chargement ; état vide avec bouton secondaire « Tout effacer » ; bouton flottant « Chercher dans cette zone » si bbox sans résultat.
-- [ ] **`/activites` redirige en 301** vers `/explorer?type=activites` — les 208 activités vivent dans la fiche lieu (« À faire sur place ») et dans Explorer, pas dans une page-catalogue de 57 000 px (→ NF-04).
+- [x] **Barre de filtres unique** pilotant carte ET liste — zone/badge/saison/durée/niveau/
+      recherche, réutilisant tel quel le helper `url-filtres.ts` du Lot 2. **Chips de type**
+      (village/sentier/crique…) **non faites** : `tags` n'existe pas (Lot 3). Zone en lieu et
+      place, seule catégorie avec de vraies données. Corrige AI-04/NF-01.
+- [x] **Corps en grille `1fr 468px`** — fait, desktop uniquement (`lg:grid-cols-[1fr_468px]`,
+      empilé en dessous).
+- [x] **Carte et liste synchronisées** — survol liste → marqueur aube ; survol marqueur → carte
+      liste surlignée ; clic marqueur → `/lieux/[slug]` direct. **`bbox` dans l'URL au pan/zoom
+      non fait** (décision délibérée : 43 lieux tiennent déjà à l'écran, carte et liste
+      partagent déjà un seul filtre — c'est justement ce que ce lot corrige — complexité sans
+      gain net à ce volume). Changement de filtre → `fitBounds`, fait.
+- [x] **Amas obligatoires** — `leaflet.markercluster` ajouté, vérifié en direct : les paires
+      superposées autour de Nice/Monaco (→ NF-03) se regroupent bien en amas numérotés.
+      Tokens réels utilisés (`--nuit-haute`/`--calcaire`, pas `--rs-nuit-3`/`--rs-zone-3` qui
+      n'existent pas — écart de spec signalé dans le plan de ce lot).
+- [x] **Marqueurs** — 15 px (13 px tactile), couleur de zone via `mer-colors.ts` (Lot 1,
+      jamais branché avant cette page), bordure 2 px. Survol = aube. **Étiquette + trait de
+      rattachement non faits** — simplifié, jugé secondaire face au reste.
+- [ ] **Légende d'altitude** — pas faite, le champ `altitude` n'existe pas sur `Lieu`.
+- [x] **Contrôles de zoom** — 44×44, bas-gauche, sur les tokens réels. **« Recentrer sur ma
+      position » non fait** — pas demandé par l'utilisateur pour ce lot, à ajouter si besoin.
+- [x] **Pagination** — 24 par 24, bouton "Voir N de plus" (tranche client, pas de re-fetch :
+      43 lieux au total, pas assez pour justifier une pagination serveur).
+- [~] **Mobile** — bascule liste/carte par bouton (pas de bascule automatique par défilement,
+      pas de filtres collants). **Feuille basse au tap sur un marqueur non faite** — simplifiée
+      en bascule pleine page, décision actée avec l'utilisateur pour ce lot.
+      Piège rencontré et corrigé : Leaflet calcule sa taille au montage ; masquée par la
+      bascule (`display:none`), elle restait figée à 0×0 tant qu'on ne togglait pas — corrigé
+      par un `ResizeObserver` qui invalide la taille et recadre au premier affichage réel.
+- [ ] **États** — squelettes de chargement et « chercher dans cette zone » non faits (pas de
+      bbox, voir plus haut, donc pas de zone à chercher). État vide fait (texte + Tout effacer).
+- [ ] **`/activites` → `/explorer?type=activites`** — non fait, décision actée avec
+      l'utilisateur : dupliquerait toute la logique de filtrage déjà écrite dans
+      `ActivitesGrid.tsx` (catégorie/durée/zone/tarif/fermé aujourd'hui). `/activites` continue
+      de fonctionner tel quel en attendant une passe dédiée.
+- [ ] **Chip « Ouvert aujourd'hui »** (pas dans la liste d'origine du ROADMAP, ajoutée à la
+      réflexion) — pas faite : `fermeJours` n'existe qu'au niveau activité, un lieu avec 1
+      activité fermée sur 5 n'a pas de statut défini, bâtir une heuristique aurait inventé une
+      donnée.
+
+**Reste** : tout ce qui précède avec un `[ ]`, plus le raccordement de l'accueil/de la nav vers
+`/explorer` (Lot 4e et Lot 5, indépendants par conception — non touchés ici). Détail du
+périmètre et des raisons dans `.claude/plans/luminous-hugging-sundae.md`.
 
 #### 4c. Composer (`07-ecran-composer.md`) — `/composer` remplace `/creer-itineraire`
 
