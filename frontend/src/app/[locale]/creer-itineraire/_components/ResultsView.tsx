@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { imgUrl, loc } from "@/lib/utils";
-import { encodeJours, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
+import { construirePlanning, encodeJours, formatTime, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
@@ -16,7 +16,7 @@ const SITE_URL =
 const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
 
 export default function ResultsView({
-  currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner,
+  currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner, source,
   editMode, onBack, onToggleEdit, onMoveStop, onRemoveStop, onDragStart, onDragOver, onSaveClick,
 }: {
   currentDays: Lieu[][];
@@ -29,6 +29,8 @@ export default function ResultsView({
   currentNom: string;
   mapStops: Array<{ lat: number; lng: number; nom: string }>;
   savedBanner: boolean;
+  /** Itinéraire éditorial dont on est parti, quand on arrive via "Partir de cet itinéraire". */
+  source: { slug: string; titre: string; titreEn?: string | null } | null;
   editMode: boolean;
   onBack: () => void;
   onToggleEdit: () => void;
@@ -43,6 +45,12 @@ export default function ResultsView({
   const tDuree = useTranslations("dureeLabels");
   const [lienCopie, setLienCopie] = useState(false);
   const nbLieux = currentDays.flat().length;
+  // Journées qui débordent du budget du préréglage. Elles n'existent que parce qu'on refuse
+  // désormais d'écarter une étape venant d'un itinéraire éditorial : le dire franchement vaut
+  // mieux que de laisser croire que tout rentre dans la journée.
+  const journeesDenses = construirePlanning(currentDays, dureeKey).journees
+    .map((j, i) => ({ ...j, numero: i + 1 }))
+    .filter((j) => j.finTardive);
 
   /**
    * Construit un lien qui rouvre l'itinéraire tel quel — arrangement par jour compris —
@@ -119,6 +127,28 @@ export default function ResultsView({
       {savedBanner && (
         <div className="no-print mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
           {t("itineraireSauvegarde")} <Link href="/mes-itineraires" className="underline">{t("voirMesItineraires")}</Link>
+        </div>
+      )}
+
+      {source && (
+        <div className="no-print mb-6 rounded-xl p-4 text-sm flex flex-wrap items-center gap-x-2 gap-y-1" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
+          <span>{t("baseSur")}</span>
+          <Link href={`/itineraires/${source.slug}`} className="underline font-semibold" style={{ color: "var(--terracotta)" }}>
+            {loc(locale, source.titreEn, source.titre)}
+          </Link>
+          <span>— {t("baseSurAide")}</span>
+        </div>
+      )}
+
+      {journeesDenses.length > 0 && (
+        <div className="no-print mb-6 rounded-xl p-4 text-sm" style={{ background: "rgba(232,163,61,0.1)", color: "var(--terracotta)" }}>
+          {journeesDenses.map((j) => (
+            <p key={j.numero}>
+              {currentDays.length > 1
+                ? t("journeeDenseJour", { n: j.numero, fin: formatTime(j.finMinutes) })
+                : t("journeeDense", { fin: formatTime(j.finMinutes) })}
+            </p>
+          ))}
         </div>
       )}
 

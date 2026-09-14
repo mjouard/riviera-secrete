@@ -193,7 +193,11 @@
     "connexionExplication": "Saving an itinerary needs an account — what you just put together is kept.",
     "partagerLien": "🔗 Share link",
     "lienCopie": "Link copied ✓",
-    "partagerTitre": "Copy a link that reopens this itinerary as-is, no account needed"
+    "partagerTitre": "Copy a link that reopens this itinerary as-is, no account needed",
+    "baseSur": "Based on:",
+    "baseSurAide": "every stop from the itinerary is kept — rearrange them as you like.",
+    "journeeDense": "Packed day: estimated finish around {fin}.",
+    "journeeDenseJour": "Day {n} — packed day: estimated finish around {fin}."
   },
   "mesItineraires": {
     "breadcrumb": "My itineraries",

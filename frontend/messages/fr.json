@@ -193,7 +193,11 @@
     "connexionExplication": "Sauvegarder un itinéraire demande un compte — on garde ce que tu viens de composer.",
     "partagerLien": "🔗 Partager le lien",
     "lienCopie": "Lien copié ✓",
-    "partagerTitre": "Copier un lien qui rouvre cet itinéraire tel quel, sans compte"
+    "partagerTitre": "Copier un lien qui rouvre cet itinéraire tel quel, sans compte",
+    "baseSur": "Basé sur :",
+    "baseSurAide": "toutes les étapes de l'itinéraire sont conservées, à toi de les réarranger.",
+    "journeeDense": "Journée dense : fin estimée vers {fin}.",
+    "journeeDenseJour": "Jour {n} — journée dense : fin estimée vers {fin}."
   },
   "mesItineraires": {
     "breadcrumb": "Mes itinéraires",

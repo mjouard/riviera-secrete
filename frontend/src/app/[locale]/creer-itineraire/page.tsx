@@ -54,6 +54,8 @@ export default function CreerItinerairePage() {
   /** Lecture seule à l'ouverture d'un itinéraire déjà sauvegardé (gagne en lisibilité) —
    * true par défaut pour un itinéraire fraîchement généré, pas encore sauvegardé. */
   const [editMode, setEditMode] = useState(true);
+  /** Itinéraire éditorial dont on est parti (`?source=`), pour l'annoncer et y renvoyer. */
+  const [source, setSource] = useState<{ slug: string; titre: string; titreEn?: string | null } | null>(null);
 
   // Drag-and-drop
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
@@ -102,6 +104,26 @@ export default function CreerItinerairePage() {
         if (valides.length > 0) {
           setSelectedSlugs(new Set(valides));
           setExpandedRegions(new Set(valides.map((s) => map.get(s)!.regionSlug)));
+
+          // `?source=` : on vient d'un itinéraire éditorial via "Partir de cet itinéraire".
+          // On génère tout de suite et on garde toutes les étapes — le visiteur a cliqué sur
+          // CET itinéraire-là, le déposer sur le sélecteur avec des cases pré-cochées lui
+          // demandait une étape de plus pour retrouver ce qu'il venait de lire.
+          const sourceSlug = params.get("source");
+          if (sourceSlug) {
+            const dureeSource = duree && duree in DUREE_META ? (duree as DureeKey) : "journee";
+            const candidats = valides.map((s) => map.get(s)!);
+            const { days } = generateItineraire(candidats, dureeSource, { garderTous: true });
+            setCurrentDays(days);
+            setExcluded([]);
+            setEditMode(true);
+            setView("results");
+            // Le nom sert au bandeau « Basé sur : … ». Son absence (slug inconnu, API
+            // indisponible) ne doit pas empêcher l'itinéraire de s'afficher.
+            api.itineraires.bySlug(sourceSlug)
+              .then((it) => it && setSource({ slug: sourceSlug, titre: it.titre, titreEn: it.titreEn }))
+              .catch(() => {});
+          }
         }
       }
     }).catch(() => setLoading(false));
@@ -401,6 +423,7 @@ export default function CreerItinerairePage() {
           currentNom={currentNom}
           mapStops={mapStops}
           savedBanner={savedBanner}
+          source={source}
           onBack={() => { setView("picker"); setSavedBanner(false); }}
           onMoveStop={moveStop}
           onRemoveStop={removeStop}

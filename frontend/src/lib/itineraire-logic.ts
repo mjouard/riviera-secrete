@@ -115,8 +115,26 @@ export function travelMinutes(a: { lat: number; lng: number }, b: { lat: number;
   return Math.round((haversineKm(a, b) / 35) * 60 + 10);
 }
 
-export function generateItineraire(candidates: Lieu[], dureeKey: DureeKey): { days: Lieu[][]; excluded: Lieu[] } {
+/**
+ * `garderTous` : place **toutes** les étapes, même si la journée déborde du budget.
+ *
+ * Réservé au cas « Partir de cet itinéraire », où la sélection vient d'un itinéraire
+ * éditorial. Un tel itinéraire est un choix humain, déjà équilibré à la main : l'algorithme
+ * n'a pas à le censurer. Sans cette option il l'amputait silencieusement — `lerins-esterel`
+ * passait de 3 étapes à 1, `villages-perches` de 5 à 3 — sans jamais dire au visiteur que ce
+ * qu'il obtenait différait de la page qu'il venait de lire.
+ *
+ * Relever le budget ne suffisait pas : même à 600 min, les deux itinéraires « Journée
+ * complète » dépassent (540 et 525 min de visites *avant* les trajets). L'honnêteté est donc
+ * de tout garder et d'annoncer une journée dense, pas de prétendre que ça rentre.
+ */
+export function generateItineraire(
+  candidates: Lieu[],
+  dureeKey: DureeKey,
+  options: { garderTous?: boolean } = {}
+): { days: Lieu[][]; excluded: Lieu[] } {
   if (!candidates.length) return { days: [], excluded: [] };
+  const { garderTous = false } = options;
   const meta = DUREE_META[dureeKey];
   const pool = candidates.slice();
   const days: Lieu[][] = [];
@@ -147,7 +165,7 @@ export function generateItineraire(candidates: Lieu[], dureeKey: DureeKey): { da
         if (travel < bestTravel) { bestTravel = travel; best = cand; }
       }
       const cost = bestTravel + parseVisitMinutes(best!);
-      if (cost > budget && day.length > 0) break;
+      if (!garderTous && cost > budget && day.length > 0) break;
       pool.splice(pool.indexOf(best!), 1);
       day.push(best!);
       budget -= cost;
@@ -156,6 +174,83 @@ export function generateItineraire(candidates: Lieu[], dureeKey: DureeKey): { da
     days.push(day);
   }
   return { days, excluded: pool };
+}
+
+/** Heure de départ de chaque journée dans le programme généré. */
+export const DEBUT_JOURNEE_MINUTES = 9 * 60;
+/** Le déjeuner s'insère au premier arrêt atteint après 12h30. */
+export const SEUIL_DEJEUNER_MINUTES = 12 * 60 + 30;
+/**
+ * Au-delà de cette heure, on prévient que la journée est dense.
+ *
+ * Seuil exprimé à l'horloge, et non en dépassement du budget de `DUREE_META` : ce budget est
+ * un outil de planification interne, alors que le visiteur juge à l'heure de fin. Une journée
+ * qui finit à 17h55 dépasse techniquement le budget de 8 h sans mériter un avertissement ;
+ * une qui finit à 20h05 le mérite, budget ou pas.
+ */
+export const FIN_JOURNEE_RAISONNABLE_MINUTES = 19 * 60;
+
+export type ElementPlanning =
+  | { type: "transit"; minutes: number }
+  | { type: "sleep"; dayNum: number }
+  | { type: "lunch" }
+  | { type: "stop"; lieu: Lieu; heure: string };
+
+export type Planning = {
+  /** Le programme à plat, transits et pauses interposés, prêt à rendre. */
+  elements: ElementPlanning[];
+  /** Par jour : heure de fin réelle, et si elle déborde sur la soirée. */
+  journees: Array<{ finMinutes: number; finTardive: boolean }>;
+};
+
+/**
+ * Déroule le programme jour par jour — horaires, trajets, pause déjeuner — et rapporte au
+ * passage l'heure de fin réelle de chaque journée.
+ *
+ * Calcul unique et partagé : le rendu du programme et l'avertissement « journée dense » de la
+ * vue résultat doivent annoncer exactement les mêmes horaires. Les dédoubler, c'est se
+ * garantir qu'ils divergeront un jour — et le site a déjà eu le cas, avec une carte de
+ * réservation qui affichait des jours d'ouverture contredisant la fiche du même lieu.
+ */
+export function construirePlanning(days: Lieu[][], dureeKey: DureeKey): Planning {
+  const meta = DUREE_META[dureeKey];
+  const elements: ElementPlanning[] = [];
+  const journees: Planning["journees"] = [];
+
+  let timeMinutes = DEBUT_JOURNEE_MINUTES;
+  let prevLieu: Lieu | null = null;
+
+  days.forEach((day, dayIndex) => {
+    let lunchInserted = !meta.lunchBreak;
+    day.forEach((lieu) => {
+      if (prevLieu) {
+        const transit = travelMinutes(prevLieu, lieu);
+        elements.push({ type: "transit", minutes: transit });
+        timeMinutes += transit;
+      }
+      if (!lunchInserted && timeMinutes >= SEUIL_DEJEUNER_MINUTES) {
+        elements.push({ type: "lunch" });
+        timeMinutes += LUNCH_BREAK_MINUTES;
+        lunchInserted = true;
+      }
+      elements.push({ type: "stop", lieu, heure: formatTime(timeMinutes) });
+      timeMinutes += parseVisitMinutes(lieu);
+      prevLieu = lieu;
+    });
+
+    journees.push({
+      finMinutes: timeMinutes,
+      finTardive: timeMinutes > FIN_JOURNEE_RAISONNABLE_MINUTES,
+    });
+
+    if (dayIndex < days.length - 1) {
+      elements.push({ type: "sleep", dayNum: dayIndex + 1 });
+      timeMinutes = DEBUT_JOURNEE_MINUTES;
+      prevLieu = null;
+    }
+  });
+
+  return { elements, journees };
 }
 
 export function formatTime(minutesSinceMidnight: number): string {

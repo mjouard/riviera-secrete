@@ -137,10 +137,13 @@ export default async function ItinerairePage({
             >
               {t("ouvrirGoogleMaps")}
             </a>
-            {/* Pont entre l'itinéraire éditorial et le créateur : on pré-coche les étapes
-                et on devine la durée depuis le badge, le visiteur ajuste ensuite. */}
+            {/* Pont entre l'itinéraire éditorial et le créateur : on pré-coche les étapes et
+                on devine la durée depuis le badge. `source` distingue ce cas d'un simple
+                `?add=` (bouton "Ajouter à un itinéraire" d'une fiche lieu) : le créateur
+                ouvre alors directement le résultat, conserve *toutes* les étapes même si la
+                journée déborde, et affiche de quel itinéraire il part. */}
             <Link
-              href={`/creer-itineraire?add=${routeStops.map((l) => l.slug).join(",")}&duree=${dureeKeyDepuisBadge(itin.badge)}`}
+              href={`/creer-itineraire?add=${routeStops.map((l) => l.slug).join(",")}&duree=${dureeKeyDepuisBadge(itin.badge)}&source=${itin.slug}`}
               title={t("partirDeCetItineraireTitre")}
               className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border font-medium transition-colors hover:bg-white/5"
               style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}

@@ -3,12 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { buildMapLinks, loc } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
-import {
-  travelMinutes, parseVisitMinutes, formatTime, formatTransitDesc,
-  DUREE_META, LUNCH_BREAK_MINUTES, type DureeKey,
-} from "@/lib/itineraire-logic";
-
-const LUNCH_THRESHOLD_MINUTES = 12 * 60 + 30; // 12h30
+import { construirePlanning, formatTransitDesc, type DureeKey } from "@/lib/itineraire-logic";
 
 const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
 
@@ -20,41 +15,7 @@ export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; d
   const tCommon = useTranslations("common");
   if (days.flat().length === 0) return null;
 
-  const hasLunchBreak = DUREE_META[dureeKey].lunchBreak;
-
-  type ProgramItem =
-    | { type: "transit"; minutes: number }
-    | { type: "sleep"; dayNum: number }
-    | { type: "lunch" }
-    | { type: "stop"; lieu: Lieu; heure: string };
-
-  let timeMinutes = 9 * 60;
-  let prevLieu: Lieu | null = null;
-  const items: ProgramItem[] = [];
-
-  days.forEach((day, dayIndex) => {
-    let lunchInserted = !hasLunchBreak;
-    day.forEach((lieu) => {
-      if (prevLieu) {
-        const transit = travelMinutes(prevLieu, lieu);
-        items.push({ type: "transit", minutes: transit });
-        timeMinutes += transit;
-      }
-      if (!lunchInserted && timeMinutes >= LUNCH_THRESHOLD_MINUTES) {
-        items.push({ type: "lunch" });
-        timeMinutes += LUNCH_BREAK_MINUTES;
-        lunchInserted = true;
-      }
-      items.push({ type: "stop", lieu, heure: formatTime(timeMinutes) });
-      timeMinutes += parseVisitMinutes(lieu);
-      prevLieu = lieu;
-    });
-    if (dayIndex < days.length - 1) {
-      items.push({ type: "sleep", dayNum: dayIndex + 1 });
-      timeMinutes = 9 * 60;
-      prevLieu = null;
-    }
-  });
+  const { elements: items } = construirePlanning(days, dureeKey);
 
   return (
     <section className="mb-10">
