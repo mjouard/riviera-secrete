@@ -80,6 +80,47 @@ déployé** : aucun de ces correctifs n'est en ligne.
       **classiques** » et enchaîne Monaco, le Musée Océanographique, Èze et la Villa
       Ephrussi, soit exactement ce que la page promet d'éviter.
 
+### Positionnement & concurrence (état des lieux du 2026-09-14)
+
+Le concurrent dangereux **n'est pas TripAdvisor**. C'est **Region Lovers / Provence Lovers**,
+qui tient déjà la même promesse (« lieux secrets de Côte d'Azur, hors des sentiers battus »),
+avec l'antériorité SEO, l'autorité de domaine et le volume éditorial. « Je référence des
+endroits cachés » n'est donc pas, en soi, un avantage concurrentiel : TripAdvisor a déjà une
+catégorie « attractions méconnues », l'Office de Tourisme a déjà carte + itinéraires +
+personnalisation via le French Riviera Pass.
+
+**Conséquence directe sur la stratégie de contenu : ne pas courir après le volume.** Ajouter
+50 lieux de plus nous met sur le terrain où on perd par construction. L'avantage défendable
+est **la manière d'aider à choisir** — « nous avons regardé 500 endroits, voici les 43 qui
+valent votre temps », puis « voici les 3 que je ferais aujourd'hui, vu où vous êtes et le
+temps dont vous disposez ». D'où la priorité donnée aux filtres situationnels et au moteur
+d'itinéraire plutôt qu'à l'expansion du catalogue.
+
+À garder en tête : **la contrainte réelle est l'acquisition**, pas la fonctionnalité. Aucun
+des raisonnements en « après 1 000 utilisateurs, l'algorithme apprend » ne tient tant qu'il
+n'y a pas de canal d'acquisition. La version anglaise et la newsletter sont, à ce titre, des
+leviers plus décisifs que n'importe quelle feature.
+
+### Ordre de traitement retenu
+
+Les chantiers produit ci-dessus dépendent les uns des autres ; cet ordre évite de construire
+sur du sable.
+
+1. **Sécurité et fiabilité** — rotation du mot de passe Postgres, synchro des coordonnées,
+   déploiements, badges non praticables, revalidation ISR.
+2. **Domaine** — débloque Resend (emails de confirmation réellement délivrés), le formulaire
+   de signalement et les URLs canoniques définitives.
+3. **Juridique** — mentions légales + politique de confidentialité. Prérequis de tout ce qui
+   suit, et à faire *avant* d'ouvrir quoi que ce soit aux contributions.
+4. **Socle comptes** — « mot de passe oublié » et délivrabilité des emails. Sans ça, pas de
+   communauté possible.
+5. **Réparer le moteur d'itinéraire** — il ampute encore 4 itinéraires sur 6. C'est la
+   fonctionnalité différenciante : la mettre en avant avant de la réparer amplifierait
+   l'échec.
+6. **Page `/activites` + filtres situationnels** — débloque les 208 activités, la donnée la
+   plus actionnable du site, avec des champs déjà en base.
+7. **Notes & avis communautaires** — voir la section de conception plus bas.
+
 ### Dette technique identifiée
 
 - [ ] **Purger `extraSpans`/`extraSpansEn`** — champs morts depuis `68a78a8` (ils étaient le
