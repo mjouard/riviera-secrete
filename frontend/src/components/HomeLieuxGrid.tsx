@@ -78,6 +78,16 @@ function FilterSelect({
   );
 }
 
+/**
+ * Grille verticale à tous les viewports. C'était un carrousel horizontal en mobile :
+ * 43 cartes sur 9 438 px de large, 1,8 carte visible à la fois, ~25 balayages pour en voir
+ * le bout et aucun indicateur de position. Acceptable pour une rangée « À découvrir aussi »,
+ * intenable pour le catalogue principal — celui que les filtres et la recherche juste
+ * au-dessus servent justement à réduire. Deux colonnes en mobile : l'inventaire reste
+ * parcourable au pouce sans doubler la longueur de page.
+ */
+const GRILLE_CLASSES = "grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4";
+
 function LieuCard({
   lieu,
   distance,
@@ -93,7 +103,7 @@ function LieuCard({
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
-      className="card-reveal group block rounded-xl overflow-hidden flex-shrink-0 snap-start w-[62%] sm:w-auto transition-transform hover:-translate-y-1"
+      className="card-reveal group block rounded-xl overflow-hidden transition-transform hover:-translate-y-1"
       style={{ background: "var(--surface)" }}
     >
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -437,10 +447,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           </button>
         </div>
       ) : (
-        <div
-          ref={gridRef}
-          className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-6 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
+        <div ref={gridRef} className={GRILLE_CLASSES}>
           {filtered.map(({ lieu, distance, activiteTrouvee }) => (
             <LieuCard key={lieu.id} lieu={lieu} distance={distance} activiteTrouvee={activiteTrouvee} />
           ))}
