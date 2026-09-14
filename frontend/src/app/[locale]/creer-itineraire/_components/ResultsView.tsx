@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
-import { construirePlanning, encodeJours, formatTime, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
+import { construirePlanning, encodeJours, formatDuree, formatTime, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
@@ -178,7 +178,7 @@ export default function ResultsView({
                 const isFirstOverall = dayIndex === 0 && stopIndex === 0;
                 const isLastOverall = dayIndex === currentDays.length - 1 && stopIndex === day.length - 1;
                 const visitMin = parseVisitMinutes(lieu);
-                const dureeLabel = visitMin >= 60 ? `~${(visitMin / 60).toFixed(visitMin % 60 ? 1 : 0)} h` : `~${visitMin} min`;
+                const dureeLabel = formatDuree(visitMin);
 
                 return (
                   <div

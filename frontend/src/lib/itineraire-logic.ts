@@ -357,12 +357,34 @@ export function formatTime(minutesSinceMidnight: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
+/**
+ * Formateur de durée unique du site (refonte Lot 3, → DC-05).
+ *
+ * Trois écritures cohabitaient pour la même chose — « ~1 h », « ~18 min » et « ~1.8 h », ce
+ * dernier avec un point décimal anglais au milieu d'une page française, et surtout illisible :
+ * personne ne convertit 0,8 h en 48 min de tête.
+ *
+ * Règle : sous l'heure, arrondi à 5 min ; au-delà, arrondi au quart d'heure et notation
+ * heures + minutes. Jamais de décimale, jamais de `~` — l'approximation est déjà dans
+ * l'arrondi, et le tilde ajoutait du bruit sans ajouter d'information.
+ */
+export function formatDuree(minutes: number): string {
+  // L'arrondi d'abord, le choix de l'unité ensuite : 58 min arrondies donnent 60, qui
+  // s'écrit « 1 h » et non « 60 min ».
+  if (minutes < 60) {
+    const arrondi = Math.max(5, Math.round(minutes / 5) * 5);
+    if (arrondi < 60) return `${arrondi} min`;
+    return "1 h";
+  }
+  const arrondi = Math.round(minutes / 15) * 15;
+  const h = Math.floor(arrondi / 60);
+  const m = arrondi % 60;
+  return m ? `${h} h ${m}` : `${h} h`;
+}
+
 export function formatTransitDesc(minutes: number, locale: string = "fr"): string {
   const suffix = locale === "en" ? "estimated travel time" : "de trajet estimé";
-  if (minutes < 60) return `~${minutes} min ${suffix}`;
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return m ? `~${h} h ${m} min ${suffix}` : `~${h} h ${suffix}`;
+  return `${formatDuree(minutes)} ${suffix}`;
 }
 
 export function buildBookingActivites(days: Lieu[][]): Array<{ lieu: Lieu; activite: Activite }> {
