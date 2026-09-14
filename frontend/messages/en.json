@@ -220,6 +220,7 @@
     "suppression": "Removing…"
   },
   "connexion": {
+    "metaTitre": "Log in",
     "connexionTitle": "Log in",
     "creerCompteTitle": "Create an account",
     "subtitleLogin": "Find your favorites and itineraries again.",
@@ -254,6 +255,7 @@
     "erreurGenerique": "Something went wrong. Try again."
   },
   "confirmerEmail": {
+    "metaTitre": "Email confirmation",
     "lienInvalide": "Invalid confirmation link.",
     "confirmationEnCours": "Confirming…",
     "emailConfirme": "Email confirmed ✓",

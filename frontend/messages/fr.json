@@ -220,6 +220,7 @@
     "suppression": "Suppression…"
   },
   "connexion": {
+    "metaTitre": "Connexion",
     "connexionTitle": "Connexion",
     "creerCompteTitle": "Créer un compte",
     "subtitleLogin": "Retrouve tes favoris et tes itinéraires.",
@@ -254,6 +255,7 @@
     "erreurGenerique": "Une erreur est survenue. Réessaie."
   },
   "confirmerEmail": {
+    "metaTitre": "Confirmation de l'adresse email",
     "lienInvalide": "Lien de confirmation invalide.",
     "confirmationEnCours": "Confirmation en cours…",
     "emailConfirme": "Email confirmé ✓",
