@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import { imgUrl, loc, alternatesPage } from "@/lib/utils";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import ItineraireCard from "@/components/ItineraireCard";
+import Photo from "@/components/Photo";
 
 export const revalidate = 3600;
 
@@ -97,8 +98,8 @@ export default async function VillePage({
 
       {/* Hero */}
       <div className="rounded-2xl overflow-hidden mb-8 aspect-[4/3]">
-        <img
-          src={imgUrl(ville.thumbImage)}
+        <Photo sizes="(max-width: 640px) 50vw, 25vw"
+          src={ville.thumbImage}
           alt={nom}
           className="w-full h-full object-cover"
         />
@@ -135,11 +136,10 @@ export default async function VillePage({
                 style={{ background: "var(--surface)" }}
               >
                 <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={imgUrl(lieu.thumbImage)}
+                  <Photo sizes="(max-width: 640px) 50vw, 25vw"
+                    src={lieu.thumbImage}
                     alt={lieu.heroAlt}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
                   />
                 </div>
                 <div className="min-w-0">

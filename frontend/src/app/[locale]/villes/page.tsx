@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, loc, alternatesPage } from "@/lib/utils";
+import { loc, alternatesPage } from "@/lib/utils";
+import Photo from "@/components/Photo";
 
 export const revalidate = 3600;
 
@@ -67,11 +68,10 @@ export default async function VillesPage({
                     style={{ background: "var(--surface)" }}
                   >
                     <div className="aspect-[4/3] overflow-hidden">
-                      <img
-                        src={imgUrl(ville.thumbImage)}
+                      <Photo sizes="(max-width: 640px) 50vw, 25vw"
+                        src={ville.thumbImage}
                         alt={nom}
                         className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                        loading="lazy"
                       />
                     </div>
                     <div className="p-4">

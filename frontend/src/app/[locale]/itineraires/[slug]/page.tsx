@@ -9,6 +9,7 @@ import { dureeKeyDepuisBadge } from "@/lib/itineraire-logic";
 import MapItinWrapper from "@/components/MapItinWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 import FermeAujourdhui from "@/components/FermeAujourdhui";
+import Photo from "@/components/Photo";
 
 function parseHeroImgTag(tag: string): { srcs: string[]; alt: string } {
   const srcMatch = tag.match(/src="([^"]+)"/);
@@ -321,11 +322,10 @@ export default async function ItinerairePage({
                 >
                   {activite && (
                     <div className="aspect-[4/3] overflow-hidden">
-                      <img
-                        src={imgUrl(activite.image)}
+                      <Photo
+                        src={activite.image}
                         alt={loc(locale, activite.altEn, activite.alt)}
                         className="w-full h-full object-cover"
-                        loading="lazy"
                       />
                     </div>
                   )}
@@ -423,11 +423,10 @@ export default async function ItinerairePage({
                 style={{ background: "var(--surface)" }}
               >
                 <div className="aspect-video overflow-hidden">
-                  <img
-                    src={imgUrl(s.img)}
+                  <Photo
+                    src={s.img}
                     alt={loc(locale, s.altEn, s.alt)}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
                   />
                 </div>
                 <div className="p-4">

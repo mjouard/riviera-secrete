@@ -230,9 +230,22 @@ sur du sable.
       du premier lieu de chaque itinéraire
 - [x] Les pages `itin/*.html` ont leur propre hero carousel — les 6 itinéraires utilisent
       désormais les photos réelles des lieux qui les composent via `data-carousel-srcs`
-- [ ] Système d'images formalisé — ratios/dimensions par composant (`heroImage`,
-      `thumbImage`, cartes homepage, strip itinéraire…), résolution minimale, export
-      WebP/AVIF + `srcset` ; chantier technique indépendant du choix des photos elles-mêmes
+- [~] Système d'images formalisé — **fait le 2026-09-14 pour le volet technique.**
+      `frontend/scripts/images.mjs` normalise et contrôle les dimensions (`verifie` /
+      `optimise`), génère les WebP et un manifeste de largeurs réelles ; le composant
+      `Photo` sert du WebP avec repli JPEG et `srcset` mobile. Fiche `/lieux/eze-village` :
+      **2 305 Ko → 1 041 Ko d'images**, zéro JPEG téléchargé par un navigateur moderne.
+      46 fichiers surdimensionnés ré-encodés — dont un de **4,3 Mo** servi comme vignette.
+
+      WebP **pré-générés** et non `next/image` : la transformation d'images de Vercel se
+      facture à l'usage et le projet est sur le plan gratuit, dont les quotas de déploiement
+      ont déjà été atteints une fois.
+
+      **Reste** : les 133 photos plus petites que leur emplacement, listées dans
+      `docs/photos-a-resourcer.md`. Aucun script ne peut les réparer — une image de 200×200
+      ne contient pas l'information d'une 960×640. Chantier de contenu (re-sourçage
+      Wikimedia), à lancer quand tu voudras. L'AVIF n'est pas fait non plus : gain marginal
+      sur le WebP, et ça doublerait encore le nombre de fichiers.
 - [~] Horaires et jours de fermeture des activités payantes — **fait le 2026-09-13 pour les
       22 sites à visiter** (musées, villas, jardins, monuments), FR + EN, 21 renseignés.
       **Périmètre volontairement restreint** : sur les 88 activités payantes, 37 sont des

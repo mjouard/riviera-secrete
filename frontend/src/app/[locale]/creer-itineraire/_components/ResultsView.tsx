@@ -3,11 +3,12 @@ import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc } from "@/lib/utils";
+import { loc } from "@/lib/utils";
 import { construirePlanning, encodeJours, formatTime, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
+import Photo from "@/components/Photo";
 
 const BuilderMap = dynamic(() => import("@/components/BuilderMap"), { ssr: false });
 
@@ -189,7 +190,7 @@ export default function ResultsView({
                     style={{ background: "var(--surface-hover)" }}
                   >
                     <div className="no-print w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={imgUrl(lieu.thumbImage)} alt="" className="w-full h-full object-cover" loading="lazy" />
+                      <Photo src={lieu.thumbImage} alt="" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <Link href={`/lieux/${lieu.slug}`} target="_blank" className="text-sm font-semibold hover:underline line-clamp-1">
@@ -258,7 +259,7 @@ export default function ResultsView({
                 className="flex items-center gap-2 pr-3 rounded-full overflow-hidden transition-colors hover:bg-white/5"
                 style={{ background: "var(--surface)" }}
               >
-                <img src={imgUrl(item.thumbImage)} alt="" className="w-9 h-9 object-cover flex-shrink-0" loading="lazy" />
+                <Photo src={item.thumbImage} alt="" className="w-9 h-9 object-cover flex-shrink-0" />
                 <span className="text-xs" style={{ color: "var(--text-muted)" }}>{loc(locale, item.nomEn, item.nom)}</span>
               </Link>
             ))}

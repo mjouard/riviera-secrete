@@ -5,8 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
-import { imgUrl, loc } from "@/lib/utils";
+import { loc } from "@/lib/utils";
 import type { Lieu } from "@/lib/types";
+import Photo from "@/components/Photo";
 
 export default function MesFavorisPage() {
   const locale = useLocale();
@@ -93,11 +94,10 @@ export default function MesFavorisPage() {
               style={{ background: "var(--surface)" }}
             >
               <Link href={`/lieux/${lieu.slug}`} className="block aspect-video overflow-hidden">
-                <img
-                  src={imgUrl(lieu.thumbImage)}
+                <Photo sizes="(max-width: 640px) 50vw, 25vw"
+                  src={lieu.thumbImage}
                   alt={lieu.heroAlt}
                   className="w-full h-full object-cover transition-transform hover:scale-105"
-                  loading="lazy"
                 />
               </Link>
               <div className="p-4 flex-1 flex flex-col justify-between">

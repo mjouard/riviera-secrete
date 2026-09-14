@@ -4,9 +4,10 @@ import { cleLinkText } from "@/lib/activites-data";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc, prixAffiche } from "@/lib/utils";
+import { loc, prixAffiche } from "@/lib/utils";
 import { buildBookingActivites } from "@/lib/itineraire-logic";
 import FermeAujourdhui from "@/components/FermeAujourdhui";
+import Photo from "@/components/Photo";
 
 /** Nombre de cartes visibles sur desktop avant de replier le reste derrière "Voir plus". */
 const VISIBLE_COUNT = 4;
@@ -38,7 +39,7 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
               style={{ background: "var(--surface)" }}
             >
               <div className="no-print aspect-video overflow-hidden">
-                <img src={imgUrl(act.image)} alt={loc(locale, act.altEn, act.alt)} className="w-full h-full object-cover" loading="lazy" />
+                <Photo src={act.image} alt={loc(locale, act.altEn, act.alt)} className="w-full h-full object-cover" />
               </div>
               <div className="p-4">
                 <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>{loc(locale, lieu.nomEn, lieu.nom)}</p>

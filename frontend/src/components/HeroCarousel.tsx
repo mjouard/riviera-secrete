@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import Photo from "@/components/Photo";
 
 interface Slide {
   src: string;
@@ -22,7 +23,7 @@ export default function HeroCarousel({ slides, className = "" }: Props) {
   if (slides.length === 0) return null;
   if (slides.length === 1) {
     return (
-      <img src={slides[0].src} alt={slides[0].alt} className={`w-full h-full object-cover ${className}`} />
+      <Photo src={slides[0].src} alt={slides[0].alt} priority sizes="100vw" className={`w-full h-full object-cover ${className}`} />
     );
   }
 
@@ -31,7 +32,7 @@ export default function HeroCarousel({ slides, className = "" }: Props) {
       <div className="carousel-track" style={{ transform: `translateX(-${index * 100}%)` }}>
         {slides.map((slide, i) => (
           <div key={i} className="carousel-slide">
-            <img src={slide.src} alt={slide.alt} loading={i === 0 ? "eager" : "lazy"} />
+            <Photo src={slide.src} alt={slide.alt} priority={i === 0} sizes="100vw" />
           </div>
         ))}
       </div>

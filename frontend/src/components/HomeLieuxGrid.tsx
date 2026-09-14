@@ -3,9 +3,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { distanceKm, formatDistanceKm, imgUrl, loc, normalizeSearch } from "@/lib/utils";
+import { distanceKm, formatDistanceKm, loc, normalizeSearch } from "@/lib/utils";
 import { BADGE_DEFS } from "@/lib/home-data";
 import FilterSelect from "@/components/FilterSelect";
+import Photo from "@/components/Photo";
 import {
   DUREES,
   NIVEAUX,
@@ -62,11 +63,10 @@ function LieuCard({
       style={{ background: "var(--surface)" }}
     >
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img
-          src={imgUrl(lieu.thumbImage)}
+        <Photo sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          src={lieu.thumbImage}
           alt={lieu.heroAlt}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
-          loading="lazy"
         />
         {distance !== undefined && (
           <span

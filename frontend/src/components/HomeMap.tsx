@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Ville } from "@/lib/types";
-import { imgUrl, loc } from "@/lib/utils";
+import { loc } from "@/lib/utils";
 import { REGION_COLORS, REGION_ORDER, truncate } from "@/lib/home-data";
 import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
+import Photo from "@/components/Photo";
 
 interface Props {
   villes: Ville[];
@@ -143,8 +144,8 @@ export default function HomeMap({ villes }: Props) {
               ×
             </button>
             <div className="aspect-[16/9] overflow-hidden">
-              <img
-                src={imgUrl(selected.thumbImage)}
+              <Photo
+                src={selected.thumbImage}
                 alt={loc(locale, selected.nomEn, selected.nom)}
                 className="w-full h-full object-cover"
               />

@@ -12,6 +12,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import ShareButton from "@/components/ShareButton";
 import AddToItinButton from "@/components/AddToItinButton";
 import FermeAujourdhui from "@/components/FermeAujourdhui";
+import Photo from "@/components/Photo";
 
 export const revalidate = 3600;
 
@@ -222,11 +223,10 @@ export default async function LieuPage({
                 style={{ background: "var(--surface)" }}
               >
                 <div className="aspect-video overflow-hidden">
-                  <img
-                    src={imgUrl(act.image)}
+                  <Photo sizes="(max-width: 640px) 100vw, 50vw"
+                    src={act.image}
                     alt={loc(locale, act.altEn, act.alt)}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 flex-1 flex flex-col justify-between">
@@ -279,11 +279,10 @@ export default async function LieuPage({
                 style={{ background: "var(--surface)" }}
               >
                 <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={imgUrl(r.img)}
+                  <Photo sizes="(max-width: 640px) 100vw, 50vw"
+                    src={r.img}
                     alt={loc(locale, r.altEn, r.alt)}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 </div>
                 <div className="min-w-0">

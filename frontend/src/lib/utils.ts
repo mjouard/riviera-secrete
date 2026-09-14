@@ -65,9 +65,16 @@ export function formatDistanceKm(km: number): string {
   return km < 10 ? `${km.toFixed(1).replace(".", ",")} km` : `${Math.round(km)} km`;
 }
 
+/**
+ * Normalise un chemin d'image du jeu de données en URL servable.
+ *
+ * **Idempotent** : un chemin déjà absolu ressort inchangé. Sans ça, le repasser une seconde
+ * fois produisait `//assets/...` — piège rencontré en introduisant le composant `Photo`, qui
+ * reçoit tantôt un chemin brut du JSON, tantôt un chemin déjà résolu par l'appelant.
+ */
 export function imgUrl(path: string): string {
   if (!path) return "";
-  if (/^https?:\/\/|^data:/.test(path)) return path;
+  if (/^https?:\/\/|^data:|^\//.test(path)) return path;
   return "/" + path.replace(/^(\.\.\/)+/, "");
 }
 

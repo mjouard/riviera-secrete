@@ -1,7 +1,8 @@
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { imgUrl, loc } from "@/lib/utils";
+import { loc } from "@/lib/utils";
 import type { Itineraire, Lieu } from "@/lib/types";
+import Photo from "@/components/Photo";
 
 export default function ItineraireCard({
   itin,
@@ -23,11 +24,10 @@ export default function ItineraireCard({
     >
       {thumb && (
         <div className="w-28 flex-shrink-0 overflow-hidden">
-          <img
-            src={imgUrl(thumb)}
+          <Photo sizes="(max-width: 640px) 100vw, 33vw"
+            src={thumb}
             alt={titre}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
-            loading="lazy"
           />
         </div>
       )}

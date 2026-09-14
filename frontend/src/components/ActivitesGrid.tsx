@@ -4,7 +4,7 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc, normalizeSearch, prixAffiche } from "@/lib/utils";
+import { loc, normalizeSearch, prixAffiche } from "@/lib/utils";
 import {
   CATEGORIES_ACTIVITE,
   cleLinkText,
@@ -14,6 +14,7 @@ import {
   type TrancheDuree,
 } from "@/lib/activites-data";
 import FilterSelect from "@/components/FilterSelect";
+import Photo from "@/components/Photo";
 
 const TRANCHES: TrancheDuree[] = ["court", "moyen", "long", "journee"];
 
@@ -199,10 +200,9 @@ function CarteActivite({
   return (
     <article className="rounded-xl overflow-hidden flex flex-col" style={{ background: "var(--surface)" }}>
       {activite.image && (
-        <img
-          src={imgUrl(activite.image)}
+        <Photo sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          src={activite.image}
           alt={activite.alt || ""}
-          loading="lazy"
           className="w-full h-32 object-cover"
         />
       )}

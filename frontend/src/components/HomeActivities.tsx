@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { imgUrl, loc, prixAffiche } from "@/lib/utils";
+import { loc, prixAffiche } from "@/lib/utils";
 import { ACTIVITY_CATEGORIES, FEATURED_ACTIVITIES } from "@/lib/home-data";
+import Photo from "@/components/Photo";
 
 interface CardData {
   key: string;
@@ -115,11 +116,10 @@ export default function HomeActivities({ lieux }: { lieux: Lieu[] }) {
                 style={{ background: "var(--surface)" }}
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
-                    src={imgUrl(card.image)}
+                  <Photo sizes="(max-width: 640px) 66vw, 33vw"
+                    src={card.image}
                     alt={card.nom}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                   <span
                     className="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-full font-medium"
