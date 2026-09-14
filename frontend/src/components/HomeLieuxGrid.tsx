@@ -105,6 +105,35 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const tFiltres = useTranslations("filtres");
   const [activeBadge, setActiveBadge] = useState<string>("");
   const [query, setQuery] = useState("");
+  const champRecherche = useRef<HTMLInputElement>(null);
+
+  // L'en-tête propose « Rechercher » parce que le champ vivait à trois écrans et demi du
+  // haut sur mobile, et que c'est la seule recherche du catalogue.
+  //
+  // On refait le défilement nous-mêmes plutôt que de compter sur l'ancre : le champ est à
+  // ~2 700 px du haut, derrière des images en chargement différé, et la position que le
+  // navigateur vise au moment du saut n'est plus la bonne une fois la grille peinte. Deux
+  // `requestAnimationFrame` laissent la mise en page se stabiliser avant de viser.
+  useEffect(() => {
+    if (window.location.hash !== "#lieu-search") return;
+    const champ = champRecherche.current;
+    if (!champ) return;
+    // `preventScroll` sur le focus : sinon il refait son propre défilement et recale le
+    // champ en haut de l'écran juste après qu'on l'a centré.
+    const viser = () => {
+      champ.scrollIntoView({ block: "center" });
+      champ.focus({ preventScroll: true });
+    };
+    const id = requestAnimationFrame(() => requestAnimationFrame(viser));
+    // Les images en dessous continuent d'arriver et repoussent le champ : on recentre une
+    // dernière fois quand la page a fini de charger.
+    const fini = document.readyState === "complete";
+    if (!fini) window.addEventListener("load", viser, { once: true });
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("load", viser);
+    };
+  }, []);
   const [saison, setSaison] = useState<Saison | "">("");
   const [duree, setDuree] = useState<Duree | "">("");
   const [niveau, setNiveau] = useState<Niveau | "">("");
@@ -266,12 +295,13 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         </span>
         <input
           id="lieu-search"
+          ref={champRecherche}
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("recherchePlaceholder")}
           autoComplete="off"
-          className="focus-ring w-full text-sm rounded-full border transition-colors py-2.5 pl-11 pr-11"
+          className="focus-ring w-full text-sm rounded-full border transition-colors py-2.5 pl-11 pr-11 scroll-mt-24"
           style={{
             borderColor: "var(--line)",
             background: "var(--surface)",

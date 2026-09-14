@@ -404,10 +404,20 @@ sur du sable.
       coordonnées, ni horaires. Or il est présenté comme l'artefact « hors ligne sur le
       terrain » : sur papier le lien est inutile, mais les coordonnées sont exactement ce
       qu'on emporte.
-- [ ] **Navigation : ni « Lieux » ni « Itinéraires »** dans l'en-tête — depuis une fiche
-      lieu, revenir au catalogue impose logo → accueil → défiler. La recherche est par
-      ailleurs la seule du site et n'est ni dans l'en-tête, ni sur les fiches, ni sur
-      `/villes`.
+- [x] **Navigation** — **fait le 2026-09-14**. « Lieux » et « Itinéraires » ajoutés à
+      l'en-tête (ancres de l'accueil, les pages de liste ayant été supprimées le 2026-09-12),
+      plus une entrée « Rechercher » qui amène au champ du catalogue **et lui donne le
+      focus** — il vivait à ~2 700 px du haut, soit trois écrans et demi sur mobile.
+
+      Deux ajustements imposés par la mesure : la barre complète bascule à `lg` (1024 px) et
+      non plus `sm` (640 px), parce qu'avec sept entrées l'en-tête débordait dès 700 px
+      (822 px de contenu pour 700 disponibles) ; et l'espacement passe à `gap-4` sous `xl`,
+      la marge libre n'étant que de 9 px à 1024 px — un libellé un peu plus long et ça
+      cassait. 81 px de marge après correction, FR et EN.
+
+      Le défilement vers le champ est refait à la main plutôt que laissé à l'ancre : les
+      images en chargement différé repoussent le champ après le saut, donc on recentre une
+      dernière fois au `load`.
 - [ ] **Filtres situationnels** sur la page `/activites` ci-dessus — l'utilisateur ne pense
       pas « destination » mais « situation » : *j'ai 3 h · je suis à Nice · gratuit · ouvert
       maintenant · sans voiture · avec des enfants · éviter la foule*. **Les données existent

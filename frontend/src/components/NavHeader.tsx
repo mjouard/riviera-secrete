@@ -8,11 +8,14 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 function useNavLinks() {
   const t = useTranslations("nav");
-  // "Activités" ouvre le catalogue complet des 208 activités : c'était la donnée la plus
-  // actionnable du site et la seule façon de l'atteindre était d'ouvrir les fiches lieu une
-  // par une.
+  // Les quatre portes d'entrée du contenu. « Lieux » et « Itinéraires » manquaient : depuis
+  // une fiche, revenir au catalogue imposait logo → accueil → défiler. Ils pointent sur les
+  // ancres de l'accueil, les pages de liste dédiées ayant été supprimées le 2026-09-12 parce
+  // qu'elles dupliquaient ces sections sans rien apporter.
   const contentLinks = [
+    { href: "/#lieux", label: t("lieux") },
     { href: "/activites", label: t("activites") },
+    { href: "/#itineraires", label: t("itineraires") },
     { href: "/villes", label: t("villes") },
   ];
   const accountLinks = [
@@ -78,20 +81,30 @@ export default function NavHeader() {
           Riviera Secrète
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden sm:flex gap-6 items-center text-sm" style={{ color: "var(--text-muted)" }}>
+        {/* Barre complète à partir de lg (1024px) et non sm (640px) : avec sept entrées,
+            le sélecteur de langue et le bouton de compte, l'en-tête débordait dès 700px —
+            mesuré à 822px de contenu pour 700 disponibles. En dessous, le menu déroulant. */}
+        <nav className="hidden lg:flex gap-4 xl:gap-6 items-center text-sm" style={{ color: "var(--text-muted)" }}>
           {navLinks.map(({ href, label }) => (
             <Link key={href} href={href} className="hover:text-white transition-colors">
               {label}
             </Link>
           ))}
+          <Link
+            href="/#lieu-search"
+            title={t("rechercher")}
+            aria-label={t("rechercher")}
+            className="hover:text-white transition-colors"
+          >
+            <span aria-hidden="true">🔎</span>
+          </Link>
           <LanguageSwitcher />
           <AuthButton />
         </nav>
 
         {/* Hamburger button — mobile only */}
         <button
-          className="sm:hidden p-2 -mr-2 rounded-lg transition-colors hover:bg-white/5"
+          className="lg:hidden p-2 -mr-2 rounded-lg transition-colors hover:bg-white/5"
           style={{ color: "var(--text-muted)" }}
           aria-label={t("menu")}
           aria-expanded={open}
@@ -104,9 +117,17 @@ export default function NavHeader() {
       {/* Mobile dropdown */}
       {open && (
         <nav
-          className="sm:hidden border-t flex flex-col"
+          className="lg:hidden border-t flex flex-col"
           style={{ borderColor: "var(--line)", background: "rgba(12,17,22,0.97)" }}
         >
+          <Link
+            href="/#lieu-search"
+            onClick={close}
+            className="px-6 py-4 text-sm border-b transition-colors hover:bg-white/5"
+            style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+          >
+            🔎 {t("rechercher")}
+          </Link>
           {contentLinks.map(({ href, label }) => (
             <Link
               key={href}

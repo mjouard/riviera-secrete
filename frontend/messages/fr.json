@@ -18,7 +18,10 @@
     "deconnexion": "Déconnexion",
     "menu": "Menu",
     "aPropos": "À propos",
-    "activites": "Activités"
+    "activites": "Activités",
+    "lieux": "Lieux",
+    "itineraires": "Itinéraires",
+    "rechercher": "Rechercher"
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",

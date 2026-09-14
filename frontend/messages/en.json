@@ -18,7 +18,10 @@
     "deconnexion": "Log out",
     "menu": "Menu",
     "aPropos": "About",
-    "activites": "Activities"
+    "activites": "Activities",
+    "lieux": "Places",
+    "itineraires": "Itineraries",
+    "rechercher": "Search"
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
