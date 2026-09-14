@@ -37,3 +37,23 @@ Wikimedia par lieu) ont été poussés sur `main` sans redéployer le frontend, 
 nouvelles images en 404 sur le site live pendant toute une session — jusqu'à ce que
 l'utilisateur remarque une image manquante en prod. **Reflexe à prendre : redéployer le
 frontend après toute série de commits touchant `frontend/`, pas seulement après une sync DB.**
+
+**Projet `riviera-secrete` supprimé le 2026-09-14.** Il traînait encore côté Vercel malgré la
+suppression de son code en 2026-09-12 : orphelin, renvoyait 404, mais accumulait quand même des
+déploiements (au moins 20 visibles via `vercel ls`, probablement plus — la CLI ne montre que les
+20 derniers) — chacun embarquant sa propre copie de `frontend/public/assets/images/`, qui est
+volumineux. Repéré en creusant une alerte Vercel « 75 % du quota de stockage utilisé » : deux
+projets actifs pour le même site, doublant le stockage consommé, et aucun n'était jamais purgé
+(Vercel ne supprime pas automatiquement les vieux déploiements Ready sur ce plan). Le vrai
+site en prod a toujours été `frontend` (confirmé via `curl` : `frontend-two-plum-92.vercel.app`
+sert du contenu réel, `riviera-secrete.vercel.app` était en 404) — cette ambiguïté disparaît
+maintenant que le doublon est supprimé, mais le réflexe reste : après un ménage de ce genre,
+penser aussi à purger les vieux déploiements de `frontend` lui-même (`vercel remove <url>
+--safe --yes` un par un, ou depuis le dashboard) plutôt que de les laisser s'accumuler
+indéfiniment — c'est reparti en boucle silencieusement une fois, ça peut recommencer.
+
+**Note d'outillage** : `vercel project remove`/`vercel remove` (suppression de projet ou de
+déploiement) est bloqué par le classifieur auto-mode de Claude Code, même avec l'accord explicite
+de l'utilisateur en amont — action jugée irréversible. Idem pour un simple `vercel ls <projet>`
+juste après, apparemment par prudence contextuelle. Dans ce cas, donner à l'utilisateur la
+commande exacte à lancer lui-même plutôt que d'insister.
