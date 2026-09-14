@@ -1,5 +1,96 @@
 # Roadmap — Riviera Secrète
 
+## Suites des audits du 2026-09-14
+
+Trois audits menés dans la nuit du 13 au 14 (sécurité backend, tests utilisateurs, UX
+mobile/web) — rapports complets dans **`docs/audits/`**. Ce qui en est ressorti et reste
+à faire. Tout ce qui a été corrigé est déjà poussé (23 commits), **mais rien n'est
+déployé** : aucun de ces correctifs n'est en ligne.
+
+### À faire par l'utilisateur — bloquant
+
+- [ ] 🔴 **Rotation du mot de passe PostgreSQL de prod.** Il est dans l'historique d'un
+      dépôt **public** (commit `7f25aea`, poussé), sur le proxy public Railway : accès
+      `postgres` complet pour quiconque lit le dépôt — comptes, hashs, tokens de
+      confirmation d'email en clair. Le retirer du fichier (fait, `7f57c21`) **ne suffit
+      pas**. Rotation via Railway, puis mise à jour de
+      `ConnectionStrings__DefaultConnection` sur le service `api` et de
+      l'`appsettings.Development.json` local. Inspecter les lignes de `Users` non reconnues.
+- [ ] **Vérifier `ASPNETCORE_ENVIRONMENT` sur Railway** — si elle vaut `Development`,
+      `POST /api/seed` est exposé publiquement. Non vérifiable depuis le code.
+- [ ] **Synchroniser les coordonnées corrigées en base** (avec la *nouvelle* chaîne de
+      connexion). Sans ça Èze reste à 8 km en pleine mer en prod :
+      ```bash
+      cd backend && SYNC_CONNECTION_STRING="<nouvelle chaîne>" \
+        dotnet run --project RivieraSecrete.Tools -- refresh-lieu-fields eze-village
+      ```
+      à répéter pour `sentier-corbusier-cap-martin`, `saorge-village`,
+      `pic-cap-roux-esterel`, `iles-de-lerins`, puis `refresh-ville-fields` pour `eze` et
+      `cannes`. (`refresh-*-fields` ne recopiait pas `lat`/`lng` avant `1434d41` : la
+      commande annonçait « rafraîchi » sans rien envoyer en base.)
+- [ ] **Déployer** : `cd backend && railway up --service api`, puis
+      `cd frontend && vercel --prod --yes`.
+
+### Arbitrages produit en attente
+
+- [ ] **Durée de vie du JWT** — 30 jours, aucune denylist de `jti`, pas de refresh token :
+      un token volé reste valable 30 jours, et une rotation du secret déconnecte tout le
+      monde.
+- [ ] **`409` de `register`** — « Un compte existe déjà avec cet email » permet d'énumérer
+      les comptes. Le corriger change l'UX du frontend.
+- [ ] **« Partir de cet itinéraire » ampute 4 itinéraires sur 6** — `lerins-esterel` passe
+      de 3 étapes éditoriales à **1** générée, `villages-perches` de 5 à 3. Cause : budget
+      dur de 480 min/jour sans marge, et « Journée complète » mappée sur le même budget que
+      « Journée ». Piste : ne jamais exclure une étape venant d'un itinéraire source —
+      la garder et allonger la journée avec un avertissement ; budget distinct (600 min)
+      pour « Journée complète » ; aller directement à la vue résultat avec un bandeau
+      « Basé sur : … ».
+- [ ] **« N lieux non inclus faute de temps » n'est pas crédible** — sur un 2 jours /
+      13 lieux, 5 exclus alors que les journées finissent vers 16h et qu'Èze et le Cap
+      Ferrat, exclus, sont *géographiquement entre* les étapes retenues. L'algorithme est
+      glouton et dépendant de l'ordre. Piste : seconde passe d'insertion dans les créneaux
+      restants, ou reformuler (« mis de côté pour garder le rythme »).
+
+### Fiabilité — contredit `/a-propos`, donc prioritaire
+
+- [ ] **Badges non praticables au lieu précis** — `rue-obscure-villefranche` (rue médiévale
+      *couverte*, 15–20 min) porte `plage` et `plongee`, et sort **en tête** du filtre
+      plage. `/a-propos` énonce explicitement la règle inverse. Repasser aussi
+      `villa-kerylos` (un musée) et `colline-du-chateau-nice` (parc à 90 m d'altitude).
+- [ ] **Revalidation ISR après écriture en base** — une page `/en` servait encore, figée au
+      dernier build, une réservation à 6 € pour le château de Gourdon **fermé au public
+      depuis 2015**, avec un lien vers un domaine viticole sans rapport. L'API était propre.
+      Les corrections de contenu passent par la base et rien ne déclenche de revalidation :
+      une page peu fréquentée sert du contenu vieux de plusieurs semaines. Piste :
+      `revalidatePath()`/`revalidateTag` déclenché par le backend à chaque écriture ; à
+      défaut, redéployer après chaque synchro et abaisser `revalidate`.
+      **Règle à retenir** : un correctif de contenu « supprimé partout » se vérifie sur les
+      pages rendues, pas seulement dans l'API.
+- [ ] **Lien de réservation mort** — `laparte-villefranche-sur-mer.com` (« Dîner au
+      restaurant L'Aparté », 29–50 €) : échec TLS et 404. Seule URL vraiment morte sur les
+      195 testées.
+- [ ] **11 liens « Réserver » pointent vers des pages génériques** GetYourGuide
+      (`/nice-l314/`, `/antibes-l5075/`…) au lieu de l'activité nommée.
+- [ ] **Titre d'itinéraire trompeur** — « Menton, Èze & Monaco » ne passe pas par Menton
+      (Roquebrune, La Turbie, Èze, Monaco, Cap-Ferrat, Villefranche).
+- [ ] **Le site se contredit sur un temps de trajet** — l'itinéraire éditorial annonce
+      « 60 min » Grasse → golfe, le générateur calcule « ~1 h 33 min » sur le même segment
+      (le second est le réaliste, ~95 km).
+- [ ] **`/a-propos` : tension de marque** — l'itinéraire vitrine s'appelle « la route des
+      **classiques** » et enchaîne Monaco, le Musée Océanographique, Èze et la Villa
+      Ephrussi, soit exactement ce que la page promet d'éviter.
+
+### Dette technique identifiée
+
+- [ ] **Purger `extraSpans`/`extraSpansEn`** — champs morts depuis `68a78a8` (ils étaient le
+      seul endroit qui recopiait un fait au lieu de le référencer, et il avait dérivé).
+      Même opération que pour `ogImage` : JSON + entité `Itineraire` + migration EF.
+- [ ] **Normaliser `prixEn` dans les données** — aujourd'hui le format euro anglais est
+      corrigé à l'affichage (`08356cb`) faute de chemin de propagation vers la base.
+- [ ] **Couvrir l'état connecté en test** — non testé par l'audit (la reconnexion Google
+      exige une saisie d'identifiants) : favoris persistés, `/mes-itineraires` peuplée,
+      édition et suppression d'un itinéraire sauvegardé.
+
 ## Priorité contenu
 
 - [x] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
@@ -146,7 +237,36 @@
       différé (décision utilisateur du 2026-09-13) pour ne pas exposer une adresse perso au
       scraping ; à ajouter une fois le nom de domaine acheté (voir "Mise en production
       réelle"), avec une adresse sur ce domaine. La section "Signaler une erreur" de la page
-      annonce déjà ce formulaire à venir.
+      annonce déjà ce formulaire à venir — **une section qui promet un canal sans en offrir
+      un est pire que pas de section** (constat de l'audit du 2026-09-13).
+
+- [ ] **Mentions légales + politique de confidentialité** — `/mentions-legales`,
+      `/confidentialite` et `/cgu` renvoient 404, alors que le site collecte email et
+      prénom, dépose un cookie de session et charge Plausible. Le formulaire d'inscription
+      ne présente aucune mention RGPD. **À régler avant l'achat du domaine, pas après.**
+- [ ] **Page `/activites` filtrable** — les 208 activités (nom, durée, prix, horaires,
+      lien) sont la donnée la plus actionnable du site et ne sont **ni cherchables en tant
+      que telles, ni parcourables** : l'accueil en montre 36 curées sans le dire, et le
+      filtre « Gratuit seulement » renvoie 12 résultats alors qu'il existe **120 activités
+      gratuites**. Filtres proposés : catégorie, gratuit/payant, durée, zone, ouvert
+      aujourd'hui (les données `fermeJours`/`horaires` existent déjà). Remplacer aussi
+      « Voir plus » par un libellé honnête (« 36 idées choisies parmi 208 — tout voir → »).
+- [ ] **« Mot de passe oublié »** — ni page ni endpoint. Un compte créé par mot de passe et
+      oublié est **définitivement perdu**, avec ses favoris et ses itinéraires. Le mécanisme
+      de jeton à expiration de la confirmation d'email est réutilisable tel quel.
+- [ ] **Coordonnées et horaires dans l'export PDF** — `.no-print` masque la carte *et*
+      toutes les rangées de liens de navigation, donc le PDF ne contient ni adresse, ni
+      coordonnées, ni horaires. Or il est présenté comme l'artefact « hors ligne sur le
+      terrain » : sur papier le lien est inutile, mais les coordonnées sont exactement ce
+      qu'on emporte.
+- [ ] **Navigation : ni « Lieux » ni « Itinéraires »** dans l'en-tête — depuis une fiche
+      lieu, revenir au catalogue impose logo → accueil → défiler. La recherche est par
+      ailleurs la seule du site et n'est ni dans l'en-tête, ni sur les fiches, ni sur
+      `/villes`.
+- [ ] **Sélecteur de langue : le lien « FR » bascule en anglais** — il émet `href="/fr/…"`,
+      or `/fr/x` redirige vers `/x`, qui redirige vers `/en/x` si le cookie `NEXT_LOCALE=en`
+      est posé. Le clic *dans* l'app fonctionne (il repose le cookie) ; c'est le lien copié
+      puis partagé qui trahit.
 
 ## Features différenciantes
 
@@ -378,6 +498,17 @@ Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
       `/confirmer-email` toutes exclues via `metadata.robots` (voir Portage ci-dessus,
       2026-09-12) ; `frontend/src/app/sitemap.ts` (route Next.js dynamique) ne les liste pas
 - [ ] Ajouter le site dans Bing Webmaster Tools (2e moteur, souvent négligé)
+- [x] **`/robots.txt`** — **fait le 2026-09-14** (`1b1dffa`). Le fichier n'existait pas et
+      `/robots.txt` tombait dans la route attrape-tout `/[locale]`, qui répondait **500** :
+      Google lit un 5xx sur ce fichier comme « ne pas explorer ce site » et suspend le
+      crawl, ce qui neutralisait en partie le sitemap et les hreflang. `app/robots.ts`
+      créé (hors `[locale]`, avec la ligne `Sitemap:`), et cause racine traitée par
+      `dynamicParams = false` — tout chemin manquant portant une extension renvoie
+      désormais 404 au lieu de 500. Voir `docs/audits/2026-09-14-ux-mobile-web.md`.
+- [x] **`rel=canonical`** sur toutes les pages publiques — **fait le 2026-09-14**
+      (`fb8d130`). Absent partout jusque-là, alors que `?itin=` génère ~25 URL dupliquées.
+      Au passage, `/credits` sortie du `noindex` où elle était rangée par erreur avec les
+      pages de compte (c'est une page d'attribution CC BY / CC BY-SA).
 
 ### Performance & cache
 - [x] Règles de cache et headers de sécurité configurés dans `vercel.json`
