@@ -4,6 +4,11 @@
     "titleTemplate": "%s — Riviera Secrète",
     "description": "{count} lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez."
   },
+  "pwa": {
+    "nom": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
+    "nomCourt": "Riviera Secrète",
+    "description": "Les lieux confidentiels de la Côte d'Azur, de Menton à Saint-Tropez, et des itinéraires prêts à suivre."
+  },
   "nav": {
     "villes": "Villes",
     "creerItineraire": "Créer un itinéraire",

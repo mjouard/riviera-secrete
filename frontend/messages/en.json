@@ -4,6 +4,11 @@
     "titleTemplate": "%s — Riviera Secrète",
     "description": "{count} off-the-beaten-path spots on the French Riviera, from Menton to Saint-Tropez."
   },
+  "pwa": {
+    "nom": "Riviera Secrète — the French Riviera off the beaten path",
+    "nomCourt": "Riviera Secrète",
+    "description": "The hidden spots of the French Riviera, from Menton to Saint-Tropez, and ready-to-follow itineraries."
+  },
   "nav": {
     "villes": "Towns",
     "creerItineraire": "Build an itinerary",

@@ -28,6 +28,14 @@
   h1 { font-size: 22px; margin: 0 0 12px; font-weight: 700; }
   p { font-size: 15px; line-height: 1.6; color: #8B96A1; margin: 0 0 8px; }
   p.en { font-size: 13px; margin: 0; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+  .btn {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    padding: 12px 20px; border-radius: 999px; text-decoration: none;
+    background: #4FC3C9; color: #0C1116; border: 1px solid #4FC3C9;
+  }
+  .btn.secondaire { background: transparent; color: #ECEEF1; border-color: rgba(255,255,255,0.5); }
+  .btn:focus-visible { outline: 2px solid #4FC3C9; outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -39,6 +47,22 @@
       hors ligne. Les pages que tu as déjà ouvertes restent accessibles.
     </p>
     <p class="en">No network — pages you already visited are still available offline.</p>
+    <!--
+      Cette page n'offrait aucune sortie : ni bouton de nouvelle tentative, ni retour à
+      l'accueil. Or c'est un cul-de-sac par nature — une navigation qui a échoué — et le
+      bouton retour du navigateur ramène sur la page d'où l'on vient, pas sur celle qu'on
+      voulait. « Réessayer » relance l'URL demandée ; l'accueil, très probablement déjà en
+      cache, sert de repli.
+    -->
+    <div class="actions">
+      <button type="button" id="reessayer" class="btn">Réessayer · Retry</button>
+      <a href="/" class="btn secondaire">Accueil · Home</a>
+    </div>
   </main>
+  <script>
+    document.getElementById("reessayer").addEventListener("click", function () {
+      location.reload();
+    });
+  </script>
 </body>
 </html>

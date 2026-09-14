@@ -71,6 +71,10 @@ export async function generateMetadata({
       locale: locale === "en" ? "en_US" : "fr_FR",
       type: "website",
     },
+    // Un manifeste par langue : celui par défaut est français, /en pointe vers sa variante
+    // (voir src/lib/manifest.ts). Sans ça, installer le site depuis /en donnait une
+    // application au nom et à la description français.
+    manifest: locale === "en" ? "/manifest.en.webmanifest" : "/manifest.webmanifest",
     // iOS ignore les icônes du manifest et lit uniquement apple-touch-icon.
     icons: { apple: "/icons/apple-touch-icon.png" },
     appleWebApp: { capable: true, title: "Riviera Secrète", statusBarStyle: "black-translucent" },

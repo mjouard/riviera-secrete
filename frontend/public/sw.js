@@ -15,7 +15,7 @@
  * ⚠️ Bump CACHE_VERSION à chaque modification de ce fichier : c'est ce qui déclenche la
  * purge des anciens caches dans `activate`.
  */
-const CACHE_VERSION = "v2";
+const CACHE_VERSION = "v3";
 const PAGES_CACHE = `rs-pages-${CACHE_VERSION}`;
 const IMAGES_CACHE = `rs-images-${CACHE_VERSION}`;
 const TILES_CACHE = `rs-map-tiles-${CACHE_VERSION}`;
