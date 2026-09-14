@@ -263,6 +263,25 @@ déployé** : aucun de ces correctifs n'est en ligne.
       lieu, revenir au catalogue impose logo → accueil → défiler. La recherche est par
       ailleurs la seule du site et n'est ni dans l'en-tête, ni sur les fiches, ni sur
       `/villes`.
+- [ ] **Filtres situationnels** sur la page `/activites` ci-dessus — l'utilisateur ne pense
+      pas « destination » mais « situation » : *j'ai 3 h · je suis à Nice · gratuit · ouvert
+      maintenant · sans voiture · avec des enfants · éviter la foule*. **Les données existent
+      déjà** (`fermeJours`/`horaires` pour « ouvert maintenant », le badge gratuit pour les
+      120 activités gratuites, `metaPills` pour durée et niveau, la géoloc pour « près de
+      moi »). C'est la version utile des filtres catégoriels, et ça prolonge « Près de moi »,
+      le meilleur composant du site, vers « qu'est-ce que je peux faire près d'ici,
+      maintenant ». *(Piste issue d'un état des lieux produit externe, 2026-09-14.)*
+- [ ] **Rendre `/a-propos` atteignable** — elle n'est liée que depuis le pied de page. Un
+      évaluateur externe qui a inspecté le site en 2026-09-14 a conclu qu'il « manquait une
+      couche de confiance » alors que la page existe et contient exactement ce qu'il
+      réclamait : si un évaluateur ne la trouve pas, les visiteurs non plus. Le problème
+      n'est pas de l'écrire mais de l'exposer (hero ou nav).
+- [ ] **Préciser la promesse** — « hors des sentiers battus » / « lieux secrets » est
+      contredit par Èze, Monaco, Saint-Paul, Cannes, Saint-Tropez, Pampelonne. Ces lieux ont
+      un angle moins touristique, mais la promesse actuelle est plus risquée qu'utile. Piste :
+      « la Côte d'Azur au-delà des cartes postales ». Même constat relevé indépendamment par
+      l'audit interne (la « route des **classiques** ») et par l'évaluation externe — la
+      convergence de deux lectures séparées en fait un point solide.
 - [ ] **Sélecteur de langue : le lien « FR » bascule en anglais** — il émet `href="/fr/…"`,
       or `/fr/x` redirige vers `/x`, qui redirige vers `/en/x` si le cookie `NEXT_LOCALE=en`
       est posé. Le clic *dans* l'app fonctionne (il repose le cookie) ; c'est le lien copié
@@ -474,6 +493,58 @@ ignorer cette URL, le seul vrai site est désormais `frontend-two-plum-92.vercel
 photo déposée par un visiteur aujourd'hui — combiné à l'absence de page à propos (ci-dessus),
 le site prive le visiteur de toute preuve sociale, dans une catégorie (voyage) où TripAdvisor/
 Google Reviews ont habitué tout le monde à vérifier avant de se déplacer.
+
+### Notes & avis communautaires — conception (idée utilisateur, 2026-09-14)
+
+Regroupe et remplace les quatre items ci-dessus le jour où le chantier démarre. **Piste la
+plus prometteuse identifiée à ce jour côté produit**, mais elle a des prérequis durs et un
+piège de conception.
+
+**Le piège à ne pas reproduire** : trier les recommandations par « les mieux notés » recrée
+TripAdvisor et **enterre exactement ce qui fait le site**. Un lieu à 4,4 ★ sur 8 avis
+disparaît derrière un lieu à 4,9 ★ sur 1 200 — alors que c'est précisément le premier qui est
+« hors des sentiers battus ». La note doit *informer* le visiteur, pas *classer* la sélection.
+
+**Conception retenue** — garder deux signaux séparés et visibles comme tels :
+
+> **Sélection Riviera Secrète** · ⭐ 4,8 · 127 visiteurs · 94 % le recommandent
+
+« Nous l'avons trouvé, vous jugez s'il vaut le détour. » L'éditorial reste le filtre d'entrée,
+la communauté valide ou conteste — ça résout aussi le trou de confiance sans diluer la marque.
+
+**Feedback structuré plutôt que texte libre**, au moins au démarrage : après une visite,
+« Qu'avez-vous aimé ? » avec des cases (belle vue · authentique · peu fréquenté · bon rapport
+qualité-prix · adapté aux enfants · accès facile · vaut le déplacement). Trois avantages : ça
+alimente directement les filtres situationnels ci-dessus, ça permet d'afficher « surtout
+apprécié pour : calme · vues · authenticité » qui aide bien plus à décider qu'un 4,7/5, et
+**c'est incomparablement moins coûteux à modérer** que du texte libre.
+
+**Prérequis durs — aucun n'est satisfait aujourd'hui** :
+- [ ] **Politique de confidentialité + mentions légales** (déjà listées plus haut). Héberger
+      des avis élargit nettement le périmètre RGPD : opinions rattachées à des personnes
+      identifiables, droit de rectification et d'effacement à outiller.
+- [ ] **Obligations d'hébergeur de contenus tiers** — signalement, retrait, traçabilité
+      (LCEN + DSA). Un formulaire de signalement devient obligatoire, pas optionnel.
+- [ ] **Transparence sur les avis en ligne** — la réglementation française impose de dire si
+      les avis sont vérifiés, comment ils sont collectés et modérés, et d'afficher leur date.
+      À prévoir dès la conception, pas après.
+- [ ] **Récupération de compte** (« mot de passe oublié », listé plus haut) et **délivrabilité
+      des emails** (domaine Resend vérifié) : une communauté sur un système de comptes dont on
+      ne peut ni récupérer l'accès ni notifier les membres ne tient pas.
+
+**Amorçage — le vrai risque.** « ⭐ 5,0 — 2 avis » n'inspire pas confiance, et « 0 avis »
+affiché sur 43 fiches est **pire que pas de système du tout** : ça signale un site mort. Donc
+ne pas afficher d'agrégat avant un seuil (ex. 5 avis), et d'ici là parler de « premières
+impressions ». Point de départ le moins coûteux : brancher le feedback sur la fin d'un
+itinéraire (« Comment s'est passée votre journée ? », note par étape) pour les comptes
+connectés seulement — ça collecte sans exposer une coquille vide.
+
+**Séquencement.** À faire *après* : les correctifs de fiabilité, le domaine + le juridique, la
+réparation du générateur d'itinéraire (il ampute encore 4 itinéraires sur 6) et le mot de
+passe oublié. Construire une couche communautaire sur un socle comptes incomplet, c'est bâtir
+sur du sable. **Et la contrainte réelle reste l'acquisition** : le raisonnement « après 1 000
+utilisateurs l'algo apprend » suppose un trafic qui n'existe pas encore — la boucle vertueuse
+ne démarre pas toute seule.
 
 ## Mise en production réelle
 
