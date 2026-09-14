@@ -56,19 +56,23 @@ public record StopActivite(
     string? LabelEn = null
 );
 
-// LieuLabelEn/NomLabelEn/ExtraSpansEn : traduction anglaise des libellés d'affichage de la
-// carte "à réserver" — Duree/Prix de l'activité référencée viennent d'Activite.DureeEn/PrixEn
-// (résolue à l'affichage via lieuSlug+activiteId), pas d'ici.
+// LieuLabelEn/NomLabelEn : traduction anglaise des libellés d'affichage de la carte
+// "à réserver" — Duree/Prix/horaires de l'activité référencée viennent d'Activite (résolue
+// à l'affichage via lieuSlug+activiteId), jamais d'une copie stockée ici.
+//
+// ExtraSpans/ExtraSpansEn ont été retirés le 2026-09-14 : c'était le seul endroit du modèle
+// qui recopiait un fait au lieu de le référencer, et il avait dérivé — « Mardi & jeudi » sur
+// la Chapelle du Rosaire là où la fiche lieu annonçait « Fermée le dimanche et le lundi ».
+// Aucune migration : Booking est une colonne jsonb, les clés disparues sont simplement
+// ignorées à la lecture et retirées au prochain refresh-itineraire-fields.
 public record BookingRef(
     string LieuLabel,
     string NomLabel,
     string LinkText,
-    List<string> ExtraSpans,
     string LieuSlug,
     string ActiviteId,
     string? LieuLabelEn = null,
-    string? NomLabelEn = null,
-    List<string>? ExtraSpansEn = null
+    string? NomLabelEn = null
 );
 
 // TitreEn/BadgeEn/AltEn : traduction anglaise.

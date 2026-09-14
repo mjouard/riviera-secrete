@@ -5,6 +5,22 @@ import { buildMapLinks, loc } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import { construirePlanning, formatTransitDesc, type DureeKey } from "@/lib/itineraire-logic";
 
+/**
+ * Horaires connus des activités d'un lieu, pour la version imprimée.
+ *
+ * Seules celles qui en déclarent : 10 activités sur 208 renseignent leurs jours de fermeture
+ * et 23 un texte d'horaires. Afficher une ligne vide pour les autres laisserait croire à une
+ * information manquante alors qu'elle n'a simplement jamais été relevée.
+ */
+function horairesDuLieu(lieu: Lieu, locale: string): Array<{ nom: string; horaires: string }> {
+  return (lieu.activites || [])
+    .filter((a) => a.horaires)
+    .map((a) => ({
+      nom: loc(locale, a.nomEn, a.nom),
+      horaires: loc(locale, a.horairesEn, a.horaires!),
+    }));
+}
+
 const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
 
 export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; dureeKey: DureeKey }) {
@@ -73,6 +89,16 @@ export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; d
                   })}
                 </div>
               )}
+              {/* Version imprimée : les liens ci-dessous sont inutiles sur papier, mais les
+                  coordonnées et les horaires sont exactement ce qu'on emporte sur le terrain.
+                  L'export était présenté comme l'artefact hors-ligne et n'en contenait aucun. */}
+              <div className="print-only text-xs" style={{ color: "var(--text-muted)" }}>
+                <p>📍 {l.lat}°N, {l.lng}°E</p>
+                {horairesDuLieu(l, locale).map((h) => (
+                  <p key={h.nom}>🕒 {h.nom} — {h.horaires}</p>
+                ))}
+              </div>
+
               <div className="no-print flex flex-wrap gap-2">
                 {buildMapLinks(l.lat, l.lng, loc(locale, l.nomEn, l.nom), tCommon("plans")).map((link) => (
                   <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer"

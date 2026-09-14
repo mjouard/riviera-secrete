@@ -81,7 +81,10 @@
     "localisationRefusee": "Accès à la position refusé — autorise-le dans ton navigateur pour trier par distance.",
     "localisationIndisponible": "Localisation indisponible sur cet appareil.",
     "distanceVolOiseau": "à vol d'oiseau",
-    "voirToutesLesActivites": "Voir les {total} activités →"
+    "voirToutesLesActivites": "Voir les {total} activités →",
+    "confianceTitle": "Qui choisit ces lieux ?",
+    "confianceSubtitle": "Un carnet de repérage, pas un guide officiel : aucun lien affilié, aucune publicité, des coordonnées vérifiées une par une et des photos créditées. Et une page qui dit franchement ce que ce site n'est pas.",
+    "confianceCta": "À propos de Riviera Secrète →"
   },
   "villes": {
     "title": "Villes & villages",

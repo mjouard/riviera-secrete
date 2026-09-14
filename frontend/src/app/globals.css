@@ -123,6 +123,10 @@ button:not(:disabled) { cursor: pointer; }
 .print-header { display: none; }
 .print-header-url { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin-bottom: 4px; }
 .print-header h1 { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 600; margin: 0 0 4px; }
+/* Réservé à l'impression : coordonnées et horaires, inutiles à l'écran où les liens
+   de navigation font mieux, indispensables sur le papier qu'on emporte. */
+.print-only { display: none; }
+
 .print-header-meta { font-size: 0.82rem; color: #666; padding-bottom: 14px; border-bottom: 2px solid #333; margin-bottom: 20px; }
 
 @media print {
@@ -140,6 +144,7 @@ button:not(:disabled) { cursor: pointer; }
   @page { margin: 1.5cm; size: A4; }
   header, footer { display: none !important; }
   .no-print { display: none !important; }
+  .print-only { display: block !important; }
   .print-header { display: block !important; }
   .print-days { display: block !important; }
   .print-day { break-inside: avoid; margin-bottom: 16px; }

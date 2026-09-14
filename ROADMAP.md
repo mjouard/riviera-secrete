@@ -123,11 +123,17 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       modifié hors de `RivieraSecrete.Tools` (psql, console Railway), rien ne purge le cache.
       Acceptable tant que l'outil reste le seul chemin ; à revoir si une interface
       d'administration apparaît.
-- [ ] **Purger `extraSpans`/`extraSpansEn`** — champs morts depuis `68a78a8` (ils étaient le
-      seul endroit qui recopiait un fait au lieu de le référencer, et il avait dérivé).
-      Même opération que pour `ogImage` : JSON + entité `Itineraire` + migration EF.
-- [ ] **Normaliser `prixEn` dans les données** — aujourd'hui le format euro anglais est
-      corrigé à l'affichage (`08356cb`) faute de chemin de propagation vers la base.
+- [x] **`extraSpans`/`extraSpansEn` purgés** — **fait le 2026-09-14**. Retirés du record
+      `BookingRef`, du type TS et des 20 occurrences de `data/itineraires.json`, puis les
+      6 itinéraires resynchronisés.
+      **Aucune migration EF, contrairement à ce qui était prévu ici** : `Itineraire.Booking`
+      est une colonne `jsonb` avec convertisseur, les clés disparues sont simplement ignorées
+      à la lecture et retirées à la réécriture. Bon à retenir pour `ogImage`, qui est dans le
+      même cas.
+- [x] **`prixEn` normalisés dans les données** — **fait le 2026-09-14**. 85 prix réécrits
+      au format anglais (« 35–50 € / person » → « €35–50 / person ») et synchronisés en base.
+      `formatEuroAnglais` reste en place comme filet : elle est idempotente, et une activité
+      ajoutée plus tard à la française serait sinon affichée telle quelle sur `/en`.
 - [ ] **Couvrir l'état connecté en test** — non testé par l'audit (la reconnexion Google
       exige une saisie d'identifiants) : favoris persistés, `/mes-itineraires` peuplée,
       édition et suppression d'un itinéraire sauvegardé.
@@ -355,11 +361,12 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
 
       La page de réinitialisation, qui avait sa propre table locale, est alignée dessus —
       deux tables auraient divergé.
-- [ ] **Coordonnées et horaires dans l'export PDF** — `.no-print` masque la carte *et*
-      toutes les rangées de liens de navigation, donc le PDF ne contient ni adresse, ni
-      coordonnées, ni horaires. Or il est présenté comme l'artefact « hors ligne sur le
-      terrain » : sur papier le lien est inutile, mais les coordonnées sont exactement ce
-      qu'on emporte.
+- [x] **Coordonnées et horaires dans l'export PDF** — **fait le 2026-09-14**. Une classe
+      `.print-only`, miroir de `.no-print`, affiche sur le papier les coordonnées de chaque
+      étape et les horaires des activités qui en déclarent. Les liens de navigation restent
+      masqués : inutiles imprimés. Seules les activités renseignées apparaissent — 23 sur 208
+      ont un texte d'horaires, et une ligne vide pour les autres laisserait croire à une
+      information manquante plutôt qu'à une information jamais relevée.
 - [x] **Navigation** — **fait le 2026-09-14**. « Lieux » et « Itinéraires » ajoutés à
       l'en-tête (ancres de l'accueil, les pages de liste ayant été supprimées le 2026-09-12),
       plus une entrée « Rechercher » qui amène au champ du catalogue **et lui donne le
@@ -382,24 +389,33 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       moi »). C'est la version utile des filtres catégoriels, et ça prolonge « Près de moi »,
       le meilleur composant du site, vers « qu'est-ce que je peux faire près d'ici,
       maintenant ». *(Piste issue d'un état des lieux produit externe, 2026-09-14.)*
-- [ ] **Rendre `/a-propos` atteignable** — elle n'est liée que depuis le pied de page. Un
-      évaluateur externe qui a inspecté le site en 2026-09-14 a conclu qu'il « manquait une
-      couche de confiance » alors que la page existe et contient exactement ce qu'il
-      réclamait : si un évaluateur ne la trouve pas, les visiteurs non plus. Le problème
-      n'est pas de l'écrire mais de l'exposer (hero ou nav).
+- [x] **`/a-propos` atteignable** — **fait le 2026-09-14**. Section « Qui choisit ces
+      lieux ? » en fin d'accueil, après le catalogue — c'est-à-dire au moment où la question
+      se pose. Pas dans la nav : elle affiche déjà sept entrées pour 81 px de marge à
+      1024 px, une huitième la cassait.
 - [ ] **Préciser la promesse** — « hors des sentiers battus » / « lieux secrets » est
       contredit par Èze, Monaco, Saint-Paul, Cannes, Saint-Tropez, Pampelonne. Ces lieux ont
       un angle moins touristique, mais la promesse actuelle est plus risquée qu'utile. Piste :
       « la Côte d'Azur au-delà des cartes postales ». Même constat relevé indépendamment par
       l'audit interne (la « route des **classiques** ») et par l'évaluation externe — la
       convergence de deux lectures séparées en fait un point solide.
-- [ ] **Sélecteur de langue : le lien « FR » bascule en anglais** — il émet `href="/fr/…"`,
-      or `/fr/x` redirige vers `/x`, qui redirige vers `/en/x` si le cookie `NEXT_LOCALE=en`
-      est posé. Le clic *dans* l'app fonctionne (il repose le cookie) ; c'est le lien copié
-      puis partagé qui trahit.
+- [~] **Sélecteur de langue — le constat de l'audit ne tient pas** (vérifié le 2026-09-14,
+      aucun changement fait). L'audit reprochait au bouton « FR » d'émettre `/fr/…` et de
+      finir en anglais. Testé avec un vrai bocal à cookies, comme un navigateur : cliquer
+      « FR » depuis un contexte anglais pose bien `NEXT_LOCALE=fr`, atterrit sur l'URL
+      française, et la navigation suivante y reste. Le préfixe `/fr/` est **délibéré** — c'est
+      ainsi que next-intl signale un choix explicite de langue et repose le cookie.
 
-## Features différenciantes
+      Ce que le test a vraiment montré : ce n'est pas `/fr/` le déclencheur. **Toute** URL
+      française non préfixée renvoie vers `/en/…` pour un visiteur dont le cookie ou le
+      navigateur dit « anglais » — c'est `localeDetection`, et c'est le comportement voulu :
+      un anglophone qui reçoit un lien français lit le site dans sa langue.
 
+      Le seul cas réellement gênant serait un lien `/fr/…` copié et envoyé à quelqu'un qui
+      veut du français mais dont le navigateur est anglais. Le corriger imposerait soit
+      `localePrefix: "always"` — toutes les URL françaises deviennent `/fr/…`, changement
+      d'URL massif et régression SEO — soit `localeDetection: false`, qui supprime la
+      détection automatique pour tout le monde. Le remède est plus coûteux que le mal.
 - [x] Créateur d'itinéraire à la volée — durée + zones/lieux au choix, génération auto,
       sauvegarde en localStorage (`creer-itineraire.html` / `mes-itineraires.html`)
 - [x] Créateur d'itinéraire : rendu complet façon `itin/*.html` (blocs transit estimés,

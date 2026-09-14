@@ -86,7 +86,7 @@
         "altEn": "Sea kayaking outing",
         "linkText": "Voir les offres →",
         "dureeEn": "2h",
-        "prixEn": "35–50 € / person"
+        "prixEn": "€35–50 / person"
       },
       {
         "id": "citadelle-saint-elme",
@@ -116,7 +116,7 @@
         "altEn": "Snorkelling",
         "linkText": "Voir les offres →",
         "dureeEn": "2h",
-        "prixEn": "40–55 € / person"
+        "prixEn": "€40–55 / person"
       },
       {
         "id": "restaurant-laparte",
@@ -131,7 +131,7 @@
         "altEn": "Entrance to the Rue Obscure, where restaurant L'Aparté is tucked away",
         "linkText": "En savoir plus →",
         "dureeEn": "1h30",
-        "prixEn": "29–50 € / person"
+        "prixEn": "€29–50 / person"
       },
       {
         "id": "plage-des-marinieres",
@@ -269,7 +269,7 @@
         "altEn": "Bike rental",
         "linkText": "Voir les offres →",
         "dureeEn": "2–4h",
-        "prixEn": "15–25 € / day"
+        "prixEn": "€15–25 / day"
       },
       {
         "id": "villa-ephrussi-de-rothschild",
@@ -284,7 +284,7 @@
         "altEn": "Visit to the villa & gardens",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "18 € / adult",
+        "prixEn": "€18 / adult",
         "fermeJours": [],
         "horaires": "10h–18h (19h en juillet-août) ; horaires réduits en hiver. Ouvert tous les jours, quelques fermetures ponctuelles pour privatisation.",
         "horairesEn": "10am–6pm (7pm in July–August); reduced hours in winter. Open daily, with occasional closures for private events."
@@ -332,7 +332,7 @@
         "altEn": "Cove at Plage de Passable on Cap Ferrat, seen from the coastal path",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "25–50 € / person"
+        "prixEn": "€25–50 / person"
       }
     ],
     "related": [
@@ -441,7 +441,7 @@
         "altEn": "Visit to Villa Kerylos",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "14 € / adult",
+        "prixEn": "€14 / adult",
         "fermeJours": [],
         "horaires": "10h–17h (18h de mai à août). Ouvert tous les jours sauf 1er janvier, 1er mai, 1er et 11 novembre, 25 décembre.",
         "horairesEn": "10am–5pm (6pm May–August). Open daily except 1 January, 1 May, 1 and 11 November, 25 December."
@@ -489,7 +489,7 @@
         "altEn": "The harbour of Beaulieu-sur-Mer, home to the African Queen restaurant",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "50–70 € / person"
+        "prixEn": "€50–70 / person"
       }
     ],
     "related": [
@@ -596,7 +596,7 @@
         "altEn": "Jardin Exotique of Èze",
         "linkText": "Réserver →",
         "dureeEn": "45 min – 1 h 15",
-        "prixEn": "8 – 10 € / adult",
+        "prixEn": "€8–10 / adult",
         "fermeJours": [],
         "horaires": "9h–16h30 en hiver, 9h–18h30 au printemps et en octobre, 9h–19h30 de juillet à septembre. Billet en ligne obligatoire.",
         "horairesEn": "9am–4.30pm in winter, 9am–6.30pm in spring and October, 9am–7.30pm July–September. Online ticket required."
@@ -614,7 +614,7 @@
         "altEn": "Perfume workshop in Èze",
         "linkText": "Réserver →",
         "dureeEn": "45 min",
-        "prixEn": "30 € / adult"
+        "prixEn": "€30 / adult"
       },
       {
         "id": "chemin-de-nietzsche",
@@ -659,7 +659,7 @@
         "altEn": "Lane in the village of Èze where La Taverne d'Antan is tucked away",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20–30 € / person"
+        "prixEn": "€20–30 / person"
       }
     ],
     "related": [
@@ -779,7 +779,7 @@
         "altEn": "Visit to the Trophy of Augustus",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "7 € / adult",
+        "prixEn": "€7 / adult",
         "fermeJours": [
           1
         ],
@@ -844,7 +844,7 @@
         "altEn": "Street in the village of La Turbie, with the Trophy of Augustus visible in the background",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20–35 € / person"
+        "prixEn": "€20–35 / person"
       }
     ],
     "related": [
@@ -951,7 +951,7 @@
         "altEn": "Jardin Exotique of Monaco",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult",
+        "prixEn": "€8 / adult",
         "fermeJours": [],
         "horaires": "Rouvert en mars 2026 après six ans de travaux. 9h–17h en hiver, 9h–19h de mai à septembre. Fermé pendant le Grand Prix, le 19 novembre et le 25 décembre.",
         "horairesEn": "Reopened in March 2026 after six years of works. 9am–5pm in winter, 9am–7pm May–September. Closed during the Grand Prix, on 19 November and 25 December."
@@ -969,7 +969,7 @@
         "altEn": "Oceanographic Museum",
         "linkText": "Réserver →",
         "dureeEn": "2h",
-        "prixEn": "18 € / adult",
+        "prixEn": "€18 / adult",
         "fermeJours": [],
         "horaires": "10h–18h en hiver, 10h–19h au printemps, 9h30–20h en juillet-août. Fermé le week-end du Grand Prix et le 25 décembre.",
         "horairesEn": "10am–6pm in winter, 10am–7pm in spring, 9.30am–8pm in July–August. Closed on Grand Prix weekend and 25 December."
@@ -987,7 +987,7 @@
         "altEn": "Rock of Monaco & Palace",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "10 € / adult"
+        "prixEn": "€10 / adult"
       },
       {
         "id": "restaurant-u-cavagnetu",
@@ -1002,7 +1002,7 @@
         "altEn": "Lane on the Rock of Monaco, where U Cavagnëtu is tucked away",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "16–30 € / person"
+        "prixEn": "€16–30 / person"
       }
     ],
     "related": [
@@ -1108,7 +1108,7 @@
         "altEn": "Visit to the medieval castle",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "5 € / adult",
+        "prixEn": "€5 / adult",
         "fermeJours": [],
         "horaires": "10h–12h30 et 14h–17h ou 18h selon la saison. Fermé les 1er mai, 1er et 11 novembre, 25 décembre et 1er janvier.",
         "horairesEn": "10am–12.30pm and 2pm–5 or 6pm depending on the season. Closed 1 May, 1 and 11 November, 25 December and 1 January."
@@ -1156,7 +1156,7 @@
         "altEn": "Square in the heart of the old village of Roquebrune-Cap-Martin",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "25–40 € / person"
+        "prixEn": "€25–40 / person"
       }
     ],
     "related": [
@@ -1279,7 +1279,7 @@
         "altEn": "Le Corbusier's Cabanon (guided tour)",
         "linkText": "Voir les offres →",
         "dureeEn": "1h",
-        "prixEn": "10 € / adult"
+        "prixEn": "€10 / adult"
       }
     ],
     "related": [
@@ -1400,7 +1400,7 @@
         "altEn": "Old Nice — guided tour",
         "linkText": "Voir les offres →",
         "dureeEn": "2h",
-        "prixEn": "15 € / adult"
+        "prixEn": "€15 / adult"
       },
       {
         "id": "montee-en-ascenseur-colline",
@@ -1579,7 +1579,7 @@
         "altEn": "Old Nice food tour",
         "linkText": "Voir les offres →",
         "dureeEn": "2h",
-        "prixEn": "45–55 € / adult"
+        "prixEn": "€45–55 / adult"
       },
       {
         "id": "cours-de-cuisine-nicoise",
@@ -1594,7 +1594,7 @@
         "altEn": "Niçoise cooking class",
         "linkText": "Voir les offres →",
         "dureeEn": "3h",
-        "prixEn": "65–90 € / adult"
+        "prixEn": "€65–90 / adult"
       },
       {
         "id": "restaurant-chez-theresa",
@@ -1609,7 +1609,7 @@
         "altEn": "Freshly baked wood-fired socca, the speciality of Chez Théresa on Cours Saleya",
         "linkText": "Réserver →",
         "dureeEn": "30min",
-        "prixEn": "3–8 € / person"
+        "prixEn": "€3–8 / person"
       }
     ],
     "related": [
@@ -1742,7 +1742,7 @@
         "altEn": "Restaurant Les Plaisirs in Peillon",
         "linkText": "Réserver →",
         "dureeEn": "1 h",
-        "prixEn": "40 – 50 € / person"
+        "prixEn": "€40–50 / person"
       },
       {
         "id": "eglise-chapelle-des-penitents-blancs",
@@ -1951,7 +1951,7 @@
         "altEn": "Old square in the village of Peille, with its fountain and arcades",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "28–35 € / person"
+        "prixEn": "€28–35 / person"
       }
     ],
     "related": [
@@ -2101,7 +2101,7 @@
         "altEn": "Façade of restaurant Au Vieux Four, rue Basse in Gourdon",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "29–42 € / person"
+        "prixEn": "€29–42 / person"
       },
       {
         "id": "bapteme-parapente-gourdon",
@@ -2111,7 +2111,7 @@
         "duree": "20 min de vol",
         "dureeEn": "20 min flight",
         "prix": "80–90 € / pers.",
-        "prixEn": "80–90 € / person",
+        "prixEn": "€80–90 / person",
         "url": "https://www.skywalkair.com/",
         "image": "../assets/images/lieux/gourdon-village/act-8.jpg",
         "alt": "Vue sur la vallée du Loup depuis les remparts de Gourdon",
@@ -2301,7 +2301,7 @@
         "altEn": "Climbing and via ferrata",
         "linkText": "Voir les offres →",
         "dureeEn": "3h–4h",
-        "prixEn": "50–80 € / person"
+        "prixEn": "€50–80 / person"
       },
       {
         "id": "cascade-de-courmes",
@@ -2346,7 +2346,7 @@
         "altEn": "The Saut du Loup waterfall, right next to the restaurant of the same name",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20–25 € / person"
+        "prixEn": "€20–25 / person"
       }
     ],
     "related": [
@@ -2496,7 +2496,7 @@
         "altEn": "Artisan jam-making workshop",
         "linkText": "Voir les offres →",
         "dureeEn": "1h30",
-        "prixEn": "30–45 € / adult"
+        "prixEn": "€30–45 / adult"
       },
       {
         "id": "vtt-bramafan-plateau-saint-barnabe",
@@ -2645,7 +2645,7 @@
         "altEn": "Artisan ceramics workshop",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "35–55 € / adult"
+        "prixEn": "€35–55 / adult"
       },
       {
         "id": "festival-des-violettes-fevrier-mars",
@@ -2705,7 +2705,7 @@
         "altEn": "View over the countryside from an inn in the old village of Tourrettes-sur-Loup",
         "linkText": "Réserver →",
         "dureeEn": "2h",
-        "prixEn": "35–50 € / person"
+        "prixEn": "€35–50 / person"
       }
     ],
     "related": [
@@ -2825,7 +2825,7 @@
         "altEn": "Fondation Maeght",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20 € / adult"
+        "prixEn": "€20 / adult"
       },
       {
         "id": "balade-sur-les-remparts",
@@ -2870,7 +2870,7 @@
         "altEn": "Chapelle du Rosaire (Matisse)",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "7 € / adult",
+        "prixEn": "€7 / adult",
         "fermeJours": [
           0,
           1
@@ -2921,7 +2921,7 @@
         "altEn": "Stepped lane in the village of Saint-Paul-de-Vence",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "16–25 € / person"
+        "prixEn": "€16–25 / person"
       }
     ],
     "related": [
@@ -3055,7 +3055,7 @@
         "altEn": "Glassblowing workshop",
         "linkText": "Voir les offres →",
         "dureeEn": "1h30",
-        "prixEn": "45–65 € / adult"
+        "prixEn": "€45–65 / adult"
       },
       {
         "id": "musee-national-fernand-leger",
@@ -3070,7 +3070,7 @@
         "altEn": "Musée National Fernand Léger",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "11 € / adult",
+        "prixEn": "€11 / adult",
         "fermeJours": [
           2
         ],
@@ -3224,7 +3224,7 @@
         "altEn": "Château-Musée Grimaldi",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "7 € / adult",
+        "prixEn": "€7 / adult",
         "fermeJours": [
           2
         ],
@@ -3244,7 +3244,7 @@
         "altEn": "Musée Renoir",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "9 € / adult",
+        "prixEn": "€9 / adult",
         "fermeJours": [
           2
         ],
@@ -3279,7 +3279,7 @@
         "altEn": "Place du Château in Haut-de-Cagnes, home to restaurant Le Village",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "30–40 € / person"
+        "prixEn": "€30–40 / person"
       }
     ],
     "related": [
@@ -3412,7 +3412,7 @@
         "altEn": "Musée Picasso d'Antibes",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult",
+        "prixEn": "€8 / adult",
         "fermeJours": [
           1
         ],
@@ -3432,7 +3432,7 @@
         "altEn": "Electric bike rental",
         "linkText": "Voir les offres →",
         "dureeEn": "2h–4h",
-        "prixEn": "20–35 €"
+        "prixEn": "€20–35"
       },
       {
         "id": "baignade-plage-de-la-garoupe",
@@ -3582,7 +3582,7 @@
         "altEn": "Jazz à Juan Festival",
         "linkText": "Réserver →",
         "dureeEn": "Evening",
-        "prixEn": "30–80 € / seat"
+        "prixEn": "€30–80 / seat"
       },
       {
         "id": "location-paddle-sup",
@@ -3597,7 +3597,7 @@
         "altEn": "Paddleboard / SUP rental",
         "linkText": "Voir les offres →",
         "dureeEn": "1h",
-        "prixEn": "15–20 € / person"
+        "prixEn": "€15–20 / person"
       },
       {
         "id": "plage-de-juan-les-pins",
@@ -3627,7 +3627,7 @@
         "altEn": "Shaded palm garden in the centre of Juan-les-Pins",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "21–39 € / person"
+        "prixEn": "€21–39 / person"
       }
     ],
     "related": [
@@ -3746,7 +3746,7 @@
         "altEn": "Boat crossing from Cannes",
         "linkText": "Réserver →",
         "dureeEn": "30min one way",
-        "prixEn": "18 € round trip"
+        "prixEn": "€18 round trip"
       },
       {
         "id": "abbaye-de-lerins-saint-honorat",
@@ -3821,7 +3821,7 @@
         "altEn": "Vineyard of Lérins Abbey on Île Saint-Honorat, tended by the monks",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "35–45 € / person"
+        "prixEn": "€35–45 / person"
       }
     ],
     "related": [
@@ -3957,7 +3957,7 @@
         "altEn": "Mountain biking in the Estérel",
         "linkText": "Réserver →",
         "dureeEn": "3h–5h",
-        "prixEn": "25–45 € / rental"
+        "prixEn": "€25–45 / rental"
       },
       {
         "id": "randonnee-esterel-cotiere",
@@ -4091,7 +4091,7 @@
         "altEn": "Sea kayaking among the coves",
         "linkText": "Voir les offres →",
         "dureeEn": "2h–3h",
-        "prixEn": "40–60 € / person"
+        "prixEn": "€40–60 / person"
       },
       {
         "id": "snorkeling-calanques-rouges",
@@ -4106,7 +4106,7 @@
         "altEn": "Snorkelling in the red coves",
         "linkText": "Voir les offres →",
         "dureeEn": "2h",
-        "prixEn": "30–45 € / person"
+        "prixEn": "€30–45 / person"
       },
       {
         "id": "randonnee-cotiere-calanques",
@@ -4151,7 +4151,7 @@
         "altEn": "Harbour of Théoule-sur-Mer, not far from restaurant La Maréa",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "60–90 € / person"
+        "prixEn": "€60–90 / person"
       }
     ],
     "related": [
@@ -4287,7 +4287,7 @@
         "altEn": "Musée International de la Parfumerie",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "8 € / adult",
+        "prixEn": "€8 / adult",
         "fermeJours": [],
         "horaires": "10h–18h (19h en juillet-août). Fermé le 1er lundi de plusieurs mois d'hiver, le 1er mai, le 25 décembre et le 1er janvier.",
         "horairesEn": "10am–6pm (7pm in July–August). Closed on the first Monday of several winter months, 1 May, 25 December and 1 January."
@@ -4305,7 +4305,7 @@
         "altEn": "Perfume-making workshop",
         "linkText": "Voir les offres →",
         "dureeEn": "1h30",
-        "prixEn": "50–80 € / adult"
+        "prixEn": "€50–80 / adult"
       },
       {
         "id": "restaurant-le-petit-caboulot",
@@ -4320,7 +4320,7 @@
         "altEn": "Place de la Foux in Grasse, near restaurant Le Petit Caboulot",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "10–20 € / person"
+        "prixEn": "€10–20 / person"
       }
     ],
     "related": [
@@ -4438,7 +4438,7 @@
         "altEn": "Citadel & naval museum",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "9 € / adult",
+        "prixEn": "€9 / adult",
         "fermeJours": [],
         "horaires": "10h–18h30 d'avril à septembre, 10h–17h30 d'octobre à mars. Fermée les 1er mai, 17 mai, 11 novembre, 25 décembre et 1er janvier.",
         "horairesEn": "10am–6.30pm April–September, 10am–5.30pm October–March. Closed 1 May, 17 May, 11 November, 25 December and 1 January."
@@ -4471,7 +4471,7 @@
         "altEn": "Boat rental",
         "linkText": "Réserver →",
         "dureeEn": "4h",
-        "prixEn": "200–500 € / group"
+        "prixEn": "€200–500 / group"
       },
       {
         "id": "randonnee-sentier-du-littoral",
@@ -4501,7 +4501,7 @@
         "altEn": "Lane in the old town of Saint-Tropez, a stone's throw from the Citadel",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "13–20 € / person"
+        "prixEn": "€13–20 / person"
       }
     ],
     "related": [
@@ -4635,7 +4635,7 @@
         "altEn": "Gulf wine tasting",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "15–25 € / tasting"
+        "prixEn": "€15–25 / tasting"
       },
       {
         "id": "visite-du-village-classe",
@@ -4680,7 +4680,7 @@
         "altEn": "Flower-lined lane in the village of Gassin",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "30–40 € / person"
+        "prixEn": "€30–40 / person"
       }
     ],
     "related": [
@@ -4829,7 +4829,7 @@
         "altEn": "Terraced pools and rare plants of Jardin Serre de la Madone",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "10 € / adult",
+        "prixEn": "€10 / adult",
         "fermeJours": [
           1
         ],
@@ -4849,7 +4849,7 @@
         "altEn": "Century-old palms and tropical plants of the Val Rahmeh garden",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "8 € / adult",
+        "prixEn": "€8 / adult",
         "fermeJours": [
           2
         ],
@@ -4869,7 +4869,7 @@
         "altEn": "Terrace of restaurant Le Petit Port at the foot of Old Menton",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "25-45 € / person"
+        "prixEn": "€25-45 / person"
       }
     ],
     "related": [
@@ -5020,7 +5020,7 @@
         "altEn": "Panoramic terrace of restaurant Le Parcours Live in Falicon",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "25-70 € / person"
+        "prixEn": "€25-70 / person"
       },
       {
         "id": "porte-saint-francois-falicon",
@@ -5186,7 +5186,7 @@
         "altEn": "Terrace of restaurant Le Plongeoir, perched on the rocks of Cap de Nice",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "30-70 € / person"
+        "prixEn": "€30-70 / person"
       }
     ],
     "related": [
@@ -5324,7 +5324,7 @@
         "altEn": "Exhibition at the Centre de la Photographie de Mougins",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "6 € / adult"
+        "prixEn": "€6 / adult"
       },
       {
         "id": "chapelle-notre-dame-de-vie",
@@ -5354,7 +5354,7 @@
         "altEn": "Former 18th-century stable converted into the dining room of the Bistrot de Mougins",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "30-50 € / person"
+        "prixEn": "€30-50 / person"
       }
     ],
     "related": [
@@ -5475,7 +5475,7 @@
         "altEn": "Romanesque chapel of Vallauris castle, home to Picasso's War and Peace",
         "linkText": "Réserver →",
         "dureeEn": "1h-1h30",
-        "prixEn": "6 € / adult",
+        "prixEn": "€6 / adult",
         "fermeJours": [
           2
         ],
@@ -5510,7 +5510,7 @@
         "altEn": "Dining room of restaurant Le Temps Jadis on Avenue Clemenceau in Vallauris",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "16-23 € / person"
+        "prixEn": "€16-23 / person"
       },
       {
         "id": "oppidum-encourdoules-vallauris",
@@ -5703,7 +5703,7 @@
         "altEn": "Terrace of the Bistrot du Port facing the old harbour of Golfe-Juan",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "25-40 € / person"
+        "prixEn": "€25-40 / person"
       }
     ],
     "related": [
@@ -5855,7 +5855,7 @@
         "altEn": "Fine-dining room of restaurant Les Santons in the heart of the village of Grimaud",
         "linkText": "Réserver →",
         "dureeEn": "2h",
-        "prixEn": "65-120 € / person"
+        "prixEn": "€65-120 / person"
       },
       {
         "id": "musee-patrimoine-grimaud",
@@ -6036,7 +6036,7 @@
         "altEn": "Wood-fired bouillabaisse served on the Bonne Terrasse beach at Chez Camille",
         "linkText": "Réserver →",
         "dureeEn": "2h",
-        "prixEn": "25-130 € / person"
+        "prixEn": "€25-130 / person"
       }
     ],
     "related": [
@@ -6217,7 +6217,7 @@
         "altEn": "Former farmhouse housing restaurant Les Moulins de Ramatuelle near Pampelonne",
         "linkText": "Réserver →",
         "dureeEn": "1h-1h30",
-        "prixEn": "30-50 € / person"
+        "prixEn": "€30-50 / person"
       }
     ],
     "related": [
@@ -6313,7 +6313,7 @@
         "altEn": "Underground gallery of the Maginot Line fort in Sainte-Agnès",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "7 € / adult",
+        "prixEn": "€7 / adult",
         "fermeJours": [
           1,
           2
@@ -6364,7 +6364,7 @@
         "altEn": "Panoramic terrace of restaurant Le Righi in Sainte-Agnès",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "25-40 € / person"
+        "prixEn": "€25-40 / person"
       },
       {
         "id": "eglise-notre-dame-neiges-sainte-agnes",
@@ -6530,7 +6530,7 @@
         "altEn": "Shaded terrace of restaurant Lo Castel on the castle square in Coaraze",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20-35 € / person"
+        "prixEn": "€20-35 / person"
       },
       {
         "id": "chapelle-saint-sebastien-coaraze",
@@ -6681,7 +6681,7 @@
         "altEn": "Concrete underground galleries of Fort Saint-Roch in Sospel",
         "linkText": "Réserver →",
         "dureeEn": "1h30-2h",
-        "prixEn": "9 € / adult",
+        "prixEn": "€9 / adult",
         "fermeJours": [],
         "horaires": "Week-ends seulement en avril, mai, juin et septembre (13h30–18h) ; tous les jours sauf lundi en juillet-août. Fermé le reste de l'année — vérifier avant de s'y rendre.",
         "horairesEn": "Weekends only in April, May, June and September (1.30pm–6pm); daily except Mondays in July–August. Closed the rest of the year — check before travelling."
@@ -6699,7 +6699,7 @@
         "altEn": "Terrace of restaurant Le Picoun on the banks of the Bévéra in Sospel",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20-35 € / person"
+        "prixEn": "€20-35 / person"
       },
       {
         "id": "cathedrale-saint-michel-sospel",
@@ -6865,7 +6865,7 @@
         "altEn": "Terrace of the Bistrot de l'Orme beneath Gorbio's three-hundred-year-old elm",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20-35 € / person"
+        "prixEn": "€20-35 / person"
       },
       {
         "id": "chateau-musee-lascaris-gorbio",
@@ -7001,7 +7001,7 @@
         "altEn": "Collector's Neapolitan nativity scene at the Musée de la Crèche in Lucéram",
         "linkText": "Réserver →",
         "dureeEn": "45 min",
-        "prixEn": "2 € / adult",
+        "prixEn": "€2 / adult",
         "fermeJours": [],
         "horaires": "Ouvert tous les jours de 14h à 17h. Horaires élargis et entrée libre pendant le Circuit des crèches, de fin novembre à début janvier.",
         "horairesEn": "Open daily from 2pm to 5pm. Extended hours and free entry during the Circuit des crèches, from late November to early January."
@@ -7034,7 +7034,7 @@
         "altEn": "Traditional Niçois cuisine served at Chez Mumu in Lucéram",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20-30 € / person"
+        "prixEn": "€20-30 / person"
       },
       {
         "id": "remparts-tour-luceram",
@@ -7212,7 +7212,7 @@
         "altEn": "Aerial adventure course in the century-old trees of Peïra-Cava",
         "linkText": "Réserver →",
         "dureeEn": "3h",
-        "prixEn": "18 € / adult, 13 € / child"
+        "prixEn": "€18 / adult, €13 / child"
       },
       {
         "id": "dejeuner-refuge-peira-cava",
@@ -7227,7 +7227,7 @@
         "altEn": "Terrace of a restaurant in Peïra-Cava with a mountain view",
         "linkText": "Réserver →",
         "dureeEn": "1h-1h30",
-        "prixEn": "20-35 € / person"
+        "prixEn": "€20-35 / person"
       }
     ],
     "related": [
@@ -7321,7 +7321,7 @@
         "altEn": "Cloister and 17th-century frescoes of the Franciscan monastery in Saorge",
         "linkText": "Réserver →",
         "dureeEn": "1h",
-        "prixEn": "7 € / adult"
+        "prixEn": "€7 / adult"
       },
       {
         "id": "balade-amphitheatre-saorge",
@@ -7366,7 +7366,7 @@
         "altEn": "Terrace of La Petite Épicerie in the heart of the village of Saorge",
         "linkText": "Réserver →",
         "dureeEn": "1h30",
-        "prixEn": "20-35 € / person"
+        "prixEn": "€20-35 / person"
       },
       {
         "id": "madone-del-poggio-saorge",

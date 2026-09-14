@@ -132,10 +132,11 @@ export function alternatesPage(siteUrl: string, locale: string, chemin: string) 
  * itinéraires — écrites à la main — affichent déjà « €7 » sur la même page. Deux
  * conventions typographiques coexistaient donc à quelques centimètres l'une de l'autre.
  *
- * Correction à l'affichage plutôt que dans les données : le seeder est idempotent, une
- * édition du JSON ne se propage pas à la base de prod (voir CLAUDE.md). La fonction est
- * idempotente elle aussi — « from €60 / person », déjà à l'anglaise, n'a pas de € suffixe
- * et ressort inchangée — donc normaliser un jour les données ne la rendra pas nuisible.
+ * **Les données sont normalisées depuis le 2026-09-14** (85 `prixEn` réécrits puis
+ * synchronisés en base) : cette fonction ne devrait donc plus rien avoir à corriger. Elle
+ * reste en place comme filet, parce qu'elle est idempotente — « from €60 / person », déjà à
+ * l'anglaise, n'a pas de € suffixe et ressort inchangée — et qu'une activité ajoutée plus
+ * tard avec la convention française serait sinon affichée telle quelle sur /en.
  */
 const EURO_SUFFIXE = /(\d[\d.,]*(?:\s*[–—-]\s*\d[\d.,]*)?)\s*€/g;
 

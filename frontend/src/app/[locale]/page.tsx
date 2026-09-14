@@ -154,6 +154,26 @@ export default async function HomePage({
           <HomeLieuxGrid lieux={lieux} />
         </div>
       </section>
+
+      {/* Qui écrit ce site — /a-propos n'était liée que depuis le pied de page. Un
+          évaluateur externe a conclu qu'il « manquait une couche de confiance » alors que la
+          page existait : s'il ne la trouve pas, un visiteur non plus. Placée ici, après le
+          catalogue, c'est-à-dire au moment où la question se pose. */}
+      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-xl font-bold mb-2">{t("confianceTitle")}</h2>
+          <p className="text-sm mb-5" style={{ color: "var(--text-muted)" }}>
+            {t("confianceSubtitle")}
+          </p>
+          <Link
+            href="/a-propos"
+            className="inline-block text-sm px-5 py-2.5 rounded-full border font-medium transition-colors hover:bg-white/5"
+            style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
+          >
+            {t("confianceCta")}
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

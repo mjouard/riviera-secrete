@@ -81,7 +81,10 @@
     "localisationRefusee": "Location access denied — allow it in your browser to sort by distance.",
     "localisationIndisponible": "Location unavailable on this device.",
     "distanceVolOiseau": "as the crow flies",
-    "voirToutesLesActivites": "See all {total} activities →"
+    "voirToutesLesActivites": "See all {total} activities →",
+    "confianceTitle": "Who picks these places?",
+    "confianceSubtitle": "A scouting notebook, not an official guide: no affiliate links, no advertising, coordinates checked one by one and photos properly credited. And a page that says plainly what this site is not.",
+    "confianceCta": "About Riviera Secrète →"
   },
   "villes": {
     "title": "Towns & villages",
