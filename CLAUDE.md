@@ -324,7 +324,18 @@ visitor picks Google vs. email/password.
 
 - **`src/lib/api.ts`** — typed fetch helpers against the backend: `api.{lieux,villes,
   itineraires}.{list,bySlug}()` for public server-side reads (Next.js `revalidate: 3600`,
-  i.e. ISR — not fetched fresh per request), plus `authFetch(path, token, options)` for
+  i.e. ISR — not fetched fresh per request). **Each read is tagged** (`TAGS.lieux`,
+  `TAGS.villes`, `TAGS.itineraires`) so a content change can purge every page that depends
+  on it in one call, without enumerating paths — a lieu shows up on its own page, the
+  homepage, its ville, `/activites` and every itinéraire citing it, in two languages.
+  `RivieraSecrete.Tools` POSTs to `/api/revalidate` (header `x-revalidate-secret`) after
+  every successful write, which calls `revalidateTag(tag, { expire: 0 })`. **Both
+  `FRONTEND_URL` and `REVALIDATE_SECRET` must be set in the tool's environment**, and the
+  same `REVALIDATE_SECRET` on Vercel — otherwise the tool prints a `[cache]` warning and the
+  correction stays invisible for up to an hour (it never fails the sync: the DB write did
+  succeed). Before 2026-09-14 nothing invalidated anything, which is how
+  `/en/itineraires/villages-perches` kept offering a château closed since 2015 at 6 €.
+  Plus `authFetch(path, token, options)` for
   client-side calls that need the `Authorization: Bearer <token>` header.
   `NEXT_PUBLIC_API_URL` (env var, see `.env.example`) points at the backend; defaults to
   `http://localhost:5171` for local dev against `dotnet run`. `get<T>()` runs every response

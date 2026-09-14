@@ -15,8 +15,27 @@ function decodeDeep<T>(value: T): T {
   return value;
 }
 
-async function get<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, { next: { revalidate: 3600 } });
+/**
+ * Étiquettes de cache, une par type de contenu.
+ *
+ * Elles permettent d'invalider *toutes* les pages qui dépendent d'un type en un appel
+ * (`revalidateTag`), sans avoir à énumérer les chemins concernés. C'est indispensable ici :
+ * un lieu apparaît sur sa fiche, mais aussi sur l'accueil, sur sa ville, sur `/activites`
+ * et dans les itinéraires qui le citent — en deux langues. Énumérer ces chemins à la main
+ * serait un inventaire à tenir à jour, donc un inventaire qui finirait faux.
+ */
+export const TAGS = {
+  lieux: "lieux",
+  villes: "villes",
+  itineraires: "itineraires",
+} as const;
+
+export type TagContenu = (typeof TAGS)[keyof typeof TAGS];
+
+async function get<T>(path: string, tag: TagContenu): Promise<T> {
+  // `revalidate: 3600` reste le filet : si l'invalidation à la demande n'est pas configurée
+  // (secret absent), le contenu se rafraîchit toujours, simplement au bout d'une heure.
+  const res = await fetch(`${API_URL}${path}`, { next: { revalidate: 3600, tags: [tag] } });
   if (!res.ok) throw new Error(`API ${path} → ${res.status}`);
   return decodeDeep((await res.json()) as T);
 }
@@ -39,15 +58,15 @@ export async function authFetch(
 
 export const api = {
   lieux: {
-    list: () => get<Lieu[]>("/api/lieux"),
-    bySlug: (slug: string) => get<Lieu>(`/api/lieux/${slug}`),
+    list: () => get<Lieu[]>("/api/lieux", TAGS.lieux),
+    bySlug: (slug: string) => get<Lieu>(`/api/lieux/${slug}`, TAGS.lieux),
   },
   villes: {
-    list: () => get<Ville[]>("/api/villes"),
-    bySlug: (slug: string) => get<Ville>(`/api/villes/${slug}`),
+    list: () => get<Ville[]>("/api/villes", TAGS.villes),
+    bySlug: (slug: string) => get<Ville>(`/api/villes/${slug}`, TAGS.villes),
   },
   itineraires: {
-    list: () => get<Itineraire[]>("/api/itineraires"),
-    bySlug: (slug: string) => get<Itineraire>(`/api/itineraires/${slug}`),
+    list: () => get<Itineraire[]>("/api/itineraires", TAGS.itineraires),
+    bySlug: (slug: string) => get<Itineraire>(`/api/itineraires/${slug}`, TAGS.itineraires),
   },
 };

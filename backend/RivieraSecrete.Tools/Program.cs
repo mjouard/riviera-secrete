@@ -43,6 +43,7 @@ if (args is ["remove-activite", var lieuSlug, var activiteId])
     db.Activites.Remove(activite);
     await db.SaveChangesAsync();
     Console.WriteLine($"Activité '{activiteId}' retirée du lieu '{lieuSlug}'.");
+    await InvaliderCacheFrontendAsync("lieux", "villes", "itineraires");
     return 0;
 }
 
@@ -74,6 +75,7 @@ if (args is ["rename-lieu", var oldSlug, var newSlug])
     if (!string.IsNullOrWhiteSpace(newDescription)) lieuToRename.Description = newDescription;
     await db.SaveChangesAsync();
     Console.WriteLine($"Lieu '{oldSlug}' renommé en '{newSlug}' ({newNom}).");
+    await InvaliderCacheFrontendAsync("lieux", "villes", "itineraires");
     return 0;
 }
 
@@ -88,6 +90,7 @@ if (args is ["refresh-lieu-fields", var refreshSlug])
     Console.WriteLine(ok
         ? $"Champs du lieu '{refreshSlug}' rafraîchis depuis le JSON."
         : $"Lieu '{refreshSlug}' introuvable en DB ou dans data/lieux.json — rien fait.");
+    if (ok) await InvaliderCacheFrontendAsync("lieux", "villes", "itineraires");
     return ok ? 0 : 1;
 }
 
@@ -100,6 +103,7 @@ if (args is ["refresh-ville-fields", var refreshVilleSlug])
     Console.WriteLine(ok
         ? $"Champs de la ville '{refreshVilleSlug}' rafraîchis depuis le JSON."
         : $"Ville '{refreshVilleSlug}' introuvable en DB ou dans data/villes.json — rien fait.");
+    if (ok) await InvaliderCacheFrontendAsync("villes");
     return ok ? 0 : 1;
 }
 
@@ -113,6 +117,7 @@ if (args is ["refresh-activite", var refreshLieuSlug, var refreshActiviteId])
     Console.WriteLine(ok
         ? $"Activité '{refreshActiviteId}' (lieu '{refreshLieuSlug}') rafraîchie depuis le JSON."
         : $"Activité '{refreshActiviteId}' ou lieu '{refreshLieuSlug}' introuvable — rien fait.");
+    if (ok) await InvaliderCacheFrontendAsync("lieux", "villes", "itineraires");
     return ok ? 0 : 1;
 }
 
@@ -128,6 +133,7 @@ if (args is ["refresh-itineraire-fields", var refreshItinSlug])
     Console.WriteLine(ok
         ? $"Champs de l'itinéraire '{refreshItinSlug}' rafraîchis depuis le JSON."
         : $"Itinéraire '{refreshItinSlug}' introuvable en DB ou dans data/itineraires.json — rien fait.");
+    if (ok) await InvaliderCacheFrontendAsync("itineraires");
     return ok ? 0 : 1;
 }
 
@@ -136,6 +142,7 @@ Console.WriteLine($"Data dir: {dataDir}");
 var (villes, lieux, activites) = await DatabaseSeeder.SyncNewContentAsync(db, dataDir);
 
 Console.WriteLine($"Sync terminée — villes ajoutées: {villes}, lieux ajoutés: {lieux}, activités ajoutées: {activites}");
+if (villes + lieux + activites > 0) await InvaliderCacheFrontendAsync("lieux", "villes", "itineraires");
 return 0;
 
 static string FindDataDir()
@@ -149,4 +156,46 @@ static string FindDataDir()
         dir = dir.Parent;
     }
     throw new DirectoryNotFoundException("Impossible de localiser le dossier data/ (villes.json introuvable) en remontant depuis " + AppContext.BaseDirectory);
+}
+
+/// <summary>
+/// Prévient le frontend qu'un contenu a changé, pour qu'il purge son cache ISR.
+///
+/// Sans cet appel, une correction restait invisible jusqu'à l'expiration du délai d'une
+/// heure — donc potentiellement des semaines sur une page peu visitée. C'est ce qui a laissé
+/// /en/itineraires/villages-perches proposer à la réservation un château fermé depuis 2015.
+///
+/// L'échec n'est jamais bloquant : la synchronisation en base, elle, a réussi, et le cache
+/// finira par expirer tout seul. On le signale bruyamment plutôt que d'échouer une commande
+/// dont le travail est fait.
+/// </summary>
+static async Task InvaliderCacheFrontendAsync(params string[] tags)
+{
+    var url = Environment.GetEnvironmentVariable("FRONTEND_URL");
+    var secret = Environment.GetEnvironmentVariable("REVALIDATE_SECRET");
+    if (string.IsNullOrWhiteSpace(url) || string.IsNullOrWhiteSpace(secret))
+    {
+        Console.WriteLine("[cache] FRONTEND_URL ou REVALIDATE_SECRET absent — cache ISR non invalidé "
+            + "(le contenu se rafraîchira au bout d'une heure).");
+        return;
+    }
+
+    try
+    {
+        using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
+        var payload = System.Text.Json.JsonSerializer.Serialize(new { tags });
+        using var req = new HttpRequestMessage(HttpMethod.Post, $"{url.TrimEnd('/')}/api/revalidate")
+        {
+            Content = new StringContent(payload, System.Text.Encoding.UTF8, "application/json"),
+        };
+        req.Headers.Add("x-revalidate-secret", secret);
+        var res = await http.SendAsync(req);
+        Console.WriteLine(res.IsSuccessStatusCode
+            ? $"[cache] invalidé : {string.Join(", ", tags)}"
+            : $"[cache] échec ({(int)res.StatusCode}) — {await res.Content.ReadAsStringAsync()}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"[cache] échec de l'appel d'invalidation : {ex.Message}");
+    }
 }

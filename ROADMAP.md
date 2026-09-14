@@ -89,92 +89,28 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       Rue Obscure »), ce qui rendrait le résultat du filtre plage compréhensible. Décision
       éditoriale laissée à l'utilisateur ; le renommage d'affichage est désormais possible
       sans toucher au slug, `refresh-lieu-fields` recopiant `Nom` depuis le 2026-09-14.
-- [ ] **Revalidation ISR après écriture en base** — une page `/en` servait encore, figée au
-      dernier build, une réservation à 6 € pour le château de Gourdon **fermé au public
-      depuis 2015**, avec un lien vers un domaine viticole sans rapport. L'API était propre.
-      Les corrections de contenu passent par la base et rien ne déclenche de revalidation :
-      une page peu fréquentée sert du contenu vieux de plusieurs semaines. Piste :
-      `revalidatePath()`/`revalidateTag` déclenché par le backend à chaque écriture ; à
-      défaut, redéployer après chaque synchro et abaisser `revalidate`.
-      **Règle à retenir** : un correctif de contenu « supprimé partout » se vérifie sur les
-      pages rendues, pas seulement dans l'API.
-- [x] **Lien de réservation mort** — corrigé le 2026-09-14. `laparte-villefranche-sur-mer.com`
-      ne répond plus (échec TLS et connexion). Le restaurant, lui, existe toujours (sources
-      de juin-juillet 2026, et il est littéralement au 1 rue Obscure) : l'activité est donc
-      conservée, l'URL pointe vers une fiche qui résout, et le libellé passe à « En savoir
-      plus » puisque ce n'est pas un lien de réservation. Les pages spécifiques de TheFork et
-      Tripadvisor ont été essayées d'abord : toutes deux redirigent vers une liste générique,
-      leur identifiant est périmé. (« Dîner au
-      restaurant L'Aparté », 29–50 €) : échec TLS et 404. Seule URL vraiment morte sur les
-      195 testées.
-- [~] **Liens « Réserver » vers des pages génériques GetYourGuide** — **15** au total, pas
-      11. Les URL ne sont pas cassées : ce sont de vraies pages, mais celles du catalogue
-      d'une ville, pas de l'activité nommée. Le libellé passe donc de « Réserver » à « Voir
-      les offres » (2026-09-14) : le bouton décrit maintenant ce qui va réellement se passer.
-      **Reste à faire** : sourcer les 15 URL spécifiques, ce qui demande de vérifier chaque
-      produit une par une chez GetYourGuide — un chantier de contenu, pas un correctif. Ne
-      pas fabriquer ces URL de tête.
-- [x] **Titre d'itinéraire trompeur** — corrigé le 2026-09-14. « Menton, Èze & Monaco : la
-      route des classiques » cumulait les deux défauts relevés séparément : il annonçait une
-      ville où l'itinéraire ne passe pas (la première étape est Roquebrune) et se vantait des
-      « classiques », ce que `/a-propos` promet justement d'éviter. Devenu « Roquebrune, Èze
-      & Monaco : la Riviera des corniches » — exact, et fidèle au parcours, qui emprunte
-      réellement la Grande puis la Moyenne Corniche. Le slug reste `menton-eze-monaco` pour
-      ne pas casser les URL partagées.
-- [x] **Contradiction sur un temps de trajet** — corrigée le 2026-09-14. L'itinéraire
-      annonçait « 60 min » Grasse → golfe là où le générateur calculait « ~1 h 33 ». Aucune
-      des deux valeurs n'était juste : ~75 km de route, donc « 1 h 15 à 1 h 30 », formulé en
-      fourchette comme le reste du site. Le générateur reste pessimiste (35 km/h de moyenne,
-      inadapté à l'A8) — à revoir avec la coupure gloutonne ci-dessus.
-- [~] **Tension de marque** — le titre « la route des classiques » est corrigé (voir
-      ci-dessus), mais l'itinéraire enchaîne toujours Monaco, le Musée Océanographique, Èze
-      et la Villa Ephrussi. Le contenu reste plus « incontournable » que le reste du site ;
-      c'est un arbitrage éditorial, pas un bug. Lié à la reformulation de la promesse
-      générale (voir « Préciser la promesse »).
+- [x] **Revalidation ISR après écriture en base** — **faite le 2026-09-14**. Les lectures
+      publiques sont étiquetées (`lieux`/`villes`/`itineraires`), une route `/api/revalidate`
+      protégée par secret purge par étiquette, et `RivieraSecrete.Tools` l'appelle après
+      chaque écriture réussie.
 
-### Positionnement & concurrence (état des lieux du 2026-09-14)
+      Étiquettes plutôt que chemins : un lieu apparaît sur sa fiche, l'accueil, sa ville,
+      `/activites` et les itinéraires qui le citent, en deux langues — énumérer ces chemins
+      serait un inventaire à tenir à jour, donc un inventaire qui finirait faux. Et
+      `{ expire: 0 }` plutôt que le profil `"max"` recommandé par défaut, qui sert encore le
+      contenu périmé le temps de régénérer : on invalide justement parce qu'une information
+      était fausse.
 
-Le concurrent dangereux **n'est pas TripAdvisor**. C'est **Region Lovers / Provence Lovers**,
-qui tient déjà la même promesse (« lieux secrets de Côte d'Azur, hors des sentiers battus »),
-avec l'antériorité SEO, l'autorité de domaine et le volume éditorial. « Je référence des
-endroits cachés » n'est donc pas, en soi, un avantage concurrentiel : TripAdvisor a déjà une
-catégorie « attractions méconnues », l'Office de Tourisme a déjà carte + itinéraires +
-personnalisation via le French Riviera Pass.
+      L'échec d'invalidation n'est jamais bloquant — la base, elle, a bien été écrite — mais
+      il est signalé bruyamment, et `revalidate: 3600` reste le filet.
 
-**Conséquence directe sur la stratégie de contenu : ne pas courir après le volume.** Ajouter
-50 lieux de plus nous met sur le terrain où on perd par construction. L'avantage défendable
-est **la manière d'aider à choisir** — « nous avons regardé 500 endroits, voici les 43 qui
-valent votre temps », puis « voici les 3 que je ferais aujourd'hui, vu où vous êtes et le
-temps dont vous disposez ». D'où la priorité donnée aux filtres situationnels et au moteur
-d'itinéraire plutôt qu'à l'expansion du catalogue.
-
-À garder en tête : **la contrainte réelle est l'acquisition**, pas la fonctionnalité. Aucun
-des raisonnements en « après 1 000 utilisateurs, l'algorithme apprend » ne tient tant qu'il
-n'y a pas de canal d'acquisition. La version anglaise et la newsletter sont, à ce titre, des
-leviers plus décisifs que n'importe quelle feature.
-
-### Ordre de traitement retenu
-
-Les chantiers produit ci-dessus dépendent les uns des autres ; cet ordre évite de construire
-sur du sable.
-
-1. **Sécurité et fiabilité** — rotation du mot de passe Postgres, synchro des coordonnées,
-   déploiements, badges non praticables, revalidation ISR.
-2. **Domaine** — débloque Resend (emails de confirmation réellement délivrés), le formulaire
-   de signalement et les URLs canoniques définitives.
-3. **Juridique** — mentions légales + politique de confidentialité. Prérequis de tout ce qui
-   suit, et à faire *avant* d'ouvrir quoi que ce soit aux contributions.
-4. **Socle comptes** — « mot de passe oublié » et délivrabilité des emails. Sans ça, pas de
-   communauté possible.
-5. **Réparer le moteur d'itinéraire** — il ampute encore 4 itinéraires sur 6. C'est la
-   fonctionnalité différenciante : la mettre en avant avant de la réparer amplifierait
-   l'échec.
-6. **Page `/activites` + filtres situationnels** — débloque les 208 activités, la donnée la
-   plus actionnable du site, avec des champs déjà en base.
-7. **Notes & avis communautaires** — voir la section de conception plus bas.
-
-### Dette technique identifiée
-
+      **À configurer** : `REVALIDATE_SECRET` sur Vercel, et `FRONTEND_URL` +
+      `REVALIDATE_SECRET` dans l'environnement où tourne l'outil. Sans ça, l'outil prévient
+      et le contenu se rafraîchit au bout d'une heure comme avant.
+- [ ] **L'invalidation ne couvre pas une écriture directe en base** — si le contenu est
+      modifié hors de `RivieraSecrete.Tools` (psql, console Railway), rien ne purge le cache.
+      Acceptable tant que l'outil reste le seul chemin ; à revoir si une interface
+      d'administration apparaît.
 - [ ] **Purger `extraSpans`/`extraSpansEn`** — champs morts depuis `68a78a8` (ils étaient le
       seul endroit qui recopiait un fait au lieu de le référencer, et il avait dérivé).
       Même opération que pour `ogImage` : JSON + entité `Itineraire` + migration EF.
