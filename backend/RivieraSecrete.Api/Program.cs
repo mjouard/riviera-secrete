@@ -73,7 +73,7 @@ builder.Services.AddRateLimiter(options =>
         if (ctx.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
             ctx.HttpContext.Response.Headers.RetryAfter = ((int)retryAfter.TotalSeconds).ToString();
         await ctx.HttpContext.Response.WriteAsJsonAsync(
-            new { Error = "Trop de tentatives. Réessaie dans quelques minutes." }, ct);
+            new { Error = "Trop de tentatives. Réessaie dans quelques minutes.", Code = "trop_de_tentatives" }, ct);
     };
 
     options.AddPolicy("auth", ctx => RateLimitPartition.GetFixedWindowLimiter(
@@ -122,6 +122,11 @@ app.MapGet("/api/itineraires/{slug}", async (string slug, AppDbContext db) =>
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
+// Chaque erreur porte un `Code` machine en plus de son `Error` en français. Le frontend est
+// bilingue, le backend ne l'est pas : afficher `Error` tel quel mettait des phrases
+// françaises sur /en. Le message reste utile aux appels directs (curl, journaux) ; c'est le
+// `Code` que l'interface traduit. Ajouter un code ici sans sa traduction côté frontend fait
+// simplement retomber sur un message générique, jamais sur du français.
 
 app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbContext db, IConfiguration config) =>
 {
@@ -196,18 +201,18 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
     var password = req.Password ?? "";
 
     if (string.IsNullOrWhiteSpace(email) || !email.Contains('@') || email.Length > 256)
-        return Results.BadRequest(new { Error = "Adresse email invalide." });
+        return Results.BadRequest(new { Error = "Adresse email invalide.", Code = "email_invalide" });
     if (string.IsNullOrWhiteSpace(nom) || nom.Length > 200)
-        return Results.BadRequest(new { Error = "Le nom est requis (200 caractères maximum)." });
+        return Results.BadRequest(new { Error = "Le nom est requis (200 caractères maximum).", Code = "nom_requis" });
     if (password.Length < 8)
-        return Results.BadRequest(new { Error = "Le mot de passe doit faire au moins 8 caractères." });
+        return Results.BadRequest(new { Error = "Le mot de passe doit faire au moins 8 caractères.", Code = "trop_court" });
     // BCrypt ne considère que les 72 premiers octets ; au-delà on refuse plutôt que de
     // tronquer silencieusement, et ça borne le coût du hachage.
     if (Encoding.UTF8.GetByteCount(password) > 72)
-        return Results.BadRequest(new { Error = "Le mot de passe ne doit pas dépasser 72 octets." });
+        return Results.BadRequest(new { Error = "Le mot de passe ne doit pas dépasser 72 octets.", Code = "trop_long" });
 
     if (await db.Users.AnyAsync(u => u.Email == email))
-        return Results.Conflict(new { Error = "Un compte existe déjà avec cet email." });
+        return Results.Conflict(new { Error = "Un compte existe déjà avec cet email.", Code = "email_deja_pris" });
 
     var user = new User
     {
@@ -239,7 +244,7 @@ app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfig
     var passwordOk = BCrypt.Net.BCrypt.Verify(password, hashToCheck);
 
     if (user is null || user.PasswordHash is null || !passwordOk)
-        return Results.Json(new { Error = "Email ou mot de passe incorrect." }, statusCode: 401);
+        return Results.Json(new { Error = "Email ou mot de passe incorrect.", Code = "identifiants_invalides" }, statusCode: 401);
     if (!user.EmailConfirmed)
         return Results.Json(new { Error = "Confirme ton email avant de te connecter.", Code = "email_not_confirmed" }, statusCode: 403);
 
@@ -253,13 +258,13 @@ app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbCont
     // qui matche tous les comptes déjà confirmés. L'expiry null les sauve aujourd'hui, mais
     // la requête n'a aucune raison d'être exécutée : on refuse en amont.
     if (string.IsNullOrWhiteSpace(req.Token))
-        return Results.BadRequest(new { Error = "Lien de confirmation invalide." });
+        return Results.BadRequest(new { Error = "Lien de confirmation invalide.", Code = "token_invalide" });
 
     var user = await db.Users.FirstOrDefaultAsync(u => u.EmailConfirmationToken == req.Token);
     if (user is null)
-        return Results.BadRequest(new { Error = "Lien de confirmation invalide." });
+        return Results.BadRequest(new { Error = "Lien de confirmation invalide.", Code = "token_invalide" });
     if (user.EmailConfirmationTokenExpiry is null || user.EmailConfirmationTokenExpiry < DateTime.UtcNow)
-        return Results.BadRequest(new { Error = "Ce lien de confirmation a expiré. Demande-en un nouveau." });
+        return Results.BadRequest(new { Error = "Ce lien de confirmation a expiré. Demande-en un nouveau.", Code = "token_expire" });
 
     user.EmailConfirmed = true;
     user.EmailConfirmationToken = null;
@@ -371,9 +376,9 @@ app.MapPost("/api/favorites/{lieuSlug}", async (string lieuSlug, ClaimsPrincipal
     // vérification d'existence, un compte authentifié pouvait remplir la table de slugs
     // arbitraires (l'index unique est sur (UserId, LieuSlug), donc rien ne l'en empêchait).
     if (!EstSlugValide(lieuSlug))
-        return Results.BadRequest(new { Error = "Slug de lieu invalide." });
+        return Results.BadRequest(new { Error = "Slug de lieu invalide.", Code = "slug_invalide" });
     if (!await db.Lieux.AnyAsync(l => l.Slug == lieuSlug))
-        return Results.NotFound(new { Error = "Lieu inconnu." });
+        return Results.NotFound(new { Error = "Lieu inconnu.", Code = "lieu_inconnu" });
 
     var exists = await db.UserFavorites.AnyAsync(f => f.UserId == userId && f.LieuSlug == lieuSlug);
     if (exists) return Results.Ok();

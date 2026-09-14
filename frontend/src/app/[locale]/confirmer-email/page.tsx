@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { codeErreur } from "@/lib/erreurs-api";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
 
@@ -10,6 +11,7 @@ type Status = "loading" | "success" | "error";
 
 export default function ConfirmerEmailPage() {
   const t = useTranslations("confirmerEmail");
+  const tErreurs = useTranslations("erreursApi");
   const [status, setStatus] = useState<Status>("loading");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -33,7 +35,9 @@ export default function ConfirmerEmailPage() {
           setStatus("success");
         } else {
           setStatus("error");
-          setMessage(data?.error ?? t("erreurGenerique"));
+          // Traduit depuis le `code` machine : le champ `error` du backend est en français.
+          const code = codeErreur(data);
+          setMessage(code ? tErreurs(code) : t("erreurGenerique"));
         }
       } catch {
         setStatus("error");

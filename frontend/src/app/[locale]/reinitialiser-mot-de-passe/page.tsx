@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
+import { codeErreur } from "@/lib/erreurs-api";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
 
@@ -20,6 +21,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
 export default function ReinitialiserMotDePassePage() {
   const t = useTranslations("reinitialiser");
   const tConnexion = useTranslations("connexion");
+  const tErreurs = useTranslations("erreursApi");
   const router = useRouter();
 
   const [password, setPassword] = useState("");
@@ -50,15 +52,10 @@ export default function ReinitialiserMotDePassePage() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        // On traduit à partir du `code` machine : le message `error` du backend est en
-        // français, l'afficher tel quel mettrait une phrase française sur /en.
-        const parCode: Record<string, string> = {
-          token_invalide: t("lienInvalide"),
-          token_expire: t("lienExpire"),
-          trop_court: t("tropCourt"),
-          trop_long: t("tropLong"),
-        };
-        setErreur(parCode[data?.code] ?? t("echec"));
+        // Traduit depuis le `code` machine, via la table partagée : le champ `error` du
+        // backend est en français. Une table locale par page aurait divergé.
+        const code = codeErreur(data);
+        setErreur(code ? tErreurs(code) : t("echec"));
         return;
       }
       setFait(true);

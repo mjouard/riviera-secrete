@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signIn } from "next-auth/react";
+import { codeErreur } from "@/lib/erreurs-api";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
 
@@ -12,6 +13,17 @@ type Mode = "login" | "register";
 export default function ConnexionPage() {
   const t = useTranslations("connexion");
   const tLegal = useTranslations("legal");
+  const tErreurs = useTranslations("erreursApi");
+
+  /**
+   * Traduit l'erreur de l'API depuis son `code` machine. On n'affiche jamais son champ
+   * `error`, écrit en français en dur côté backend : c'était la dernière source de français
+   * sur /en. Sans code reconnu, on retombe sur le message de repli de l'appelant.
+   */
+  function messageErreur(corps: unknown, repli: string): string {
+    const code = codeErreur(corps);
+    return code ? tErreurs(code) : repli;
+  }
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("login");
   const [callbackUrl, setCallbackUrl] = useState("/");
@@ -97,7 +109,7 @@ export default function ConnexionPage() {
         });
         const data = await res.json().catch(() => null);
         if (!res.ok) {
-          setError(data?.error ?? t("erreurCreationCompte"));
+          setError(messageErreur(data, t("erreurCreationCompte")));
           setLoading(false);
           return;
         }
@@ -123,7 +135,7 @@ export default function ConnexionPage() {
           setNeedsConfirmation(true);
           setPendingEmail(email);
         } else {
-          setError(data?.error ?? t("erreurIdentifiants"));
+          setError(messageErreur(data, t("erreurIdentifiants")));
         }
         setLoading(false);
         return;

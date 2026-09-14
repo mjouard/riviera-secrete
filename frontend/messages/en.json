@@ -415,8 +415,21 @@
     "reseau": "Could not reach the server. Please try again in a moment.",
     "succesTitre": "Password updated",
     "succesTexte": "You can now sign in with your new password. Redirecting…",
-    "retourConnexion": "Back to sign in",
-    "lienExpire": "This link has expired. Request a new one from the sign-in page.",
-    "tropLong": "The password must not exceed 72 bytes."
+    "retourConnexion": "Back to sign in"
+  },
+  "erreursApi": {
+    "trop_de_tentatives": "Too many attempts. Try again in a few minutes.",
+    "email_invalide": "This email address does not look valid.",
+    "nom_requis": "First name is required (200 characters maximum).",
+    "trop_court": "The password must be at least 8 characters long.",
+    "trop_long": "The password is too long (72 bytes maximum).",
+    "email_deja_pris": "An account already exists with this address.",
+    "identifiants_invalides": "Incorrect email or password.",
+    "email_not_confirmed": "Confirm your email address before signing in.",
+    "token_invalide": "This link is invalid or has already been used.",
+    "token_expire": "This link has expired. Request a new one.",
+    "slug_invalide": "Invalid place reference.",
+    "lieu_inconnu": "This place does not exist.",
+    "generique": "Something went wrong. Please try again in a moment."
   }
 }

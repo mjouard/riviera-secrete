@@ -331,10 +331,18 @@ Base de prod synchronisée à chaque fois. Sauf ce qui est listé ci-dessous.
       passe) demanderait d'envoyer un vrai email et de modifier le mot de passe d'un compte
       réel. Les tests ont tourné avec `Resend__ApiKey` vide. À faire une fois le domaine
       branché, en une minute depuis un compte de test.
-- [ ] **Les messages d'erreur du backend sont uniquement en français** — ils s'affichent tels
-      quels sur `/en`. Trouvé en testant la réinitialisation, où c'est corrigé par un `code`
-      machine que le frontend traduit ; le reste des endpoints d'auth (`register`, `login`,
-      `confirm-email`) renvoie encore du français brut. Même remède à généraliser.
+- [x] **Messages d'erreur du backend traduits** — **fait le 2026-09-14**. Les 18 réponses
+      d'erreur de l'API portent désormais un `code` machine en plus de leur `Error` français,
+      et le frontend traduit depuis ce code via `src/lib/erreurs-api.ts` + le namespace
+      `erreursApi`. C'était la dernière source de français sur le site anglais.
+
+      Le repli est volontairement un message générique et non le champ `error` du backend :
+      un code ajouté côté API sans sa traduction doit donner une phrase correcte dans la
+      langue du visiteur, pas une phrase française. On perd un peu de précision, on ne
+      régresse jamais.
+
+      La page de réinitialisation, qui avait sa propre table locale, est alignée dessus —
+      deux tables auraient divergé.
 - [ ] **Coordonnées et horaires dans l'export PDF** — `.no-print` masque la carte *et*
       toutes les rangées de liens de navigation, donc le PDF ne contient ni adresse, ni
       coordonnées, ni horaires. Or il est présenté comme l'artefact « hors ligne sur le

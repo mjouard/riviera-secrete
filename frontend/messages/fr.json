@@ -415,8 +415,21 @@
     "reseau": "Impossible de joindre le serveur. Réessaie dans un instant.",
     "succesTitre": "Mot de passe mis à jour",
     "succesTexte": "Tu peux maintenant te connecter avec ton nouveau mot de passe. Redirection en cours…",
-    "retourConnexion": "Retour à la connexion",
-    "lienExpire": "Ce lien a expiré. Redemande une réinitialisation depuis la page de connexion.",
-    "tropLong": "Le mot de passe ne doit pas dépasser 72 octets."
+    "retourConnexion": "Retour à la connexion"
+  },
+  "erreursApi": {
+    "trop_de_tentatives": "Trop de tentatives. Réessaie dans quelques minutes.",
+    "email_invalide": "Cette adresse e-mail ne semble pas valide.",
+    "nom_requis": "Le prénom est requis (200 caractères maximum).",
+    "trop_court": "Le mot de passe doit faire au moins 8 caractères.",
+    "trop_long": "Le mot de passe est trop long (72 octets maximum).",
+    "email_deja_pris": "Un compte existe déjà avec cette adresse.",
+    "identifiants_invalides": "E-mail ou mot de passe incorrect.",
+    "email_not_confirmed": "Confirme ton adresse e-mail avant de te connecter.",
+    "token_invalide": "Ce lien est invalide ou a déjà été utilisé.",
+    "token_expire": "Ce lien a expiré. Demandes-en un nouveau.",
+    "slug_invalide": "Référence de lieu invalide.",
+    "lieu_inconnu": "Ce lieu n'existe pas.",
+    "generique": "Une erreur est survenue. Réessaie dans un instant."
   }
 }
