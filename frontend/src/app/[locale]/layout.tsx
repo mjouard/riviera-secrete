@@ -27,6 +27,19 @@ export function generateStaticParams() {
 }
 
 /**
+ * Toute valeur de `locale` autre que fr/en doit répondre 404 sans jamais être rendue.
+ *
+ * Le proxy next-intl ignore les chemins portant une extension (matcher `.*\..*`, requis
+ * pour /sitemap.xml, /assets/…, /sw.js) : une URL inexistante comme /foo.txt ou
+ * /apple-touch-icon.png atterrit donc ici avec locale = "foo.txt". Sans ce réglage, Next
+ * tentait un rendu à la demande de cette page prérendue statiquement ; next-intl, faute de
+ * `setRequestLocale` valide, lisait alors les en-têtes — interdit sur une page statique —
+ * et la réponse était **500 au lieu de 404**. Un 5xx sur /robots.txt fait suspendre le
+ * crawl à Google (voir aussi app/robots.ts).
+ */
+export const dynamicParams = false;
+
+/**
  * `themeColor` colore la barre d'adresse mobile et l'écran de démarrage de la PWA.
  * Le site n'ayant qu'un thème sombre côté chrome, une seule valeur suffit — elle doit
  * rester alignée sur --bg (globals.css) et sur background_color/theme_color du manifest.
