@@ -32,7 +32,7 @@ export default function ShareButton({ title }: { title: string }) {
   return (
     <button
       onClick={handleClick}
-      className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+      className="focus-ring inline-flex items-center h-11 text-sm px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
       style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
     >
       {copied ? t("lienCopie") : t("partager")}

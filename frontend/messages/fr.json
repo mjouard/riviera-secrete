@@ -99,7 +99,12 @@
   "lieu": {
     "conseilsPratiques": "Conseils pratiques",
     "aFaireSurPlace": "À faire sur place",
-    "aDecouvrirAussi": "À découvrir aussi"
+    "aDecouvrirAussi": "À découvrir aussi",
+    "itineraireQuiPasse": "Cet itinéraire passe par ici",
+    "nbEtapes": "{n} étapes",
+    "etapeNumero": "Étape {n}",
+    "aProximite": "À moins de 20 minutes",
+    "enVoiture": "en voiture"
   },
   "itineraire": {
     "programmeDetaille": "Programme détaillé",

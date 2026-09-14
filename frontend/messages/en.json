@@ -99,7 +99,12 @@
   "lieu": {
     "conseilsPratiques": "Practical tips",
     "aFaireSurPlace": "Things to do here",
-    "aDecouvrirAussi": "You might also like"
+    "aDecouvrirAussi": "You might also like",
+    "itineraireQuiPasse": "This itinerary passes through here",
+    "nbEtapes": "{n} stops",
+    "etapeNumero": "Stop {n}",
+    "aProximite": "Within 20 minutes",
+    "enVoiture": "by car"
   },
   "itineraire": {
     "programmeDetaille": "Detailed itinerary",

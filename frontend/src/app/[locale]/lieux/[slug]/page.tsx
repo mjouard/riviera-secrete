@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
-import { imgUrl, buildMapLinks, loc, alternatesPage, prixAffiche } from "@/lib/utils";
+import { imgUrl, buildMapLinks, distanceKm, loc, alternatesPage, prixAffiche } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -58,15 +58,20 @@ export default async function LieuPage({
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
 
-  const [ville, itin, t, tCommon, tActivite, tBadges, tRegionFull] = await Promise.all([
-    api.villes.bySlug(lieu.villeSlug).catch(() => null),
-    itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
-    getTranslations("lieu"),
-    getTranslations("common"),
-    getTranslations("activite"),
-    getTranslations("badges"),
-    getTranslations("regionFull"),
-  ]);
+  const [ville, itin, tousItineraires, tousLieux, t, tCommon, tActivite, tBadges, tRegionFull] =
+    await Promise.all([
+      api.villes.bySlug(lieu.villeSlug).catch(() => null),
+      itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
+      // Rebonds de bas de page (→ PA-03) : deux lectures déjà étiquetées et mises en cache
+      // (ISR 3600), donc sans coût par visite.
+      api.itineraires.list().catch(() => []),
+      api.lieux.list().catch(() => []),
+      getTranslations("lieu"),
+      getTranslations("common"),
+      getTranslations("activite"),
+      getTranslations("badges"),
+      getTranslations("regionFull"),
+    ]);
 
   const nom = loc(locale, lieu.nomEn, lieu.nom);
   const description = loc(locale, lieu.descriptionEn, lieu.description);
@@ -78,8 +83,71 @@ export default async function LieuPage({
       ? { href: `/villes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
       : { href: "/#lieux", label: tCommon("lieux") };
 
+  // ─── Rebonds de bas de fiche (→ PA-03) ─────────────────────────────────────
+  //
+  // C'est la page qui reçoit l'essentiel du trafic entrant depuis Google, et c'était celle
+  // qui offrait le moins de suites : la liste « À découvrir aussi » est un instantané figé,
+  // sans rapport avec l'endroit où l'on se trouve. L'information existait déjà ailleurs
+  // (/villes/eze annonce « 1 itinéraire qui passe par ici ») mais pas sur la fiche elle-même.
+
+  /** Itinéraires éditoriaux citant ce lieu, avec le rang de l'étape et son heure. */
+  const itinerairesQuiPassent = tousItineraires
+    .map((it) => {
+      const etapes = it.items.filter((i) => i.type === "stop");
+      const index = etapes.findIndex((e) => e.lieuSlug === lieu.slug);
+      return index === -1 ? null : { itineraire: it, rang: index + 1, total: etapes.length, heure: etapes[index].heure };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null);
+
+  /**
+   * Lieux atteignables rapidement. Même conversion distance → temps que le générateur
+   * d'itinéraire (35 km/h de moyenne sur ces routes, plus 10 min de marge stationnement),
+   * pour que les deux ne racontent pas deux histoires différentes du même trajet.
+   */
+  const aProximite = tousLieux
+    .filter((l) => l.slug !== lieu.slug)
+    .map((l) => {
+      const km = distanceKm(lieu.lat, lieu.lng, l.lat, l.lng);
+      return { lieu: l, km, minutes: Math.round((km / 35) * 60 + 10) };
+    })
+    .filter((x) => x.minutes <= 20)
+    .sort((a, b) => a.minutes - b.minutes)
+    .slice(0, 3);
+
+  /**
+   * JSON-LD. Même forme que le `TouristDestination` de /villes/[slug], mais en
+   * `TouristAttraction` — les fiches lieu n'en portaient aucun alors qu'elles reçoivent
+   * l'essentiel du trafic de recherche.
+   *
+   * `isAccessibleForFree` n'est déclaré que si toutes les activités payantes sont absentes :
+   * un lieu dont l'accès est libre mais qui compte une visite payante n'est pas « gratuit »
+   * au sens de Google, et l'annoncer ainsi serait faux.
+   */
+  const activitesPayantes = (lieu.activites ?? []).filter((a) => a.badge === "payant");
+  const attractionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    name: nom,
+    description,
+    image: `${SITE_URL}${imgUrl(lieu.heroImage)}`,
+    geo: { "@type": "GeoCoordinates", latitude: lieu.lat, longitude: lieu.lng },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: lieu.commune,
+      addressRegion: loc(locale, null, lieu.regionLabel),
+      addressCountry: "FR",
+    },
+    isAccessibleForFree: activitesPayantes.length === 0,
+    url: `${SITE_URL}${locale === "en" ? "/en" : ""}/lieux/${lieu.slug}`,
+  };
+
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(attractionJsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
@@ -146,18 +214,22 @@ export default async function LieuPage({
           </span>
         </div>
 
-        {/* Liens Maps/Waze/Plans — quittent le site, traitement discret */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+        {/* Liens Maps/Waze/Plans.
+            Ils étaient en texte de 12 px, la plus petite cible de la page — alors que c'est
+            l'action principale d'un site de destination consulté sur place, une fois sur la
+            route (→ MO-01). Vrais boutons de 44 px, espacés de 8 px. */}
+        <div className="flex flex-wrap gap-2 mt-4">
           {buildMapLinks(lieu.lat, lieu.lng, nom, tCommon("plans")).map((link) => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs hover:underline transition-colors"
-              style={{ color: "var(--text-muted)" }}
+              className="focus-ring inline-flex items-center gap-2 h-11 px-4 rounded-lg border text-sm transition-colors hover:bg-white/5"
+              style={{ borderColor: "var(--line)", color: "var(--text)" }}
             >
-              {link.icon} {link.label}
+              <span aria-hidden="true">{link.icon}</span>
+              {link.label}
             </a>
           ))}
         </div>
@@ -263,6 +335,58 @@ export default async function LieuPage({
               </a>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* Rebond ① — l'itinéraire qui passe par ici (→ PA-03) */}
+      {itinerairesQuiPassent.length > 0 && (
+        <section className="mb-10">
+          <h2 className="text-lg font-semibold mb-4">{t("itineraireQuiPasse")}</h2>
+          <div className="flex flex-col gap-3">
+            {itinerairesQuiPassent.map(({ itineraire, rang, total, heure }) => (
+              <Link
+                key={itineraire.slug}
+                href={`/itineraires/${itineraire.slug}`}
+                className="focus-ring block rounded-lg p-4 transition-colors hover:bg-white/5"
+                style={{ background: "var(--surface)" }}
+              >
+                <p className="text-xs font-mono mb-1" style={{ color: "var(--terracotta)" }}>
+                  {t("nbEtapes", { n: total })}
+                  {heure ? ` · ${t("etapeNumero", { n: rang })} · ${heure}` : ` · ${t("etapeNumero", { n: rang })}`}
+                </p>
+                <p className="font-semibold text-sm leading-snug">
+                  {loc(locale, itineraire.titreEn, itineraire.titre)}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Rebond ② — ce qu'on peut enchaîner sans reprendre la route longtemps (→ PA-03) */}
+      {aProximite.length > 0 && (
+        <section className="mb-10">
+          <h2 className="text-lg font-semibold mb-4">{t("aProximite")}</h2>
+          <ul className="flex flex-col gap-2 list-none p-0">
+            {aProximite.map(({ lieu: voisin, minutes }) => (
+              <li key={voisin.slug}>
+                <Link
+                  href={`/lieux/${voisin.slug}`}
+                  className="focus-ring flex items-center justify-between gap-4 h-11 px-4 rounded-lg transition-colors hover:bg-white/5"
+                  style={{ background: "var(--surface)" }}
+                >
+                  <span className="text-sm min-w-0">
+                    <span className="font-medium">{loc(locale, voisin.nomEn, voisin.nom)}</span>
+                    <span className="mx-2" aria-hidden="true" style={{ color: "var(--line)" }}>·</span>
+                    <span style={{ color: "var(--text-muted)" }}>{voisin.commune}</span>
+                  </span>
+                  <span className="text-xs font-mono whitespace-nowrap" style={{ color: "var(--terracotta)" }}>
+                    {minutes} min
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 

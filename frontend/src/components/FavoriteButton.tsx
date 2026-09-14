@@ -20,6 +20,14 @@ export default function FavoriteButton({ slug }: { slug: string }) {
       .catch(() => {});
   }, [session, slug]);
 
+  /**
+   * Bascule optimiste (→ EC-06).
+   *
+   * L'état n'était appliqué qu'au retour du serveur : 416 ms mesurés entre le clic et le
+   * changement de libellé, sans indicateur — le visiteur cliquait une seconde fois, ce qui
+   * annulait son propre geste. On bascule donc tout de suite et on revient en arrière si
+   * l'appel échoue, plutôt que de faire attendre le cas nominal pour couvrir l'exception.
+   */
   async function toggle() {
     if (!session) {
       redirectToConnexion();
@@ -30,14 +38,18 @@ export default function FavoriteButton({ slug }: { slug: string }) {
       redirectToConnexion();
       return;
     }
+    const cible = !isFavorite;
+    setIsFavorite(cible);
     setLoading(true);
     try {
-      await authFetch(`/api/favorites/${slug}`, session.apiToken, {
-        method: isFavorite ? "DELETE" : "POST",
+      const res = await authFetch(`/api/favorites/${slug}`, session.apiToken, {
+        method: cible ? "POST" : "DELETE",
       });
-      setIsFavorite((v) => !v);
+      if (!res.ok) setIsFavorite(!cible);
     } catch {
-      // silent — état inchangé si erreur réseau
+      // Échec réseau : on remet l'état d'avant, sans quoi le cœur mentirait sur ce qui est
+      // réellement enregistré.
+      setIsFavorite(!cible);
     } finally {
       setLoading(false);
     }
@@ -48,15 +60,20 @@ export default function FavoriteButton({ slug }: { slug: string }) {
   return (
     <button
       onClick={toggle}
+      // Toujours désactivé pendant l'appel, malgré la bascule optimiste : l'état visible a
+      // déjà changé, donc l'attente ne se voit pas, et deux requêtes concurrentes dont les
+      // réponses reviennent dans le désordre laisseraient le cœur désaccordé de la base.
       disabled={loading}
+      aria-pressed={isFavorite}
+      aria-busy={loading}
       title={!session ? t("connexionRequise") : isFavorite ? t("retirerDesFavoris") : t("ajouterAuxFavoris")}
-      className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full border transition-colors hover:bg-white/5 disabled:opacity-50 cursor-pointer disabled:cursor-default"
+      className="focus-ring flex items-center gap-1.5 h-11 text-sm px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
       style={{
         borderColor: isFavorite ? "var(--terracotta)" : "var(--line)",
         color: isFavorite ? "var(--terracotta)" : "var(--text-muted)",
       }}
     >
-      <span>{isFavorite ? "♥" : "♡"}</span>
+      <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
       <span>{isFavorite ? t("favori") : t("ajouterAuxFavoris")}</span>
     </button>
   );
