@@ -78,8 +78,18 @@ function FilterSelect({
   );
 }
 
-function LieuCard({ lieu, distance }: { lieu: Lieu; distance?: number }) {
+function LieuCard({
+  lieu,
+  distance,
+  activiteTrouvee,
+}: {
+  lieu: Lieu;
+  distance?: number;
+  /** Nom de l'activité qui a fait remonter ce lieu, quand la recherche a matché dessus. */
+  activiteTrouvee?: string;
+}) {
   const locale = useLocale();
+  const t = useTranslations("home");
   return (
     <Link
       href={`/lieux/${lieu.slug}`}
@@ -110,6 +120,13 @@ function LieuCard({ lieu, distance }: { lieu: Lieu; distance?: number }) {
         <p className="text-xs line-clamp-2" style={{ color: "var(--text-muted)" }}>
           {loc(locale, lieu.descriptionEn, lieu.description)}
         </p>
+        {/* Sans cette ligne, chercher "kayak" renvoyait une carte "La Rue Obscure" sans
+            aucun rapport visible avec la requête : on nomme l'activité qui a matché. */}
+        {activiteTrouvee && (
+          <p className="text-xs mt-2 line-clamp-1" style={{ color: "var(--terracotta)" }}>
+            {t("resultatActivite", { activite: activiteTrouvee })}
+          </p>
+        )}
       </div>
     </Link>
   );
@@ -131,9 +148,14 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Index de recherche pré-calculé une fois par lieu (43 aujourd'hui) plutôt qu'à chaque
-  // frappe : nom, commune, description et libellés de badges, dans la locale affichée —
-  // chercher "beach" sur /en doit marcher comme "plage" sur /fr. Accents retirés des deux
-  // côtés pour que "eze" trouve "Èze".
+  // frappe : nom, commune, description, libellés de badges et **noms d'activités**, dans la
+  // locale affichée — chercher "beach" sur /en doit marcher comme "plage" sur /fr. Accents
+  // retirés des deux côtés pour que "eze" trouve "Èze".
+  //
+  // Les activités sont indexées en FR **et** en EN quelle que soit la locale : le placeholder
+  // promet « une activité », et les deux graphies sont utiles des deux côtés (un anglophone
+  // tape "snorkeling" là où la donnée EN dit "Snorkelling", mais la donnée FR dit bien
+  // "Snorkeling").
   const searchIndex = useMemo(
     () =>
       lieux.map((l) => {
@@ -143,6 +165,10 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
             ? tBadges(slug as (typeof known)[number])
             : slug;
         });
+        const activites = (l.activites ?? []).map((a) => ({
+          nom: loc(locale, a.nomEn, a.nom),
+          haystack: normalizeSearch([a.nom, a.nomEn ?? ""].join(" ")),
+        }));
         return {
           lieu: l,
           // Catégories dérivées ici plutôt qu'à chaque frappe : l'analyse du texte libre
@@ -150,6 +176,7 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           saisons: saisonsDuLieu(l),
           duree: dureeDuLieu(l),
           niveaux: niveauxDuLieu(l),
+          activites,
           haystack: normalizeSearch(
             [
               loc(locale, l.nomEn, l.nom),
@@ -173,11 +200,19 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
         if (saison && !entry.saisons.includes(saison)) return false;
         if (duree && entry.duree !== duree) return false;
         if (niveau && !entry.niveaux.includes(niveau)) return false;
-        return q === "" || entry.haystack.includes(q);
+        if (q === "") return true;
+        return entry.haystack.includes(q) || entry.activites.some((a) => a.haystack.includes(q));
       })
-      .map(({ lieu }) => ({
+      .map(({ lieu, activites, haystack }) => ({
         lieu,
         distance: position ? distanceKm(position.lat, position.lng, lieu.lat, lieu.lng) : undefined,
+        // Uniquement quand le lieu lui-même ne correspond pas : sur "eze", la carte "Èze,
+        // le village perché" se passe d'explication, l'annotation ne servirait qu'à
+        // brouiller le résultat.
+        activiteTrouvee:
+          q && !haystack.includes(q)
+            ? activites.find((a) => a.haystack.includes(q))?.nom
+            : undefined,
       }));
 
     // Le tri par distance ne s'applique que si une position est connue : sinon on conserve
@@ -406,8 +441,8 @@ export default function HomeLieuxGrid({ lieux }: { lieux: Lieu[] }) {
           ref={gridRef}
           className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-6 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
-          {filtered.map(({ lieu, distance }) => (
-            <LieuCard key={lieu.id} lieu={lieu} distance={distance} />
+          {filtered.map(({ lieu, distance, activiteTrouvee }) => (
+            <LieuCard key={lieu.id} lieu={lieu} distance={distance} activiteTrouvee={activiteTrouvee} />
           ))}
         </div>
       )}

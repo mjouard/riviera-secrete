@@ -60,6 +60,7 @@
     "recherchePlaceholder": "Rechercher un lieu, une commune, une activité…",
     "rechercheEffacer": "Effacer la recherche",
     "aucunResultat": "Aucun lieu ne correspond à « {query} ».",
+    "resultatActivite": "↳ {activite}",
     "reinitialiser": "Tout afficher",
     "gratuitSeulement": "Gratuit seulement",
     "aucuneGratuite": "Aucune activité gratuite dans cette catégorie.",

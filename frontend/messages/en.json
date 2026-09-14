@@ -60,6 +60,7 @@
     "recherchePlaceholder": "Search a place, a town, an activity…",
     "rechercheEffacer": "Clear search",
     "aucunResultat": "No place matches “{query}”.",
+    "resultatActivite": "↳ {activite}",
     "reinitialiser": "Show everything",
     "gratuitSeulement": "Free only",
     "aucuneGratuite": "No free activity in this category.",
