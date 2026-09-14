@@ -7,7 +7,8 @@ import { useSession } from "next-auth/react";
 import { api, authFetch } from "@/lib/api";
 import type { Lieu } from "@/lib/types";
 import { redirectToConnexion } from "@/lib/utils";
-import { DUREE_META, decodeJours, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
+import { DUREE_META, decodeJours, encodeJours, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
+import { ecrireSelectionPersistee, lireSelectionPersistee } from "@/lib/brouillon-itineraire";
 import PickerView from "./_components/PickerView";
 import ResultsView from "./_components/ResultsView";
 import { Modal } from "@/components/ui/Modal";
@@ -64,6 +65,8 @@ export default function CreerItinerairePage() {
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
   const dbIdAttempted = useRef<string | null>(null);
   const draftRestoreAttempted = useRef(false);
+  /** Passe à vrai quand le montage a fini de lire l'URL — voir l'effet de synchronisation. */
+  const selectionHydratee = useRef(false);
 
   const lieuBySlug = useMemo(() => new Map(lieux.map((l) => [l.slug, l])), [lieux]);
 
@@ -96,39 +99,63 @@ export default function CreerItinerairePage() {
         }
       }
 
+      // Pré-sélection du sélecteur, par cumul de trois sources.
+      //
       // `?add=` accepte un slug seul (bouton "Ajouter à un itinéraire" d'une fiche lieu) ou
       // plusieurs séparés par des virgules (bouton "Partir de cet itinéraire" d'un
       // itinéraire éditorial). Les slugs inconnus sont ignorés silencieusement : une URL
       // partagée après un renommage de lieu doit pré-remplir ce qui reste valide plutôt que
       // de ne rien faire.
-      const add = params.get("add");
-      if (add) {
-        const valides = add.split(",").map((s) => s.trim()).filter((s) => map.has(s));
-        if (valides.length > 0) {
-          setSelectedSlugs(new Set(valides));
-          setExpandedRegions(new Set(valides.map((s) => map.get(s)!.regionSlug)));
+      //
+      // Il **s'ajoute** désormais à ce qui était déjà sélectionné, au lieu de le remplacer
+      // (PR-02) : le verbe « ajouter » promettait un panier qui n'existait pas. La base vient
+      // de `?lieux=` s'il est là (lien rechargé ou partagé, qui fait foi), sinon du brouillon
+      // de session — seul moyen de cumuler deux ajouts faits depuis deux fiches différentes,
+      // chacun étant une navigation qui remonte cette page (voir brouillon-itineraire.ts).
+      const valider = (brut: string | null) =>
+        (brut ?? "").split(",").map((s) => s.trim()).filter((s) => map.has(s));
 
-          // `?source=` : on vient d'un itinéraire éditorial via "Partir de cet itinéraire".
-          // On génère tout de suite et on garde toutes les étapes — le visiteur a cliqué sur
-          // CET itinéraire-là, le déposer sur le sélecteur avec des cases pré-cochées lui
-          // demandait une étape de plus pour retrouver ce qu'il venait de lire.
-          const sourceSlug = params.get("source");
-          if (sourceSlug) {
-            const dureeSource = duree && duree in DUREE_META ? (duree as DureeKey) : "journee";
-            const candidats = valides.map((s) => map.get(s)!);
-            const { days } = generateItineraire(candidats, dureeSource, { garderTous: true });
-            setCurrentDays(days);
-            setExcluded([]);
-            setEditMode(true);
-            setView("results");
-            // Le nom sert au bandeau « Basé sur : … ». Son absence (slug inconnu, API
-            // indisponible) ne doit pas empêcher l'itinéraire de s'afficher.
-            api.itineraires.bySlug(sourceSlug)
-              .then((it) => it && setSource({ slug: sourceSlug, titre: it.titre, titreEn: it.titreEn }))
-              .catch(() => {});
-          }
-        }
+      const ajouts = valider(params.get("add"));
+      const sourceSlug = params.get("source");
+      const depuisUrl = valider(params.get("lieux"));
+
+      // « Partir de cet itinéraire » remplace au lieu de cumuler : le visiteur a cliqué sur
+      // CET itinéraire-là, le mêler à un brouillon en cours lui donnerait autre chose que ce
+      // qu'il vient de lire.
+      const base = sourceSlug
+        ? []
+        : depuisUrl.length > 0
+          ? depuisUrl
+          : lireSelectionPersistee().filter((s) => map.has(s));
+
+      const selection = [...new Set([...base, ...ajouts])];
+      if (selection.length > 0) {
+        setSelectedSlugs(new Set(selection));
+        setExpandedRegions(new Set(selection.map((s) => map.get(s)!.regionSlug)));
       }
+
+      // `?source=` : on vient d'un itinéraire éditorial via "Partir de cet itinéraire". On
+      // génère tout de suite et on garde toutes les étapes — le visiteur a cliqué sur CET
+      // itinéraire-là, le déposer sur le sélecteur avec des cases pré-cochées lui demandait
+      // une étape de plus pour retrouver ce qu'il venait de lire.
+      if (sourceSlug && ajouts.length > 0) {
+        const dureeSource = duree && duree in DUREE_META ? (duree as DureeKey) : "journee";
+        const candidats = ajouts.map((s) => map.get(s)!);
+        const { days } = generateItineraire(candidats, dureeSource, { garderTous: true });
+        setCurrentDays(days);
+        setExcluded([]);
+        setEditMode(true);
+        setView("results");
+        // Le nom sert au bandeau « Basé sur : … ». Son absence (slug inconnu, API
+        // indisponible) ne doit pas empêcher l'itinéraire de s'afficher.
+        api.itineraires.bySlug(sourceSlug)
+          .then((it) => it && setSource({ slug: sourceSlug, titre: it.titre, titreEn: it.titreEn }))
+          .catch(() => {});
+      }
+
+      // À partir d'ici le sélecteur possède l'URL : l'effet de synchronisation peut écrire
+      // sans risquer d'effacer les paramètres qu'on vient tout juste de lire.
+      selectionHydratee.current = true;
     }).catch(() => setLoading(false));
   }, []);
 
@@ -198,6 +225,41 @@ export default function CreerItinerairePage() {
     }
     restoreDraft();
   }, [loading, status, session, lieux]);
+
+  /**
+   * Sélection du sélecteur → URL + brouillon de session (PR-01).
+   *
+   * Avant, après génération comme pendant la sélection, l'URL restait `/creer-itineraire`
+   * nue : un F5 ou un retour arrière effaçait tout le travail. Deux écritures selon l'étape —
+   * `?lieux=` tant qu'on choisit, `?jours=` une fois l'itinéraire composé (même encodage que
+   * le lien de partage déjà produit par ResultsView, donc rechargeable par le même chemin).
+   *
+   * `replaceState` et non `pushState` : empiler une entrée par case cochée rendrait le bouton
+   * Précédent inutilisable. Conséquence assumée, Précédent depuis le résultat ne revient pas
+   * au sélecteur — mais le brouillon de session, lui, le retrouve.
+   */
+  useEffect(() => {
+    if (!selectionHydratee.current) return;
+    // Ces trois-là désignent un itinéraire déjà constitué : leur URL ne nous appartient pas.
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("id") || params.has("source")) return;
+
+    const sortie = new URLSearchParams();
+    if (view === "results" && currentDays.flat().length > 0) {
+      sortie.set("jours", encodeJours(currentDays));
+      if (currentNom) sortie.set("nom", currentNom);
+    } else if (view === "picker") {
+      const slugs = Array.from(selectedSlugs);
+      ecrireSelectionPersistee(slugs);
+      if (slugs.length > 0) sortie.set("lieux", slugs.join(","));
+    } else {
+      return;
+    }
+    if (dureeKey !== "journee") sortie.set("duree", dureeKey);
+
+    const query = sortie.toString();
+    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
+  }, [view, selectedSlugs, dureeKey, currentDays, currentNom]);
 
   // ─── Picker logic ──────────────────────────────────────────────────────────
 
