@@ -274,6 +274,159 @@ d'accueil »). Codes de référence entre parenthèses pour retrouver le détail
       pages. **Piste** : deux objets — un espace d'exploration (carte + liste + filtres) et une
       collection éditoriale (itinéraires) ; communes et activités deviennent des filtres.
 
+## Refonte UI — spécifications du 2026-09-14
+
+Spécifications complètes dans `Downloads/riviera-refonte-specs/` (10 fichiers `.md`).
+Maquettes de référence dans `Downloads/refonte-riviera-secrete.html` (8 artboards, à ouvrir dans un navigateur).
+Audits sources dans `Downloads/audit-ux-riviera-secrete.html` et `Downloads/audit-ux-ui-riviera-secrete.html`.
+Les codes entre parenthèses (`PR-`, `SV-`, `AI-`, `DC-`, `EC-`, `MO-`, `NF-`, `PF-`, `AC-`, `PA-`) renvoient aux constats détaillés de ces audits.
+
+Migration en **5 lots indépendants**, chacun livrable seul. Ordre imposé : les lots suivants supposent que le précédent est fait.
+
+### Lot 1 — Fondations *(aucun changement visible pour l'utilisateur)*
+
+- [ ] **Tokens CSS** (`01-tokens.md`) — variables `--rs-nuit` `--rs-nuit-haute` `--rs-nuit-3` `--rs-trait` `--rs-calcaire` `--rs-brume` `--rs-aube` `--rs-aube-presse` `--rs-pin` ; zones `--rs-zone-{1-5}` ; polices `--rs-font-display` (Bodoni Moda) / `--rs-font-ui` (Karla) / `--rs-font-mono` (IBM Plex Mono) ; `--rs-radius: 3px` `--rs-control-h: 44px`. Bloc CSS prêt dans `01-tokens.md` § 5, config Tailwind dans le même fichier. Charger Bodoni Moda + Karla + IBM Plex Mono depuis Google Fonts avec leurs piles de repli.
+- [ ] **Typographie** — échelle à 7 crans (display-xl 74/44 px, display-l 40/30, display-m 38/30, title 20/18, body 16/16, meta 14/14, data 12/12) ; `text-wrap: balance` sur les titres Bodoni ; 16 px plancher absolu du texte courant. Retirer `text-xs` du code applicatif sauf derrière la classe mono étiquetée `.lbl`. Corrige : 204 nœuds de texte sur 224 en 12 ou 14 px (→ SV-01).
+- [ ] **Rayons et ombres** — `border-radius: 3px` valeur par défaut ; 2 px pour badges et vignettes ; 50 % pour marqueurs/pastilles/avatars. Retirer `rounded-lg` et `rounded-full` du code applicatif. Une seule ombre (`0 24px 60px rgba(6,14,24,.55)`) uniquement sur les éléments flottants. Corrige : 59 éléments à 12 px + 39 pilules = plus rien ne ressort (→ SV-05).
+- [ ] **Composants** (`02-composants.md`) — 3 variantes de bouton (primaire/secondaire/discret) × 2 tailles (44/52 px) ; chips de filtre hauteur 44, sélectionné en `--rs-calcaire` jamais en aube ; badges (gratuit/prix/fermé/amas) ; champs hauteur 44 px, 16 px minimum absolu (< 16 px = zoom Safari iOS → MO-02) ; cartes de liste/contenu/sélection ; modale native `<dialog>` + `showModal()` (Échap et piège à focus gratuits) ; toast `role="status"` 4 s, 7 s avec « Annuler » après suppression. Remplace les 12 variantes de bouton et 5 hauteurs actuelles (→ SV-03).
+- [ ] **Règle de rareté** — un seul bouton primaire ambre visible par zone d'écran. Si deux boutons primaires cohabitent, l'un passe en secondaire. C'est ce qui libère l'aube pour l'action seule (→ SV-02).
+- [ ] **Icônes inline SVG** — remplacer les emojis d'interface (🥾 🏛 🍽️ ⛵ 🔎 📍) par des SVG grille 20 × 20, `fill: none`, `stroke: currentColor`, `stroke-width: 1.6`. Les emojis restent dans le contenu éditorial seulement. Jeu minimal listé dans `01-tokens.md` § 4.
+- [ ] **Accessibilité** — `aria-pressed` sur chips et cœurs de favori ; `role="alert"` sur les messages d'erreur de formulaire ; `alt` sur toutes les images, `alt=""` explicite sur le décoratif (30 images sur 115 sans `alt` → AC-02) ; lien « Aller au contenu » en tête de `<body>` (nav de 9 entrées répétée partout, absent → AC-02) ; `.focus-ring` appliqué sur tous les éléments (la classe existe dans le CSS mais n'est posée sur aucun élément, → AC-02) ; focus `outline: 2px solid var(--rs-aube)` ; Échap ferme menu/modale/panneau (→ EC-07).
+- [ ] **Cibles tactiles** — 44 px minimum pour tout élément interactif, 8 px d'écart entre deux cibles voisines. 20 boutons sur 20 sous ce seuil sur l'accueil mobile actuel (→ MO-01).
+- [ ] **Cache CDN** (`09-donnees-api-migration.md` § 2.3) — sortir la lecture de session du layout racine (composant client sur l'en-tête uniquement), rendre les routes éditoriales statiques avec ISR. Cible : `x-vercel-cache: HIT` sur `/lieux/*` au lieu de TTFB 1 960 ms à froid (→ PF-01). Meilleur rapport effort/gain de toute la liste.
+- [ ] **Sécurité apiToken** (`09` § 2.2) — proxifier les appels via des route handlers Next (`app/api/**/route.ts`), garder le JWT dans un cookie `httpOnly Secure SameSite=Lax`. Le navigateur n'appelle plus Railway directement. À défaut : réduire fortement la durée de vie du token (→ EC-02).
+
+*Recette :* aucun `<input>/<select>` sous 16 px ; aucune cible tactile sous 44 px ; `x-vercel-cache: HIT` sur `/lieux/*` ; `/api/auth/session` ne contient plus `apiToken`.
+
+### Lot 2 — Contrat d'URL
+
+- [ ] **Filtres dans l'URL sur toutes les listes** (`03-architecture-routes-url.md` § 5.1) — `router.replace(url, { scroll: false })` à chaque changement ; `useSearchParams()` au montage. Un état vide = paramètre absent (jamais `?zone=`). Format : `/explorer?zone=menton-monaco&type=village,sentier&duree=court&niveau=facile&ouvert=1&q=eze&sort=proximite`. Corrige PR-01 pour les filtres.
+- [ ] **`/composer` avec état complet dans l'URL** (`03` § 5.2) — `/composer?duree=journee&depart=nice&date=2026-09-19&transport=voiture&lieux=eze-village,la-turbie,rue-obscure`. Paramètre `lieux` **cumulatif** : « Ajouter à un itinéraire » depuis une fiche *ajoute* le slug, ne le remplace pas. Corrige PR-02 (un lieu écrase le précédent).
+- [ ] **Routes `/inscription` et `/mot-de-passe-oublie`** — deux routes à part entière avec leur propre URL, pas des bascules sur `/connexion` sans changement d'URL. La route `/reinitialiser-mot-de-passe` existe déjà (2026-09-14), garder. Corrige PR-08.
+- [ ] **Page 404 localisée** (`03` § 7) — `app/not-found.tsx` avec la mise en page du site, un champ de recherche et trois lieux tirés au hasard (le bouton « Surprends-moi » existe déjà dans le code). Corrige la 404 Next.js en anglais sans en-tête ni lien (→ PR-03).
+
+*Recette :* une vue filtrée se partage et se recharge à l'identique ; Précédent défait un filtre ; un F5 sur un itinéraire composé ne perd rien ; ajouter trois lieux depuis trois fiches donne `lieux=lieu1,lieu2,lieu3`.
+
+### Lot 3 — Données
+
+- [ ] **Tags des 43 lieux nettoyés** (`09` § 1.1) — passe manuelle sur les 43 fiches, `tags: TagLieu[]` propre au lieu, jamais dérivé de la commune. Vocabulaire figé : `village | sentier | crique | jardin | monument | panorama | table`. Demi-journée de travail, meilleur rapport effort/crédibilité. Tant que ce n'est pas fait, les filtres d'Explorer mentent (→ DC-01).
+- [ ] **`commune_slug` sur les activités** (`09` § 1.2) — nouveau champ ; affichage : commune en sous-titre, « à proximité de X » seulement si `lieu_slug` renseigné et `sur_place === false`. Corrige « Sortie kayak de mer · La Rue Obscure » — on ne fait pas de kayak dans une rue couverte du XIII siècle (→ DC-02).
+- [ ] **`lien_type` et `partenaire`** (`09` § 1.3) — deux libellés seulement : `reservation` → « Réserver », `officiel` → « Site officiel ». Un lien n'est `reservation` que s'il mène à la page de réservation de cette activité précise. Liens partenaires : `rel="sponsored nofollow"` + mention mono 12 `--rs-brume` « lien partenaire ». Corrige DC-03.
+- [ ] **Formateur de durée unique** (`08-ecran-itineraire.md` § 4) — < 60 min → `45 min` arrondi à 5 ; ≥ 60 min → `1 h 45` arrondi au quart d'heure. Jamais de décimale, jamais de `~`. La chaîne `~1.8 h` ne doit plus pouvoir exister (→ DC-05).
+- [ ] **Horaires calculés sur la date de visite** (`09` § 3) — `estOuvert(horaires, dateVisite, heureVisite)` ; `dateVisite` vient toujours du paramètre `date` de l'écran Composer, jamais de `new Date()`. Les alertes « Fermé aujourd'hui » deviennent vraies pour un voyage dans le futur.
+
+*Recette :* filtrer « Criques » ne remonte aucun village ; aucune carte d'activité n'affiche un lieu parent comme adresse ; la chaîne `1.8 h` n'existe plus nulle part.
+
+### Lot 4 — Écrans
+
+Dans cet ordre — chacun indépendant. La fiche lieu en premier : c'est la page d'atterrissage n° 1 depuis Google, et elle a le meilleur ratio effort/valeur. L'accueil en dernier : il pointe vers les autres écrans, autant qu'ils existent d'abord.
+
+#### 4a. Fiche lieu (`06-ecran-fiche-lieu.md`)
+
+La composition actuelle est bonne (galerie → identité → infos pratiques → carte → récit → conseils → activités → rebonds). Elle change de peau et gagne trois blocs.
+
+- [ ] **Barre d'action fixe mobile** (`02-composants.md` § 7) — ancrée en bas : bouton primaire « Y aller » 52 px `flex-grow` + icône épingle 19 px + 3 carrés 52 × 52 (favori/partage/ajouter). `padding-bottom: max(20px, env(safe-area-inset-bottom))`. Le contenu réserve 112 px en bas. Corrige MO-05 (actions disparaissent au défilement sur mobile) et MO-01 (liens Maps/Waze/Plans à 16 px de haut).
+- [ ] **Trois rebonds sous la fiche** (`06` § 2.6) — ① « Cet itinéraire passe par ici » : carte de liste avec sur-titre `6 ÉTAPES · 2 JOURS` en aube, étape et heure en mono ; ② « À moins de 20 minutes » : 3 lieux en lignes 44 px avec distance estimée en aube ; ③ ligne de confiance mono 12 `VÉRIFIÉ SUR PLACE EN AOÛT 2026 · PHOTO [CRÉDIT]`. Corrige PA-03 (la fiche qui reçoit 100 % du trafic organique offre le moins de suites).
+- [ ] **Favori optimiste** — bascule immédiate, retour arrière en cas d'échec réseau ; `aria-pressed` ; déconnecté → feuille contextuelle « Connecte-toi pour épingler Èze » avec bouton primaire de connexion (pas redirection sèche → PR-07) ; appliquer le favori automatiquement au retour.
+- [ ] **« Ajouter à un itinéraire » sans quitter la page** — ajoute le slug à `lieux=` de `/composer` de façon cumulative ; toast « Ajouté — 3 lieux » avec action « Composer ». Corrige PR-02 (navigue vers `/creer-itineraire?add=<slug>` et remplace la sélection précédente).
+- [ ] **Encadré « Le bon moment »** (`06` § 2.3) — reprend les « Conseils pratiques » existants en forme tabulaire scannable (Y aller / Saison / Stationner). Surface `--rs-nuit-haute`, bordure `--rs-trait`, icône horloge aube.
+- [ ] **Composition desktop** (`06` § 3) — deux colonnes ≥ 1024 px : gauche (62 %) galerie/identité/récit, droite (38 %, collante) carte/actions/rebonds. Largeur de lecture du récit : 66 caractères max. Fil d'Ariane : supprimer la redondance quand le nom du lieu commence par le nom de la commune.
+- [ ] **JSON-LD `TouristAttraction`** (`06` § 4) — nom, description, `geo`, `address`, `isAccessibleForFree`, `openingHours` quand la donnée existe. Gain SEO direct sur 43 pages.
+
+#### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer`
+
+Remplace la section `#lieux` + la carte de l'accueil + `/activites`. Un seul écran, plein viewport, filtres uniques en tête, carte et liste synchronisées.
+
+- [ ] **Barre de filtres unique** pilotant carte ET liste — chips de type, chips déroulants durée/niveau, chip bascule « Ouvert aujourd'hui », « Tout effacer » mono 12 aube. Hors zone défilante (pas sticky — elle est fixe, la liste défile). Chaque changement réécrit l'URL. Corrige AI-04/NF-01 (deux jeux de filtres indépendants).
+- [ ] **Corps en grille `1fr 468px`** — carte à gauche (pleine hauteur, pas de défilement propre), liste à droite (zone défilante 24 px, `gap: 10`, cartes compactes).
+- [ ] **Carte et liste synchronisées** — survol carte → marqueur aube + étiquette ; survol marqueur → carte bordurée + scrollée ; clic marqueur → `/lieux/[slug]` ; déplacement/zoom → recalcul liste + `bbox` dans l'URL (débounce 400 ms) ; changement de filtre → `fitBounds`.
+- [ ] **Amas obligatoires** (`leaflet.markercluster`) — pastille 32–36 px, fond `--rs-nuit-3`, bordure `--rs-zone-3`, chiffre 14/700. 13 paires de marqueurs se superposent autour de Nice/Monaco au zoom par défaut (→ NF-03).
+- [ ] **Marqueurs** — 15 px (13 sur mobile), couleur = zone (`--rs-zone-{1-5}`), bordure 2 px `--rs-nuit`. Marqueur sélectionné : aube, étiquette rattachée par un trait 1 px de 16 px, fond aube, texte nuit 15/700.
+- [ ] **Légende d'altitude** — cartouche 40 px ancré en haut à gauche (20 px), mono `ALTITUDE`, barre dégradé 92 × 8 (`--rs-zone-1` → `--rs-zone-5`), mono `0 — 800 m`.
+- [ ] **Contrôles de zoom** — 44 × 44 (actuellement 30 × 30), fond `--rs-nuit`, bordure `--rs-trait`, rayon 3, en bas à gauche. Bouton « Recentrer sur ma position » en bas à droite, secondaire 44. Corrige MO-01.
+- [ ] **Pagination** — chargement progressif par 24 au défilement + bouton secondaire « Voir 24 lieux de plus ».
+- [ ] **Mobile** — vue liste par défaut avec filtres collants (`position: sticky; top: 0`, corrige NF-04) ; bouton flottant primaire 52 « Voir sur la carte » sur dégradé 96 px ; tap sur un marqueur → feuille basse (hauteur ≈ 180) avec bouton « Voir la fiche ».
+- [ ] **États** — squelettes sans animation de brillance pendant le chargement ; état vide avec bouton secondaire « Tout effacer » ; bouton flottant « Chercher dans cette zone » si bbox sans résultat.
+- [ ] **`/activites` redirige en 301** vers `/explorer?type=activites` — les 208 activités vivent dans la fiche lieu (« À faire sur place ») et dans Explorer, pas dans une page-catalogue de 57 000 px (→ NF-04).
+
+#### 4c. Composer (`07-ecran-composer.md`) — `/composer` remplace `/creer-itineraire`
+
+Le moteur algorithmique est bon. L'entrée et la sortie le desservent.
+
+- [ ] **Bandeau de 4 paramètres** — grille 4 colonnes : DURÉE / DÉPART + heure `08:30` / DATE / TRANSPORT (voiture ou train + marche). La date rend les alertes d'ouverture honnêtes pour un voyage dans le futur (→ PR-04). Les trois premiers sont les paramètres qui manquent aujourd'hui.
+- [ ] **Sélection sur vignettes** (`02` § 5.3) — grille 3 colonnes, cartes avec image 3:2, case d'état 28 × 28 (non sélectionnée : carré bordé `--rs-brume` ; sélectionnée : fond aube + coche nuit ; fermée : `opacity .6` + voile + badge « Fermé samedi » calculé sur la `date`). Remplace les 43 noms nus dans des accordéons sans photo ni info (→ PR-05).
+- [ ] **Recherche + filtre de zone** — champ 44 + chips de zone (défilement horizontal) + lien « Depuis mes favoris (N) ». Ce dernier est le pont manquant entre les favoris et le générateur (→ PA-04).
+- [ ] **Récapitulatif vivant** (colonne droite 500 px) — carte avec pastilles numérotées en aube reliées par un trait ambre pointillé (l'ordre est celui du moteur, pas celui du clic) ; panneau : titre Bodoni « 3 lieux, 5 h 40 » + 4 chiffres (temps sur place / trajets / entrées à prévoir / reste dans la journée — en `--rs-pin` si positif, en aube si négatif) ; encadré de suggestion ; bouton primaire pleine largeur 52 désactivé si 0 lieu + mention « Choisis au moins un lieu. » avant le clic.
+- [ ] **Tout dans l'URL** via `router.replace` — fermer l'onglet et revenir recharge l'état complet. La mention « Ta sélection est conservée dans le lien » n'est écrite que si l'URL est effectivement synchronisée.
+- [ ] **Mobile** — barre fixe en bas (ligne 1 : récap chiffres, ligne 2 : bouton primaire pleine largeur 52).
+- [ ] **Micro-copie** — « On place tes lieux dans l'ordre, avec les horaires et les temps de trajet. » remplace « l'algorithme compose le meilleur itinéraire possible » ; « Composer l'itinéraire » remplace « Générer » (→ MC-02).
+
+#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique)
+
+- [ ] **Lecture publique** (`09` § 2.1) — `GET /api/itineraires/:id` public sans auth (200/404) ; `POST /api/itineraires` sans compte → `{ id, editToken }`, `id` nanoid ≥ 8 non devinable, champ `visibilite: 'lien'` par défaut. `PATCH`/`DELETE` par session OU `editToken`. Corrige EC-01 (le lien partagé retourne 405/404 sans auth, puis retombe silencieusement sur le formulaire vide).
+- [ ] **Persistance dans l'URL** — état complet dans `/composer?…` pour le cas anonyme : F5 reconstruit l'itinéraire, Précédent revient à la sélection. Corrige PR-01.
+- [ ] **Partage avec retour visible** — après copie : texte « Lien copié », bordure et texte `--rs-pin`, coche SVG, 4 s. `navigator.share` en mobile (repli : copie). Corrige EC-01 (aucun retour visuel aujourd'hui).
+- [ ] **Bandeau d'arbitrage nommé** (`08` § 2.3) — quand un lieu est écarté : nommer le lieu, donner le delta en minutes, proposer « Passer à 2 jours » / « Remplacer une étape » / « Garder pour plus tard » (→ favori). Bordure aube. Corrige PR-06 (« 1 lieu non inclus » sans nom ni action).
+- [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`.
+- [ ] **URL de partage dans l'en-tête** — mono 12 `--rs-brume` : `riviera-secrete.fr/i/3f7a2c`. Pas décoratif : signale que l'itinéraire existe, se partage, survit au F5.
+- [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04).
+- [ ] **Modale de suppression** — `<dialog>` natif remplace `window.confirm()` (→ EC-03), bouton destructif à droite, « Annuler » par défaut.
+- [ ] **`/i/[id]` introuvable** — vraie page 404 with titre « Cet itinéraire n'existe plus », explication, bouton primaire « En composer un ».
+- [ ] **Open Graph** sur `/i/[id]` — `title` = nom de l'itinéraire, `image` = photo de la première étape.
+- [ ] **Export PDF** — conserver, adapter à la nouvelle mise en page.
+
+#### 4e. Accueil (`04-ecran-accueil.md`)
+
+L'accueil vient en dernier : il pointe vers les autres écrans.
+
+- [ ] **Héros** — une seule image 1440 × 660 WebP+JPEG `fetchpriority="high"` `<link rel="preload">` (vs. cinq images actuelles, → PF-02). Voile gradient vertical. Sur-titre `.lbl` aube, titre Bodoni 74 px desktop / 44 mobile `max-width: 16ch`, accroche 19 px `max-width: 52ch`.
+- [ ] **Panneau de qualification** posé à cheval sur le héros — surface `--rs-nuit-haute`, ombre flottante, 3 contrôles (J'AI / JE PARS DE / J'AI ENVIE DE), séparateur, bouton primaire grand « Composer mon itinéraire » + lien discret « Ou explorer les 43 lieux ». Le premier champ interactif remonte dans le héros au lieu d'attendre à 2 623 px (→ AI-02/03).
+- [ ] **Section Explorer** — aperçu carte + liste synchronisés (470 px de haut, grille 1.45fr/1fr), 5 chips de filtre, compteur unique « 26 lieux dans la vue », bouton secondaire « Voir les 26 lieux » → `/explorer`. Corrige AI-04.
+- [ ] **Section « Déjà composés »** — 3 cartes verticales 3:2, sur-titre mono aube, titre/description. Les itinéraires viennent *après* l'outil : ils sont le raccourci pour qui ne veut pas répondre aux trois questions.
+- [ ] **Section « La méthode »** — titre Bodoni + paragraphe éditorial + 4 lignes tabulaires (lieux vérifiés sur place / dernière passe / lieux retirés / auteur). Corrige PA-05 (rien ne dit qui trie aujourd'hui).
+- [ ] **Suppression de la section Activités de l'accueil** — elle présentait les feuilles avant l'arbre, le rattachement au lieu parent devenait incompréhensible (→ AI-05).
+- [ ] **Performance** — objectif < 900 Ko et < 60 requêtes (actuellement 1 768 Ko et 142 requêtes dont 45 préchargements RSC dupliqués, → PF-02) ; `srcset` sur toutes les vignettes, deux largeurs 700w/1000w WebP + repli JPEG (aucun `srcset` aujourd'hui sur les 208 images d'activités, → MO-03).
+- [ ] **Mobile** — panneau de qualification avec les 3 contrôles empilés ; bouton primaire pleine largeur 52 ; section Explorer avec carte 208 px + bouton flottant « Ouvrir la carte » ; 1 carte itinéraire pleine largeur.
+
+### Lot 5 — Navigation et nettoyage
+
+- [ ] **Menu à 4 entrées + 1 bouton + recherche globale** (`03-architecture-routes-url.md` § 2) — `Explorer · Itinéraires · Le carnet [recherche 250 px] [Composer un itinéraire] (compte)`. La recherche est un vrai champ dans l'en-tête, disponible partout (la loupe actuelle navigue vers `/#lieu-search`, recharge l'accueil et saute à 2 672 px → AI-06). « Composer un itinéraire » est un bouton primaire dans l'en-tête, pas la 5e entrée sur 9 (→ PA-02). Mobile : logo + loupe 44 × 44 + burger 44 × 44, panneau déroulant.
+- [ ] **`/carnet`** — fusionne `/mes-favoris` et `/mes-itineraires` en une seule entrée à deux onglets. Corrige NF-05 (deux entrées cul-de-sac pour 100 % des nouveaux visiteurs).
+- [ ] **Redirections 301** (`03` § 3) à poser côté Next.js + équivalents `/en/…` :
+  - `/creer-itineraire` → `/composer`
+  - `/mes-favoris` → `/carnet?onglet=favoris`
+  - `/mes-itineraires` → `/carnet?onglet=itineraires`
+  - `/activites` → `/explorer?type=activites`
+  - `/villes` → `/explorer`
+  - `/villes/[slug]` → `/communes/[slug]`
+  - `/#lieux` → `/explorer`
+  - `/#itineraires` → `/itineraires`
+- [ ] **Pages communes** (`03` § 4) — ≥ 2 lieux → page conservée sous `/communes/[slug]`, retirée du menu, accessible via fil d'Ariane ; 1 lieu → redirection 301 vers `/lieux/[slug-du-lieu]`. 28 communes sur 34 n'ont qu'un seul lieu (→ DC-04).
+- [ ] **Page `/itineraires`** — index des 6 itinéraires éditoriaux (ancre `#itineraires` de l'accueil devient une vraie page), grille de cartes verticales 3:2.
+- [ ] **Vocabulaire figé partout** (`03` § 8) — *lieu* / *commune* / *activité* / *itinéraire* / *itinéraire composé* dans l'interface, le contenu, les balises, les slugs et les noms de variables. Corrige MC-01 (4 mots pour 2 objets : *spots* / *lieux* / *villes* / *communes*).
+- [ ] **Pied de page** — cibles ≥ 15 px minimum (actuellement 17 px de haut → MO-01) ; liens : La méthode · Crédits photo · Mentions légales · Confidentialité ; FR · EN à droite.
+
+### Critères de recette globaux
+
+| # | Critère | Vérification |
+|---|---|---|
+| 1 | Un itinéraire composé survit à un F5 et à Précédent, sans compte | Manuel |
+| 2 | Un lien `/i/[id]` s'ouvre en navigation privée | Manuel |
+| 3 | Une vue filtrée se partage et se recharge à l'identique | Manuel |
+| 4 | Aucun élément interactif sous 44 px sur les 8 écrans | Script DOM |
+| 5 | Aucun `input`/`select`/`textarea` sous 16 px | Script DOM |
+| 6 | Tout texte atteint 4,5:1 de contraste | Script DOM |
+| 7 | Chaque image a un `alt` (vide si décoratif) | Script DOM |
+| 8 | Échap ferme menu, modale et feuille | Manuel |
+| 9 | Aucun `window.confirm` / `alert` dans le code | `grep -r "window.confirm\|window.alert"` |
+| 10 | Toute action > 150 ms a un état visible | Manuel |
+| 11 | `x-vercel-cache: HIT` sur les routes éditoriales | `curl -I /lieux/eze-village` |
+| 12 | Accueil < 900 Ko et < 60 requêtes | DevTools Network |
+| 13 | Aucun filtre ne remonte un lieu hors catégorie | Revue des 43 fiches |
+| 14 | Un seul bouton primaire ambre visible par zone d'écran | Revue visuelle |
+
+---
+
 ## Priorité contenu
 
 - [x] Enrichir les activités de chaque lieu — angle éditorial : activités secrètes, atypiques,
