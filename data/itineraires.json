@@ -240,8 +240,8 @@
       },
       {
         "type": "transit",
-        "desc": "🚗 60 min — A8 puis D98a, traversée du golfe de Saint-Tropez",
-        "descEn": "🚗 60 min — A8 then D98a, crossing the Gulf of Saint-Tropez"
+        "desc": "🚗 1 h 15 à 1 h 30 — A8 puis D98a, traversée du golfe de Saint-Tropez",
+        "descEn": "🚗 1 hr 15 to 1 hr 30 — A8 then D98a, crossing the Gulf of Saint-Tropez"
       },
       {
         "type": "stop",
@@ -514,7 +514,7 @@
   },
   {
     "slug": "menton-eze-monaco",
-    "titre": "Menton, Èze &amp; Monaco : la route des classiques",
+    "titre": "Roquebrune, Èze &amp; Monaco : la Riviera des corniches",
     "description": "Deux jours entre villages perchés, panoramas et villas Belle Époque : Grande Corniche, Monaco, Cap Ferrat et Villefranche-sur-Mer.",
     "badge": "6 étapes · 2 jours",
     "heroImgTag": "<img src=\"../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg\"\n         data-carousel-srcs=\"../assets/images/lieux/roquebrune-cap-martin-village/hero.jpg,\n                             ../assets/images/lieux/trophee-auguste-la-turbie/hero.jpg,\n                             ../assets/images/lieux/eze-village/hero.jpg,\n                             ../assets/images/lieux/jardin-exotique-monaco/hero.jpg,\n                             ../assets/images/lieux/villa-ephrussi-rothschild/hero.jpg,\n                             ../assets/images/lieux/rue-obscure-villefranche/hero.jpg\"\n         alt=\"La côte de la Riviera entre Menton et Monaco\" loading=\"eager\">",
@@ -797,7 +797,7 @@
         "badgeEn": "4 stops"
       }
     ],
-    "titreEn": "Menton, Èze & Monaco: the classic route",
+    "titreEn": "Roquebrune, Èze & Monaco: the corniche route",
     "badgeEn": "6 stops · 2 days",
     "descriptionEn": "Two days between perched villages, panoramas and Belle Époque villas: Grande Corniche, Monaco, Cap Ferrat and Villefranche-sur-Mer.",
     "introEn": "Two days from east to west: Grande Corniche and perched villages on the first day, an overnight stay in Monaco, then Cap Ferrat and Villefranche at a gentler pace on the second.",

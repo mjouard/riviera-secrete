@@ -201,6 +201,10 @@ public static class DatabaseSeeder
         dbLieu.DescriptionEn  = jsonLieu["descriptionEn"]?.GetValue<string>();
         dbLieu.Description2   = jsonLieu["description2"]?.GetValue<string>();
         dbLieu.Description2En = jsonLieu["description2En"]?.GetValue<string>();
+        // `Nom` manquait alors que `NomEn` était bien recopié : renommer un lieu en français
+        // dans le JSON était annoncé « rafraîchi » sans jamais partir en base, et la version
+        // anglaise se retrouvait seule à jour. Même angle mort que lat/lng (cf. 1434d41).
+        dbLieu.Nom          = jsonLieu["nom"]!.GetValue<string>();
         dbLieu.NomEn        = jsonLieu["nomEn"]?.GetValue<string>();
         dbLieu.HeroAlt      = jsonLieu["heroAlt"]!.GetValue<string>();
         dbLieu.HeroImage    = jsonLieu["heroImage"]!.GetValue<string>();
@@ -235,6 +239,7 @@ public static class DatabaseSeeder
 
         dbVille.Description   = jsonVille["description"]!.GetValue<string>();
         dbVille.DescriptionEn = jsonVille["descriptionEn"]?.GetValue<string>();
+        dbVille.Nom           = jsonVille["nom"]!.GetValue<string>();  // même angle mort que côté lieu
         dbVille.NomEn         = jsonVille["nomEn"]?.GetValue<string>();
         dbVille.ThumbImage    = jsonVille["thumbImage"]!.GetValue<string>();
         // Mêmes coordonnées manquantes que dans RefreshLieuFieldsAsync — et c'est bien une

@@ -84,7 +84,7 @@
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-2.jpg",
         "alt": "Sortie kayak de mer",
         "altEn": "Sea kayaking outing",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h",
         "prixEn": "35–50 € / person"
       },
@@ -114,7 +114,7 @@
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-4.jpg",
         "alt": "Plongée snorkeling",
         "altEn": "Snorkelling",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h",
         "prixEn": "40–55 € / person"
       },
@@ -125,11 +125,11 @@
         "badge": "payant",
         "duree": "1h30",
         "prix": "29–50 € / pers.",
-        "url": "https://www.laparte-villefranche-sur-mer.com/",
+        "url": "https://lacarte.menu/restaurants/villefranche-sur-mer/laparte-8",
         "image": "../assets/images/lieux/rue-obscure-villefranche/act-5.jpg",
         "alt": "Entrée de la Rue Obscure, où se niche le restaurant L'Aparté",
         "altEn": "Entrance to the Rue Obscure, where restaurant L'Aparté is tucked away",
-        "linkText": "Réserver →",
+        "linkText": "En savoir plus →",
         "dureeEn": "1h30",
         "prixEn": "29–50 € / person"
       },
@@ -267,7 +267,7 @@
         "image": "../assets/images/lieux/sentier-cap-ferrat/act-2.jpg",
         "alt": "Location de vélos",
         "altEn": "Bike rental",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2–4h",
         "prixEn": "15–25 € / day"
       },
@@ -1277,7 +1277,7 @@
         "image": "../assets/images/lieux/sentier-corbusier-cap-martin/act-1.jpg",
         "alt": "Cabanon Le Corbusier (visite guidée)",
         "altEn": "Le Corbusier's Cabanon (guided tour)",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "1h",
         "prixEn": "10 € / adult"
       }
@@ -1398,7 +1398,7 @@
         "image": "../assets/images/lieux/colline-du-chateau-nice/act-2.jpg",
         "alt": "Vieux Nice — visite guidée",
         "altEn": "Old Nice — guided tour",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h",
         "prixEn": "15 € / adult"
       },
@@ -1577,7 +1577,7 @@
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-3.jpg",
         "alt": "Tour gastronomique Vieux Nice",
         "altEn": "Old Nice food tour",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h",
         "prixEn": "45–55 € / adult"
       },
@@ -1592,7 +1592,7 @@
         "image": "../assets/images/lieux/cours-saleya-vieux-nice/act-2.jpg",
         "alt": "Cours de cuisine niçoise",
         "altEn": "Niçoise cooking class",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "3h",
         "prixEn": "65–90 € / adult"
       },
@@ -2299,7 +2299,7 @@
         "image": "../assets/images/lieux/gorges-du-loup-cascade-courmes/act-2.jpg",
         "alt": "Escalade et via ferrata",
         "altEn": "Climbing and via ferrata",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "3h–4h",
         "prixEn": "50–80 € / person"
       },
@@ -2494,7 +2494,7 @@
         "image": "../assets/images/lieux/pont-du-loup/act-2.jpg",
         "alt": "Atelier confitures artisanales",
         "altEn": "Artisan jam-making workshop",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "1h30",
         "prixEn": "30–45 € / adult"
       },
@@ -3053,7 +3053,7 @@
         "image": "../assets/images/lieux/biot-village-verrier/act-1.jpg",
         "alt": "Atelier soufflage de verre",
         "altEn": "Glassblowing workshop",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "1h30",
         "prixEn": "45–65 € / adult"
       },
@@ -3430,7 +3430,7 @@
         "image": "../assets/images/lieux/sentier-cap-antibes/act-3.jpg",
         "alt": "Location de vélos électriques",
         "altEn": "Electric bike rental",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h–4h",
         "prixEn": "20–35 €"
       },
@@ -3595,7 +3595,7 @@
         "image": "../assets/images/lieux/pinede-gould-juan-les-pins/act-2.jpg",
         "alt": "Location paddle / SUP",
         "altEn": "Paddleboard / SUP rental",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "1h",
         "prixEn": "15–20 € / person"
       },
@@ -4089,7 +4089,7 @@
         "image": "../assets/images/lieux/calanques-esterel-theoule/act-1.jpg",
         "alt": "Kayak de mer calanques",
         "altEn": "Sea kayaking among the coves",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h–3h",
         "prixEn": "40–60 € / person"
       },
@@ -4104,7 +4104,7 @@
         "image": "../assets/images/lieux/calanques-esterel-theoule/act-2.jpg",
         "alt": "Snorkeling calanques rouges",
         "altEn": "Snorkelling in the red coves",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "2h",
         "prixEn": "30–45 € / person"
       },
@@ -4303,7 +4303,7 @@
         "image": "../assets/images/lieux/vieille-ville-grasse/act-3.jpg",
         "alt": "Atelier création de parfum",
         "altEn": "Perfume-making workshop",
-        "linkText": "Réserver →",
+        "linkText": "Voir les offres →",
         "dureeEn": "1h30",
         "prixEn": "50–80 € / adult"
       },

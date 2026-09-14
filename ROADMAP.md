@@ -72,10 +72,22 @@ base), sauf ce qui est listé ci-dessous.
 
 ### Fiabilité — contredit `/a-propos`, donc prioritaire
 
-- [ ] **Badges non praticables au lieu précis** — `rue-obscure-villefranche` (rue médiévale
-      *couverte*, 15–20 min) porte `plage` et `plongee`, et sort **en tête** du filtre
-      plage. `/a-propos` énonce explicitement la règle inverse. Repasser aussi
-      `villa-kerylos` (un musée) et `colline-du-chateau-nice` (parc à 90 m d'altitude).
+- [~] **Badges de `rue-obscure-villefranche` — le constat de l'audit ne tient pas**
+      (vérifié le 2026-09-14, **aucun changement fait**). L'audit signalait qu'une « rue
+      couverte » portant `plage` et `plongee` sortait en tête du filtre plage. Mais la règle
+      du projet dit « praticable **à cet endroit précis**, pas ailleurs dans la commune », et
+      le précédent `roquebrune-cap-martin-village` garde `plage` pour des plages à ~10 min à
+      pied. Or la plage des Marinières est à 3-5 min de la Rue Obscure, et le lieu porte
+      lui-même « Baignade à la plage des Marinières » et « Plongée snorkeling » dans ses
+      activités : retirer les badges rendrait la fiche incohérente avec son propre contenu.
+      Même conclusion pour `villa-kerylos` (la villa est bâtie sur les rochers de la baie des
+      Fourmis) et `colline-du-chateau-nice` (plage des Ponchettes à son pied).
+      **Le vrai problème est un écart de périmètre, pas de badge** : le lieu s'appelle « La
+      Rue Obscure » mais couvre en fait tout le vieux Villefranche — citadelle, kayak,
+      snorkeling, plage. C'est le nom qui devrait être élargi (« Le Vieux Villefranche et la
+      Rue Obscure »), ce qui rendrait le résultat du filtre plage compréhensible. Décision
+      éditoriale laissée à l'utilisateur ; le renommage d'affichage est désormais possible
+      sans toucher au slug, `refresh-lieu-fields` recopiant `Nom` depuis le 2026-09-14.
 - [ ] **Revalidation ISR après écriture en base** — une page `/en` servait encore, figée au
       dernier build, une réservation à 6 € pour le château de Gourdon **fermé au public
       depuis 2015**, avec un lien vers un domaine viticole sans rapport. L'API était propre.
@@ -85,19 +97,39 @@ base), sauf ce qui est listé ci-dessous.
       défaut, redéployer après chaque synchro et abaisser `revalidate`.
       **Règle à retenir** : un correctif de contenu « supprimé partout » se vérifie sur les
       pages rendues, pas seulement dans l'API.
-- [ ] **Lien de réservation mort** — `laparte-villefranche-sur-mer.com` (« Dîner au
+- [x] **Lien de réservation mort** — corrigé le 2026-09-14. `laparte-villefranche-sur-mer.com`
+      ne répond plus (échec TLS et connexion). Le restaurant, lui, existe toujours (sources
+      de juin-juillet 2026, et il est littéralement au 1 rue Obscure) : l'activité est donc
+      conservée, l'URL pointe vers une fiche qui résout, et le libellé passe à « En savoir
+      plus » puisque ce n'est pas un lien de réservation. Les pages spécifiques de TheFork et
+      Tripadvisor ont été essayées d'abord : toutes deux redirigent vers une liste générique,
+      leur identifiant est périmé. (« Dîner au
       restaurant L'Aparté », 29–50 €) : échec TLS et 404. Seule URL vraiment morte sur les
       195 testées.
-- [ ] **11 liens « Réserver » pointent vers des pages génériques** GetYourGuide
-      (`/nice-l314/`, `/antibes-l5075/`…) au lieu de l'activité nommée.
-- [ ] **Titre d'itinéraire trompeur** — « Menton, Èze & Monaco » ne passe pas par Menton
-      (Roquebrune, La Turbie, Èze, Monaco, Cap-Ferrat, Villefranche).
-- [ ] **Le site se contredit sur un temps de trajet** — l'itinéraire éditorial annonce
-      « 60 min » Grasse → golfe, le générateur calcule « ~1 h 33 min » sur le même segment
-      (le second est le réaliste, ~95 km).
-- [ ] **`/a-propos` : tension de marque** — l'itinéraire vitrine s'appelle « la route des
-      **classiques** » et enchaîne Monaco, le Musée Océanographique, Èze et la Villa
-      Ephrussi, soit exactement ce que la page promet d'éviter.
+- [~] **Liens « Réserver » vers des pages génériques GetYourGuide** — **15** au total, pas
+      11. Les URL ne sont pas cassées : ce sont de vraies pages, mais celles du catalogue
+      d'une ville, pas de l'activité nommée. Le libellé passe donc de « Réserver » à « Voir
+      les offres » (2026-09-14) : le bouton décrit maintenant ce qui va réellement se passer.
+      **Reste à faire** : sourcer les 15 URL spécifiques, ce qui demande de vérifier chaque
+      produit une par une chez GetYourGuide — un chantier de contenu, pas un correctif. Ne
+      pas fabriquer ces URL de tête.
+- [x] **Titre d'itinéraire trompeur** — corrigé le 2026-09-14. « Menton, Èze & Monaco : la
+      route des classiques » cumulait les deux défauts relevés séparément : il annonçait une
+      ville où l'itinéraire ne passe pas (la première étape est Roquebrune) et se vantait des
+      « classiques », ce que `/a-propos` promet justement d'éviter. Devenu « Roquebrune, Èze
+      & Monaco : la Riviera des corniches » — exact, et fidèle au parcours, qui emprunte
+      réellement la Grande puis la Moyenne Corniche. Le slug reste `menton-eze-monaco` pour
+      ne pas casser les URL partagées.
+- [x] **Contradiction sur un temps de trajet** — corrigée le 2026-09-14. L'itinéraire
+      annonçait « 60 min » Grasse → golfe là où le générateur calculait « ~1 h 33 ». Aucune
+      des deux valeurs n'était juste : ~75 km de route, donc « 1 h 15 à 1 h 30 », formulé en
+      fourchette comme le reste du site. Le générateur reste pessimiste (35 km/h de moyenne,
+      inadapté à l'A8) — à revoir avec la coupure gloutonne ci-dessus.
+- [~] **Tension de marque** — le titre « la route des classiques » est corrigé (voir
+      ci-dessus), mais l'itinéraire enchaîne toujours Monaco, le Musée Océanographique, Èze
+      et la Villa Ephrussi. Le contenu reste plus « incontournable » que le reste du site ;
+      c'est un arbitrage éditorial, pas un bug. Lié à la reformulation de la promesse
+      générale (voir « Préciser la promesse »).
 
 ### Positionnement & concurrence (état des lieux du 2026-09-14)
 

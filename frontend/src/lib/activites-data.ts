@@ -77,9 +77,15 @@ export function trancheDeDuree(minutes: number | null): TrancheDuree | null {
  * colonne `linkTextEn` à remplir 208 fois. Repli sur `reserver` pour tout libellé inconnu —
  * mieux vaut un bouton correct en anglais qu'une chaîne française sur `/en`.
  */
-export function cleLinkText(linkText: string | null | undefined): "reserver" | "verifierHoraires" | "enSavoirPlus" {
+export function cleLinkText(
+  linkText: string | null | undefined
+): "reserver" | "verifierHoraires" | "enSavoirPlus" | "voirLesOffres" {
   if (linkText === "En savoir plus →") return "enSavoirPlus";
   if (linkText === "Vérifier les horaires →") return "verifierHoraires";
+  // « Voir les offres » et non « Réserver » pour les liens qui atterrissent sur le
+  // catalogue d'une ville plutôt que sur l'activité nommée : le bouton doit décrire ce qui
+  // va réellement se passer. Quinze activités sont dans ce cas.
+  if (linkText === "Voir les offres →") return "voirLesOffres";
   return "reserver";
 }
 

@@ -1,3 +1,4 @@
+import { cleLinkText } from "@/lib/activites-data";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -256,7 +257,7 @@ export default async function LieuPage({
                     className="text-xs mt-3"
                     style={{ color: "var(--azure)" }}
                   >
-                    {act.linkText === "Réserver →" ? tActivite("reserver") : tActivite("enSavoirPlus")}
+                    {tActivite(cleLinkText(act.linkText))}
                   </span>
                 </div>
               </a>

@@ -1,3 +1,4 @@
+import { cleLinkText } from "@/lib/activites-data";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -362,11 +363,7 @@ export default async function ItinerairePage({
                       className="text-sm mt-auto self-start"
                       style={{ color: "var(--azure)" }}
                     >
-                      {b.linkText === "Réserver →"
-                        ? tActivite("reserver")
-                        : b.linkText === "Vérifier les horaires →"
-                          ? tActivite("verifierHoraires")
-                          : b.linkText}
+                      {tActivite(cleLinkText(b.linkText))}
                     </a>
                   </div>
                 </div>
