@@ -368,20 +368,37 @@ entrée. L'obtenir suppose `pushState`, qui entre en conflit avec l'historique q
 routeur de Next — le spec demandait lui-même `router.replace`, les deux exigences se
 contredisent. À trancher si le besoin se confirme à l'usage.
 
-### Lot 3 — Données — **partiellement fait le 2026-09-14**
+### Lot 3 — Données — **fait le 2026-09-15 côté code/données, synchro prod bloquée**
 
-- [ ] **Tags des 43 lieux nettoyés** (`09` § 1.1) — passe manuelle sur les 43 fiches, `tags: TagLieu[]` propre au lieu, jamais dérivé de la commune. Vocabulaire figé : `village | sentier | crique | jardin | monument | panorama | table`. Demi-journée de travail, meilleur rapport effort/crédibilité. Tant que ce n'est pas fait, les filtres d'Explorer mentent (→ DC-01).
-- [ ] **`commune_slug` sur les activités** (`09` § 1.2) — nouveau champ ; affichage : commune en sous-titre, « à proximité de X » seulement si `lieu_slug` renseigné et `sur_place === false`. Corrige « Sortie kayak de mer · La Rue Obscure » — on ne fait pas de kayak dans une rue couverte du XIII siècle (→ DC-02).
-- [ ] **`lien_type` et `partenaire`** (`09` § 1.3) — deux libellés seulement : `reservation` → « Réserver », `officiel` → « Site officiel ». Un lien n'est `reservation` que s'il mène à la page de réservation de cette activité précise. Liens partenaires : `rel="sponsored nofollow"` + mention mono 12 `--rs-brume` « lien partenaire ». Corrige DC-03.
+- [x] **Tags des 43 lieux nettoyés** — **fait le 2026-09-15**. `tags: string[]` sur les 43
+      lieux, vocabulaire figé (`village | sentier | crique | jardin | monument | panorama |
+      table`), aucun lieu sans tag. Répartition : village 25, panorama 9, monument 9,
+      sentier 7, crique 7, jardin 4 (un lieu peut porter plusieurs tags). Consommé par de
+      nouvelles chips de type sur `/explorer` (`ExplorerFilterBar.tsx`), même pattern que
+      les chips de zone. Détail complet dans `.claude/memory/project_lot3_donnees.md`.
+- [x] **`communeSlug`/`surPlace` sur les activités** — **fait le 2026-09-15**. Les 208
+      activités ont les deux champs ; seulement 3 sont `surPlace: false` (« à proximité »
+      est réel mais rare dans ce jeu de données). Corrige « Sortie kayak de mer · La Rue
+      Obscure ».
+- [x] **`lienType` et `partenaire`** — **fait le 2026-09-15**, en remplacement complet de
+      `linkText` (retiré de `data/lieux.json` **et** `data/itineraires.json` — le
+      `BookingRef` d'un itinéraire dérive maintenant son libellé de l'activité référencée,
+      même principe que `horaires`/`fermeJours` depuis le nettoyage d'`extraSpans`). 67
+      activités `reservation`, 141 `officiel`, 19 marquées `partenaire: true`
+      (`rel="sponsored nofollow"` + mention « lien partenaire »).
 - [x] **Formateur de durée unique** — **fait le 2026-09-14** (`formatDuree` dans
       `itineraire-logic.ts`, `formatTransitDesc` y délègue). L'arrondi précède le choix de
       l'unité, sans quoi 58 min sortaient en « 60 min » au lieu de « 1 h ». Les horaires
       d'ouverture (« 10h–18h ») ne sont pas concernés : texte éditorial, pas une durée calculée.
-      **Les trois autres items de ce lot sont en attente** — ils demandent un nouveau champ
-      (JSON + entité + migration EF), des décisions éditoriales sur 43 lieux et 208 activités,
-      et une écriture dans la base de prod via `RivieraSecrete.Tools` (donc le mot de passe
-      PostgreSQL, toujours pas tourné). Décision du 2026-09-14 : les faire au moment où Explorer
-      (Lot 4b) les consomme réellement, plutôt que d'inventer un schéma sans lecteur.
+
+**Le Lot 3 est donc fait côté code, mais la synchro vers la base de PostgreSQL de production
+n'a pas pu être faite** (mot de passe compromis, rotation toujours en attente — item 🔴 en
+tête de ce fichier) : les entités backend, la migration EF (générée, jamais appliquée) et
+`DatabaseSeeder.cs` sont prêts, mais `/explorer` ne montrera aucune chip de type fonctionnelle
+tant que la base réelle n'a pas ces colonnes. Ce travail a été fait sur une branche séparée
+(`worktree-agent-af973d59e253c9c11`), **pas encore mergée dans `main`** — à relire avant
+fusion. Chaîne à faire une fois le mot de passe tourné : `dotnet ef database update` →
+`RivieraSecrete.Tools` (sync `data/*.json` → base) → vérifier `/explorer` en prod.
 - [ ] **Horaires calculés sur la date de visite** (`09` § 3) — `estOuvert(horaires, dateVisite, heureVisite)` ; `dateVisite` vient toujours du paramètre `date` de l'écran Composer, jamais de `new Date()`. Les alertes « Fermé aujourd'hui » deviennent vraies pour un voyage dans le futur.
 
 *Recette :* filtrer « Criques » ne remonte aucun village ; aucune carte d'activité n'affiche un lieu parent comme adresse ; la chaîne `1.8 h` n'existe plus nulle part.

@@ -1,4 +1,4 @@
-import { cleLinkText } from "@/lib/activites-data";
+import { cleLienType, communeActivite, relActivite } from "@/lib/activites-data";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -310,9 +310,9 @@ export default async function ItinerairePage({
           <h2 className="text-xl font-bold mb-6">{t("aReserver")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {itin.booking.map((b, i) => {
-              const activite = lieuBySlug
-                .get(b.lieuSlug)
-                ?.activites.find((a) => a.activiteId === b.activiteId);
+              const lieuActivite = lieuBySlug.get(b.lieuSlug);
+              const activite = lieuActivite?.activites.find((a) => a.activiteId === b.activiteId);
+              const commune = activite && lieuActivite ? communeActivite(activite, lieuActivite) : null;
 
               return (
                 <div
@@ -334,11 +334,16 @@ export default async function ItinerairePage({
                       {loc(locale, b.lieuLabelEn, b.lieuLabel)}
                     </p>
                     <p className="font-semibold mb-1">{loc(locale, b.nomLabelEn, b.nomLabel)}</p>
-                    {/* Durée, prix et horaires viennent de l'activité référencée, jamais
-                        d'une copie figée côté itinéraire : `booking[].extraSpans` affichait
-                        encore « Mardi & jeudi » pour la Chapelle du Rosaire quand la fiche
-                        lieu dit « Fermée le dimanche et le lundi… ». Les deux étaient
-                        incompatibles et rien ne permettait de trancher. */}
+                    {/* Durée, prix, horaires et commune viennent de l'activité référencée,
+                        jamais d'une copie figée côté itinéraire : `booking[].extraSpans`
+                        affichait encore « Mardi & jeudi » pour la Chapelle du Rosaire quand
+                        la fiche lieu dit « Fermée le dimanche et le lundi… ». Les deux
+                        étaient incompatibles et rien ne permettait de trancher. */}
+                    {commune && (
+                      <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                        📍 {tActivite("aProximiteDe", { commune })}
+                      </p>
+                    )}
                     {activite && (
                       <div className="mb-3">
                         <div
@@ -359,11 +364,16 @@ export default async function ItinerairePage({
                     <a
                       href={activite?.url ?? `/lieux/${b.lieuSlug}`}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={relActivite(activite?.partenaire ?? false)}
                       className="text-sm mt-auto self-start"
                       style={{ color: "var(--azure)" }}
                     >
-                      {tActivite(cleLinkText(b.linkText))}
+                      {tActivite(cleLienType(activite?.lienType))}
+                      {activite?.partenaire && (
+                        <span className="ml-1" style={{ color: "var(--text-muted)" }}>
+                          · {tActivite("lienPartenaire")}
+                        </span>
+                      )}
                     </a>
                   </div>
                 </div>

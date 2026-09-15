@@ -33,6 +33,12 @@ public class LieuConfiguration : IEntityTypeConfiguration<Lieu>
                    v => JsonSerializer.Serialize(v, Json),
                    v => JsonSerializer.Deserialize<List<string>>(v, Json) ?? new List<string>());
 
+        builder.Property(l => l.Tags)
+               .HasColumnType("jsonb")
+               .HasConversion(
+                   v => JsonSerializer.Serialize(v, Json),
+                   v => JsonSerializer.Deserialize<List<string>>(v, Json) ?? new List<string>());
+
         builder.Property(l => l.MetaPills)
                .HasColumnType("jsonb")
                .HasConversion(

@@ -45,6 +45,9 @@ public static class DatabaseSeeder
             HeroSlides  = l["heroSlides"]?.GetValue<int>(),
             ThumbImage  = l["thumbImage"]!.GetValue<string>(),
             Badges      = l["badges"]?.Deserialize<List<string>>(JsonOpts) ?? [],
+            // Vocabulaire figé (Lot 3) : village | sentier | crique | jardin | monument |
+            // panorama | table — voir le commentaire sur Lieu.Tags.
+            Tags        = l["tags"]?.Deserialize<List<string>>(JsonOpts) ?? [],
             MetaPills   = l["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [],
             Tips        = l["tips"]?.Deserialize<List<Tip>>(JsonOpts) ?? [],
             Related     = l["related"]?.Deserialize<List<RelatedCard>>(JsonOpts) ?? [],
@@ -72,7 +75,11 @@ public static class DatabaseSeeder
         Image      = a["image"]!.GetValue<string>(),
         Alt        = a["alt"]!.GetValue<string>(),
         AltEn      = a["altEn"]?.GetValue<string>(),
-        LinkText   = a["linkText"]!.GetValue<string>(),
+        // Lot 3 : remplace l'ancien LinkText texte-libre — voir Activite.cs.
+        CommuneSlug = a["communeSlug"]!.GetValue<string>(),
+        SurPlace    = a["surPlace"]!.GetValue<bool>(),
+        LienType    = a["lienType"]!.GetValue<string>(),
+        Partenaire  = a["partenaire"]!.GetValue<bool>(),
         Horaires   = a["horaires"]?.GetValue<string>(),
         HorairesEn = a["horairesEn"]?.GetValue<string>(),
         FermeJours = a["fermeJours"]?.Deserialize<List<int>>(JsonOpts) ?? [],
@@ -181,7 +188,7 @@ public static class DatabaseSeeder
 
     /// <summary>
     /// Recopie depuis data/lieux.json les champs mutables d'un lieu EXISTANT (Description,
-    /// Description2, HeroAlt, images, Badges, MetaPills, Tips, Related, **Lat/Lng**) sur
+    /// Description2, HeroAlt, images, Badges, **Tags**, MetaPills, Tips, Related, **Lat/Lng**) sur
     /// la ligne DB correspondante — jamais Id/Slug/VilleSlug/Activites (gérés par
     /// SyncNewContentAsync / rename-lieu / remove-activite). Utile quand une correction de
     /// contenu (ex. un `related[]` qui pointait vers un slug renommé/supprimé) doit être
@@ -210,6 +217,7 @@ public static class DatabaseSeeder
         dbLieu.HeroImage    = jsonLieu["heroImage"]!.GetValue<string>();
         dbLieu.ThumbImage   = jsonLieu["thumbImage"]!.GetValue<string>();
         dbLieu.Badges       = jsonLieu["badges"]?.Deserialize<List<string>>(JsonOpts) ?? [];
+        dbLieu.Tags         = jsonLieu["tags"]?.Deserialize<List<string>>(JsonOpts) ?? [];
         dbLieu.MetaPills    = jsonLieu["metaPills"]?.Deserialize<List<MetaPill>>(JsonOpts) ?? [];
         dbLieu.Tips         = jsonLieu["tips"]?.Deserialize<List<Tip>>(JsonOpts) ?? [];
         dbLieu.Related      = jsonLieu["related"]?.Deserialize<List<RelatedCard>>(JsonOpts) ?? [];
@@ -253,7 +261,8 @@ public static class DatabaseSeeder
 
     /// <summary>
     /// Recopie depuis data/lieux.json tous les champs mutables d'une activité EXISTANTE
-    /// (Nom, Badge, Duree, Prix, Url, Image, Alt, LinkText) sur la ligne DB correspondante —
+    /// (Nom, Badge, Duree, Prix, Url, Image, Alt, CommuneSlug, SurPlace, LienType, Partenaire)
+    /// sur la ligne DB correspondante —
     /// jamais Id/ActiviteId/LieuId. `RefreshLieuFieldsAsync` ne touche pas aux activités
     /// d'un lieu, donc c'est le seul chemin pour corriger une URL cassée ou remplacer le
     /// placeholder image d'une activité déjà synchronisée (voir le chantier vignettes
@@ -282,7 +291,10 @@ public static class DatabaseSeeder
         dbActivite.Image    = jsonActivite["image"]!.GetValue<string>();
         dbActivite.Alt      = jsonActivite["alt"]!.GetValue<string>();
         dbActivite.AltEn    = jsonActivite["altEn"]?.GetValue<string>();
-        dbActivite.LinkText = jsonActivite["linkText"]!.GetValue<string>();
+        dbActivite.CommuneSlug = jsonActivite["communeSlug"]!.GetValue<string>();
+        dbActivite.SurPlace    = jsonActivite["surPlace"]!.GetValue<bool>();
+        dbActivite.LienType    = jsonActivite["lienType"]!.GetValue<string>();
+        dbActivite.Partenaire  = jsonActivite["partenaire"]!.GetValue<bool>();
         dbActivite.Horaires   = jsonActivite["horaires"]?.GetValue<string>();
         dbActivite.HorairesEn = jsonActivite["horairesEn"]?.GetValue<string>();
         dbActivite.FermeJours = jsonActivite["fermeJours"]?.Deserialize<List<int>>(JsonOpts) ?? [];

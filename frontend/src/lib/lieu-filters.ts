@@ -17,9 +17,26 @@ export const SAISONS = ["printemps", "ete", "automne", "hiver"] as const;
 export const DUREES = ["court", "moyen", "long", "demi-journee"] as const;
 export const NIVEAUX = ["facile", "modere"] as const;
 
+/**
+ * Vocabulaire figé de `Lieu.tags` (Lot 3, ROADMAP § Lot 3 § 1.1) — jamais dérivé de la
+ * commune, toujours propre au lieu. `emoji` reste ici en JS (même bord que `BADGE_DEFS`
+ * dans home-data.ts) ; le libellé traduit vient de `messages/*.json`'s `tags` namespace.
+ */
+export const TAG_DEFS: { slug: string; emoji: string }[] = [
+  { slug: "village", emoji: "🏘️" },
+  { slug: "sentier", emoji: "🥾" },
+  { slug: "crique", emoji: "🏖️" },
+  { slug: "jardin", emoji: "🌿" },
+  { slug: "monument", emoji: "🏛️" },
+  { slug: "panorama", emoji: "🌄" },
+  { slug: "table", emoji: "🍽️" },
+];
+export const TAGS_LIEU = TAG_DEFS.map((t) => t.slug);
+
 export type Saison = (typeof SAISONS)[number];
 export type Duree = (typeof DUREES)[number];
 export type Niveau = (typeof NIVEAUX)[number];
+export type TagLieu = (typeof TAGS_LIEU)[number];
 
 const MOIS: Record<string, number> = {
   janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6,

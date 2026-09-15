@@ -7,7 +7,9 @@ import type { Lieu } from "@/lib/types";
 import { loc, normalizeSearch, prixAffiche } from "@/lib/utils";
 import {
   CATEGORIES_ACTIVITE,
-  cleLinkText,
+  cleLienType,
+  communeActivite,
+  relActivite,
   enrichirActivites,
   type ActiviteEnrichie,
   type CategorieActivite,
@@ -196,6 +198,7 @@ function CarteActivite({
   const { activite, lieu } = item;
   const fermee = jour !== null && item.fermeJours.includes(jour);
   const cat = CATEGORIES_ACTIVITE.find((c) => c.slug === item.categorie)!;
+  const commune = communeActivite(activite, lieu);
 
   return (
     <article className="rounded-xl overflow-hidden flex flex-col" style={{ background: "var(--surface)" }}>
@@ -245,16 +248,25 @@ function CarteActivite({
           <Link href={`/lieux/${lieu.slug}`} className="underline focus-ring rounded" style={{ color: "var(--azure)" }}>
             {loc(locale, lieu.nomEn, lieu.nom)}
           </Link>
-          <span style={{ color: "var(--text-muted)" }}>{lieu.commune}</span>
+          {/* « à proximité de X » seulement quand l'activité ne se pratique pas au lieu
+              même (Lot 3, DC-02) — sinon le nom de la commune porteuse suffit. */}
+          <span style={{ color: "var(--text-muted)" }}>
+            {commune ? tActivite("aProximiteDe", { commune }) : lieu.commune}
+          </span>
           {activite.url && (
             <a
               href={activite.url}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={relActivite(activite.partenaire)}
               className="ml-auto underline focus-ring rounded"
               style={{ color: "var(--terracotta)" }}
             >
-              {tActivite(cleLinkText(activite.linkText))}
+              {tActivite(cleLienType(activite.lienType))}
+              {activite.partenaire && (
+                <span className="ml-1 no-underline" style={{ color: "var(--text-muted)" }}>
+                  · {tActivite("lienPartenaire")}
+                </span>
+              )}
             </a>
           )}
         </div>

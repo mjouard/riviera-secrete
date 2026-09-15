@@ -11,7 +11,34 @@ public class Activite
     public string Url { get; set; } = default!;
     public string Image { get; set; } = default!;
     public string Alt { get; set; } = default!;
-    public string LinkText { get; set; } = default!;
+
+    /// <summary>
+    /// Slug de la commune où se pratique réellement l'activité (Lot 3, § 1.2). Sert à
+    /// afficher « à proximité de X » quand <see cref="SurPlace"/> vaut false — corrige les
+    /// activités listées sous un lieu qui n'est pas leur vraie adresse (ex. une sortie
+    /// kayak listée sous une rue couverte).
+    /// </summary>
+    public string CommuneSlug { get; set; } = default!;
+
+    /// <summary>
+    /// true si l'activité se pratique au lieu même, false si elle se pratique ailleurs dans
+    /// la commune (ou une commune voisine) référencée par <see cref="CommuneSlug"/>.
+    /// </summary>
+    public bool SurPlace { get; set; }
+
+    /// <summary>
+    /// "reservation" (bouton « Réserver ») ou "officiel" (bouton « Site officiel ») — Lot 3
+    /// § 1.3, remplace l'ancien <c>LinkText</c> à deux libellés fixes plutôt que du texte
+    /// libre. "reservation" seulement si l'URL mène à la page de réservation de cette
+    /// activité précise.
+    /// </summary>
+    public string LienType { get; set; } = default!;
+
+    /// <summary>
+    /// true si l'URL est un lien partenaire (affilié) — impose rel="sponsored nofollow" et
+    /// la mention « lien partenaire » côté frontend (Lot 3 § 1.3).
+    /// </summary>
+    public bool Partenaire { get; set; }
 
     // Traduction anglaise — colonnes jumelles nullable, voir
     // .claude/memory/project_version_anglaise.md.

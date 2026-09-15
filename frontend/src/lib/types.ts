@@ -39,7 +39,18 @@ export interface Activite {
   image: string;
   alt: string;
   altEn?: string | null;
-  linkText: string;
+  /**
+   * Slug de la commune où se pratique réellement l'activité (Lot 3). Sert à afficher
+   * « à proximité de X » quand `surPlace` vaut false — voir `communeActivite` dans
+   * `activites-data.ts`.
+   */
+  communeSlug: string;
+  /** true si l'activité se pratique au lieu même, false si ailleurs dans `communeSlug`. */
+  surPlace: boolean;
+  /** "reservation" → « Réserver », "officiel" → « Site officiel » — remplace l'ancien `linkText` texte libre (Lot 3). */
+  lienType: "reservation" | "officiel";
+  /** true si l'URL est un lien partenaire (affilié) — impose rel="sponsored nofollow" côté frontend. */
+  partenaire: boolean;
   /** Horaires en texte libre ; null tant que non sourcé (voir ROADMAP "Horaires"). */
   horaires?: string | null;
   horairesEn?: string | null;
@@ -68,6 +79,8 @@ export interface Lieu {
   heroSlides?: number;
   thumbImage: string;
   badges: string[];
+  /** Vocabulaire figé (Lot 3) : village | sentier | crique | jardin | monument | panorama | table — voir TAGS_LIEU dans lieu-filters.ts. */
+  tags: string[];
   metaPills: MetaPill[];
   tips: Tip[];
   related: RelatedCard[];

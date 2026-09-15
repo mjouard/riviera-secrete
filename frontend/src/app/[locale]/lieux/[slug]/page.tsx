@@ -1,4 +1,4 @@
-import { cleLinkText } from "@/lib/activites-data";
+import { cleLienType, communeActivite, relActivite } from "@/lib/activites-data";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -285,55 +285,71 @@ export default async function LieuPage({
         <section className="mb-10">
           <h2 className="text-lg font-semibold mb-4">{t("aFaireSurPlace")}</h2>
           <div className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2">
-            {lieu.activites.map((act) => (
-              <a
-                key={act.activiteId}
-                href={act.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-xl overflow-hidden flex flex-col flex-shrink-0 snap-start w-[70%] sm:w-auto transition-transform hover:-translate-y-0.5"
-                style={{ background: "var(--surface)" }}
-              >
-                <div className="aspect-video overflow-hidden">
-                  <Photo sizes="(max-width: 640px) 100vw, 50vw"
-                    src={act.image}
-                    alt={loc(locale, act.altEn, act.alt)}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <span
-                      className="text-xs font-semibold"
-                      style={{
-                        color:
-                          act.badge === "gratuit"
-                            ? "var(--azure)"
-                            : "var(--terracotta)",
-                      }}
-                    >
-                      {act.badge === "gratuit" ? tActivite("gratuit") : tActivite("payant")}
-                    </span>
-                    <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
-                    <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-                      {loc(locale, act.dureeEn, act.duree)} · {prixAffiche(locale, act.prixEn, act.prix)}
-                    </p>
-                    {act.horaires && (
-                      <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-                        🕒 {loc(locale, act.horairesEn, act.horaires)}
-                      </p>
-                    )}
-                    <FermeAujourdhui fermeJours={act.fermeJours} />
+            {lieu.activites.map((act) => {
+              const commune = communeActivite(act, lieu);
+              return (
+                <a
+                  key={act.activiteId}
+                  href={act.url}
+                  target="_blank"
+                  rel={relActivite(act.partenaire)}
+                  className="group rounded-xl overflow-hidden flex flex-col flex-shrink-0 snap-start w-[70%] sm:w-auto transition-transform hover:-translate-y-0.5"
+                  style={{ background: "var(--surface)" }}
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <Photo sizes="(max-width: 640px) 100vw, 50vw"
+                      src={act.image}
+                      alt={loc(locale, act.altEn, act.alt)}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
                   </div>
-                  <span
-                    className="text-xs mt-3"
-                    style={{ color: "var(--azure)" }}
-                  >
-                    {tActivite(cleLinkText(act.linkText))}
-                  </span>
-                </div>
-              </a>
-            ))}
+                  <div className="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span
+                        className="text-xs font-semibold"
+                        style={{
+                          color:
+                            act.badge === "gratuit"
+                              ? "var(--azure)"
+                              : "var(--terracotta)",
+                        }}
+                      >
+                        {act.badge === "gratuit" ? tActivite("gratuit") : tActivite("payant")}
+                      </span>
+                      <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
+                      <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                        {loc(locale, act.dureeEn, act.duree)} · {prixAffiche(locale, act.prixEn, act.prix)}
+                      </p>
+                      {/* Ne s'affiche que si l'activité ne se pratique pas au lieu même
+                          (Lot 3, DC-02) — sinon rien ne change, l'affichage sans commune
+                          ne mentait pas. */}
+                      {commune && (
+                        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                          📍 {tActivite("aProximiteDe", { commune })}
+                        </p>
+                      )}
+                      {act.horaires && (
+                        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                          🕒 {loc(locale, act.horairesEn, act.horaires)}
+                        </p>
+                      )}
+                      <FermeAujourdhui fermeJours={act.fermeJours} />
+                    </div>
+                    <span
+                      className="text-xs mt-3"
+                      style={{ color: "var(--azure)" }}
+                    >
+                      {tActivite(cleLienType(act.lienType))}
+                      {act.partenaire && (
+                        <span className="ml-1" style={{ color: "var(--text-muted)" }}>
+                          · {tActivite("lienPartenaire")}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </section>
       )}

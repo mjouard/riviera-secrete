@@ -27,6 +27,9 @@ public class Lieu
 
     // Stored as JSON columns
     public List<string> Badges { get; set; } = [];
+    // Vocabulaire figé (Lot 3) : village | sentier | crique | jardin | monument | panorama |
+    // table. Toujours propre au lieu, jamais dérivé de la commune — voir ROADMAP.md § Lot 3.
+    public List<string> Tags { get; set; } = [];
     public List<MetaPill> MetaPills { get; set; } = [];
     public List<Tip> Tips { get; set; } = [];
     public List<RelatedCard> Related { get; set; } = [];
