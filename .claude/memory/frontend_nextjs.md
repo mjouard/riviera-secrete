@@ -7,6 +7,37 @@ metadata:
   originSessionId: 52dd96aa-badc-4607-83f8-5de46933687d
 ---
 
+## Mise à jour 2026-09-15 — daté avant la refonte UI, lire avec prudence
+
+Ce fichier décrit l'état du frontend **avant** la refonte UI (`docs/design-refonte-2026-09-
+14.md`, suivie lot par lot dans `ROADMAP.md`) et avant le passage i18n — deux chantiers
+majeurs non reflétés ci-dessous. Racine `CLAUDE.md` est plus à jour sur ces deux points ; à
+défaut d'une repasse complète de ce fichier, voici les écarts connus les plus importants :
+
+- **Toutes les routes vivent sous `src/app/[locale]/`** (fr par défaut sans préfixe, en
+  préfixé `/en/…`) depuis le 2026-09-13 — la section Structure ci-dessous ne le montre pas
+  encore. `src/proxy.ts` (pas `middleware.ts`, renommé en Next.js 16) fait le routing de
+  locale.
+- **Nouvelles routes de la refonte** (Lots 4a-4d) : `/explorer` (Lot 4b — carte + liste
+  synchronisées, remplace la carte homepage + grille `#lieux` + `/activites` pour la
+  découverte), `/composer` (Lot 4c — éditeur d'itinéraire avec mode/heure de départ/date de
+  voyage, coexiste avec `/creer-itineraire`, ne le remplace pas), `/i/[id]` (Lot 4d — lecture
+  publique d'un itinéraire composé anonyme, `_components/ItineraireComposeView.tsx`),
+  `/credits` (attribution photos CC BY/CC BY-SA Wikimedia).
+- **`/lieux` et `/itineraires` (listes complètes) supprimées le 2026-09-12** — dupliquaient la
+  homepage. Tous les liens repointent vers les ancres `#lieux`/`#itineraires` de l'accueil (en
+  attendant que Lot 5 les redirige vers `/explorer`/`/itineraires` refondues).
+- **Lot 1** a livré des tokens/composants partagés (`components/ui/{Button,Chip,Badge,
+  Field}.tsx`, palette `--nuit`/--nuit-haute`/`--calcaire`/`--brume`/`--aube`/`--mer-1..5`)
+  qui coexistent avec l'ancienne palette (`--bg`/`--surface`/`--terracotta`/`--azure`, section
+  Design ci-dessous) — `/explorer` et la fiche lieu (Lot 4a) sont bâtis dessus, le reste de
+  l'app (dont tout ce que documente ce fichier) est encore sur l'ancienne palette.
+- **Lot 2** a livré un contrat de filtres dans l'URL (`src/lib/url-filtres.ts` —
+  `useSearchString()`, `lireParam`/`lireTexte`, `ecrireFiltres()`), pattern d'écriture unique
+  repris par `HomeLieuxGrid.tsx`, `/explorer`, `/composer`.
+- **`aujourdhui.ts`** (Lot 4c) — hook `useSyncExternalStore` pour une "date du jour" stable
+  SSR/ISR, utilisé pour le statut ouvert/fermé dépendant de la date de voyage choisie.
+
 ## Stack
 
 - **Next.js 16.3.4** App Router, TypeScript, Tailwind CSS

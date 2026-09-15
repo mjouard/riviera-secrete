@@ -7,6 +7,46 @@ metadata:
   originSessionId: 52dd96aa-badc-4607-83f8-5de46933687d
 ---
 
+## Mise à jour 2026-09-15 — Lots 3 et 4d de la refonte UI
+
+Ajouté depuis la dernière relecture complète de ce fichier (qui reste daté d'avant la
+refonte UI — routes/composants/tokens frontend de `frontend_nextjs.md` idem, voir sa propre
+note en tête) :
+
+- **`Activite`** a 4 nouveaux champs (migration `AddLot3Champs`, 2026-09-15) :
+  `Tags: List<string>` (jsonb, `defaultValueSql: "'[]'"` — **pas** `defaultValue: ""`, qui se
+  traduit en `DEFAULT '{}'` = objet JSON vide, casse la désérialisation en liste, corrigé une
+  fois en prod via la commande `fix-lot3-tags-default` de `RivieraSecrete.Tools`),
+  `CommuneSlug: string`, `Partenaire: bool`, `SurPlace: bool`. La colonne `LinkText` a été
+  **renommée** `LienType` dans la même migration.
+- **`ItineraireCompose`** — nouvelle entité (migration `AddItinerairesComposes`, 2026-09-15) :
+  itinéraire "composé" anonyme et partageable, `Id` (court, généré côté C#,
+  `GenerateUniqueShortIdAsync`), `EditToken` (séparé, jamais renvoyé par le `GET` public),
+  `Jours` (jsonb), `Nom`, `DureeKey`, `CreatedAt`, `VisibiliteLien` (`"lien"` par défaut).
+  Endpoints `GET`/`POST` publics sans auth, `PATCH`/`DELETE` autorisés par JWT propriétaire
+  **ou** `EditToken` (`EstAutoriseSurItineraireCompose`), volontairement en dehors de
+  `.RequireAuthorization()` puisqu'un visiteur sans compte doit pouvoir modifier via son seul
+  token — voir `Program.cs`.
+- **`RivieraSecrete.Tools`** — 4e projet de la solution (console utility), pas listé dans la
+  structure du dépôt ci-dessous : commandes `SyncNewContentAsync` (insertion de contenu
+  nouveau, idempotent), `refresh-lieu-fields`/`refresh-ville-fields`/`refresh-activite`/
+  `refresh-itineraire-fields` (backfill ciblé de champs sur des lignes déjà en base — c'est le
+  seul chemin qui fait propager un edit `data/*.json` vers la DB prod une fois le premier seed
+  fait, le seeder normal étant un no-op passé ce stade), `remove-activite`/`rename-lieu`
+  (corrections ponctuelles), et le `fix-lot3-tags-default` ad hoc mentionné ci-dessus. Lancé
+  via `dotnet run --project RivieraSecrete.Tools -- <commande> [args]` depuis `backend/`, avec
+  `SYNC_CONNECTION_STRING` en variable d'env. Voir `scripts/sync-lot3-champs.sh` et
+  `scripts/sync-coordonnees.sh` pour le pattern complet (récupération de la connection string
+  Railway, jamais affichée en clair).
+- **Migration + déploiement des deux migrations ci-dessus ont bien été appliqués et vérifiés
+  en prod le 2026-09-15** (`dotnet ef database update` + `railway up --service api`) — un bref
+  incident de prod est survenu entre les deux (l'ancien code backend, encore déployé,
+  attendait `LinkText` juste après le renommage en `LienType`), corrigé en redéployant
+  immédiatement.
+- Compteurs `lieux`/`villes` obsolètes dans la table Endpoints ci-dessous (27/22) — check
+  `data/lieux.json`/`villes.json` directement, comme le rappelle `CLAUDE.md` racine (43 lieux
+  / 34 villes au 2026-09-13).
+
 ## Stack
 
 - **.NET 10**, ASP.NET Core Minimal API
@@ -53,6 +93,9 @@ RivieraSecrete.Infrastructure/
     20260911213921_AddPasswordAuth.cs      — GoogleId nullable, +PasswordHash, index unique Email
     20260911224044_AddEmailConfirmation.cs — +EmailConfirmed/Token/Expiry, marque
                                               rétroactivement les Google existants confirmés
+    20260915103548_AddLot3Champs.cs        — LinkText→LienType (rename), +Tags/CommuneSlug/
+                                              Partenaire/SurPlace sur Activite
+    20260915014647_AddItinerairesComposes.cs — +table ItineraireCompose
 RivieraSecrete.Api/
   Program.cs           — endpoints Minimal API + JWT auth + CORS
   EmailService.cs      — envoi d'emails transactionnels via l'API HTTP Resend (2026-09-12)
@@ -75,8 +118,17 @@ RivieraSecrete.Api/
 | GET | `/api/villes/{slug}` | Une ville par slug |
 | GET | `/api/itineraires` | 6 itinéraires |
 | GET | `/api/itineraires/{slug}` | Un itinéraire par slug |
+| GET | `/api/itineraires-composes/{id}` | Itinéraire composé (anonyme, partageable) par id — 404 si absent |
+| POST | `/api/itineraires-composes` | Crée un itinéraire composé (compte ou non) → `{ id, editToken }` |
 | GET | `/health` | `{"status":"ok"}` |
 | POST | `/api/seed` | Dev-only — seed depuis data/*.json |
+
+### Itinéraires composés — écriture (JWT propriétaire OU `EditToken`, pas `.RequireAuthorization()`)
+
+| Méthode | Route | Description |
+|---|---|---|
+| PATCH | `/api/itineraires-composes/{id}` | Modifie (nom, jours, visibilité) — header `X-Edit-Token` ou JWT du créateur |
+| DELETE | `/api/itineraires-composes/{id}` | Supprime — même autorisation que PATCH |
 
 ### Auth
 
