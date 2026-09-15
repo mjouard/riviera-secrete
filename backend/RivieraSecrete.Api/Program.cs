@@ -121,6 +121,24 @@ app.MapGet("/api/itineraires/{slug}", async (string slug, AppDbContext db) =>
 
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
 
+// ── Public: Itinéraires composés (lot 4d, ROADMAP.md) ─────────────────────────
+// Un itinéraire composé sans compte, lisible par quiconque a le lien /i/{id} — jamais
+// l'EditToken, qui reste réservé à PATCH/DELETE (voir plus bas, section protégée).
+
+app.MapGet("/api/itineraires-composes/{id}", async (string id, AppDbContext db) =>
+    await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id)
+    is { } itin
+        ? Results.Ok(new
+        {
+            itin.Id,
+            itin.Nom,
+            itin.DureeKey,
+            itin.Jours,
+            itin.CreatedAt,
+            itin.VisibiliteLien,
+        })
+        : Results.NotFound());
+
 // ── Auth ──────────────────────────────────────────────────────────────────────
 // Chaque erreur porte un `Code` machine en plus de son `Error` en français. Le frontend est
 // bilingue, le backend ne l'est pas : afficher `Error` tel quel mettait des phrases
