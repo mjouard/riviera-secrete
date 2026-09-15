@@ -161,3 +161,19 @@ export interface UserItineraire {
   days: string[][];
   createdAt: string;
 }
+
+/**
+ * Itinéraire composé par un visiteur sans compte (table ItineraireCompose côté backend,
+ * lot 4d ROADMAP.md) — partagé via `/i/{id}`. Distinct de `UserItineraire` : celui-ci n'a
+ * pas besoin de compte pour exister, `id` est un identifiant court public (pas un Guid), et
+ * l'`editToken` qui autorise sa modification n'est jamais renvoyé par le GET public — voir
+ * `ItineraireCompose.cs` côté backend.
+ */
+export interface ItineraireComposePublic {
+  id: string;
+  nom: string;
+  dureeKey: string;
+  jours: string[][];
+  createdAt: string;
+  visibiliteLien: string;
+}

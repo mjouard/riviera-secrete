@@ -465,5 +465,10 @@
     "voirPlus": "See {count} more places",
     "voirCarte": "View on map",
     "voirListe": "View list"
+  },
+  "itineraireCompose": {
+    "breadcrumb": "Custom itinerary",
+    "creeLe": "Composed on {date}",
+    "lienPartage": "riviera-secrete.fr/i/{id}"
   }
 }

@@ -1,4 +1,4 @@
-import type { Itineraire, Lieu, Ville } from "./types";
+import type { Itineraire, ItineraireComposePublic, Lieu, Ville } from "./types";
 import { decodeEntities } from "./utils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5171";
@@ -68,5 +68,19 @@ export const api = {
   itineraires: {
     list: () => get<Itineraire[]>("/api/itineraires", TAGS.itineraires),
     bySlug: (slug: string) => get<Itineraire>(`/api/itineraires/${slug}`, TAGS.itineraires),
+  },
+  /**
+   * Itinéraires composés sans compte (`/i/[id]`, lot 4d). Pas de `TAGS`/ISR ici, à la
+   * différence du contenu éditorial ci-dessus : c'est du contenu utilisateur qui peut changer
+   * à tout moment via PATCH/DELETE (édité via l'EditToken, sans passer par une invalidation de
+   * cache côté backend) — `cache: "no-store"` pour toujours lire l'état courant.
+   */
+  itinerairesComposes: {
+    bySlug: async (id: string): Promise<ItineraireComposePublic | null> => {
+      const res = await fetch(`${API_URL}/api/itineraires-composes/${id}`, { cache: "no-store" });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error(`API /api/itineraires-composes/${id} → ${res.status}`);
+      return decodeDeep((await res.json()) as ItineraireComposePublic);
+    },
   },
 };
