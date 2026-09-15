@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { BADGE_DEFS } from "@/lib/home-data";
 import { regionToMerShade } from "@/lib/mer-colors";
-import { DUREES, NIVEAUX, SAISONS } from "@/lib/lieu-filters";
+import { DUREES, NIVEAUX, SAISONS, TAG_DEFS } from "@/lib/lieu-filters";
 import { Chip } from "@/components/ui/Chip";
 import { Field } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
@@ -27,6 +27,7 @@ export default function ExplorerFilterBar({
   const t = useTranslations("explorer");
   const tRegion = useTranslations("regionShort");
   const tBadges = useTranslations("badges");
+  const tTags = useTranslations("tags");
   const tFiltres = useTranslations("filtres");
 
   const aUnFiltre = Object.values(filtres).some((v) => v !== "");
@@ -68,6 +69,17 @@ export default function ExplorerFilterBar({
           </Chip>
         ))}
 
+        <span className="w-px self-stretch mx-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+
+        {/* Chips de type (Lot 3) — même pattern que les chips de zone/badge ci-dessus,
+            vocabulaire figé de Lieu.tags (village/sentier/crique/jardin/monument/panorama/table). */}
+        {TAG_DEFS.map((tag) => (
+          <Chip key={tag.slug} selected={filtres.type === tag.slug} onClick={() => onChange({ type: filtres.type === tag.slug ? "" : tag.slug })}>
+            <span aria-hidden="true">{tag.emoji}</span>{" "}
+            {tTags(tag.slug as "village" | "sentier" | "crique" | "jardin" | "monument" | "panorama" | "table")}
+          </Chip>
+        ))}
+
         <ExplorerSelectChip
           label={tFiltres("saison")}
           value={filtres.saison}
@@ -91,7 +103,7 @@ export default function ExplorerFilterBar({
         />
 
         {aUnFiltre && (
-          <Button type="button" variant="discret" onClick={() => onChange({ zone: "", badge: "", saison: "", duree: "", niveau: "", q: "" })}>
+          <Button type="button" variant="discret" onClick={() => onChange({ zone: "", badge: "", type: "", saison: "", duree: "", niveau: "", q: "" })}>
             {t("toutEffacer")}
           </Button>
         )}

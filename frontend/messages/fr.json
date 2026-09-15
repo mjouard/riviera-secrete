@@ -129,6 +129,15 @@
     "fermeAujourdhui": "⚠️ Fermé aujourd'hui",
     "voirLesOffres": "Voir les offres →"
   },
+  "tags": {
+    "village": "Village",
+    "sentier": "Sentier",
+    "crique": "Crique",
+    "jardin": "Jardin",
+    "monument": "Monument",
+    "panorama": "Panorama",
+    "table": "Table"
+  },
   "badges": {
     "plage": "Plage",
     "randonnee": "Randonnée",

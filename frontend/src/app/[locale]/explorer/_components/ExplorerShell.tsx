@@ -9,6 +9,7 @@ import {
   DUREES,
   NIVEAUX,
   SAISONS,
+  TAGS_LIEU,
   dureeDuLieu,
   niveauxDuLieu,
   saisonsDuLieu,
@@ -23,7 +24,7 @@ const PAR_PAGE = 24;
 const REGION_SLUGS = ["menton-monaco", "nice", "arriere-pays", "antibes-cannes", "golfe-st-tropez"] as const;
 const BADGE_SLUGS = BADGE_DEFS.map((b) => b.slug);
 
-export type FiltresExplorer = { zone: string; badge: string; saison: string; duree: string; niveau: string; q: string };
+export type FiltresExplorer = { zone: string; badge: string; type: string; saison: string; duree: string; niveau: string; q: string };
 
 export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
   const locale = useLocale();
@@ -35,6 +36,7 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
     () => ({
       zone: lireParam(search, "zone", REGION_SLUGS),
       badge: lireParam(search, "badge", BADGE_SLUGS),
+      type: lireParam(search, "type", TAGS_LIEU),
       saison: lireParam(search, "saison", SAISONS),
       duree: lireParam(search, "duree", DUREES),
       niveau: lireParam(search, "niveau", NIVEAUX),
@@ -52,6 +54,7 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
     ecrireFiltres({
       zone: lireParam(courant, "zone", REGION_SLUGS),
       badge: lireParam(courant, "badge", BADGE_SLUGS),
+      type: lireParam(courant, "type", TAGS_LIEU),
       saison: lireParam(courant, "saison", SAISONS),
       duree: lireParam(courant, "duree", DUREES),
       niveau: lireParam(courant, "niveau", NIVEAUX),
@@ -89,6 +92,7 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
       .filter((entry) => {
         if (filtres.zone && entry.lieu.regionSlug !== filtres.zone) return false;
         if (filtres.badge && !entry.lieu.badges?.includes(filtres.badge)) return false;
+        if (filtres.type && !entry.lieu.tags?.includes(filtres.type)) return false;
         if (filtres.saison && !entry.saisons.includes(filtres.saison as (typeof SAISONS)[number])) return false;
         if (filtres.duree && entry.duree !== filtres.duree) return false;
         if (filtres.niveau && !entry.niveaux.includes(filtres.niveau as (typeof NIVEAUX)[number])) return false;
@@ -132,7 +136,7 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
             hoveredSlug={hoveredSlug}
             onHover={setHoveredSlug}
             onVoirPlus={() => setVisibleCount((c) => c + PAR_PAGE)}
-            onToutEffacer={() => majFiltres({ zone: "", badge: "", saison: "", duree: "", niveau: "", q: "" })}
+            onToutEffacer={() => majFiltres({ zone: "", badge: "", type: "", saison: "", duree: "", niveau: "", q: "" })}
           />
         </div>
       </div>

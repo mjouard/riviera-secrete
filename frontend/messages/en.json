@@ -129,6 +129,15 @@
     "fermeAujourdhui": "⚠️ Closed today",
     "voirLesOffres": "See the offers →"
   },
+  "tags": {
+    "village": "Village",
+    "sentier": "Trail",
+    "crique": "Cove",
+    "jardin": "Garden",
+    "monument": "Monument",
+    "panorama": "Viewpoint",
+    "table": "Dining"
+  },
   "badges": {
     "plage": "Beach",
     "randonnee": "Hiking",
