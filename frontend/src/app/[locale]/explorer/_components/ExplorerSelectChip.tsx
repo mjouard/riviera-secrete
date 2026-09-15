@@ -6,7 +6,7 @@
  * Même technique que components/FilterSelect.tsx (appearance:none + chevron dessiné,
  * colorScheme:"dark" indispensable — sans lui la liste déroulante native s'ouvre en blanc
  * sur un thème sombre) mais sur la nouvelle palette : FilterSelect reste sur --terracotta,
- * encore utilisé tel quel par HomeLieuxGrid/ActivitesGrid, non touchés dans cette passe.
+ * encore utilisé tel quel par ActivitesGrid, non touché dans cette passe.
  */
 export default function ExplorerSelectChip({
   label,

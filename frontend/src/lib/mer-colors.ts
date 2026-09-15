@@ -2,9 +2,8 @@ import { REGION_ORDER } from "./home-data";
 
 /**
  * Refonte UI Lot 1 — mapping des 5 zones carte vers la palette "Mer" (docs/design-refonte-
- * 2026-09-14.md § 1). Pas branché sur HomeMap.tsx dans cette passe : REGION_COLORS continue
- * de piloter la carte telle quelle (changer ses couleurs est un changement visuel, hors
- * périmètre). Ce fichier existe pour que le Lot 4 n'ait pas à refaire cette décision.
+ * 2026-09-14.md § 1). Utilisé par ExplorerMap.tsx et HomeExplorerSection.tsx (Lot 4e), qui
+ * ont remplacé l'ancienne HomeMap.tsx et ses REGION_COLORS.
  */
 export const MER_SHADES = [
   "var(--mer-1)",

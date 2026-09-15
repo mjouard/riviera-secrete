@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { loc, normalizeSearch } from "@/lib/utils";
-import { REGION_ORDER } from "@/lib/home-data";
+import { BADGE_DEFS, REGION_ORDER } from "@/lib/home-data";
 import { Chip } from "@/components/ui/Chip";
 import { Field } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
@@ -26,6 +26,8 @@ export default function ComposerPicker({
   onQChange,
   zone,
   onZoneChange,
+  badge,
+  onBadgeChange,
   favorisOnly,
   onFavorisOnlyChange,
   favorisSlugs,
@@ -38,6 +40,8 @@ export default function ComposerPicker({
   onQChange: (v: string) => void;
   zone: string;
   onZoneChange: (v: string) => void;
+  badge: string;
+  onBadgeChange: (v: string) => void;
   favorisOnly: boolean;
   onFavorisOnlyChange: (v: boolean) => void;
   /** `null` tant que non connecté / pas encore chargé — le lien "Depuis mes favoris" ne
@@ -47,6 +51,7 @@ export default function ComposerPicker({
   const locale = useLocale();
   const t = useTranslations("composer");
   const tRegion = useTranslations("regionShort");
+  const tBadges = useTranslations("badges");
 
   const index = useMemo(
     () =>
@@ -63,14 +68,15 @@ export default function ComposerPicker({
     return index
       .filter((entry) => {
         if (zone && entry.lieu.regionSlug !== zone) return false;
+        if (badge && !entry.lieu.badges?.includes(badge)) return false;
         if (favSet && !favSet.has(entry.lieu.slug)) return false;
         if (query === "") return true;
         return entry.haystack.includes(query);
       })
       .map((entry) => entry.lieu);
-  }, [index, q, zone, favorisOnly, favorisSlugs]);
+  }, [index, q, zone, badge, favorisOnly, favorisSlugs]);
 
-  const aUnFiltre = q !== "" || zone !== "" || favorisOnly;
+  const aUnFiltre = q !== "" || zone !== "" || badge !== "" || favorisOnly;
 
   return (
     <div>
@@ -109,11 +115,19 @@ export default function ComposerPicker({
             <Button
               type="button"
               variant="discret"
-              onClick={() => { onQChange(""); onZoneChange(""); onFavorisOnlyChange(false); }}
+              onClick={() => { onQChange(""); onZoneChange(""); onBadgeChange(""); onFavorisOnlyChange(false); }}
             >
               {t("toutEffacer")}
             </Button>
           )}
+        </div>
+
+        <div className="flex flex-wrap gap-2 items-center overflow-x-auto pb-1">
+          {BADGE_DEFS.map((b) => (
+            <Chip key={b.slug} selected={badge === b.slug} onClick={() => onBadgeChange(badge === b.slug ? "" : b.slug)}>
+              {b.emoji} {tBadges(b.slug as "plage" | "randonnee" | "vtt" | "plongee" | "restaurant")}
+            </Chip>
+          ))}
         </div>
       </div>
 

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 import { loc, alternatesPage } from "@/lib/utils";
-import HomeMapWrapper from "@/components/HomeMapWrapper";
-import HomeActivities from "@/components/HomeActivities";
-import HomeLieuxGrid from "@/components/HomeLieuxGrid";
 import HomeHero from "@/components/HomeHero";
+import HomeQualificateur from "@/components/HomeQualificateur";
+import HomeExplorerSection from "@/components/HomeExplorerSection";
 import HomeItineraires from "@/components/HomeItineraires";
+import HomeMethode from "@/components/HomeMethode";
 
 export const revalidate = 3600;
 
@@ -23,6 +22,12 @@ export async function generateMetadata({
   return { alternates: alternatesPage(SITE_URL, locale, "") };
 }
 
+/**
+ * Refonte UI Lot 4e — héros qualificateur (3 questions → /composer pré-rempli) à la place du
+ * carrousel vitrine, aperçu Explorer synchronisé à la place de la carte+grille dupliquées,
+ * section Activités supprimée (cassait la hiérarchie Lieu→Activité, voir CLAUDE.md), bloc "La
+ * méthode" ajouté. Voir docs/design-refonte-2026-09-14.md § 2-3 et ROADMAP.md, Lot 4e.
+ */
 export default async function HomePage({
   params,
 }: {
@@ -56,123 +61,42 @@ export default async function HomePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden py-24 px-6 text-center" style={{ minHeight: 540 }}>
+      {/* Héros qualificateur */}
+      <section className="relative overflow-hidden py-24 px-6 text-center" style={{ minHeight: 620 }}>
         <HomeHero />
-        {/* Le voile était le plus clair (0,52) en son milieu, c'est-à-dire exactement
-            derrière le texte, et le sous-titre était en --text-muted — une couleur pensée
-            pour le fond sombre du site, pas pour une photo. Sur les 8 visuels du hero, dont
-            plusieurs très clairs, le contraste mesuré tombait à ~2,0:1 (AA en exige 4,5) et
-            changeait toutes les 5 s. Voile renforcé + texte plein + ombre portée : ~5,8:1
-            au pire, quelle que soit l'image dessous. */}
+        {/* Voile renforcé + texte plein + ombre portée : contraste tenu quelle que soit
+            l'image dessous (même raisonnement que l'ancien héros multi-images). */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(160deg, rgba(12,17,22,0.82) 0%, rgba(12,17,22,0.68) 50%, rgba(12,17,22,0.88) 100%)",
+              "linear-gradient(160deg, rgba(12,26,41,0.82) 0%, rgba(12,26,41,0.7) 50%, rgba(12,26,41,0.9) 100%)",
           }}
         />
-        <div
-          className="relative z-[2] max-w-2xl mx-auto"
-          style={{ textShadow: "0 1px 3px rgba(0,0,0,0.65)" }}
-        >
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-            {t("heroTitleStart")}{" "}
-            <em className="not-italic" style={{ color: "var(--terracotta)" }}>
-              {t("heroTitleEm")}
-            </em>
-          </h1>
-          <p className="text-lg" style={{ color: "var(--text)" }}>
-            {t("heroSubtitle", { lieuxCount: lieux.length, itinCount: itineraires.length })}
-          </p>
-          <div className="flex gap-4 justify-center mt-8">
-            <Link
-              href="#lieux"
-              className="px-6 py-3 rounded-full text-sm font-medium transition-colors"
-              style={{ background: "var(--azure)", color: "#0C1116", textShadow: "none" }}
-            >
-              {t("exploreLieux")}
-            </Link>
-            {/* Bordure --line (rgba(255,255,255,.08)) : invisible sur une photo, le CTA
-                secondaire ne se lisait pas comme un bouton. Bordure franche + fond sombre
-                translucide, pour qu'il tienne sur les 8 visuels. */}
-            <Link
-              href="#itineraires"
-              className="px-6 py-3 rounded-full text-sm font-medium border transition-colors hover:bg-white/15"
-              style={{
-                borderColor: "rgba(255,255,255,0.5)",
-                background: "rgba(12,17,22,0.45)",
-                color: "var(--text)",
-                textShadow: "none",
-              }}
-            >
-              {t("seeItineraires")}
-            </Link>
-          </div>
+        <HomeQualificateur villes={villes} lieuxCount={lieux.length} />
+      </section>
+
+      {/* Explorer — carte + liste synchronisées (aperçu, → /explorer) */}
+      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-section mb-2" style={{ color: "var(--calcaire)" }}>{t("explorerTitre")}</h2>
+          <p className="text-body mb-6" style={{ color: "var(--brume)" }}>{t("explorerSousTitre")}</p>
+          <HomeExplorerSection lieux={lieux} />
         </div>
       </section>
 
-      {/* Itinéraires */}
+      {/* Déjà composés */}
       <section id="itineraires" className="py-12 px-6 border-t scroll-mt-20" style={{ borderColor: "var(--line)" }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8">{t("itinerairesTitle")}</h2>
+          <h2 className="text-section mb-2" style={{ color: "var(--calcaire)" }}>{t("itinerairesTitle")}</h2>
+          <p className="text-body mb-8" style={{ color: "var(--brume)" }}>{t("dejaComposesSousTitre")}</p>
           <HomeItineraires itineraires={itineraires} lieuBySlug={lieuBySlug} />
         </div>
       </section>
 
-      {/* Activités suggérées */}
+      {/* La méthode */}
       <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-1">
-              {t("activitesTitleStart")} <em className="not-italic" style={{ color: "var(--terracotta)" }}>{t("activitesTitleEm")}</em>
-            </h2>
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              {t("activitesSubtitle")}
-            </p>
-          </div>
-          <HomeActivities lieux={lieux} />
-        </div>
-      </section>
-
-      {/* Carte */}
-      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-1">{t("mapTitle", { count: villes.length })}</h2>
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              {t("mapSubtitle")}
-            </p>
-          </div>
-          <HomeMapWrapper villes={villes} />
-        </div>
-      </section>
-
-      {/* Lieux */}
-      <section id="lieux" className="py-12 px-6 border-t scroll-mt-20" style={{ borderColor: "var(--line)" }}>
-        <div className="max-w-6xl mx-auto">
-          <HomeLieuxGrid lieux={lieux} />
-        </div>
-      </section>
-
-      {/* Qui écrit ce site — /a-propos n'était liée que depuis le pied de page. Un
-          évaluateur externe a conclu qu'il « manquait une couche de confiance » alors que la
-          page existait : s'il ne la trouve pas, un visiteur non plus. Placée ici, après le
-          catalogue, c'est-à-dire au moment où la question se pose. */}
-      <section className="py-12 px-6 border-t" style={{ borderColor: "var(--line)" }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-xl font-bold mb-2">{t("confianceTitle")}</h2>
-          <p className="text-sm mb-5" style={{ color: "var(--text-muted)" }}>
-            {t("confianceSubtitle")}
-          </p>
-          <Link
-            href="/a-propos"
-            className="inline-block text-sm px-5 py-2.5 rounded-full border font-medium transition-colors hover:bg-white/5"
-            style={{ borderColor: "var(--terracotta)", color: "var(--terracotta)" }}
-          >
-            {t("confianceCta")}
-          </Link>
-        </div>
+        <HomeMethode locale={locale} lieuxCount={lieux.length} />
       </section>
     </>
   );

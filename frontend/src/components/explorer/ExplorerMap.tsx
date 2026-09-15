@@ -29,11 +29,12 @@ function construireIcone(L: typeof import("leaflet"), lieu: Lieu, survole: boole
 }
 
 /**
- * Carte Explorer — un marqueur par LIEU (HomeMap.tsx, qui reste inchangé, en met un par
- * ville), coloré par zone via mer-colors.ts (Lot 1, jamais branché avant cette page), amas
+ * Carte Explorer — un marqueur par LIEU, coloré par zone via mer-colors.ts (Lot 1), amas
  * obligatoires (13 paires de marqueurs se superposent autour de Nice/Monaco au zoom par
- * défaut → NF-03), clic → navigation directe vers la fiche (pas de carte d'info intermédiaire
- * comme sur HomeMap).
+ * défaut → NF-03), clic → navigation directe vers la fiche (pas de carte d'info intermédiaire).
+ * Composant partagé (Lot 4e) : utilisé par `/explorer` (ExplorerShell.tsx) et par l'aperçu
+ * Explorer de l'accueil (HomeExplorerSection.tsx), qui a remplacé l'ancienne HomeMap.tsx
+ * (un marqueur par ville, sans amas — supprimée).
  */
 export default function ExplorerMap({
   lieux,

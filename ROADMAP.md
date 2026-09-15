@@ -296,8 +296,8 @@ si les 7 crans de `01-tokens.md` reflétaient une décision plus récente, il fa
 au moment du Lot 4.
 
 - [~] **Tokens CSS + composants partagés** — **fait le 2026-09-14, système visuel seulement**
-      (le cache CDN et la sécurité `apiToken` ci-dessous restent à faire, traités à part —
-      voir aussi `.claude/plans/luminous-hugging-sundae.md`). Palette Nuit/Nuit haute/
+      (le cache CDN et la sécurité `apiToken` ci-dessous restent à faire, traités à part).
+      Palette Nuit/Nuit haute/
       Calcaire/Brume/Aube/Pin + 5 teintes Mer (provisoires, faute du fichier maquette
       source), rayons (`--radius` 3px / `--radius-sm` 2px / `--radius-full` 50%), ombre
       `--shadow-float`, typographie à 6 crans (`.text-display/-section/-card-title/-body/
@@ -368,7 +368,7 @@ entrée. L'obtenir suppose `pushState`, qui entre en conflit avec l'historique q
 routeur de Next — le spec demandait lui-même `router.replace`, les deux exigences se
 contredisent. À trancher si le besoin se confirme à l'usage.
 
-### Lot 3 — Données — **fait le 2026-09-15 côté code/données, synchro prod bloquée**
+### Lot 3 — Données — **fait le 2026-09-15, synchronisé et vérifié en prod**
 
 - [x] **Tags des 43 lieux nettoyés** — **fait le 2026-09-15**. `tags: string[]` sur les 43
       lieux, vocabulaire figé (`village | sentier | crique | jardin | monument | panorama |
@@ -460,8 +460,10 @@ La composition actuelle est bonne (galerie → identité → infos pratiques →
 
 #### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer` — **faite le 2026-09-14**
 
-Déployée et vérifiée en prod (FR + EN). Ne remplace pas encore `#lieux`/la carte de l'accueil
-ni `/activites` — voir plus bas, c'est du Lot 4e/du hors-périmètre, pas un oubli.
+Déployée et vérifiée en prod (FR + EN). **L'accueil a été rebranchée dessus au Lot 4e**
+(2026-09-15) : `#lieux`/l'ancienne carte de l'accueil sont remplacés par un aperçu de cette
+page (`HomeExplorerSection.tsx`, composants carte/liste partagés). `/activites` n'est, elle,
+toujours pas remplacée — hors périmètre, pas un oubli.
 
 - [x] **Barre de filtres unique** pilotant carte ET liste — zone/badge/saison/durée/niveau/
       recherche, réutilisant tel quel le helper `url-filtres.ts` du Lot 2. **Chips de type**
@@ -503,9 +505,8 @@ ni `/activites` — voir plus bas, c'est du Lot 4e/du hors-périmètre, pas un o
       activité fermée sur 5 n'a pas de statut défini, bâtir une heuristique aurait inventé une
       donnée.
 
-**Reste** : tout ce qui précède avec un `[ ]`, plus le raccordement de l'accueil/de la nav vers
-`/explorer` (Lot 4e et Lot 5, indépendants par conception — non touchés ici). Détail du
-périmètre et des raisons dans `.claude/plans/luminous-hugging-sundae.md`.
+**Reste** : tout ce qui précède avec un `[ ]`. Le raccordement de l'accueil vers `/explorer`
+est fait depuis (Lot 4e, 2026-09-15) ; celui de la nav reste à faire (Lot 5).
 
 #### 4c. Composer (`07-ecran-composer.md`) — `/composer`, nouvelle route à côté de `/creer-itineraire`
 
@@ -575,18 +576,81 @@ redéployé sur Vercel (`cd frontend && npx vercel --prod --yes`). Vérifié en 
 `POST`/`GET`/`PATCH`/`DELETE` sur `/api/itineraires-composes/{id}`, et `/composer`, `/explorer`
 (chips de tags) et `/i/[id]` fonctionnels sur le domaine de prod.
 
-#### 4e. Accueil (`04-ecran-accueil.md`)
+#### 4e. Accueil (`04-ecran-accueil.md`) — **fait le 2026-09-15, écarts documentés ci-dessous**
 
-L'accueil vient en dernier : il pointe vers les autres écrans.
+- [x] **Héros** — **fait**, simplifié : `HomeHero.tsx` sert une seule image (`hero-1.jpg`,
+      `priority`) au lieu du crossfade de 8, plus gros levier de poids listé par le spec.
+      **Non fait** : dimensions figées 1440×660, `<link rel="preload">` explicite (React gère
+      le préchargement via `priority`, pas un `<link>` dédié), sur-titre `.lbl` séparé (le
+      titre `.text-display` du Lot 1 fait tout le travail).
+- [x] **Panneau de qualification** — **fait** (`HomeQualificateur.tsx`), 3 contrôles + bouton
+      primaire + lien discret, dans le héros dès le chargement (pas à 2 623 px, → AI-02/03).
+      **Écart assumé** : à l'intérieur du héros plutôt que "à cheval" dessus (pas de
+      superposition mi-image/mi-fond) — plus simple, et le spec ne motivait pas la
+      superposition par autre chose qu'un effet visuel. « Je pars de » inclut un vrai bouton
+      « Ma position » (géolocalisation → ville la plus proche par `distanceKm()`), au-delà du
+      "[Nice] ou [ma position]" du spec. « J'ai envie de » est mappé sur les badges réels
+      (Marcher→randonnée, Me baigner→plage, Manger→restaurant, Visiter→aucun filtre, pas de
+      badge "visiter" dans `BADGE_DEFS`) — décision actée avec l'utilisateur : sans ce
+      branchement le contrôle aurait été décoratif. Le bouton mène à `/composer?duree=…
+      &depart=…&badge=…`, que `/composer` sait déjà lire (voir plus bas).
+- [x] **Section Explorer** — **fait** (`HomeExplorerSection.tsx`, `id="explorer"`), aperçu
+      carte+liste réutilisant les mêmes composants que `/explorer` (`ExplorerMap`,
+      `ExplorerListCard`, déplacés de `explorer/_components/` vers `src/components/explorer/`
+      pour ce partage — Lot 4e). 5 chips région, compteur, bouton « Voir les N lieux » →
+      `/explorer` (avec `?zone=` conservé). Corrige AI-04. Liste plafonnée à 6 (pas de
+      pagination — c'est le rôle du bouton vers `/explorer`), grille `1.45fr/1fr`, ~470px de
+      haut, bascule mobile carte/liste identique au patron de `/explorer`.
+- [x] **Section « Déjà composés »** — **fait**, mais en grille (2/3 colonnes selon largeur)
+      plutôt que 3 cartes fixes — les 6 itinéraires éditoriaux tiennent tous. Nouveau
+      composant `ComposeCard.tsx` (carte verticale 3:2, sur-titre mono aube) plutôt qu'une
+      modification de `ItineraireCard.tsx`, qui reste utilisé tel quel par
+      `villes/[slug]/page.tsx`. Mobile : scroll horizontal `snap-x` (pas de grille), même
+      technique que les autres rangées secondaires du site (booking cards, activités d'une
+      fiche lieu).
+- [x] **Section « La méthode »** — **fait** (`HomeMethode.tsx`), remplace l'ancienne section
+      "confiance" (lien nu vers `/a-propos`, ajoutée le 2026-09-13) sans perdre son lien — il
+      est repris en pied de section. 4 compteurs : lieux vérifiés = `lieux.length` (dynamique,
+      le seul dérivable sans mentir), dernière passe = **août 2026**, lieux retirés = **3**
+      (les 3 démotions documentées dans `CLAUDE.md`), auteur = **Maxime Jouard** — valeurs
+      actées avec l'utilisateur, hardcodées comme le demande le spec ("champs à renseigner").
+      Corrige PA-05.
+- [x] **Suppression de la section Activités de l'accueil** — **fait**. `HomeActivities.tsx`
+      supprimé avec `page.tsx`'s import ; `ACTIVITY_CATEGORIES`/`FEATURED_ACTIVITIES` dans
+      `home-data.ts` supprimés aussi (devenus orphelins, `/activites` utilise
+      `CATEGORIES_ACTIVITE`, une constante différente et plus récente). Corrige AI-05.
+- [ ] **Performance** — **non auditée dans cette passe**, seul le héros à une image (le plus
+      gros levier explicitement listé par le spec) est fait. Objectif <900 Ko/<60 requêtes,
+      `srcset` sur les 208 images d'activités : demanderait un audit dédié, hors périmètre —
+      décision actée avec l'utilisateur au moment de planifier ce lot.
+- [x] **Mobile** — **fait** : panneau de qualification empilé (screenshot vérifié), bouton
+      primaire pleine largeur, section Explorer avec bouton "Voir sur la carte"/"Voir la
+      liste" (patron d'`/explorer`), "Déjà composés" en scroll horizontal, "La méthode"
+      condensée à date + auteur (vérifié : les 2 autres lignes passent bien `display:none` en
+      dessous de 640px).
 
-- [ ] **Héros** — une seule image 1440 × 660 WebP+JPEG `fetchpriority="high"` `<link rel="preload">` (vs. cinq images actuelles, → PF-02). Voile gradient vertical. Sur-titre `.lbl` aube, titre Bodoni 74 px desktop / 44 mobile `max-width: 16ch`, accroche 19 px `max-width: 52ch`.
-- [ ] **Panneau de qualification** posé à cheval sur le héros — surface `--rs-nuit-haute`, ombre flottante, 3 contrôles (J'AI / JE PARS DE / J'AI ENVIE DE), séparateur, bouton primaire grand « Composer mon itinéraire » + lien discret « Ou explorer les 43 lieux ». Le premier champ interactif remonte dans le héros au lieu d'attendre à 2 623 px (→ AI-02/03).
-- [ ] **Section Explorer** — aperçu carte + liste synchronisés (470 px de haut, grille 1.45fr/1fr), 5 chips de filtre, compteur unique « 26 lieux dans la vue », bouton secondaire « Voir les 26 lieux » → `/explorer`. Corrige AI-04.
-- [ ] **Section « Déjà composés »** — 3 cartes verticales 3:2, sur-titre mono aube, titre/description. Les itinéraires viennent *après* l'outil : ils sont le raccourci pour qui ne veut pas répondre aux trois questions.
-- [ ] **Section « La méthode »** — titre Bodoni + paragraphe éditorial + 4 lignes tabulaires (lieux vérifiés sur place / dernière passe / lieux retirés / auteur). Corrige PA-05 (rien ne dit qui trie aujourd'hui).
-- [ ] **Suppression de la section Activités de l'accueil** — elle présentait les feuilles avant l'arbre, le rattachement au lieu parent devenait incompréhensible (→ AI-05).
-- [ ] **Performance** — objectif < 900 Ko et < 60 requêtes (actuellement 1 768 Ko et 142 requêtes dont 45 préchargements RSC dupliqués, → PF-02) ; `srcset` sur toutes les vignettes, deux largeurs 700w/1000w WebP + repli JPEG (aucun `srcset` aujourd'hui sur les 208 images d'activités, → MO-03).
-- [ ] **Mobile** — panneau de qualification avec les 3 contrôles empilés ; bouton primaire pleine largeur 52 ; section Explorer avec carte 208 px + bouton flottant « Ouvrir la carte » ; 1 carte itinéraire pleine largeur.
+**Ajouté à `/explorer` au passage, hors spec de ce lot mais nécessaire** : `HomeLieuxGrid.tsx`
+(l'ancienne grille de l'accueil, supprimée par ce lot) portait deux fonctions saluées par un
+audit externe ("le meilleur composant du site") et absentes du spec de refonte — "Près de
+moi" (tri par géolocalisation, `distanceKm()`) et "Surprends-moi" (pioche aléatoire dans les
+résultats filtrés). Les perdre en remplaçant la grille par l'aperçu Explorer aurait été une
+régression silencieuse ; décision actée avec l'utilisateur : portées sur `/explorer`
+(`ExplorerShell.tsx`/`ExplorerFilterBar.tsx`), avec badge de distance sur les cartes de la
+liste quand "Près de moi" est actif. `HomeMap.tsx`/`HomeMapWrapper.tsx`/`HomeLieuxGrid.tsx`
+supprimés (plus aucun consommateur).
+
+**Ajouté à `/composer` au passage** : le contrôle "J'ai envie de" du héros a besoin d'un
+filtre par badge sur `/composer` pour ne pas être décoratif — ajouté (`ComposerPicker.tsx`,
+chips `BADGE_DEFS`), suit exactement le patron déjà en place pour `zone`/`q` (lu et réécrit
+dans l'URL au même endroit). Vérifié en direct (backend local + base de prod, lecture seule) :
+`/composer?duree=demi-journee&depart=eze&badge=plage` présélectionne bien les 3 champs et
+filtre la liste à 12 lieux.
+
+**Bug pré-existant trouvé en testant, sans rapport avec ce lot** : `ComposerPicker.tsx`'s
+`t("lieuxTrouves", …)` affiche la clé brute `composer.lieuxTrouves` au lieu du texte — la
+valeur JSON utilise `{count} lieu{plural} sur {total}`, une syntaxe ICU invalide pour
+next-intl (confirmé : `FORMATTING_ERROR` en console). Existait avant ce lot, non touché ici,
+tâche de fond posée pour un correctif séparé.
 
 ### Lot 5 — Navigation et nettoyage
 

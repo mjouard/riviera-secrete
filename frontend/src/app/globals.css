@@ -120,25 +120,6 @@ button:not(:disabled) { cursor: pointer; }
   .booking-extra { display: block !important; }
 }
 
-/* Cartes au-dela de 3 repliees derriere "Voir plus" (mobile uniquement, utilise par la
-   section itineraires de l'accueil) - inverse de .booking-extra ci-dessus : ici c'est le
-   desktop qui montre tout par defaut, et le mobile qui limite. */
-@media (max-width: 639.98px) {
-  .home-itin-extra { display: none; }
-  .home-itin-grid.expanded .home-itin-extra { display: block; }
-}
-
-/* ---------- SCROLL REVEAL (grille lieux homepage) ---------- */
-/* Le fondu etait limite a 640px+ tant que la grille etait un carrousel horizontal en
-   mobile : declenche par l'IntersectionObserver au fil du scroll *horizontal*, ce
-   translateY vertical faisait "sauter" les cartes pendant le swipe. La grille est
-   verticale a tous les viewports depuis, le fondu s'applique donc partout. */
-.card-reveal { opacity: 0; transform: translateY(16px); transition: transform 0.25s ease; }
-.card-reveal.visible { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) {
-  .card-reveal { transition: none; opacity: 1; transform: none; }
-}
-
 /* ---------- PRINT / PDF EXPORT (créateur d'itinéraire) ---------- */
 .print-header { display: none; }
 .print-header-url { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin-bottom: 4px; }

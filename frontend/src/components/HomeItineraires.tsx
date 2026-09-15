@@ -1,13 +1,13 @@
-"use client";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import type { Itineraire, Lieu } from "@/lib/types";
-import ItineraireCard from "./ItineraireCard";
+import ComposeCard from "./ComposeCard";
 
-/** Nombre de cartes visibles sur mobile avant de replier le reste derrière "Voir plus". */
-const VISIBLE_COUNT_MOBILE = 3;
-
+/**
+ * "Déjà composés" (refonte UI Lot 4e) — grille verticale 3:2 en desktop, scroll horizontal
+ * en mobile (spec § 3 : "1 carte visible, scroll horizontal, pas de grille"). Même technique
+ * `.hscroll`/`snap-x`/largeur-fixe-puis-`sm:w-auto` que les autres rangées secondaires du
+ * site (booking cards, activités d'une fiche lieu — voir lieux/[slug]/page.tsx).
+ * Server Component : ComposeCard ne dépend d'aucun état client.
+ */
 export default function HomeItineraires({
   itineraires,
   lieuBySlug,
@@ -15,39 +15,13 @@ export default function HomeItineraires({
   itineraires: Itineraire[];
   lieuBySlug: Map<string, Lieu>;
 }) {
-  const t = useTranslations("home");
-  const [expanded, setExpanded] = useState(false);
-  const hiddenCount = itineraires.length - VISIBLE_COUNT_MOBILE;
-
   return (
-    <div>
-      <div
-        className={`home-itin-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${expanded ? "expanded" : ""}`}
-      >
-        {itineraires.map((itin, i) => (
-          <div key={itin.id} className={i >= VISIBLE_COUNT_MOBILE ? "home-itin-extra" : ""}>
-            <ItineraireCard itin={itin} lieuBySlug={lieuBySlug} />
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-3 mt-6">
-        {hiddenCount > 0 && (
-          <button
-            onClick={() => setExpanded((v) => !v)}
-            className="sm:hidden text-sm px-4 py-2 rounded-lg border transition-colors hover:bg-white/5"
-            style={{ borderColor: "var(--line)", color: "var(--text)" }}
-          >
-            {expanded ? t("voirMoins") : t("voirLesAutres", { count: hiddenCount })}
-          </button>
-        )}
-        <Link
-          href="/creer-itineraire"
-          className="text-sm px-4 py-2 rounded-lg font-semibold transition-colors"
-          style={{ background: "var(--azure)", color: "#0c1116" }}
-        >
-          {t("creerMonItineraire")}
-        </Link>
-      </div>
+    <div className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-6 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 lg:grid-cols-3">
+      {itineraires.map((itin) => (
+        <div key={itin.id} className="flex-shrink-0 snap-start w-[88%] sm:w-auto">
+          <ComposeCard itin={itin} lieuBySlug={lieuBySlug} />
+        </div>
+      ))}
     </div>
   );
 }

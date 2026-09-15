@@ -20,6 +20,7 @@ import {
   type TransportMode,
 } from "@/lib/itineraire-logic";
 import { useAujourdhui, dateISOLocale } from "@/lib/aujourdhui";
+import { BADGE_DEFS } from "@/lib/home-data";
 import ComposerParamsBar from "./_components/ComposerParamsBar";
 import ComposerPicker from "./_components/ComposerPicker";
 import ComposerRecap from "./_components/ComposerRecap";
@@ -67,6 +68,7 @@ export default function ComposerPage() {
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
   const [q, setQ] = useState("");
   const [zone, setZone] = useState("");
+  const [badge, setBadge] = useState("");
   const [favorisOnly, setFavorisOnly] = useState(false);
   const [favorisSlugs, setFavorisSlugs] = useState<string[] | null>(null);
 
@@ -122,6 +124,8 @@ export default function ComposerPage() {
         setQ(params.get("q") ?? "");
         const zoneParam = params.get("zone");
         if (zoneParam) setZone(zoneParam);
+        const badgeParam = params.get("badge");
+        if (badgeParam && BADGE_DEFS.some((b) => b.slug === badgeParam)) setBadge(badgeParam);
 
         // `?jours=` : composition déjà faite, partagée par lien — on rouvre directement le
         // résultat (même logique que /creer-itineraire, voir ce fichier pour le détail).
@@ -272,6 +276,7 @@ export default function ComposerPage() {
       if (slugs.length > 0) sortie.set("lieux", slugs.join(","));
       if (q) sortie.set("q", q);
       if (zone) sortie.set("zone", zone);
+      if (badge) sortie.set("badge", badge);
     } else {
       return;
     }
@@ -283,7 +288,7 @@ export default function ComposerPage() {
 
     const query = sortie.toString();
     window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
-  }, [view, selectedSlugs, dureeKey, currentDays, currentNom, mode, departSlug, heure, dateStr, q, zone]);
+  }, [view, selectedSlugs, dureeKey, currentDays, currentNom, mode, departSlug, heure, dateStr, q, zone, badge]);
 
   // ─── Vue résultat : réordonnancement, sauvegarde ───────────────────────────
 
@@ -455,6 +460,8 @@ export default function ComposerPage() {
               onQChange={setQ}
               zone={zone}
               onZoneChange={setZone}
+              badge={badge}
+              onBadgeChange={setBadge}
               favorisOnly={favorisOnly}
               onFavorisOnlyChange={setFavorisOnly}
               favorisSlugs={favorisSlugs}

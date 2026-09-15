@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
-import ExplorerListCard from "./ExplorerListCard";
+import ExplorerListCard from "@/components/explorer/ExplorerListCard";
 
 export default function ExplorerList({
   lieux,
@@ -12,6 +12,7 @@ export default function ExplorerList({
   onHover,
   onVoirPlus,
   onToutEffacer,
+  distanceBySlug,
 }: {
   lieux: Lieu[];
   total: number;
@@ -19,6 +20,8 @@ export default function ExplorerList({
   onHover: (slug: string | null) => void;
   onVoirPlus: () => void;
   onToutEffacer: () => void;
+  /** Présent seulement si « Près de moi » est actif. */
+  distanceBySlug?: Map<string, number>;
 }) {
   const t = useTranslations("explorer");
 
@@ -34,7 +37,13 @@ export default function ExplorerList({
   return (
     <div className="flex flex-col gap-1 overflow-y-auto" style={{ maxHeight: "min(80vh, 720px)" }}>
       {lieux.map((lieu) => (
-        <ExplorerListCard key={lieu.slug} lieu={lieu} survole={hoveredSlug === lieu.slug} onHover={onHover} />
+        <ExplorerListCard
+          key={lieu.slug}
+          lieu={lieu}
+          survole={hoveredSlug === lieu.slug}
+          onHover={onHover}
+          distance={distanceBySlug?.get(lieu.slug)}
+        />
       ))}
       {lieux.length < total && (
         <Button type="button" variant="secondaire" onClick={onVoirPlus} className="self-center mt-3">

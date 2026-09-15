@@ -20,15 +20,28 @@ const REGION_SLUGS = ["menton-monaco", "nice", "arriere-pays", "antibes-cannes",
 export default function ExplorerFilterBar({
   filtres,
   onChange,
+  position,
+  geoEtat,
+  onToggleProximite,
+  onSurprendsMoi,
+  surprendsMoiDesactive,
 }: {
   filtres: FiltresExplorer;
   onChange: (patch: Partial<FiltresExplorer>) => void;
+  position: { lat: number; lng: number } | null;
+  geoEtat: "idle" | "chargement" | "refuse" | "indisponible";
+  onToggleProximite: () => void;
+  onSurprendsMoi: () => void;
+  surprendsMoiDesactive: boolean;
 }) {
   const t = useTranslations("explorer");
   const tRegion = useTranslations("regionShort");
   const tBadges = useTranslations("badges");
   const tTags = useTranslations("tags");
   const tFiltres = useTranslations("filtres");
+  // presDeMoi*/localisation* vivaient dans "home" (ancienne HomeLieuxGrid) — réutilisées
+  // telles quelles ici, portées vers /explorer (Lot 4e), pas dupliquées dans les messages.
+  const tHome = useTranslations("home");
 
   const aUnFiltre = Object.values(filtres).some((v) => v !== "");
 
@@ -102,12 +115,37 @@ export default function ExplorerFilterBar({
           options={NIVEAUX.map((n) => ({ value: n, label: tFiltres(n) }))}
         />
 
+        <span className="w-px self-stretch mx-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+
+        <Chip
+          selected={position !== null}
+          onClick={onToggleProximite}
+          disabled={geoEtat === "chargement"}
+          title={tHome("presDeMoiTitre")}
+        >
+          {geoEtat === "chargement"
+            ? tHome("localisationEnCours")
+            : position
+              ? tHome("presDeMoiActif")
+              : tHome("presDeMoi")}
+        </Chip>
+
+        <Button type="button" variant="discret" onClick={onSurprendsMoi} disabled={surprendsMoiDesactive} title={tFiltres("surprendsMoiTitre")}>
+          {tFiltres("surprendsMoi")}
+        </Button>
+
         {aUnFiltre && (
           <Button type="button" variant="discret" onClick={() => onChange({ zone: "", badge: "", type: "", saison: "", duree: "", niveau: "", q: "" })}>
             {t("toutEffacer")}
           </Button>
         )}
       </div>
+
+      {(geoEtat === "refuse" || geoEtat === "indisponible") && (
+        <p className="text-meta -mt-1" style={{ color: "var(--aube)" }}>
+          {geoEtat === "refuse" ? tHome("localisationRefusee") : tHome("localisationIndisponible")}
+        </p>
+      )}
     </div>
   );
 }
