@@ -474,17 +474,27 @@ ni `/activites` — voir plus bas, c'est du Lot 4e/du hors-périmètre, pas un o
 `/explorer` (Lot 4e et Lot 5, indépendants par conception — non touchés ici). Détail du
 périmètre et des raisons dans `.claude/plans/luminous-hugging-sundae.md`.
 
-#### 4c. Composer (`07-ecran-composer.md`) — `/composer` remplace `/creer-itineraire`
+#### 4c. Composer (`07-ecran-composer.md`) — `/composer`, nouvelle route à côté de `/creer-itineraire`
 
 Le moteur algorithmique est bon. L'entrée et la sortie le desservent.
 
-- [ ] **Bandeau de 4 paramètres** — grille 4 colonnes : DURÉE / DÉPART + heure `08:30` / DATE / TRANSPORT (voiture ou train + marche). La date rend les alertes d'ouverture honnêtes pour un voyage dans le futur (→ PR-04). Les trois premiers sont les paramètres qui manquent aujourd'hui.
-- [ ] **Sélection sur vignettes** (`02` § 5.3) — grille 3 colonnes, cartes avec image 3:2, case d'état 28 × 28 (non sélectionnée : carré bordé `--rs-brume` ; sélectionnée : fond aube + coche nuit ; fermée : `opacity .6` + voile + badge « Fermé samedi » calculé sur la `date`). Remplace les 43 noms nus dans des accordéons sans photo ni info (→ PR-05).
-- [ ] **Recherche + filtre de zone** — champ 44 + chips de zone (défilement horizontal) + lien « Depuis mes favoris (N) ». Ce dernier est le pont manquant entre les favoris et le générateur (→ PA-04).
-- [ ] **Récapitulatif vivant** (colonne droite 500 px) — carte avec pastilles numérotées en aube reliées par un trait ambre pointillé (l'ordre est celui du moteur, pas celui du clic) ; panneau : titre Bodoni « 3 lieux, 5 h 40 » + 4 chiffres (temps sur place / trajets / entrées à prévoir / reste dans la journée — en `--rs-pin` si positif, en aube si négatif) ; encadré de suggestion ; bouton primaire pleine largeur 52 désactivé si 0 lieu + mention « Choisis au moins un lieu. » avant le clic.
-- [ ] **Tout dans l'URL** via `router.replace` — fermer l'onglet et revenir recharge l'état complet. La mention « Ta sélection est conservée dans le lien » n'est écrite que si l'URL est effectivement synchronisée.
-- [ ] **Mobile** — barre fixe en bas (ligne 1 : récap chiffres, ligne 2 : bouton primaire pleine largeur 52).
-- [ ] **Micro-copie** — « On place tes lieux dans l'ordre, avec les horaires et les temps de trajet. » remplace « l'algorithme compose le meilleur itinéraire possible » ; « Composer l'itinéraire » remplace « Générer » (→ MC-02).
+**Décision de routage** : `/composer` est une route neuve (`frontend/src/app/[locale]/composer/`),
+elle ne remplace pas `/creer-itineraire` — les deux fonctionnent en parallèle. La redirection
+301 `/creer-itineraire` → `/composer` fait partie du Lot 5 (nettoyage des routes, ligne ~521
+plus bas), pas de ce lot : basculer la redirection maintenant couperait l'ancienne route avant
+que `/composer` ait eu de recette utilisateur.
+
+- [x] **Bandeau de 4 paramètres** — grille 4 colonnes : DURÉE / DÉPART + heure `08:30` / DATE / TRANSPORT (voiture ou train + marche). La date rend les alertes d'ouverture honnêtes pour un voyage dans le futur (→ PR-04). Les trois premiers sont les paramètres qui manquent aujourd'hui. Fait (`ComposerParamsBar.tsx`).
+- [x] **Sélection sur vignettes** (`02` § 5.3) — grille 3 colonnes, cartes avec image 3:2, case d'état 28 × 28 (non sélectionnée : carré bordé `--rs-brume` ; sélectionnée : fond aube + coche nuit ; fermée : `opacity .6` + voile + badge « Fermé samedi » calculé sur la `date`). Remplace les 43 noms nus dans des accordéons sans photo ni info (→ PR-05). Fait (`ComposerCard.tsx`/`ComposerPicker.tsx`), fermeture calculée via `useAujourdhui`/la date choisie (Lot 4c, cf. commit `dca8c2f`).
+- [x] **Recherche + filtre de zone** — champ 44 + chips de zone (défilement horizontal) + lien « Depuis mes favoris (N) ». Ce dernier est le pont manquant entre les favoris et le générateur (→ PA-04). Fait (`ComposerPicker.tsx` : recherche, chips de zone, et lien favoris branché sur `GET /api/favorites` via `authFetch`, masqué tant que la liste de favoris n'est pas chargée).
+- [x] **Récapitulatif vivant** (colonne droite 500 px) — carte avec pastilles numérotées en aube reliées par un trait ambre pointillé (l'ordre est celui du moteur, pas celui du clic) ; panneau : titre Bodoni « 3 lieux, 5 h 40 » + 4 chiffres (temps sur place / trajets / entrées à prévoir / reste dans la journée — en `--rs-pin` si positif, en aube si négatif) ; encadré de suggestion ; bouton primaire pleine largeur 52 désactivé si 0 lieu + mention « Choisis au moins un lieu. » avant le clic. Fait (`ComposerRecap.tsx`).
+- [x] **Tout dans l'URL** — fait, mais via `history.replaceState` plutôt que `router.replace` (voir le commentaire dans `page.tsx` autour de la ligne 255 : même choix que `/creer-itineraire`, pour ne pas empiler un `pushState` par frappe/clic et ne pas faire retraverser le routeur Next à chaque changement de filtre, le rendu restant 100 % client). Fermer l'onglet et revenir recharge l'état complet (paramètres, sélection ou jours composés selon la vue).
+- [x] **Mobile** — barre fixe en bas (ligne 1 : récap chiffres, ligne 2 : bouton primaire pleine largeur 52). Fait (`ComposerMobileBar.tsx`).
+- [x] **Micro-copie** — « On place tes lieux dans l'ordre, avec les horaires et les temps de trajet. » remplace « l'algorithme compose le meilleur itinéraire possible » ; « Composer l'itinéraire » remplace « Générer » (→ MC-02). Fait (`messages/fr.json` : `subtitle`/`composerBouton`).
+
+**Vérification rapide de fin de chantier (2026-09-15)** : `npx tsc --noEmit` et `npm run build`
+passent tous les deux sans erreur sur ce worktree — aucune correction de code n'a été
+nécessaire, cette passe n'a touché que ce fichier.
 
 #### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique)
 
