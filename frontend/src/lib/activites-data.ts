@@ -72,21 +72,44 @@ export function trancheDeDuree(minutes: number | null): TrancheDuree | null {
 }
 
 /**
- * `linkText` n'a pas de colonne traduite : le libellé du lien de réservation est l'un des
- * trois seuls du jeu de données, donc on le mappe vers une clé i18n plutôt que d'ajouter une
- * colonne `linkTextEn` à remplir 208 fois. Repli sur `reserver` pour tout libellé inconnu —
- * mieux vaut un bouton correct en anglais qu'une chaîne française sur `/en`.
+ * Libellé du bouton d'action d'une activité (Lot 3, ROADMAP § Lot 3 § 1.3) — remplace
+ * l'ancien `cleLinkText`/`Activite.linkText`, texte libre à trois variantes qui avait fini
+ * par dériver du sens réel du lien. `lienType` est un vocabulaire fermé à deux valeurs
+ * écrit à la main pour chacune des 208 activités : `"reservation"` seulement si l'URL mène
+ * à la page de réservation de cette activité précise, `"officiel"` sinon.
  */
-export function cleLinkText(
-  linkText: string | null | undefined
-): "reserver" | "verifierHoraires" | "enSavoirPlus" | "voirLesOffres" {
-  if (linkText === "En savoir plus →") return "enSavoirPlus";
-  if (linkText === "Vérifier les horaires →") return "verifierHoraires";
-  // « Voir les offres » et non « Réserver » pour les liens qui atterrissent sur le
-  // catalogue d'une ville plutôt que sur l'activité nommée : le bouton doit décrire ce qui
-  // va réellement se passer. Quinze activités sont dans ce cas.
-  if (linkText === "Voir les offres →") return "voirLesOffres";
-  return "reserver";
+export function cleLienType(
+  lienType: string | null | undefined
+): "reserver" | "siteOfficiel" {
+  return lienType === "officiel" ? "siteOfficiel" : "reserver";
+}
+
+/** `rel` du lien d'action — un lien partenaire impose `sponsored nofollow` (Lot 3 § 1.3). */
+export function relActivite(partenaire: boolean): string {
+  return partenaire ? "noopener noreferrer sponsored nofollow" : "noopener noreferrer";
+}
+
+/**
+ * Commune où se pratique réellement une activité, à afficher seulement quand elle diffère
+ * du lieu qui la porte (Lot 3 § 1.2 — corrige DC-02 : « Sortie kayak de mer · La Rue
+ * Obscure » laissait croire qu'on fait du kayak dans une rue couverte du XIIIe siècle).
+ * `null` quand l'activité se pratique bien sur place (`surPlace === true`) : rien à
+ * corriger dans ce cas, l'affichage actuel ne ment pas.
+ *
+ * Résout via le nom déjà connu du lieu porteur quand `communeSlug` pointe sur sa propre
+ * commune — le seul cas rencontré dans les 208 activités actuelles (voir data/lieux.json).
+ * Sinon replie sur le slug mis en forme : imparfait pour un nom composé irrégulier
+ * (« Villefranche-Sur-Mer » plutôt que « Villefranche-sur-Mer »), mais aucune activité
+ * existante n'emprunte ce chemin aujourd'hui — à corriger avec de vraies données de commune
+ * (ex. `api.villes.list()`) si un jour `communeSlug` diverge du lieu porteur.
+ */
+export function communeActivite(activite: Activite, lieu: Lieu): string | null {
+  if (activite.surPlace || !activite.communeSlug) return null;
+  if (activite.communeSlug === lieu.villeSlug) return lieu.commune;
+  return activite.communeSlug
+    .split("-")
+    .map((mot) => (mot ? mot.charAt(0).toUpperCase() + mot.slice(1) : mot))
+    .join("-");
 }
 
 export interface ActiviteEnrichie {

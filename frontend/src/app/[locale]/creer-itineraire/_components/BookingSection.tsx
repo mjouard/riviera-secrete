@@ -1,6 +1,6 @@
 "use client";
 
-import { cleLinkText } from "@/lib/activites-data";
+import { cleLienType, communeActivite, relActivite } from "@/lib/activites-data";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
@@ -31,7 +31,8 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
         className={`booking-grid hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2 lg:grid-cols-3 ${expanded ? "expanded" : ""}`}
       >
         {bookings.map(({ lieu, activite: act }, i) => {
-          const linkText = tActivite(cleLinkText(act.linkText));
+          const linkText = tActivite(cleLienType(act.lienType));
+          const commune = communeActivite(act, lieu);
           return (
             <div
               key={i}
@@ -45,6 +46,12 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
                 <p className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>{loc(locale, lieu.nomEn, lieu.nom)}</p>
                 <p className="font-semibold text-sm mb-1">{loc(locale, act.nomEn, act.nom)}</p>
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>⏱ {loc(locale, act.dureeEn, act.duree)} · 💶 {prixAffiche(locale, act.prixEn, act.prix)}</p>
+                {/* Ne s'affiche que si l'activité ne se pratique pas au lieu même (Lot 3). */}
+                {commune && (
+                  <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                    📍 {tActivite("aProximiteDe", { commune })}
+                  </p>
+                )}
                 {/* Même information d'ouverture que la fiche lieu et que les itinéraires
                     éditoriaux : un itinéraire se lit le matin du départ. */}
                 {act.horaires && (
@@ -55,8 +62,13 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
                 <div className="mb-3">
                   <FermeAujourdhui fermeJours={act.fermeJours} />
                 </div>
-                <a href={act.url} target="_blank" rel="noopener noreferrer" className="no-print text-xs" style={{ color: "var(--azure)" }}>
+                <a href={act.url} target="_blank" rel={relActivite(act.partenaire)} className="no-print text-xs" style={{ color: "var(--azure)" }}>
                   {linkText}
+                  {act.partenaire && (
+                    <span className="ml-1" style={{ color: "var(--text-muted)" }}>
+                      · {tActivite("lienPartenaire")}
+                    </span>
+                  )}
                 </a>
               </div>
             </div>

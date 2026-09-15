@@ -120,6 +120,7 @@
   },
   "activite": {
     "reserver": "Book →",
+    "siteOfficiel": "Official website →",
     "enSavoirPlus": "Learn more →",
     "gratuit": "free",
     "payant": "paid",
@@ -127,7 +128,9 @@
     "Payant": "Paid",
     "verifierHoraires": "Check schedule →",
     "fermeAujourdhui": "⚠️ Closed today",
-    "voirLesOffres": "See the offers →"
+    "voirLesOffres": "See the offers →",
+    "lienPartenaire": "affiliate link",
+    "aProximiteDe": "near {commune}"
   },
   "tags": {
     "village": "Village",

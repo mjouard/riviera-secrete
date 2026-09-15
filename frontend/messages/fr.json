@@ -120,6 +120,7 @@
   },
   "activite": {
     "reserver": "Réserver →",
+    "siteOfficiel": "Site officiel →",
     "enSavoirPlus": "En savoir plus →",
     "gratuit": "gratuit",
     "payant": "payant",
@@ -127,7 +128,9 @@
     "Payant": "Payant",
     "verifierHoraires": "Vérifier les horaires →",
     "fermeAujourdhui": "⚠️ Fermé aujourd'hui",
-    "voirLesOffres": "Voir les offres →"
+    "voirLesOffres": "Voir les offres →",
+    "lienPartenaire": "lien partenaire",
+    "aProximiteDe": "à proximité de {commune}"
   },
   "tags": {
     "village": "Village",
