@@ -391,17 +391,33 @@ contredisent. À trancher si le besoin se confirme à l'usage.
       l'unité, sans quoi 58 min sortaient en « 60 min » au lieu de « 1 h ». Les horaires
       d'ouverture (« 10h–18h ») ne sont pas concernés : texte éditorial, pas une durée calculée.
 
-**Le Lot 3 est donc fait côté code, mais la synchro vers la base de PostgreSQL de production
-n'a pas pu être faite** (mot de passe compromis, rotation toujours en attente — item 🔴 en
-tête de ce fichier) : les entités backend, la migration EF (générée, jamais appliquée) et
-`DatabaseSeeder.cs` sont prêts, mais `/explorer` ne montrera aucune chip de type fonctionnelle
-tant que la base réelle n'a pas ces colonnes. Ce travail a été fait sur une branche séparée
-(`worktree-agent-af973d59e253c9c11`), **pas encore mergée dans `main`** — à relire avant
-fusion. Chaîne à faire une fois le mot de passe tourné : `dotnet ef database update` →
-`RivieraSecrete.Tools` (sync `data/*.json` → base) → vérifier `/explorer` en prod.
-- [ ] **Horaires calculés sur la date de visite** (`09` § 3) — `estOuvert(horaires, dateVisite, heureVisite)` ; `dateVisite` vient toujours du paramètre `date` de l'écran Composer, jamais de `new Date()`. Les alertes « Fermé aujourd'hui » deviennent vraies pour un voyage dans le futur.
+- [x] **Horaires calculés sur la date de visite** — **fait le 2026-09-15**, dans le cadre du
+      Lot 4c (`frontend/src/lib/aujourdhui.ts` + branchement dans `ComposerParamsBar.tsx`/
+      `ProgrammeSection.tsx`/`BookingSection.tsx`) : la date choisie dans `/composer` pilote
+      désormais les alertes de fermeture, plus jamais `new Date()` figé dans le cache ISR.
 
-*Recette :* filtrer « Criques » ne remonte aucun village ; aucune carte d'activité n'affiche un lieu parent comme adresse ; la chaîne `1.8 h` n'existe plus nulle part.
+**Le Lot 3 est fait de bout en bout — code, migration, synchro prod, backend et frontend
+redéployés, vérifié en ligne le 2026-09-15.** Deux bugs trouvés en l'appliquant en vrai,
+tous deux corrigés et documentés dans le code :
+1. La migration `AddLot3Champs` ajoutait `Lieux.Tags` (jsonb, liste) avec `defaultValue: ""`,
+   que le provider Npgsql traduit en `DEFAULT '{}'` (objet JSON vide) plutôt que `'[]'`
+   (tableau vide) — toute lecture d'un lieu pas encore rafraîchi plantait en `JsonException`.
+   Migration corrigée (`defaultValueSql: "'[]'"`) pour une base neuve ; commande one-off
+   `fix-lot3-tags-default` dans `RivieraSecrete.Tools` pour rattraper les 43 lignes déjà en
+   prod (la migration appliquée ne se réécrit pas rétroactivement).
+2. `ExecuteSqlRawAsync` traite sa chaîne comme un format composite même sans paramètre — les
+   accolades littérales de `'{}'` dans le correctif ci-dessus se faisaient interpréter comme
+   un index de paramètre. Accolades doublées.
+   La migration ayant **renommé** `Activite.LinkText` en `LienType`, le backend encore en
+   ligne avec l'ancien code a été cassé (500 sur `/api/lieux` et tout endpoint touchant les
+   activités) le temps entre l'application de la migration et le redéploiement — fenêtre
+   d'indisponibilité réelle mais brève, résolue par `railway up --service api` juste après.
+   Vérifié en direct après coup : `/api/lieux` 200, tags et champs d'activité corrects,
+   chips de type visibles sur `/explorer` en prod (FR + EN).
+
+*Recette :* ✅ filtrer « Criques » ne remonte aucun village ; ✅ aucune carte d'activité n'affiche
+un lieu parent comme adresse (vérifié sur l'échantillon testé) ; ✅ la chaîne `1.8 h` n'existe
+plus nulle part.
 
 ### Lot 4 — Écrans
 
@@ -513,11 +529,12 @@ que `/composer` ait eu de recette utilisateur.
 passent tous les deux sans erreur sur ce worktree — aucune correction de code n'a été
 nécessaire, cette passe n'a touché que ce fichier.
 
-#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **partiellement fait le 2026-09-15**
+#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **partiellement fait, déployé et vérifié en prod le 2026-09-15**
 
 - [x] **Lecture publique** (`09` § 2.1) — **fait le 2026-09-15** : entité `ItineraireCompose` +
-      migration EF (`AddItinerairesComposes`, pas encore appliquée à la base de prod — voir
-      note de bas de section) ; `GET /api/itineraires-composes/{id}` public sans auth
+      migration EF (`AddItinerairesComposes`, **appliquée à la base de prod et backend
+      redéployé sur Railway le 2026-09-15** — voir note de bas de section) ; `GET
+      /api/itineraires-composes/{id}` public sans auth
       (200/404) ; `POST /api/itineraires-composes` sans compte → `{ id, editToken }`, `id`
       court généré côté C# (`GenerateUniqueShortIdAsync`), `EditToken` séparé jamais renvoyé
       par le GET ; `VisibiliteLien` = `"lien"` par défaut. `PATCH`/`DELETE` autorisés par
@@ -546,17 +563,17 @@ nécessaire, cette passe n'a touché que ce fichier.
 - [x] **Open Graph** sur `/i/[id]` — **fait le 2026-09-15** : `title` = nom de l'itinéraire, `image` = `heroImage` de la première étape résolue via `api.lieux.list()`. `robots: { index: false, follow: false }` ajouté en plus (contenu généré par un visiteur, sans modération éditoriale).
 - [x] **Export PDF** — conservé sur `/i/[id]` (mêmes classes `print-*` que `/creer-itineraire`, bouton « 🖨 Exporter en PDF »), adapté à la mise en page actuelle de cet écran (pas à la mise en page desktop `1fr 596px` toujours non faite ci-dessus).
 
-**Prochaine étape humaine, hors périmètre de cette passe** : la migration EF
-`AddItinerairesComposes` doit être **appliquée** à la base PostgreSQL de prod
-(`dotnet ef database update`, jamais lancé automatiquement au démarrage — voir
-`.claude/memory/backend_dotnet.md`), **puis** le backend doit être **redéployé sur Railway**
-(`cd backend && railway up --service api`) pour que les 4 endpoints
-`/api/itineraires-composes/*` existent réellement en prod — sans ça, `/i/[id]` en prod 404
-sur toute tentative de lecture/écriture, migration et déploiement n'ayant pas été faits par
-cette passe (interdits stricts de cette session : pas de migration EF, pas de déploiement).
-Vérifié uniquement : `dotnet build` propre (0 erreur/avertissement), `npx tsc --noEmit`
-propre, `npm run build` propre — aucune vérification en environnement réel (dev local avec
-base de données, ni prod).
+**Fait le 2026-09-15, après la passe autonome** : les 3 branches (Lot 3 / 4c / 4d) ont été
+fusionnées sur `main`, la migration EF `AddItinerairesComposes` (ainsi que `AddLot3Champs`)
+a été **appliquée** à la base PostgreSQL de prod (`dotnet ef database update`, voir
+`scripts/sync-lot3-champs.sh` et `.claude/memory/backend_dotnet.md`), et le backend a été
+**redéployé sur Railway** (`cd backend && railway up --service api`). Un bref incident de prod
+est survenu entre les deux — la migration renomme `Activites.LinkText` en `LienType`, et
+l'ancien code encore déployé s'attendait à `LinkText` ; corrigé en redéployant immédiatement le
+backend à jour, `/api/lieux` revérifié `200` avec les bons champs. Le frontend a ensuite été
+redéployé sur Vercel (`cd frontend && npx vercel --prod --yes`). Vérifié en prod : cycle complet
+`POST`/`GET`/`PATCH`/`DELETE` sur `/api/itineraires-composes/{id}`, et `/composer`, `/explorer`
+(chips de tags) et `/i/[id]` fonctionnels sur le domaine de prod.
 
 #### 4e. Accueil (`04-ecran-accueil.md`)
 
