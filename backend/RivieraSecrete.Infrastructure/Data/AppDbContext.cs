@@ -12,6 +12,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<User> Users => Set<User>();
     public DbSet<UserFavorite> UserFavorites => Set<UserFavorite>();
     public DbSet<UserItineraire> UserItineraires => Set<UserItineraire>();
+    public DbSet<ItineraireCompose> ItinerairesComposes => Set<ItineraireCompose>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
