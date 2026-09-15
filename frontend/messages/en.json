@@ -178,7 +178,7 @@
     "modifier": "✏️ Edit",
     "itineraireSauvegarde": "✓ Itinerary saved.",
     "voirMesItineraires": "See my itineraries",
-    "nonInclus": "{count} place{plural} not included for lack of time —",
+    "nonInclus": "Not included for lack of time: {noms} —",
     "aVoirEnBas": "see below",
     "jourN": "Day {n}",
     "glisseUnLieu": "Drag a place here",

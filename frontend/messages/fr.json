@@ -178,7 +178,7 @@
     "modifier": "✏️ Modifier",
     "itineraireSauvegarde": "✓ Itinéraire sauvegardé.",
     "voirMesItineraires": "Voir mes itinéraires",
-    "nonInclus": "{count} lieu{plural} non inclus faute de temps —",
+    "nonInclus": "Faute de temps, non inclus : {noms} —",
     "aVoirEnBas": "à voir en bas de page",
     "jourN": "Jour {n}",
     "glisseUnLieu": "Glisse un lieu ici",

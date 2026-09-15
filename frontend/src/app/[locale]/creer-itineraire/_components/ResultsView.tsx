@@ -159,7 +159,7 @@ export default function ResultsView({
 
       {excluded.length > 0 && (
         <p className="no-print mb-6 text-sm rounded-xl p-3" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
-          {t("nonInclus", { count: excluded.length, plural: excluded.length > 1 ? (locale === "en" ? "s" : "x") : "" })}{" "}
+          {t("nonInclus", { noms: excluded.map((l) => loc(locale, l.nomEn, l.nom)).join(", ") })}{" "}
           <a href="#suggestions-bonus" className="underline" style={{ color: "var(--azure)" }}>
             {t("aVoirEnBas")}
           </a>
