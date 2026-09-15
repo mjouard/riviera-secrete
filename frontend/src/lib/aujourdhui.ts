@@ -16,16 +16,43 @@ import { useSyncExternalStore } from "react";
  *
  * Le générateur d'itinéraire (`/composer`) en a besoin pour préremplir la date de voyage par
  * défaut à "aujourd'hui" sans figer cette valeur dans le cache — voir ComposerParamsBar.tsx.
+ *
+ * **Piège corrigé** (trouvé en vérifiant /composer dans le navigateur — React plantait avec
+ * "The result of getSnapshot should be cached to avoid an infinite loop") : `getSnapshot` doit
+ * renvoyer une référence **stable** entre deux appels tant que rien n'a changé, or
+ * `() => new Date()` en fabriquait une neuve à chaque appel. `useSyncExternalStore` compare les
+ * instantanés par `Object.is` ; deux `Date` neuves ne sont jamais `===`, donc React re-render en
+ * boucle. Ce bug touchait déjà tout usage de `FermeAujourdhui` sans prop `date` (le cas par
+ * défaut), pas seulement /composer, simplement aucune page ne l'avait fait crasher fort avant.
+ * Fix : un instantané mis en cache au niveau module, rafraîchi par un minuteur plutôt qu'à
+ * chaque rendu — couvre toujours le cas "onglet ouvert à cheval sur minuit" (comme avant), à une
+ * minute de latence près, sans violer le contrat de `useSyncExternalStore`.
  */
-const neJamaisResouscrire = () => () => {};
+const abonnes = new Set<() => void>();
+let instantane = new Date();
+let minuteur: ReturnType<typeof setInterval> | null = null;
+
+function sAbonner(cb: () => void) {
+  abonnes.add(cb);
+  if (minuteur === null) {
+    minuteur = setInterval(() => {
+      instantane = new Date();
+      abonnes.forEach((c) => c());
+    }, 60_000);
+  }
+  return () => {
+    abonnes.delete(cb);
+    if (abonnes.size === 0 && minuteur !== null) {
+      clearInterval(minuteur);
+      minuteur = null;
+    }
+  };
+}
+const getSnapshot = () => instantane;
 const maintenantServeur = () => null;
 
 export function useAujourdhui(): Date | null {
-  // `() => new Date()` : une nouvelle instance par appel plutôt qu'un `Date` constant capturé
-  // au chargement du module, sans quoi la valeur ne changerait plus jamais après le premier
-  // rendu client (utile si l'onglet reste ouvert à cheval sur minuit — cas rare mais gratuit
-  // à couvrir ici).
-  return useSyncExternalStore(neJamaisResouscrire, () => new Date(), maintenantServeur);
+  return useSyncExternalStore(sAbonner, getSnapshot, maintenantServeur);
 }
 
 /** "2026-09-19", pour un input `type="date"` — format ISO local, jamais UTC (`toISOString`
