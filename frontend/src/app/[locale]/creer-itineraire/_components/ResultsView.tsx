@@ -9,6 +9,7 @@ import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
 import Photo from "@/components/Photo";
+import { Toast } from "@/components/ui/Toast";
 
 const BuilderMap = dynamic(() => import("@/components/BuilderMap"), { ssr: false });
 
@@ -94,6 +95,9 @@ export default function ResultsView({
 
   return (
     <div>
+      {lienCopie && (
+        <Toast message={t("lienCopie")} onDismiss={() => setLienCopie(false)} />
+      )}
       <div className="print-header">
         <p className="print-header-url">{SITE_DISPLAY_URL}</p>
         <h1>{title}</h1>
@@ -162,7 +166,7 @@ export default function ResultsView({
 
       {excluded.length > 0 && (
         <p className="no-print mb-6 text-sm rounded-xl p-3" style={{ background: "var(--surface)", color: "var(--text-muted)" }}>
-          {t("nonInclus", { count: excluded.length, plural: excluded.length > 1 ? (locale === "en" ? "s" : "x") : "" })}{" "}
+          {t("nonInclus", { noms: excluded.map((l) => loc(locale, l.nomEn, l.nom)).join(", ") })}{" "}
           <a href="#suggestions-bonus" className="underline" style={{ color: "var(--azure)" }}>
             {t("aVoirEnBas")}
           </a>

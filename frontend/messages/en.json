@@ -191,7 +191,7 @@
     "modifier": "✏️ Edit",
     "itineraireSauvegarde": "✓ Itinerary saved.",
     "voirMesItineraires": "See my itineraries",
-    "nonInclus": "{count} place{plural} not included for lack of time —",
+    "nonInclus": "Not included for lack of time: {noms} —",
     "aVoirEnBas": "see below",
     "jourN": "Day {n}",
     "glisseUnLieu": "Drag a place here",
@@ -515,5 +515,14 @@
     "voirPlus": "See {count} more places",
     "voirCarte": "View on map",
     "voirListe": "View list"
+  },
+  "itineraireCompose": {
+    "breadcrumb": "Custom itinerary",
+    "creeLe": "Composed on {date}",
+    "lienPartage": "riviera-secrete.fr/i/{id}",
+    "garder": "Keep in my notebook",
+    "gardeEnCours": "Saving…",
+    "garde": "✓ Kept",
+    "itineraireGarde": "✓ Added to your itineraries."
   }
 }

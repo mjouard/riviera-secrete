@@ -121,6 +121,91 @@ app.MapGet("/api/itineraires/{slug}", async (string slug, AppDbContext db) =>
 
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
 
+// ── Public: Itinéraires composés (lot 4d, ROADMAP.md) ─────────────────────────
+// Un itinéraire composé sans compte, lisible par quiconque a le lien /i/{id} — jamais
+// l'EditToken, qui reste réservé à PATCH/DELETE (voir plus bas, section protégée).
+
+app.MapGet("/api/itineraires-composes/{id}", async (string id, AppDbContext db) =>
+    await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id)
+    is { } itin
+        ? Results.Ok(new
+        {
+            itin.Id,
+            itin.Nom,
+            itin.DureeKey,
+            itin.Jours,
+            itin.CreatedAt,
+            itin.VisibiliteLien,
+        })
+        : Results.NotFound());
+
+app.MapPost("/api/itineraires-composes", async (ItineraireComposeCreateRequest req, ClaimsPrincipal principal, AppDbContext db) =>
+{
+    if (ValiderItineraireCompose(req) is { } erreur) return Results.BadRequest(new { Error = erreur });
+
+    // Le Bearer, s'il est présent et valide, est déjà résolu dans `principal` ici — pas besoin
+    // de RequireAuthorization pour ça : cet endpoint reste utilisable sans compte, mais un
+    // visiteur connecté au moment du POST se voit rattacher l'itinéraire (autorise alors
+    // PATCH/DELETE via son propre JWT, en plus de l'EditToken — voir ItineraireCompose.cs).
+    var userId = GetUserId(principal);
+
+    var id = await GenerateUniqueShortIdAsync(db);
+    var itin = new ItineraireCompose
+    {
+        Id = id,
+        EditToken = GenerateToken(),
+        Nom = req.Nom.Trim(),
+        DureeKey = req.DureeKey,
+        Jours = req.Jours,
+        CreatedAt = DateTime.UtcNow,
+        UserId = userId,
+    };
+    db.ItinerairesComposes.Add(itin);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/api/itineraires-composes/{itin.Id}", new { itin.Id, itin.EditToken });
+}).RequireRateLimiting("auth");
+
+// PATCH/DELETE ne passent pas par .RequireAuthorization() : un visiteur sans compte doit
+// pouvoir modifier/supprimer via son EditToken seul. `principal` reste résolu si un Bearer
+// valide est fourni (auth "optionnelle" par nature des minimal APIs — un Bearer absent ou
+// invalide donne juste un ClaimsPrincipal anonyme, pas un 401), donc les deux voies
+// d'autorisation (JWT propriétaire OU EditToken) sont vérifiées à la main ci-dessous.
+
+app.MapPatch("/api/itineraires-composes/{id}", async (string id, ItineraireComposeCreateRequest req, ClaimsPrincipal principal, HttpRequest request, AppDbContext db) =>
+{
+    if (ValiderItineraireCompose(req) is { } erreur) return Results.BadRequest(new { Error = erreur });
+    var itin = await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id);
+    if (itin is null) return Results.NotFound();
+    if (!EstAutoriseSurItineraireCompose(itin, principal, request)) return Results.Forbid();
+
+    itin.Nom = req.Nom.Trim();
+    itin.DureeKey = req.DureeKey;
+    itin.Jours = req.Jours;
+    await db.SaveChangesAsync();
+
+    return Results.Ok(new
+    {
+        itin.Id,
+        itin.Nom,
+        itin.DureeKey,
+        itin.Jours,
+        itin.CreatedAt,
+        itin.VisibiliteLien,
+    });
+}).RequireRateLimiting("auth");
+
+app.MapDelete("/api/itineraires-composes/{id}", async (string id, ClaimsPrincipal principal, HttpRequest request, AppDbContext db) =>
+{
+    var itin = await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id);
+    if (itin is null) return Results.NotFound();
+    if (!EstAutoriseSurItineraireCompose(itin, principal, request)) return Results.Forbid();
+
+    db.ItinerairesComposes.Remove(itin);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).RequireRateLimiting("auth");
+
 // ── Auth ──────────────────────────────────────────────────────────────────────
 // Chaque erreur porte un `Code` machine en plus de son `Error` en français. Le frontend est
 // bilingue, le backend ne l'est pas : afficher `Error` tel quel mettait des phrases
@@ -485,6 +570,21 @@ static Guid? GetUserId(ClaimsPrincipal principal)
 }
 
 /// <summary>
+/// Autorise le PATCH/DELETE d'un itinéraire composé : soit le JWT (`sub`) correspond au
+/// propriétaire (<see cref="ItineraireCompose.UserId"/>), soit le header <c>X-Edit-Token</c>
+/// correspond à l'<see cref="ItineraireCompose.EditToken"/> généré à la création. Un
+/// itinéraire créé par un visiteur sans compte (UserId null) ne peut donc être modifié que
+/// via l'EditToken — aucun JWT ne peut jamais matcher un UserId null.
+/// </summary>
+static bool EstAutoriseSurItineraireCompose(ItineraireCompose itin, ClaimsPrincipal principal, HttpRequest request)
+{
+    var userId = GetUserId(principal);
+    if (userId is not null && itin.UserId == userId) return true;
+    var editToken = request.Headers["X-Edit-Token"].ToString();
+    return !string.IsNullOrEmpty(editToken) && editToken == itin.EditToken;
+}
+
+/// <summary>
 /// Clé de partitionnement du rate limiter : l'IP réelle du client.
 /// Derrière le proxy Railway, <c>RemoteIpAddress</c> est celle du proxy (identique pour tout
 /// le monde), donc on lit X-Forwarded-For et on prend la **première** entrée.
@@ -548,6 +648,64 @@ static string GenerateToken()
     return Convert.ToHexString(bytes).ToLowerInvariant();
 }
 
+/// <summary>
+/// Valide le payload de création d'un itinéraire composé. Mêmes bornes que
+/// <see cref="ValiderItineraire"/> (même forme de données, Days ↔ Jours) — un visiteur sans
+/// compte peut appeler cet endpoint sans aucune limite de fréquence, donc sans ces bornes
+/// <c>Jours</c> (jsonb, aucune limite de taille en base) permettrait de stocker des
+/// mégaoctets arbitraires par requête.
+/// </summary>
+static string? ValiderItineraireCompose(ItineraireComposeCreateRequest req)
+{
+    var nom = (req.Nom ?? "").Trim();
+    if (string.IsNullOrWhiteSpace(nom) || nom.Length > 200)
+        return "Le nom de l'itinéraire est requis (200 caractères maximum).";
+    if (string.IsNullOrWhiteSpace(req.DureeKey) || req.DureeKey.Length > 20)
+        return "Durée invalide.";
+    if (req.Jours is null)
+        return "Le programme est requis.";
+    if (req.Jours.Length > Limites.MaxJours)
+        return $"Un itinéraire ne peut pas dépasser {Limites.MaxJours} jours.";
+    if (req.Jours.Any(j => j is null))
+        return "Le programme contient un jour invalide.";
+    if (req.Jours.Sum(j => j.Length) > Limites.MaxEtapes)
+        return $"Un itinéraire ne peut pas dépasser {Limites.MaxEtapes} étapes.";
+    if (req.Jours.SelectMany(j => j).Any(s => !EstSlugValide(s)))
+        return "Le programme contient un slug de lieu invalide.";
+    return null;
+}
+
+/// <summary>
+/// Alphabet sans caractères ambigus (pas de 0/O/1/l/I) — l'id apparaît dans une URL partagée
+/// à la main (/i/{id}), autant éviter les confusions à la relecture/retranscription.
+/// 12 caractères sur cet alphabet de 57 donnent ~70 bits d'entropie : largement assez pour
+/// rester non devinable sans être interminable dans l'URL.
+/// </summary>
+const string ShortIdAlphabet = "23456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
+const int ShortIdLength = 12;
+
+static string GenerateShortId()
+{
+    var bytes = System.Security.Cryptography.RandomNumberGenerator.GetBytes(ShortIdLength);
+    var chars = new char[ShortIdLength];
+    for (var i = 0; i < ShortIdLength; i++)
+        chars[i] = ShortIdAlphabet[bytes[i] % ShortIdAlphabet.Length];
+    return new string(chars);
+}
+
+/// <summary>Génère un id court et retire les collisions (négligeables à cette entropie, mais
+/// gratuites à exclure) plutôt que de laisser l'INSERT échouer sur la clé primaire.</summary>
+static async Task<string> GenerateUniqueShortIdAsync(AppDbContext db)
+{
+    for (var attempt = 0; attempt < 5; attempt++)
+    {
+        var id = GenerateShortId();
+        if (!await db.ItinerairesComposes.AnyAsync(i => i.Id == id))
+            return id;
+    }
+    throw new InvalidOperationException("Impossible de générer un id unique pour l'itinéraire composé.");
+}
+
 static string GenerateJwt(User user, IConfiguration config)
 {
     var secret = config["Jwt:Secret"]!;
@@ -585,6 +743,7 @@ record ResendConfirmationRequest(string Email);
 record ForgotPasswordRequest(string Email);
 record ResetPasswordRequest(string Token, string Password);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);
+record ItineraireComposeCreateRequest(string Nom, string DureeKey, string[][] Jours);
 
 // ── Constantes & helpers de type ──────────────────────────────────────────────
 

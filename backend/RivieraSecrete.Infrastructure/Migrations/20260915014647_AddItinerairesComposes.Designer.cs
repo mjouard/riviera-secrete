@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RivieraSecrete.Infrastructure.Data;
@@ -11,9 +12,11 @@ using RivieraSecrete.Infrastructure.Data;
 namespace RivieraSecrete.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260915014647_AddItinerairesComposes")]
+    partial class AddItinerairesComposes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,10 +48,6 @@ namespace RivieraSecrete.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CommuneSlug")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Duree")
                         .IsRequired()
                         .HasColumnType("text");
@@ -70,12 +69,12 @@ namespace RivieraSecrete.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("LienType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("LieuId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("LinkText")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -84,18 +83,12 @@ namespace RivieraSecrete.Infrastructure.Migrations
                     b.Property<string>("NomEn")
                         .HasColumnType("text");
 
-                    b.Property<bool>("Partenaire")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Prix")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PrixEn")
                         .HasColumnType("text");
-
-                    b.Property<bool>("SurPlace")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -306,10 +299,6 @@ namespace RivieraSecrete.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Tags")
-                        .IsRequired()
-                        .HasColumnType("jsonb");
 
                     b.Property<string>("ThumbImage")
                         .IsRequired()
