@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
-import { construirePlanning, encodeJours, formatDuree, formatTime, parseVisitMinutes, type DureeKey } from "@/lib/itineraire-logic";
+import { construirePlanning, encodeJours, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
@@ -19,6 +19,7 @@ const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
 export default function ResultsView({
   currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner, source,
   editMode, onBack, onToggleEdit, onMoveStop, onRemoveStop, onDragStart, onDragOver, onSaveClick,
+  mode, depart, heureDebutMinutes, date,
 }: {
   currentDays: Lieu[][];
   excluded: Lieu[];
@@ -40,6 +41,12 @@ export default function ResultsView({
   onDragStart: (dayIndex: number, stopIndex: number) => void;
   onDragOver: (e: React.DragEvent, targetDay: number, targetStop: number) => void;
   onSaveClick: () => void;
+  /** Contexte du Composer (→ ROADMAP Lot 4c) : absent pour /creer-itineraire, qui garde son
+   * comportement d'avant (voiture, 09:00, pas de point de départ, alertes sur aujourd'hui). */
+  mode?: TransportMode;
+  depart?: { lat: number; lng: number; nom: string } | null;
+  heureDebutMinutes?: number;
+  date?: Date | null;
 }) {
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
@@ -49,7 +56,7 @@ export default function ResultsView({
   // Journées qui débordent du budget du préréglage. Elles n'existent que parce qu'on refuse
   // désormais d'écarter une étape venant d'un itinéraire éditorial : le dire franchement vaut
   // mieux que de laisser croire que tout rentre dans la journée.
-  const journeesDenses = construirePlanning(currentDays, dureeKey).journees
+  const journeesDenses = construirePlanning(currentDays, dureeKey, { mode, depart, heureDebutMinutes }).journees
     .map((j, i) => ({ ...j, numero: i + 1 }))
     .filter((j) => j.finTardive);
 
@@ -235,10 +242,10 @@ export default function ResultsView({
       )}
 
       {/* Programme */}
-      <ProgrammeSection days={currentDays} dureeKey={dureeKey} />
+      <ProgrammeSection days={currentDays} dureeKey={dureeKey} mode={mode} depart={depart} heureDebutMinutes={heureDebutMinutes} />
 
       {/* Booking */}
-      <BookingSection days={currentDays} />
+      <BookingSection days={currentDays} date={date} />
 
       {/* Bonus : lieux écartés faute de temps (ou suggestions à proximité pour un itinéraire
           déjà sauvegardé), discret pour ne pas concurrencer l'itinéraire lui-même */}

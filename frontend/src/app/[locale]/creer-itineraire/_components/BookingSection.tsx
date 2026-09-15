@@ -12,7 +12,15 @@ import Photo from "@/components/Photo";
 /** Nombre de cartes visibles sur desktop avant de replier le reste derrière "Voir plus". */
 const VISIBLE_COUNT = 4;
 
-export default function BookingSection({ days }: { days: Lieu[][] }) {
+export default function BookingSection({
+  days,
+  date,
+}: {
+  days: Lieu[][];
+  /** Date du voyage (Composer, → ROADMAP Lot 4c/PR-04). `undefined`/`null` retombe sur le
+   * jour du visiteur, comportement inchangé pour /creer-itineraire. */
+  date?: Date | null;
+}) {
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
   const tActivite = useTranslations("activite");
@@ -60,7 +68,7 @@ export default function BookingSection({ days }: { days: Lieu[][] }) {
                   </p>
                 )}
                 <div className="mb-3">
-                  <FermeAujourdhui fermeJours={act.fermeJours} />
+                  <FermeAujourdhui fermeJours={act.fermeJours} date={date ?? null} />
                 </div>
                 <a href={act.url} target="_blank" rel={relActivite(act.partenaire)} className="no-print text-xs" style={{ color: "var(--azure)" }}>
                   {linkText}
