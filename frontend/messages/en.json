@@ -469,6 +469,10 @@
   "itineraireCompose": {
     "breadcrumb": "Custom itinerary",
     "creeLe": "Composed on {date}",
-    "lienPartage": "riviera-secrete.fr/i/{id}"
+    "lienPartage": "riviera-secrete.fr/i/{id}",
+    "garder": "Keep in my notebook",
+    "gardeEnCours": "Saving…",
+    "garde": "✓ Kept",
+    "itineraireGarde": "✓ Added to your itineraries."
   }
 }

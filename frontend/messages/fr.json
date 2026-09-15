@@ -469,6 +469,10 @@
   "itineraireCompose": {
     "breadcrumb": "Itinéraire composé",
     "creeLe": "Composé le {date}",
-    "lienPartage": "riviera-secrete.fr/i/{id}"
+    "lienPartage": "riviera-secrete.fr/i/{id}",
+    "garder": "Garder dans mon carnet",
+    "gardeEnCours": "Enregistrement…",
+    "garde": "✓ Gardé",
+    "itineraireGarde": "✓ Ajouté à tes itinéraires."
   }
 }
