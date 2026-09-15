@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { buildMapLinks, loc } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
-import { construirePlanning, formatTransitDesc, type DureeKey } from "@/lib/itineraire-logic";
+import { construirePlanning, formatTransitDesc, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
 
 /**
  * Horaires connus des activités d'un lieu, pour la version imprimée.
@@ -23,7 +23,22 @@ function horairesDuLieu(lieu: Lieu, locale: string): Array<{ nom: string; horair
 
 const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
 
-export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; dureeKey: DureeKey }) {
+export default function ProgrammeSection({
+  days,
+  dureeKey,
+  mode,
+  depart,
+  heureDebutMinutes,
+}: {
+  days: Lieu[][];
+  dureeKey: DureeKey;
+  /** Contexte du Composer (→ ROADMAP Lot 4c) : `undefined` reproduit le calcul par défaut de
+   * `construirePlanning` (voiture, 09:00, pas de trajet de départ) — /creer-itineraire, qui
+   * n'a pas ces paramètres, n'est pas affecté par leur ajout. */
+  mode?: TransportMode;
+  depart?: { lat: number; lng: number } | null;
+  heureDebutMinutes?: number;
+}) {
   const locale = useLocale();
   const t = useTranslations("itineraire");
   const tCreer = useTranslations("creerItineraire");
@@ -31,7 +46,7 @@ export default function ProgrammeSection({ days, dureeKey }: { days: Lieu[][]; d
   const tCommon = useTranslations("common");
   if (days.flat().length === 0) return null;
 
-  const { elements: items } = construirePlanning(days, dureeKey);
+  const { elements: items } = construirePlanning(days, dureeKey, { mode, depart, heureDebutMinutes });
 
   return (
     <section className="mb-10">

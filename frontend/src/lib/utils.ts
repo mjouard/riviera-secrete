@@ -155,3 +155,14 @@ export function prixAffiche(
   if (locale === "en" && prixEn) return formatEuroAnglais(prixEn);
   return loc(locale, prixEn, prix);
 }
+
+/**
+ * "samedi" / "Saturday" — casse déjà correcte pour se glisser dans "Fermé {jour}".
+ *
+ * Extrait de `FermeAujourdhui.tsx` (refonte UI Lot 4c → Composer) pour être partagé avec la
+ * grille de sélection du composer, qui affiche le même badge « Fermé {jour} » calculé sur la
+ * date du voyage plutôt que sur aujourd'hui.
+ */
+export function nomJourSemaine(d: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : "fr-FR", { weekday: "long" }).format(d);
+}

@@ -1,45 +1,44 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import { useTranslations } from "next-intl";
-
-/** Le jour ne change pas pendant une visite : rien à écouter. */
-const neJamaisResouscrire = () => () => {};
-const jourClient = () => new Date().getDay();
-/** Côté serveur (et au premier rendu d'hydratation) : aucun jour connu, donc rien affiché. */
-const jourServeur = () => null;
+import { useTranslations, useLocale } from "next-intl";
+import { useAujourdhui } from "@/lib/aujourdhui";
+import { nomJourSemaine } from "@/lib/utils";
 
 /**
- * Avertissement "fermé aujourd'hui" pour une activité.
+ * Avertissement de fermeture pour une activité — "fermé aujourd'hui" par défaut, ou "fermé
+ * <jour>" quand une date de voyage est fournie (Composer, refonte Lot 4c → PR-04).
  *
- * Client et non serveur, volontairement : la page lieu est rendue en ISR (revalidate 3600),
- * un `new Date().getDay()` côté serveur serait donc figé dans le HTML mis en cache et
- * afficherait le mauvais jour pendant une heure — voire bien plus longtemps sur une page
- * peu visitée. Le jour doit être celui du visiteur, au moment où il regarde.
- *
- * `useSyncExternalStore` plutôt qu'un `useState` + `useEffect` : il expose nativement un
- * instantané serveur distinct (null, donc rien affiché) du instantané client, ce qui évite
- * à la fois la discordance d'hydratation et le `setState` synchrone dans un effet.
+ * Sans la prop `date`, se comporte exactement comme avant (2026-08-XX) : jour du visiteur via
+ * `useAujourdhui` (voir ce fichier — même raison qu'ici, un `new Date()` lu pendant le rendu
+ * resterait figé dans le HTML ISR pendant jusqu'à une heure). Avec `date` — un voyage
+ * programmé dans le futur depuis `/composer` — l'alerte porte sur le jour effectivement
+ * prévu, jamais sur `new Date()` : un itinéraire composé pour samedi doit dire si le lieu est
+ * fermé *ce samedi-là*, pas si le bureau qui l'a généré tombe un jour de fermeture.
  */
 export default function FermeAujourdhui({
   fermeJours,
   compact = false,
+  date = null,
 }: {
   fermeJours?: number[] | null;
   /** Variante sans marge haute, pour s'insérer dans une pastille d'étape déjà dense. */
   compact?: boolean;
+  /** Date du voyage (Composer). `null` (repli) = aujourd'hui, calculé côté client. */
+  date?: Date | null;
 }) {
   const t = useTranslations("activite");
-  const jour = useSyncExternalStore(neJamaisResouscrire, jourClient, jourServeur);
+  const locale = useLocale();
+  const maintenant = useAujourdhui();
+  const reference = date ?? maintenant;
 
-  if (jour === null || !fermeJours?.includes(jour)) return null;
+  if (reference === null || !fermeJours?.includes(reference.getDay())) return null;
 
   return (
     <span
       className={`inline-block font-semibold rounded-full ${compact ? "text-[10px] px-1.5 py-0.5 ml-1.5" : "text-[11px] px-2 py-0.5 mt-2"}`}
       style={{ background: "rgba(232,74,74,0.15)", color: "#E8705A" }}
     >
-      {t("fermeAujourdhui")}
+      {date ? t("fermeCeJour", { jour: nomJourSemaine(reference, locale) }) : t("fermeAujourdhui")}
     </span>
   );
 }

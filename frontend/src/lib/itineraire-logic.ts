@@ -127,8 +127,25 @@ function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: num
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
-export function travelMinutes(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
-  return Math.round((haversineKm(a, b) / 35) * 60 + 10);
+/** Refonte UI Lot 4c (Composer) — le bandeau de paramètres propose un mode de transport. */
+export type TransportMode = "voiture" | "transport-commun";
+
+/**
+ * Vitesse moyenne et battement fixe par mode. Les deux restent des ordres de grandeur, pas un
+ * calcul multimodal réel (pas d'horaires SNCF/Lignes d'Azur consultés) — "transport-commun"
+ * suppose train + marche, plus lent et avec plus de battement (correspondance, marche d'accès
+ * à la gare) que la voiture. Étiqueté comme estimation dans l'UI (`ComposerParamsBar`), jamais
+ * présenté comme un horaire garanti.
+ */
+const VITESSE_KMH: Record<TransportMode, number> = { voiture: 35, "transport-commun": 20 };
+const BATTEMENT_MINUTES: Record<TransportMode, number> = { voiture: 10, "transport-commun": 20 };
+
+export function travelMinutes(
+  a: { lat: number; lng: number },
+  b: { lat: number; lng: number },
+  mode: TransportMode = "voiture"
+): number {
+  return Math.round((haversineKm(a, b) / VITESSE_KMH[mode]) * 60 + BATTEMENT_MINUTES[mode]);
 }
 
 /**
@@ -147,10 +164,10 @@ export function travelMinutes(a: { lat: number; lng: number }, b: { lat: number;
 export function generateItineraire(
   candidates: Lieu[],
   dureeKey: DureeKey,
-  options: { garderTous?: boolean } = {}
+  options: { garderTous?: boolean; mode?: TransportMode } = {}
 ): { days: Lieu[][]; excluded: Lieu[] } {
   if (!candidates.length) return { days: [], excluded: [] };
-  const { garderTous = false } = options;
+  const { garderTous = false, mode = "voiture" } = options;
   const meta = DUREE_META[dureeKey];
   const pool = candidates.slice();
   const days: Lieu[][] = [];
@@ -178,7 +195,7 @@ export function generateItineraire(
       let best: Lieu | null = null;
       let bestTravel = Infinity;
       for (const cand of pool) {
-        const travel = travelMinutes(currentPos, cand);
+        const travel = travelMinutes(currentPos, cand, mode);
         if (travel < bestTravel) { bestTravel = travel; best = cand; }
       }
       const cost = bestTravel + parseVisitMinutes(best!);
@@ -212,7 +229,7 @@ export function generateItineraire(
     const avecTolerance = restants.map(
       (r, d) => r + Math.round(meta.dayBudgets[d] * TOLERANCE_JOURNEE)
     );
-    placerLesRestants(pool, days, avecTolerance);
+    placerLesRestants(pool, days, avecTolerance, mode);
   }
 
   return { days, excluded: pool };
@@ -226,7 +243,7 @@ export function generateItineraire(
  * moins que de rallonger la fin de journée. On boucle tant qu'un placement a réussi : caser
  * un lieu peut raccourcir le détour d'un autre.
  */
-function placerLesRestants(pool: Lieu[], days: Lieu[][], restants: number[]): void {
+function placerLesRestants(pool: Lieu[], days: Lieu[][], restants: number[], mode: TransportMode = "voiture"): void {
   let placeAuMoinsUn = true;
   while (pool.length && placeAuMoinsUn) {
     placeAuMoinsUn = false;
@@ -246,8 +263,8 @@ function placerLesRestants(pool: Lieu[], days: Lieu[][], restants: number[]): vo
           const avant = k > 0 ? jour[k - 1] : null;
           const apres = k < jour.length ? jour[k] : null;
           const ajoute =
-            (avant ? travelMinutes(avant, lieu) : 0) + (apres ? travelMinutes(lieu, apres) : 0);
-          const retire = avant && apres ? travelMinutes(avant, apres) : 0;
+            (avant ? travelMinutes(avant, lieu, mode) : 0) + (apres ? travelMinutes(lieu, apres, mode) : 0);
+          const retire = avant && apres ? travelMinutes(avant, apres, mode) : 0;
           const surcout = ajoute - retire + visite;
 
           if (surcout > restants[j]) continue;
@@ -309,19 +326,38 @@ export type Planning = {
  * garantir qu'ils divergeront un jour — et le site a déjà eu le cas, avec une carte de
  * réservation qui affichait des jours d'ouverture contredisant la fiche du même lieu.
  */
-export function construirePlanning(days: Lieu[][], dureeKey: DureeKey): Planning {
+export function construirePlanning(
+  days: Lieu[][],
+  dureeKey: DureeKey,
+  options: {
+    mode?: TransportMode;
+    /** Heure de départ du premier jour, en minutes depuis minuit — vient du champ "Heure"
+     * du bandeau Composer. Les jours suivants (après une "nuit") gardent l'heure de repli
+     * par défaut : on ne sait pas à quelle heure l'hébergement du soir libère le matin. */
+    heureDebutMinutes?: number;
+    /** Point de départ du voyage (ex. la ville choisie dans "Je pars de"). Quand fourni, un
+     * premier trajet est inséré avant la toute première étape — sans lui le programme
+     * commençait directement au premier lieu, comme si le visiteur s'y téléportait. */
+    depart?: { lat: number; lng: number } | null;
+  } = {}
+): Planning {
+  const { mode = "voiture", heureDebutMinutes = DEBUT_JOURNEE_MINUTES, depart = null } = options;
   const meta = DUREE_META[dureeKey];
   const elements: ElementPlanning[] = [];
   const journees: Planning["journees"] = [];
 
-  let timeMinutes = DEBUT_JOURNEE_MINUTES;
+  let timeMinutes = heureDebutMinutes;
   let prevLieu: Lieu | null = null;
 
   days.forEach((day, dayIndex) => {
     let lunchInserted = !meta.lunchBreak;
-    day.forEach((lieu) => {
+    day.forEach((lieu, stopIndex) => {
       if (prevLieu) {
-        const transit = travelMinutes(prevLieu, lieu);
+        const transit = travelMinutes(prevLieu, lieu, mode);
+        elements.push({ type: "transit", minutes: transit });
+        timeMinutes += transit;
+      } else if (dayIndex === 0 && stopIndex === 0 && depart) {
+        const transit = travelMinutes(depart, lieu, mode);
         elements.push({ type: "transit", minutes: transit });
         timeMinutes += transit;
       }
@@ -385,6 +421,63 @@ export function formatDuree(minutes: number): string {
 export function formatTransitDesc(minutes: number, locale: string = "fr"): string {
   const suffix = locale === "en" ? "estimated travel time" : "de trajet estimé";
   return `${formatDuree(minutes)} ${suffix}`;
+}
+
+/**
+ * "HH:MM" → minutes depuis minuit ("08:30" → 510). `null` si le format ne correspond pas
+ * (champ vide, saisie invalide) — l'appelant retombe alors sur `DEBUT_JOURNEE_MINUTES`.
+ */
+export function parseHeureMinutes(heure: string): number | null {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(heure.trim());
+  if (!m) return null;
+  const h = Number(m[1]);
+  const min = Number(m[2]);
+  if (h > 23 || min > 59) return null;
+  return h * 60 + min;
+}
+
+/**
+ * Un lieu est-il fermé un jour donné, d'après les fermetures hebdomadaires connues de ses
+ * activités (`Activite.fermeJours`) ?
+ *
+ * Renvoie `null` — statut inconnu, pas affiché — quand l'information est absente ou
+ * ambiguë (ex. une activité fermée ce jour-là et une autre ouverte) : même retenue que la
+ * puce "Ouvert aujourd'hui" jamais ajoutée à Explorer (ROADMAP Lot 4b, → NF-01) — bâtir une
+ * heuristique sur une fermeture partielle inventerait un statut que le lieu n'a pas. Un lieu
+ * n'ayant qu'une seule activité (le cas le plus courant) donne toujours une réponse nette.
+ */
+export function lieuFermeCeJour(lieu: Lieu, date: Date): boolean | null {
+  const connues = (lieu.activites || [])
+    .map((a) => a.fermeJours)
+    .filter((f): f is number[] => Array.isArray(f) && f.length > 0);
+  if (connues.length === 0) return null;
+  const jour = date.getDay();
+  const fermes = connues.filter((f) => f.includes(jour)).length;
+  if (fermes === connues.length) return true;
+  if (fermes === 0) return false;
+  return null;
+}
+
+/**
+ * Estimation grossière du budget "entrées" d'une sélection, pour le récapitulatif vivant du
+ * Composer (→ ROADMAP Lot 4c). `prix` est du texte libre ("8 €", "8–10 €", "Gratuit") — on
+ * retient le premier nombre venu par activité payante (une par lieu, comme `BookingSection`)
+ * et on additionne. Volontairement approximatif (une fourchette "8–10 €" ne garde que 8, pas
+ * sa moyenne) : le récapitulatif l'annonce comme "à prévoir", jamais comme un total exact.
+ * `null` quand aucune activité payante n'a de prix analysable, pour que l'appelant affiche
+ * "—" plutôt qu'un 0 € trompeur.
+ */
+export function estimerEntreesEuros(days: Lieu[][]): number | null {
+  const bookings = buildBookingActivites(days);
+  let total = 0;
+  let trouve = false;
+  for (const { activite } of bookings) {
+    const m = /(\d+(?:[.,]\d+)?)/.exec(activite.prix);
+    if (!m) continue;
+    total += parseFloat(m[1].replace(",", "."));
+    trouve = true;
+  }
+  return trouve ? Math.round(total) : null;
 }
 
 export function buildBookingActivites(days: Lieu[][]): Array<{ lieu: Lieu; activite: Activite }> {
