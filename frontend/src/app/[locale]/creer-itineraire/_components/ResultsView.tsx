@@ -50,7 +50,6 @@ export default function ResultsView({
 }) {
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
-  const tComposer = useTranslations("composer");
   const tDuree = useTranslations("dureeLabels");
   const [lienCopie, setLienCopie] = useState(false);
   const nbLieux = currentDays.flat().length;
@@ -243,10 +242,10 @@ export default function ResultsView({
       )}
 
       {/* Programme */}
-      <ProgrammeSection days={currentDays} dureeKey={dureeKey} />
+      <ProgrammeSection days={currentDays} dureeKey={dureeKey} mode={mode} depart={depart} heureDebutMinutes={heureDebutMinutes} />
 
       {/* Booking */}
-      <BookingSection days={currentDays} />
+      <BookingSection days={currentDays} date={date} />
 
       {/* Bonus : lieux écartés faute de temps (ou suggestions à proximité pour un itinéraire
           déjà sauvegardé), discret pour ne pas concurrencer l'itinéraire lui-même */}
