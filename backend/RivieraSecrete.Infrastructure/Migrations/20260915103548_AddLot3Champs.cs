@@ -15,12 +15,17 @@ namespace RivieraSecrete.Infrastructure.Migrations
                 table: "Activites",
                 newName: "LienType");
 
+            // defaultValue: "" (chaîne vide) se traduit par le provider Npgsql en
+            // DEFAULT '{}' pour une colonne jsonb — un objet JSON vide, pas un tableau vide,
+            // ce qui casse la désérialisation en List<string> (trouvé en l'appliquant en
+            // prod : la première lecture d'un Lieu pas encore rafraîchi levait une
+            // JsonException). defaultValueSql explicite pour obtenir un vrai '[]'.
             migrationBuilder.AddColumn<string>(
                 name: "Tags",
                 table: "Lieux",
                 type: "jsonb",
                 nullable: false,
-                defaultValue: "");
+                defaultValueSql: "'[]'");
 
             migrationBuilder.AddColumn<string>(
                 name: "CommuneSlug",

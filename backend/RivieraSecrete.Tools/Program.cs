@@ -20,6 +20,20 @@ var options = new DbContextOptionsBuilder<AppDbContext>()
 
 await using var db = new AppDbContext(options);
 
+// `fix-lot3-tags-default` : correctif ponctuel pour la migration AddLot3Champs, qui a ajouté
+// Lieux.Tags (jsonb, List<string>) avec `defaultValue: ""` — traduit par le provider Npgsql
+// en `DEFAULT '{}'` (objet JSON vide) plutôt que `'[]'` (tableau vide), ce qui fait planter
+// toute lecture d'un Lieu pas encore rafraîchi (JsonException à la désérialisation en
+// List<string>). Corrige les lignes existantes ; le fichier de migration a été corrigé en
+// parallèle pour qu'une base neuve n'ait pas le problème. À supprimer une fois que tous les
+// lieux ont été rafraîchis depuis le JSON (donc que plus aucune ligne ne porte encore '{}').
+if (args is ["fix-lot3-tags-default"])
+{
+    var n = await db.Database.ExecuteSqlRawAsync("UPDATE \"Lieux\" SET \"Tags\" = '[]' WHERE \"Tags\"::text = '{}'");
+    Console.WriteLine($"{n} lieu(x) corrigé(s) ('{{}}' -> '[]' sur Tags).");
+    return 0;
+}
+
 // `remove-activite <lieuSlug> <activiteId>` : correction ciblée pour une activité
 // mal rattachée (ex. deux jardins de Menton trouvés sous cimetiere-vieux-chateau-menton
 // alors qu'ils sont à plusieurs km, voir data/lieux.json et le commit qui les a retirés).

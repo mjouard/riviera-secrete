@@ -40,10 +40,14 @@ export Jwt__Secret="design-time-only-unused-for-real-auth-32-characters-min"
 (cd backend/RivieraSecrete.Infrastructure && dotnet ef database update --startup-project ../RivieraSecrete.Api)
 echo
 
-# ── 2. Backfill des lignes déjà en base ───────────────────────────────────────
+# ── 2. Correctif ponctuel : DEFAULT '{}' -> '[]' sur Tags (voir Program.cs) ──────
 export SYNC_CONNECTION_STRING="$CONN"
 cd backend
+echo "→ Correction du défaut jsonb sur Lieux.Tags"
+dotnet run --project RivieraSecrete.Tools -- fix-lot3-tags-default
+echo
 
+# ── 3. Backfill des lignes déjà en base ───────────────────────────────────────
 SLUGS=()
 while IFS= read -r ligne; do SLUGS+=("$ligne"); done < <(python3 -c "
 import json
