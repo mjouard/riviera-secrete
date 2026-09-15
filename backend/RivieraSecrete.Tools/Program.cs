@@ -29,7 +29,10 @@ await using var db = new AppDbContext(options);
 // lieux ont été rafraîchis depuis le JSON (donc que plus aucune ligne ne porte encore '{}').
 if (args is ["fix-lot3-tags-default"])
 {
-    var n = await db.Database.ExecuteSqlRawAsync("UPDATE \"Lieux\" SET \"Tags\" = '[]' WHERE \"Tags\"::text = '{}'");
+    // ExecuteSqlRawAsync traite la chaîne comme un format composite (à la string.Format)
+    // même sans paramètre — les accolades littérales de '{}' doivent être doublées, sinon
+    // il tente d'y lire un index de paramètre et lève un FormatException.
+    var n = await db.Database.ExecuteSqlRawAsync("UPDATE \"Lieux\" SET \"Tags\" = '[]' WHERE \"Tags\"::text = '{{}}'");
     Console.WriteLine($"{n} lieu(x) corrigé(s) ('{{}}' -> '[]' sur Tags).");
     return 0;
 }
