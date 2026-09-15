@@ -44,7 +44,8 @@ echo
 export SYNC_CONNECTION_STRING="$CONN"
 cd backend
 
-mapfile -t SLUGS < <(python3 -c "
+SLUGS=()
+while IFS= read -r ligne; do SLUGS+=("$ligne"); done < <(python3 -c "
 import json
 for l in json.load(open('../data/lieux.json')): print(l['slug'])
 ")
@@ -54,7 +55,8 @@ for slug in "${SLUGS[@]}"; do
   dotnet run --project RivieraSecrete.Tools -- refresh-lieu-fields "$slug"
 done
 
-mapfile -t ACTIVITES < <(python3 -c "
+ACTIVITES=()
+while IFS= read -r ligne; do ACTIVITES+=("$ligne"); done < <(python3 -c "
 import json
 for l in json.load(open('../data/lieux.json')):
     for a in l.get('activites', []):
