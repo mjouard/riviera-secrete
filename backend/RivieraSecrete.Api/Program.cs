@@ -166,6 +166,46 @@ app.MapPost("/api/itineraires-composes", async (ItineraireComposeCreateRequest r
     return Results.Created($"/api/itineraires-composes/{itin.Id}", new { itin.Id, itin.EditToken });
 }).RequireRateLimiting("auth");
 
+// PATCH/DELETE ne passent pas par .RequireAuthorization() : un visiteur sans compte doit
+// pouvoir modifier/supprimer via son EditToken seul. `principal` reste résolu si un Bearer
+// valide est fourni (auth "optionnelle" par nature des minimal APIs — un Bearer absent ou
+// invalide donne juste un ClaimsPrincipal anonyme, pas un 401), donc les deux voies
+// d'autorisation (JWT propriétaire OU EditToken) sont vérifiées à la main ci-dessous.
+
+app.MapPatch("/api/itineraires-composes/{id}", async (string id, ItineraireComposeCreateRequest req, ClaimsPrincipal principal, HttpRequest request, AppDbContext db) =>
+{
+    if (ValiderItineraireCompose(req) is { } erreur) return Results.BadRequest(new { Error = erreur });
+    var itin = await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id);
+    if (itin is null) return Results.NotFound();
+    if (!EstAutoriseSurItineraireCompose(itin, principal, request)) return Results.Forbid();
+
+    itin.Nom = req.Nom.Trim();
+    itin.DureeKey = req.DureeKey;
+    itin.Jours = req.Jours;
+    await db.SaveChangesAsync();
+
+    return Results.Ok(new
+    {
+        itin.Id,
+        itin.Nom,
+        itin.DureeKey,
+        itin.Jours,
+        itin.CreatedAt,
+        itin.VisibiliteLien,
+    });
+}).RequireRateLimiting("auth");
+
+app.MapDelete("/api/itineraires-composes/{id}", async (string id, ClaimsPrincipal principal, HttpRequest request, AppDbContext db) =>
+{
+    var itin = await db.ItinerairesComposes.FirstOrDefaultAsync(i => i.Id == id);
+    if (itin is null) return Results.NotFound();
+    if (!EstAutoriseSurItineraireCompose(itin, principal, request)) return Results.Forbid();
+
+    db.ItinerairesComposes.Remove(itin);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).RequireRateLimiting("auth");
+
 // ── Auth ──────────────────────────────────────────────────────────────────────
 // Chaque erreur porte un `Code` machine en plus de son `Error` en français. Le frontend est
 // bilingue, le backend ne l'est pas : afficher `Error` tel quel mettait des phrases
@@ -530,6 +570,21 @@ static Guid? GetUserId(ClaimsPrincipal principal)
 }
 
 /// <summary>
+/// Autorise le PATCH/DELETE d'un itinéraire composé : soit le JWT (`sub`) correspond au
+/// propriétaire (<see cref="ItineraireCompose.UserId"/>), soit le header <c>X-Edit-Token</c>
+/// correspond à l'<see cref="ItineraireCompose.EditToken"/> généré à la création. Un
+/// itinéraire créé par un visiteur sans compte (UserId null) ne peut donc être modifié que
+/// via l'EditToken — aucun JWT ne peut jamais matcher un UserId null.
+/// </summary>
+static bool EstAutoriseSurItineraireCompose(ItineraireCompose itin, ClaimsPrincipal principal, HttpRequest request)
+{
+    var userId = GetUserId(principal);
+    if (userId is not null && itin.UserId == userId) return true;
+    var editToken = request.Headers["X-Edit-Token"].ToString();
+    return !string.IsNullOrEmpty(editToken) && editToken == itin.EditToken;
+}
+
+/// <summary>
 /// Clé de partitionnement du rate limiter : l'IP réelle du client.
 /// Derrière le proxy Railway, <c>RemoteIpAddress</c> est celle du proxy (identique pour tout
 /// le monde), donc on lit X-Forwarded-For et on prend la **première** entrée.
@@ -689,7 +744,6 @@ record ForgotPasswordRequest(string Email);
 record ResetPasswordRequest(string Token, string Password);
 record ItineraireUpsertRequest(string Nom, string DureeKey, string[][] Days);
 record ItineraireComposeCreateRequest(string Nom, string DureeKey, string[][] Jours);
-record ItineraireComposeUpdateRequest(string Nom, string DureeKey, string[][] Jours);
 
 // ── Constantes & helpers de type ──────────────────────────────────────────────
 
