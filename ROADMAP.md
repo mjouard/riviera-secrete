@@ -486,19 +486,50 @@ Le moteur algorithmique est bon. L'entrée et la sortie le desservent.
 - [ ] **Mobile** — barre fixe en bas (ligne 1 : récap chiffres, ligne 2 : bouton primaire pleine largeur 52).
 - [ ] **Micro-copie** — « On place tes lieux dans l'ordre, avec les horaires et les temps de trajet. » remplace « l'algorithme compose le meilleur itinéraire possible » ; « Composer l'itinéraire » remplace « Générer » (→ MC-02).
 
-#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique)
+#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **partiellement fait le 2026-09-15**
 
-- [ ] **Lecture publique** (`09` § 2.1) — `GET /api/itineraires/:id` public sans auth (200/404) ; `POST /api/itineraires` sans compte → `{ id, editToken }`, `id` nanoid ≥ 8 non devinable, champ `visibilite: 'lien'` par défaut. `PATCH`/`DELETE` par session OU `editToken`. Corrige EC-01 (le lien partagé retourne 405/404 sans auth, puis retombe silencieusement sur le formulaire vide).
-- [ ] **Persistance dans l'URL** — état complet dans `/composer?…` pour le cas anonyme : F5 reconstruit l'itinéraire, Précédent revient à la sélection. Corrige PR-01.
-- [ ] **Partage avec retour visible** — après copie : texte « Lien copié », bordure et texte `--rs-pin`, coche SVG, 4 s. `navigator.share` en mobile (repli : copie). Corrige EC-01 (aucun retour visuel aujourd'hui).
-- [ ] **Bandeau d'arbitrage nommé** (`08` § 2.3) — quand un lieu est écarté : nommer le lieu, donner le delta en minutes, proposer « Passer à 2 jours » / « Remplacer une étape » / « Garder pour plus tard » (→ favori). Bordure aube. Corrige PR-06 (« 1 lieu non inclus » sans nom ni action).
-- [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`.
-- [ ] **URL de partage dans l'en-tête** — mono 12 `--rs-brume` : `riviera-secrete.fr/i/3f7a2c`. Pas décoratif : signale que l'itinéraire existe, se partage, survit au F5.
-- [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04).
-- [ ] **Modale de suppression** — `<dialog>` natif remplace `window.confirm()` (→ EC-03), bouton destructif à droite, « Annuler » par défaut.
-- [ ] **`/i/[id]` introuvable** — vraie page 404 with titre « Cet itinéraire n'existe plus », explication, bouton primaire « En composer un ».
-- [ ] **Open Graph** sur `/i/[id]` — `title` = nom de l'itinéraire, `image` = photo de la première étape.
-- [ ] **Export PDF** — conserver, adapter à la nouvelle mise en page.
+- [x] **Lecture publique** (`09` § 2.1) — **fait le 2026-09-15** : entité `ItineraireCompose` +
+      migration EF (`AddItinerairesComposes`, pas encore appliquée à la base de prod — voir
+      note de bas de section) ; `GET /api/itineraires-composes/{id}` public sans auth
+      (200/404) ; `POST /api/itineraires-composes` sans compte → `{ id, editToken }`, `id`
+      court généré côté C# (`GenerateUniqueShortIdAsync`), `EditToken` séparé jamais renvoyé
+      par le GET ; `VisibiliteLien` = `"lien"` par défaut. `PATCH`/`DELETE` autorisés par
+      JWT propriétaire (si le créateur était connecté au POST) OU `EditToken`
+      (`EstAutoriseSurItineraireCompose`), sans passer par `.RequireAuthorization()` puisqu'un
+      visiteur sans compte doit pouvoir modifier via son seul token. Corrige EC-01 côté API.
+- [ ] **Persistance dans l'URL** — état complet dans `/composer?…` pour le cas anonyme : F5 reconstruit l'itinéraire, Précédent revient à la sélection. Corrige PR-01. **Non fait** — hors périmètre de cette passe (`/creer-itineraire`, pas `/composer`, garde son mécanisme `?jours=` existant).
+- [x] **Partage avec retour visible** — **fait le 2026-09-15**, mais simplifié par rapport au
+      spec : texte « Lien copié » (`Toast`, `role="status"`, `aria-live="polite"`, 4 s) sur
+      `/creer-itineraire` et `/i/[id]` ; `navigator.share` en mobile avec repli sur la copie.
+      **Bordure/texte `--rs-pin` et coche SVG non repris** — le `Toast` générique du Lot 1
+      (fond `--nuit-haute`) a été réutilisé tel quel plutôt que d'en dériver une variante
+      dédiée. Corrige EC-01 côté retour visuel.
+- [x] **Bandeau d'arbitrage nommé** (`08` § 2.3) — **fait le 2026-09-15**, version simplifiée :
+      le bandeau nomme désormais le(s) lieu(x) écarté(s) (`ResultsView.tsx`, clé `nonInclus`
+      avec `{noms}`) au lieu du compte générique « N lieux non inclus ». **Le delta en minutes
+      et les 3 actions (Passer à 2 jours / Remplacer une étape / Garder pour plus tard) ne
+      sont pas faits** — le lien existant vers `#suggestions-bonus` (qui affiche déjà ces
+      lieux avec accès à leur propre page) fait office d'action, jugé suffisant pour cette
+      passe. Corrige PR-06 pour la partie « sans nom » ; la partie « sans action riche » reste ouverte.
+- [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`. **Non fait** — `/i/[id]` reprend la mise en page simple de `ResultsView` (grille de colonnes par jour, carte en pleine largeur sous le programme), pas la grille collante décrite ici.
+- [x] **URL de partage dans l'en-tête** — **fait le 2026-09-15** : `riviera-secrete.fr/i/{id}` en mono sous le titre sur `/i/[id]` (clé `itineraireCompose.lienPartage`).
+- [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04). **Non fait** — `/i/[id]` n'a pas de mode Modifier en place : le bouton « Modifier » renvoie vers `/creer-itineraire?jours=…` (son propre éditeur, déjà avec ses propres flèches/× existants, non retouchés ici) plutôt que de PATCH l'itinéraire composé sur place — choix délibéré : cet écran n'a nulle part où récupérer l'`EditToken` du créateur pour l'instant.
+- [ ] **Modale de suppression** — `<dialog>` natif remplace `window.confirm()` (→ EC-03), bouton destructif à droite, « Annuler » par défaut. **Non fait** — `/i/[id]` n'expose pas d'action Supprimer du tout dans cette passe (seulement Modifier/Exporter/Partager/Garder).
+- [ ] **`/i/[id]` introuvable** — vraie page 404 with titre « Cet itinéraire n'existe plus », explication, bouton primaire « En composer un ». **Non fait** — un id inconnu appelle `notFound()` et retombe sur le 404 générique du site, pas cet écran dédié.
+- [x] **Open Graph** sur `/i/[id]` — **fait le 2026-09-15** : `title` = nom de l'itinéraire, `image` = `heroImage` de la première étape résolue via `api.lieux.list()`. `robots: { index: false, follow: false }` ajouté en plus (contenu généré par un visiteur, sans modération éditoriale).
+- [x] **Export PDF** — conservé sur `/i/[id]` (mêmes classes `print-*` que `/creer-itineraire`, bouton « 🖨 Exporter en PDF »), adapté à la mise en page actuelle de cet écran (pas à la mise en page desktop `1fr 596px` toujours non faite ci-dessus).
+
+**Prochaine étape humaine, hors périmètre de cette passe** : la migration EF
+`AddItinerairesComposes` doit être **appliquée** à la base PostgreSQL de prod
+(`dotnet ef database update`, jamais lancé automatiquement au démarrage — voir
+`.claude/memory/backend_dotnet.md`), **puis** le backend doit être **redéployé sur Railway**
+(`cd backend && railway up --service api`) pour que les 4 endpoints
+`/api/itineraires-composes/*` existent réellement en prod — sans ça, `/i/[id]` en prod 404
+sur toute tentative de lecture/écriture, migration et déploiement n'ayant pas été faits par
+cette passe (interdits stricts de cette session : pas de migration EF, pas de déploiement).
+Vérifié uniquement : `dotnet build` propre (0 erreur/avertissement), `npx tsc --noEmit`
+propre, `npm run build` propre — aucune vérification en environnement réel (dev local avec
+base de données, ni prod).
 
 #### 4e. Accueil (`04-ecran-accueil.md`)
 
