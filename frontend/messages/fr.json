@@ -493,7 +493,10 @@
     "garder": "Garder dans mon carnet",
     "gardeEnCours": "Enregistrement…",
     "garde": "✓ Gardé",
-    "itineraireGarde": "✓ Ajouté à tes itinéraires."
+    "itineraireGarde": "✓ Ajouté à tes itinéraires.",
+    "introuvableTitre": "Cet itinéraire n'existe plus",
+    "introuvableExplication": "Le lien est peut-être périmé, ou son créateur l'a supprimé. Tu peux en composer un nouveau en quelques clics.",
+    "enComposerUn": "En composer un"
   },
   "itineraires": {
     "titre": "Itinéraires",

@@ -493,7 +493,10 @@
     "garder": "Keep in my notebook",
     "gardeEnCours": "Saving…",
     "garde": "✓ Kept",
-    "itineraireGarde": "✓ Added to your itineraries."
+    "itineraireGarde": "✓ Added to your itineraries.",
+    "introuvableTitre": "This itinerary no longer exists",
+    "introuvableExplication": "The link may be outdated, or its creator deleted it. You can compose a new one in a few clicks.",
+    "enComposerUn": "Compose one"
   },
   "itineraires": {
     "titre": "Itineraries",

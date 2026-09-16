@@ -677,7 +677,13 @@ nécessaire, cette passe n'a touché que ce fichier.
 - [x] **URL de partage dans l'en-tête** — **fait le 2026-09-15** : `riviera-secrete.fr/i/{id}` en mono sous le titre sur `/i/[id]` (clé `itineraireCompose.lienPartage`).
 - [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04). **Non fait** — `/i/[id]` n'a pas de mode Modifier en place : le bouton « Modifier » renvoie vers `/creer-itineraire?jours=…` (son propre éditeur, déjà avec ses propres flèches/× existants, non retouchés ici) plutôt que de PATCH l'itinéraire composé sur place — choix délibéré : cet écran n'a nulle part où récupérer l'`EditToken` du créateur pour l'instant.
 - [ ] **Modale de suppression** — `<dialog>` natif remplace `window.confirm()` (→ EC-03), bouton destructif à droite, « Annuler » par défaut. **Non fait** — `/i/[id]` n'expose pas d'action Supprimer du tout dans cette passe (seulement Modifier/Exporter/Partager/Garder).
-- [ ] **`/i/[id]` introuvable** — vraie page 404 with titre « Cet itinéraire n'existe plus », explication, bouton primaire « En composer un ». **Non fait** — un id inconnu appelle `notFound()` et retombe sur le 404 générique du site, pas cet écran dédié.
+- [x] **`/i/[id]` introuvable** — **fait le 2026-09-16**, deuxième brique de la reprise. Nouveau
+      `i/[id]/not-found.tsx` — Next route ici tout `notFound()` levé par `page.tsx` (le plus
+      proche `not-found.tsx` dans l'arbre) avant que ça remonte à la 404 générique du site.
+      Titre « Cet itinéraire n'existe plus », explication, bouton primaire « En composer un »
+      → `/composer`. Même contrainte que `[locale]/not-found.tsx` (Lot 2) : Next ne passe
+      aucune prop à un `not-found.tsx` dans cette version, donc pas d'id affiché — sans objet,
+      le spec ne le demande pas non plus. Vérifié en direct (FR + EN, `curl` → 404 HTTP).
 - [x] **Open Graph** sur `/i/[id]` — **fait le 2026-09-15** : `title` = nom de l'itinéraire, `image` = `heroImage` de la première étape résolue via `api.lieux.list()`. `robots: { index: false, follow: false }` ajouté en plus (contenu généré par un visiteur, sans modération éditoriale).
 - [x] **Export PDF** — conservé sur `/i/[id]` (mêmes classes `print-*` que `/creer-itineraire`, bouton « 🖨 Exporter en PDF »), adapté à la mise en page actuelle de cet écran (pas à la mise en page desktop `1fr 596px` toujours non faite ci-dessus).
 
