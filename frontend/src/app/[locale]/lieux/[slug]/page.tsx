@@ -7,6 +7,7 @@ import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, distanceKm, loc, alternatesPage, prixAffiche } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import { regionToMerShade } from "@/lib/mer-colors";
+import { IconClock } from "@/components/ui/Icons";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -339,18 +340,25 @@ export default async function LieuPage({
         </div>
       </div>
 
-      {/* Tips */}
+      {/* Le bon moment — refonte UI Lot 4a (06 § 2.3) : reprend les anciens "Conseils
+          pratiques" (cartes en grille) en un seul encadré tabulaire scannable, une ligne par
+          conseil plutôt qu'une carte par conseil — plus rapide à parcourir d'un coup d'œil. */}
       {lieu.tips.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("conseilsPratiques")}</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <h2 className="text-card-title mb-4 flex items-center gap-2" style={{ color: "var(--calcaire)" }}>
+            <span style={{ color: "var(--aube)" }}>
+              <IconClock className="w-5 h-5" />
+            </span>
+            {t("leBonMoment")}
+          </h2>
+          <div className="rounded-lg overflow-hidden" style={{ background: "var(--nuit-haute)", border: "1px solid var(--line)" }}>
             {lieu.tips.map((tip, i) => (
               <div
                 key={i}
-                className="rounded-lg p-4"
-                style={{ background: "var(--nuit-haute)" }}
+                className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-1 sm:gap-4 px-4 py-3"
+                style={i > 0 ? { borderTop: "1px solid var(--line)" } : undefined}
               >
-                <p className="text-data mb-1" style={{ color: "var(--aube)" }}>
+                <p className="text-data" style={{ color: "var(--aube)" }}>
                   {loc(locale, tip.labelEn, tip.label)}
                 </p>
                 <p className="text-meta" style={{ color: "var(--brume)" }}>

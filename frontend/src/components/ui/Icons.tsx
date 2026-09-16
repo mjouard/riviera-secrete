@@ -84,6 +84,15 @@ export function IconClose({ className }: IconProps) {
   );
 }
 
+export function IconClock({ className }: IconProps) {
+  return (
+    <svg {...BASE_PROPS} className={className} aria-hidden="true">
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="M10 5.5V10l3.2 2" />
+    </svg>
+  );
+}
+
 export function IconChevronDown({ className }: IconProps) {
   return (
     <svg {...BASE_PROPS} className={className} aria-hidden="true">

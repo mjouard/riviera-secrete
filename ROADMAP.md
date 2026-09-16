@@ -449,7 +449,17 @@ moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" 
 - [~] **« Ajouter à un itinéraire »** — **le fond est corrigé au Lot 2** : l'ajout est cumulatif
       (relais `sessionStorage` + `?lieux=`), le lieu précédent n'est plus écrasé. **Reste la
       forme** : ça navigue encore vers le créateur au lieu d'ajouter sur place avec un toast.
-- [ ] **Encadré « Le bon moment »** (`06` § 2.3) — reprend les « Conseils pratiques » existants en forme tabulaire scannable (Y aller / Saison / Stationner). Surface `--rs-nuit-haute`, bordure `--rs-trait`, icône horloge aube.
+- [x] **Encadré « Le bon moment »** (`06` § 2.3) — **fait le 2026-09-16**, troisième brique.
+      Section renommée ("Conseils pratiques" → "Le bon moment", clé `lieu.conseilsPratiques`
+      → `lieu.leBonMoment", FR + EN). Les anciennes cartes en grille (une par conseil, chacune
+      sa propre boîte `--nuit-haute`) deviennent un seul encadré tabulaire — une ligne par
+      conseil (label + texte, séparées par un simple filet `--line`), plus scannable qu'une
+      grille de cartes. Icône horloge ajoutée (`IconClock`, nouvelle dans `ui/Icons.tsx`,
+      même style stroke-only que les autres), teintée `--aube`. Les libellés "Y aller /
+      Saison / Stationner" du spec sont un exemple, pas un vocabulaire figé — chaque lieu
+      garde ses propres `tips[].label` existants (ex. Èze : "Accès" / "Meilleur moment" /
+      "Jardin exotique"), seule la forme change. Vérifié en direct (FR + EN) : fond/bordure/
+      couleur d'icône calculés conformes aux tokens.
 - [x] **Composition desktop** (`06` § 3) — **fait le 2026-09-16**, deuxième brique. Grille
       `grid-cols-1 lg:grid-cols-[1.63fr_1fr]` ≥ 1024 px (ratio mesuré en direct : 580px/356px
       = 62,0 %/38,0 %, exact). Gauche : galerie, identité (commune/région, titre, badges,
