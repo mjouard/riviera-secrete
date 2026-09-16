@@ -496,7 +496,11 @@
     "itineraireGarde": "✓ Ajouté à tes itinéraires.",
     "introuvableTitre": "Cet itinéraire n'existe plus",
     "introuvableExplication": "Le lien est peut-être périmé, ou son créateur l'a supprimé. Tu peux en composer un nouveau en quelques clics.",
-    "enComposerUn": "En composer un"
+    "enComposerUn": "En composer un",
+    "supprimer": "Supprimer",
+    "supprimerTitre": "Supprimer cet itinéraire ?",
+    "supprimerExplication": "Le lien cessera de fonctionner pour tout le monde. Cette action ne peut pas être annulée.",
+    "suppressionEnCours": "Suppression…"
   },
   "itineraires": {
     "titre": "Itinéraires",

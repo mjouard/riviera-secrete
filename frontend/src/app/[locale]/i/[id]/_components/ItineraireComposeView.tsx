@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc, redirectToConnexion } from "@/lib/utils";
-import { authFetch } from "@/lib/api";
+import { api, authFetch } from "@/lib/api";
+import { oublierEditToken, useEditToken } from "@/lib/itineraire-compose-tokens";
 import { formatDuree, parseVisitMinutes, encodeJours, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 import ProgrammeSection from "@/app/[locale]/creer-itineraire/_components/ProgrammeSection";
 import BookingSection from "@/app/[locale]/creer-itineraire/_components/BookingSection";
 import MapItinWrapper from "@/components/MapItinWrapper";
@@ -38,6 +41,7 @@ export default function ItineraireComposeView({
   createdAt: string;
 }) {
   const locale = useLocale();
+  const router = useRouter();
   const t = useTranslations("creerItineraire");
   const tItin = useTranslations("itineraireCompose");
   const tDuree = useTranslations("dureeLabels");
@@ -45,6 +49,28 @@ export default function ItineraireComposeView({
   const [lienCopie, setLienCopie] = useState(false);
   const [garde, setGarde] = useState(false);
   const [gardeEnCours, setGardeEnCours] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [suppressionEnCours, setSuppressionEnCours] = useState(false);
+
+  // L'EditToken n'est jamais renvoyé par le GET public (voir lib/types.ts) — seul ce
+  // navigateur, s'il a créé ce lien, l'a en localStorage (Lot 4d, "brancher la création").
+  // C'est ce qui décide d'afficher "Supprimer" ou non.
+  const editToken = useEditToken(id);
+
+  async function confirmerSuppression() {
+    if (!editToken) return;
+    setSuppressionEnCours(true);
+    try {
+      await api.itinerairesComposes.remove(id, editToken);
+      oublierEditToken(id);
+      router.push("/composer");
+    } catch {
+      // Le backend est peut-être injoignable — on referme quand même la modale, le bouton
+      // "Supprimer" reste disponible pour retenter plutôt que de rester coincé ouvert.
+      setSuppressionEnCours(false);
+      setShowDeleteModal(false);
+    }
+  }
 
   const nbLieux = days.flat().length;
   const meta = `${days.length} ${days.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
@@ -150,8 +176,46 @@ export default function ItineraireComposeView({
           >
             {garde ? tItin("garde") : gardeEnCours ? tItin("gardeEnCours") : tItin("garder")}
           </button>
+          {/* "Supprimer" — visible seulement pour le navigateur qui a créé ce lien (EditToken
+              en localStorage, voir plus haut). Un autre visiteur avec le même lien /i/{id}
+              n'a aucun moyen de le supprimer, par conception. */}
+          {editToken && (
+            <button
+              onClick={() => setShowDeleteModal(true)}
+              className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+              style={{ borderColor: "#B84040", color: "#E07A7A" }}
+            >
+              {tItin("supprimer")}
+            </button>
+          )}
         </div>
       </div>
+
+      {/* Modale de suppression — <dialog> natif (Modal.tsx, Lot 1) plutôt que
+          window.confirm() (→ EC-03). Bouton destructif à droite, "Annuler" par défaut
+          (autoFocus) : Entrée/activation clavier annule plutôt que supprime. */}
+      <Modal open={showDeleteModal} onClose={() => setShowDeleteModal(false)} titleId="supprimer-modal-titre">
+        <h2 id="supprimer-modal-titre" className="text-card-title mb-2" style={{ color: "var(--calcaire)" }}>
+          {tItin("supprimerTitre")}
+        </h2>
+        <p className="text-body mb-6" style={{ color: "var(--brume)" }}>
+          {tItin("supprimerExplication")}
+        </p>
+        <div className="flex justify-end gap-2">
+          <Button type="button" variant="discret" autoFocus onClick={() => setShowDeleteModal(false)}>
+            {t("annuler")}
+          </Button>
+          <button
+            type="button"
+            onClick={() => void confirmerSuppression()}
+            disabled={suppressionEnCours}
+            className="focus-ring-aube h-11 px-4 rounded-full text-body font-semibold disabled:opacity-60 disabled:cursor-default cursor-pointer"
+            style={{ background: "#B84040", color: "var(--calcaire)" }}
+          >
+            {suppressionEnCours ? tItin("suppressionEnCours") : tItin("supprimer")}
+          </button>
+        </div>
+      </Modal>
 
       {garde && (
         <div className="no-print mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>

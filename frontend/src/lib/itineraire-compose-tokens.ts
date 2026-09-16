@@ -1,5 +1,7 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+
 /**
  * Persistance locale des `EditToken` des itinéraires composés créés depuis ce navigateur
  * (Lot 4d — brique "brancher la création"). `localStorage`, pas `sessionStorage`
@@ -35,4 +37,17 @@ export function oublierEditToken(id: string) {
   } catch {
     // rien à faire de plus
   }
+}
+
+const AUCUN_ABONNE = () => () => {};
+
+/**
+ * `lireEditToken`, mais hydratation-sûre : le rendu serveur ne connaît jamais `localStorage`
+ * (snapshot serveur toujours `null`), le rendu client lit la vraie valeur dès le premier
+ * rendu — pas de `useEffect` + `setState` qui refait un rendu après coup (même raisonnement
+ * que `useAujourdhui`/`aujourdhui.ts`). Pas d'abonnement réel : ce token ne change jamais
+ * après sa création par ce navigateur, une seule lecture au montage suffit.
+ */
+export function useEditToken(id: string): string | null {
+  return useSyncExternalStore(AUCUN_ABONNE, () => lireEditToken(id), () => null);
 }

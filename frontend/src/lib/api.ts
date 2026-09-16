@@ -118,5 +118,13 @@ export const api = {
       });
       if (!res.ok) throw new Error(`PATCH /api/itineraires-composes/${id} → ${res.status}`);
     },
+    /** DELETE avec l'EditToken — Lot 4d, brique "modale de suppression". */
+    remove: async (id: string, editToken: string): Promise<void> => {
+      const res = await fetch(`${API_URL}/api/itineraires-composes/${id}`, {
+        method: "DELETE",
+        headers: { "X-Edit-Token": editToken },
+      });
+      if (!res.ok) throw new Error(`DELETE /api/itineraires-composes/${id} → ${res.status}`);
+    },
   },
 };

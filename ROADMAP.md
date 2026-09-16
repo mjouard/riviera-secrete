@@ -676,7 +676,23 @@ nécessaire, cette passe n'a touché que ce fichier.
 - [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`. **Non fait** — `/i/[id]` reprend la mise en page simple de `ResultsView` (grille de colonnes par jour, carte en pleine largeur sous le programme), pas la grille collante décrite ici.
 - [x] **URL de partage dans l'en-tête** — **fait le 2026-09-15** : `riviera-secrete.fr/i/{id}` en mono sous le titre sur `/i/[id]` (clé `itineraireCompose.lienPartage`).
 - [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04). **Non fait** — `/i/[id]` n'a pas de mode Modifier en place : le bouton « Modifier » renvoie vers `/creer-itineraire?jours=…` (son propre éditeur, déjà avec ses propres flèches/× existants, non retouchés ici) plutôt que de PATCH l'itinéraire composé sur place — choix délibéré : cet écran n'a nulle part où récupérer l'`EditToken` du créateur pour l'instant.
-- [ ] **Modale de suppression** — `<dialog>` natif remplace `window.confirm()` (→ EC-03), bouton destructif à droite, « Annuler » par défaut. **Non fait** — `/i/[id]` n'expose pas d'action Supprimer du tout dans cette passe (seulement Modifier/Exporter/Partager/Garder).
+- [x] **Modale de suppression** — **fait le 2026-09-16**, troisième brique de la reprise.
+      L'action Supprimer elle-même n'existait pas du tout (seulement Modifier/Exporter/
+      Partager/Garder) — ajoutée, visible uniquement si ce navigateur a créé le lien
+      (`useEditToken(id)`, nouveau hook `useSyncExternalStore` dans
+      `lib/itineraire-compose-tokens.ts` — snapshot serveur `null`, snapshot client la vraie
+      valeur, sans `useEffect`+`setState` après coup ni faux positif de mismatch
+      d'hydratation). `<dialog>` natif (`Modal.tsx`, déjà posé au Lot 1) plutôt que
+      `window.confirm()` (→ EC-03) : titre, explication, « Annuler » **par défaut**
+      (`autoFocus`, vérifié en direct — Entrée confirme l'annulation, pas la suppression),
+      bouton destructif rouge à droite (pas de token "danger" dans le système Lot 1, couleur
+      posée en dur pour ce seul bouton, cas encore isolé). Confirmer appelle `DELETE
+      /api/itineraires-composes/{id}` avec l'`EditToken` (nouveau `api.itinerairesComposes
+      .remove()`), oublie le token en `localStorage`, puis redirige vers `/composer`.
+      **Vérifié en direct de bout en bout avec de vraies données** (backend local + base de
+      prod) : clic Supprimer → modale, "Annuler" a le focus → clic sur le bouton destructif →
+      `DELETE → 204` → redirection vers `/composer` → token disparu du `localStorage` →
+      `GET` sur l'id supprimé → `404` confirmé.
 - [x] **`/i/[id]` introuvable** — **fait le 2026-09-16**, deuxième brique de la reprise. Nouveau
       `i/[id]/not-found.tsx` — Next route ici tout `notFound()` levé par `page.tsx` (le plus
       proche `not-found.tsx` dans l'arbre) avant que ça remonte à la 404 générique du site.
