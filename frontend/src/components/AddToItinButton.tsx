@@ -59,8 +59,8 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
     <div ref={wrapRef} className="relative inline-block">
       <button
         onClick={toggle}
-        className="focus-ring inline-flex items-center h-11 text-sm px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
-        style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+        className="focus-ring-aube inline-flex items-center h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+        style={{ borderColor: "var(--line)", color: "var(--brume)" }}
       >
         {t("ajouterAUnItineraire")}
       </button>
@@ -68,18 +68,18 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
       {open && (
         <div
           className="absolute left-0 top-full mt-2 w-72 rounded-xl overflow-hidden z-20 shadow-xl"
-          style={{ background: "var(--surface)", border: "1px solid var(--line)" }}
+          style={{ background: "var(--nuit-haute)", border: "1px solid var(--line)" }}
         >
           {items === null ? (
-            <p className="text-xs p-4" style={{ color: "var(--text-muted)" }}>{t("chargement")}</p>
+            <p className="text-meta p-4" style={{ color: "var(--brume)" }}>{t("chargement")}</p>
           ) : items.length === 0 ? (
-            <p className="text-xs p-4" style={{ color: "var(--text-muted)" }}>
+            <p className="text-meta p-4" style={{ color: "var(--brume)" }}>
               {t("aucunItineraireSauvegarde")}
               <br />
               <Link
                 href={`/creer-itineraire?add=${encodeURIComponent(lieuSlug)}`}
                 className="underline"
-                style={{ color: "var(--azure)" }}
+                style={{ color: "var(--aube)" }}
               >
                 {t("creerUnItineraire")}
               </Link>
@@ -98,15 +98,15 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
                         className="w-full text-left px-4 py-2.5 flex items-center justify-between gap-3 transition-colors hover:bg-white/5 cursor-pointer disabled:cursor-default"
                       >
                         <span className="min-w-0">
-                          <span className="block text-sm font-medium line-clamp-1">{it.nom}</span>
-                          <span className="block text-xs" style={{ color: "var(--text-muted)" }}>
+                          <span className="block text-body font-medium line-clamp-1" style={{ color: "var(--calcaire)" }}>{it.nom}</span>
+                          <span className="block text-meta" style={{ color: "var(--brume)" }}>
                             {dureeLabel}
                           </span>
                         </span>
                         {addedId === it.id ? (
-                          <span className="text-xs flex-shrink-0" style={{ color: "var(--azure)" }}>{t("ajoute")}</span>
+                          <span className="text-meta flex-shrink-0" style={{ color: "var(--aube)" }}>{t("ajoute")}</span>
                         ) : alreadyIn ? (
-                          <span className="text-xs flex-shrink-0" style={{ color: "var(--text-muted)" }}>{t("dejaPresent")}</span>
+                          <span className="text-meta flex-shrink-0" style={{ color: "var(--brume)" }}>{t("dejaPresent")}</span>
                         ) : null}
                       </button>
                     </li>
@@ -115,8 +115,8 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
               </ul>
               <Link
                 href={`/creer-itineraire?add=${encodeURIComponent(lieuSlug)}`}
-                className="block text-xs px-4 py-2.5 text-center transition-colors hover:bg-white/5"
-                style={{ color: "var(--azure)" }}
+                className="block text-meta px-4 py-2.5 text-center transition-colors hover:bg-white/5"
+                style={{ color: "var(--aube)" }}
               >
                 {t("nouvelItineraire")}
               </Link>

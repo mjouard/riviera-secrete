@@ -67,10 +67,10 @@ export default function FavoriteButton({ slug }: { slug: string }) {
       aria-pressed={isFavorite}
       aria-busy={loading}
       title={!session ? t("connexionRequise") : isFavorite ? t("retirerDesFavoris") : t("ajouterAuxFavoris")}
-      className="focus-ring flex items-center gap-1.5 h-11 text-sm px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+      className="focus-ring-aube flex items-center gap-1.5 h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
       style={{
-        borderColor: isFavorite ? "var(--terracotta)" : "var(--line)",
-        color: isFavorite ? "var(--terracotta)" : "var(--text-muted)",
+        borderColor: isFavorite ? "var(--aube)" : "var(--line)",
+        color: isFavorite ? "var(--aube)" : "var(--brume)",
       }}
     >
       <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>

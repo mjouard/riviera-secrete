@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, distanceKm, loc, alternatesPage, prixAffiche } from "@/lib/utils";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { regionToMerShade } from "@/lib/mer-colors";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
 import HeroCarousel from "@/components/HeroCarousel";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -152,14 +153,14 @@ export default async function LieuPage({
       />
 
       {/* Breadcrumb */}
-      <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
+      <nav className="text-meta mb-8 flex gap-2" style={{ color: "var(--brume)" }}>
         <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
         <Link href={parentCrumb.href} className="hover:text-white transition-colors">
           {parentCrumb.label}
         </Link>
         <span>/</span>
-        <span style={{ color: "var(--text)" }}>{nom}</span>
+        <span style={{ color: "var(--calcaire)" }}>{nom}</span>
       </nav>
 
       {/* Hero */}
@@ -176,12 +177,13 @@ export default async function LieuPage({
 
       {/* Header */}
       <div className="mb-8">
-        <p className="text-sm mb-2" style={{ color: "var(--azure)" }}>
+        <p className="text-meta mb-2" style={{ color: regionToMerShade(lieu.regionSlug) }}>
           {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
         </p>
-        <h1 className="font-display text-3xl font-bold mb-4">{nom}</h1>
+        <h1 className="text-display mb-4" style={{ color: "var(--calcaire)" }}>{nom}</h1>
 
-        {/* Badges */}
+        {/* Badges — informatifs sur cette page (pas des filtres), même forme visuelle que
+            les puces Chip du Lot 1 mais sans le comportement interactif. */}
         {lieu.badges.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {lieu.badges.map((b) => {
@@ -193,8 +195,8 @@ export default async function LieuPage({
               return (
                 <span
                   key={b}
-                  className="text-xs px-3 py-1 rounded-full border"
-                  style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                  className="text-meta px-3 py-1 rounded-full border"
+                  style={{ borderColor: "var(--line)", color: "var(--brume)" }}
                 >
                   {def ? `${def.emoji} ${badgeLabel}` : b}
                 </span>
@@ -206,14 +208,14 @@ export default async function LieuPage({
         {/* MetaPills + GPS */}
         <div className="flex flex-wrap gap-3">
           {lieu.metaPills.map((pill, i) => (
-            <span key={i} className="text-sm" style={{ color: "var(--text-muted)" }}>
+            <span key={i} className="text-meta" style={{ color: "var(--brume)" }}>
               <span>{loc(locale, pill.labelEn, pill.label)}</span>{" "}
-              <span style={{ color: "var(--text)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
+              <span style={{ color: "var(--calcaire)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
             </span>
           ))}
-          <span className="text-sm" style={{ color: "var(--text-muted)" }}>
+          <span className="text-meta" style={{ color: "var(--brume)" }}>
             <span>📍</span>{" "}
-            <span style={{ color: "var(--text)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
+            <span className="text-data" style={{ color: "var(--calcaire)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
           </span>
         </div>
 
@@ -228,8 +230,8 @@ export default async function LieuPage({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring inline-flex items-center gap-2 h-11 px-4 rounded-lg border text-sm transition-colors hover:bg-white/5"
-              style={{ borderColor: "var(--line)", color: "var(--text)" }}
+              className="focus-ring-aube inline-flex items-center gap-2 h-11 px-4 rounded-lg border text-body transition-colors hover:bg-white/5"
+              style={{ borderColor: "var(--line)", color: "var(--calcaire)" }}
             >
               <span aria-hidden="true">{link.icon}</span>
               {link.label}
@@ -252,9 +254,9 @@ export default async function LieuPage({
 
       {/* Description */}
       <div className="prose max-w-none mb-10">
-        <p className="text-base leading-relaxed mb-4">{description}</p>
+        <p className="text-body mb-4" style={{ color: "var(--calcaire)" }}>{description}</p>
         {description2 && (
-          <p className="text-base leading-relaxed" style={{ color: "var(--text-muted)" }}>
+          <p className="text-body" style={{ color: "var(--brume)" }}>
             {description2}
           </p>
         )}
@@ -263,18 +265,18 @@ export default async function LieuPage({
       {/* Tips */}
       {lieu.tips.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">{t("conseilsPratiques")}</h2>
+          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("conseilsPratiques")}</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {lieu.tips.map((tip, i) => (
               <div
                 key={i}
                 className="rounded-lg p-4"
-                style={{ background: "var(--surface)" }}
+                style={{ background: "var(--nuit-haute)" }}
               >
-                <p className="text-xs font-semibold mb-1" style={{ color: "var(--azure)" }}>
+                <p className="text-data mb-1" style={{ color: "var(--aube)" }}>
                   {loc(locale, tip.labelEn, tip.label)}
                 </p>
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                <p className="text-meta" style={{ color: "var(--brume)" }}>
                   {loc(locale, tip.texteEn, tip.texte)}
                 </p>
               </div>
@@ -286,7 +288,7 @@ export default async function LieuPage({
       {/* Activités */}
       {lieu.activites.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">{t("aFaireSurPlace")}</h2>
+          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("aFaireSurPlace")}</h2>
           <div className="hscroll flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 snap-x snap-mandatory sm:grid sm:gap-4 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid-cols-2">
             {lieu.activites.map((act) => {
               const commune = communeActivite(act, lieu);
@@ -297,7 +299,7 @@ export default async function LieuPage({
                   target="_blank"
                   rel={relActivite(act.partenaire)}
                   className="group rounded-xl overflow-hidden flex flex-col flex-shrink-0 snap-start w-[70%] sm:w-auto transition-transform hover:-translate-y-0.5"
-                  style={{ background: "var(--surface)" }}
+                  style={{ background: "var(--nuit-haute)" }}
                 >
                   <div className="aspect-video overflow-hidden">
                     <Photo sizes="(max-width: 640px) 100vw, 50vw"
@@ -308,43 +310,41 @@ export default async function LieuPage({
                   </div>
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
+                      {/* Gratuit en Pin (seul usage sémantique de cette teinte), payant en
+                          Brume — pas de couleur d'action ici, ce n'est pas un état cliquable
+                          (docs/design-refonte-2026-09-14.md § 1 "Filtres & badges"). */}
                       <span
-                        className="text-xs font-semibold"
-                        style={{
-                          color:
-                            act.badge === "gratuit"
-                              ? "var(--azure)"
-                              : "var(--terracotta)",
-                        }}
+                        className="text-data"
+                        style={{ color: act.badge === "gratuit" ? "var(--pin)" : "var(--brume)" }}
                       >
                         {act.badge === "gratuit" ? tActivite("gratuit") : tActivite("payant")}
                       </span>
-                      <h3 className="font-semibold text-sm mt-1">{loc(locale, act.nomEn, act.nom)}</h3>
-                      <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                      <h3 className="text-card-title mt-1" style={{ color: "var(--calcaire)" }}>{loc(locale, act.nomEn, act.nom)}</h3>
+                      <p className="text-meta mt-1" style={{ color: "var(--brume)" }}>
                         {loc(locale, act.dureeEn, act.duree)} · {prixAffiche(locale, act.prixEn, act.prix)}
                       </p>
                       {/* Ne s'affiche que si l'activité ne se pratique pas au lieu même
                           (Lot 3, DC-02) — sinon rien ne change, l'affichage sans commune
                           ne mentait pas. */}
                       {commune && (
-                        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                        <p className="text-meta mt-1" style={{ color: "var(--brume)" }}>
                           📍 {tActivite("aProximiteDe", { commune })}
                         </p>
                       )}
                       {act.horaires && (
-                        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                        <p className="text-meta mt-1" style={{ color: "var(--brume)" }}>
                           🕒 {loc(locale, act.horairesEn, act.horaires)}
                         </p>
                       )}
                       <FermeAujourdhui fermeJours={act.fermeJours} />
                     </div>
                     <span
-                      className="text-xs mt-3"
-                      style={{ color: "var(--azure)" }}
+                      className="text-meta mt-3"
+                      style={{ color: "var(--aube)" }}
                     >
                       {tActivite(cleLienType(act.lienType))}
                       {act.partenaire && (
-                        <span className="ml-1" style={{ color: "var(--text-muted)" }}>
+                        <span className="ml-1" style={{ color: "var(--brume)" }}>
                           · {tActivite("lienPartenaire")}
                         </span>
                       )}
@@ -360,20 +360,20 @@ export default async function LieuPage({
       {/* Rebond ① — l'itinéraire qui passe par ici (→ PA-03) */}
       {itinerairesQuiPassent.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">{t("itineraireQuiPasse")}</h2>
+          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("itineraireQuiPasse")}</h2>
           <div className="flex flex-col gap-3">
             {itinerairesQuiPassent.map(({ itineraire, rang, total, heure }) => (
               <Link
                 key={itineraire.slug}
                 href={`/itineraires/${itineraire.slug}`}
-                className="focus-ring block rounded-lg p-4 transition-colors hover:bg-white/5"
-                style={{ background: "var(--surface)" }}
+                className="focus-ring-aube block rounded-lg p-4 transition-colors hover:bg-white/5"
+                style={{ background: "var(--nuit-haute)" }}
               >
-                <p className="text-xs font-mono mb-1" style={{ color: "var(--terracotta)" }}>
+                <p className="text-data mb-1" style={{ color: "var(--aube)" }}>
                   {t("nbEtapes", { n: total })}
                   {heure ? ` · ${t("etapeNumero", { n: rang })} · ${heure}` : ` · ${t("etapeNumero", { n: rang })}`}
                 </p>
-                <p className="font-semibold text-sm leading-snug">
+                <p className="text-card-title" style={{ color: "var(--calcaire)" }}>
                   {loc(locale, itineraire.titreEn, itineraire.titre)}
                 </p>
               </Link>
@@ -385,21 +385,21 @@ export default async function LieuPage({
       {/* Rebond ② — ce qu'on peut enchaîner sans reprendre la route longtemps (→ PA-03) */}
       {aProximite.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-semibold mb-4">{t("aProximite")}</h2>
+          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("aProximite")}</h2>
           <ul className="flex flex-col gap-2 list-none p-0">
             {aProximite.map(({ lieu: voisin, minutes }) => (
               <li key={voisin.slug}>
                 <Link
                   href={`/lieux/${voisin.slug}`}
-                  className="focus-ring flex items-center justify-between gap-4 h-11 px-4 rounded-lg transition-colors hover:bg-white/5"
-                  style={{ background: "var(--surface)" }}
+                  className="focus-ring-aube flex items-center justify-between gap-4 h-11 px-4 rounded-lg transition-colors hover:bg-white/5"
+                  style={{ background: "var(--nuit-haute)" }}
                 >
-                  <span className="text-sm min-w-0">
-                    <span className="font-medium">{loc(locale, voisin.nomEn, voisin.nom)}</span>
+                  <span className="text-body min-w-0">
+                    <span style={{ color: "var(--calcaire)" }}>{loc(locale, voisin.nomEn, voisin.nom)}</span>
                     <span className="mx-2" aria-hidden="true" style={{ color: "var(--line)" }}>·</span>
-                    <span style={{ color: "var(--text-muted)" }}>{voisin.commune}</span>
+                    <span style={{ color: "var(--brume)" }}>{voisin.commune}</span>
                   </span>
-                  <span className="text-xs font-mono whitespace-nowrap" style={{ color: "var(--terracotta)" }}>
+                  <span className="text-data whitespace-nowrap" style={{ color: "var(--aube)" }}>
                     {minutes} min
                   </span>
                 </Link>
@@ -412,14 +412,14 @@ export default async function LieuPage({
       {/* Related — region reste un nom de commune (nom propre), jamais traduit */}
       {lieu.related.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold mb-4">{t("aDecouvrirAussi")}</h2>
+          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("aDecouvrirAussi")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {lieu.related.map((r, i) => (
               <Link
                 key={i}
                 href={`/lieux/${r.href.replace(".html", "")}`}
                 className="group flex gap-4 rounded-xl overflow-hidden p-3 transition-colors"
-                style={{ background: "var(--surface)" }}
+                style={{ background: "var(--nuit-haute)" }}
               >
                 <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
                   <Photo sizes="(max-width: 640px) 100vw, 50vw"
@@ -429,11 +429,11 @@ export default async function LieuPage({
                   />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs mb-0.5" style={{ color: "var(--text-muted)" }}>
+                  <p className="text-meta mb-0.5" style={{ color: "var(--brume)" }}>
                     {r.region}
                   </p>
-                  <p className="text-sm font-semibold line-clamp-2">{loc(locale, r.titreEn, r.titre)}</p>
-                  <p className="text-xs line-clamp-1" style={{ color: "var(--text-muted)" }}>
+                  <p className="text-card-title line-clamp-2" style={{ color: "var(--calcaire)" }}>{loc(locale, r.titreEn, r.titre)}</p>
+                  <p className="text-meta line-clamp-1" style={{ color: "var(--brume)" }}>
                     {loc(locale, r.blurbEn, r.blurb)}
                   </p>
                 </div>

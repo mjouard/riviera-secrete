@@ -423,9 +423,13 @@ plus nulle part.
 
 Dans cet ordre — chacun indépendant. La fiche lieu en premier : c'est la page d'atterrissage n° 1 depuis Google, et elle a le meilleur ratio effort/valeur. L'accueil en dernier : il pointe vers les autres écrans, autant qu'ils existent d'abord.
 
-#### 4a. Fiche lieu (`06-ecran-fiche-lieu.md`)
+#### 4a. Fiche lieu (`06-ecran-fiche-lieu.md`) — reprise en petites briques le 2026-09-16
 
 La composition actuelle est bonne (galerie → identité → infos pratiques → carte → récit → conseils → activités → rebonds). Elle change de peau et gagne trois blocs.
+
+Repris par petites briques (décision utilisateur, même format que le Lot 5) : relookage
+visuel d'abord (fondation pour tout le reste), puis composition desktop, encadré "Le bon
+moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" sur place.
 
 - [ ] **Barre d'action fixe mobile** (`02-composants.md` § 7) — ancrée en bas : bouton primaire « Y aller » 52 px `flex-grow` + icône épingle 19 px + 3 carrés 52 × 52 (favori/partage/ajouter). `padding-bottom: max(20px, env(safe-area-inset-bottom))`. Le contenu réserve 112 px en bas. Corrige MO-05 (actions disparaissent au défilement sur mobile) et MO-01 (liens Maps/Waze/Plans à 16 px de haut).
 - [~] **Trois rebonds sous la fiche** (`06` § 2.6) — **①  et ② faits le 2026-09-14**, déployés et
@@ -452,11 +456,26 @@ La composition actuelle est bonne (galerie → identité → infos pratiques →
       accès libre avec une visite payante n'est pas gratuit au sens de Google. `openingHours`
       non déclaré — les horaires sont du texte libre saisonnier (« 9h–16h30 en hiver »), pas
       convertible sans perte en `OpeningHoursSpecification`.
-- [ ] **Reste aussi** : la refonte visuelle de la page (tokens/composants du Lot 1 posés mais
-      pas encore appliqués ici — la fiche utilise toujours l'ancienne palette), et les cibles
-      tactiles du chrome partagé mesurées sur cette page (burger 40 px, flèches du carrousel
-      36 px, pastilles 7-9 px, zoom Leaflet 30 px, pied de page 37 px) qui relèvent des lots
-      4b et 5.
+- [x] **Relookage visuel** — **fait le 2026-09-16**, première brique de la reprise. Tout
+      `lieux/[slug]/page.tsx` remappé sur les tokens du Lot 1 : `.text-display` (titre),
+      `.text-card-title` (sous-titres de section), `.text-meta`/`.text-data`/`.text-body`,
+      `--calcaire`/`--brume`/`--nuit-haute`/`--aube`. Badge d'activité **gratuit → `--pin`**
+      (seul usage sémantique de cette teinte), **payant → `--brume`** (pas de couleur
+      d'action sur une donnée non cliquable) — suit le spec à la lettre (§ 1 "Filtres &
+      badges"). Commune/région dans l'en-tête colorée par zone (`regionToMerShade`, Lot 1
+      posé au Lot 4b, jamais branché ici jusqu'à présent). `FavoriteButton`/`ShareButton`/
+      `AddToItinButton` (page-only, pas partagés) reskinnés avec ; `HeroCarousel`/
+      `FermeAujourdhui`/`MapLieuWrapper` **non touchés** — partagés avec
+      `itineraires/[slug]`/`/communes/[slug]`/`/activites`/`creer-itineraire`, un reskin ici
+      aurait dérivé ces pages, hors périmètre de cette brique.
+      **Trouvé au passage** : la cible du zoom Leaflet (30 px dans la liste ci-dessous) est
+      **déjà réglée** — la règle CSS `.leaflet-control-zoom` posée au Lot 4b (globale, pas
+      scopée à Explorer) s'applique à toutes les cartes du site dont celle-ci. Vérifié en
+      direct (FR + EN) : polices/couleurs calculées correctes (`getComputedStyle`), rien de
+      cassé structurellement.
+      **Reste** : burger 40 px, flèches du carrousel 36 px, pastilles 7-9 px, pied de page
+      37 px (chrome partagé — pied de page déjà réglé au Lot 5, reste burger/carrousel/
+      pastilles, à traiter si une brique dédiée chrome-partagé s'ouvre un jour).
 
 #### 4b. Explorer (`05-ecran-explorer.md`) — nouvelle page `/explorer` — **faite le 2026-09-14**
 

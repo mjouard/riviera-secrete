@@ -32,8 +32,8 @@ export default function ShareButton({ title }: { title: string }) {
   return (
     <button
       onClick={handleClick}
-      className="focus-ring inline-flex items-center h-11 text-sm px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
-      style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+      className="focus-ring-aube inline-flex items-center h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+      style={{ borderColor: "var(--line)", color: "var(--brume)" }}
     >
       {copied ? t("lienCopie") : t("partager")}
     </button>
