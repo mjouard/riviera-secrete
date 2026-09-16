@@ -36,7 +36,7 @@ export default function NotFoundRacine() {
             <Link href="/" className="btn btn-primaire focus-ring-aube">
               Retour à l&apos;accueil
             </Link>
-            <Link href="/#lieux" className="btn btn-secondaire focus-ring-aube">
+            <Link href="/explorer" className="btn btn-secondaire focus-ring-aube">
               Voir tous les lieux
             </Link>
           </div>

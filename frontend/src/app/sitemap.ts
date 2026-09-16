@@ -22,7 +22,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, priority: 1, changeFrequency: "weekly", alternates: withEn("") },
-    { url: `${SITE_URL}/villes`, priority: 0.8, changeFrequency: "weekly", alternates: withEn("/villes") },
     { url: `${SITE_URL}/activites`, priority: 0.8, changeFrequency: "weekly", alternates: withEn("/activites") },
     { url: `${SITE_URL}/itineraires`, priority: 0.8, changeFrequency: "weekly", alternates: withEn("/itineraires") },
     { url: `${SITE_URL}/a-propos`, priority: 0.5, changeFrequency: "yearly", alternates: withEn("/a-propos") },
@@ -44,12 +43,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     alternates: withEn(`/itineraires/${i.slug}`),
   }));
 
-  const villeRoutes: MetadataRoute.Sitemap = villes.map((v) => ({
-    url: `${SITE_URL}/villes/${v.slug}`,
-    priority: 0.6,
-    changeFrequency: "monthly" as const,
-    alternates: withEn(`/villes/${v.slug}`),
-  }));
+  // Seules les communes à ≥ 2 lieux ont une page (Lot 5, → /communes/[slug]) — les autres
+  // redirigent vers leur unique fiche lieu, déjà dans lieuRoutes ci-dessus.
+  const communeRoutes: MetadataRoute.Sitemap = villes
+    .filter((v) => v.lieux.length >= 2)
+    .map((v) => ({
+      url: `${SITE_URL}/communes/${v.slug}`,
+      priority: 0.6,
+      changeFrequency: "monthly" as const,
+      alternates: withEn(`/communes/${v.slug}`),
+    }));
 
-  return [...staticRoutes, ...lieuRoutes, ...itinRoutes, ...villeRoutes];
+  return [...staticRoutes, ...lieuRoutes, ...itinRoutes, ...communeRoutes];
 }

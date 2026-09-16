@@ -83,6 +83,11 @@ export default async function ItinerairePage({
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
   const stops = itin.items.filter((item) => item.type === "stop");
 
+  // Seules les communes à ≥ 2 lieux ont une page (Lot 5, → /communes/[slug]) — une commune à
+  // 1 seul lieu n'a nulle part où lier au-delà du lieu lui-même, déjà cité juste à côté.
+  const villeLieuCount = new Map<string, number>();
+  for (const l of lieux) villeLieuCount.set(l.villeSlug, (villeLieuCount.get(l.villeSlug) ?? 0) + 1);
+
   const routeStops = stops
     .map((s) => s.lieuSlug ? lieuBySlug.get(s.lieuSlug) : null)
     .filter((l): l is NonNullable<typeof l> => l != null);
@@ -215,9 +220,11 @@ export default async function ItinerairePage({
                         {item.heure}
                       </span>
                     )}
-                    {item.lieuSlug && lieuBySlug.get(item.lieuSlug)?.villeSlug ? (
+                    {item.lieuSlug &&
+                    lieuBySlug.get(item.lieuSlug)?.villeSlug &&
+                    (villeLieuCount.get(lieuBySlug.get(item.lieuSlug)!.villeSlug) ?? 0) >= 2 ? (
                       <Link
-                        href={`/villes/${lieuBySlug.get(item.lieuSlug)!.villeSlug}`}
+                        href={`/communes/${lieuBySlug.get(item.lieuSlug)!.villeSlug}`}
                         className="text-xs hover:underline"
                         style={{ color: "var(--text-muted)" }}
                       >

@@ -696,7 +696,29 @@ page (ce dernier indépendant, peut se glisser n'importe où).
   - `/villes/[slug]` → `/communes/[slug]`
   - `/#lieux` → `/explorer`
   - `/#itineraires` → `/itineraires`
-- [ ] **Pages communes** (`03` § 4) — ≥ 2 lieux → page conservée sous `/communes/[slug]`, retirée du menu, accessible via fil d'Ariane ; 1 lieu → redirection 301 vers `/lieux/[slug-du-lieu]`. 28 communes sur 34 n'ont qu'un seul lieu (→ DC-04).
+- [x] **Pages communes** — **fait le 2026-09-16**. `/villes/[slug]` et `/villes` (liste)
+      remplacés : 7 communes sur 34 ont ≥ 2 lieux (`data/villes.json`, pas les 28 de la ligne
+      d'origine — vérifié en direct, ce nombre dérive avec le contenu) et gardent une page à
+      `/communes/[slug]` (`generateStaticParams` filtré) ; les 27 autres, à 1 seul lieu,
+      redirigent (`/villes/[slug]` **et** `/communes/[slug]`) directement vers
+      `/lieux/[slug-du-lieu]` — une page qui listerait le seul lieu qu'on vient de citer
+      n'apporterait rien. `/villes` (liste) → `/explorer`. Corrige DC-04. Fil d'Ariane des
+      pages lieu et itinéraire mis à jour (lien vers la commune seulement si ≥ 2 lieux, sinon
+      repli générique). `sitemap.ts` et `NavHeader.tsx` ("Villes" pointe directement sur
+      `/explorer`) suivent. Ancien namespace de traduction `villes` supprimé, remplacé par
+      `communes` (clés de fiche seulement, celles de l'ancienne liste étaient orphelines).
+      **Corrigé au passage** : 4 liens morts vers l'ancre `/#lieux` (supprimée par le Lot 4e)
+      trouvés en touchant ces fichiers — `mes-favoris`/le fil d'Ariane d'une fiche lieu (déjà
+      réparés aux briques précédentes) et les deux pages 404 (`not-found.tsx` racine et
+      `[locale]`), redirigées vers `/explorer` plutôt que l'ancre.
+      **Piège de déploiement trouvé et corrigé** : les redirections des communes étaient
+      d'abord calculées en lisant `data/villes.json` directement dans `next.config.ts`
+      (`fs.readFileSync`) — marche en local, mais **échoue en build sur Vercel** (`ENOENT`,
+      build entièrement bloqué) : le projet Vercel a sa racine sur `frontend/`
+      (`rootDirectory`), et le déploiement n'inclut donc pas `data/`, sibling du dossier
+      déployé. Corrigé en lisant l'API de prod à la place (`fetch` dans `redirects()`,
+      `.catch(() => [])` en repli — même discipline que `sitemap.ts` : un API injoignable au
+      moment du build saute ces redirections plutôt que de faire échouer tout le déploiement).
 - [ ] **Vocabulaire figé partout** (`03` § 8) — *lieu* / *commune* / *activité* / *itinéraire* / *itinéraire composé* dans l'interface, le contenu, les balises, les slugs et les noms de variables. Corrige MC-01 (4 mots pour 2 objets : *spots* / *lieux* / *villes* / *communes*).
 - [ ] **Pied de page** — cibles ≥ 15 px minimum (actuellement 17 px de haut → MO-01) ; liens : La méthode · Crédits photo · Mentions légales · Confidentialité ; FR · EN à droite.
 

@@ -34,7 +34,6 @@
     "accueil": "Home",
     "lieux": "Places",
     "itineraires": "Itineraries",
-    "villes": "Towns",
     "plans": "Maps",
     "imagePrecedente": "Previous image",
     "imageSuivante": "Next image",
@@ -79,16 +78,6 @@
     "methodeAuteur": "Written by",
     "methodeAuteurValeur": "Maxime Jouard",
     "itinerairesVoirTous": "See all itineraries →"
-  },
-  "villes": {
-    "title": "Towns & villages",
-    "subtitle": "{count} communes on the French Riviera",
-    "lieu": "place",
-    "lieux": "places",
-    "lieuADecouvrir": "place to discover",
-    "lieuxADecouvrir": "places to discover",
-    "itineraireIci": "itinerary passes through here",
-    "itinerairesIci": "itineraries pass through here"
   },
   "lieu": {
     "conseilsPratiques": "Practical tips",
@@ -524,5 +513,11 @@
     "connecteToi": "Sign in to find your favorites and itineraries.",
     "seConnecter": "Sign in",
     "accueil": "Home"
+  },
+  "communes": {
+    "lieuADecouvrir": "place to discover",
+    "lieuxADecouvrir": "places to discover",
+    "itineraireIci": "itinerary passes through here",
+    "itinerairesIci": "itineraries pass through here"
   }
 }

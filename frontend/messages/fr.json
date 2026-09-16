@@ -34,7 +34,6 @@
     "accueil": "Accueil",
     "lieux": "Lieux",
     "itineraires": "Itinéraires",
-    "villes": "Villes",
     "plans": "Plans",
     "imagePrecedente": "Image précédente",
     "imageSuivante": "Image suivante",
@@ -79,16 +78,6 @@
     "methodeAuteur": "Écrit par",
     "methodeAuteurValeur": "Maxime Jouard",
     "itinerairesVoirTous": "Voir tous les itinéraires →"
-  },
-  "villes": {
-    "title": "Villes & villages",
-    "subtitle": "{count} communes sur la Côte d'Azur",
-    "lieu": "lieu",
-    "lieux": "lieux",
-    "lieuADecouvrir": "lieu à découvrir",
-    "lieuxADecouvrir": "lieux à découvrir",
-    "itineraireIci": "itinéraire qui passe par ici",
-    "itinerairesIci": "itinéraires qui passent par ici"
   },
   "lieu": {
     "conseilsPratiques": "Conseils pratiques",
@@ -524,5 +513,11 @@
     "connecteToi": "Connecte-toi pour retrouver tes favoris et tes itinéraires.",
     "seConnecter": "Se connecter",
     "accueil": "Accueil"
+  },
+  "communes": {
+    "lieuADecouvrir": "lieu à découvrir",
+    "lieuxADecouvrir": "lieux à découvrir",
+    "itineraireIci": "itinéraire qui passe par ici",
+    "itinerairesIci": "itinéraires qui passent par ici"
   }
 }

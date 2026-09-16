@@ -13,9 +13,17 @@ export const revalidate = 3600;
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 
+/**
+ * Refonte UI Lot 5 (03-architecture-routes-url.md § 4) — remplace villes/[slug]/page.tsx.
+ * Seules les communes à ≥ 2 lieux ont une page ici : une commune à 1 seul lieu redirige
+ * directement vers la fiche de ce lieu (next.config.ts, `redirects()`, calculé depuis l'API
+ * de prod) — une page qui listerait un seul lieu qu'on vient de citer n'apporterait rien.
+ * 7 communes sur 34 sont dans ce cas au 2026-09-16 (vérifier data/villes.json plutôt que ce
+ * nombre, qui dérive avec le contenu).
+ */
 export async function generateStaticParams() {
   const villes = await api.villes.list();
-  return villes.map((v) => ({ slug: v.slug }));
+  return villes.filter((v) => v.lieux.length >= 2).map((v) => ({ slug: v.slug }));
 }
 
 export async function generateMetadata({
@@ -36,11 +44,11 @@ export async function generateMetadata({
       description,
       images: ville.thumbImage ? [{ url: imgUrl(ville.thumbImage), width: 500, height: 375 }] : [],
     },
-    alternates: alternatesPage(SITE_URL, locale, `/villes/${slug}`),
+    alternates: alternatesPage(SITE_URL, locale, `/communes/${slug}`),
   };
 }
 
-export default async function VillePage({
+export default async function CommunePage({
   params,
 }: {
   params: Promise<{ slug: string; locale: string }>;
@@ -50,11 +58,14 @@ export default async function VillePage({
     api.villes.bySlug(slug).catch(() => null),
     api.itineraires.list().catch(() => []),
     api.lieux.list().catch(() => []),
-    getTranslations("villes"),
+    getTranslations("communes"),
     getTranslations("common"),
     getTranslations("regionFull"),
   ]);
-  if (!ville) notFound();
+  // Une commune à 1 seul lieu n'a pas de page ici (redirigée vers la fiche du lieu par
+  // next.config.ts) — si elle atterrit quand même là (donnée modifiée depuis le dernier
+  // build, redirect pas encore à jour), pas de page à moitié vide : 404 plutôt que trompeur.
+  if (!ville || ville.lieux.length < 2) notFound();
 
   const nom = loc(locale, ville.nomEn, ville.nom);
   const description = loc(locale, ville.descriptionEn, ville.description);
@@ -77,7 +88,7 @@ export default async function VillePage({
       latitude: ville.lat,
       longitude: ville.lng,
     },
-    url: `${SITE_URL}/villes/${ville.slug}`,
+    url: `${SITE_URL}/communes/${ville.slug}`,
   };
 
   return (
@@ -87,11 +98,12 @@ export default async function VillePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(touristDestinationJsonLd) }}
       />
 
-      {/* Breadcrumb */}
+      {/* Breadcrumb — pas de page de liste des communes (supprimée avec /villes), le parent
+          générique est Explorer, comme sur les fiches lieu et itinéraire. */}
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <Link href="/villes" className="hover:text-white transition-colors">{tCommon("villes")}</Link>
+        <Link href="/explorer" className="hover:text-white transition-colors">{tCommon("lieux")}</Link>
         <span>/</span>
         <span style={{ color: "var(--text)" }}>{nom}</span>
       </nav>

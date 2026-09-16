@@ -17,7 +17,10 @@ function useNavLinks() {
     { href: "/#explorer", label: t("lieux") },
     { href: "/activites", label: t("activites") },
     { href: "/itineraires", label: t("itineraires") },
-    { href: "/villes", label: t("villes") },
+    // /villes n'existe plus (Lot 5, 2026-09-16 : communes → /communes/[slug] ou fiche lieu
+    // directe) — pointe directement sur /explorer plutôt que de laisser passer par la
+    // redirection 308 posée dans next.config.ts pour les liens externes/anciens marque-pages.
+    { href: "/explorer", label: t("villes") },
   ];
   // /mes-itineraires et /mes-favoris sont fusionnés dans /carnet (Lot 5, 2026-09-16) — une
   // seule entrée à deux onglets plutôt que deux entrées cul-de-sac.

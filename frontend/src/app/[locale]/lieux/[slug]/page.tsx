@@ -77,11 +77,14 @@ export default async function LieuPage({
   const description = loc(locale, lieu.descriptionEn, lieu.description);
   const description2 = loc(locale, lieu.description2En, lieu.description2 ?? "") || undefined;
 
+  // Une commune à 1 seul lieu n'a pas de page dédiée (Lot 5, → /communes/[slug]) : ce lieu
+  // EST son seul contenu, un aller-retour vers une page qui le liste à nouveau n'apporterait
+  // rien — repli sur le fil générique, comme pour un lieu sans commune connue.
   const parentCrumb = itin
     ? { href: `/itineraires/${itin.slug}`, label: loc(locale, itin.titreEn, itin.titre) }
-    : ville
-      ? { href: `/villes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
-      : { href: "/#lieux", label: tCommon("lieux") };
+    : ville && ville.lieux.length >= 2
+      ? { href: `/communes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
+      : { href: "/#explorer", label: tCommon("lieux") };
 
   // ─── Rebonds de bas de fiche (→ PA-03) ─────────────────────────────────────
   //
