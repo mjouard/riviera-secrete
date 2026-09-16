@@ -654,6 +654,21 @@ tâche de fond posée pour un correctif séparé.
 
 ### Lot 5 — Navigation et nettoyage
 
+Livré par petites briques indépendantes (décision utilisateur, 2026-09-16), dans un ordre qui
+évite de poser une redirection vers une page qui n'existe pas encore : `/itineraires` →
+`/carnet` → pages communes → nouveau menu → redirections 301 → vocabulaire figé → pied de
+page (ce dernier indépendant, peut se glisser n'importe où).
+
+- [x] **Page `/itineraires`** — **fait le 2026-09-16**. Index des 6 itinéraires éditoriaux à
+      `/itineraires` (FR + EN), grille verticale 3:2 réutilisant `ComposeCard.tsx` tel quel
+      (créé au Lot 4e pour "Déjà composés" — même format de carte, pas de nouveau composant).
+      Ajouté au `sitemap.ts`. Liens mis à jour : `NavHeader.tsx`'s "Itinéraires" (pointait sur
+      l'ancre `/#itineraires`), le fil d'Ariane de `itineraires/[slug]/page.tsx`, et un nouveau
+      bouton "Voir tous les itinéraires →" sous "Déjà composés" sur l'accueil.
+      **Corrigé au passage** : `NavHeader.tsx`'s lien "Lieux" pointait encore sur `/#lieux`,
+      une ancre supprimée par le Lot 4e (remplacée par `id="explorer"`) — lien mort trouvé en
+      touchant ce fichier, réparé vers `/#explorer` (son remplacement complet par `/explorer`
+      fait partie de la brique "nouveau menu", pas de celle-ci).
 - [ ] **Menu à 4 entrées + 1 bouton + recherche globale** (`03-architecture-routes-url.md` § 2) — `Explorer · Itinéraires · Le carnet [recherche 250 px] [Composer un itinéraire] (compte)`. La recherche est un vrai champ dans l'en-tête, disponible partout (la loupe actuelle navigue vers `/#lieu-search`, recharge l'accueil et saute à 2 672 px → AI-06). « Composer un itinéraire » est un bouton primaire dans l'en-tête, pas la 5e entrée sur 9 (→ PA-02). Mobile : logo + loupe 44 × 44 + burger 44 × 44, panneau déroulant.
 - [ ] **`/carnet`** — fusionne `/mes-favoris` et `/mes-itineraires` en une seule entrée à deux onglets. Corrige NF-05 (deux entrées cul-de-sac pour 100 % des nouveaux visiteurs).
 - [ ] **Redirections 301** (`03` § 3) à poser côté Next.js + équivalents `/en/…` :
@@ -666,7 +681,6 @@ tâche de fond posée pour un correctif séparé.
   - `/#lieux` → `/explorer`
   - `/#itineraires` → `/itineraires`
 - [ ] **Pages communes** (`03` § 4) — ≥ 2 lieux → page conservée sous `/communes/[slug]`, retirée du menu, accessible via fil d'Ariane ; 1 lieu → redirection 301 vers `/lieux/[slug-du-lieu]`. 28 communes sur 34 n'ont qu'un seul lieu (→ DC-04).
-- [ ] **Page `/itineraires`** — index des 6 itinéraires éditoriaux (ancre `#itineraires` de l'accueil devient une vraie page), grille de cartes verticales 3:2.
 - [ ] **Vocabulaire figé partout** (`03` § 8) — *lieu* / *commune* / *activité* / *itinéraire* / *itinéraire composé* dans l'interface, le contenu, les balises, les slugs et les noms de variables. Corrige MC-01 (4 mots pour 2 objets : *spots* / *lieux* / *villes* / *communes*).
 - [ ] **Pied de page** — cibles ≥ 15 px minimum (actuellement 17 px de haut → MO-01) ; liens : La méthode · Crédits photo · Mentions légales · Confidentialité ; FR · EN à droite.
 

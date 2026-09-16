@@ -103,7 +103,7 @@ export default async function ItinerairePage({
       <nav className="text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
         <span>/</span>
-        <Link href="/#itineraires" className="hover:text-white transition-colors">{tCommon("itineraires")}</Link>
+        <Link href="/itineraires" className="hover:text-white transition-colors">{tCommon("itineraires")}</Link>
         <span>/</span>
         <span style={{ color: "var(--text)" }}>{titre}</span>
       </nav>

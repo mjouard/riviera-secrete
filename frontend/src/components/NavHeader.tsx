@@ -8,14 +8,15 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 function useNavLinks() {
   const t = useTranslations("nav");
-  // Les quatre portes d'entrée du contenu. « Lieux » et « Itinéraires » manquaient : depuis
-  // une fiche, revenir au catalogue imposait logo → accueil → défiler. Ils pointent sur les
-  // ancres de l'accueil, les pages de liste dédiées ayant été supprimées le 2026-09-12 parce
-  // qu'elles dupliquaient ces sections sans rien apporter.
+  // « Itinéraires » pointe désormais sur sa propre page (Lot 5, 2026-09-16) plutôt que sur
+  // l'ancre d'accueil #itineraires — /itineraires (index éditorial) existe depuis ce lot.
+  // « Lieux » reste sur l'ancre #explorer de l'accueil (Lot 4e a remplacé la grille #lieux par
+  // l'aperçu Explorer) : /explorer existe déjà en page dédiée, mais son remplacement complet
+  // de ce lien fait partie de la brique "nouveau menu", pas de celle-ci.
   const contentLinks = [
-    { href: "/#lieux", label: t("lieux") },
+    { href: "/#explorer", label: t("lieux") },
     { href: "/activites", label: t("activites") },
-    { href: "/#itineraires", label: t("itineraires") },
+    { href: "/itineraires", label: t("itineraires") },
     { href: "/villes", label: t("villes") },
   ];
   const accountLinks = [

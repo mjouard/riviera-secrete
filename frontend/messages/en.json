@@ -76,7 +76,8 @@
     "methodeDernierePasseValeur": "August 2026",
     "methodeRetires": "Places removed since 2024",
     "methodeAuteur": "Written by",
-    "methodeAuteurValeur": "Maxime Jouard"
+    "methodeAuteurValeur": "Maxime Jouard",
+    "itinerairesVoirTous": "See all itineraries →"
   },
   "villes": {
     "title": "Towns & villages",
@@ -516,5 +517,13 @@
     "gardeEnCours": "Saving…",
     "garde": "✓ Kept",
     "itineraireGarde": "✓ Added to your itineraries."
+  },
+  "itineraires": {
+    "titre": "Itineraries",
+    "sousTitre": "Six ready-made routes, if you'd rather we picked.",
+    "metaTitre": "Itineraries",
+    "metaDescription": "{count} editorial itineraries on the French Riviera, from half a day to 2 days, with opening hours and travel times.",
+    "filAriane": "Breadcrumb",
+    "accueil": "Home"
   }
 }

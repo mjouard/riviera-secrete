@@ -7,6 +7,7 @@ import HomeQualificateur from "@/components/HomeQualificateur";
 import HomeExplorerSection from "@/components/HomeExplorerSection";
 import HomeItineraires from "@/components/HomeItineraires";
 import HomeMethode from "@/components/HomeMethode";
+import { LinkButton } from "@/components/ui/Button";
 
 export const revalidate = 3600;
 
@@ -91,6 +92,9 @@ export default async function HomePage({
           <h2 className="text-section mb-2" style={{ color: "var(--calcaire)" }}>{t("itinerairesTitle")}</h2>
           <p className="text-body mb-8" style={{ color: "var(--brume)" }}>{t("dejaComposesSousTitre")}</p>
           <HomeItineraires itineraires={itineraires} lieuBySlug={lieuBySlug} />
+          <LinkButton href="/itineraires" variant="secondaire" className="mt-6">
+            {t("itinerairesVoirTous")}
+          </LinkButton>
         </div>
       </section>
 

@@ -76,7 +76,8 @@
     "methodeDernierePasseValeur": "Août 2026",
     "methodeRetires": "Lieux retirés depuis 2024",
     "methodeAuteur": "Écrit par",
-    "methodeAuteurValeur": "Maxime Jouard"
+    "methodeAuteurValeur": "Maxime Jouard",
+    "itinerairesVoirTous": "Voir tous les itinéraires →"
   },
   "villes": {
     "title": "Villes & villages",
@@ -516,5 +517,13 @@
     "gardeEnCours": "Enregistrement…",
     "garde": "✓ Gardé",
     "itineraireGarde": "✓ Ajouté à tes itinéraires."
+  },
+  "itineraires": {
+    "titre": "Itinéraires",
+    "sousTitre": "Six parcours composés d'avance, si tu préfères qu'on choisisse.",
+    "metaTitre": "Itinéraires",
+    "metaDescription": "{count} itinéraires éditoriaux sur la Côte d'Azur, de la demi-journée aux 2 jours, avec horaires et temps de trajet.",
+    "filAriane": "Fil d'Ariane",
+    "accueil": "Accueil"
   }
 }
