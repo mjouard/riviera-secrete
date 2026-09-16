@@ -675,7 +675,25 @@ nécessaire, cette passe n'a touché que ce fichier.
       passe. Corrige PR-06 pour la partie « sans nom » ; la partie « sans action riche » reste ouverte.
 - [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`. **Non fait** — `/i/[id]` reprend la mise en page simple de `ResultsView` (grille de colonnes par jour, carte en pleine largeur sous le programme), pas la grille collante décrite ici.
 - [x] **URL de partage dans l'en-tête** — **fait le 2026-09-15** : `riviera-secrete.fr/i/{id}` en mono sous le titre sur `/i/[id]` (clé `itineraireCompose.lienPartage`).
-- [ ] **Mode Modifier** — contrôles 44 × 44 minimum (actuellement 20 × 20, → MO-01) ; « Retirer » séparé des flèches de réordonnement ; toast « Annuler » 7 s après retrait (→ `02` § 10) ; « Enregistrer les modifications » ne rouvre pas la modale de nommage si l'itinéraire existe déjà (→ EC-04). **Non fait** — `/i/[id]` n'a pas de mode Modifier en place : le bouton « Modifier » renvoie vers `/creer-itineraire?jours=…` (son propre éditeur, déjà avec ses propres flèches/× existants, non retouchés ici) plutôt que de PATCH l'itinéraire composé sur place — choix délibéré : cet écran n'a nulle part où récupérer l'`EditToken` du créateur pour l'instant.
+- [x] **Mode Modifier** — **fait le 2026-09-16**, quatrième brique de la reprise, débloquée
+      par l'`EditToken` désormais disponible côté client (brique "brancher la création").
+      « Modifier » bascule en édition sur place (`editMode`, état local `workingDays`) pour
+      le navigateur qui a créé le lien ; sans `EditToken`, comportement inchangé (renvoi vers
+      `/creer-itineraire?jours=…`, son propre éditeur — non retouché, partagé avec d'autres
+      pages).
+      Contrôles **44×44** (vérifiés en direct — la fiche lieu (20×20) citée par le spec est
+      `ResultsView.tsx`, non touché ici, toujours partagé) : ▲/▼ groupées d'un côté, « Retirer »
+      séparé de l'autre — pas sandwiché entre les deux comme dans `ResultsView.tsx`. Retrait
+      → `Toast` `variant="undo"` (7 s, déjà le comportement du composant Lot 1), réinsertion
+      exacte à la position d'origine si "Annuler". « Enregistrer les modifications » appelle
+      directement `api.itinerairesComposes.update()` (PATCH) — pas de modale de nommage (→
+      EC-04), l'itinéraire a déjà un nom. Pas de glisser-déposer (hors du périmètre listé par
+      le spec pour cet écran, seulement ▲/▼ + Retirer).
+      **Vérifié en direct de bout en bout avec de vraies données** (backend local + base de
+      prod, itinéraire 2 jours/2 lieux) : contrôles mesurés 44×44 exact ; retrait → toast →
+      Annuler → le lieu réapparaît ; déplacement vers le jour suivant en butée de liste ;
+      Enregistrer → `PATCH` → relecture backend confirmant `jours` exactement dans le nouvel
+      ordre/répartition.
 - [x] **Modale de suppression** — **fait le 2026-09-16**, troisième brique de la reprise.
       L'action Supprimer elle-même n'existait pas du tout (seulement Modifier/Exporter/
       Partager/Garder) — ajoutée, visible uniquement si ce navigateur a créé le lien

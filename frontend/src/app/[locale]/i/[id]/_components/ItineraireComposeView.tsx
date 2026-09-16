@@ -12,6 +12,7 @@ import { formatDuree, parseVisitMinutes, encodeJours, type DureeKey } from "@/li
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
+import { Toast } from "@/components/ui/Toast";
 import ProgrammeSection from "@/app/[locale]/creer-itineraire/_components/ProgrammeSection";
 import BookingSection from "@/app/[locale]/creer-itineraire/_components/BookingSection";
 import MapItinWrapper from "@/components/MapItinWrapper";
@@ -22,10 +23,11 @@ const SITE_URL =
 const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
 
 /**
- * Vue en lecture seule d'un itinéraire composé (`/i/[id]`, ROADMAP.md § 4d) — équivalent de
- * `ResultsView` (creer-itineraire) mais sans mode Modifier/glisser-déposer : ce visiteur n'est
- * pas forcément celui qui l'a composé (voir `EstAutoriseSurItineraireCompose` côté backend),
- * l'écran par défaut d'un lien partagé doit donc être consultable, pas éditable.
+ * Vue d'un itinéraire composé (`/i/[id]`, ROADMAP.md § 4d). En lecture seule par défaut — ce
+ * visiteur n'est pas forcément celui qui l'a composé (voir `EstAutoriseSurItineraireCompose`
+ * côté backend) — mais bascule en mode Modifier sur place si ce navigateur a créé le lien
+ * (`useEditToken`). Pas de glisser-déposer ici (seulement ▲/▼ + Retirer) : le spec ne demande
+ * que ça pour cet écran, `ResultsView.tsx` (creer-itineraire/composer) garde le sien.
  */
 export default function ItineraireComposeView({
   id,
@@ -51,11 +53,84 @@ export default function ItineraireComposeView({
   const [gardeEnCours, setGardeEnCours] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [suppressionEnCours, setSuppressionEnCours] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [workingDays, setWorkingDays] = useState<Lieu[][]>(days);
+  const [removedStop, setRemovedStop] = useState<{ dayIndex: number; stopIndex: number; lieu: Lieu } | null>(null);
+  const [enregistrementEnCours, setEnregistrementEnCours] = useState(false);
 
   // L'EditToken n'est jamais renvoyé par le GET public (voir lib/types.ts) — seul ce
   // navigateur, s'il a créé ce lien, l'a en localStorage (Lot 4d, "brancher la création").
-  // C'est ce qui décide d'afficher "Supprimer" ou non.
+  // C'est ce qui décide d'afficher "Supprimer" et de basculer "Modifier" en édition sur
+  // place plutôt qu'un renvoi vers /creer-itineraire.
   const editToken = useEditToken(id);
+
+  /** Même logique que `moveStop` dans creer-itineraire/page.tsx : échange dans le jour, ou
+   * bascule vers le jour adjacent en butée de liste. */
+  function deplacerEtape(dayIndex: number, stopIndex: number, direction: -1 | 1) {
+    setWorkingDays((prev) => {
+      const next = prev.map((d) => [...d]);
+      const cible = stopIndex + direction;
+      if (cible >= 0 && cible < next[dayIndex].length) {
+        [next[dayIndex][stopIndex], next[dayIndex][cible]] = [next[dayIndex][cible], next[dayIndex][stopIndex]];
+      } else if (direction === -1 && dayIndex > 0) {
+        const [item] = next[dayIndex].splice(stopIndex, 1);
+        next[dayIndex - 1].push(item);
+      } else if (direction === 1 && dayIndex < next.length - 1) {
+        const [item] = next[dayIndex].splice(stopIndex, 1);
+        next[dayIndex + 1].unshift(item);
+      } else return prev;
+      return next;
+    });
+  }
+
+  /** Toast "Annuler" 7s après retrait (→ 02 § 10), pas de suppression silencieuse. */
+  function retirerEtape(dayIndex: number, stopIndex: number) {
+    setWorkingDays((prev) => {
+      const next = prev.map((d) => [...d]);
+      const [lieu] = next[dayIndex].splice(stopIndex, 1);
+      setRemovedStop({ dayIndex, stopIndex, lieu });
+      return next;
+    });
+  }
+
+  function annulerRetrait() {
+    if (!removedStop) return;
+    const { dayIndex, stopIndex, lieu } = removedStop;
+    setWorkingDays((prev) => {
+      const next = prev.map((d) => [...d]);
+      next[dayIndex].splice(stopIndex, 0, lieu);
+      return next;
+    });
+    setRemovedStop(null);
+  }
+
+  function annulerEdition() {
+    setWorkingDays(days);
+    setRemovedStop(null);
+    setEditMode(false);
+  }
+
+  /** PATCH sur l'itinéraire composé lui-même (possible depuis que l'EditToken est disponible
+   * côté client, voir "brancher la création"). Pas de modale de nommage à rouvrir (→ EC-04) :
+   * l'itinéraire a déjà un nom, ce bouton ne fait que mettre à jour `Jours`. */
+  async function sauvegarderModifications() {
+    if (!editToken) return;
+    setEnregistrementEnCours(true);
+    try {
+      await api.itinerairesComposes.update(
+        id,
+        { nom, dureeKey, jours: workingDays.map((jour) => jour.map((l) => l.slug)) },
+        editToken
+      );
+      setRemovedStop(null);
+      setEditMode(false);
+    } catch {
+      // Le backend est peut-être injoignable — on reste en mode édition, rien n'est perdu
+      // localement, le bouton "Enregistrer" reste disponible pour retenter.
+    } finally {
+      setEnregistrementEnCours(false);
+    }
+  }
 
   async function confirmerSuppression() {
     if (!editToken) return;
@@ -72,14 +147,14 @@ export default function ItineraireComposeView({
     }
   }
 
-  const nbLieux = days.flat().length;
-  const meta = `${days.length} ${days.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
+  const nbLieux = workingDays.flat().length;
+  const meta = `${workingDays.length} ${workingDays.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
   const date = new Date(createdAt).toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  const mapStops = days.flat().map((l) => ({ lat: l.lat, lng: l.lng, nom: l.nom }));
+  const mapStops = workingDays.flat().map((l) => ({ lat: l.lat, lng: l.lng, nom: l.nom }));
 
   /** Copie l'URL courante (celle de ce lien partagé) — même mécanique que le partage de
    * ResultsView, mais rien à encoder ici : l'itinéraire vit déjà côté serveur sous cet id. */
@@ -115,7 +190,7 @@ export default function ItineraireComposeView({
     try {
       await authFetch("/api/my-itineraires", session.apiToken, {
         method: "POST",
-        body: JSON.stringify({ nom, dureeKey, days: days.map((jour) => jour.map((l) => l.slug)) }),
+        body: JSON.stringify({ nom, dureeKey, days: workingDays.map((jour) => jour.map((l) => l.slug)) }),
       });
       setGarde(true);
     } finally {
@@ -154,42 +229,82 @@ export default function ItineraireComposeView({
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Link href={lienModifier} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
-            {t("modifier")}
-          </Link>
-          <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
-            {t("exporterPdf")}
-          </button>
-          <button
-            onClick={partager}
-            title={t("partagerTitre")}
-            className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
-            style={{ borderColor: "var(--line)", color: lienCopie ? "var(--azure)" : "var(--text-muted)" }}
-          >
-            {lienCopie ? t("lienCopie") : t("partagerLien")}
-          </button>
-          <button
-            onClick={() => void garder()}
-            disabled={gardeEnCours || garde}
-            className="text-sm px-3 py-2 rounded-lg font-semibold disabled:opacity-60"
-            style={{ background: "var(--azure)", color: "#0c1116" }}
-          >
-            {garde ? tItin("garde") : gardeEnCours ? tItin("gardeEnCours") : tItin("garder")}
-          </button>
-          {/* "Supprimer" — visible seulement pour le navigateur qui a créé ce lien (EditToken
-              en localStorage, voir plus haut). Un autre visiteur avec le même lien /i/{id}
-              n'a aucun moyen de le supprimer, par conception. */}
-          {editToken && (
-            <button
-              onClick={() => setShowDeleteModal(true)}
-              className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
-              style={{ borderColor: "#B84040", color: "#E07A7A" }}
-            >
-              {tItin("supprimer")}
-            </button>
+          {editMode ? (
+            <>
+              <Button type="button" variant="discret" onClick={annulerEdition}>
+                {t("annuler")}
+              </Button>
+              <button
+                onClick={() => void sauvegarderModifications()}
+                disabled={enregistrementEnCours}
+                className="text-sm px-3 py-2 rounded-lg font-semibold disabled:opacity-60 cursor-pointer disabled:cursor-default"
+                style={{ background: "var(--azure)", color: "#0c1116" }}
+              >
+                {enregistrementEnCours ? tItin("enregistrementEnCours") : tItin("enregistrerModifications")}
+              </button>
+            </>
+          ) : (
+            <>
+              {/* "Modifier" bascule en édition sur place si ce navigateur a l'EditToken,
+                  sinon renvoie vers l'éditeur existant (visiteur sans lien vers ce lien-ci). */}
+              {editToken ? (
+                <button
+                  onClick={() => setEditMode(true)}
+                  className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                  style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                >
+                  {t("modifier")}
+                </button>
+              ) : (
+                <Link href={lienModifier} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
+                  {t("modifier")}
+                </Link>
+              )}
+              <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
+                {t("exporterPdf")}
+              </button>
+              <button
+                onClick={partager}
+                title={t("partagerTitre")}
+                className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                style={{ borderColor: "var(--line)", color: lienCopie ? "var(--azure)" : "var(--text-muted)" }}
+              >
+                {lienCopie ? t("lienCopie") : t("partagerLien")}
+              </button>
+              <button
+                onClick={() => void garder()}
+                disabled={gardeEnCours || garde}
+                className="text-sm px-3 py-2 rounded-lg font-semibold disabled:opacity-60"
+                style={{ background: "var(--azure)", color: "#0c1116" }}
+              >
+                {garde ? tItin("garde") : gardeEnCours ? tItin("gardeEnCours") : tItin("garder")}
+              </button>
+              {/* "Supprimer" — visible seulement pour le navigateur qui a créé ce lien (EditToken
+                  en localStorage, voir plus haut). Un autre visiteur avec le même lien /i/{id}
+                  n'a aucun moyen de le supprimer, par conception. */}
+              {editToken && (
+                <button
+                  onClick={() => setShowDeleteModal(true)}
+                  className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                  style={{ borderColor: "#B84040", color: "#E07A7A" }}
+                >
+                  {tItin("supprimer")}
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
+
+      {removedStop && (
+        <Toast
+          message={tItin("stopRetire", { nom: loc(locale, removedStop.lieu.nomEn, removedStop.lieu.nom) })}
+          variant="undo"
+          undoLabel={t("annuler")}
+          onUndo={annulerRetrait}
+          onDismiss={() => setRemovedStop(null)}
+        />
+      )}
 
       {/* Modale de suppression — <dialog> natif (Modal.tsx, Lot 1) plutôt que
           window.confirm() (→ EC-03). Bouton destructif à droite, "Annuler" par défaut
@@ -225,7 +340,7 @@ export default function ItineraireComposeView({
 
       {/* Day columns */}
       <div className="print-days grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
-        {days.map((day, dayIndex) => (
+        {workingDays.map((day, dayIndex) => (
           <div key={dayIndex} className="print-day rounded-xl p-4" style={{ background: "var(--surface)" }}>
             <h3 className="text-sm font-semibold mb-3" style={{ color: "var(--azure)" }}>
               {t("jourN", { n: dayIndex + 1 })}{" "}
@@ -234,8 +349,10 @@ export default function ItineraireComposeView({
               </span>
             </h3>
             <div className="space-y-2">
-              {day.map((lieu) => {
+              {day.map((lieu, stopIndex) => {
                 const dureeLabel = formatDuree(parseVisitMinutes(lieu));
+                const estPremier = dayIndex === 0 && stopIndex === 0;
+                const estDernier = dayIndex === workingDays.length - 1 && stopIndex === day.length - 1;
                 return (
                   <div
                     key={lieu.slug}
@@ -262,6 +379,43 @@ export default function ItineraireComposeView({
                         </div>
                       )}
                     </div>
+                    {/* Contrôles d'édition — 44×44 minimum (→ MO-01, "actuellement 20×20" chez
+                        ResultsView.tsx, non touché ici : partagé avec d'autres pages). ▲/▼
+                        groupées, "Retirer" séparé (à droite plutôt que juste à côté des
+                        flèches) pour ne pas confondre un déplacement et un retrait. */}
+                    {editMode && (
+                      <div className="no-print flex-shrink-0 flex items-center gap-2">
+                        <div className="flex flex-col gap-1">
+                          <button
+                            onClick={() => deplacerEtape(dayIndex, stopIndex, -1)}
+                            disabled={estPremier}
+                            aria-label={t("monter")}
+                            className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 disabled:opacity-30 disabled:cursor-default cursor-pointer"
+                            style={{ borderColor: "var(--line)", color: "var(--brume)" }}
+                          >
+                            ▲
+                          </button>
+                          <button
+                            onClick={() => deplacerEtape(dayIndex, stopIndex, 1)}
+                            disabled={estDernier}
+                            aria-label={t("descendre")}
+                            className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 disabled:opacity-30 disabled:cursor-default cursor-pointer"
+                            style={{ borderColor: "var(--line)", color: "var(--brume)" }}
+                          >
+                            ▼
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => retirerEtape(dayIndex, stopIndex)}
+                          aria-label={t("retirer")}
+                          title={t("retirer")}
+                          className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                          style={{ borderColor: "#B84040", color: "#E07A7A" }}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -281,10 +435,10 @@ export default function ItineraireComposeView({
       )}
 
       {/* Programme */}
-      <ProgrammeSection days={days} dureeKey={dureeKey} />
+      <ProgrammeSection days={workingDays} dureeKey={dureeKey} />
 
       {/* Booking */}
-      <BookingSection days={days} />
+      <BookingSection days={workingDays} />
     </div>
   );
 }

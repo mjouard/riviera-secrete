@@ -500,7 +500,10 @@
     "supprimer": "Supprimer",
     "supprimerTitre": "Supprimer cet itinéraire ?",
     "supprimerExplication": "Le lien cessera de fonctionner pour tout le monde. Cette action ne peut pas être annulée.",
-    "suppressionEnCours": "Suppression…"
+    "suppressionEnCours": "Suppression…",
+    "enregistrerModifications": "Enregistrer les modifications",
+    "enregistrementEnCours": "Enregistrement…",
+    "stopRetire": "{nom} retiré"
   },
   "itineraires": {
     "titre": "Itinéraires",

@@ -500,7 +500,10 @@
     "supprimer": "Delete",
     "supprimerTitre": "Delete this itinerary?",
     "supprimerExplication": "The link will stop working for everyone. This action cannot be undone.",
-    "suppressionEnCours": "Deleting…"
+    "suppressionEnCours": "Deleting…",
+    "enregistrerModifications": "Save changes",
+    "enregistrementEnCours": "Saving…",
+    "stopRetire": "{nom} removed"
   },
   "itineraires": {
     "titre": "Itineraries",
