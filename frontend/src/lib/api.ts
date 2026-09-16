@@ -82,5 +82,41 @@ export const api = {
       if (!res.ok) throw new Error(`API /api/itineraires-composes/${id} → ${res.status}`);
       return decodeDeep((await res.json()) as ItineraireComposePublic);
     },
+    /**
+     * Crée un itinéraire composé (Lot 4d, brique "brancher la création" — jusqu'ici aucun
+     * bouton du site n'appelait jamais cet endpoint, pourtant complet côté backend : `/i/[id]`
+     * était inatteignable par un vrai visiteur). Fonctionne sans compte ; `token`, s'il est
+     * fourni, rattache l'itinéraire au compte connecté en plus de l'`EditToken` (le backend
+     * autorise alors PATCH/DELETE par les deux voies).
+     */
+    create: async (
+      payload: { nom: string; dureeKey: string; jours: string[][] },
+      token?: string
+    ): Promise<{ id: string; editToken: string }> => {
+      const res = await fetch(`${API_URL}/api/itineraires-composes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`POST /api/itineraires-composes → ${res.status}`);
+      return res.json();
+    },
+    /** PATCH avec l'EditToken — remet à jour un lien déjà créé plutôt que d'en créer un
+     * second à chaque nouveau clic sur "Partager" pendant la même édition. */
+    update: async (
+      id: string,
+      payload: { nom: string; dureeKey: string; jours: string[][] },
+      editToken: string
+    ): Promise<void> => {
+      const res = await fetch(`${API_URL}/api/itineraires-composes/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "X-Edit-Token": editToken },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`PATCH /api/itineraires-composes/${id} → ${res.status}`);
+    },
   },
 };

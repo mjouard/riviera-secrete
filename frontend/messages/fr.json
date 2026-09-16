@@ -202,7 +202,8 @@
     "baseSur": "Basé sur :",
     "baseSurAide": "toutes les étapes de l'itinéraire sont conservées, à toi de les réarranger.",
     "journeeDense": "Journée dense : fin estimée vers {fin}.",
-    "journeeDenseJour": "Jour {n} — journée dense : fin estimée vers {fin}."
+    "journeeDenseJour": "Jour {n} — journée dense : fin estimée vers {fin}.",
+    "partageEnCours": "Partage…"
   },
   "composer": {
     "breadcrumb": "Composer un itinéraire",

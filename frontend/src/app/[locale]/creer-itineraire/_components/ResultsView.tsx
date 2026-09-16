@@ -1,10 +1,13 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
-import { construirePlanning, encodeJours, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
+import { api } from "@/lib/api";
+import { construirePlanning, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
+import { ecrireEditToken } from "@/lib/itineraire-compose-tokens";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
@@ -52,8 +55,13 @@ export default function ResultsView({
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
   const tDuree = useTranslations("dureeLabels");
+  const { data: session } = useSession();
   const [lienCopie, setLienCopie] = useState(false);
+  const [partageEnCours, setPartageEnCours] = useState(false);
+  const [composeId, setComposeId] = useState<string | null>(null);
+  const [composeEditToken, setComposeEditToken] = useState<string | null>(null);
   const nbLieux = currentDays.flat().length;
+  const titre = currentNom || t("itineraireFallback", { duree: tDuree(dureeKey) });
   // Journées qui débordent du budget du préréglage. Elles n'existent que parce qu'on refuse
   // désormais d'écarter une étape venant d'un itinéraire éditorial : le dire franchement vaut
   // mieux que de laisser croire que tout rentre dans la journée.
@@ -62,35 +70,55 @@ export default function ResultsView({
     .filter((j) => j.finTardive);
 
   /**
-   * Construit un lien qui rouvre l'itinéraire tel quel — arrangement par jour compris —
-   * sans compte ni backend (voir encodeJours). L'URL est bâtie depuis `window.location`
-   * pour rester dans la locale courante (/creer-itineraire ou /en/creer-itineraire).
+   * Crée (ou met à jour, si déjà fait pendant cette visite) un vrai `/i/[id]` — jusqu'ici,
+   * aucun bouton du site n'appelait `POST /api/itineraires-composes` : ce bouton copiait un
+   * lien `?jours=…` encodé dans l'URL courante, jamais persisté côté backend, donc jamais
+   * modifiable ni consultable en dehors de qui recevait exactement ce lien-là (trouvé et
+   * corrigé au Lot 4d, brique "brancher la création"). L'`EditToken` reçu est gardé en
+   * mémoire (pour ré-appeler PATCH plutôt que POST sur un second clic dans la même visite)
+   * et persisté dans `localStorage` (`lib/itineraire-compose-tokens.ts`) pour que `/i/[id]`
+   * puisse plus tard reconnaître ce navigateur comme l'auteur du lien.
+   *
+   * Un clic reste possible sans réseau disponible : en cas d'échec, on ne casse rien, le
+   * bouton redevient simplement cliquable (pas de lien à copier cette fois).
    */
   async function partager() {
-    const url = new URL(window.location.origin + window.location.pathname);
-    url.searchParams.set("jours", encodeJours(currentDays));
-    url.searchParams.set("duree", dureeKey);
-    if (currentNom) url.searchParams.set("nom", currentNom);
-    const lien = url.toString();
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: currentNom || t("partagerLien"), url: lien });
-        return;
-      } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") return; // annulé par l'utilisateur
-      }
-    }
-    if (!navigator.clipboard) return;
+    setPartageEnCours(true);
     try {
+      const jours = currentDays.map((jour) => jour.map((l) => l.slug));
+      let id = composeId;
+      if (id && composeEditToken) {
+        await api.itinerairesComposes.update(id, { nom: titre, dureeKey, jours }, composeEditToken);
+      } else {
+        const cree = await api.itinerairesComposes.create({ nom: titre, dureeKey, jours }, session?.apiToken);
+        id = cree.id;
+        setComposeId(cree.id);
+        setComposeEditToken(cree.editToken);
+        ecrireEditToken(cree.id, cree.editToken);
+      }
+
+      const prefixeLocale = locale === "en" ? "/en" : "";
+      const lien = `${window.location.origin}${prefixeLocale}/i/${id}`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: titre, url: lien });
+          return;
+        } catch (err) {
+          if (err instanceof Error && err.name === "AbortError") return; // annulé par l'utilisateur
+        }
+      }
+      if (!navigator.clipboard) return;
       await navigator.clipboard.writeText(lien);
       setLienCopie(true);
       setTimeout(() => setLienCopie(false), 2000);
     } catch {
-      // silent — rien de mieux à proposer si le presse-papiers est refusé
+      // silent — le backend est peut-être injoignable, rien de mieux à proposer que de
+      // laisser le visiteur retenter
+    } finally {
+      setPartageEnCours(false);
     }
   }
-  const title = currentNom || t("itineraireFallback", { duree: tDuree(dureeKey) });
   const meta = `${currentDays.length} ${currentDays.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
 
   return (
@@ -100,13 +128,13 @@ export default function ResultsView({
       )}
       <div className="print-header">
         <p className="print-header-url">{SITE_DISPLAY_URL}</p>
-        <h1>{title}</h1>
+        <h1>{titre}</h1>
         <p className="print-header-meta">{meta}</p>
       </div>
 
       <div className="no-print flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{title}</h1>
+          <h1 className="text-2xl font-bold">{titre}</h1>
           <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>{meta}</p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -117,12 +145,13 @@ export default function ResultsView({
             {t("exporterPdf")}
           </button>
           <button
-            onClick={partager}
+            onClick={() => void partager()}
+            disabled={partageEnCours}
             title={t("partagerTitre")}
-            className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+            className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-60 disabled:cursor-default"
             style={{ borderColor: "var(--line)", color: lienCopie ? "var(--azure)" : "var(--text-muted)" }}
           >
-            {lienCopie ? t("lienCopie") : t("partagerLien")}
+            {lienCopie ? t("lienCopie") : partageEnCours ? t("partageEnCours") : t("partagerLien")}
           </button>
           {editMode ? (
             <button onClick={onSaveClick} className="text-sm px-3 py-2 rounded-lg font-semibold" style={{ background: "var(--azure)", color: "#0c1116" }}>

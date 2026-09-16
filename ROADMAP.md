@@ -626,8 +626,29 @@ que `/composer` ait eu de recette utilisateur.
 passent tous les deux sans erreur sur ce worktree — aucune correction de code n'a été
 nécessaire, cette passe n'a touché que ce fichier.
 
-#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **partiellement fait, déployé et vérifié en prod le 2026-09-15**
+#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **reprise le 2026-09-16, `/i/[id]` réellement atteignable depuis ce jour**
 
+- [x] **Brancher la création** — **fait le 2026-09-16, trouvé en reprenant ce lot**. Aucun
+      bouton du site n'appelait jamais `POST /api/itineraires-composes` : "Partager" sur
+      `/composer`/`/creer-itineraire` (`ResultsView.tsx`, composant partagé par les deux)
+      copiait un lien `?jours=…` codé dans l'URL courante, jamais persisté côté backend.
+      `/i/[id]` était donc **une page qu'aucun visiteur réel ne pouvait atteindre** — tout ce
+      qui avait été vérifié pour ce lot jusqu'ici (cycle CRUD complet, Open Graph, export PDF…)
+      l'avait été en tapant l'URL à la main ou via `curl`, jamais par un clic.
+      `ResultsView.tsx`'s `partager()` réécrit : `api.itinerairesComposes.create()` (nouveau,
+      `lib/api.ts`) au premier clic, `.update()` (PATCH avec l'`EditToken`) aux clics suivants
+      dans la même visite plutôt que de dupliquer la ligne en base ; le lien copié/partagé
+      devient le vrai `riviera-secrete.fr/i/{id}`. L'`EditToken` reçu est persisté dans
+      `localStorage` (nouveau `lib/itineraire-compose-tokens.ts`, portée délibérément plus
+      longue que `lib/brouillon-itineraire.ts` — un créateur doit pouvoir revenir modifier son
+      lien plusieurs jours après, pas seulement dans l'onglet), en préparation de la brique
+      "Mode Modifier" plus bas — pas encore consommé par `/i/[id]` lui-même dans cette brique.
+      Un visiteur connecté au moment du clic rattache l'itinéraire à son compte (le backend le
+      permettait déjà, juste jamais exercé).
+      **Vérifié en direct avec de vraies données** (backend local + base de prod) : cycle
+      complet `/composer` (sélection → Composer l'itinéraire → Partager) → `POST
+      /api/itineraires-composes` → `201 Created` avec `{id, editToken}` → `EditToken` bien en
+      `localStorage` → `/i/{id}` s'ouvre et affiche le contenu réel.
 - [x] **Lecture publique** (`09` § 2.1) — **fait le 2026-09-15** : entité `ItineraireCompose` +
       migration EF (`AddItinerairesComposes`, **appliquée à la base de prod et backend
       redéployé sur Railway le 2026-09-15** — voir note de bas de section) ; `GET

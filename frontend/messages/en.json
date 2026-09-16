@@ -202,7 +202,8 @@
     "baseSur": "Based on:",
     "baseSurAide": "every stop from the itinerary is kept — rearrange them as you like.",
     "journeeDense": "Packed day: estimated finish around {fin}.",
-    "journeeDenseJour": "Day {n} — packed day: estimated finish around {fin}."
+    "journeeDenseJour": "Day {n} — packed day: estimated finish around {fin}.",
+    "partageEnCours": "Sharing…"
   },
   "composer": {
     "breadcrumb": "Compose an itinerary",
