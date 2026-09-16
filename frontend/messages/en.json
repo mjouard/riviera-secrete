@@ -10,19 +10,15 @@
     "description": "The hidden spots of the French Riviera, from Menton to Saint-Tropez, and ready-to-follow itineraries."
   },
   "nav": {
-    "villes": "Towns",
-    "creerItineraire": "Build an itinerary",
-    "mesItineraires": "My itineraries",
-    "mesFavoris": "My favorites",
     "connexion": "Log in",
     "deconnexion": "Log out",
     "menu": "Menu",
     "aPropos": "About",
-    "activites": "Activities",
-    "lieux": "Places",
     "itineraires": "Itineraries",
     "rechercher": "Search",
-    "carnet": "The notebook"
+    "carnet": "The notebook",
+    "explorer": "Explore",
+    "composer": "Compose an itinerary"
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",

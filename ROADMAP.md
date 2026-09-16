@@ -669,7 +669,22 @@ page (ce dernier indépendant, peut se glisser n'importe où).
       une ancre supprimée par le Lot 4e (remplacée par `id="explorer"`) — lien mort trouvé en
       touchant ce fichier, réparé vers `/#explorer` (son remplacement complet par `/explorer`
       fait partie de la brique "nouveau menu", pas de celle-ci).
-- [ ] **Menu à 4 entrées + 1 bouton + recherche globale** (`03-architecture-routes-url.md` § 2) — `Explorer · Itinéraires · Le carnet [recherche 250 px] [Composer un itinéraire] (compte)`. La recherche est un vrai champ dans l'en-tête, disponible partout (la loupe actuelle navigue vers `/#lieu-search`, recharge l'accueil et saute à 2 672 px → AI-06). « Composer un itinéraire » est un bouton primaire dans l'en-tête, pas la 5e entrée sur 9 (→ PA-02). Mobile : logo + loupe 44 × 44 + burger 44 × 44, panneau déroulant.
+- [x] **Menu à 4 entrées + 1 bouton + recherche globale** — **fait le 2026-09-16**.
+      `NavHeader.tsx` réduit de 6 entrées (Lieux/Activités/Itinéraires/Villes/Créer un
+      itinéraire/Le carnet) à `Explorer · Itinéraires · Le carnet` + recherche + bouton primaire
+      + compte. Activités et Villes disparaissent en tant que destinations (ce sont des filtres
+      d'Explorer) ; « Créer un itinéraire » devient le bouton primaire **« Composer un
+      itinéraire »** vers `/composer` (l'outil principal depuis le Lot 4e, pas
+      `/creer-itineraire`).
+      **Recherche globale** (corrige AI-06) : un vrai champ (`RechercheGlobale`, 250 px,
+      composant `Field` du Lot 1), pas la loupe qui naviguait vers l'ancre `/#lieu-search` —
+      **déjà morte** avant même ce lot (elle ciblait `HomeLieuxGrid.tsx`, supprimé au Lot 4e).
+      Soumet vers `/explorer?q=…`, qui sait déjà filtrer dessus (`ExplorerShell.tsx`) — aucune
+      nouvelle logique de recherche, juste un point d'entrée de plus. Vérifié en direct :
+      `Èze` → `/explorer?q=Èze` → 1 lieu sur 43.
+      **Mobile** — fait : logo + loupe 44×44 (mène directement à `/explorer`, pas de champ
+      dupliqué dans une barre déjà étroite) + burger 44×44, panneau déroulant avec les 3
+      entrées, langue, compte et le bouton primaire.
 - [x] **`/carnet`** — **fait le 2026-09-16**. Fusionne `/mes-favoris` et `/mes-itineraires` en
       une seule entrée (`carnet/page.tsx`) à deux onglets (`?onglet=favoris|itineraires`,
       contrat d'URL du Lot 2 — `url-filtres.ts`), un seul palier de connexion partagé au lieu

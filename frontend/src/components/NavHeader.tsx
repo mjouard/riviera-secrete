@@ -3,32 +3,27 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { Field } from "@/components/ui/Field";
+import { LinkButton } from "@/components/ui/Button";
+import { IconSearch } from "@/components/ui/Icons";
 import LanguageSwitcher from "./LanguageSwitcher";
 
+/**
+ * Refonte UI Lot 5 (03-architecture-routes-url.md § 2) — 3 entrées (Explorer/Itinéraires/Le
+ * carnet) au lieu des 6 précédentes (Lieux/Activités/Itinéraires/Villes/Créer un itinéraire/
+ * Le carnet) : Activités et Villes sont des filtres d'Explorer, pas des destinations à part
+ * (→ PA-02) ; "Créer un itinéraire" devient le bouton primaire "Composer un itinéraire" dans
+ * l'en-tête (vers /composer, l'outil principal depuis le Lot 4e), plus une entrée sur 6.
+ */
 function useNavLinks() {
   const t = useTranslations("nav");
-  // « Itinéraires » pointe désormais sur sa propre page (Lot 5, 2026-09-16) plutôt que sur
-  // l'ancre d'accueil #itineraires — /itineraires (index éditorial) existe depuis ce lot.
-  // « Lieux » reste sur l'ancre #explorer de l'accueil (Lot 4e a remplacé la grille #lieux par
-  // l'aperçu Explorer) : /explorer existe déjà en page dédiée, mais son remplacement complet
-  // de ce lien fait partie de la brique "nouveau menu", pas de celle-ci.
   const contentLinks = [
-    { href: "/#explorer", label: t("lieux") },
-    { href: "/activites", label: t("activites") },
+    { href: "/explorer", label: t("explorer") },
     { href: "/itineraires", label: t("itineraires") },
-    // /villes n'existe plus (Lot 5, 2026-09-16 : communes → /communes/[slug] ou fiche lieu
-    // directe) — pointe directement sur /explorer plutôt que de laisser passer par la
-    // redirection 308 posée dans next.config.ts pour les liens externes/anciens marque-pages.
-    { href: "/explorer", label: t("villes") },
-  ];
-  // /mes-itineraires et /mes-favoris sont fusionnés dans /carnet (Lot 5, 2026-09-16) — une
-  // seule entrée à deux onglets plutôt que deux entrées cul-de-sac.
-  const accountLinks = [
-    { href: "/creer-itineraire", label: t("creerItineraire") },
     { href: "/carnet", label: t("carnet") },
   ];
-  return { contentLinks, accountLinks, navLinks: [...contentLinks, ...accountLinks] };
+  return { contentLinks };
 }
 
 function AuthButton({ onClose }: { onClose?: () => void }) {
@@ -61,11 +56,46 @@ function AuthButton({ onClose }: { onClose?: () => void }) {
   );
 }
 
+/**
+ * Recherche globale (→ AI-06) — un vrai champ, pas la loupe qui rechargeait l'accueil et
+ * sautait vers une ancre. Soumet vers /explorer?q=…, qui sait déjà filtrer sur ce paramètre
+ * (ExplorerShell.tsx) : pas de nouvelle logique de recherche, juste un point d'entrée de plus
+ * vers celle qui existe.
+ */
+function RechercheGlobale({ className, onSubmitted }: { className?: string; onSubmitted?: () => void }) {
+  const t = useTranslations("nav");
+  const router = useRouter();
+  const [q, setQ] = useState("");
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!q.trim()) return;
+    router.push(`/explorer?q=${encodeURIComponent(q.trim())}`);
+    onSubmitted?.();
+  }
+
+  return (
+    <form onSubmit={submit} className={`relative ${className ?? ""}`}>
+      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "var(--brume)" }}>
+        <IconSearch className="w-4 h-4" />
+      </span>
+      <Field
+        type="search"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        aria-label={t("rechercher")}
+        placeholder={t("rechercher")}
+        style={{ paddingLeft: "36px", height: "38px", minHeight: "38px" }}
+      />
+    </form>
+  );
+}
+
 export default function NavHeader() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   const t = useTranslations("nav");
-  const { contentLinks, accountLinks, navLinks } = useNavLinks();
+  const { contentLinks } = useNavLinks();
 
   return (
     <header
@@ -76,47 +106,55 @@ export default function NavHeader() {
         borderColor: "var(--line)",
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
         <Link
           href="/"
           onClick={close}
-          className="font-display text-lg font-semibold tracking-tight"
+          className="font-display text-lg font-semibold tracking-tight flex-shrink-0"
           style={{ color: "var(--text)" }}
         >
           Riviera Secrète
         </Link>
 
-        {/* Barre complète à partir de lg (1024px) et non sm (640px) : avec sept entrées,
-            le sélecteur de langue et le bouton de compte, l'en-tête débordait dès 700px —
-            mesuré à 822px de contenu pour 700 disponibles. En dessous, le menu déroulant. */}
-        <nav className="hidden lg:flex gap-4 xl:gap-6 items-center text-sm" style={{ color: "var(--text-muted)" }}>
-          {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className="hover:text-white transition-colors">
+        {/* Barre complète à partir de lg (1024px) : 3 entrées + recherche + bouton primaire
+            + sélecteur de langue + compte tiennent large, mais pas en dessous. */}
+        <nav className="hidden lg:flex gap-6 items-center text-sm flex-1 justify-end" style={{ color: "var(--text-muted)" }}>
+          {contentLinks.map(({ href, label }) => (
+            <Link key={href} href={href} className="hover:text-white transition-colors flex-shrink-0">
               {label}
             </Link>
           ))}
-          <Link
-            href="/#lieu-search"
-            title={t("rechercher")}
-            aria-label={t("rechercher")}
-            className="hover:text-white transition-colors"
-          >
-            <span aria-hidden="true">🔎</span>
-          </Link>
+          <RechercheGlobale className="w-[250px] flex-shrink-0" />
           <LanguageSwitcher />
           <AuthButton />
+          <LinkButton href="/composer" variant="primaire" className="flex-shrink-0">
+            {t("composer")}
+          </LinkButton>
         </nav>
 
-        {/* Hamburger button — mobile only */}
-        <button
-          className="lg:hidden p-2 -mr-2 rounded-lg transition-colors hover:bg-white/5"
-          style={{ color: "var(--text-muted)" }}
-          aria-label={t("menu")}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? "✕" : "☰"}
-        </button>
+        {/* Mobile : logo + loupe 44×44 + burger 44×44 (spec § 2) — la recherche complète vit
+            sur /explorer, la loupe y mène directement plutôt que de dupliquer un champ dans
+            une barre déjà étroite. */}
+        <div className="lg:hidden flex items-center">
+          <Link
+            href="/explorer"
+            title={t("rechercher")}
+            aria-label={t("rechercher")}
+            className="w-11 h-11 flex items-center justify-center rounded-lg transition-colors hover:bg-white/5"
+            style={{ color: "var(--text-muted)" }}
+          >
+            <IconSearch className="w-5 h-5" />
+          </Link>
+          <button
+            className="w-11 h-11 flex items-center justify-center rounded-lg transition-colors hover:bg-white/5"
+            style={{ color: "var(--text-muted)" }}
+            aria-label={t("menu")}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}
@@ -125,14 +163,6 @@ export default function NavHeader() {
           className="lg:hidden border-t flex flex-col"
           style={{ borderColor: "var(--line)", background: "rgba(12,17,22,0.97)" }}
         >
-          <Link
-            href="/#lieu-search"
-            onClick={close}
-            className="px-6 py-4 text-sm border-b transition-colors hover:bg-white/5"
-            style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
-          >
-            🔎 {t("rechercher")}
-          </Link>
           {contentLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -144,22 +174,14 @@ export default function NavHeader() {
               {label}
             </Link>
           ))}
-          <div style={{ background: "rgba(255,255,255,0.02)" }}>
-            {accountLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={close}
-                className="block px-6 py-4 text-sm border-b transition-colors hover:bg-white/5"
-                style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
-              >
-                {label}
-              </Link>
-            ))}
-            <div className="px-6 py-4 flex items-center justify-between">
-              <LanguageSwitcher onClick={close} />
-              <AuthButton onClose={close} />
-            </div>
+          <div className="px-6 py-4 flex items-center justify-between" style={{ background: "rgba(255,255,255,0.02)" }}>
+            <LanguageSwitcher onClick={close} />
+            <AuthButton onClose={close} />
+          </div>
+          <div className="px-6 py-4">
+            <LinkButton href="/composer" variant="primaire" onClick={close} className="w-full justify-center">
+              {t("composer")}
+            </LinkButton>
           </div>
         </nav>
       )}

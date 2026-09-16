@@ -10,19 +10,15 @@
     "description": "Les lieux confidentiels de la Côte d'Azur, de Menton à Saint-Tropez, et des itinéraires prêts à suivre."
   },
   "nav": {
-    "villes": "Villes",
-    "creerItineraire": "Créer un itinéraire",
-    "mesItineraires": "Mes itinéraires",
-    "mesFavoris": "Mes favoris",
     "connexion": "Connexion",
     "deconnexion": "Déconnexion",
     "menu": "Menu",
     "aPropos": "À propos",
-    "activites": "Activités",
-    "lieux": "Lieux",
     "itineraires": "Itinéraires",
     "rechercher": "Rechercher",
-    "carnet": "Le carnet"
+    "carnet": "Le carnet",
+    "explorer": "Explorer",
+    "composer": "Composer un itinéraire"
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
