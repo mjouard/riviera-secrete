@@ -341,7 +341,8 @@
     "creerUnItineraire": "Créer un itinéraire →",
     "ajoute": "✓ Ajouté !",
     "dejaPresent": "✓ Déjà présent",
-    "nouvelItineraire": "+ Nouvel itinéraire"
+    "nouvelItineraire": "+ Nouvel itinéraire",
+    "yAller": "Y aller"
   },
   "aPropos": {
     "title": "À propos",

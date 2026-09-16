@@ -431,7 +431,24 @@ Repris par petites briques (décision utilisateur, même format que le Lot 5) : 
 visuel d'abord (fondation pour tout le reste), puis composition desktop, encadré "Le bon
 moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" sur place.
 
-- [ ] **Barre d'action fixe mobile** (`02-composants.md` § 7) — ancrée en bas : bouton primaire « Y aller » 52 px `flex-grow` + icône épingle 19 px + 3 carrés 52 × 52 (favori/partage/ajouter). `padding-bottom: max(20px, env(safe-area-inset-bottom))`. Le contenu réserve 112 px en bas. Corrige MO-05 (actions disparaissent au défilement sur mobile) et MO-01 (liens Maps/Waze/Plans à 16 px de haut).
+- [x] **Barre d'action fixe mobile** (`02-composants.md` § 7) — **fait le 2026-09-16**,
+      quatrième brique. Nouveau `LieuMobileActionBar.tsx` (`lg:hidden fixed bottom-0`) :
+      bouton primaire « Y aller »/« Get directions » 52px `flex-grow` (icône épingle
+      `IconPin` 19px + libellé, ouvre Google Maps — premier lien de `buildMapLinks`, seule
+      action qui tienne sur une barre fixe) + 3 carrés 52×52 (favori/partager/ajouter).
+      `padding-bottom: max(20px, env(safe-area-inset-bottom))` pour la zone sûre iOS ;
+      contenu de la page réservant 112px en bas (`pb-28` mobile, `lg:pb-12` desktop).
+      Corrige MO-05. MO-01 (liens Maps/Waze/Plans à 16px) déjà réglé au Lot 1 (vrais boutons
+      44px), cette brique ajoute par-dessus l'action principale à 52px.
+      **`FavoriteButton`/`ShareButton`/`AddToItinButton`** gagnent un prop `variant="square"`
+      (défaut `"pill"`, comportement desktop inchangé) plutôt que 3 nouveaux composants — même
+      logique (bascule optimiste, partage, ajout à un itinéraire), juste l'habillage carré
+      icône-seule. Le menu déroulant d'`AddToItinButton` s'ouvre vers le **haut**, ancré à
+      **droite** en variante carrée (`bottom-full` + `right-0`, au lieu de `top-full` +
+      `left-0`) — un bouton collé au bas de l'écran ouvrirait sinon son menu hors du viewport.
+      Vérifié en direct (mobile 375px) : bouton "Y aller" à 52px/fond aube, 3 carrés à
+      52×52 exact, `padding-bottom` de l'article à 112px, barre invisible (`display:none`)
+      ≥1024px où la colonne collante du Lot 4a couvre déjà ce rôle.
 - [~] **Trois rebonds sous la fiche** (`06` § 2.6) — **①  et ② faits le 2026-09-14**, déployés et
       vérifiés en prod (FR + EN). ① lit `api.itineraires.list()` et affiche le rang de l'étape
       et son heure ; ② réutilise la conversion distance → temps du générateur (35 km/h + 10 min),

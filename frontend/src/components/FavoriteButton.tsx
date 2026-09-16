@@ -6,7 +6,14 @@ import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
 import { redirectToConnexion } from "@/lib/utils";
 
-export default function FavoriteButton({ slug }: { slug: string }) {
+export default function FavoriteButton({
+  slug,
+  variant = "pill",
+}: {
+  slug: string;
+  /** "square" — carré 52×52 icône seule, pour la barre d'action fixe mobile (Lot 4a). */
+  variant?: "pill" | "square";
+}) {
   const t = useTranslations("lieuActions");
   const { data: session, status } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -57,6 +64,26 @@ export default function FavoriteButton({ slug }: { slug: string }) {
 
   if (status === "loading") return null;
 
+  const title = !session ? t("connexionRequise") : isFavorite ? t("retirerDesFavoris") : t("ajouterAuxFavoris");
+  const borderColor = isFavorite ? "var(--aube)" : "var(--line)";
+  const color = isFavorite ? "var(--aube)" : "var(--brume)";
+
+  if (variant === "square") {
+    return (
+      <button
+        onClick={toggle}
+        disabled={loading}
+        aria-pressed={isFavorite}
+        aria-busy={loading}
+        title={title}
+        className="focus-ring-aube w-[52px] h-[52px] flex-shrink-0 flex items-center justify-center text-xl rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+        style={{ borderColor, color, background: "var(--nuit-haute)" }}
+      >
+        <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={toggle}
@@ -66,12 +93,9 @@ export default function FavoriteButton({ slug }: { slug: string }) {
       disabled={loading}
       aria-pressed={isFavorite}
       aria-busy={loading}
-      title={!session ? t("connexionRequise") : isFavorite ? t("retirerDesFavoris") : t("ajouterAuxFavoris")}
+      title={title}
       className="focus-ring-aube flex items-center gap-1.5 h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
-      style={{
-        borderColor: isFavorite ? "var(--aube)" : "var(--line)",
-        color: isFavorite ? "var(--aube)" : "var(--brume)",
-      }}
+      style={{ borderColor, color }}
     >
       <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
       <span>{isFavorite ? t("favori") : t("ajouterAuxFavoris")}</span>

@@ -341,7 +341,8 @@
     "creerUnItineraire": "Build an itinerary →",
     "ajoute": "✓ Added!",
     "dejaPresent": "✓ Already in there",
-    "nouvelItineraire": "+ New itinerary"
+    "nouvelItineraire": "+ New itinerary",
+    "yAller": "Get directions"
   },
   "aPropos": {
     "title": "About",

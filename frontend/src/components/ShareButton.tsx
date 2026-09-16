@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-export default function ShareButton({ title }: { title: string }) {
+export default function ShareButton({
+  title,
+  variant = "pill",
+}: {
+  title: string;
+  /** "square" — carré 52×52 icône seule, pour la barre d'action fixe mobile (Lot 4a). */
+  variant?: "pill" | "square";
+}) {
   const t = useTranslations("lieuActions");
   const [copied, setCopied] = useState(false);
 
@@ -27,6 +34,19 @@ export default function ShareButton({ title }: { title: string }) {
     } catch {
       // silent
     }
+  }
+
+  if (variant === "square") {
+    return (
+      <button
+        onClick={handleClick}
+        title={t("partager")}
+        className="focus-ring-aube w-[52px] h-[52px] flex-shrink-0 flex items-center justify-center text-lg rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+        style={{ borderColor: "var(--line)", color: "var(--brume)", background: "var(--nuit-haute)" }}
+      >
+        <span aria-hidden="true">{copied ? "✓" : "🔗"}</span>
+      </button>
+    );
   }
 
   return (

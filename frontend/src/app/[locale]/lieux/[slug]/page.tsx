@@ -14,6 +14,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import ShareButton from "@/components/ShareButton";
 import AddToItinButton from "@/components/AddToItinButton";
 import FermeAujourdhui from "@/components/FermeAujourdhui";
+import LieuMobileActionBar from "@/components/LieuMobileActionBar";
 import Photo from "@/components/Photo";
 
 export const revalidate = 3600;
@@ -160,7 +161,7 @@ export default async function LieuPage({
   };
 
   return (
-    <article className="max-w-6xl mx-auto px-6 py-12">
+    <article className="max-w-6xl mx-auto px-6 pt-12 pb-28 lg:pb-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(attractionJsonLd) }}
@@ -475,6 +476,8 @@ export default async function LieuPage({
           </div>
         </section>
       )}
+
+      <LieuMobileActionBar lieuSlug={lieu.slug} lat={lieu.lat} lng={lieu.lng} nom={nom} />
     </article>
   );
 }

@@ -8,7 +8,16 @@ import { authFetch } from "@/lib/api";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
 import type { UserItineraire } from "@/lib/types";
 
-export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
+export default function AddToItinButton({
+  lieuSlug,
+  variant = "pill",
+}: {
+  lieuSlug: string;
+  /** "square" — carré 52×52 icône seule, pour la barre d'action fixe mobile (Lot 4a) : le
+   * menu s'ouvre alors vers le haut et ancré à droite, pas vers le bas comme la version pilule
+   * (le bouton est collé au bas de l'écran, un menu ouvert vers le bas sortirait du viewport). */
+  variant?: "pill" | "square";
+}) {
   const t = useTranslations("lieuActions");
   const tDuree = useTranslations("dureeLabels");
   const { data: session } = useSession();
@@ -57,17 +66,32 @@ export default function AddToItinButton({ lieuSlug }: { lieuSlug: string }) {
 
   return (
     <div ref={wrapRef} className="relative inline-block">
-      <button
-        onClick={toggle}
-        className="focus-ring-aube inline-flex items-center h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
-        style={{ borderColor: "var(--line)", color: "var(--brume)" }}
-      >
-        {t("ajouterAUnItineraire")}
-      </button>
+      {variant === "square" ? (
+        <button
+          onClick={toggle}
+          title={t("ajouterAUnItineraire")}
+          className="focus-ring-aube w-[52px] h-[52px] flex-shrink-0 flex items-center justify-center text-lg rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+          style={{ borderColor: "var(--line)", color: "var(--brume)", background: "var(--nuit-haute)" }}
+        >
+          <span aria-hidden="true">➕</span>
+        </button>
+      ) : (
+        <button
+          onClick={toggle}
+          className="focus-ring-aube inline-flex items-center h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+          style={{ borderColor: "var(--line)", color: "var(--brume)" }}
+        >
+          {t("ajouterAUnItineraire")}
+        </button>
+      )}
 
       {open && (
         <div
-          className="absolute left-0 top-full mt-2 w-72 rounded-xl overflow-hidden z-20 shadow-xl"
+          className={
+            variant === "square"
+              ? "absolute right-0 bottom-full mb-2 w-72 rounded-xl overflow-hidden z-20 shadow-xl"
+              : "absolute left-0 top-full mt-2 w-72 rounded-xl overflow-hidden z-20 shadow-xl"
+          }
           style={{ background: "var(--nuit-haute)", border: "1px solid var(--line)" }}
         >
           {items === null ? (
