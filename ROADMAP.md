@@ -749,7 +749,37 @@ page (ce dernier indépendant, peut se glisser n'importe où).
       déployé. Corrigé en lisant l'API de prod à la place (`fetch` dans `redirects()`,
       `.catch(() => [])` en repli — même discipline que `sitemap.ts` : un API injoignable au
       moment du build saute ces redirections plutôt que de faire échouer tout le déploiement).
-- [ ] **Vocabulaire figé partout** (`03` § 8) — *lieu* / *commune* / *activité* / *itinéraire* / *itinéraire composé* dans l'interface, le contenu, les balises, les slugs et les noms de variables. Corrige MC-01 (4 mots pour 2 objets : *spots* / *lieux* / *villes* / *communes*).
+- [~] **Vocabulaire figé partout** (`03` § 8) — **le volet interface/contenu fait le
+      2026-09-16**, le volet slugs/noms de variables **volontairement pas fait**, voir
+      détail ci-dessous. Corrige MC-01 (4 mots pour 2 objets : *spots* / *lieux* / *villes* /
+      *communes*).
+      - **`ville`/`commune`** : déjà réglé aux briques 2/7-3/7 de ce lot (pages, routes,
+        namespace de traduction — voir plus haut).
+      - **`lieu`, pas `spot`/`gem`** : trouvé en relisant `messages/*.json` un vrai cas
+        d'école du problème que ce point nomme — le `<title>` du site (`meta.title`, visible
+        dans tout onglet/résultat de recherche) disait *« Les spots confidentiels »* en FR et
+        *« Hidden **gems** »* en EN : deux mots différents, aucun des deux "lieux"/"places"
+        utilisés partout ailleurs sur le site. Corrigé, plus 5 autres occurrences de *spot(s)*
+        trouvées côté EN uniquement (`meta.description`, `pwa.description`,
+        `home.itemListName`, `aPropos.choixTexte`, `aPropos.methodePoint2`) — le FR n'avait
+        que celle du titre. Non touché : *"spot"* verbe (*"if you spot an outdated
+        price"*, `aPropos.contactTexte`) — sens différent (repérer), pas le même mot.
+      - **`itinéraire`, pas `parcours`/`route`** : 2 sous-titres écrits pendant ce lot
+        utilisaient *"parcours"* (FR, repris du texte du spec de refonte lui-même) / *"routes"*
+        (EN) juste sous un titre *"Itinéraires"* — corrigés en `itinéraires`/`itineraries`
+        pour la même raison que le point précédent, en s'écartant délibérément de la
+        formulation exacte du spec.
+      - **`activité`** : pas de synonyme concurrent trouvé en relisant `messages/*.json`.
+      - **Slugs et noms de variables — pas fait, hors périmètre de cette passe** :
+        l'entité backend s'appelle toujours `Ville` (`RivieraSecrete.Domain/Entities/Ville.cs`,
+        colonne `VilleSlug` sur `Activite`, `GET /api/villes`, fichier `data/villes.json`).
+        Aligner ces noms sur "Commune" toucherait le backend (entité, migration EF,
+        endpoints), le fichier de données et son script de seed/sync — un effort bien plus
+        large et risqué qu'une "petite brique" de polish frontend, pour un gain invisible à
+        l'utilisateur (l'URL publique, elle, dit déjà `/communes/[slug]` depuis la brique
+        3/7 — c'est elle qui compte pour la perception de cohérence). À rouvrir seulement si
+        ce nom interne cause un vrai problème (ex. onboarding d'un nouveau contributeur
+        confus par l'écart nom-de-code / nom-produit), pas par principe.
 - [ ] **Pied de page** — cibles ≥ 15 px minimum (actuellement 17 px de haut → MO-01) ; liens : La méthode · Crédits photo · Mentions légales · Confidentialité ; FR · EN à droite.
 
 ### Critères de recette globaux

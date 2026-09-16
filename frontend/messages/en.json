@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Riviera Secrète — Hidden gems of the French Riviera",
+    "title": "Riviera Secrète — Hidden places of the French Riviera",
     "titleTemplate": "%s — Riviera Secrète",
-    "description": "{count} off-the-beaten-path spots on the French Riviera, from Menton to Saint-Tropez."
+    "description": "{count} off-the-beaten-path places on the French Riviera, from Menton to Saint-Tropez."
   },
   "pwa": {
     "nom": "Riviera Secrète — the French Riviera off the beaten path",
     "nomCourt": "Riviera Secrète",
-    "description": "The hidden spots of the French Riviera, from Menton to Saint-Tropez, and ready-to-follow itineraries."
+    "description": "The hidden places of the French Riviera, from Menton to Saint-Tropez, and ready-to-follow itineraries."
   },
   "nav": {
     "connexion": "Log in",
@@ -38,7 +38,7 @@
   },
   "home": {
     "itinerairesTitle": "Itineraries",
-    "itemListName": "{count} hidden spots on the French Riviera",
+    "itemListName": "{count} hidden places on the French Riviera",
     "presDeMoi": "📍 Near me",
     "presDeMoiActif": "📍 Sorted by distance",
     "presDeMoiTitre": "Sort places from nearest to farthest",
@@ -64,7 +64,7 @@
     "explorerVoirCarte": "View on map",
     "explorerVoirListe": "View list",
     "explorerVoirTous": "See all {count} places →",
-    "dejaComposesSousTitre": "Six routes, if you'd rather we picked.",
+    "dejaComposesSousTitre": "Six itineraries, if you'd rather we picked.",
     "methodeTitre": "A place makes the list if it holds up without the crowds",
     "methodeTexte": "No rankings, no sponsorships. Every listing is visited, dated, and removed if the place stops being worth the trip. Partner booking links are labelled as such.",
     "methodeVerifies": "Places verified on site",
@@ -351,11 +351,11 @@
     "quoiTitle": "What's in it",
     "quoiTexte": "{lieux} places across {villes} towns, from Menton to Saint-Tropez, grouped into {itineraires} ready-made itineraries — plus an itinerary builder if you'd rather put together your own. Each place lists what you can actually do there ({activites} activities in total), with duration, indicative price and a link to the source.",
     "choixTitle": "How places are chosen",
-    "choixTexte": "The criterion is simple: is the place worth the trip without already being on every list? A perched village the tour coaches don't climb to, a coastal path you get to yourself off-season, a chapel you can visit on request. A few unmissable spots remain (hard to talk about Èze without Èze), but the angle stays the same: what you actually do there, and when to go to avoid the crowds.",
+    "choixTexte": "The criterion is simple: is the place worth the trip without already being on every list? A perched village the tour coaches don't climb to, a coastal path you get to yourself off-season, a chapel you can visit on request. A few unmissable places remain (hard to talk about Èze without Èze), but the angle stays the same: what you actually do there, and when to go to avoid the crowds.",
     "methodeTitle": "How it's verified",
     "methodeIntro": "The site is written and maintained by hand. In practice:",
     "methodePoint1": "Each place's GPS coordinates are checked one by one against real sources — several were off by a few kilometres to begin with.",
-    "methodePoint2": "The badges (beach, hiking, mountain biking, diving, restaurant) describe what's practicable at that exact spot, not somewhere in the same town. Èze village has no beach badge: the beach is down below, at Èze-sur-Mer, which is a different place.",
+    "methodePoint2": "The badges (beach, hiking, mountain biking, diving, restaurant) describe what's practicable at that exact place, not somewhere in the same town. Èze village has no beach badge: the beach is down below, at Èze-sur-Mer, which is a different place.",
     "methodePoint3": "Photos are either personal or Creative Commons-licensed, found on Wikimedia Commons — each one credited with its author and licence.",
     "methodePoint4": "No affiliate links, no commission, no sponsored content. Booking links point to the tourist office, the venue's own site, or a booking platform, with no referral ID attached.",
     "limitesTitle": "What this site isn't",
@@ -494,7 +494,7 @@
   },
   "itineraires": {
     "titre": "Itineraries",
-    "sousTitre": "Six ready-made routes, if you'd rather we picked.",
+    "sousTitre": "Six ready-made itineraries, if you'd rather we picked.",
     "metaTitre": "Itineraries",
     "metaDescription": "{count} editorial itineraries on the French Riviera, from half a day to 2 days, with opening hours and travel times.",
     "filAriane": "Breadcrumb",

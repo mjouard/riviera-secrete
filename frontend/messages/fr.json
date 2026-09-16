@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Riviera Secrète — Les spots confidentiels de la Côte d'Azur",
+    "title": "Riviera Secrète — Les lieux confidentiels de la Côte d'Azur",
     "titleTemplate": "%s — Riviera Secrète",
     "description": "{count} lieux hors des sentiers battus sur la Côte d'Azur, de Menton à Saint-Tropez."
   },
@@ -64,7 +64,7 @@
     "explorerVoirCarte": "Voir sur la carte",
     "explorerVoirListe": "Voir la liste",
     "explorerVoirTous": "Voir les {count} lieux →",
-    "dejaComposesSousTitre": "Six parcours, si tu préfères qu'on choisisse.",
+    "dejaComposesSousTitre": "Six itinéraires, si tu préfères qu'on choisisse.",
     "methodeTitre": "Un lieu entre dans la liste s'il tient debout sans la foule",
     "methodeTexte": "Pas de classement, pas de partenariat. Chaque fiche est visitée, datée, et retirée si l'endroit devient impraticable. Les liens de réservation partenaires sont signalés comme tels.",
     "methodeVerifies": "Lieux vérifiés sur place",
@@ -494,7 +494,7 @@
   },
   "itineraires": {
     "titre": "Itinéraires",
-    "sousTitre": "Six parcours composés d'avance, si tu préfères qu'on choisisse.",
+    "sousTitre": "Six itinéraires composés d'avance, si tu préfères qu'on choisisse.",
     "metaTitre": "Itinéraires",
     "metaDescription": "{count} itinéraires éditoriaux sur la Côte d'Azur, de la demi-journée aux 2 jours, avec horaires et temps de trajet.",
     "filAriane": "Fil d'Ariane",
