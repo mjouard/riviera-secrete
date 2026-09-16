@@ -702,15 +702,30 @@ page (ce dernier indépendant, peut se glisser n'importe où).
       itinéraires elles-mêmes une fois connecté — code repris quasi tel quel des deux
       anciennes pages (mêmes appels `authFetch`), pas retesté en session authentifiée dans
       cette passe.
-- [ ] **Redirections 301** (`03` § 3) à poser côté Next.js + équivalents `/en/…` :
-  - `/creer-itineraire` → `/composer`
-  - `/mes-favoris` → `/carnet?onglet=favoris`
-  - `/mes-itineraires` → `/carnet?onglet=itineraires`
-  - `/activites` → `/explorer?type=activites`
-  - `/villes` → `/explorer`
-  - `/villes/[slug]` → `/communes/[slug]`
-  - `/#lieux` → `/explorer`
-  - `/#itineraires` → `/itineraires`
+- [x] **Redirections 301** (`03` § 3) — **fait le 2026-09-16**, sur les 8 listées à l'origine :
+  - `/mes-favoris` → `/carnet?onglet=favoris`, `/mes-itineraires` → `/carnet?onglet=itineraires`
+    — posées à la brique `/carnet` (2/7), dès que la dépendance a existé.
+  - `/villes` → `/explorer`, `/villes/[slug]` → `/communes/[slug]` (ou `/lieux/[slug]` pour les
+    27 communes à 1 seul lieu) — posées à la brique pages communes (3/7).
+  - `/creer-itineraire` → `/composer` — posée ici (`next.config.ts`), **mais conditionnelle** :
+    `missing: [{ type: "query", key: "id" }]`. `/composer` ne sait pas encore charger un
+    itinéraire déjà sauvegardé par id (seul `/carnet`'s bouton "Voir" en dépend,
+    `carnet/page.tsx`) — sans cette garde, ce lien aurait redirigé vers une page qui ignore
+    `?id=`, silencieusement. La page nue et toutes les variantes à paramètres que `/composer`
+    comprend déjà (`?add=`, `?jours=`, `?duree=`, `?nom=` — utilisées par
+    `itineraires/[slug]/page.tsx`, `AddToItinButton.tsx`, `ItineraireComposeView.tsx`)
+    redirigent normalement ; `?id=` continue de servir l'ancienne page, toujours déployée.
+    Vérifié en direct les 4 cas (nu, `?id=`, `?add=`, `/en/`).
+    **Volontairement pas allé plus loin** : les call sites ci-dessus n'ont pas été repointés
+    directement vers `/composer` (ce qui économiserait le saut de redirection) — la parité
+    `?add=`/`?jours=` entre les deux outils n'a pas été revérifiée en détail dans cette passe,
+    seule la lecture des paramètres au montage l'a été par lecture de code.
+  - `/activites` → `/explorer?type=activites` — **toujours pas fait, décision actée** (Lot 4b,
+    2026-09-14) : dupliquerait toute la logique de `ActivitesGrid.tsx`.
+  - `/#lieux` → `/explorer`, `/#itineraires` → `/itineraires` — **sans objet côté serveur** :
+    une ancre `#fragment` n'atteint jamais le serveur, donc rien à rediriger. Les liens qui
+    généraient ces ancres ont tous été corrigés au fil des briques précédentes (dernier
+    contrôle : plus aucune occurrence dans `frontend/src`).
 - [x] **Pages communes** — **fait le 2026-09-16**. `/villes/[slug]` et `/villes` (liste)
       remplacés : 7 communes sur 34 ont ≥ 2 lieux (`data/villes.json`, pas les 28 de la ligne
       d'origine — vérifié en direct, ce nombre dérive avec le contenu) et gardent une page à

@@ -54,6 +54,24 @@ const nextConfig: NextConfig = {
       { source: "/en/mes-itineraires", destination: "/en/carnet?onglet=itineraires", permanent: true },
       { source: "/villes", destination: "/explorer", permanent: true },
       { source: "/en/villes", destination: "/en/explorer", permanent: true },
+      // /composer (Lot 4c) est l'outil principal depuis le Lot 4e — mais il ne sait pas
+      // encore charger un itinéraire déjà sauvegardé par id (`/creer-itineraire?id=…`, seul
+      // /carnet.tsx's bouton "Voir" en dépend). `missing: [{ type: "query", key: "id" }]` :
+      // redirige tout le reste (page nue, `?add=`, `?jours=`, `?duree=`… — tous déjà compris
+      // par /composer) et laisse passer ce seul cas vers la page /creer-itineraire, toujours
+      // déployée. Ne pas élargir tant que /composer n'a pas cette capacité.
+      {
+        source: "/creer-itineraire",
+        missing: [{ type: "query", key: "id" }],
+        destination: "/composer",
+        permanent: true,
+      },
+      {
+        source: "/en/creer-itineraire",
+        missing: [{ type: "query", key: "id" }],
+        destination: "/en/composer",
+        permanent: true,
+      },
       ...(await communesRedirects()),
     ];
   },
