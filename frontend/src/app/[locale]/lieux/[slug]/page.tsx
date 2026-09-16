@@ -267,7 +267,7 @@ export default async function LieuPage({
             <div className="flex flex-wrap gap-2 mt-3">
               <FavoriteButton slug={lieu.slug} />
               <ShareButton title={nom} />
-              <AddToItinButton lieuSlug={lieu.slug} />
+              <AddToItinButton lieuSlug={lieu.slug} nom={nom} />
             </div>
           </div>
 

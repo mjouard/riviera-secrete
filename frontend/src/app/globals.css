@@ -31,11 +31,24 @@ button:not(:disabled) { cursor: pointer; }
   background: rgba(255,255,255,0.38); transition: background 0.2s, transform 0.2s;
 }
 .carousel-dot.active { background: #fff; transform: scale(1.3); }
+/* Compteur de slides (refonte UI Lot 4a, docs/design-refonte-2026-09-14.md § 5) — même
+   habillage translucide que .carousel-btn/.carousel-dots (déjà établi sur cette image),
+   coin opposé aux pastilles pour ne pas se superposer. */
+.carousel-counter {
+  position: absolute; bottom: 16px; left: 14px; z-index: 3;
+  background: rgba(12,17,22,0.48); border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(5px);
+  padding: 3px 8px; border-radius: var(--radius, 3px);
+  color: var(--calcaire, #F0E9DC);
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.02em;
+}
 @media (max-width: 640px) {
   .carousel-btn { width: 36px; height: 36px; font-size: 1.3rem; top: 16px; transform: none; }
   .carousel-prev { left: 8px; }
   .carousel-next { right: 8px; }
   .carousel-dots { bottom: 12px; right: 14px; }
+  .carousel-counter { bottom: 12px; left: 8px; }
 }
 
 /* ---------- FOCUS CLAVIER ---------- */

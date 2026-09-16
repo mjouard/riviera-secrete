@@ -54,7 +54,7 @@ export default function LieuMobileActionBar({
         </a>
         <FavoriteButton slug={lieuSlug} variant="square" />
         <ShareButton title={nom} variant="square" />
-        <AddToItinButton lieuSlug={lieuSlug} variant="square" />
+        <AddToItinButton lieuSlug={lieuSlug} nom={nom} variant="square" />
       </div>
     </div>
   );

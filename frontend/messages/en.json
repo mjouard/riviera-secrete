@@ -342,7 +342,9 @@
     "ajoute": "✓ Added!",
     "dejaPresent": "✓ Already in there",
     "nouvelItineraire": "+ New itinerary",
-    "yAller": "Get directions"
+    "yAller": "Get directions",
+    "ajouteAuBrouillon": "{nom} added to your itinerary ({count, plural, one {# place} other {# places}})",
+    "voirMonItineraire": "View my itinerary"
   },
   "aPropos": {
     "title": "About",

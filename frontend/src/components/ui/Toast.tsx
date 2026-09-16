@@ -14,12 +14,17 @@ export function Toast({
   variant = "info",
   onUndo,
   undoLabel,
+  raised = false,
 }: {
   message: string;
   onDismiss: () => void;
   variant?: "info" | "undo";
   onUndo?: () => void;
   undoLabel?: string;
+  /** Ajouté au Lot 4a : `true` remonte le toast au-dessus de `LieuMobileActionBar.tsx`
+   * (barre fixe 52px + zone sûre iOS, sous 1024px) — sans ça, le toast serait masqué
+   * derrière elle sur la fiche lieu. Sans effet ≥1024px, où cette barre n'existe pas. */
+  raised?: boolean;
 }) {
   useEffect(() => {
     const delay = variant === "undo" ? 7000 : 4000;
@@ -31,7 +36,7 @@ export function Toast({
     <div
       role="status"
       aria-live="polite"
-      className="text-body fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 px-5 py-3 z-50"
+      className={`text-body fixed left-1/2 -translate-x-1/2 flex items-center gap-4 px-5 py-3 z-50 ${raised ? "bottom-[104px] lg:bottom-6" : "bottom-6"}`}
       style={{
         background: "var(--nuit-haute)",
         color: "var(--calcaire)",

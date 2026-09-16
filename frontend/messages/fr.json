@@ -342,7 +342,9 @@
     "ajoute": "✓ Ajouté !",
     "dejaPresent": "✓ Déjà présent",
     "nouvelItineraire": "+ Nouvel itinéraire",
-    "yAller": "Y aller"
+    "yAller": "Y aller",
+    "ajouteAuBrouillon": "{nom} ajouté à ton itinéraire ({count, plural, one {# lieu} other {# lieux}})",
+    "voirMonItineraire": "Voir mon itinéraire"
   },
   "aPropos": {
     "title": "À propos",

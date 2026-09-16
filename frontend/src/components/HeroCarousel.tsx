@@ -54,6 +54,12 @@ export default function HeroCarousel({ slides, className = "" }: Props) {
           />
         ))}
       </div>
+
+      {/* Compteur de slides (refonte UI Lot 4a, § 5 du spec) — affiché dès qu'il y a plus
+          d'une image, comme les flèches et les pastilles au-dessus. */}
+      <span className="carousel-counter" aria-hidden="true">
+        {index + 1} / {slides.length}
+      </span>
     </div>
   );
 }

@@ -6,13 +6,18 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { authFetch } from "@/lib/api";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
+import { ecrireSelectionPersistee, lireSelectionPersistee } from "@/lib/brouillon-itineraire";
 import type { UserItineraire } from "@/lib/types";
+import { Toast } from "@/components/ui/Toast";
 
 export default function AddToItinButton({
   lieuSlug,
+  nom,
   variant = "pill",
 }: {
   lieuSlug: string;
+  /** Nom affiché du lieu, pour le message du toast "ajouté sur place" (visiteur sans compte). */
+  nom: string;
   /** "square" — carré 52×52 icône seule, pour la barre d'action fixe mobile (Lot 4a) : le
    * menu s'ouvre alors vers le haut et ancré à droite, pas vers le bas comme la version pilule
    * (le bouton est collé au bas de l'écran, un menu ouvert vers le bas sortirait du viewport). */
@@ -26,6 +31,7 @@ export default function AddToItinButton({
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<UserItineraire[] | null>(null);
   const [addedId, setAddedId] = useState<string | null>(null);
+  const [toastCount, setToastCount] = useState<number | null>(null);
 
   useEffect(() => {
     function onOutsideClick(e: MouseEvent) {
@@ -37,8 +43,16 @@ export default function AddToItinButton({
 
   async function toggle() {
     if (!session?.apiToken) {
-      // Pas besoin de compte pour composer un itinéraire — seule la sauvegarde en exige un.
-      router.push(`/creer-itineraire?add=${encodeURIComponent(lieuSlug)}`);
+      // Sans compte, pas de liste d'itinéraires à choisir (→ un seul geste possible :
+      // accumuler dans le brouillon de session) — ajoute sur place et le dit par toast,
+      // plutôt que de naviguer immédiatement vers /composer (refonte UI Lot 4a, "reste la
+      // forme"). Même relais que /creer-itineraire et /composer eux-mêmes
+      // (lib/brouillon-itineraire.ts), pour que ce clic et un futur passage par le
+      // composeur voient la même sélection.
+      const actuel = lireSelectionPersistee();
+      const fusion = actuel.includes(lieuSlug) ? actuel : [...actuel, lieuSlug];
+      ecrireSelectionPersistee(fusion);
+      setToastCount(fusion.length);
       return;
     }
     if (!open) {
@@ -64,7 +78,13 @@ export default function AddToItinButton({
     setTimeout(() => setOpen(false), 1000);
   }
 
+  function voirItineraire() {
+    const slugs = lireSelectionPersistee();
+    router.push(slugs.length > 0 ? `/composer?lieux=${slugs.map(encodeURIComponent).join(",")}` : "/composer");
+  }
+
   return (
+    <>
     <div ref={wrapRef} className="relative inline-block">
       {variant === "square" ? (
         <button
@@ -149,5 +169,16 @@ export default function AddToItinButton({
         </div>
       )}
     </div>
+    {toastCount !== null && (
+      <Toast
+        message={t("ajouteAuBrouillon", { nom, count: toastCount })}
+        variant="undo"
+        undoLabel={t("voirMonItineraire")}
+        onUndo={voirItineraire}
+        onDismiss={() => setToastCount(null)}
+        raised
+      />
+    )}
+    </>
   );
 }

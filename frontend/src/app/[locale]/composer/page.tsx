@@ -21,6 +21,7 @@ import {
 } from "@/lib/itineraire-logic";
 import { useAujourdhui, dateISOLocale } from "@/lib/aujourdhui";
 import { BADGE_DEFS } from "@/lib/home-data";
+import { ecrireSelectionPersistee, lireSelectionPersistee } from "@/lib/brouillon-itineraire";
 import ComposerParamsBar from "./_components/ComposerParamsBar";
 import ComposerPicker from "./_components/ComposerPicker";
 import ComposerRecap from "./_components/ComposerRecap";
@@ -143,9 +144,20 @@ export default function ComposerPage() {
           }
         }
 
+        // « Ajouter à un itinéraire » depuis une fiche lieu (→ PR-02) s'ajoute à ce qui était
+        // déjà sélectionné plutôt que de l'écraser. La base vient de `?lieux=` s'il est là
+        // (lien rechargé/partagé, qui fait foi), sinon du brouillon de session — seul moyen de
+        // cumuler deux ajouts faits depuis deux fiches différentes sans repasser par ici entre
+        // les deux, chacun étant une navigation qui remonte cette page. Même mécanisme que
+        // /creer-itineraire (lib/brouillon-itineraire.ts), qui ne se branchait pas tout seul
+        // ici alors que /creer-itineraire?add=… y redirige depuis le Lot 5 — trouvé et corrigé
+        // en construisant le toast "ajouté sur place" du Lot 4a.
         const valider = (brut: string | null) =>
           (brut ?? "").split(",").map((s) => s.trim()).filter((s) => map.has(s));
-        const selection = [...new Set([...valider(params.get("lieux")), ...valider(params.get("add"))])];
+        const ajouts = valider(params.get("add"));
+        const depuisUrl = valider(params.get("lieux"));
+        const base = depuisUrl.length > 0 ? depuisUrl : lireSelectionPersistee().filter((s) => map.has(s));
+        const selection = [...new Set([...base, ...ajouts])];
         if (selection.length > 0) setSelectedSlugs(new Set(selection));
 
         selectionHydratee.current = true;
@@ -273,6 +285,7 @@ export default function ComposerPage() {
       if (currentNom) sortie.set("nom", currentNom);
     } else if (view === "picker") {
       const slugs = Array.from(selectedSlugs);
+      ecrireSelectionPersistee(slugs);
       if (slugs.length > 0) sortie.set("lieux", slugs.join(","));
       if (q) sortie.set("q", q);
       if (zone) sortie.set("zone", zone);

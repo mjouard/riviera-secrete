@@ -152,10 +152,10 @@ d'accueil »). Codes de référence entre parenthèses pour retrouver le détail
       encoder la sélection et la durée dans l'URL (`?duree=journee&lieux=eze,la-turbie`) et
       reconstruire au montage — couvre les visiteurs sans compte, le retour arrière et le
       bookmark.
-- [ ] **« Ajouter à un itinéraire » efface le lieu précédent** (PR-02) — fiche Èze puis fiche
-      Gourdon : `?add=gourdon-village`, Èze a disparu. Le verbe « ajouter » promet un panier,
-      il n'y en a pas. **Piste** : accumuler dans l'URL ou `sessionStorage`, afficher un
-      compteur visible, retour immédiat sur la fiche (« Ajouté — 3 lieux ») sans naviguer.
+- [x] **« Ajouter à un itinéraire » efface le lieu précédent** (PR-02) — le fond était corrigé
+      dès le Lot 2 (accumulation via `sessionStorage` + `?lieux=`, `lib/brouillon-itineraire.ts`).
+      La piste elle-même (compteur visible, retour immédiat sans naviguer) **faite le
+      2026-09-16** à la dernière brique du Lot 4a — voir plus bas.
 - [ ] **La 404 est celle de Next.js, en anglais** (PR-03) — `/lieux/page-qui-nexiste-pas` →
       écran noir « 404 — This page could not be found. », sans en-tête ni pied de page.
       **Piste** : un `not-found.tsx` localisé avec la mise en page du site et deux ou trois
@@ -423,7 +423,7 @@ plus nulle part.
 
 Dans cet ordre — chacun indépendant. La fiche lieu en premier : c'est la page d'atterrissage n° 1 depuis Google, et elle a le meilleur ratio effort/valeur. L'accueil en dernier : il pointe vers les autres écrans, autant qu'ils existent d'abord.
 
-#### 4a. Fiche lieu (`06-ecran-fiche-lieu.md`) — reprise en petites briques le 2026-09-16
+#### 4a. Fiche lieu (`06-ecran-fiche-lieu.md`) — **reprise en 6 petites briques, terminée le 2026-09-16**
 
 La composition actuelle est bonne (galerie → identité → infos pratiques → carte → récit → conseils → activités → rebonds). Elle change de peau et gagne trois blocs.
 
@@ -431,6 +431,13 @@ Repris par petites briques (décision utilisateur, même format que le Lot 5) : 
 visuel d'abord (fondation pour tout le reste), puis composition desktop, encadré "Le bon
 moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" sur place.
 
+- [x] **Compteur de slides** (`docs/design-refonte-2026-09-14.md` § 5 — pas listé dans la
+      checklist d'origine de ce Lot, trouvé en relisant le spec) — **fait le 2026-09-16**,
+      cinquième brique. `HeroCarousel.tsx` (composant partagé avec `itineraires/[slug]`, donc
+      s'affiche aussi là-bas, cohérent) affiche `N / total` en Plex Mono, coin bas-gauche
+      (`.carousel-counter`, nouvelle classe — même habillage translucide que les flèches/
+      pastilles déjà en place), dès que `slides.length > 1`. Vérifié en direct : "1 / 3" sur
+      Èze (3 photos), police IBM Plex Mono confirmée.
 - [x] **Barre d'action fixe mobile** (`02-composants.md` § 7) — **fait le 2026-09-16**,
       quatrième brique. Nouveau `LieuMobileActionBar.tsx` (`lg:hidden fixed bottom-0`) :
       bouton primaire « Y aller »/« Get directions » 52px `flex-grow` (icône épingle
@@ -463,9 +470,32 @@ moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" 
       l'état visible a déjà changé, et deux réponses revenant dans le désordre laisseraient le
       cœur désaccordé de la base. **La feuille contextuelle « Connecte-toi pour épingler Èze »
       (PR-07) reste à faire** : c'est toujours une redirection sèche vers `/connexion`.
-- [~] **« Ajouter à un itinéraire »** — **le fond est corrigé au Lot 2** : l'ajout est cumulatif
-      (relais `sessionStorage` + `?lieux=`), le lieu précédent n'est plus écrasé. **Reste la
-      forme** : ça navigue encore vers le créateur au lieu d'ajouter sur place avec un toast.
+- [x] **« Ajouter à un itinéraire »** — **fait le 2026-09-16**, sixième et dernière brique du
+      Lot 4a. Le fond était corrigé au Lot 2 (accumulation `sessionStorage` + `?lieux=`,
+      `lib/brouillon-itineraire.ts`) ; la forme restante (ça naviguait au lieu d'ajouter sur
+      place) est traitée pour le seul cas concerné, visiteur sans compte — connecté, le menu
+      déroulant ajoutait déjà sur place avec une confirmation inline.
+      `AddToItinButton.tsx` sans session : fusionne `lieuSlug` dans le brouillon de session
+      (`lireSelectionPersistee`/`ecrireSelectionPersistee`), affiche un `Toast` ("Èze ajouté
+      à ton itinéraire (1 lieu)" — pluriel ICU correct, `{count, plural, one {…} other {…}}`,
+      pas la syntaxe `{plural}` invalide déjà signalée en tâche de fond ailleurs) avec une
+      action "Voir mon itinéraire" → `/composer?lieux=…`, **sans navigation immédiate**.
+      `Toast.tsx` gagne un prop `raised` (remonte le toast au-dessus de
+      `LieuMobileActionBar.tsx` sous 1024px, sinon le toast serait masqué derrière elle).
+      **Régression trouvée et corrigée en creusant ce point** : `/composer/page.tsx` ne lisait
+      ni n'écrivait jamais le brouillon de session — seul `/creer-itineraire` le faisait. Or
+      `/creer-itineraire?add=…` **redirige vers `/composer?add=…` depuis le Lot 5** (brique
+      5/7) : la correction du Lot 2 pour PR-02 ne s'appliquait donc plus du tout sur le
+      parcours réellement emprunté aujourd'hui, silencieusement, depuis cette redirection.
+      Porté vers `/composer/page.tsx` (mêmes lecture au montage / écriture dans l'effet de
+      synchronisation d'URL que `/creer-itineraire`).
+      Vérifié en direct : clic sur "Ajouter à un itinéraire" sans session → toast affiché,
+      **aucune navigation**, `sessionStorage` correctement écrit (`["eze-village"]`) ; clic
+      "Voir mon itinéraire" → `/composer?lieux=eze-village`. **Non revérifié avec de vraies
+      données** : le pré-remplissage du picker de `/composer` une fois arrivé là (même
+      contrainte CORS qu'au Lot 4e — le picker fetche côté client, backend prod non
+      accessible en dev local) — la logique reprend cependant celle de `/creer-itineraire`,
+      déjà éprouvée, ligne pour ligne.
 - [x] **Encadré « Le bon moment »** (`06` § 2.3) — **fait le 2026-09-16**, troisième brique.
       Section renommée ("Conseils pratiques" → "Le bon moment", clé `lieu.conseilsPratiques`
       → `lieu.leBonMoment", FR + EN). Les anciennes cartes en grille (une par conseil, chacune
