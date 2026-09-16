@@ -87,6 +87,19 @@ export default async function LieuPage({
       ? { href: `/communes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
       : { href: "/#explorer", label: tCommon("lieux") };
 
+  // Fil d'Ariane (Lot 4a, composition desktop) : quand le nom du lieu commence par « {nom de
+  // la commune}, » et que le fil d'Ariane affiche déjà cette commune juste avant (donc
+  // uniquement le cas ville.lieux.length >= 2 ci-dessus — le repli générique "Lieux" ne répète
+  // rien), le dernier maillon droppe ce préfixe redondant : "Tourrettes-sur-Loup /
+  // Tourrettes-sur-Loup, la cité des violettes" devenait "Tourrettes-sur-Loup / la cité des
+  // violettes". Ne s'applique pas à une égalité stricte nom === commune (ex. Lucéram) : il n'y
+  // a alors aucun résidu à afficher à la place, et répéter le nom du lieu en dernier maillon
+  // est un usage de fil d'Ariane parfaitement normal.
+  const nomBreadcrumb =
+    !itin && ville && ville.lieux.length >= 2 && nom.startsWith(`${lieu.commune}, `)
+      ? nom.slice(lieu.commune.length + 2)
+      : nom;
+
   // ─── Rebonds de bas de fiche (→ PA-03) ─────────────────────────────────────
   //
   // C'est la page qui reçoit l'essentiel du trafic entrant depuis Google, et c'était celle
@@ -146,7 +159,7 @@ export default async function LieuPage({
   };
 
   return (
-    <article className="max-w-4xl mx-auto px-6 py-12">
+    <article className="max-w-6xl mx-auto px-6 py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(attractionJsonLd) }}
@@ -160,106 +173,170 @@ export default async function LieuPage({
           {parentCrumb.label}
         </Link>
         <span>/</span>
-        <span style={{ color: "var(--calcaire)" }}>{nom}</span>
+        <span style={{ color: "var(--calcaire)" }}>{nomBreadcrumb}</span>
       </nav>
 
-      {/* Hero */}
-      <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
-        <HeroCarousel
-          slides={Array.from({ length: lieu.heroSlides ?? 1 }, (_, i) => ({
-            src: i === 0
-              ? imgUrl(lieu.heroImage)
-              : imgUrl(lieu.heroImage.replace(/hero\.jpg$/, `hero-${i + 1}.jpg`)),
-            alt: lieu.heroAlt,
-          }))}
-        />
-      </div>
-
-      {/* Header */}
-      <div className="mb-8">
-        <p className="text-meta mb-2" style={{ color: regionToMerShade(lieu.regionSlug) }}>
-          {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
-        </p>
-        <h1 className="text-display mb-4" style={{ color: "var(--calcaire)" }}>{nom}</h1>
-
-        {/* Badges — informatifs sur cette page (pas des filtres), même forme visuelle que
-            les puces Chip du Lot 1 mais sans le comportement interactif. */}
-        {lieu.badges.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {lieu.badges.map((b) => {
-              const def = BADGE_DEFS_BY_SLUG[b];
-              const known = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
-              const badgeLabel = (known as readonly string[]).includes(b)
-                ? tBadges(b as (typeof known)[number])
-                : def?.label;
-              return (
-                <span
-                  key={b}
-                  className="text-meta px-3 py-1 rounded-full border"
-                  style={{ borderColor: "var(--line)", color: "var(--brume)" }}
-                >
-                  {def ? `${def.emoji} ${badgeLabel}` : b}
-                </span>
-              );
-            })}
+      {/* Composition desktop (≥1024px, → 06 § 3) : colonne gauche 62% galerie/identité/récit,
+          colonne droite 38% collante carte/rebonds. Les actions (liens Maps/Waze/Plans,
+          favori/partager/ajouter) restent avec l'identité à gauche plutôt que de suivre la
+          carte à droite comme le nomme le spec au mot près — sur mobile (colonnes empilées),
+          ces boutons doivent rester juste sous le titre, pas atterrir après le récit et la
+          carte une fois la grille repliée en une colonne ; les regrouper avec l'identité
+          règle les deux mises en page à la fois sans dupliquer le bloc. */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.63fr_1fr] lg:gap-10">
+        <div className="min-w-0">
+          {/* Hero */}
+          <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
+            <HeroCarousel
+              slides={Array.from({ length: lieu.heroSlides ?? 1 }, (_, i) => ({
+                src: i === 0
+                  ? imgUrl(lieu.heroImage)
+                  : imgUrl(lieu.heroImage.replace(/hero\.jpg$/, `hero-${i + 1}.jpg`)),
+                alt: lieu.heroAlt,
+              }))}
+            />
           </div>
-        )}
 
-        {/* MetaPills + GPS */}
-        <div className="flex flex-wrap gap-3">
-          {lieu.metaPills.map((pill, i) => (
-            <span key={i} className="text-meta" style={{ color: "var(--brume)" }}>
-              <span>{loc(locale, pill.labelEn, pill.label)}</span>{" "}
-              <span style={{ color: "var(--calcaire)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
-            </span>
-          ))}
-          <span className="text-meta" style={{ color: "var(--brume)" }}>
-            <span>📍</span>{" "}
-            <span className="text-data" style={{ color: "var(--calcaire)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
-          </span>
+          {/* Identité */}
+          <div className="mb-8">
+            <p className="text-meta mb-2" style={{ color: regionToMerShade(lieu.regionSlug) }}>
+              {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
+            </p>
+            <h1 className="text-display mb-4" style={{ color: "var(--calcaire)" }}>{nom}</h1>
+
+            {/* Badges — informatifs sur cette page (pas des filtres), même forme visuelle que
+                les puces Chip du Lot 1 mais sans le comportement interactif. */}
+            {lieu.badges.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {lieu.badges.map((b) => {
+                  const def = BADGE_DEFS_BY_SLUG[b];
+                  const known = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
+                  const badgeLabel = (known as readonly string[]).includes(b)
+                    ? tBadges(b as (typeof known)[number])
+                    : def?.label;
+                  return (
+                    <span
+                      key={b}
+                      className="text-meta px-3 py-1 rounded-full border"
+                      style={{ borderColor: "var(--line)", color: "var(--brume)" }}
+                    >
+                      {def ? `${def.emoji} ${badgeLabel}` : b}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* MetaPills + GPS */}
+            <div className="flex flex-wrap gap-3">
+              {lieu.metaPills.map((pill, i) => (
+                <span key={i} className="text-meta" style={{ color: "var(--brume)" }}>
+                  <span>{loc(locale, pill.labelEn, pill.label)}</span>{" "}
+                  <span style={{ color: "var(--calcaire)" }}>{loc(locale, pill.valeurEn, pill.valeur)}</span>
+                </span>
+              ))}
+              <span className="text-meta" style={{ color: "var(--brume)" }}>
+                <span>📍</span>{" "}
+                <span className="text-data" style={{ color: "var(--calcaire)" }}>{lieu.lat}°N, {lieu.lng}°E</span>
+              </span>
+            </div>
+
+            {/* Liens Maps/Waze/Plans.
+                Ils étaient en texte de 12 px, la plus petite cible de la page — alors que c'est
+                l'action principale d'un site de destination consulté sur place, une fois sur la
+                route (→ MO-01). Vrais boutons de 44 px, espacés de 8 px. */}
+            <div className="flex flex-wrap gap-2 mt-4">
+              {buildMapLinks(lieu.lat, lieu.lng, nom, tCommon("plans")).map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring-aube inline-flex items-center gap-2 h-11 px-4 rounded-lg border text-body transition-colors hover:bg-white/5"
+                  style={{ borderColor: "var(--line)", color: "var(--calcaire)" }}
+                >
+                  <span aria-hidden="true">{link.icon}</span>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Favori / Partager / Itinéraire — actions sur le site */}
+            <div className="flex flex-wrap gap-2 mt-3">
+              <FavoriteButton slug={lieu.slug} />
+              <ShareButton title={nom} />
+              <AddToItinButton lieuSlug={lieu.slug} />
+            </div>
+          </div>
+
+          {/* Récit — largeur de lecture bornée à 66 caractères (→ 06 § 3), pas la pleine
+              largeur de la colonne gauche. */}
+          <div className="prose max-w-none mb-10" style={{ maxWidth: "66ch" }}>
+            <p className="text-body mb-4" style={{ color: "var(--calcaire)" }}>{description}</p>
+            {description2 && (
+              <p className="text-body" style={{ color: "var(--brume)" }}>
+                {description2}
+              </p>
+            )}
+          </div>
         </div>
 
-        {/* Liens Maps/Waze/Plans.
-            Ils étaient en texte de 12 px, la plus petite cible de la page — alors que c'est
-            l'action principale d'un site de destination consulté sur place, une fois sur la
-            route (→ MO-01). Vrais boutons de 44 px, espacés de 8 px. */}
-        <div className="flex flex-wrap gap-2 mt-4">
-          {buildMapLinks(lieu.lat, lieu.lng, nom, tCommon("plans")).map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring-aube inline-flex items-center gap-2 h-11 px-4 rounded-lg border text-body transition-colors hover:bg-white/5"
-              style={{ borderColor: "var(--line)", color: "var(--calcaire)" }}
-            >
-              <span aria-hidden="true">{link.icon}</span>
-              {link.label}
-            </a>
-          ))}
+        {/* Colonne droite (38%, collante ≥1024px) — carte + rebonds. */}
+        <div className="flex flex-col gap-6 mb-10 lg:mb-0 lg:sticky lg:top-[92px] lg:self-start">
+          <MapLieuWrapper lat={lieu.lat} lng={lieu.lng} nom={nom} />
+
+          {/* Rebond ① — l'itinéraire qui passe par ici (→ PA-03) */}
+          {itinerairesQuiPassent.length > 0 && (
+            <section>
+              <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("itineraireQuiPasse")}</h2>
+              <div className="flex flex-col gap-3">
+                {itinerairesQuiPassent.map(({ itineraire, rang, total, heure }) => (
+                  <Link
+                    key={itineraire.slug}
+                    href={`/itineraires/${itineraire.slug}`}
+                    className="focus-ring-aube block rounded-lg p-4 transition-colors hover:bg-white/5"
+                    style={{ background: "var(--nuit-haute)" }}
+                  >
+                    <p className="text-data mb-1" style={{ color: "var(--aube)" }}>
+                      {t("nbEtapes", { n: total })}
+                      {heure ? ` · ${t("etapeNumero", { n: rang })} · ${heure}` : ` · ${t("etapeNumero", { n: rang })}`}
+                    </p>
+                    <p className="text-card-title" style={{ color: "var(--calcaire)" }}>
+                      {loc(locale, itineraire.titreEn, itineraire.titre)}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Rebond ② — ce qu'on peut enchaîner sans reprendre la route longtemps (→ PA-03) */}
+          {aProximite.length > 0 && (
+            <section>
+              <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("aProximite")}</h2>
+              <ul className="flex flex-col gap-2 list-none p-0">
+                {aProximite.map(({ lieu: voisin, minutes }) => (
+                  <li key={voisin.slug}>
+                    <Link
+                      href={`/lieux/${voisin.slug}`}
+                      className="focus-ring-aube flex items-center justify-between gap-4 h-11 px-4 rounded-lg transition-colors hover:bg-white/5"
+                      style={{ background: "var(--nuit-haute)" }}
+                    >
+                      <span className="text-body min-w-0">
+                        <span style={{ color: "var(--calcaire)" }}>{loc(locale, voisin.nomEn, voisin.nom)}</span>
+                        <span className="mx-2" aria-hidden="true" style={{ color: "var(--line)" }}>·</span>
+                        <span style={{ color: "var(--brume)" }}>{voisin.commune}</span>
+                      </span>
+                      <span className="text-data whitespace-nowrap" style={{ color: "var(--aube)" }}>
+                        {minutes} min
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
-
-        {/* Favori / Partager / Itinéraire — actions sur le site */}
-        <div className="flex flex-wrap gap-2 mt-3">
-          <FavoriteButton slug={lieu.slug} />
-          <ShareButton title={nom} />
-          <AddToItinButton lieuSlug={lieu.slug} />
-        </div>
-      </div>
-
-      {/* Carte */}
-      <div className="mb-10">
-        <MapLieuWrapper lat={lieu.lat} lng={lieu.lng} nom={nom} />
-      </div>
-
-      {/* Description */}
-      <div className="prose max-w-none mb-10">
-        <p className="text-body mb-4" style={{ color: "var(--calcaire)" }}>{description}</p>
-        {description2 && (
-          <p className="text-body" style={{ color: "var(--brume)" }}>
-            {description2}
-          </p>
-        )}
       </div>
 
       {/* Tips */}
@@ -354,58 +431,6 @@ export default async function LieuPage({
               );
             })}
           </div>
-        </section>
-      )}
-
-      {/* Rebond ① — l'itinéraire qui passe par ici (→ PA-03) */}
-      {itinerairesQuiPassent.length > 0 && (
-        <section className="mb-10">
-          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("itineraireQuiPasse")}</h2>
-          <div className="flex flex-col gap-3">
-            {itinerairesQuiPassent.map(({ itineraire, rang, total, heure }) => (
-              <Link
-                key={itineraire.slug}
-                href={`/itineraires/${itineraire.slug}`}
-                className="focus-ring-aube block rounded-lg p-4 transition-colors hover:bg-white/5"
-                style={{ background: "var(--nuit-haute)" }}
-              >
-                <p className="text-data mb-1" style={{ color: "var(--aube)" }}>
-                  {t("nbEtapes", { n: total })}
-                  {heure ? ` · ${t("etapeNumero", { n: rang })} · ${heure}` : ` · ${t("etapeNumero", { n: rang })}`}
-                </p>
-                <p className="text-card-title" style={{ color: "var(--calcaire)" }}>
-                  {loc(locale, itineraire.titreEn, itineraire.titre)}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Rebond ② — ce qu'on peut enchaîner sans reprendre la route longtemps (→ PA-03) */}
-      {aProximite.length > 0 && (
-        <section className="mb-10">
-          <h2 className="text-card-title mb-4" style={{ color: "var(--calcaire)" }}>{t("aProximite")}</h2>
-          <ul className="flex flex-col gap-2 list-none p-0">
-            {aProximite.map(({ lieu: voisin, minutes }) => (
-              <li key={voisin.slug}>
-                <Link
-                  href={`/lieux/${voisin.slug}`}
-                  className="focus-ring-aube flex items-center justify-between gap-4 h-11 px-4 rounded-lg transition-colors hover:bg-white/5"
-                  style={{ background: "var(--nuit-haute)" }}
-                >
-                  <span className="text-body min-w-0">
-                    <span style={{ color: "var(--calcaire)" }}>{loc(locale, voisin.nomEn, voisin.nom)}</span>
-                    <span className="mx-2" aria-hidden="true" style={{ color: "var(--line)" }}>·</span>
-                    <span style={{ color: "var(--brume)" }}>{voisin.commune}</span>
-                  </span>
-                  <span className="text-data whitespace-nowrap" style={{ color: "var(--aube)" }}>
-                    {minutes} min
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </section>
       )}
 

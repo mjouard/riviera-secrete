@@ -450,7 +450,27 @@ moment", barre d'action mobile, compteur de slides, "ajouter à un itinéraire" 
       (relais `sessionStorage` + `?lieux=`), le lieu précédent n'est plus écrasé. **Reste la
       forme** : ça navigue encore vers le créateur au lieu d'ajouter sur place avec un toast.
 - [ ] **Encadré « Le bon moment »** (`06` § 2.3) — reprend les « Conseils pratiques » existants en forme tabulaire scannable (Y aller / Saison / Stationner). Surface `--rs-nuit-haute`, bordure `--rs-trait`, icône horloge aube.
-- [ ] **Composition desktop** (`06` § 3) — deux colonnes ≥ 1024 px : gauche (62 %) galerie/identité/récit, droite (38 %, collante) carte/actions/rebonds. Largeur de lecture du récit : 66 caractères max. Fil d'Ariane : supprimer la redondance quand le nom du lieu commence par le nom de la commune.
+- [x] **Composition desktop** (`06` § 3) — **fait le 2026-09-16**, deuxième brique. Grille
+      `grid-cols-1 lg:grid-cols-[1.63fr_1fr]` ≥ 1024 px (ratio mesuré en direct : 580px/356px
+      = 62,0 %/38,0 %, exact). Gauche : galerie, identité (commune/région, titre, badges,
+      metaPills, **liens Maps/Waze/Plans et favori/partager/ajouter**), récit (`max-width:
+      66ch`, mesuré 666px en direct). Droite, collante (`lg:sticky lg:top-[92px]`, calé sur
+      les 81px mesurés du `NavHeader` + marge) : carte, rebonds ①②.
+      **Écart assumé par rapport au libellé exact du spec** ("carte/actions/rebonds" à
+      droite) : les actions restent groupées avec l'identité à gauche plutôt que de suivre la
+      carte à droite. Sur mobile, la grille se réduit à une colonne et l'ordre du DOM devient
+      l'ordre visuel — regrouper actions+carte+rebonds à droite les aurait fait apparaître
+      après le récit et la carte une fois empilés, alors qu'ils sont juste sous le titre
+      aujourd'hui (vérifié en direct : bouton favori à 913px, carte à 1361px sur mobile,
+      dans le bon ordre). Un seul bloc qui sert les deux mises en page plutôt que deux.
+      **Fil d'Ariane** — dernier maillon corrigé : `nomBreadcrumb` retire le préfixe
+      "{Commune}, " du nom du lieu quand le fil d'Ariane affiche déjà cette commune juste
+      avant (uniquement les communes ≥ 2 lieux, seul cas où la commune apparaît réellement
+      dans le fil). Vérifié en direct sur `tourrettes-sur-loup` (FR+EN) : "Tourrettes-sur-Loup
+      / la cité des violettes" au lieu de "Tourrettes-sur-Loup / Tourrettes-sur-Loup, la cité
+      des violettes". Le seul autre cas concerné, `luceram` (nom du lieu strictement égal à
+      la commune), reste inchangé — aucun résidu à afficher à la place, répéter le nom en
+      dernier maillon y est un usage de fil d'Ariane normal.
 - [x] **JSON-LD `TouristAttraction`** — **fait le 2026-09-14** sur les 43 fiches, qui n'en
       portaient aucun. `isAccessibleForFree` n'est vrai que sans aucune activité payante : un
       accès libre avec une visite payante n'est pas gratuit au sens de Google. `openingHours`
