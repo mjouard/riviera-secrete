@@ -21,7 +21,8 @@
     "activites": "Activities",
     "lieux": "Places",
     "itineraires": "Itineraries",
-    "rechercher": "Search"
+    "rechercher": "Search",
+    "carnet": "The notebook"
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
@@ -257,13 +258,6 @@
     "lieu": "place"
   },
   "mesItineraires": {
-    "breadcrumb": "My itineraries",
-    "title": "My itineraries",
-    "subtitleConnecte": "Saved to your account.",
-    "subtitleDeconnecte": "Build an itinerary freely — log in to save it.",
-    "creer": "+ Create",
-    "connecteToiBanner": "Log in to save your itineraries and find them on all your devices.",
-    "connexion": "Log in",
     "aucunItineraire": "No saved itinerary",
     "composePremier": "Build your first custom itinerary.",
     "creerItineraire": "Build an itinerary →",
@@ -274,12 +268,7 @@
     "confirmSuppression": "Delete \"{nom}\"?"
   },
   "mesFavoris": {
-    "breadcrumb": "My favorites",
-    "title": "My favorites",
-    "subtitle": "The places you've pinned.",
     "chargement": "Loading…",
-    "connecteToi": "Log in to find your favorite places.",
-    "seConnecter": "Log in",
     "aucunFavori": "No favorites yet.",
     "parcourirLesLieux": "Browse places →",
     "retirerDesFavoris": "Remove from favorites",
@@ -524,6 +513,16 @@
     "metaTitre": "Itineraries",
     "metaDescription": "{count} editorial itineraries on the French Riviera, from half a day to 2 days, with opening hours and travel times.",
     "filAriane": "Breadcrumb",
+    "accueil": "Home"
+  },
+  "carnet": {
+    "breadcrumb": "The notebook",
+    "title": "The notebook",
+    "subtitle": "Your pinned places and composed itineraries, in one place.",
+    "ongletFavoris": "Favorites",
+    "ongletItineraires": "Itineraries",
+    "connecteToi": "Sign in to find your favorites and itineraries.",
+    "seConnecter": "Sign in",
     "accueil": "Home"
   }
 }

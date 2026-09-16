@@ -19,10 +19,11 @@ function useNavLinks() {
     { href: "/itineraires", label: t("itineraires") },
     { href: "/villes", label: t("villes") },
   ];
+  // /mes-itineraires et /mes-favoris sont fusionnés dans /carnet (Lot 5, 2026-09-16) — une
+  // seule entrée à deux onglets plutôt que deux entrées cul-de-sac.
   const accountLinks = [
     { href: "/creer-itineraire", label: t("creerItineraire") },
-    { href: "/mes-itineraires", label: t("mesItineraires") },
-    { href: "/mes-favoris", label: t("mesFavoris") },
+    { href: "/carnet", label: t("carnet") },
   ];
   return { contentLinks, accountLinks, navLinks: [...contentLinks, ...accountLinks] };
 }

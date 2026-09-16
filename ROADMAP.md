@@ -670,7 +670,23 @@ page (ce dernier indépendant, peut se glisser n'importe où).
       touchant ce fichier, réparé vers `/#explorer` (son remplacement complet par `/explorer`
       fait partie de la brique "nouveau menu", pas de celle-ci).
 - [ ] **Menu à 4 entrées + 1 bouton + recherche globale** (`03-architecture-routes-url.md` § 2) — `Explorer · Itinéraires · Le carnet [recherche 250 px] [Composer un itinéraire] (compte)`. La recherche est un vrai champ dans l'en-tête, disponible partout (la loupe actuelle navigue vers `/#lieu-search`, recharge l'accueil et saute à 2 672 px → AI-06). « Composer un itinéraire » est un bouton primaire dans l'en-tête, pas la 5e entrée sur 9 (→ PA-02). Mobile : logo + loupe 44 × 44 + burger 44 × 44, panneau déroulant.
-- [ ] **`/carnet`** — fusionne `/mes-favoris` et `/mes-itineraires` en une seule entrée à deux onglets. Corrige NF-05 (deux entrées cul-de-sac pour 100 % des nouveaux visiteurs).
+- [x] **`/carnet`** — **fait le 2026-09-16**. Fusionne `/mes-favoris` et `/mes-itineraires` en
+      une seule entrée (`carnet/page.tsx`) à deux onglets (`?onglet=favoris|itineraires`,
+      contrat d'URL du Lot 2 — `url-filtres.ts`), un seul palier de connexion partagé au lieu
+      d'un par page. Corrige NF-05. `NavHeader.tsx` n'a plus qu'une entrée "Le carnet" à la
+      place des deux anciennes.
+      **Redirections des deux anciennes routes posées dans la foulée** (`next.config.ts`,
+      `redirects()`, 308) — dépendance satisfaite dès que `/carnet` existe, pas besoin
+      d'attendre la brique "redirections 301" groupée plus bas, qui reste pour les 6 autres
+      (elles dépendent chacune d'une page qui n'existe pas encore). `/mes-favoris`/
+      `/mes-itineraires` et leurs `layout.tsx` supprimés ; les 2 liens "voir mes itinéraires"
+      (`ResultsView.tsx`, `ItineraireComposeView.tsx`) repointés vers
+      `/carnet?onglet=itineraires`.
+      **Vérifié** : redirections 308 (FR + EN), rendu des deux onglets et de la porte de
+      connexion (FR + EN), lien nav unique. **Non vérifié** : le rendu des listes favoris/
+      itinéraires elles-mêmes une fois connecté — code repris quasi tel quel des deux
+      anciennes pages (mêmes appels `authFetch`), pas retesté en session authentifiée dans
+      cette passe.
 - [ ] **Redirections 301** (`03` § 3) à poser côté Next.js + équivalents `/en/…` :
   - `/creer-itineraire` → `/composer`
   - `/mes-favoris` → `/carnet?onglet=favoris`

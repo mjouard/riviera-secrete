@@ -155,7 +155,7 @@ export default function ItineraireComposeView({
 
       {garde && (
         <div className="no-print mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
-          {tItin("itineraireGarde")} <Link href="/mes-itineraires" className="underline">{t("voirMesItineraires")}</Link>
+          {tItin("itineraireGarde")} <Link href="/carnet?onglet=itineraires" className="underline">{t("voirMesItineraires")}</Link>
         </div>
       )}
 

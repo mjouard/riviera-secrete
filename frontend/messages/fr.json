@@ -21,7 +21,8 @@
     "activites": "Activités",
     "lieux": "Lieux",
     "itineraires": "Itinéraires",
-    "rechercher": "Rechercher"
+    "rechercher": "Rechercher",
+    "carnet": "Le carnet"
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
@@ -257,13 +258,6 @@
     "lieu": "lieu"
   },
   "mesItineraires": {
-    "breadcrumb": "Mes itinéraires",
-    "title": "Mes itinéraires",
-    "subtitleConnecte": "Sauvegardés sur ton compte.",
-    "subtitleDeconnecte": "Compose un itinéraire librement — connecte-toi pour le sauvegarder.",
-    "creer": "+ Créer",
-    "connecteToiBanner": "Connecte-toi pour sauvegarder et retrouver tes itinéraires sur tous tes appareils.",
-    "connexion": "Connexion",
     "aucunItineraire": "Aucun itinéraire sauvegardé",
     "composePremier": "Compose ton premier itinéraire sur mesure.",
     "creerItineraire": "Créer un itinéraire →",
@@ -274,12 +268,7 @@
     "confirmSuppression": "Supprimer « {nom} » ?"
   },
   "mesFavoris": {
-    "breadcrumb": "Mes favoris",
-    "title": "Mes favoris",
-    "subtitle": "Les lieux que tu as épinglés.",
     "chargement": "Chargement…",
-    "connecteToi": "Connecte-toi pour retrouver tes lieux favoris.",
-    "seConnecter": "Se connecter",
     "aucunFavori": "Aucun favori pour l'instant.",
     "parcourirLesLieux": "Parcourir les lieux →",
     "retirerDesFavoris": "Retirer des favoris",
@@ -524,6 +513,16 @@
     "metaTitre": "Itinéraires",
     "metaDescription": "{count} itinéraires éditoriaux sur la Côte d'Azur, de la demi-journée aux 2 jours, avec horaires et temps de trajet.",
     "filAriane": "Fil d'Ariane",
+    "accueil": "Accueil"
+  },
+  "carnet": {
+    "breadcrumb": "Le carnet",
+    "title": "Le carnet",
+    "subtitle": "Tes lieux épinglés et tes itinéraires composés, au même endroit.",
+    "ongletFavoris": "Favoris",
+    "ongletItineraires": "Itinéraires",
+    "connecteToi": "Connecte-toi pour retrouver tes favoris et tes itinéraires.",
+    "seConnecter": "Se connecter",
     "accueil": "Accueil"
   }
 }

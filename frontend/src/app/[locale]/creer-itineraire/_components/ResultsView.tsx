@@ -138,7 +138,7 @@ export default function ResultsView({
 
       {savedBanner && (
         <div className="no-print mb-6 rounded-xl p-4 text-sm flex items-center gap-3" style={{ background: "rgba(79,195,201,0.1)", color: "var(--azure)" }}>
-          {t("itineraireSauvegarde")} <Link href="/mes-itineraires" className="underline">{t("voirMesItineraires")}</Link>
+          {t("itineraireSauvegarde")} <Link href="/carnet?onglet=itineraires" className="underline">{t("voirMesItineraires")}</Link>
         </div>
       )}
 
