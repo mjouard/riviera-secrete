@@ -11,9 +11,25 @@ interface Stop {
 
 interface Props {
   stops: Stop[];
+  /** Refonte UI Lot 4d, "composition desktop" — tracé/pastilles restylés en Lot 1
+   * (`--aube`, `stroke-dasharray: 10 8`, pastilles 26px) pour `/i/[id]` uniquement. Défauts
+   * inchangés : `/itineraires/[slug]` (éditorial), seul autre appelant de ce composant
+   * partagé, n'est pas concerné par ce lot et garde son apparence actuelle telle quelle. */
+  lineColor?: string;
+  dashArray?: string;
+  pinSize?: number;
+  /** Hauteur du conteneur — 380px par défaut (`/itineraires/[slug]`), `/i/[id]` en desktop
+   * la remplit plutôt via `height: 100%` du conteneur collant parent. */
+  height?: string;
 }
 
-export default function LeafletItinMap({ stops }: Props) {
+export default function LeafletItinMap({
+  stops,
+  lineColor = "#4a9eca",
+  dashArray = "6 4",
+  pinSize = 24,
+  height = "380px",
+}: Props) {
   // Chaîne (et non la fonction `t`) dans les dépendances de l'effet : stable pour une
   // locale donnée, la carte n'est donc pas recréée à chaque rendu.
   const indicationTactile = useTranslations("common")("carteDeuxDoigts");
@@ -33,15 +49,15 @@ export default function LeafletItinMap({ stops }: Props) {
       const latlngs = stops.map((s) => [s.lat, s.lng] as [number, number]);
 
       // Polyline
-      L.polyline(latlngs, { color: "#4a9eca", weight: 2.5, opacity: 0.8, dashArray: "6 4" }).addTo(currentMap);
+      L.polyline(latlngs, { color: lineColor, weight: 2.5, opacity: 0.8, dashArray }).addTo(currentMap);
 
       // Numbered markers
       stops.forEach((stop, i) => {
         const icon = L.divIcon({
           className: "",
-          html: `<div style="background:#4a9eca;color:#0c1116;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.3)">${i + 1}</div>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
+          html: `<div style="background:${lineColor};color:#0c1116;width:${pinSize}px;height:${pinSize}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.3)">${i + 1}</div>`,
+          iconSize: [pinSize, pinSize],
+          iconAnchor: [pinSize / 2, pinSize / 2],
         });
         L.marker([stop.lat, stop.lng], { icon })
           .addTo(currentMap)
@@ -55,12 +71,12 @@ export default function LeafletItinMap({ stops }: Props) {
       cancelled = true;
       map?.remove();
     };
-  }, [stops, indicationTactile]);
+  }, [stops, indicationTactile, lineColor, dashArray, pinSize]);
 
   return (
     <>
       <link rel="stylesheet" href={LEAFLET_CSS_HREF} crossOrigin="" />
-      <div ref={ref} style={{ height: "380px", borderRadius: "12px", overflow: "hidden" }} />
+      <div ref={ref} style={{ height, borderRadius: "12px", overflow: "hidden" }} />
     </>
   );
 }

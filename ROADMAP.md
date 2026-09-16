@@ -626,7 +626,7 @@ que `/composer` ait eu de recette utilisateur.
 passent tous les deux sans erreur sur ce worktree — aucune correction de code n'a été
 nécessaire, cette passe n'a touché que ce fichier.
 
-#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **reprise le 2026-09-16, `/i/[id]` réellement atteignable depuis ce jour**
+#### 4d. Itinéraire composé (`08-ecran-itineraire.md`) — route `/i/[id]` (nouvelle, publique) — **reprise et terminée le 2026-09-16, `/i/[id]` réellement atteignable depuis ce jour**
 
 - [x] **Brancher la création** — **fait le 2026-09-16, trouvé en reprenant ce lot**. Aucun
       bouton du site n'appelait jamais `POST /api/itineraires-composes` : "Partager" sur
@@ -673,7 +673,36 @@ nécessaire, cette passe n'a touché que ce fichier.
       sont pas faits** — le lien existant vers `#suggestions-bonus` (qui affiche déjà ces
       lieux avec accès à leur propre page) fait office d'action, jugé suffisant pour cette
       passe. Corrige PR-06 pour la partie « sans nom » ; la partie « sans action riche » reste ouverte.
-- [ ] **Mise en page desktop** — grille `1fr 596px` : carte collante à gauche avec tracé ambre pointillé (`stroke-dasharray: 10 8`), pastilles numérotées 26 px, profil d'altitude en cartouche ; programme à droite en chronologie `60px 1fr`. **Non fait** — `/i/[id]` reprend la mise en page simple de `ResultsView` (grille de colonnes par jour, carte en pleine largeur sous le programme), pas la grille collante décrite ici.
+- [x] **Mise en page desktop** — **fait le 2026-09-16**, cinquième et dernière brique de la
+      reprise. Grille `1fr 596px` (`ItineraireComposeView.tsx`) au-dessus du programme :
+      colonne carte collante à gauche (`lg:sticky lg:top-[92px] lg:self-start
+      lg:h-[calc(100vh-140px)]`, `92px` = hauteur mesurée du `NavHeader` collant, même valeur
+      déjà utilisée sur la fiche lieu au Lot 4a), tracé ambre pointillé et pastilles
+      numérotées 26 px à droite. `LeafletItinMap.tsx`/`MapItinWrapper.tsx` (partagés avec
+      `/itineraires/[slug]`) ont reçu 4 props optionnelles (`lineColor`, `dashArray`,
+      `pinSize`, `height`) toutes par défaut égales aux valeurs codées en dur d'avant — l'autre
+      appelant (`/itineraires/[slug]`) n'est pas concerné par ce lot et n'a montré aucun
+      changement de tracé/couleur/taille en vérification directe. Conteneur élargi
+      `max-w-4xl` → `max-w-6xl` (`i/[id]/page.tsx`).
+      **Non fait, documenté comme tel** : profil d'altitude en cartouche (`Lieu` n'a pas de
+      champ altitude — même lacune de donnée déjà documentée pour la légende altitude
+      d'Explorer au Lot 4b) ; chronologie `60px 1fr` à l'intérieur de `ProgrammeSection.tsx`
+      (composant partagé avec `/creer-itineraire` et `/composer`, restylage jugé hors
+      périmètre de cette brique par prudence sur les composants partagés, comme pour d'autres
+      briques de cette reprise).
+      **Piège évité** : envelopper toute la nouvelle grille dans `no-print` aurait masqué
+      `ProgrammeSection` à l'export PDF (rendu avant cette brique sans condition, visible à
+      l'écran comme à l'impression) — corrigé en ajoutant un second `<ProgrammeSection>`
+      dédié, enveloppé dans `print-only`, en plus de celui à l'écran.
+      **Vérifié en direct avec de vraies données** (itinéraire 2 jours/2 lieux déjà utilisé
+      pour la brique "Mode Modifier") : `grid-template-columns` mesuré `348px 596px` en
+      desktop, colonne carte `position: sticky` / `top: 92px` confirmés par
+      `getComputedStyle` ; tracé Leaflet `stroke: var(--aube)` / `stroke-dasharray: "10 8"`,
+      pastilles mesurées 26×26 px et couleur de fond `rgb(242, 162, 92)` (= `--aube`) ;
+      `/itineraires/[slug]` revérifié en parallèle et toujours `#4a9eca` / `"6 4"` / 24×24 px
+      inchangé ; repli mobile (`resize_window` 375 px) confirmé en une seule colonne empilée,
+      `position: static` ; les deux instances de `ProgrammeSection` (écran + impression)
+      confirmées présentes dans le DOM avec le même contenu.
 - [x] **URL de partage dans l'en-tête** — **fait le 2026-09-15** : `riviera-secrete.fr/i/{id}` en mono sous le titre sur `/i/[id]` (clé `itineraireCompose.lienPartage`).
 - [x] **Mode Modifier** — **fait le 2026-09-16**, quatrième brique de la reprise, débloquée
       par l'`EditToken` désormais disponible côté client (brique "brancher la création").

@@ -69,7 +69,7 @@ export default async function ItineraireComposePage({
   const dureeKey = (itin.dureeKey in DUREE_META ? itin.dureeKey : "journee") as DureeKey;
 
   return (
-    <div className="print-page max-w-4xl mx-auto px-6 py-12">
+    <div className="print-page max-w-6xl mx-auto px-6 py-12">
       <nav className="no-print text-sm mb-8 flex gap-2" style={{ color: "var(--text-muted)" }}>
         <Link href="/" className="hover:text-white transition-colors">
           {tCommon("accueil")}

@@ -427,15 +427,38 @@ export default function ItineraireComposeView({
         ))}
       </div>
 
-      {/* Map */}
-      {mapStops.length > 0 && (
-        <div className="no-print mb-10">
-          <MapItinWrapper stops={mapStops} />
+      {/* Composition desktop (≥1024px, refonte UI Lot 4d, dernière brique) : carte collante à
+          gauche (1fr, tracé --aube pointillé 10/8, pastilles 26px), programme à droite
+          (596px fixe). `ProgrammeSection.tsx` lui-même (sa propre grille interne "60px 1fr"
+          par ligne) reste inchangé ici — composant partagé avec /creer-itineraire et
+          /composer, sa restylisation est hors périmètre de cette brique. Le profil
+          d'altitude en cartouche du spec n'est **pas fait** : aucun champ `altitude` sur
+          `Lieu` (même constat que la légende d'altitude exclue d'Explorer au Lot 4b) —
+          l'inventer serait mentir sur des données qui n'existent pas. */}
+      <div className="no-print grid grid-cols-1 lg:grid-cols-[1fr_596px] lg:gap-8">
+        {mapStops.length > 0 && (
+          <div className="mb-10 lg:mb-0 lg:sticky lg:top-[92px] lg:self-start lg:h-[calc(100vh-140px)]">
+            <MapItinWrapper
+              stops={mapStops}
+              lineColor="var(--aube)"
+              dashArray="10 8"
+              pinSize={26}
+              height="100%"
+            />
+          </div>
+        )}
+        <div className="min-w-0">
+          <ProgrammeSection days={workingDays} dureeKey={dureeKey} />
         </div>
-      )}
+      </div>
 
-      {/* Programme */}
-      <ProgrammeSection days={workingDays} dureeKey={dureeKey} />
+      {/* Version imprimée : la carte n'a pas sa place sur papier, mais le programme doit
+          rester présent — le `no-print` du bloc ci-dessus (`.no-print`/`.print-only`,
+          convention déjà établie ailleurs dans ce fichier) le masquerait sinon entièrement à
+          l'impression, une régression par rapport au rendu d'avant cette brique. */}
+      <div className="print-only">
+        <ProgrammeSection days={workingDays} dureeKey={dureeKey} />
+      </div>
 
       {/* Booking */}
       <BookingSection days={workingDays} />

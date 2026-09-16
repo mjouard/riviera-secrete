@@ -5,6 +5,10 @@ const LeafletItinMap = dynamic(() => import("./LeafletItinMap"), { ssr: false })
 
 interface Props {
   stops: Array<{ lat: number; lng: number; nom: string }>;
+  lineColor?: string;
+  dashArray?: string;
+  pinSize?: number;
+  height?: string;
 }
 
 export default function MapItinWrapper(props: Props) {
