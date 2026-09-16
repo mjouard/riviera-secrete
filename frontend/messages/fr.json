@@ -22,9 +22,8 @@
   },
   "footer": {
     "tagline": "Riviera Secrète — Côte d'Azur hors des sentiers battus",
-    "photos": "Photos :",
-    "credits": "crédits & licences",
-    "aPropos": "À propos"
+    "methode": "La méthode",
+    "credits": "Crédits photo"
   },
   "common": {
     "accueil": "Accueil",

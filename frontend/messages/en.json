@@ -22,9 +22,8 @@
   },
   "footer": {
     "tagline": "Riviera Secrète — The French Riviera off the beaten path",
-    "photos": "Photos:",
-    "credits": "credits & licenses",
-    "aPropos": "About"
+    "methode": "The method",
+    "credits": "Photo credits"
   },
   "common": {
     "accueil": "Home",

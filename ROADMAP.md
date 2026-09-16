@@ -652,7 +652,7 @@ valeur JSON utilise `{count} lieu{plural} sur {total}`, une syntaxe ICU invalide
 next-intl (confirmé : `FORMATTING_ERROR` en console). Existait avant ce lot, non touché ici,
 tâche de fond posée pour un correctif séparé.
 
-### Lot 5 — Navigation et nettoyage
+### Lot 5 — Navigation et nettoyage — **fait le 2026-09-16**
 
 Livré par petites briques indépendantes (décision utilisateur, 2026-09-16), dans un ordre qui
 évite de poser une redirection vers une page qui n'existe pas encore : `/itineraires` →
@@ -780,7 +780,20 @@ page (ce dernier indépendant, peut se glisser n'importe où).
         3/7 — c'est elle qui compte pour la perception de cohérence). À rouvrir seulement si
         ce nom interne cause un vrai problème (ex. onboarding d'un nouveau contributeur
         confus par l'écart nom-de-code / nom-produit), pas par principe.
-- [ ] **Pied de page** — cibles ≥ 15 px minimum (actuellement 17 px de haut → MO-01) ; liens : La méthode · Crédits photo · Mentions légales · Confidentialité ; FR · EN à droite.
+- [x] **Pied de page** — **fait le 2026-09-16**, dernière brique du Lot 5. Cibles tactiles
+      agrandies (`layout.tsx` : chaque lien porte son propre `px-2 py-2` plutôt que du texte
+      nu dans un `<p>` — 36 px de haut mesuré en direct, contre ~17 px avant → MO-01). 4 liens
+      figés sur ceux du spec : « À propos » renommé **La méthode** (même cible `/a-propos`,
+      cohérent avec le titre de la section homepage du Lot 4e) · Crédits photo (fusionne
+      l'ancien "Photos : crédits & licences" en un seul lien) · Mentions légales ·
+      Confidentialité. **FR · EN ajouté** (absent du pied de page jusqu'ici, seul `NavHeader`
+      portait `LanguageSwitcher`) — réutilisé tel quel, pas agrandi spécifiquement dans le
+      pied de page pour rester cohérent avec sa taille dans l'en-tête. Vérifié en direct FR et
+      EN (libellés, hrefs, hauteur des cibles).
+
+**Les 7 briques ci-dessus sont toutes faites.** Reste hors périmètre, documenté à sa brique :
+`/activites → /explorer?type=activites` (décision Lot 4b) et le renommage backend
+`Ville` → `Commune` (décision brique vocabulaire, 6/7).
 
 ### Critères de recette globaux
 

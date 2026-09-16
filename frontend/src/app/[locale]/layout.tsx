@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { api } from "@/lib/api";
 import NavHeader from "@/components/NavHeader";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Providers from "@/components/Providers";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import "../globals.css";
@@ -145,31 +146,38 @@ export default async function RootLayout({
 
             <main className="flex-1">{children}</main>
 
+            {/* Refonte UI Lot 5, dernière brique (2026-09-16) — cibles tactiles agrandies
+                (chaque lien porte son propre padding, plutôt que du texte nu dans un <p>,
+                ~17px de haut avant → MO-01) et sélecteur de langue ajouté ("FR · EN à
+                droite" du spec, absent du pied de page jusqu'ici — seul NavHeader l'avait). */}
             <footer
-              className="border-t mt-auto py-8 text-center text-sm"
+              className="border-t mt-auto py-6 text-sm"
               style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
             >
-              <div className="max-w-6xl mx-auto px-6">
-                <p>{t("tagline")}</p>
-                <p className="mt-1">
-                  <Link href="/a-propos" className="hover:text-white transition-colors">
-                    {t("aPropos")}
-                  </Link>
-                  <span className="mx-2" aria-hidden="true">·</span>
-                  {t("photos")}{" "}
-                  <Link href="/credits" className="hover:text-white transition-colors">
-                    {t("credits")}
-                  </Link>
-                </p>
-                <p className="mt-1">
-                  <Link href="/mentions-legales" className="hover:text-white transition-colors">
-                    {tLegal("mentionsTitre")}
-                  </Link>
-                  <span className="mx-2" aria-hidden="true">·</span>
-                  <Link href="/confidentialite" className="hover:text-white transition-colors">
-                    {tLegal("confidentialiteTitre")}
-                  </Link>
-                </p>
+              <div className="max-w-6xl mx-auto px-4 flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col items-center sm:items-start">
+                  <p className="px-2 py-1">{t("tagline")}</p>
+                  <nav className="flex flex-wrap justify-center sm:justify-start items-center">
+                    <Link href="/a-propos" className="px-2 py-2 hover:text-white transition-colors">
+                      {t("methode")}
+                    </Link>
+                    <span aria-hidden="true">·</span>
+                    <Link href="/credits" className="px-2 py-2 hover:text-white transition-colors">
+                      {t("credits")}
+                    </Link>
+                    <span aria-hidden="true">·</span>
+                    <Link href="/mentions-legales" className="px-2 py-2 hover:text-white transition-colors">
+                      {tLegal("mentionsTitre")}
+                    </Link>
+                    <span aria-hidden="true">·</span>
+                    <Link href="/confidentialite" className="px-2 py-2 hover:text-white transition-colors">
+                      {tLegal("confidentialiteTitre")}
+                    </Link>
+                  </nav>
+                </div>
+                <div className="px-2 py-2">
+                  <LanguageSwitcher />
+                </div>
               </div>
             </footer>
           </Providers>
