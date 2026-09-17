@@ -66,27 +66,28 @@ Audit complet dans `frontend/AUDIT.md`. Priorités extraites ici.
 
 ### Critiques
 
-- [ ] **F1 — `FormulaireAuth.tsx` à scinder** — ~350 lignes, 3 logiques mélangées (login,
+- [x] **F1 — `FormulaireAuth.tsx` à scinder** — ~350 lignes, 3 logiques mélangées (login,
       register, pending confirmation), 8 états simultanés. Toute évolution du flow auth est
       bloquée tant que ce fichier n'est pas découpé en `LoginForm` / `RegisterForm` /
       `PendingConfirmationForm`.
-- [ ] **F2 — Typage NextAuth Session/JWT insuffisant** (`src/types/next-auth.d.ts`) —
+- [x] **F2 — Typage NextAuth Session/JWT insuffisant** (`src/types/next-auth.d.ts`) —
       `apiToken?: string` déclaré optionnel alors que tout `authFetch` l'assume présent. Pas
       d'interceptor 401 → session expirée = requête silencieusement échouée. Rendre `apiToken`
       et `user.id` obligatoires ; ajouter `signOut()` sur 401 dans `authFetch`.
-- [ ] **F3 — `carnet/page.tsx` : 3 états de chargement disjoints** — `favLoading`,
+- [x] **F3 — `carnet/page.tsx` : 3 états de chargement disjoints** — `favLoading`,
       `itinLoaded`, `loadingAuth` chargés dans 2 `useEffect` séparés. Extraire un hook
       `useCarnetData()` avec `Promise.all`.
 
 ### Majeurs
 
-- [ ] **F4 — `estTactile()` dupliquée** (`ExplorerMap.tsx` l.16 copie `map-tiles.ts` l.32) →
-      centraliser dans `map-tiles.ts`.
-- [ ] **F5 — Couleurs Leaflet hardcodées** (`"#E8A33D"` dans `BuilderMap.tsx`, `"#4a9eca"`
-      dans `LeafletItinMap.tsx`) → fonction `getMarkerColor()` lisant les tokens CSS.
-- [ ] **F6 — `ItineraireItem` : union sans discriminant** (`types.ts`) — `nom?`, `lieuSlug?`,
+- [x] **F4 — `estTactile()` dupliquée** (`ExplorerMap.tsx` l.16 copie `map-tiles.ts` l.32) →
+      centralisée dans `map-tiles.ts` (exportée), `ExplorerMap` importe depuis là.
+- [x] **F5 — Couleurs Leaflet hardcodées** (`"#E8A33D"` dans `BuilderMap.tsx`, `"#4a9eca"`
+      dans `LeafletItinMap.tsx`) → `var(--aube)` et jeton `--trace-itin` ajouté dans
+      `globals.css` ; pas de `getMarkerColor()` (tokens CSS directs suffisent).
+- [x] **F6 — `ItineraireItem` : union sans discriminant** (`types.ts`) — `nom?`, `lieuSlug?`,
       `activites?`, `dormirA?` tous optionnels, compilateur n'aide pas → discriminated union
-      sur `type: "stop" | "transit" | "sleep"`.
+      sur `type: "stop" | "transit" | "sleep"` ; prédicats de type dans les appelants.
 - [ ] **F7 — Champs `?: T | null` incohérents** (`types.ts`) — choisir un modèle unique :
       optional (`?`) OU nullable (`null`), pas les deux simultanément.
 - [ ] **F8 — `itineraire-logic.ts` monolithique** (~350 lignes, mélange génération / planning /
