@@ -524,7 +524,9 @@
     "metaTitre": "Itinéraires",
     "metaDescription": "{count} itinéraires éditoriaux sur la Côte d'Azur, de la demi-journée aux 2 jours, avec horaires et temps de trajet.",
     "filAriane": "Fil d'Ariane",
-    "accueil": "Accueil"
+    "accueil": "Accueil",
+    "toutEffacer": "Tout effacer",
+    "aucunResultat": "Aucun itinéraire ne correspond à ces filtres."
   },
   "carnet": {
     "breadcrumb": "Le carnet",

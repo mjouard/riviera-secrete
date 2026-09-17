@@ -524,7 +524,9 @@
     "metaTitre": "Itineraries",
     "metaDescription": "{count} editorial itineraries on the French Riviera, from half a day to 2 days, with opening hours and travel times.",
     "filAriane": "Breadcrumb",
-    "accueil": "Home"
+    "accueil": "Home",
+    "toutEffacer": "Clear all",
+    "aucunResultat": "No itinerary matches these filters."
   },
   "carnet": {
     "breadcrumb": "The notebook",

@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { api } from "@/lib/api";
 import { alternatesPage } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
-import ComposeCard from "@/components/ComposeCard";
+import ItinerairesShell from "./_components/ItinerairesShell";
 
 export const revalidate = 3600;
 
@@ -32,7 +32,8 @@ export async function generateMetadata({
  * "Ordre des sections" : "l'ancre #itineraires de l'accueil devient une vraie page"). Grille
  * verticale 3:2, réutilise ComposeCard tel quel (créé au Lot 4e pour la section "Déjà
  * composés" de l'accueil, qui a exactement le même format de carte) — pas de nouveau
- * composant. Pas de filtre : 6 itinéraires, une liste simple suffit.
+ * composant de carte. Filtres zone/durée (→ ROADMAP § Trimestre) dans ItinerairesShell.tsx,
+ * seule partie cliente de cette page — le reste reste un Server Component pour l'ISR.
  */
 export default async function ItinerairesPage({
   params,
@@ -58,11 +59,7 @@ export default async function ItinerairesPage({
       <h1 className="text-section mb-2" style={{ color: "var(--calcaire)" }}>{t("titre")}</h1>
       <p className="text-body mb-8" style={{ color: "var(--brume)" }}>{t("sousTitre")}</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {itineraires.map((itin) => (
-          <ComposeCard key={itin.id} itin={itin} lieuBySlug={lieuBySlug} />
-        ))}
-      </div>
+      <ItinerairesShell itineraires={itineraires} lieuBySlug={lieuBySlug} />
     </main>
   );
 }
