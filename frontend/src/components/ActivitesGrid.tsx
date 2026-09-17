@@ -205,7 +205,7 @@ function CarteActivite({
       {activite.image && (
         <Photo sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           src={activite.image}
-          alt={activite.alt || ""}
+          alt={loc(locale, activite.altEn, activite.alt)}
           className="w-full h-32 object-cover"
         />
       )}

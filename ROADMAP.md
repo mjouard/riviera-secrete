@@ -201,7 +201,10 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 - [x] Bouton « Composer » désactivé sans sélection — fait en amont (ComposerMobileBar).
 - [x] 404 localisée — faite en amont (`not-found.tsx`).
 - [x] Recherche header branchée sur `/explorer?q=` — faite en amont (NavHeader).
-- [ ] `alt` sur toutes les images (AC-02) — non fait dans cette passe.
+- [x] `alt` sur toutes les images (AC-02) — vérifié le 2026-09-17 : `Photo` impose déjà un `alt`
+      non optionnel, et les 43 lieux/activités/`related`/`suggestions` ont tous un `heroAlt`/
+      `alt` non vide en base (script de contrôle). Seul bug réel trouvé : `ActivitesGrid.tsx`
+      ignorait `altEn` et affichait l'alt français même sur `/en/activites` — corrigé.
 
 #### Mois 1 — restructurer le mobile (maquettes M1, M3, M4)
 
