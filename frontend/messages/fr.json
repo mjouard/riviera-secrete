@@ -489,8 +489,8 @@
     "resultats": "{count} sur {total} lieux",
     "aucunResultat": "Aucun lieu ne correspond à ces filtres.",
     "voirPlus": "Voir {count} lieux de plus",
-    "voirCarte": "Voir sur la carte",
-    "voirListe": "Voir la liste"
+    "carte": "Carte",
+    "fermerCarte": "Fermer la carte"
   },
   "itineraireCompose": {
     "breadcrumb": "Itinéraire composé",

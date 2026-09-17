@@ -33,7 +33,11 @@ export default function ExplorerList({
   }
 
   return (
-    <div className="flex flex-col gap-1 overflow-y-auto" style={{ maxHeight: "min(80vh, 720px)" }}>
+    // Défilement interne réservé au desktop (liste à hauteur de fenêtre à côté d'une carte
+    // fixe) : sur mobile, ça créait deux défilements imbriqués sous le doigt (→ audit UX
+    // 17/09, 3.2) — la liste flotte désormais avec la page, la carte devient plein écran
+    // (bouton flottant, ExplorerShell.tsx).
+    <div className="flex flex-col gap-1 lg:overflow-y-auto lg:max-h-[min(80vh,720px)]">
       {lieux.map((lieu) => (
         <ExplorerListCard
           key={lieu.slug}

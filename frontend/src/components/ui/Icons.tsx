@@ -124,6 +124,16 @@ export function IconBike({ className }: IconProps) {
   );
 }
 
+/** Bouton flottant "Carte" de l'Explorer mobile (→ audit UX 17/09, 3.2 — remplace 🗺️). */
+export function IconMap({ className }: IconProps) {
+  return (
+    <svg {...BASE_PROPS} className={className} aria-hidden="true">
+      <path d="M2.5 5l5-2 5 2 5-2v12l-5 2-5-2-5 2z" />
+      <path d="M7.5 3v12M12.5 5v12" />
+    </svg>
+  );
+}
+
 /** Badge "plongée" (→ audit UX 17/09, 3.3 — remplace 🤿). */
 export function IconDiving({ className }: IconProps) {
   return (

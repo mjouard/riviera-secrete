@@ -489,8 +489,8 @@
     "resultats": "{count} of {total} places",
     "aucunResultat": "No place matches these filters.",
     "voirPlus": "See {count} more places",
-    "voirCarte": "View on map",
-    "voirListe": "View list"
+    "carte": "Map",
+    "fermerCarte": "Close map"
   },
   "itineraireCompose": {
     "breadcrumb": "Custom itinerary",

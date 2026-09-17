@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
@@ -16,7 +16,7 @@ import {
   saisonsDuLieu,
 } from "@/lib/lieu-filters";
 import { ecrireFiltres, lireParam, lireTexte, useSearchString } from "@/lib/url-filtres";
-import { Button } from "@/components/ui/Button";
+import { IconMap, IconClose } from "@/components/ui/Icons";
 import ExplorerFilterBar from "./ExplorerFilterBar";
 import ExplorerList from "./ExplorerList";
 import ExplorerMapWrapper from "@/components/explorer/ExplorerMapWrapper";
@@ -49,8 +49,27 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
   );
 
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
-  const [vue, setVue] = useState<"liste" | "carte">("liste");
+  /** Carte plein écran sur mobile (→ audit UX 17/09, 3.2) — remplace l'ancien aller-retour
+   * liste/carte : la liste reste maintenant toujours visible et défile avec la page, la carte
+   * s'ouvre par-dessus via le bouton flottant plutôt que de remplacer la liste sur place. */
+  const [carteOuverte, setCarteOuverte] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAR_PAGE);
+
+  // Bloque le défilement de la page derrière la carte plein écran, et permet de la fermer
+  // au clavier (Échap) — même attente qu'une modale ailleurs sur le site.
+  useEffect(() => {
+    if (!carteOuverte) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setCarteOuverte(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [carteOuverte]);
 
   // « Près de moi » / « Surprends-moi » — portés depuis l'ancienne HomeLieuxGrid.tsx (accueil,
   // Lot 4e) : bien reçus par un audit externe, absents du spec de refonte mais pas question de
@@ -173,25 +192,33 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
         {t("resultats", { count: filtered.length, total: lieux.length })}
       </p>
 
-      {/* Bascule mobile — un simple aller-retour liste/carte plutôt que la feuille basse au
-          tap sur un marqueur du spec : les deux panneaux existent déjà en pleine hauteur,
-          pas besoin d'une troisième mise en page pour le mobile. */}
-      <div className="flex lg:hidden mb-4">
-        <Button
-          type="button"
-          variant="secondaire"
-          onClick={() => setVue((v) => (v === "liste" ? "carte" : "liste"))}
-        >
-          {vue === "liste" ? t("voirCarte") : t("voirListe")}
-        </Button>
-      </div>
-
       <ExplorerHoverProvider value={{ hoveredSlug, onHover: setHoveredSlug }}>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_468px] gap-6">
-          <div className={`${vue === "carte" ? "block" : "hidden"} lg:block`} style={{ height: "min(80vh, 720px)" }}>
+          {/* Carte — colonne fixe à droite ≥1024px (inchangé) ; sur mobile, plein écran par-
+              dessus le reste (fixed inset-0) uniquement quand ouverte via le bouton flottant,
+              sinon absente du flux (→ audit UX 17/09, 3.2). `lg:static` neutralise le
+              positionnement fixe dès 1024px, quel que soit l'état `carteOuverte`. */}
+          <div
+            className={carteOuverte ? "fixed inset-0 z-50 lg:static lg:z-auto lg:block" : "hidden lg:block"}
+            style={{ height: carteOuverte ? "100dvh" : "min(80vh, 720px)" }}
+          >
+            {carteOuverte && (
+              <button
+                type="button"
+                onClick={() => setCarteOuverte(false)}
+                aria-label={t("fermerCarte")}
+                className="focus-ring-aube lg:hidden absolute top-3 right-3 w-11 h-11 flex items-center justify-center rounded-full"
+                style={{ background: "var(--nuit-haute)", color: "var(--calcaire)", boxShadow: "var(--shadow-float)", zIndex: 1000 }}
+              >
+                <IconClose className="w-5 h-5" />
+              </button>
+            )}
             <ExplorerMapWrapper lieux={filtered} hoveredSlug={hoveredSlug} onHoverMarker={setHoveredSlug} />
           </div>
-          <div className={vue === "liste" ? "block" : "hidden lg:block"}>
+
+          {/* Liste — toujours visible et défile avec la page sur mobile (plus de bascule
+              liste/carte qui la masquait entièrement). */}
+          <div>
             <ExplorerList
               lieux={visibles}
               total={filtered.length}
@@ -202,6 +229,18 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
           </div>
         </div>
       </ExplorerHoverProvider>
+
+      {!carteOuverte && (
+        <button
+          type="button"
+          onClick={() => setCarteOuverte(true)}
+          className="focus-ring-aube lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 h-11 px-5 rounded-full font-semibold text-body"
+          style={{ background: "var(--nuit-haute)", color: "var(--calcaire)", boxShadow: "var(--shadow-float)", border: "1px solid var(--line)" }}
+        >
+          <IconMap className="w-4 h-4" />
+          {t("carte")}
+        </button>
+      )}
     </div>
   );
 }
