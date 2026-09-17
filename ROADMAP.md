@@ -208,7 +208,18 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 
 #### Mois 1 — restructurer le mobile (maquettes M1, M3, M4)
 
-- [ ] **M1 · Composeur mobile** — récapitulatif éditable + tiroir filtres, cartes 1 colonne, titres non tronqués, état « Ajouté ✓ » explicite.
+- [x] **M1 · Composeur mobile** (fait le 2026-09-18) — `ComposerParamsBar.tsx` replié par
+      défaut sur mobile en ligne récap éditable (« Journée · 09:00 · Voiture · Modifier »),
+      déplié/replié par le visiteur (« Modifier »/« Terminé »), toujours déplié sur desktop.
+      `ComposerPicker.tsx` : seule la recherche reste visible sur mobile, zone/badges/favoris/
+      tout-effacer repliés dans le tiroir partagé `FilterDrawer.tsx` (même composant que M3).
+      `ComposerCard.tsx` : grille 1 colonne sous `sm` (carte horizontale, vignette 96px +
+      titre 2 lignes `line-clamp-2`) au lieu de 2 colonnes tronquées, grille verticale
+      inchangée à partir de `sm`. État « Ajouté » explicite : label texte « ✓ Ajouté » en plus
+      de la case 28×28. Bandeau récap et tiroir vérifiés au navigateur ; la grille de cartes
+      elle-même pas vérifiée avec de vraies données (CORS bloque l'API prod depuis localhost
+      pour cette page qui fetch côté client) — vérifiée par `tsc`/build propres et identité de
+      pattern avec `ExplorerListCard.tsx` (déjà vérifié). **Clôture Mois 1 (6/6).**
 - [x] **M3 · Explorer mobile** (fait le 2026-09-17/18) — 3.2 : la liste ne défile plus dans une
       boîte interne sur mobile (`overflow-y-auto`/`max-height` passés en `lg:` uniquement dans
       `ExplorerList.tsx`), elle flotte avec la page ; la carte s'ouvre en plein écran via un
