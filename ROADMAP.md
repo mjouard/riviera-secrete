@@ -58,6 +58,50 @@ Audit complet dans `backend/AUDIT.md`. Priorités extraites ici.
 - [ ] **M6 — Tag Docker `sdk:10.0` flottant** → épingler `sdk:10.0.x`.
 - [ ] **M7 — `CreatedAt` non-nullable sans init C#** → `DateTime?` ou `= DateTime.UtcNow`.
 
+## Frontend — dette technique (audit 2026-09-17)
+
+Audit complet dans `frontend/AUDIT.md`. Priorités extraites ici.
+
+### Critiques
+
+- [ ] **F1 — `FormulaireAuth.tsx` à scinder** — ~350 lignes, 3 logiques mélangées (login,
+      register, pending confirmation), 8 états simultanés. Toute évolution du flow auth est
+      bloquée tant que ce fichier n'est pas découpé en `LoginForm` / `RegisterForm` /
+      `PendingConfirmationForm`.
+- [ ] **F2 — Typage NextAuth Session/JWT insuffisant** (`src/types/next-auth.d.ts`) —
+      `apiToken?: string` déclaré optionnel alors que tout `authFetch` l'assume présent. Pas
+      d'interceptor 401 → session expirée = requête silencieusement échouée. Rendre `apiToken`
+      et `user.id` obligatoires ; ajouter `signOut()` sur 401 dans `authFetch`.
+- [ ] **F3 — `carnet/page.tsx` : 3 états de chargement disjoints** — `favLoading`,
+      `itinLoaded`, `loadingAuth` chargés dans 2 `useEffect` séparés. Extraire un hook
+      `useCarnetData()` avec `Promise.all`.
+
+### Majeurs
+
+- [ ] **F4 — `estTactile()` dupliquée** (`ExplorerMap.tsx` l.16 copie `map-tiles.ts` l.32) →
+      centraliser dans `map-tiles.ts`.
+- [ ] **F5 — Couleurs Leaflet hardcodées** (`"#E8A33D"` dans `BuilderMap.tsx`, `"#4a9eca"`
+      dans `LeafletItinMap.tsx`) → fonction `getMarkerColor()` lisant les tokens CSS.
+- [ ] **F6 — `ItineraireItem` : union sans discriminant** (`types.ts`) — `nom?`, `lieuSlug?`,
+      `activites?`, `dormirA?` tous optionnels, compilateur n'aide pas → discriminated union
+      sur `type: "stop" | "transit" | "sleep"`.
+- [ ] **F7 — Champs `?: T | null` incohérents** (`types.ts`) — choisir un modèle unique :
+      optional (`?`) OU nullable (`null`), pas les deux simultanément.
+- [ ] **F8 — `itineraire-logic.ts` monolithique** (~350 lignes, mélange génération / planning /
+      formatage) → scinder par domaine pour rendre testable unitairement.
+- [ ] **F9 — Props drilling Explorer sur 4 niveaux** (`ExplorerShell → List → Card`) →
+      `FilterContext` + `useFilter()`.
+- [ ] **F10 — `.catch(() => {})` muet** dans plusieurs pages (Carnet, Explorer) → `ErrorBoundary`
+      global + toast system pour les erreurs réseau silencieuses.
+
+### Mineurs
+
+- [ ] **F11 — Zéro test sur la logique métier** — `generateItineraire()`, `construirePlanning()`
+      non couverts → Jest/Vitest sur `itineraire-logic.ts` en priorité (logique pure, pas de DOM).
+- [ ] **F12 — Pas de bundle analysis** → `@next/bundle-analyzer` pour mesurer les chunks.
+- [ ] **F13 — 5 fonts Google** (`layout.tsx`) — FCP/LCP non mesuré ; auditer et supprimer les
+      peu utilisées.
+
 ## Arbitrages produit en attente
 
 - [ ] **Durée de vie du JWT** — 30 jours, aucune denylist de `jti`, pas de refresh token : un
