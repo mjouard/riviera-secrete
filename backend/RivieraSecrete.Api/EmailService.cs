@@ -11,15 +11,14 @@ namespace RivieraSecrete.Api;
 /// faire échouer une inscription ni révéler, par un code d'erreur, qu'une adresse existe.
 /// Le visiteur peut toujours redemander l'envoi une fois le service revenu.
 /// </summary>
-public static class EmailService
+public class EmailService(IHttpClientFactory httpClientFactory, IConfiguration config, ILogger<EmailService> logger)
 {
-    private static readonly HttpClient Http = new() { BaseAddress = new Uri("https://api.resend.com/") };
+    private readonly HttpClient _http = httpClientFactory.CreateClient("Resend");
 
-    public static Task SendConfirmationEmailAsync(string toEmail, string nom, string token, IConfiguration config)
+    public Task SendConfirmationEmailAsync(string toEmail, string nom, string token)
     {
-        var url = $"{FrontendUrl(config)}/confirmer-email?token={Uri.EscapeDataString(token)}";
+        var url = $"{FrontendUrl()}/confirmer-email?token={Uri.EscapeDataString(token)}";
         return EnvoyerAsync(
-            config,
             toEmail,
             sujet: "Confirme ton adresse email",
             html: Gabarit(
@@ -30,11 +29,10 @@ public static class EmailService
                 pied: "Ce lien expire dans 24h. Si tu n'es pas à l'origine de cette inscription, ignore cet email."));
     }
 
-    public static Task SendPasswordResetEmailAsync(string toEmail, string nom, string token, IConfiguration config)
+    public Task SendPasswordResetEmailAsync(string toEmail, string nom, string token)
     {
-        var url = $"{FrontendUrl(config)}/reinitialiser-mot-de-passe?token={Uri.EscapeDataString(token)}";
+        var url = $"{FrontendUrl()}/reinitialiser-mot-de-passe?token={Uri.EscapeDataString(token)}";
         return EnvoyerAsync(
-            config,
             toEmail,
             sujet: "Réinitialise ton mot de passe",
             html: Gabarit(
@@ -48,8 +46,7 @@ public static class EmailService
                     + "ignore cet email : ton mot de passe actuel reste valable."));
     }
 
-    private static string FrontendUrl(IConfiguration config) =>
-        config["Frontend:Url"] ?? "http://localhost:3000";
+    private string FrontendUrl() => config["Frontend:Url"] ?? "http://localhost:3000";
 
     private static string Gabarit(string titre, string phrase, string bouton, string url, string pied) => $"""
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
@@ -64,12 +61,12 @@ public static class EmailService
         </div>
         """;
 
-    private static async Task EnvoyerAsync(IConfiguration config, string toEmail, string sujet, string html)
+    private async Task EnvoyerAsync(string toEmail, string sujet, string html)
     {
         var apiKey = config["Resend:ApiKey"];
         if (string.IsNullOrEmpty(apiKey))
         {
-            Console.WriteLine($"[EmailService] Resend:ApiKey non configuré — email « {sujet} » non envoyé.");
+            logger.LogWarning("Resend:ApiKey non configuré — email « {Sujet} » non envoyé.", sujet);
             return;
         }
 
@@ -90,16 +87,16 @@ public static class EmailService
 
         try
         {
-            var res = await Http.SendAsync(req);
+            var res = await _http.SendAsync(req);
             if (!res.IsSuccessStatusCode)
             {
                 var body = await res.Content.ReadAsStringAsync();
-                Console.WriteLine($"[EmailService] Échec envoi Resend ({res.StatusCode}): {body}");
+                logger.LogWarning("Échec envoi Resend ({StatusCode}): {Body}", res.StatusCode, body);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[EmailService] Exception envoi email: {ex.Message}");
+            logger.LogError(ex, "Exception lors de l'envoi email « {Sujet} » à {Email}", sujet, toEmail);
         }
     }
 

@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
         policy.WithOrigins(
             builder.Configuration["Cors:AllowedOrigin"] ?? "http://localhost:3000"
-        ).AllowAnyHeader().AllowAnyMethod());
+        ).AllowAnyHeader().WithMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -39,8 +39,10 @@ if (string.IsNullOrWhiteSpace(jwtSecret))
 if (Encoding.UTF8.GetByteCount(jwtSecret) < 32)
     Console.WriteLine("[Auth] ATTENTION : Jwt:Secret fait moins de 32 octets — HMAC-SHA256 attend une clé d'au moins 256 bits.");
 
-var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
-var jwtAudience = builder.Configuration["Jwt:Audience"]!;
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]
+    ?? throw new InvalidOperationException("Jwt:Issuer est requis (variable d'environnement Jwt__Issuer) — démarrage refusé.");
+var jwtAudience = builder.Configuration["Jwt:Audience"]
+    ?? throw new InvalidOperationException("Jwt:Audience est requis (variable d'environnement Jwt__Audience) — démarrage refusé.");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opts =>
@@ -85,10 +87,31 @@ builder.Services.AddRateLimiter(options =>
         _ => new FixedWindowRateLimiterOptions { PermitLimit = 10, Window = TimeSpan.FromMinutes(15) }));
 });
 
+builder.Services.AddHttpClient("Resend", c => c.BaseAddress = new Uri("https://api.resend.com/"));
+builder.Services.AddScoped<EmailService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
+else
+    app.UseExceptionHandler(errorApp =>
+        errorApp.Run(async ctx =>
+        {
+            var ex = ctx.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+            var logger = ctx.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "Exception non gérée sur {Method} {Path}", ctx.Request.Method, ctx.Request.Path);
+            ctx.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await ctx.Response.WriteAsJsonAsync(new { Error = "Une erreur interne est survenue." });
+        }));
+
+app.Use(async (ctx, next) =>
+{
+    ctx.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    ctx.Response.Headers["X-Frame-Options"] = "DENY";
+    ctx.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+    await next();
+});
 
 app.UseCors();
 app.UseRateLimiter();
@@ -98,25 +121,25 @@ app.UseAuthorization();
 // ── Public endpoints ──────────────────────────────────────────────────────────
 
 app.MapGet("/api/lieux", async (AppDbContext db) =>
-    await db.Lieux.Include(l => l.Activites).OrderBy(l => l.Id).ToListAsync());
+    await db.Lieux.AsNoTracking().Include(l => l.Activites).OrderBy(l => l.Id).ToListAsync());
 
 app.MapGet("/api/lieux/{slug}", async (string slug, AppDbContext db) =>
-    await db.Lieux.Include(l => l.Activites).FirstOrDefaultAsync(l => l.Slug == slug)
+    await db.Lieux.AsNoTracking().Include(l => l.Activites).FirstOrDefaultAsync(l => l.Slug == slug)
     is { } lieu ? Results.Ok(lieu) : Results.NotFound());
 
 app.MapGet("/api/villes", async (AppDbContext db) =>
-    await db.Villes.Include(v => v.Lieux).OrderBy(v => v.Id).ToListAsync());
+    await db.Villes.AsNoTracking().Include(v => v.Lieux).OrderBy(v => v.Id).ToListAsync());
 
 app.MapGet("/api/villes/{slug}", async (string slug, AppDbContext db) =>
-    await db.Villes.Include(v => v.Lieux).ThenInclude(l => l.Activites)
+    await db.Villes.AsNoTracking().Include(v => v.Lieux).ThenInclude(l => l.Activites)
         .FirstOrDefaultAsync(v => v.Slug == slug)
     is { } ville ? Results.Ok(ville) : Results.NotFound());
 
 app.MapGet("/api/itineraires", async (AppDbContext db) =>
-    await db.Itineraires.OrderBy(i => i.Id).ToListAsync());
+    await db.Itineraires.AsNoTracking().OrderBy(i => i.Id).ToListAsync());
 
 app.MapGet("/api/itineraires/{slug}", async (string slug, AppDbContext db) =>
-    await db.Itineraires.FirstOrDefaultAsync(i => i.Slug == slug)
+    await db.Itineraires.AsNoTracking().FirstOrDefaultAsync(i => i.Slug == slug)
     is { } itin ? Results.Ok(itin) : Results.NotFound());
 
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
@@ -275,7 +298,7 @@ app.MapPost("/api/auth/google-signin", async (GoogleSignInRequest req, AppDbCont
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
 }).RequireRateLimiting("auth");
 
-app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, IConfiguration config) =>
+app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, EmailService emailService) =>
 {
     // Les champs d'un record ne sont pas validés par le binder : un JSON sans clé (ou avec
     // null) arrive ici en null et faisait planter le .Trim() en 500. Les bornes de longueur
@@ -285,7 +308,8 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
     var nom = (req.Nom ?? "").Trim();
     var password = req.Password ?? "";
 
-    if (string.IsNullOrWhiteSpace(email) || !email.Contains('@') || email.Length > 256)
+    if (string.IsNullOrWhiteSpace(email) || email.Length > 256
+        || !System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
         return Results.BadRequest(new { Error = "Adresse email invalide.", Code = "email_invalide" });
     if (string.IsNullOrWhiteSpace(nom) || nom.Length > 200)
         return Results.BadRequest(new { Error = "Le nom est requis (200 caractères maximum).", Code = "nom_requis" });
@@ -309,9 +333,10 @@ app.MapPost("/api/auth/register", async (RegisterRequest req, AppDbContext db, I
         EmailConfirmationTokenExpiry = DateTime.UtcNow.AddHours(24),
     };
     db.Users.Add(user);
-    await db.SaveChangesAsync();
+    try { await db.SaveChangesAsync(); }
+    catch (DbUpdateException) { return Results.Conflict(new { Error = "Un compte existe déjà avec cet email.", Code = "email_deja_pris" }); }
 
-    await EmailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!, config);
+    await emailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!);
 
     return Results.Ok(new { Status = "confirmation_required", Email = user.Email });
 }).RequireRateLimiting("auth-email");
@@ -337,7 +362,7 @@ app.MapPost("/api/auth/login", async (LoginRequest req, AppDbContext db, IConfig
     return Results.Ok(new { Token = token, User = new { user.Id, user.Email, user.Nom } });
 }).RequireRateLimiting("auth");
 
-app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbContext db, IConfiguration config) =>
+app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbContext db) =>
 {
     // Un token null se traduirait par un `WHERE "EmailConfirmationToken" IS NULL` côté EF,
     // qui matche tous les comptes déjà confirmés. L'expiry null les sauve aujourd'hui, mais
@@ -359,7 +384,7 @@ app.MapPost("/api/auth/confirm-email", async (ConfirmEmailRequest req, AppDbCont
     return Results.Ok(new { Status = "confirmed" });
 }).RequireRateLimiting("auth");
 
-app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest req, AppDbContext db, IConfiguration config) =>
+app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest req, AppDbContext db, EmailService emailService) =>
 {
     var email = (req.Email ?? "").Trim().ToLowerInvariant();
     var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -370,13 +395,13 @@ app.MapPost("/api/auth/resend-confirmation", async (ResendConfirmationRequest re
         user.EmailConfirmationToken = GenerateToken();
         user.EmailConfirmationTokenExpiry = DateTime.UtcNow.AddHours(24);
         await db.SaveChangesAsync();
-        await EmailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!, config);
+        await emailService.SendConfirmationEmailAsync(user.Email, user.Nom, user.EmailConfirmationToken!);
     }
 
     return Results.Ok(new { Status = "sent" });
 }).RequireRateLimiting("auth-email");
 
-app.MapPost("/api/auth/forgot-password", async (ForgotPasswordRequest req, AppDbContext db, IConfiguration config) =>
+app.MapPost("/api/auth/forgot-password", async (ForgotPasswordRequest req, AppDbContext db, EmailService emailService) =>
 {
     var email = (req.Email ?? "").Trim().ToLowerInvariant();
     var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -395,14 +420,14 @@ app.MapPost("/api/auth/forgot-password", async (ForgotPasswordRequest req, AppDb
             // d'accès au compte, il n'a pas à survivre dans une boîte mail.
             user.PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1);
             await db.SaveChangesAsync();
-            await EmailService.SendPasswordResetEmailAsync(user.Email, user.Nom, user.PasswordResetToken!, config);
+            await emailService.SendPasswordResetEmailAsync(user.Email, user.Nom, user.PasswordResetToken!);
         }
     }
 
     return Results.Ok(new { Status = "sent" });
 }).RequireRateLimiting("auth-email");
 
-app.MapPost("/api/auth/reset-password", async (ResetPasswordRequest req, AppDbContext db, IConfiguration config) =>
+app.MapPost("/api/auth/reset-password", async (ResetPasswordRequest req, AppDbContext db) =>
 {
     // Même garde que confirm-email : un token null se traduirait par un
     // `WHERE "PasswordResetToken" IS NULL`, qui matche tous les comptes sans demande en cours.
@@ -421,7 +446,7 @@ app.MapPost("/api/auth/reset-password", async (ResetPasswordRequest req, AppDbCo
     var user = await db.Users.FirstOrDefaultAsync(u => u.PasswordResetToken == req.Token);
     if (user is null)
         return Results.BadRequest(new { Error = "Lien de réinitialisation invalide.", Code = "token_invalide" });
-    if (user.PasswordResetTokenExpiry < DateTime.UtcNow)
+    if (user.PasswordResetTokenExpiry is null || user.PasswordResetTokenExpiry < DateTime.UtcNow)
         return Results.BadRequest(new { Error = "Ce lien a expiré. Redemande une réinitialisation.", Code = "token_expire" });
 
     user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
@@ -581,7 +606,10 @@ static bool EstAutoriseSurItineraireCompose(ItineraireCompose itin, ClaimsPrinci
     var userId = GetUserId(principal);
     if (userId is not null && itin.UserId == userId) return true;
     var editToken = request.Headers["X-Edit-Token"].ToString();
-    return !string.IsNullOrEmpty(editToken) && editToken == itin.EditToken;
+    if (string.IsNullOrEmpty(editToken)) return false;
+    return System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(
+        Encoding.UTF8.GetBytes(editToken),
+        Encoding.UTF8.GetBytes(itin.EditToken));
 }
 
 /// <summary>
