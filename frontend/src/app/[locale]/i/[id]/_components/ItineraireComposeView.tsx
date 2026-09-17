@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc, redirectToConnexion } from "@/lib/utils";
-import { api, authFetch } from "@/lib/api";
+import { api } from "@/lib/api";
 import { oublierEditToken, useEditToken } from "@/lib/itineraire-compose-tokens";
 import { formatDuree, parseVisitMinutes, encodeJours, type DureeKey } from "@/lib/itineraire-logic";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
@@ -185,11 +185,12 @@ export default function ItineraireComposeView({
    * et ce lien /i/{id} doit continuer de fonctionner pour tout le monde après coup.
    */
   async function garder() {
-    if (!session?.apiToken) { redirectToConnexion(); return; }
+    if (!session) { redirectToConnexion(); return; }
     setGardeEnCours(true);
     try {
-      await authFetch("/api/my-itineraires", session.apiToken, {
+      await fetch("/api/proxy/my-itineraires", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nom, dureeKey, days: workingDays.map((jour) => jour.map((l) => l.slug)) }),
       });
       setGarde(true);

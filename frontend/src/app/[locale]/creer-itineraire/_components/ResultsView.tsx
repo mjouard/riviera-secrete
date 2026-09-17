@@ -1,7 +1,6 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
@@ -90,7 +89,12 @@ export default function ResultsView({
       if (id && composeEditToken) {
         await api.itinerairesComposes.update(id, { nom: titre, dureeKey, jours }, composeEditToken);
       } else {
-        const cree = await api.itinerairesComposes.create({ nom: titre, dureeKey, jours }, session?.apiToken);
+        const creeRes = await fetch("/api/proxy/itineraires-composes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nom: titre, dureeKey, jours }),
+        });
+        const cree = await creeRes.json() as { id: string; editToken: string };
         id = cree.id;
         setComposeId(cree.id);
         setComposeEditToken(cree.editToken);

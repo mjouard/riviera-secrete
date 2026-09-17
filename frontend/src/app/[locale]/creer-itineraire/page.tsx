@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
-import { api, authFetch } from "@/lib/api";
+import { api } from "@/lib/api";
 import type { Lieu } from "@/lib/types";
 import { redirectToConnexion } from "@/lib/utils";
 import { DUREE_META, decodeJours, encodeJours, type DureeKey, generateItineraire } from "@/lib/itineraire-logic";
@@ -163,7 +163,7 @@ export default function CreerItinerairePage() {
   useEffect(() => {
     if (loading) return;
     if (status === "loading") return;
-    if (!session?.apiToken) return;
+    if (!session) return;
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
@@ -173,7 +173,7 @@ export default function CreerItinerairePage() {
     dbIdAttempted.current = id;
 
     const map = new Map(lieux.map((l) => [l.slug, l]));
-    authFetch("/api/my-itineraires", session.apiToken)
+    fetch("/api/proxy/my-itineraires")
       .then((r) => (r.ok ? r.json() : []))
       .then((itins: Array<{ id: string; nom: string; dureeKey: string; days: string[][] }>) => {
         const found = itins.find((it) => it.id === id);
@@ -198,7 +198,7 @@ export default function CreerItinerairePage() {
     function restoreDraft() {
       if (loading) return;
       if (status === "loading") return;
-      if (!session?.apiToken) return;
+      if (!session) return;
       if (draftRestoreAttempted.current) return;
       draftRestoreAttempted.current = true;
 
@@ -403,7 +403,7 @@ export default function CreerItinerairePage() {
     const nom = saveInput.trim();
     if (!nom) { setNomErreur(true); return; }
     setNomErreur(false);
-    if (!session?.apiToken) {
+    if (!session) {
       const draft: Draft = {
         nom,
         dureeKey,
@@ -418,14 +418,16 @@ export default function CreerItinerairePage() {
       const slugDays = currentDays.map((day) => day.map((l) => l.slug));
       let id: string;
       if (currentId) {
-        await authFetch(`/api/my-itineraires/${currentId}`, session.apiToken, {
+        await fetch(`/api/proxy/my-itineraires/${currentId}`, {
           method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nom, dureeKey, days: slugDays }),
         });
         id = currentId;
       } else {
-        const res = await authFetch("/api/my-itineraires", session.apiToken, {
+        const res = await fetch("/api/proxy/my-itineraires", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nom, dureeKey, days: slugDays }),
         });
         const data = await res.json();

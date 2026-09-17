@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
-import { authFetch } from "@/lib/api";
 import { DUREE_META, type DureeKey } from "@/lib/itineraire-logic";
 import { ecrireSelectionPersistee, lireSelectionPersistee } from "@/lib/brouillon-itineraire";
 import type { UserItineraire } from "@/lib/types";
@@ -42,7 +41,7 @@ export default function AddToItinButton({
   }, []);
 
   async function toggle() {
-    if (!session?.apiToken) {
+    if (!session) {
       // Sans compte, pas de liste d'itinéraires à choisir (→ un seul geste possible :
       // accumuler dans le brouillon de session) — ajoute sur place et le dit par toast,
       // plutôt que de naviguer immédiatement vers /composer (refonte UI Lot 4a, "reste la
@@ -57,19 +56,20 @@ export default function AddToItinButton({
     }
     if (!open) {
       setAddedId(null);
-      const res = await authFetch("/api/my-itineraires", session.apiToken).catch(() => null);
+      const res = await fetch("/api/proxy/my-itineraires").catch(() => null);
       setItems(res?.ok ? await res.json() : []);
     }
     setOpen((v) => !v);
   }
 
   async function addTo(itin: UserItineraire) {
-    if (!session?.apiToken) return;
+    if (!session) return;
     const days = itin.days.length > 0 ? itin.days.map((d) => [...d]) : [[]];
     days[days.length - 1].push(lieuSlug);
 
-    await authFetch(`/api/my-itineraires/${itin.id}`, session.apiToken, {
+    await fetch(`/api/proxy/my-itineraires/${itin.id}`, {
       method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nom: itin.nom, dureeKey: itin.dureeKey, days }),
     }).catch(() => null);
 

@@ -40,21 +40,6 @@ async function get<T>(path: string, tag: TagContenu): Promise<T> {
   return decodeDeep((await res.json()) as T);
 }
 
-/** Fetch avec token JWT — à utiliser côté client uniquement. */
-export async function authFetch(
-  path: string,
-  token: string,
-  options: RequestInit = {}
-): Promise<Response> {
-  return fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-      ...(options.headers ?? {}),
-    },
-  });
-}
 
 export const api = {
   lieux: {

@@ -66,7 +66,9 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (token.apiToken) session.apiToken = token.apiToken as string;
+      // apiToken reste dans le JWT NextAuth (cookie httpOnly) — ne plus l'exposer dans la
+      // session client. Les appels protégés passent par /api/proxy/* qui lit getToken()
+      // côté serveur.
       if (token.apiUser) {
         const u = token.apiUser as { id: string; email: string; nom: string };
         session.user = { ...session.user, id: u.id, name: u.nom, email: u.email };

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
-import { api, authFetch } from "@/lib/api";
+import { api } from "@/lib/api";
 import type { Lieu, Ville } from "@/lib/types";
 import { redirectToConnexion } from "@/lib/utils";
 import {
@@ -175,8 +175,8 @@ export default function ComposerPage() {
   // Favoris du visiteur connecté — pont manquant entre /mes-favoris et le générateur (→ PA-04).
   useEffect(() => {
     function chargerFavoris() {
-      if (!session?.apiToken) { setFavorisSlugs(null); return; }
-      authFetch("/api/favorites", session.apiToken)
+      if (!session) { setFavorisSlugs(null); return; }
+      fetch("/api/proxy/favorites")
         .then((r) => (r.ok ? r.json() : []))
         .then(setFavorisSlugs)
         .catch(() => {});
@@ -188,7 +188,7 @@ export default function ComposerPage() {
   // que /creer-itineraire, clé de stockage distincte pour ne pas se marcher dessus).
   useEffect(() => {
     function restoreDraft() {
-      if (loading || status === "loading" || !session?.apiToken || draftRestoreAttempted.current) return;
+      if (loading || status === "loading" || !session || draftRestoreAttempted.current) return;
       draftRestoreAttempted.current = true;
       const raw = sessionStorage.getItem(DRAFT_KEY);
       if (!raw) return;
@@ -389,7 +389,7 @@ export default function ComposerPage() {
     const nom = saveInput.trim();
     if (!nom) { setNomErreur(true); return; }
     setNomErreur(false);
-    if (!session?.apiToken) {
+    if (!session) {
       const draft: Draft = { nom, dureeKey, daySlugs: currentDays.map((day) => day.map((l) => l.slug)) };
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
       redirectToConnexion();
@@ -400,14 +400,16 @@ export default function ComposerPage() {
       const slugDays = currentDays.map((day) => day.map((l) => l.slug));
       let id: string;
       if (currentId) {
-        await authFetch(`/api/my-itineraires/${currentId}`, session.apiToken, {
+        await fetch(`/api/proxy/my-itineraires/${currentId}`, {
           method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nom, dureeKey, days: slugDays }),
         });
         id = currentId;
       } else {
-        const res = await authFetch("/api/my-itineraires", session.apiToken, {
+        const res = await fetch("/api/proxy/my-itineraires", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nom, dureeKey, days: slugDays }),
         });
         const data = await res.json();

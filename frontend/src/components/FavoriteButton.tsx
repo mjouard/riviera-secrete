@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import { authFetch } from "@/lib/api";
 import { redirectToConnexion } from "@/lib/utils";
 
 export default function FavoriteButton({
@@ -20,8 +19,8 @@ export default function FavoriteButton({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!session?.apiToken) return;
-    authFetch("/api/favorites", session.apiToken)
+    if (!session) return;
+    fetch("/api/proxy/favorites")
       .then((r) => r.json())
       .then((slugs: string[]) => setIsFavorite(slugs.includes(slug)))
       .catch(() => {});
@@ -40,16 +39,11 @@ export default function FavoriteButton({
       redirectToConnexion();
       return;
     }
-    if (!session.apiToken) {
-      // Session OK mais échange backend raté — forcer un nouveau login
-      redirectToConnexion();
-      return;
-    }
     const cible = !isFavorite;
     setIsFavorite(cible);
     setLoading(true);
     try {
-      const res = await authFetch(`/api/favorites/${slug}`, session.apiToken, {
+      const res = await fetch(`/api/proxy/favorites/${slug}`, {
         method: cible ? "POST" : "DELETE",
       });
       if (!res.ok) setIsFavorite(!cible);

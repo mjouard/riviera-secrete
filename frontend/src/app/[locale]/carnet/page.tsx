@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
-import { api, authFetch } from "@/lib/api";
+import { api } from "@/lib/api";
 import { loc } from "@/lib/utils";
 import { lireParam, ecrireFiltres, useSearchString } from "@/lib/url-filtres";
 import { DUREE_META } from "@/lib/itineraire-logic";
@@ -51,16 +51,16 @@ export default function CarnetPage() {
     // Pas de session → on ne bascule jamais favLoading/itinLoaded à "chargé" : ce cas ne
     // consulte jamais ces flags (voir le rendu plus bas, branche `!session`), donc rien à
     // synchroniser — même raisonnement que l'ancien mes-favoris/page.tsx.
-    if (!session?.apiToken) return;
+    if (!session) return;
     Promise.all([
-      authFetch("/api/favorites", session.apiToken).then((r) => r.json() as Promise<string[]>),
+      fetch("/api/proxy/favorites").then((r) => r.json() as Promise<string[]>),
       api.lieux.list(),
     ])
       .then(([slugs, allLieux]) => setFavLieux(allLieux.filter((l) => slugs.includes(l.slug))))
       .catch(() => {})
       .finally(() => setFavLoading(false));
 
-    authFetch("/api/my-itineraires", session.apiToken)
+    fetch("/api/proxy/my-itineraires")
       .then((r) => (r.ok ? (r.json() as Promise<UserItineraire[]>) : []))
       .then((res) =>
         setItinItems(res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
@@ -70,10 +70,10 @@ export default function CarnetPage() {
   }, [session]);
 
   async function removeFavorite(slug: string) {
-    if (!session?.apiToken) return;
+    if (!session) return;
     setRemovingFav(slug);
     try {
-      await authFetch(`/api/favorites/${slug}`, session.apiToken, { method: "DELETE" });
+      await fetch(`/api/proxy/favorites/${slug}`, { method: "DELETE" });
       setFavLieux((prev) => prev.filter((l) => l.slug !== slug));
     } finally {
       setRemovingFav(null);
@@ -82,10 +82,10 @@ export default function CarnetPage() {
 
   async function deleteItineraire(id: string, nom: string) {
     if (!confirm(tItin("confirmSuppression", { nom }))) return;
-    if (!session?.apiToken) return;
+    if (!session) return;
     setDeletingItin(id);
     try {
-      await authFetch(`/api/my-itineraires/${id}`, session.apiToken, { method: "DELETE" });
+      await fetch(`/api/proxy/my-itineraires/${id}`, { method: "DELETE" });
       setItinItems((prev) => prev.filter((it) => it.id !== id));
     } finally {
       setDeletingItin(null);

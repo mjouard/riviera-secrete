@@ -3,7 +3,6 @@ import "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
-    apiToken?: string;
     user: {
       id?: string;
       name?: string | null;
@@ -13,7 +12,7 @@ declare module "next-auth" {
   }
 
   interface User {
-    apiToken?: string;
+    apiToken?: string; // intermédiaire authorize() → jwt() uniquement, jamais exposé en session
   }
 }
 
