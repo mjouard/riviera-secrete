@@ -9,6 +9,7 @@ import { Chip } from "@/components/ui/Chip";
 import { Button, LinkButton } from "@/components/ui/Button";
 import ExplorerMapWrapper from "@/components/explorer/ExplorerMapWrapper";
 import ExplorerListCard from "@/components/explorer/ExplorerListCard";
+import { ExplorerHoverProvider } from "@/components/explorer/ExplorerHoverContext";
 
 const APERCU_MAX = 6;
 const REGION_SLUGS = REGION_ORDER;
@@ -63,11 +64,13 @@ export default function HomeExplorerSection({ lieux }: { lieux: Lieu[] }) {
           <ExplorerMapWrapper lieux={filtres} hoveredSlug={hoveredSlug} onHoverMarker={setHoveredSlug} />
         </div>
         <div className={vue === "liste" ? "block" : "hidden lg:block"}>
-          <div className="flex flex-col gap-1" style={{ maxHeight: "470px", overflowY: "auto" }}>
-            {visibles.map((lieu) => (
-              <ExplorerListCard key={lieu.slug} lieu={lieu} survole={hoveredSlug === lieu.slug} onHover={setHoveredSlug} />
-            ))}
-          </div>
+          <ExplorerHoverProvider value={{ hoveredSlug, onHover: setHoveredSlug }}>
+            <div className="flex flex-col gap-1" style={{ maxHeight: "470px", overflowY: "auto" }}>
+              {visibles.map((lieu) => (
+                <ExplorerListCard key={lieu.slug} lieu={lieu} survole={hoveredSlug === lieu.slug} />
+              ))}
+            </div>
+          </ExplorerHoverProvider>
         </div>
       </div>
 

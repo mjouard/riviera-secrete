@@ -54,7 +54,6 @@ export default function ResultsView({
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
   const tDuree = useTranslations("dureeLabels");
-  const { data: session } = useSession();
   const [lienCopie, setLienCopie] = useState(false);
   const [partageEnCours, setPartageEnCours] = useState(false);
   const [composeId, setComposeId] = useState<string | null>(null);

@@ -194,13 +194,8 @@ export default async function ItinerairePage({
                   style={{ background: "var(--surface)", borderColor: "var(--line)" }}
                 >
                   <h3 className="font-semibold mb-1">
-                    🌙 {loc(locale, item.dormirAEn, item.dormirA ?? "") || t("dormirA", { commune: item.commune ?? "" })}
+                    🌙 {loc(locale, item.dormirAEn, item.dormirA)}
                   </h3>
-                  {item.desc && (
-                    <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                      {loc(locale, item.descEn, item.desc)}
-                    </p>
-                  )}
                 </div>
               );
             }
