@@ -28,7 +28,7 @@ export default function ExplorerSelectChip({
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="focus-ring-aube h-11 appearance-none rounded-full border pl-4 pr-9 text-sm font-medium cursor-pointer transition-colors"
+        className="focus-ring-aube h-11 appearance-none rounded-full border pl-4 pr-9 text-base font-medium cursor-pointer transition-colors"
         style={{
           colorScheme: "dark",
           borderColor: active ? "var(--aube)" : "var(--line)",

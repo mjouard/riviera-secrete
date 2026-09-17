@@ -68,7 +68,7 @@ export default function MotDePasseOubliePage() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+              className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
               style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
               placeholder={t("emailPlaceholder")}
             />

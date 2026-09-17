@@ -185,7 +185,7 @@ function LoginForm({ onPending, callbackUrl }: LoginFormProps) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={t("emailPlaceholder")}
           />
@@ -212,7 +212,7 @@ function LoginForm({ onPending, callbackUrl }: LoginFormProps) {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder="••••••••"
           />
@@ -227,7 +227,7 @@ function LoginForm({ onPending, callbackUrl }: LoginFormProps) {
         </Link>
 
         {error && (
-          <p className="text-xs px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>
+          <p role="alert" aria-live="polite" className="text-sm px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>
             {error}
           </p>
         )}
@@ -347,7 +347,7 @@ function RegisterForm({ onPending, callbackUrl }: RegisterFormProps) {
             required
             value={nom}
             onChange={(e) => setNom(e.target.value)}
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={t("nomPlaceholder")}
           />
@@ -364,7 +364,7 @@ function RegisterForm({ onPending, callbackUrl }: RegisterFormProps) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={t("emailPlaceholder")}
           />
@@ -392,14 +392,14 @@ function RegisterForm({ onPending, callbackUrl }: RegisterFormProps) {
             autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border transition-colors"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border transition-colors"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             placeholder={t("motDePassePlaceholderRegister")}
           />
         </div>
 
         {error && (
-          <p className="text-xs px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>
+          <p role="alert" aria-live="polite" className="text-sm px-3 py-2 rounded-lg" style={{ background: "rgba(232,74,74,0.1)", color: "#E84A4A" }}>
             {error}
           </p>
         )}

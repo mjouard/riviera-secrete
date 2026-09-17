@@ -99,7 +99,7 @@ export default function ReinitialiserMotDePassePage() {
               required
               autoComplete="new-password"
               placeholder={tConnexion("motDePassePlaceholderRegister")}
-              className="focus-ring w-full text-sm px-3 py-2.5 pr-16 rounded-lg border"
+              className="focus-ring w-full text-base px-3 py-2.5 pr-16 rounded-lg border"
               style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
             />
             <button
@@ -124,7 +124,7 @@ export default function ReinitialiserMotDePassePage() {
             onChange={(e) => setConfirmation(e.target.value)}
             required
             autoComplete="new-password"
-            className="focus-ring w-full text-sm px-3 py-2.5 rounded-lg border"
+            className="focus-ring w-full text-base px-3 py-2.5 rounded-lg border"
             style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
           />
         </div>

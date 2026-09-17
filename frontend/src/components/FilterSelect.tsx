@@ -30,7 +30,7 @@ export default function FilterSelect({
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="focus-ring w-full h-10 appearance-none rounded-full border pl-4 pr-9 text-xs font-medium cursor-pointer transition-colors sm:w-auto"
+        className="focus-ring w-full h-10 appearance-none rounded-full border pl-4 pr-9 text-base font-medium cursor-pointer transition-colors sm:w-auto"
         style={{
           colorScheme: "dark",
           borderColor: active ? "var(--terracotta)" : "var(--line)",

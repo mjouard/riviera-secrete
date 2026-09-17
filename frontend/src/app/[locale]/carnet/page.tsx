@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 import { api } from "@/lib/api";
 import { loc } from "@/lib/utils";
@@ -11,6 +11,8 @@ import { DUREE_META } from "@/lib/itineraire-logic";
 import type { Session } from "next-auth";
 import type { Lieu, UserItineraire } from "@/lib/types";
 import Photo from "@/components/Photo";
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 
 const ONGLETS = ["favoris", "itineraires"] as const;
 type Onglet = (typeof ONGLETS)[number];
@@ -56,7 +58,6 @@ function useCarnetData(session: Session | null) {
  */
 export default function CarnetPage() {
   const locale = useLocale();
-  const router = useRouter();
   const t = useTranslations("carnet");
   const tFav = useTranslations("mesFavoris");
   const tItin = useTranslations("mesItineraires");
@@ -71,6 +72,7 @@ export default function CarnetPage() {
   const { favLieux, setFavLieux, itinItems, setItinItems, loading, loadError } = useCarnetData(session);
   const [removingFav, setRemovingFav] = useState<string | null>(null);
   const [deletingItin, setDeletingItin] = useState<string | null>(null);
+  const [toDelete, setToDelete] = useState<UserItineraire | null>(null);
 
   async function removeFavorite(slug: string) {
     if (!session) return;
@@ -83,13 +85,14 @@ export default function CarnetPage() {
     }
   }
 
-  async function deleteItineraire(id: string, nom: string) {
-    if (!confirm(tItin("confirmSuppression", { nom }))) return;
-    if (!session) return;
+  async function confirmerSuppression() {
+    if (!session || !toDelete) return;
+    const { id } = toDelete;
     setDeletingItin(id);
     try {
       await fetch(`/api/proxy/my-itineraires/${id}`, { method: "DELETE" });
       setItinItems((prev) => prev.filter((it) => it.id !== id));
+      setToDelete(null);
     } finally {
       setDeletingItin(null);
     }
@@ -221,20 +224,20 @@ export default function CarnetPage() {
                   </div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">
-                  <button
-                    onClick={() => router.push(`/creer-itineraire?id=${encodeURIComponent(it.id)}`)}
-                    className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                  <Link
+                    href={`/creer-itineraire?id=${encodeURIComponent(it.id)}`}
+                    className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/5"
                     style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                   >
                     {tItin("voir")}
-                  </button>
+                  </Link>
                   <button
-                    onClick={() => deleteItineraire(it.id, it.nom)}
+                    onClick={() => setToDelete(it)}
                     disabled={deletingItin === it.id}
                     className="text-sm px-3 py-1.5 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer disabled:opacity-50 disabled:cursor-default"
                     style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
                   >
-                    {deletingItin === it.id ? "…" : tItin("supprimer")}
+                    {deletingItin === it.id ? tItin("suppressionEnCours") : tItin("supprimer")}
                   </button>
                 </div>
               </div>
@@ -242,6 +245,32 @@ export default function CarnetPage() {
           })}
         </div>
       )}
+
+      {/* Modale de suppression — <dialog> natif (Modal.tsx, Lot 1) plutôt que window.confirm()
+          (→ EC-03/reliquat audit 14/09) : Échap et piège à focus gratuits, "Annuler" par
+          défaut (autoFocus) pour que la touche Entrée n'active pas la suppression. */}
+      <Modal open={toDelete !== null} onClose={() => setToDelete(null)} titleId="carnet-supprimer-titre">
+        <h2 id="carnet-supprimer-titre" className="text-card-title mb-2" style={{ color: "var(--calcaire)" }}>
+          {toDelete ? tItin("confirmSuppression", { nom: toDelete.nom }) : ""}
+        </h2>
+        <p className="text-body mb-6" style={{ color: "var(--brume)" }}>
+          {tItin("supprimerExplication")}
+        </p>
+        <div className="flex justify-end gap-2">
+          <Button type="button" variant="discret" autoFocus onClick={() => setToDelete(null)}>
+            {tItin("annuler")}
+          </Button>
+          <button
+            type="button"
+            onClick={() => void confirmerSuppression()}
+            disabled={deletingItin !== null}
+            className="focus-ring-aube h-11 px-4 rounded-full text-body font-semibold disabled:opacity-60 disabled:cursor-default cursor-pointer"
+            style={{ background: "#B84040", color: "var(--calcaire)" }}
+          >
+            {deletingItin !== null ? tItin("suppressionEnCours") : tItin("supprimer")}
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

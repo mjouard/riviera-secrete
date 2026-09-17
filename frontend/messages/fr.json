@@ -250,7 +250,10 @@
     "lieux": "lieux",
     "voir": "Voir",
     "supprimer": "Supprimer",
-    "confirmSuppression": "Supprimer « {nom} » ?"
+    "confirmSuppression": "Supprimer « {nom} » ?",
+    "supprimerExplication": "Cette action ne peut pas être annulée.",
+    "suppressionEnCours": "Suppression…",
+    "annuler": "Annuler"
   },
   "mesFavoris": {
     "chargement": "Chargement…",

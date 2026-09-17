@@ -90,7 +90,7 @@ export default function ActivitesGrid({ lieux }: { lieux: Lieu[] }) {
           onChange={(e) => setRecherche(e.target.value)}
           placeholder={t("rechercherPlaceholder")}
           aria-label={t("rechercherLabel")}
-          className="focus-ring w-full h-11 rounded-full border px-4 text-sm"
+          className="focus-ring w-full h-11 rounded-full border px-4 text-base"
           style={{ borderColor: "var(--line)", background: "var(--surface)", color: "var(--text)" }}
         />
 

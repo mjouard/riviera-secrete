@@ -232,14 +232,32 @@ natif, générateur moins conservateur, filtres carte/liste unifiés, marqueurs 
 vocabulaire figé, cibles tactiles des liens Maps…). Ce qui reste, sans qu'aucun lot ne l'ait
 couvert :
 
-- [ ] **Cartes `/carnet` (onglet itinéraires) sans lien direct** (EC-05) — « Voir »/« Supprimer »
-      sont des `<button>`, pas de `href`. Impossible d'ouvrir dans un nouvel onglet.
-- [ ] **Champs de saisie en 12–14px → zoom auto Safari iOS** (MO-02) — `font-size: 16px`
-      manquant sur des `input`/`select`/`textarea` restants.
-- [ ] **Libellés de sortie des activités inconsistants** (DC-03) — « En savoir plus → »,
-      « Réserver → », « Voir les offres → » cohabitent sans règle.
-- [ ] **Message d'erreur de connexion non annoncé** (AC-01) — pas de `role="alert"`/
-      `aria-live`, un lecteur d'écran n'annonce rien.
+- [x] **Cartes `/carnet` (onglet itinéraires) sans lien direct** (EC-05, fait le 2026-09-17) —
+      « Voir » est maintenant un vrai `<Link href>` (ouvrable dans un nouvel onglet).
+      « Supprimer » reste un `<button>` par conception (action destructive, pas une navigation)
+      mais passe désormais par la modale `<dialog>` native (`Modal.tsx`, Lot 1) au lieu d'un
+      `window.confirm()` — la même régression que EC-03 avait déjà corrigée ailleurs
+      (`ItineraireComposeView.tsx`), réapparue ici car cette page n'avait pas été migrée.
+- [x] **Champs de saisie en 12–14px → zoom auto Safari iOS** (MO-02, fait le 2026-09-17) —
+      `font-size: 16px` (`text-base`) sur les 11 champs restants qui utilisaient encore
+      `text-sm`/`text-xs` : les 5 champs de `FormulaireAuth.tsx`, `mot-de-passe-oublie`,
+      les 2 champs de `reinitialiser-mot-de-passe`, la recherche d'`ActivitesGrid.tsx`, et les
+      `<select>` d'`ExplorerSelectChip.tsx`/`FilterSelect.tsx`. Vérifié en navigateur
+      (`getComputedStyle` → 16px partout).
+- [x] **Libellés de sortie des activités inconsistants** (DC-03, vérifié le 2026-09-17) — déjà
+      résolu par le Lot 3 : `lienType` est un vocabulaire fermé à deux valeurs
+      (`"reservation"` → « Réserver », `"officiel"` → « Site officiel », voir
+      `lib/activites-data.ts`), plus de texte libre à trois variantes. Trouvé au passage :
+      `BookingRef.linkText` (le champ que ce vocabulaire a remplacé) est un mort-vivant du
+      même genre que `ogImage`/`extraSpans` — encore servi par l'API (`"linkText": "Réserver
+      →"` dans `/api/itineraires/...`) et stocké en base, mais plus lu nulle part côté front
+      (`grep .linkText` ne remonte qu'un commentaire). Safe à ignorer jusqu'à la même passe de
+      nettoyage que les deux autres (JSON + entité + migration EF).
+- [x] **Message d'erreur de connexion non annoncé** (AC-01, fait le 2026-09-17) — `role="alert"
+      aria-live="polite"` (même convention que `Toast.tsx`) sur le message d'erreur des deux
+      formulaires (connexion + inscription) de `FormulaireAuth.tsx`, taille remontée de
+      `text-xs` (12px) à `text-sm` (14px). Vérifié : lecteur d'écran annoncerait désormais le
+      message (role+aria-live confirmés en DOM après un échec de connexion).
 
 ## Priorité contenu
 
@@ -319,11 +337,11 @@ la reconnecter, voir `.claude/memory/feedback_vercel_deploy.md`.
 | 2 | Un lien `/i/[id]` s'ouvre en navigation privée | ✅ vérifié |
 | 3 | Une vue filtrée se partage et se recharge à l'identique | ✅ vérifié (Lot 2) |
 | 4 | Aucun élément interactif sous 44px sur les 8 écrans | Partiel — chrome partagé (4a) encore sous le seuil |
-| 5 | Aucun `input`/`select`/`textarea` sous 16px | ⚠️ MO-02 encore ouvert |
+| 5 | Aucun `input`/`select`/`textarea` sous 16px | ✅ vérifié (MO-02, 2026-09-17) |
 | 6 | Tout texte atteint 4,5:1 de contraste | Non audité |
-| 7 | Chaque image a un `alt` (vide si décoratif) | ⚠️ AC-02 encore ouvert |
+| 7 | Chaque image a un `alt` (vide si décoratif) | ✅ vérifié (AC-02, 2026-09-17) |
 | 8 | Échap ferme menu, modale et feuille | Partiel — modale ✅, menu burger ⚠️ |
-| 9 | Aucun `window.confirm`/`alert` dans le code | ✅ vérifié (Lot 4d) |
+| 9 | Aucun `window.confirm`/`alert` dans le code | ✅ vérifié (Lot 4d + EC-05 carnet, 2026-09-17) |
 | 10 | Toute action > 150ms a un état visible | Majoritairement fait |
 | 11 | `x-vercel-cache: HIT` sur les routes éditoriales | ❌ cache CDN/ISR non fait |
 | 12 | Accueil < 900 Ko et < 60 requêtes | Non audité |

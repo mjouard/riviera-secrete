@@ -250,7 +250,10 @@
     "lieux": "places",
     "voir": "View",
     "supprimer": "Delete",
-    "confirmSuppression": "Delete \"{nom}\"?"
+    "confirmSuppression": "Delete \"{nom}\"?",
+    "supprimerExplication": "This action cannot be undone.",
+    "suppressionEnCours": "Deleting…",
+    "annuler": "Cancel"
   },
   "mesFavoris": {
     "chargement": "Loading…",
