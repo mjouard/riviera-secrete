@@ -78,6 +78,8 @@ export default function ComposerPage() {
   // Résultat composé
   const [currentDays, setCurrentDays] = useState<Lieu[][]>([]);
   const [excluded, setExcluded] = useState<Lieu[]>([]);
+  /** Toast "Annuler" après un retrait (même pattern que ItineraireComposeView.tsx). */
+  const [removedStop, setRemovedStop] = useState<{ dayIndex: number; stopIndex: number; lieu: Lieu } | null>(null);
   const [currentId, setCurrentId] = useState<string | null>(null);
   const [currentNom, setCurrentNom] = useState("");
   const [showSaveModal, setShowSaveModal] = useState(false);
@@ -327,9 +329,21 @@ export default function ComposerPage() {
   const removeStop = (dayIndex: number, stopIndex: number) => {
     setCurrentDays((prev) => {
       const days = prev.map((d) => [...d]);
-      days[dayIndex].splice(stopIndex, 1);
+      const [lieu] = days[dayIndex].splice(stopIndex, 1);
+      setRemovedStop({ dayIndex, stopIndex, lieu });
       return days;
     });
+  };
+
+  const annulerRetraitStop = () => {
+    if (!removedStop) return;
+    const { dayIndex, stopIndex, lieu } = removedStop;
+    setCurrentDays((prev) => {
+      const days = prev.map((d) => [...d]);
+      days[dayIndex].splice(stopIndex, 0, lieu);
+      return days;
+    });
+    setRemovedStop(null);
   };
 
   const handleDragStart = (dayIndex: number, stopIndex: number) => {
@@ -523,6 +537,9 @@ export default function ComposerPage() {
           onRemoveStop={removeStop}
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
+          removedStop={removedStop}
+          onUndoRemoveStop={annulerRetraitStop}
+          onDismissRemovedStop={() => setRemovedStop(null)}
           onSaveClick={() => { setSaveInput(currentNom || nomParDefaut()); setNomErreur(false); setShowSaveModal(true); }}
           editMode={editMode}
           onToggleEdit={() => setEditMode(true)}

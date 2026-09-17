@@ -22,7 +22,7 @@ const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
 export default function ResultsView({
   currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner, source,
   editMode, onBack, onToggleEdit, onMoveStop, onRemoveStop, onDragStart, onDragOver, onSaveClick,
-  mode, depart, heureDebutMinutes, date,
+  mode, depart, heureDebutMinutes, date, removedStop, onUndoRemoveStop, onDismissRemovedStop,
 }: {
   currentDays: Lieu[][];
   excluded: Lieu[];
@@ -44,6 +44,11 @@ export default function ResultsView({
   onDragStart: (dayIndex: number, stopIndex: number) => void;
   onDragOver: (e: React.DragEvent, targetDay: number, targetStop: number) => void;
   onSaveClick: () => void;
+  /** Toast "Annuler" après un retrait (→ audit UX 17/09, 2.2 — même pattern que
+   * ItineraireComposeView.tsx). */
+  removedStop: { dayIndex: number; stopIndex: number; lieu: Lieu } | null;
+  onUndoRemoveStop: () => void;
+  onDismissRemovedStop: () => void;
   /** Contexte du Composer (→ ROADMAP Lot 4c) : absent pour /creer-itineraire, qui garde son
    * comportement d'avant (voiture, 09:00, pas de point de départ, alertes sur aujourd'hui). */
   mode?: TransportMode;
@@ -128,6 +133,16 @@ export default function ResultsView({
     <div>
       {lienCopie && (
         <Toast message={t("lienCopie")} onDismiss={() => setLienCopie(false)} />
+      )}
+
+      {removedStop && (
+        <Toast
+          message={t("stopRetire", { nom: loc(locale, removedStop.lieu.nomEn, removedStop.lieu.nom) })}
+          variant="undo"
+          undoLabel={t("annuler")}
+          onUndo={onUndoRemoveStop}
+          onDismiss={onDismissRemovedStop}
+        />
       )}
       <div className="print-header">
         <p className="print-header-url">{SITE_DISPLAY_URL}</p>
@@ -253,10 +268,38 @@ export default function ResultsView({
                       )}
                     </div>
                     {editMode && (
-                      <div className="no-print flex flex-col items-center gap-1 flex-shrink-0">
-                        <button onClick={() => onMoveStop(dayIndex, stopIndex, -1)} disabled={isFirstOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label={t("monter")}>▲</button>
-                        <button onClick={() => onRemoveStop(dayIndex, stopIndex)} className="text-xs px-1 py-0.5 rounded" style={{ color: "var(--text-muted)" }} aria-label={t("retirer")}>✕</button>
-                        <button onClick={() => onMoveStop(dayIndex, stopIndex, 1)} disabled={isLastOverall} className="text-xs px-1 py-0.5 rounded disabled:opacity-30" style={{ color: "var(--text-muted)" }} aria-label={t("descendre")}>▼</button>
+                      /* 44×44 minimum (→ audit UX 17/09, 2.2 — "actuellement 20×20") : même
+                         markup que ItineraireComposeView.tsx, non partagé mais tenu identique. */
+                      <div className="no-print flex-shrink-0 flex items-center gap-2">
+                        <div className="flex flex-col gap-1">
+                          <button
+                            onClick={() => onMoveStop(dayIndex, stopIndex, -1)}
+                            disabled={isFirstOverall}
+                            aria-label={t("monter")}
+                            className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 disabled:opacity-30 disabled:cursor-default cursor-pointer"
+                            style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                          >
+                            ▲
+                          </button>
+                          <button
+                            onClick={() => onMoveStop(dayIndex, stopIndex, 1)}
+                            disabled={isLastOverall}
+                            aria-label={t("descendre")}
+                            className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 disabled:opacity-30 disabled:cursor-default cursor-pointer"
+                            style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}
+                          >
+                            ▼
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => onRemoveStop(dayIndex, stopIndex)}
+                          aria-label={t("retirer")}
+                          title={t("retirer")}
+                          className="focus-ring-aube w-11 h-11 flex items-center justify-center rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+                          style={{ borderColor: "#B84040", color: "#E07A7A" }}
+                        >
+                          ✕
+                        </button>
                       </div>
                     )}
                   </div>

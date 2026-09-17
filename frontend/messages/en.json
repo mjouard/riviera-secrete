@@ -176,6 +176,7 @@
     "monter": "Move up",
     "retirer": "Remove",
     "descendre": "Move down",
+    "stopRetire": "{nom} removed",
     "pause": "Break",
     "dejeuner": "Lunch — ~1 h in the area",
     "nuit": "Overnight",

@@ -176,6 +176,7 @@
     "monter": "Monter",
     "retirer": "Retirer",
     "descendre": "Descendre",
+    "stopRetire": "{nom} retiré",
     "pause": "Pause",
     "dejeuner": "Déjeuner — ~1 h dans le coin",
     "nuit": "Nuit",

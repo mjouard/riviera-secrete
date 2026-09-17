@@ -62,6 +62,8 @@ export default function CreerItinerairePage() {
   const [editMode, setEditMode] = useState(true);
   /** Itinéraire éditorial dont on est parti (`?source=`), pour l'annoncer et y renvoyer. */
   const [source, setSource] = useState<{ slug: string; titre: string; titreEn?: string | null } | null>(null);
+  /** Toast "Annuler" après un retrait (même pattern que ItineraireComposeView.tsx). */
+  const [removedStop, setRemovedStop] = useState<{ dayIndex: number; stopIndex: number; lieu: Lieu } | null>(null);
 
   // Drag-and-drop
   const dragging = useRef<{ dayIndex: number; stopIndex: number } | null>(null);
@@ -329,9 +331,21 @@ export default function CreerItinerairePage() {
   const removeStop = (dayIndex: number, stopIndex: number) => {
     setCurrentDays((prev) => {
       const days = prev.map((d) => [...d]);
-      days[dayIndex].splice(stopIndex, 1);
+      const [lieu] = days[dayIndex].splice(stopIndex, 1);
+      setRemovedStop({ dayIndex, stopIndex, lieu });
       return days;
     });
+  };
+
+  const annulerRetraitStop = () => {
+    if (!removedStop) return;
+    const { dayIndex, stopIndex, lieu } = removedStop;
+    setCurrentDays((prev) => {
+      const days = prev.map((d) => [...d]);
+      days[dayIndex].splice(stopIndex, 0, lieu);
+      return days;
+    });
+    setRemovedStop(null);
   };
 
   const handleDragStart = (dayIndex: number, stopIndex: number) => {
@@ -498,6 +512,9 @@ export default function CreerItinerairePage() {
           onRemoveStop={removeStop}
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
+          removedStop={removedStop}
+          onUndoRemoveStop={annulerRetraitStop}
+          onDismissRemovedStop={() => setRemovedStop(null)}
           onSaveClick={() => { setSaveInput(currentNom || nomParDefaut()); setNomErreur(false); setShowSaveModal(true); }}
           editMode={editMode}
           onToggleEdit={() => setEditMode(true)}
