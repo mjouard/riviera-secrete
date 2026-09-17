@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/Button";
 import ExplorerFilterBar from "./ExplorerFilterBar";
 import ExplorerList from "./ExplorerList";
 import ExplorerMapWrapper from "@/components/explorer/ExplorerMapWrapper";
+import { ExplorerHoverProvider } from "@/components/explorer/ExplorerHoverContext";
 
 const PAR_PAGE = 24;
 const REGION_SLUGS = ["menton-monaco", "nice", "arriere-pays", "antibes-cannes", "golfe-st-tropez"] as const;
@@ -185,22 +186,22 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_468px] gap-6">
-        <div className={`${vue === "carte" ? "block" : "hidden"} lg:block`} style={{ height: "min(80vh, 720px)" }}>
-          <ExplorerMapWrapper lieux={filtered} hoveredSlug={hoveredSlug} onHoverMarker={setHoveredSlug} />
+      <ExplorerHoverProvider value={{ hoveredSlug, onHover: setHoveredSlug }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_468px] gap-6">
+          <div className={`${vue === "carte" ? "block" : "hidden"} lg:block`} style={{ height: "min(80vh, 720px)" }}>
+            <ExplorerMapWrapper lieux={filtered} hoveredSlug={hoveredSlug} onHoverMarker={setHoveredSlug} />
+          </div>
+          <div className={vue === "liste" ? "block" : "hidden lg:block"}>
+            <ExplorerList
+              lieux={visibles}
+              total={filtered.length}
+              onVoirPlus={() => setVisibleCount((c) => c + PAR_PAGE)}
+              onToutEffacer={() => majFiltres({ zone: "", badge: "", type: "", saison: "", duree: "", niveau: "", q: "" })}
+              distanceBySlug={distanceBySlug}
+            />
+          </div>
         </div>
-        <div className={vue === "liste" ? "block" : "hidden lg:block"}>
-          <ExplorerList
-            lieux={visibles}
-            total={filtered.length}
-            hoveredSlug={hoveredSlug}
-            onHover={setHoveredSlug}
-            onVoirPlus={() => setVisibleCount((c) => c + PAR_PAGE)}
-            onToutEffacer={() => majFiltres({ zone: "", badge: "", type: "", saison: "", duree: "", niveau: "", q: "" })}
-            distanceBySlug={distanceBySlug}
-          />
-        </div>
-      </div>
+      </ExplorerHoverProvider>
     </div>
   );
 }

@@ -1,15 +1,15 @@
 export interface MetaPill {
   label: string;
   valeur: string;
-  labelEn?: string | null;
-  valeurEn?: string | null;
+  labelEn: string | null;
+  valeurEn: string | null;
 }
 
 export interface Tip {
   label: string;
   texte: string;
-  labelEn?: string | null;
-  texteEn?: string | null;
+  labelEn: string | null;
+  texteEn: string | null;
 }
 
 export interface RelatedCard {
@@ -20,25 +20,25 @@ export interface RelatedCard {
   region: string;
   titre: string;
   blurb: string;
-  titreEn?: string | null;
-  blurbEn?: string | null;
-  altEn?: string | null;
+  titreEn: string | null;
+  blurbEn: string | null;
+  altEn: string | null;
 }
 
 export interface Activite {
   id: number;
   activiteId: string;
   nom: string;
-  nomEn?: string | null;
+  nomEn: string | null;
   badge: "gratuit" | "payant";
   duree: string;
-  dureeEn?: string | null;
+  dureeEn: string | null;
   prix: string;
-  prixEn?: string | null;
+  prixEn: string | null;
   url: string;
   image: string;
   alt: string;
-  altEn?: string | null;
+  altEn: string | null;
   /**
    * Slug de la commune où se pratique réellement l'activité (Lot 3). Sert à afficher
    * « à proximité de X » quand `surPlace` vaut false — voir `communeActivite` dans
@@ -52,10 +52,10 @@ export interface Activite {
   /** true si l'URL est un lien partenaire (affilié) — impose rel="sponsored nofollow" côté frontend. */
   partenaire: boolean;
   /** Horaires en texte libre ; null tant que non sourcé (voir ROADMAP "Horaires"). */
-  horaires?: string | null;
-  horairesEn?: string | null;
+  horaires: string | null;
+  horairesEn: string | null;
   /** Jours de fermeture hebdomadaire, 0 = dimanche … 6 = samedi. */
-  fermeJours?: number[] | null;
+  fermeJours: number[] | null;
   lieuId: number;
 }
 
@@ -63,11 +63,11 @@ export interface Lieu {
   id: number;
   slug: string;
   nom: string;
-  nomEn?: string | null;
+  nomEn: string | null;
   description: string;
-  descriptionEn?: string | null;
+  descriptionEn: string | null;
   description2?: string;
-  description2En?: string | null;
+  description2En: string | null;
   commune: string;
   regionSlug: string;
   regionLabel: string;
@@ -91,13 +91,13 @@ export interface Ville {
   id: number;
   slug: string;
   nom: string;
-  nomEn?: string | null;
+  nomEn: string | null;
   regionSlug: string;
   regionLabel: string;
   lat: number;
   lng: number;
   description: string;
-  descriptionEn?: string | null;
+  descriptionEn: string | null;
   thumbImage: string;
   lieux: Lieu[];
 }
@@ -108,13 +108,13 @@ export interface StopActivite {
   lieuSlug?: string;
   activiteId?: string;
   url?: string;
-  labelEn?: string | null;
+  labelEn: string | null;
 }
 
 export type ItineraireItem =
-  | { type: "stop"; lieuSlug: string; nom: string; heure?: string; commune?: string; desc?: string; descEn?: string | null; activites?: StopActivite[]; nomEn?: string | null }
-  | { type: "transit"; heure?: string; desc?: string; descEn?: string | null }
-  | { type: "sleep"; dormirA: string; dormirAEn?: string | null };
+  | { type: "stop"; lieuSlug: string; nom: string; heure?: string; commune?: string; desc?: string; descEn: string | null; activites?: StopActivite[]; nomEn: string | null }
+  | { type: "transit"; heure?: string; desc?: string; descEn: string | null }
+  | { type: "sleep"; dormirA: string; dormirAEn: string | null };
 
 export interface BookingRef {
   lieuLabel: string;
@@ -122,8 +122,8 @@ export interface BookingRef {
   linkText: string;
   lieuSlug: string;
   activiteId: string;
-  lieuLabelEn?: string | null;
-  nomLabelEn?: string | null;
+  lieuLabelEn: string | null;
+  nomLabelEn: string | null;
 }
 
 export interface SuggestCard {
@@ -132,25 +132,25 @@ export interface SuggestCard {
   alt: string;
   badge: string;
   titre: string;
-  titreEn?: string | null;
-  badgeEn?: string | null;
-  altEn?: string | null;
+  titreEn: string | null;
+  badgeEn: string | null;
+  altEn: string | null;
 }
 
 export interface Itineraire {
   id: number;
   slug: string;
   titre: string;
-  titreEn?: string | null;
+  titreEn: string | null;
   badge: string;
-  badgeEn?: string | null;
+  badgeEn: string | null;
   description: string;
-  descriptionEn?: string | null;
+  descriptionEn: string | null;
   intro: string;
-  introEn?: string | null;
+  introEn: string | null;
   heroImgTag: string;
   mapLabel: string;
-  mapLabelEn?: string | null;
+  mapLabelEn: string | null;
   metaPills: MetaPill[];
   items: ItineraireItem[];
   booking: BookingRef[];

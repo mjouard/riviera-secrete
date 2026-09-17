@@ -4,26 +4,24 @@ import { useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 import ExplorerListCard from "@/components/explorer/ExplorerListCard";
+import { useExplorerHover } from "@/components/explorer/ExplorerHoverContext";
 
 export default function ExplorerList({
   lieux,
   total,
-  hoveredSlug,
-  onHover,
   onVoirPlus,
   onToutEffacer,
   distanceBySlug,
 }: {
   lieux: Lieu[];
   total: number;
-  hoveredSlug: string | null;
-  onHover: (slug: string | null) => void;
   onVoirPlus: () => void;
   onToutEffacer: () => void;
   /** Présent seulement si « Près de moi » est actif. */
   distanceBySlug?: Map<string, number>;
 }) {
   const t = useTranslations("explorer");
+  const { hoveredSlug } = useExplorerHover();
 
   if (lieux.length === 0) {
     return (
@@ -41,7 +39,6 @@ export default function ExplorerList({
           key={lieu.slug}
           lieu={lieu}
           survole={hoveredSlug === lieu.slug}
-          onHover={onHover}
           distance={distanceBySlug?.get(lieu.slug)}
         />
       ))}

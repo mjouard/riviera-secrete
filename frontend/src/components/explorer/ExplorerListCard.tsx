@@ -6,6 +6,7 @@ import { formatDistanceKm, loc } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import Photo from "@/components/Photo";
 import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { useExplorerHover } from "./ExplorerHoverContext";
 
 /**
  * Carte compacte horizontale — pas le format 4:3 pleine largeur de l'ancienne HomeLieuxGrid
@@ -14,16 +15,15 @@ import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
 export default function ExplorerListCard({
   lieu,
   survole,
-  onHover,
   distance,
 }: {
   lieu: Lieu;
   survole: boolean;
-  onHover: (slug: string | null) => void;
   /** Distance à vol d'oiseau depuis la position du visiteur (km) — « Près de moi ». */
   distance?: number;
 }) {
   const locale = useLocale();
+  const { onHover } = useExplorerHover();
 
   return (
     <Link
