@@ -162,8 +162,8 @@ Ne reste ci-dessous que ce qui est explicitement resté hors périmètre ou non 
 
 - **Fiche lieu (4a)** : ligne de confiance « vérifié sur place en [mois/année] » non faite —
   le champ `verifieSurPlace` n'existe pas, l'écrire en dur serait inventer une vérification.
-  Feuille contextuelle « Connecte-toi pour épingler Èze » pas faite (reste une redirection
-  sèche vers `/connexion`). Chrome partagé pas encore repris : burger 40px, flèches carrousel
+  Feuille contextuelle « Connecte-toi pour épingler Èze » pas faite — la redirection vers
+  `/connexion` préserve désormais la locale (`663b7ff`), reste à faire la bottom sheet locale. Chrome partagé pas encore repris : burger 40px, flèches carrousel
   36px, pastilles 7-9px, sous les 44px cible.
 - **Explorer (4b)** : légende d'altitude non faite (`altitude` n'existe pas sur `Lieu`).
   Squelettes de chargement et « chercher dans cette zone » non faits (pas de `bbox` en URL,
@@ -184,9 +184,42 @@ Ne reste ci-dessous que ce qui est explicitement resté hors périmètre ou non 
 
 ### Bugs de fond trouvés pendant la refonte, pas encore corrigés
 
-- [ ] Syntaxe ICU invalide sur `composer.lieuxTrouves` (`FORMATTING_ERROR` en console) —
-      signalé en tâche de fond.
+- [x] Syntaxe ICU invalide sur `composer.lieuxTrouves` / `recapTitre` / `lieuxSection`
+      (`FORMATTING_ERROR` en console, "placex" affiché) — corrigé le 2026-09-17 (`663b7ff`).
 - [ ] `sitemap.ts` n'inclut pas `/explorer`/`/composer` — signalé en tâche de fond.
+
+### Audit UX/UI du 2026-09-17 (docs/audit-ux-riviera-secrete.md, wireframes docs/audit-riviera-secrete.html)
+
+Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` — référence visuelle pour les correctifs Mois 1 et Trimestre.
+
+#### Semaine 1 — réparer (fait le 2026-09-17, commit `663b7ff`)
+
+- [x] Pluriels ICU `composer.lieuxTrouves` / `recapTitre` / `lieuxSection` — "placex" et `FORMATTING_ERROR` corrigés.
+- [x] `redirectToConnexion()` préserve la locale — `/en/` → `/en/connexion`.
+- [x] Un seul `<h1>` par page — print-header de ResultsView converti en `<p aria-hidden>`.
+- [x] Toast favori — "Ajouté / Retiré de vos favoris" après chaque bascule réussie.
+- [x] Bouton « Composer » désactivé sans sélection — fait en amont (ComposerMobileBar).
+- [x] 404 localisée — faite en amont (`not-found.tsx`).
+- [x] Recherche header branchée sur `/explorer?q=` — faite en amont (NavHeader).
+- [ ] `alt` sur toutes les images (AC-02) — non fait dans cette passe.
+
+#### Mois 1 — restructurer le mobile (maquettes M1, M3, M4)
+
+- [ ] **M1 · Composeur mobile** — récapitulatif éditable + tiroir filtres, cartes 1 colonne, titres non tronqués, état « Ajouté ✓ » explicite.
+- [ ] **M3 · Explorer mobile** — chips défilantes + bouton « Filtres », liste plein écran, carte flottante « 🗺 Carte ».
+- [ ] **M4 · Fiche lieu mobile** — titre + accroche avant la photo, tableau de métadonnées, une seule barre d'actions.
+- [ ] Hero accueil : CTA « Composer » dans le premier écran mobile, header 56 px.
+- [ ] Réordonnancement par glisser-déposer, cibles 44 px (▲✕▼ actuellement 20 px).
+- [ ] Icônes vectorielles monochromes à la place des émojis.
+
+#### Trimestre — différencier (maquettes M2, M6)
+
+- [ ] **M2 · Résultat desktop** — timeline + carte collante côte à côte, sauvegarde « Enregistré ✓ ».
+- [ ] Alerte déjeuner tardif + « Optimiser l'ordre » dans `itineraire-logic.ts`.
+- [ ] **M6 · Mode « Sur place »** — thème clair fort contraste, étape courante développée, corps 18 px.
+- [ ] Export agenda `.ics` (le moteur calcule déjà des horaires).
+- [ ] Filtres itinéraires prêts (durée, zone, voiture/train).
+- [ ] Menu compte (Carnet, Mes itinéraires, Se déconnecter) + confirmation suppression.
 
 ### Reliquat des audits UX/UI du 2026-09-14, non couvert par la refonte ci-dessus
 
