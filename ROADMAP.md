@@ -209,7 +209,17 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 #### Mois 1 — restructurer le mobile (maquettes M1, M3, M4)
 
 - [ ] **M1 · Composeur mobile** — récapitulatif éditable + tiroir filtres, cartes 1 colonne, titres non tronqués, état « Ajouté ✓ » explicite.
-- [ ] **M3 · Explorer mobile** — chips défilantes + bouton « Filtres », liste plein écran, carte flottante « 🗺 Carte ».
+- [x] **M3 · Explorer mobile** (fait le 2026-09-17/18) — 3.2 : la liste ne défile plus dans une
+      boîte interne sur mobile (`overflow-y-auto`/`max-height` passés en `lg:` uniquement dans
+      `ExplorerList.tsx`), elle flotte avec la page ; la carte s'ouvre en plein écran via un
+      bouton flottant « 🗺 Carte » (`ExplorerShell.tsx`, `fixed inset-0`, Échap + scroll
+      bloqués). 3.1 : sur mobile, seules la recherche et une ligne de chips de zone défilante
+      restent visibles, tout le reste (badges/types/saison/durée/niveau/près de moi/surprends-
+      moi) replié dans un nouveau tiroir plein écran partagé `ui/FilterDrawer.tsx` (bouton
+      « Filtres (n) », pied « Voir les N lieux »). Nouveau hook `lib/use-overlay-lock.ts`
+      (scroll bloqué + Échap) partagé par la carte plein écran et le tiroir. Premier lieu
+      vérifié à 346px sur 812px de viewport (était 894–946px). Desktop entièrement inchangé sur
+      les deux points (l'audit ne signalait ce mur/cette boîte à défilement que sur 375px).
 - [x] **M4 · Fiche lieu mobile** (fait le 2026-09-17) — bloc commune+titre remonté au-dessus du
       carrousel sur mobile (`flex-col` + `order-*` responsive, desktop inchangé), rangée
       Favori/Partager/Ajouter du corps masquée sous 1024px (`hidden lg:flex` — doublon pur avec
