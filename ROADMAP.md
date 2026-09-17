@@ -225,7 +225,18 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
       chantier à part, non fait ici. Non vérifié au navigateur (CORS bloque l'API prod depuis
       localhost, pas de backend local dans cette session) — vérifié par `tsc`/build propres et
       identité avec le pattern déjà en prod.
-- [ ] Icônes vectorielles monochromes à la place des émojis.
+- [x] **Icônes vectorielles monochromes à la place des émojis** (fait le 2026-09-17) — 3
+      nouvelles icônes (`IconBeach`/`IconBike`/`IconDiving` dans `ui/Icons.tsx`, réutilise
+      `IconHike`/`IconFork` pour randonnée/restaurant) + table `BADGE_ICONS` dans
+      `home-data.ts`. Appliqué aux 5 endroits qui affichaient un badge de lieu :
+      `ExplorerListCard.tsx` (le cas cité par l'audit — icône + libellé, max 3 puis « +N »),
+      `ResultsView.tsx`/`ItineraireComposeView.tsx` (cartes trop étroites — icône + libellé en
+      `sr-only`), `lieux/[slug]/page.tsx`/`ProgrammeSection.tsx` (avaient déjà un libellé —
+      simple remplacement emoji→icône). Les puces de filtre (déjà emoji + `aria-hidden` +
+      libellé visible, donc déjà accessibles) restent inchangées — hors périmètre de ce
+      correctif. Vérifié au navigateur sur `/explorer` et une fiche lieu ; les cartes de jour
+      du composeur n'ont pas pu être vérifiées en navigateur (CORS bloque l'API prod depuis
+      localhost) — vérifiées par `tsc`/build propres et identité de pattern.
 
 #### Trimestre — différencier (maquettes M2, M6)
 
