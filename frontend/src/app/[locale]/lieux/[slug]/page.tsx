@@ -1,5 +1,7 @@
 import { cleLienType, communeActivite, relActivite } from "@/lib/activites-data";
 import type { Metadata } from "next";
+import type { Itineraire } from "@/lib/types";
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
@@ -15,6 +17,7 @@ import ShareButton from "@/components/ShareButton";
 import AddToItinButton from "@/components/AddToItinButton";
 import FermeAujourdhui from "@/components/FermeAujourdhui";
 import LieuMobileActionBar from "@/components/LieuMobileActionBar";
+import LieuBreadcrumb from "@/components/LieuBreadcrumb";
 import Photo from "@/components/Photo";
 
 export const revalidate = 3600;
@@ -51,20 +54,16 @@ export async function generateMetadata({
 
 export default async function LieuPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string; locale: string }>;
-  searchParams: Promise<{ itin?: string }>;
 }) {
   const { slug, locale } = await params;
-  const { itin: itinSlug } = await searchParams;
   const lieu = await api.lieux.bySlug(slug).catch(() => null);
   if (!lieu) notFound();
 
-  const [ville, itin, tousItineraires, tousLieux, t, tCommon, tActivite, tBadges, tRegionFull] =
+  const [ville, tousItineraires, tousLieux, t, tCommon, tActivite, tBadges, tRegionFull] =
     await Promise.all([
       api.villes.bySlug(lieu.villeSlug).catch(() => null),
-      itinSlug ? api.itineraires.bySlug(itinSlug).catch(() => null) : Promise.resolve(null),
       // Rebonds de bas de page (→ PA-03) : deux lectures déjà étiquetées et mises en cache
       // (ISR 3600), donc sans coût par visite.
       api.itineraires.list().catch(() => []),
@@ -83,11 +82,9 @@ export default async function LieuPage({
   // Une commune à 1 seul lieu n'a pas de page dédiée (Lot 5, → /communes/[slug]) : ce lieu
   // EST son seul contenu, un aller-retour vers une page qui le liste à nouveau n'apporterait
   // rien — repli sur le fil générique, comme pour un lieu sans commune connue.
-  const parentCrumb = itin
-    ? { href: `/itineraires/${itin.slug}`, label: loc(locale, itin.titreEn, itin.titre) }
-    : ville && ville.lieux.length >= 2
-      ? { href: `/communes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
-      : { href: "/#explorer", label: tCommon("lieux") };
+  const villeParentCrumb = ville && ville.lieux.length >= 2
+    ? { href: `/communes/${ville.slug}`, label: loc(locale, ville.nomEn, ville.nom) }
+    : { href: "/#explorer", label: tCommon("lieux") };
 
   // Fil d'Ariane (Lot 4a, composition desktop) : quand le nom du lieu commence par « {nom de
   // la commune}, » et que le fil d'Ariane affiche déjà cette commune juste avant (donc
@@ -97,10 +94,16 @@ export default async function LieuPage({
   // violettes". Ne s'applique pas à une égalité stricte nom === commune (ex. Lucéram) : il n'y
   // a alors aucun résidu à afficher à la place, et répéter le nom du lieu en dernier maillon
   // est un usage de fil d'Ariane parfaitement normal.
-  const nomBreadcrumb =
-    !itin && ville && ville.lieux.length >= 2 && nom.startsWith(`${lieu.commune}, `)
-      ? nom.slice(lieu.commune.length + 2)
-      : nom;
+  //
+  // Le contexte `?itin=` est géré côté client (LieuBreadcrumb) : `searchParams` dans le server
+  // component aurait forcé la page en dynamique et court-circuité l'ISR.
+  const nomVille = ville && ville.lieux.length >= 2 && nom.startsWith(`${lieu.commune}, `)
+    ? nom.slice(lieu.commune.length + 2)
+    : nom;
+
+  const itinTitles = Object.fromEntries(
+    tousItineraires.map((it: Itineraire) => [it.slug, loc(locale, it.titreEn, it.titre)])
+  );
 
   // ─── Rebonds de bas de fiche (→ PA-03) ─────────────────────────────────────
   //
@@ -167,16 +170,29 @@ export default async function LieuPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(attractionJsonLd) }}
       />
 
-      {/* Breadcrumb */}
-      <nav className="text-meta mb-8 flex gap-2" style={{ color: "var(--brume)" }}>
-        <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
-        <span>/</span>
-        <Link href={parentCrumb.href} className="hover:text-white transition-colors">
-          {parentCrumb.label}
-        </Link>
-        <span>/</span>
-        <span style={{ color: "var(--calcaire)" }}>{nomBreadcrumb}</span>
-      </nav>
+      {/* Breadcrumb — LieuBreadcrumb lit ?itin= côté client (useSearchParams + Suspense)
+          pour que le server component reste statique et bénéficie de l'ISR. Le fallback
+          Suspense restitue le fil commune, visible dans le HTML prérendu et pour les bots. */}
+      <Suspense fallback={
+        <nav className="text-meta mb-8 flex gap-2" style={{ color: "var(--brume)" }}>
+          <Link href="/" className="hover:text-white transition-colors">{tCommon("accueil")}</Link>
+          <span>/</span>
+          <Link href={villeParentCrumb.href} className="hover:text-white transition-colors">
+            {villeParentCrumb.label}
+          </Link>
+          <span>/</span>
+          <span style={{ color: "var(--calcaire)" }}>{nomVille}</span>
+        </nav>
+      }>
+        <LieuBreadcrumb
+          accueilLabel={tCommon("accueil")}
+          villeHref={villeParentCrumb.href}
+          villeLabel={villeParentCrumb.label}
+          nomVille={nomVille}
+          nom={nom}
+          itinTitles={itinTitles}
+        />
+      </Suspense>
 
       {/* Composition desktop (≥1024px, → 06 § 3) : colonne gauche 62% galerie/identité/récit,
           colonne droite 38% collante carte/rebonds. Les actions (liens Maps/Waze/Plans,

@@ -45,9 +45,12 @@ Ne reste ci-dessous que ce qui est explicitement resté hors périmètre ou non 
 
 ### Reste ouvert — transversal (posé au Lot 1, jamais repris globalement)
 
-- [ ] **Cache CDN/ISR** (`x-vercel-cache: HIT` sur les routes éditoriales au lieu d'un TTFB à
-      froid de ~2s) — sortir la lecture de session du layout racine, rendre les routes
-      éditoriales statiques avec ISR. **Meilleur rapport effort/gain de toute la roadmap.**
+- [x] **Cache CDN/ISR** — fiches lieux (`/lieux/[slug]`) renvoyaient `x-vercel-cache: MISS`
+      (TTFB ~2s) car `searchParams` (`?itin=`) dans le server component forçait le rendu
+      dynamique. Corrigé le 2026-09-17 : breadcrumb extrait dans `LieuBreadcrumb` (client,
+      `useSearchParams` + `<Suspense>`), le server component ne lit plus `searchParams` et
+      bénéficie de l'ISR. La homepage et les pages communes/itinéraires étaient déjà en
+      cache (`STALE`/`PRERENDER`) — seules les fiches lieux étaient cassées.
 - [ ] **Sécurité du token API** — proxifier les appels via des route handlers Next
       (`app/api/**/route.ts`), garder le JWT dans un cookie `httpOnly Secure SameSite=Lax` au
       lieu de l'exposer côté client. À défaut, réduire fortement sa durée de vie.
