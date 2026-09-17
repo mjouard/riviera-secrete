@@ -98,13 +98,16 @@ Audit complet dans `frontend/AUDIT.md`. Priorités extraites ici.
 - [x] **F9 — Props drilling Explorer sur 4 niveaux** (`ExplorerShell → List → Card`) →
       `ExplorerHoverContext` (hoveredSlug + onHover) ; Shell fournit via Provider, List et
       Card consomment via `useExplorerHover()` sans props intermédiaires.
-- [ ] **F10 — `.catch(() => {})` muet** dans plusieurs pages (Carnet, Explorer) → `ErrorBoundary`
-      global + toast system pour les erreurs réseau silencieuses.
+- [x] **F10 — `.catch(() => {})` muet** dans plusieurs pages (Carnet, Explorer) →
+      `Toast.tsx` (ToastProvider + useToast, zéro lib externe) dans `Providers.tsx` ;
+      carnet ajoute `loadError` + bannière inline ; creer-itineraire et composer utilisent
+      `showError()` dans leurs catch client-side.
 
 ### Mineurs
 
-- [ ] **F11 — Zéro test sur la logique métier** — `generateItineraire()`, `construirePlanning()`
-      non couverts → Jest/Vitest sur `itineraire-logic.ts` en priorité (logique pure, pas de DOM).
+- [x] **F11 — Zéro test sur la logique métier** — Vitest v5 installé (`npm run test`) ;
+      40 tests couvrant `parseDureeTexte`, `formatDuree`, `formatTime`, `parseHeureMinutes`,
+      `dureeKeyDepuisBadge`, `generateItineraire`, `construirePlanning` — tous passent.
 - [ ] **F12 — Pas de bundle analysis** → `@next/bundle-analyzer` pour mesurer les chunks.
 - [ ] **F13 — 5 fonts Google** (`layout.tsx`) — FCP/LCP non mesuré ; auditer et supprimer les
       peu utilisées.
