@@ -22,6 +22,7 @@ import {
 import { useAujourdhui, dateISOLocale } from "@/lib/aujourdhui";
 import { BADGE_DEFS } from "@/lib/home-data";
 import { ecrireSelectionPersistee, lireSelectionPersistee } from "@/lib/brouillon-itineraire";
+import { useToast } from "@/components/Toast";
 import ComposerParamsBar from "./_components/ComposerParamsBar";
 import ComposerPicker from "./_components/ComposerPicker";
 import ComposerRecap from "./_components/ComposerRecap";
@@ -51,6 +52,7 @@ export default function ComposerPage() {
   const tCreer = useTranslations("creerItineraire");
   const tDuree = useTranslations("dureeLabels");
   const { data: session, status } = useSession();
+  const { showError } = useToast();
 
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [villes, setVilles] = useState<Ville[]>([]);
@@ -179,10 +181,10 @@ export default function ComposerPage() {
       fetch("/api/proxy/favorites")
         .then((r) => (r.ok ? r.json() : []))
         .then(setFavorisSlugs)
-        .catch(() => {});
+        .catch(() => showError("Impossible de charger vos favoris — vérifiez votre connexion."));
     }
     chargerFavoris();
-  }, [session]);
+  }, [session, showError]);
 
   // Restaure un brouillon perdu au moment de se connecter pour sauvegarder (même mécanisme
   // que /creer-itineraire, clé de stockage distincte pour ne pas se marcher dessus).

@@ -14,6 +14,7 @@ import ResultsView from "./_components/ResultsView";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
+import { useToast } from "@/components/Toast";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -34,6 +35,7 @@ export default function CreerItinerairePage() {
   const tCommon = useTranslations("common");
   const tDuree = useTranslations("dureeLabels");
   const { data: session, status } = useSession();
+  const { showError } = useToast();
   const [lieux, setLieux] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>("picker");
@@ -190,8 +192,8 @@ export default function CreerItinerairePage() {
           setView("results");
         }
       })
-      .catch(() => {});
-  }, [loading, status, session, lieux, view]);
+      .catch(() => showError("Impossible de charger votre itinéraire — vérifiez votre connexion."));
+  }, [loading, status, session, lieux, view, showError]);
 
   // Restaure un brouillon perdu au moment de se connecter pour sauvegarder
   useEffect(() => {

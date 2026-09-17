@@ -19,12 +19,14 @@ function useCarnetData(session: Session | null) {
   const [favLieux, setFavLieux] = useState<Lieu[]>([]);
   const [itinItems, setItinItems] = useState<UserItineraire[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     // Pas de session → on ne bascule jamais loading à "chargé" : ce cas ne consulte jamais
     // ce flag (voir le rendu plus bas, branche `!session`), donc rien à synchroniser.
     if (!session) return;
     setLoading(true);
+    setLoadError(false);
     Promise.all([
       fetch("/api/proxy/favorites").then((r) => r.json() as Promise<string[]>),
       api.lieux.list(),
@@ -34,11 +36,11 @@ function useCarnetData(session: Session | null) {
         setFavLieux(allLieux.filter((l) => slugs.includes(l.slug)));
         setItinItems(itins.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
       })
-      .catch(() => {})
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
   }, [session]);
 
-  return { favLieux, setFavLieux, itinItems, setItinItems, loading };
+  return { favLieux, setFavLieux, itinItems, setItinItems, loading, loadError };
 }
 
 /**
@@ -66,7 +68,7 @@ export default function CarnetPage() {
   const onglet: Onglet = lireParam(search, "onglet", ONGLETS) || "favoris";
   const setOnglet = useCallback((v: Onglet) => ecrireFiltres({ onglet: v }), []);
 
-  const { favLieux, setFavLieux, itinItems, setItinItems, loading } = useCarnetData(session);
+  const { favLieux, setFavLieux, itinItems, setItinItems, loading, loadError } = useCarnetData(session);
   const [removingFav, setRemovingFav] = useState<string | null>(null);
   const [deletingItin, setDeletingItin] = useState<string | null>(null);
 
@@ -129,6 +131,12 @@ export default function CarnetPage() {
           </button>
         ))}
       </div>
+
+      {loadError && (
+        <p className="mb-6 text-sm px-4 py-3 rounded-lg" style={{ background: "var(--nuit-haute)", border: "1px solid var(--aube)", color: "var(--aube)" }}>
+          Erreur de chargement — rechargez la page.
+        </p>
+      )}
 
       {loadingAuth ? null : !session ? (
         <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>
