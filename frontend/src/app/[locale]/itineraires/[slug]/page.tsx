@@ -42,8 +42,8 @@ export async function generateMetadata({
     api.lieux.list().catch(() => []),
   ]);
   if (!itin) return {};
-  const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
-  const firstLieu = firstStop?.lieuSlug
+  const firstStop = itin.items.find((item): item is Extract<typeof item, { type: "stop" }> => item.type === "stop");
+  const firstLieu = firstStop
     ? lieux.find((l) => l.slug === firstStop.lieuSlug)
     : undefined;
   const ogImage = firstLieu?.heroImage ? imgUrl(firstLieu.heroImage) : undefined;
@@ -81,7 +81,7 @@ export default async function ItinerairePage({
   const description = loc(locale, itin.descriptionEn, itin.description);
 
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
-  const stops = itin.items.filter((item) => item.type === "stop");
+  const stops = itin.items.filter((item): item is Extract<typeof item, { type: "stop" }> => item.type === "stop");
 
   // Seules les communes à ≥ 2 lieux ont une page (Lot 5, → /communes/[slug]) — une commune à
   // 1 seul lieu n'a nulle part où lier au-delà du lieu lui-même, déjà cité juste à côté.

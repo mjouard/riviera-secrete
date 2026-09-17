@@ -16,11 +16,11 @@ function applyStops(state: MapState, stops: Stop[]) {
   layer.clearLayers();
   if (!stops.length) return;
   const latlngs = stops.map((s) => [s.lat, s.lng] as [number, number]);
-  L.polyline(latlngs, { color: "#E8A33D", weight: 2.5, opacity: 0.8, dashArray: "6 4" }).addTo(layer);
+  L.polyline(latlngs, { color: "var(--aube)", weight: 2.5, opacity: 0.8, dashArray: "6 4" }).addTo(layer);
   stops.forEach((s, i) => {
     const icon = L.divIcon({
       className: "",
-      html: `<div style="background:#E8A33D;color:#0c1116;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.2)">${i + 1}</div>`,
+      html: `<div style="background:var(--aube);color:#0c1116;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.2)">${i + 1}</div>`,
       iconSize: [22, 22],
       iconAnchor: [11, 11],
     });

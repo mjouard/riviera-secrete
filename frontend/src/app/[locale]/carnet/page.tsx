@@ -8,11 +8,38 @@ import { api } from "@/lib/api";
 import { loc } from "@/lib/utils";
 import { lireParam, ecrireFiltres, useSearchString } from "@/lib/url-filtres";
 import { DUREE_META } from "@/lib/itineraire-logic";
+import type { Session } from "next-auth";
 import type { Lieu, UserItineraire } from "@/lib/types";
 import Photo from "@/components/Photo";
 
 const ONGLETS = ["favoris", "itineraires"] as const;
 type Onglet = (typeof ONGLETS)[number];
+
+function useCarnetData(session: Session | null) {
+  const [favLieux, setFavLieux] = useState<Lieu[]>([]);
+  const [itinItems, setItinItems] = useState<UserItineraire[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Pas de session → on ne bascule jamais loading à "chargé" : ce cas ne consulte jamais
+    // ce flag (voir le rendu plus bas, branche `!session`), donc rien à synchroniser.
+    if (!session) return;
+    setLoading(true);
+    Promise.all([
+      fetch("/api/proxy/favorites").then((r) => r.json() as Promise<string[]>),
+      api.lieux.list(),
+      fetch("/api/proxy/my-itineraires").then((r) => (r.ok ? (r.json() as Promise<UserItineraire[]>) : [])),
+    ])
+      .then(([slugs, allLieux, itins]) => {
+        setFavLieux(allLieux.filter((l) => slugs.includes(l.slug)));
+        setItinItems(itins.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [session]);
+
+  return { favLieux, setFavLieux, itinItems, setItinItems, loading };
+}
 
 /**
  * Refonte UI Lot 5 — fusionne /mes-favoris et /mes-itineraires en une seule entrée à deux
@@ -39,35 +66,9 @@ export default function CarnetPage() {
   const onglet: Onglet = lireParam(search, "onglet", ONGLETS) || "favoris";
   const setOnglet = useCallback((v: Onglet) => ecrireFiltres({ onglet: v }), []);
 
-  const [favLieux, setFavLieux] = useState<Lieu[]>([]);
-  const [favLoading, setFavLoading] = useState(true);
+  const { favLieux, setFavLieux, itinItems, setItinItems, loading } = useCarnetData(session);
   const [removingFav, setRemovingFav] = useState<string | null>(null);
-
-  const [itinItems, setItinItems] = useState<UserItineraire[]>([]);
-  const [itinLoaded, setItinLoaded] = useState(false);
   const [deletingItin, setDeletingItin] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Pas de session → on ne bascule jamais favLoading/itinLoaded à "chargé" : ce cas ne
-    // consulte jamais ces flags (voir le rendu plus bas, branche `!session`), donc rien à
-    // synchroniser — même raisonnement que l'ancien mes-favoris/page.tsx.
-    if (!session) return;
-    Promise.all([
-      fetch("/api/proxy/favorites").then((r) => r.json() as Promise<string[]>),
-      api.lieux.list(),
-    ])
-      .then(([slugs, allLieux]) => setFavLieux(allLieux.filter((l) => slugs.includes(l.slug))))
-      .catch(() => {})
-      .finally(() => setFavLoading(false));
-
-    fetch("/api/proxy/my-itineraires")
-      .then((r) => (r.ok ? (r.json() as Promise<UserItineraire[]>) : []))
-      .then((res) =>
-        setItinItems(res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-      )
-      .catch(() => {})
-      .finally(() => setItinLoaded(true));
-  }, [session]);
 
   async function removeFavorite(slug: string) {
     if (!session) return;
@@ -120,7 +121,7 @@ export default function CarnetPage() {
             }
           >
             {o === "favoris" ? t("ongletFavoris") : t("ongletItineraires")}
-            {session && (favLoading || !itinLoaded) === false && (
+            {session && !loading && (
               <span className="ml-1.5" style={{ color: "var(--text-muted)" }}>
                 ({o === "favoris" ? favLieux.length : itinItems.length})
               </span>
@@ -141,7 +142,7 @@ export default function CarnetPage() {
           </Link>
         </div>
       ) : onglet === "favoris" ? (
-        favLoading ? (
+        loading ? (
           <p style={{ color: "var(--text-muted)" }}>{tFav("chargement")}</p>
         ) : favLieux.length === 0 ? (
           <div className="rounded-xl p-8 text-center" style={{ background: "var(--surface)" }}>
@@ -183,7 +184,7 @@ export default function CarnetPage() {
             ))}
           </div>
         )
-      ) : !itinLoaded ? null : itinItems.length === 0 ? (
+      ) : loading ? null : itinItems.length === 0 ? (
         <div className="rounded-2xl p-12 text-center" style={{ background: "var(--surface)" }}>
           <p className="text-lg font-semibold mb-2">{tItin("aucunItineraire")}</p>
           <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>{tItin("composePremier")}</p>

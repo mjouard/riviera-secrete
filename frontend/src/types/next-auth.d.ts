@@ -4,7 +4,7 @@ import "next-auth/jwt";
 declare module "next-auth" {
   interface Session {
     user: {
-      id?: string;
+      id: string; // toujours présent quand la session existe (voir auth.ts session callback)
       name?: string | null;
       email?: string | null;
       image?: string | null;

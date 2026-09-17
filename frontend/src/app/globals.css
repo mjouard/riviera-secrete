@@ -220,6 +220,8 @@ body {
   --mer-3: #4A7C9B;
   --mer-4: #3D6684;
   --mer-5: #30516A;
+  /* Tracé de carte pour les itinéraires éditoriaux (/itineraires/[slug]) */
+  --trace-itin: #4a9eca;
 
   /* Rayons */
   --radius: 3px;

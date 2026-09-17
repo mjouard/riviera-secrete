@@ -29,7 +29,7 @@ export function applyDarkTileFilter(map: import("leaflet").Map): void {
  * les deux doivent rester alignés, sinon on désactive le drag sans rendre le scroll, ou
  * l'inverse.
  */
-function estTactile(): boolean {
+export function estTactile(): boolean {
   if (typeof window === "undefined" || !window.matchMedia) return false;
   return window.matchMedia("(pointer: coarse)").matches;
 }

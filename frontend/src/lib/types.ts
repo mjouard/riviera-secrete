@@ -111,19 +111,10 @@ export interface StopActivite {
   labelEn?: string | null;
 }
 
-export interface ItineraireItem {
-  type: "stop" | "transit" | "sleep";
-  heure?: string;
-  lieuSlug?: string;
-  nom?: string;
-  commune?: string;
-  desc?: string;
-  activites?: StopActivite[];
-  dormirA?: string;
-  nomEn?: string | null;
-  descEn?: string | null;
-  dormirAEn?: string | null;
-}
+export type ItineraireItem =
+  | { type: "stop"; lieuSlug: string; nom: string; heure?: string; commune?: string; desc?: string; descEn?: string | null; activites?: StopActivite[]; nomEn?: string | null }
+  | { type: "transit"; heure?: string; desc?: string; descEn?: string | null }
+  | { type: "sleep"; dormirA: string; dormirAEn?: string | null };
 
 export interface BookingRef {
   lieuLabel: string;

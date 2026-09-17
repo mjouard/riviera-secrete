@@ -25,7 +25,7 @@ interface Props {
 
 export default function LeafletItinMap({
   stops,
-  lineColor = "#4a9eca",
+  lineColor = "var(--trace-itin)",
   dashArray = "6 4",
   pinSize = 24,
   height = "380px",

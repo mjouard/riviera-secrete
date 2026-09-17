@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
-import { createBaseMap, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
+import { createBaseMap, estTactile, LEAFLET_CSS_HREF } from "@/lib/map-tiles";
 import { regionToMerShade } from "@/lib/mer-colors";
 
 const MARKERCLUSTER_CSS = [
@@ -12,13 +12,8 @@ const MARKERCLUSTER_CSS = [
   "https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css",
 ];
 
-/** Même condition que globals.css (`@media (pointer: coarse)`) et map-tiles.ts — à garder alignées. */
-function tactile(): boolean {
-  return typeof window !== "undefined" && !!window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-}
-
 function construireIcone(L: typeof import("leaflet"), lieu: Lieu, survole: boolean) {
-  const taille = tactile() ? 13 : 15;
+  const taille = estTactile() ? 13 : 15;
   const couleur = survole ? "var(--aube)" : regionToMerShade(lieu.regionSlug);
   return L.divIcon({
     className: "",

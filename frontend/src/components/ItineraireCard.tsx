@@ -12,8 +12,8 @@ export default function ItineraireCard({
   lieuBySlug: Map<string, Lieu>;
 }) {
   const locale = useLocale();
-  const firstStop = itin.items.find((item) => item.type === "stop" && item.lieuSlug);
-  const thumb = firstStop?.lieuSlug ? lieuBySlug.get(firstStop.lieuSlug)?.thumbImage : undefined;
+  const firstStop = itin.items.find((item): item is Extract<typeof item, { type: "stop" }> => item.type === "stop");
+  const thumb = firstStop ? lieuBySlug.get(firstStop.lieuSlug)?.thumbImage : undefined;
   const titre = loc(locale, itin.titreEn, itin.titre);
 
   return (
