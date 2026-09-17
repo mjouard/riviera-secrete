@@ -88,12 +88,16 @@ Audit complet dans `frontend/AUDIT.md`. Priorités extraites ici.
 - [x] **F6 — `ItineraireItem` : union sans discriminant** (`types.ts`) — `nom?`, `lieuSlug?`,
       `activites?`, `dormirA?` tous optionnels, compilateur n'aide pas → discriminated union
       sur `type: "stop" | "transit" | "sleep"` ; prédicats de type dans les appelants.
-- [ ] **F7 — Champs `?: T | null` incohérents** (`types.ts`) — choisir un modèle unique :
-      optional (`?`) OU nullable (`null`), pas les deux simultanément.
-- [ ] **F8 — `itineraire-logic.ts` monolithique** (~350 lignes, mélange génération / planning /
-      formatage) → scinder par domaine pour rendre testable unitairement.
-- [ ] **F9 — Props drilling Explorer sur 4 niveaux** (`ExplorerShell → List → Card`) →
-      `FilterContext` + `useFilter()`.
+- [x] **F7 — Champs `?: T | null` incohérents** (`types.ts`) — `?: T | null` → `: T | null`
+      sur tous les champs i18n et nullable (nomEn, horaires, fermeJours…) : le backend
+      envoie toujours null pour ces champs, jamais undefined.
+- [x] **F8 — `itineraire-logic.ts` monolithique** (~350 lignes, mélange génération / planning /
+      formatage) → scindé en `itineraire-format.ts` (pur formatage, zéro import Lieu) et
+      `itineraire-url.ts` (encode/decode jours) ; `itineraire-logic.ts` ré-exporte les deux
+      pour que les 17 sites d'import restent inchangés.
+- [x] **F9 — Props drilling Explorer sur 4 niveaux** (`ExplorerShell → List → Card`) →
+      `ExplorerHoverContext` (hoveredSlug + onHover) ; Shell fournit via Provider, List et
+      Card consomment via `useExplorerHover()` sans props intermédiaires.
 - [ ] **F10 — `.catch(() => {})` muet** dans plusieurs pages (Carnet, Explorer) → `ErrorBoundary`
       global + toast system pour les erreurs réseau silencieuses.
 
