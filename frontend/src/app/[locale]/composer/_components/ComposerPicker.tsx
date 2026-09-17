@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { loc, normalizeSearch } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { Chip } from "@/components/ui/Chip";
 import { Field } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 import { IconSearch } from "@/components/ui/Icons";
+import { FilterDrawer } from "@/components/ui/FilterDrawer";
 import ComposerCard from "./ComposerCard";
 
 /**
@@ -77,6 +78,49 @@ export default function ComposerPicker({
   }, [index, q, zone, badge, favorisOnly, favorisSlugs]);
 
   const aUnFiltre = q !== "" || zone !== "" || badge !== "" || favorisOnly;
+  const nbFiltresSecondaires = [zone, badge, favorisOnly ? "1" : ""].filter(Boolean).length;
+
+  /** Tiroir mobile (→ audit UX 17/09, 1.3) — zone/badge/favoris, en plus du bandeau de
+   * ComposerParamsBar, formaient la seconde moitié du "mur de réglages" avant le premier
+   * lieu. La recherche reste visible en permanence. */
+  const [tiroirOuvert, setTiroirOuvert] = useState(false);
+
+  const filtresSecondaires = (
+    <>
+      {REGION_ORDER.map((slug) => (
+        <Chip key={slug} selected={zone === slug} onClick={() => onZoneChange(zone === slug ? "" : slug)}>
+          {tRegion(slug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
+        </Chip>
+      ))}
+
+      {favorisSlugs && favorisSlugs.length > 0 && (
+        <>
+          <span className="w-px self-stretch mx-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+          <Chip selected={favorisOnly} onClick={() => onFavorisOnlyChange(!favorisOnly)}>
+            {t("depuisMesFavoris", { count: favorisSlugs.length })}
+          </Chip>
+        </>
+      )}
+
+      <span className="w-px self-stretch mx-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+
+      {BADGE_DEFS.map((b) => (
+        <Chip key={b.slug} selected={badge === b.slug} onClick={() => onBadgeChange(badge === b.slug ? "" : b.slug)}>
+          {b.emoji} {tBadges(b.slug as "plage" | "randonnee" | "vtt" | "plongee" | "restaurant")}
+        </Chip>
+      ))}
+
+      {aUnFiltre && (
+        <Button
+          type="button"
+          variant="discret"
+          onClick={() => { onQChange(""); onZoneChange(""); onBadgeChange(""); onFavorisOnlyChange(false); }}
+        >
+          {t("toutEffacer")}
+        </Button>
+      )}
+    </>
+  );
 
   return (
     <div>
@@ -95,39 +139,16 @@ export default function ComposerPicker({
           />
         </div>
 
-        <div className="flex flex-wrap gap-2 items-center overflow-x-auto pb-1">
-          {REGION_ORDER.map((slug) => (
-            <Chip key={slug} selected={zone === slug} onClick={() => onZoneChange(zone === slug ? "" : slug)}>
-              {tRegion(slug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
-            </Chip>
-          ))}
-
-          {favorisSlugs && favorisSlugs.length > 0 && (
-            <>
-              <span className="w-px self-stretch mx-1" style={{ background: "var(--line)" }} aria-hidden="true" />
-              <Chip selected={favorisOnly} onClick={() => onFavorisOnlyChange(!favorisOnly)}>
-                {t("depuisMesFavoris", { count: favorisSlugs.length })}
-              </Chip>
-            </>
-          )}
-
-          {aUnFiltre && (
-            <Button
-              type="button"
-              variant="discret"
-              onClick={() => { onQChange(""); onZoneChange(""); onBadgeChange(""); onFavorisOnlyChange(false); }}
-            >
-              {t("toutEffacer")}
-            </Button>
-          )}
+        {/* Mobile — recherche + bouton Filtres, le reste replié dans le tiroir. */}
+        <div className="lg:hidden">
+          <Button type="button" variant="secondaire" onClick={() => setTiroirOuvert(true)}>
+            {t("filtres")}{nbFiltresSecondaires > 0 ? ` (${nbFiltresSecondaires})` : ""}
+          </Button>
         </div>
 
-        <div className="flex flex-wrap gap-2 items-center overflow-x-auto pb-1">
-          {BADGE_DEFS.map((b) => (
-            <Chip key={b.slug} selected={badge === b.slug} onClick={() => onBadgeChange(badge === b.slug ? "" : b.slug)}>
-              {b.emoji} {tBadges(b.slug as "plage" | "randonnee" | "vtt" | "plongee" | "restaurant")}
-            </Chip>
-          ))}
+        {/* Desktop — inchangé, tout à plat. */}
+        <div className="hidden lg:flex flex-wrap gap-2 items-center overflow-x-auto pb-1">
+          {filtresSecondaires}
         </div>
       </div>
 
@@ -135,10 +156,26 @@ export default function ComposerPicker({
         {t("lieuxTrouves", { count: filtered.length, total: lieux.length })}
       </p>
 
+      <FilterDrawer
+        open={tiroirOuvert}
+        onClose={() => setTiroirOuvert(false)}
+        title={t("filtres")}
+        footer={
+          <Button type="button" variant="primaire" className="w-full justify-center" onClick={() => setTiroirOuvert(false)}>
+            {t("voirResultats", { count: filtered.length })}
+          </Button>
+        }
+      >
+        <div className="flex flex-wrap gap-2 items-center">{filtresSecondaires}</div>
+      </FilterDrawer>
+
       {filtered.length === 0 ? (
         <p className="text-body py-10 text-center" style={{ color: "var(--brume)" }}>{t("aucunResultat")}</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        // 1 colonne sur mobile (→ audit UX 17/09, 1.4 : 2 colonnes ne laissaient que ~160px
+        // au titre, tronqué à 100%) — cartes horizontales en dessous de sm, grille de
+        // vignettes verticales inchangée à partir de sm.
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {filtered.map((lieu) => (
             <ComposerCard
               key={lieu.slug}

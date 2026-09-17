@@ -10,6 +10,11 @@ import Photo from "@/components/Photo";
  * Vignette de sélection du Composer (ROADMAP Lot 4c, → PR-05) — remplace la case à cocher nue
  * de /creer-itineraire : photo, commune, durée de visite, et une case d'état 28×28 plutôt
  * qu'un `<input type="checkbox">` par défaut du navigateur.
+ *
+ * Sous `sm` (→ audit UX 17/09, 1.4), la carte passe en ligne horizontale (vignette à gauche,
+ * texte à droite, titre sur deux lignes) plutôt que la carte verticale photo-en-haut — la
+ * grille 2 colonnes ne laissait alors que ~160px au titre, tronqué sur 10 cartes sur 10.
+ * Inchangée à partir de `sm` (vignette en haut, grille de 3 colonnes).
  */
 export default function ComposerCard({
   lieu,
@@ -35,14 +40,14 @@ export default function ComposerCard({
       type="button"
       onClick={() => onToggle(lieu.slug)}
       aria-pressed={selected}
-      className="focus-ring-aube text-left rounded-xl overflow-hidden transition-transform hover:-translate-y-0.5"
+      className="focus-ring-aube text-left rounded-xl overflow-hidden transition-transform sm:hover:-translate-y-0.5 flex flex-row sm:flex-col gap-3 sm:gap-0 p-2 sm:p-0"
       style={{ background: "var(--nuit-haute)" }}
     >
-      <div className="relative aspect-[3/2] overflow-hidden">
+      <div className="relative shrink-0 w-24 h-24 sm:w-full sm:h-auto sm:aspect-[3/2] rounded-lg sm:rounded-none overflow-hidden">
         <Photo
           src={lieu.thumbImage}
           alt={lieu.heroAlt}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 240px"
+          sizes="(max-width: 640px) 96px, (max-width: 1024px) 33vw, 240px"
           className="w-full h-full object-cover"
           style={ferme ? { opacity: 0.6 } : undefined}
         />
@@ -75,12 +80,19 @@ export default function ComposerCard({
         )}
       </div>
 
-      <div className="p-2.5">
+      <div className="min-w-0 flex-1 sm:p-2.5">
         <p className="text-meta truncate" style={{ color: "var(--mer-3)" }}>{lieu.commune}</p>
-        <h3 className="text-card-title truncate" style={{ color: "var(--calcaire)", fontSize: "15px" }}>
+        <h3 className="text-card-title line-clamp-2 sm:truncate" style={{ color: "var(--calcaire)", fontSize: "15px" }}>
           {loc(locale, lieu.nomEn, lieu.nom)}
         </h3>
-        <p className="text-meta mt-0.5" style={{ color: "var(--brume)" }}>⏱ {dureeLabel}</p>
+        <div className="flex items-center gap-2 mt-0.5">
+          <p className="text-meta" style={{ color: "var(--brume)" }}>⏱ {dureeLabel}</p>
+          {/* État explicite (→ audit UX 17/09, 1.4) : la case 28×28 seule sur la vignette
+              n'était pas assez visible pour compter comme un état "ajouté" à part entière. */}
+          {selected && (
+            <p className="text-meta font-semibold" style={{ color: "var(--aube)" }}>✓ {t("ajoute")}</p>
+          )}
+        </div>
       </div>
     </button>
   );
