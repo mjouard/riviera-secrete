@@ -20,42 +20,44 @@ prérequis satisfaits ou de priorité proche. Détail historique complet dans `g
 ## Backend — dette technique (audit 2026-09-17)
 
 Audit complet dans `backend/AUDIT.md`. Priorités extraites ici.
+Fixes appliqués le 2026-09-17 (commits `3f250c7`, `6c21499`).
 
 ### Critiques
 
-- [ ] **S1 — Guard sur `Jwt:Issuer` / `Jwt:Audience`** (`Program.cs:42-43`) — lus avec `!`
-      sans vérification : si absent de Railway, le token est émis avec `null` et la validation
-      passe. Fix : `?? throw new InvalidOperationException(...)` comme pour `Jwt:Secret`. < 5 min.
+- [x] **S1 — Guard sur `Jwt:Issuer` / `Jwt:Audience`** — `?? throw InvalidOperationException`
+      ajouté comme pour `Jwt:Secret`.
 - [ ] **M1 — Zéro test** — `ValiderItineraire`, `EstAutoriseSurItineraireCompose`,
       `EstSlugValide` non couverts. Minimum : tests unitaires sur les validators + 1 test
       d'intégration auth (SQLite in-memory).
 
 ### Majeurs
 
-- [ ] **S2 — `EditToken` comparé par `==`** (timing attack) → `CryptographicOperations.FixedTimeEquals`.
-- [ ] **S3 — Aucun header de sécurité HTTP** — `X-Content-Type-Options`, `X-Frame-Options`,
-      `Referrer-Policy` manquants. Fix : middleware de 4 lignes avant `app.MapGet`.
+- [x] **S2 — `EditToken` comparé par `==`** → `CryptographicOperations.FixedTimeEquals`.
+- [x] **S3 — Headers de sécurité HTTP** — `X-Content-Type-Options`, `X-Frame-Options`,
+      `Referrer-Policy` ajoutés via middleware.
 - [ ] **S4 — Confirmer `ASPNETCORE_ENVIRONMENT=Production` sur Railway** — sinon `/api/seed`
       est accessible en prod.
-- [ ] **P1 — Zéro `AsNoTracking()`** sur les endpoints de lecture publique — gain ~20-30 %
-      garanti, 10 min de travail.
-- [ ] **P2 — Aucun cache côté API** — chaque revalidation ISR frappe PostgreSQL. `OutputCache`
-      60 s sur les endpoints publics.
-- [ ] **A1 — `EmailService` non injectable** — `static class` + `static HttpClient` sans
-      `IHttpClientFactory` → DNS non renouvelés, non testable. Extraire vers Infrastructure
-      avec `IEmailService`.
-- [ ] **M2 — Logging `Console.WriteLine`** → `ILogger<T>` pour des logs corrélés sur Railway.
-- [ ] **M3 — Aucune gestion globale des exceptions** → `app.UseExceptionHandler` ou middleware
-      de logging des 5xx.
+- [x] **S5 — CORS `AllowAnyMethod()`** → `WithMethods("GET","POST","PUT","PATCH","DELETE","OPTIONS")`.
+- [x] **P1 — `AsNoTracking()`** ajouté sur les 6 endpoints de lecture publique.
+- [ ] **P2 — Aucun cache côté API** — `OutputCache` 60 s sur les endpoints publics. Différé :
+      nécessite d'invalider aussi le cache ASP.NET Core depuis `RivieraSecrete.Tools`,
+      sinon le `/api/revalidate` frontend ne suffit plus.
+- [x] **A1 + M2 — `EmailService` injectable** — converti en classe non-statique avec
+      `IHttpClientFactory` et `ILogger<EmailService>` ; enregistré en DI.
+- [x] **M3 — Gestion globale des exceptions** — `app.UseExceptionHandler` en production,
+      log structuré `LogError` + 500 JSON.
 
 ### Mineurs
 
-- [ ] **S6 — Race condition `/register`** → `DbUpdateException` non catchée → 500 au lieu de
-      409 sur double inscription simultanée.
-- [ ] **S7 — Validation email `Contains('@')`** → regex minimale ou `MailAddress`.
-- [ ] **P3 — `GET /api/villes` surcharge** → `.Include(v => v.Lieux)` inutile pour le listing,
-      remplacer par une projection.
-- [ ] **M6 — Tag Docker `sdk:10.0` flottant** → épingler `sdk:10.0.x`.
+- [x] **S6 — Race condition `/register`** → `catch (DbUpdateException)` → 409.
+- [x] **S7 — Validation email** → regex `^[^@\s]+@[^@\s]+\.[^@\s]+$`.
+- [x] **M5 — `PasswordResetTokenExpiry` null** — `is null ||` ajouté avant la comparaison.
+- [ ] **P3 — `GET /api/villes` surcharge** → projection sans `Include(Lieux)`. Différé :
+      plusieurs pages frontend utilisent `v.lieux` depuis le listing, nécessite un refactor
+      du type `Ville` côté frontend d'abord.
+- [x] **M6 — Tag Docker `sdk:10.0` flottant** → épinglé sur `sdk:10.0.401`.
+- [x] **A2 — `Program.cs` monolithique** → `Helpers.cs` (static class + `using static`) +
+      `Dtos.cs` ; `Program.cs` passe de 767 à 588 lignes.
 - [ ] **M7 — `CreatedAt` non-nullable sans init C#** → `DateTime?` ou `= DateTime.UtcNow`.
 
 ## Frontend — dette technique (audit 2026-09-17)
