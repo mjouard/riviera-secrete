@@ -17,6 +17,47 @@ prérequis satisfaits ou de priorité proche. Détail historique complet dans `g
       l'`appsettings.Development.json` local. Inspecter les lignes de `Users` non reconnues.
       `scripts/sync-coordonnees.sh` relit la chaîne à chaque exécution, restera valable après.
 
+## Backend — dette technique (audit 2026-09-17)
+
+Audit complet dans `backend/AUDIT.md`. Priorités extraites ici.
+
+### Critiques
+
+- [ ] **S1 — Guard sur `Jwt:Issuer` / `Jwt:Audience`** (`Program.cs:42-43`) — lus avec `!`
+      sans vérification : si absent de Railway, le token est émis avec `null` et la validation
+      passe. Fix : `?? throw new InvalidOperationException(...)` comme pour `Jwt:Secret`. < 5 min.
+- [ ] **M1 — Zéro test** — `ValiderItineraire`, `EstAutoriseSurItineraireCompose`,
+      `EstSlugValide` non couverts. Minimum : tests unitaires sur les validators + 1 test
+      d'intégration auth (SQLite in-memory).
+
+### Majeurs
+
+- [ ] **S2 — `EditToken` comparé par `==`** (timing attack) → `CryptographicOperations.FixedTimeEquals`.
+- [ ] **S3 — Aucun header de sécurité HTTP** — `X-Content-Type-Options`, `X-Frame-Options`,
+      `Referrer-Policy` manquants. Fix : middleware de 4 lignes avant `app.MapGet`.
+- [ ] **S4 — Confirmer `ASPNETCORE_ENVIRONMENT=Production` sur Railway** — sinon `/api/seed`
+      est accessible en prod.
+- [ ] **P1 — Zéro `AsNoTracking()`** sur les endpoints de lecture publique — gain ~20-30 %
+      garanti, 10 min de travail.
+- [ ] **P2 — Aucun cache côté API** — chaque revalidation ISR frappe PostgreSQL. `OutputCache`
+      60 s sur les endpoints publics.
+- [ ] **A1 — `EmailService` non injectable** — `static class` + `static HttpClient` sans
+      `IHttpClientFactory` → DNS non renouvelés, non testable. Extraire vers Infrastructure
+      avec `IEmailService`.
+- [ ] **M2 — Logging `Console.WriteLine`** → `ILogger<T>` pour des logs corrélés sur Railway.
+- [ ] **M3 — Aucune gestion globale des exceptions** → `app.UseExceptionHandler` ou middleware
+      de logging des 5xx.
+
+### Mineurs
+
+- [ ] **S6 — Race condition `/register`** → `DbUpdateException` non catchée → 500 au lieu de
+      409 sur double inscription simultanée.
+- [ ] **S7 — Validation email `Contains('@')`** → regex minimale ou `MailAddress`.
+- [ ] **P3 — `GET /api/villes` surcharge** → `.Include(v => v.Lieux)` inutile pour le listing,
+      remplacer par une projection.
+- [ ] **M6 — Tag Docker `sdk:10.0` flottant** → épingler `sdk:10.0.x`.
+- [ ] **M7 — `CreatedAt` non-nullable sans init C#** → `DateTime?` ou `= DateTime.UtcNow`.
+
 ## Arbitrages produit en attente
 
 - [ ] **Durée de vie du JWT** — 30 jours, aucune denylist de `jti`, pas de refresh token : un
