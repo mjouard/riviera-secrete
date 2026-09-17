@@ -27,7 +27,7 @@ export default function ComposerMobileBar({
     >
       <p className="text-meta text-center" style={{ color: "var(--brume)" }}>
         {nbLieux > 0
-          ? t("recapTitre", { count: nbLieux, plural: nbLieux > 1 ? "x" : "", duree: formatDuree(tempsTotalMin) })
+          ? t("recapTitre", { count: nbLieux, duree: formatDuree(tempsTotalMin) })
           : t("composerBoutonVide")}
       </p>
       <Button type="button" variant="primaire" className="w-full" style={{ height: "52px" }} disabled={nbLieux === 0} onClick={onCompose}>

@@ -132,7 +132,7 @@ export default function ResultsView({
       )}
       <div className="print-header">
         <p className="print-header-url">{SITE_DISPLAY_URL}</p>
-        <h1>{titre}</h1>
+        <p className="print-header-title font-bold text-lg" aria-hidden="true">{titre}</p>
         <p className="print-header-meta">{meta}</p>
       </div>
 

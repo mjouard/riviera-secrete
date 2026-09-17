@@ -57,7 +57,7 @@ export default function PickerView({
       {/* Zones */}
       <section className="mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
-          {t("lieuxSection", { count: selectedSlugs.size, plural: selectedSlugs.size !== 1 ? "s" : "" })}
+          {t("lieuxSection", { count: selectedSlugs.size })}
         </h2>
         <div className="space-y-2">
           {REGION_ORDER.filter((r) => byRegion.has(r)).map((regionSlug) => {

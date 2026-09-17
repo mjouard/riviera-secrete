@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { redirectToConnexion } from "@/lib/utils";
+import { Toast } from "@/components/ui/Toast";
 
 export default function FavoriteButton({
   slug,
@@ -17,6 +18,7 @@ export default function FavoriteButton({
   const { data: session, status } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     if (!session) return;
@@ -46,7 +48,11 @@ export default function FavoriteButton({
       const res = await fetch(`/api/proxy/favorites/${slug}`, {
         method: cible ? "POST" : "DELETE",
       });
-      if (!res.ok) setIsFavorite(!cible);
+      if (!res.ok) {
+        setIsFavorite(!cible);
+      } else {
+        setToast(cible ? t("ajouteFavoriToast") : t("retireFavoriToast"));
+      }
     } catch {
       // Échec réseau : on remet l'état d'avant, sans quoi le cœur mentirait sur ce qui est
       // réellement enregistré.
@@ -62,37 +68,45 @@ export default function FavoriteButton({
   const borderColor = isFavorite ? "var(--aube)" : "var(--line)";
   const color = isFavorite ? "var(--aube)" : "var(--brume)";
 
+  const toastEl = toast ? <Toast message={toast} onDismiss={() => setToast(null)} raised /> : null;
+
   if (variant === "square") {
     return (
-      <button
-        onClick={toggle}
-        disabled={loading}
-        aria-pressed={isFavorite}
-        aria-busy={loading}
-        title={title}
-        className="focus-ring-aube w-[52px] h-[52px] flex-shrink-0 flex items-center justify-center text-xl rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
-        style={{ borderColor, color, background: "var(--nuit-haute)" }}
-      >
-        <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
-      </button>
+      <>
+        {toastEl}
+        <button
+          onClick={toggle}
+          disabled={loading}
+          aria-pressed={isFavorite}
+          aria-busy={loading}
+          title={title}
+          className="focus-ring-aube w-[52px] h-[52px] flex-shrink-0 flex items-center justify-center text-xl rounded-lg border transition-colors hover:bg-white/5 cursor-pointer"
+          style={{ borderColor, color, background: "var(--nuit-haute)" }}
+        >
+          <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
+        </button>
+      </>
     );
   }
 
   return (
-    <button
-      onClick={toggle}
-      // Toujours désactivé pendant l'appel, malgré la bascule optimiste : l'état visible a
-      // déjà changé, donc l'attente ne se voit pas, et deux requêtes concurrentes dont les
-      // réponses reviennent dans le désordre laisseraient le cœur désaccordé de la base.
-      disabled={loading}
-      aria-pressed={isFavorite}
-      aria-busy={loading}
-      title={title}
-      className="focus-ring-aube flex items-center gap-1.5 h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
-      style={{ borderColor, color }}
-    >
-      <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
-      <span>{isFavorite ? t("favori") : t("ajouterAuxFavoris")}</span>
-    </button>
+    <>
+      {toastEl}
+      <button
+        onClick={toggle}
+        // Toujours désactivé pendant l'appel, malgré la bascule optimiste : l'état visible a
+        // déjà changé, donc l'attente ne se voit pas, et deux requêtes concurrentes dont les
+        // réponses reviennent dans le désordre laisseraient le cœur désaccordé de la base.
+        disabled={loading}
+        aria-pressed={isFavorite}
+        aria-busy={loading}
+        title={title}
+        className="focus-ring-aube flex items-center gap-1.5 h-11 text-body px-4 rounded-full border transition-colors hover:bg-white/5 cursor-pointer"
+        style={{ borderColor, color }}
+      >
+        <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>
+        <span>{isFavorite ? t("favori") : t("ajouterAuxFavoris")}</span>
+      </button>
+    </>
   );
 }

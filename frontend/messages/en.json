@@ -226,11 +226,11 @@
     "zoneLabel": "Zone",
     "toutEffacer": "Clear all",
     "depuisMesFavoris": "♥ From my favourites ({count})",
-    "lieuxTrouves": "{count} place{plural} of {total}",
+    "lieuxTrouves": "{count, plural, one {# place} other {# places}} of {total}",
     "aucunResultat": "No place matches this search.",
     "fermeJour": "Closed {jour}",
     "recapTitreVide": "Your selection",
-    "recapTitre": "{count} place{plural}, {duree}",
+    "recapTitre": "{count, plural, one {# place} other {# places}}, {duree}",
     "tempsSurPlace": "Time on site",
     "trajets": "Travel",
     "entrees": "Entry fees to plan",
@@ -345,7 +345,9 @@
     "nouvelItineraire": "+ New itinerary",
     "yAller": "Get directions",
     "ajouteAuBrouillon": "{nom} added to your itinerary ({count, plural, one {# place} other {# places}})",
-    "voirMonItineraire": "View my itinerary"
+    "voirMonItineraire": "View my itinerary",
+    "ajouteFavoriToast": "Added to favourites",
+    "retireFavoriToast": "Removed from favourites"
   },
   "aPropos": {
     "title": "About",

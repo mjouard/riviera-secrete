@@ -152,7 +152,7 @@
     "title": "Créer mon itinéraire",
     "subtitle": "Choisis une durée et les lieux qui t'intéressent — l'algorithme compose le meilleur itinéraire possible.",
     "duree": "Durée",
-    "lieuxSection": "Lieux ({count} sélectionné{plural})",
+    "lieuxSection": "{count, plural, one {Lieu (# sélectionné)} other {Lieux (# sélectionnés)}}",
     "lieuxCount": "{count} lieux",
     "toutSelectionnerZone": "Tout sélectionner — {zone}",
     "emptyNote": "Sélectionne au moins un lieu.",
@@ -226,11 +226,11 @@
     "zoneLabel": "Zone",
     "toutEffacer": "Tout effacer",
     "depuisMesFavoris": "♥ Depuis mes favoris ({count})",
-    "lieuxTrouves": "{count} lieu{plural} sur {total}",
+    "lieuxTrouves": "{count, plural, one {# lieu} other {# lieux}} sur {total}",
     "aucunResultat": "Aucun lieu ne correspond à cette recherche.",
     "fermeJour": "Fermé {jour}",
     "recapTitreVide": "Ta sélection",
-    "recapTitre": "{count} lieu{plural}, {duree}",
+    "recapTitre": "{count, plural, one {# lieu} other {# lieux}}, {duree}",
     "tempsSurPlace": "Temps sur place",
     "trajets": "Trajets",
     "entrees": "Entrées à prévoir",
@@ -345,7 +345,9 @@
     "nouvelItineraire": "+ Nouvel itinéraire",
     "yAller": "Y aller",
     "ajouteAuBrouillon": "{nom} ajouté à ton itinéraire ({count, plural, one {# lieu} other {# lieux}})",
-    "voirMonItineraire": "Voir mon itinéraire"
+    "voirMonItineraire": "Voir mon itinéraire",
+    "ajouteFavoriToast": "Ajouté à vos favoris",
+    "retireFavoriToast": "Retiré de vos favoris"
   },
   "aPropos": {
     "title": "À propos",

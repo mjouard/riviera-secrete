@@ -89,7 +89,8 @@ export function buildMapLinks(lat: number, lng: number, nom: string, plansLabel 
 
 /** Redirige vers /connexion en conservant l'URL courante comme callbackUrl. Client uniquement. */
 export function redirectToConnexion(): void {
-  window.location.href = "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
+  const prefix = window.location.pathname.startsWith("/en") ? "/en" : "";
+  window.location.href = prefix + "/connexion?callbackUrl=" + encodeURIComponent(window.location.href);
 }
 
 export function buildGoogleMapsRouteUrl(stops: Array<{ lat: number; lng: number }>): string {

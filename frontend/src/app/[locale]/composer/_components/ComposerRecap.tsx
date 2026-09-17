@@ -93,7 +93,7 @@ export default function ComposerRecap({
 
   const titre = nbLieux === 0
     ? t("recapTitreVide")
-    : t("recapTitre", { count: nbLieux, plural: nbLieux > 1 ? "x" : "", duree: formatDuree(tempsSurPlaceMin + trajetsMin) });
+    : t("recapTitre", { count: nbLieux, duree: formatDuree(tempsSurPlaceMin + trajetsMin) });
 
   return (
     <div
