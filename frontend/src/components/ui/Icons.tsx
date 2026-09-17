@@ -100,3 +100,38 @@ export function IconChevronDown({ className }: IconProps) {
     </svg>
   );
 }
+
+/** Badge "plage" (→ audit UX 17/09, 3.3 — remplace 🏖️). */
+export function IconBeach({ className }: IconProps) {
+  return (
+    <svg {...BASE_PROPS} className={className} aria-hidden="true">
+      <path d="M2.5 17c2-1 4-1 6 0s4 1 6 0 3-1 3-1" />
+      <path d="M10 12.5S6 9 6 5.5A4 4 0 0110 2c0 4-2 6-2 6" />
+      <path d="M10 12.5L4 8M10 12.5l6.5-2.5" />
+    </svg>
+  );
+}
+
+/** Badge "VTT" (→ audit UX 17/09, 3.3 — remplace 🚵). */
+export function IconBike({ className }: IconProps) {
+  return (
+    <svg {...BASE_PROPS} className={className} aria-hidden="true">
+      <circle cx="5" cy="14.5" r="3" />
+      <circle cx="15" cy="14.5" r="3" />
+      <path d="M5 14.5l3.5-7h4l2.5 7" />
+      <path d="M8.5 7.5h4M8.5 7.5L7 4h-1.5" />
+    </svg>
+  );
+}
+
+/** Badge "plongée" (→ audit UX 17/09, 3.3 — remplace 🤿). */
+export function IconDiving({ className }: IconProps) {
+  return (
+    <svg {...BASE_PROPS} className={className} aria-hidden="true">
+      <path d="M4 10a5 5 0 0110 0v3a1.5 1.5 0 001.5 1.5H16" />
+      <circle cx="6.5" cy="10" r="1" fill="currentColor" stroke="none" />
+      <circle cx="11.5" cy="10" r="1" fill="currentColor" stroke="none" />
+      <path d="M4 10H2.5M14 10h1.5" />
+    </svg>
+  );
+}

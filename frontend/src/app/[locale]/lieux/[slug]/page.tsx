@@ -7,7 +7,7 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
 import { imgUrl, buildMapLinks, distanceKm, loc, alternatesPage, prixAffiche } from "@/lib/utils";
-import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { BADGE_DEFS_BY_SLUG, BADGE_ICONS } from "@/lib/home-data";
 import { regionToMerShade } from "@/lib/mer-colors";
 import { IconClock } from "@/components/ui/Icons";
 import MapLieuWrapper from "@/components/MapLieuWrapper";
@@ -229,16 +229,17 @@ export default async function LieuPage({
                 {lieu.badges.map((b) => {
                   const def = BADGE_DEFS_BY_SLUG[b];
                   const known = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
-                  const badgeLabel = (known as readonly string[]).includes(b)
-                    ? tBadges(b as (typeof known)[number])
-                    : def?.label;
+                  const estConnu = (known as readonly string[]).includes(b);
+                  const badgeLabel = estConnu ? tBadges(b as (typeof known)[number]) : def?.label;
+                  const Icon = estConnu ? BADGE_ICONS[b] : null;
                   return (
                     <span
                       key={b}
-                      className="text-meta px-3 py-1 rounded-full border"
+                      className="text-meta px-3 py-1 rounded-full border inline-flex items-center gap-1.5"
                       style={{ borderColor: "var(--line)", color: "var(--brume)" }}
                     >
-                      {def ? `${def.emoji} ${badgeLabel}` : b}
+                      {Icon && <Icon className="w-3.5 h-3.5" />}
+                      {def ? badgeLabel : b}
                     </span>
                   );
                 })}

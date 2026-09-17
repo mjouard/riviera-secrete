@@ -9,7 +9,7 @@ import { loc, redirectToConnexion } from "@/lib/utils";
 import { api } from "@/lib/api";
 import { oublierEditToken, useEditToken } from "@/lib/itineraire-compose-tokens";
 import { formatDuree, parseVisitMinutes, encodeJours, type DureeKey } from "@/lib/itineraire-logic";
-import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { BADGE_ICONS } from "@/lib/home-data";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
 import { Toast } from "@/components/ui/Toast";
@@ -21,6 +21,8 @@ import Photo from "@/components/Photo";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
+
+const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
 
 /**
  * Vue d'un itinéraire composé (`/i/[id]`, ROADMAP.md § 4d). En lecture seule par défaut — ce
@@ -47,6 +49,7 @@ export default function ItineraireComposeView({
   const t = useTranslations("creerItineraire");
   const tItin = useTranslations("itineraireCompose");
   const tDuree = useTranslations("dureeLabels");
+  const tBadges = useTranslations("badges");
   const { data: session } = useSession();
   const [lienCopie, setLienCopie] = useState(false);
   const [garde, setGarde] = useState(false);
@@ -370,12 +373,20 @@ export default function ItineraireComposeView({
                       <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{lieu.commune}</p>
                       <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>⏱ {dureeLabel}</p>
                       {lieu.badges.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mt-1">
+                        /* Icônes vectorielles plutôt qu'émojis (→ audit UX 17/09, 3.3) — même
+                           traitement que ResultsView.tsx (carte trop étroite pour un libellé
+                           visible, sr-only porte le mot pour un lecteur d'écran). */
+                        <div className="flex flex-wrap gap-1.5 mt-1">
                           {lieu.badges.map((badgeId) => {
-                            const def = BADGE_DEFS_BY_SLUG[badgeId];
-                            return def ? (
-                              <span key={badgeId} className="text-xs" style={{ color: "var(--text-muted)" }}>{def.emoji}</span>
-                            ) : null;
+                            const Icon = (KNOWN_BADGES as readonly string[]).includes(badgeId) ? BADGE_ICONS[badgeId] : null;
+                            if (!Icon) return null;
+                            const label = tBadges(badgeId as (typeof KNOWN_BADGES)[number]);
+                            return (
+                              <span key={badgeId} title={label} style={{ color: "var(--text-muted)" }}>
+                                <Icon className="w-3.5 h-3.5" />
+                                <span className="sr-only">{label}</span>
+                              </span>
+                            );
                           })}
                         </div>
                       )}

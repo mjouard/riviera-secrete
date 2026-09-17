@@ -1,12 +1,17 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { Lieu } from "@/lib/types";
 import { formatDistanceKm, loc } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import Photo from "@/components/Photo";
-import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { BADGE_ICONS } from "@/lib/home-data";
 import { useExplorerHover } from "./ExplorerHoverContext";
+
+const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
+/** Max de badges affichés avec icône + libellé avant de replier le reste en « +N »
+ * (→ audit UX 17/09, 3.3). */
+const MAX_BADGES_VISIBLES = 3;
 
 /**
  * Carte compacte horizontale — pas le format 4:3 pleine largeur de l'ancienne HomeLieuxGrid
@@ -23,7 +28,9 @@ export default function ExplorerListCard({
   distance?: number;
 }) {
   const locale = useLocale();
+  const tBadges = useTranslations("badges");
   const { onHover } = useExplorerHover();
+  const badgesConnus = lieu.badges.filter((b) => (KNOWN_BADGES as readonly string[]).includes(b));
 
   return (
     <Link
@@ -49,13 +56,21 @@ export default function ExplorerListCard({
         <h3 className="text-card-title truncate" style={{ color: "var(--calcaire)" }}>
           {loc(locale, lieu.nomEn, lieu.nom)}
         </h3>
-        {lieu.badges.length > 0 && (
-          <p className="text-meta mt-1" style={{ color: "var(--brume)" }}>
-            {lieu.badges
-              .map((slug) => BADGE_DEFS_BY_SLUG[slug]?.emoji)
-              .filter(Boolean)
-              .join(" ")}
-          </p>
+        {badgesConnus.length > 0 && (
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 mt-1 text-meta" style={{ color: "var(--brume)" }}>
+            {badgesConnus.slice(0, MAX_BADGES_VISIBLES).map((slug) => {
+              const Icon = BADGE_ICONS[slug];
+              return (
+                <span key={slug} className="inline-flex items-center gap-1">
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                  {tBadges(slug as (typeof KNOWN_BADGES)[number])}
+                </span>
+              );
+            })}
+            {badgesConnus.length > MAX_BADGES_VISIBLES && (
+              <span>+{badgesConnus.length - MAX_BADGES_VISIBLES}</span>
+            )}
+          </div>
         )}
       </div>
     </Link>

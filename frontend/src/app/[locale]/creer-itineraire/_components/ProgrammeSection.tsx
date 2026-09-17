@@ -2,7 +2,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { buildMapLinks, loc } from "@/lib/utils";
-import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { BADGE_DEFS_BY_SLUG, BADGE_ICONS } from "@/lib/home-data";
 import { construirePlanning, formatTransitDesc, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
 
 /**
@@ -93,12 +93,13 @@ export default function ProgrammeSection({
                 <div className="flex flex-wrap gap-2 mb-2">
                   {l.badges.map((id) => {
                     const def = BADGE_DEFS_BY_SLUG[id];
-                    const label = (KNOWN_BADGES as readonly string[]).includes(id)
-                      ? tBadges(id as (typeof KNOWN_BADGES)[number])
-                      : def?.label;
+                    const estConnu = (KNOWN_BADGES as readonly string[]).includes(id);
+                    const label = estConnu ? tBadges(id as (typeof KNOWN_BADGES)[number]) : def?.label;
+                    const Icon = estConnu ? BADGE_ICONS[id] : null;
                     return def ? (
-                      <span key={id} className="text-xs px-2 py-0.5 rounded" style={{ background: "var(--surface-hover)", color: "var(--text-muted)" }}>
-                        {def.emoji} {label}
+                      <span key={id} className="text-xs px-2 py-0.5 rounded inline-flex items-center gap-1" style={{ background: "var(--surface-hover)", color: "var(--text-muted)" }}>
+                        {Icon && <Icon className="w-3 h-3" />}
+                        {label}
                       </span>
                     ) : null;
                   })}

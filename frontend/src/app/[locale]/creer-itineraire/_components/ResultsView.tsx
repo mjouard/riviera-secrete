@@ -7,7 +7,7 @@ import { loc } from "@/lib/utils";
 import { api } from "@/lib/api";
 import { construirePlanning, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
 import { ecrireEditToken } from "@/lib/itineraire-compose-tokens";
-import { BADGE_DEFS_BY_SLUG } from "@/lib/home-data";
+import { BADGE_ICONS } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
 import BookingSection from "./BookingSection";
 import Photo from "@/components/Photo";
@@ -18,6 +18,8 @@ const BuilderMap = dynamic(() => import("@/components/BuilderMap"), { ssr: false
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-two-plum-92.vercel.app";
 const SITE_DISPLAY_URL = SITE_URL.replace(/^https?:\/\//, "");
+
+const KNOWN_BADGES = ["plage", "randonnee", "vtt", "plongee", "restaurant"] as const;
 
 export default function ResultsView({
   currentDays, excluded, bonusSuggestions, dureeKey, currentNom, mapStops, savedBanner, source,
@@ -59,6 +61,7 @@ export default function ResultsView({
   const locale = useLocale();
   const t = useTranslations("creerItineraire");
   const tDuree = useTranslations("dureeLabels");
+  const tBadges = useTranslations("badges");
   const [lienCopie, setLienCopie] = useState(false);
   const [partageEnCours, setPartageEnCours] = useState(false);
   const [composeId, setComposeId] = useState<string | null>(null);
@@ -257,12 +260,21 @@ export default function ResultsView({
                       <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{lieu.commune}</p>
                       <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>⏱ {dureeLabel}</p>
                       {lieu.badges.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mt-1">
+                        /* Icônes vectorielles plutôt qu'émojis (→ audit UX 17/09, 3.3) : carte
+                           trop étroite (grille 2-3 colonnes) pour un libellé visible à côté de
+                           chacune, donc titre + <span className="sr-only"> portent le mot pour
+                           un lecteur d'écran. */
+                        <div className="flex flex-wrap gap-1.5 mt-1">
                           {lieu.badges.map((id) => {
-                            const def = BADGE_DEFS_BY_SLUG[id];
-                            return def ? (
-                              <span key={id} className="text-xs" style={{ color: "var(--text-muted)" }}>{def.emoji}</span>
-                            ) : null;
+                            const Icon = (KNOWN_BADGES as readonly string[]).includes(id) ? BADGE_ICONS[id] : null;
+                            if (!Icon) return null;
+                            const label = tBadges(id as (typeof KNOWN_BADGES)[number]);
+                            return (
+                              <span key={id} title={label} style={{ color: "var(--text-muted)" }}>
+                                <Icon className="w-3.5 h-3.5" />
+                                <span className="sr-only">{label}</span>
+                              </span>
+                            );
                           })}
                         </div>
                       )}
