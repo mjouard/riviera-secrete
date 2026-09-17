@@ -211,8 +211,20 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 - [ ] **M1 · Composeur mobile** — récapitulatif éditable + tiroir filtres, cartes 1 colonne, titres non tronqués, état « Ajouté ✓ » explicite.
 - [ ] **M3 · Explorer mobile** — chips défilantes + bouton « Filtres », liste plein écran, carte flottante « 🗺 Carte ».
 - [ ] **M4 · Fiche lieu mobile** — titre + accroche avant la photo, tableau de métadonnées, une seule barre d'actions.
-- [ ] Hero accueil : CTA « Composer » dans le premier écran mobile, header 56 px.
-- [ ] Réordonnancement par glisser-déposer, cibles 44 px (▲✕▼ actuellement 20 px).
+- [x] **Hero accueil : CTA « Composer » dans le premier écran mobile, header 56 px** (fait le
+      2026-09-17) — header mobile 77→56px (`py-1.5`, desktop inchangé via `lg:py-4`), titre du
+      hero 32px sur mobile (`sm:text-display` au-dessus de 640px), question « J'ai envie de »
+      masquée sur mobile et reportée à `/composer` (qui a déjà son propre filtre par badge).
+      Bouton visible à 693px sur 812px de viewport (vérifié au navigateur).
+- [x] **Réordonnancement par glisser-déposer, cibles 44 px** (▲✕▼ actuellement 20 px, fait le
+      2026-09-17) — `ResultsView.tsx` (partagé par `/composer` et `/creer-itineraire`) reprend
+      le markup 44×44 + toast « {nom} retiré · Annuler » déjà en prod sur
+      `ItineraireComposeView.tsx` (`/i/[id]`), qui n'avait jamais été porté ici (commentaire
+      "MO-01... non touché ici" trouvé dans le code). Le vrai glisser-déposer HTML5
+      (`onDragStart`/`onDragOver`) reste souris seulement — un drag tactile fonctionnel est un
+      chantier à part, non fait ici. Non vérifié au navigateur (CORS bloque l'API prod depuis
+      localhost, pas de backend local dans cette session) — vérifié par `tsc`/build propres et
+      identité avec le pattern déjà en prod.
 - [ ] Icônes vectorielles monochromes à la place des émojis.
 
 #### Trimestre — différencier (maquettes M2, M6)
