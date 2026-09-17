@@ -202,9 +202,20 @@ export default async function LieuPage({
           carte une fois la grille repliée en une colonne ; les regrouper avec l'identité
           règle les deux mises en page à la fois sans dupliquer le bloc. */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.63fr_1fr] lg:gap-10">
-        <div className="min-w-0">
+        <div className="min-w-0 flex flex-col">
+          {/* Titre + accroche — au-dessus de la photo sur mobile (→ audit UX 17/09, 4.1 :
+              "h1 à 454px, description encore plus bas" — le visiteur faisait défiler tout le
+              carrousel avant de savoir où il était). Après la photo sur desktop, où ce n'était
+              pas le problème signalé (h1 déjà visible sans défiler à 1280×800). */}
+          <div className="order-1 lg:order-2 mb-4 lg:mb-8">
+            <p className="text-meta mb-2" style={{ color: regionToMerShade(lieu.regionSlug) }}>
+              {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
+            </p>
+            <h1 className="text-display" style={{ color: "var(--calcaire)" }}>{nom}</h1>
+          </div>
+
           {/* Hero */}
-          <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
+          <div className="order-2 lg:order-1 rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
             <HeroCarousel
               slides={Array.from({ length: lieu.heroSlides ?? 1 }, (_, i) => ({
                 src: i === 0
@@ -215,13 +226,8 @@ export default async function LieuPage({
             />
           </div>
 
-          {/* Identité */}
-          <div className="mb-8">
-            <p className="text-meta mb-2" style={{ color: regionToMerShade(lieu.regionSlug) }}>
-              {lieu.commune} · {tRegionFull(lieu.regionSlug as "menton-monaco" | "nice" | "arriere-pays" | "antibes-cannes" | "golfe-st-tropez")}
-            </p>
-            <h1 className="text-display mb-4" style={{ color: "var(--calcaire)" }}>{nom}</h1>
-
+          {/* Reste de l'identité : badges, métadonnées, liens carte, actions */}
+          <div className="order-3 mb-8">
             {/* Badges — informatifs sur cette page (pas des filtres), même forme visuelle que
                 les puces Chip du Lot 1 mais sans le comportement interactif. */}
             {lieu.badges.length > 0 && (
@@ -280,8 +286,10 @@ export default async function LieuPage({
               ))}
             </div>
 
-            {/* Favori / Partager / Itinéraire — actions sur le site */}
-            <div className="flex flex-wrap gap-2 mt-3">
+            {/* Favori / Partager / Itinéraire — masqué sur mobile (→ audit UX 17/09, 4.3 :
+                "6 boutons dans le corps + les mêmes dans la barre collante"), LieuMobileActionBar
+                couvre déjà ces trois actions sous 1024px. */}
+            <div className="hidden lg:flex flex-wrap gap-2 mt-3">
               <FavoriteButton slug={lieu.slug} />
               <ShareButton title={nom} />
               <AddToItinButton lieuSlug={lieu.slug} nom={nom} />
@@ -290,7 +298,7 @@ export default async function LieuPage({
 
           {/* Récit — largeur de lecture bornée à 66 caractères (→ 06 § 3), pas la pleine
               largeur de la colonne gauche. */}
-          <div className="prose max-w-none mb-10" style={{ maxWidth: "66ch" }}>
+          <div className="order-4 prose max-w-none mb-10" style={{ maxWidth: "66ch" }}>
             <p className="text-body mb-4" style={{ color: "var(--calcaire)" }}>{description}</p>
             {description2 && (
               <p className="text-body" style={{ color: "var(--brume)" }}>
