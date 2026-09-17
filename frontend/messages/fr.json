@@ -391,7 +391,9 @@
     "facile": "Facile",
     "modere": "Modéré",
     "surprendsMoi": "🎲 Surprends-moi",
-    "surprendsMoiTitre": "Ouvrir un lieu au hasard parmi les résultats"
+    "surprendsMoiTitre": "Ouvrir un lieu au hasard parmi les résultats",
+    "filtres": "Filtres",
+    "voirResultats": "{count, plural, =0 {Aucun lieu} one {Voir le lieu} other {Voir les # lieux}}"
   },
   "activites": {
     "title": "Toutes les activités",

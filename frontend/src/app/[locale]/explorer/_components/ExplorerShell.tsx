@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
@@ -16,6 +16,7 @@ import {
   saisonsDuLieu,
 } from "@/lib/lieu-filters";
 import { ecrireFiltres, lireParam, lireTexte, useSearchString } from "@/lib/url-filtres";
+import { useOverlayLock } from "@/lib/use-overlay-lock";
 import { IconMap, IconClose } from "@/components/ui/Icons";
 import ExplorerFilterBar from "./ExplorerFilterBar";
 import ExplorerList from "./ExplorerList";
@@ -53,23 +54,8 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
    * liste/carte : la liste reste maintenant toujours visible et défile avec la page, la carte
    * s'ouvre par-dessus via le bouton flottant plutôt que de remplacer la liste sur place. */
   const [carteOuverte, setCarteOuverte] = useState(false);
+  useOverlayLock(carteOuverte, () => setCarteOuverte(false));
   const [visibleCount, setVisibleCount] = useState(PAR_PAGE);
-
-  // Bloque le défilement de la page derrière la carte plein écran, et permet de la fermer
-  // au clavier (Échap) — même attente qu'une modale ailleurs sur le site.
-  useEffect(() => {
-    if (!carteOuverte) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setCarteOuverte(false);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [carteOuverte]);
 
   // « Près de moi » / « Surprends-moi » — portés depuis l'ancienne HomeLieuxGrid.tsx (accueil,
   // Lot 4e) : bien reçus par un audit externe, absents du spec de refonte mais pas question de
@@ -186,6 +172,7 @@ export default function ExplorerShell({ lieux }: { lieux: Lieu[] }) {
         onToggleProximite={toggleProximite}
         onSurprendsMoi={surprendsMoi}
         surprendsMoiDesactive={filtered.length === 0}
+        resultCount={filtered.length}
       />
 
       <p className="text-meta mb-4" style={{ color: "var(--brume)" }}>

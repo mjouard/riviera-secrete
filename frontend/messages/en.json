@@ -391,7 +391,9 @@
     "facile": "Easy",
     "modere": "Moderate",
     "surprendsMoi": "🎲 Surprise me",
-    "surprendsMoiTitre": "Open a random place from the results"
+    "surprendsMoiTitre": "Open a random place from the results",
+    "filtres": "Filters",
+    "voirResultats": "{count, plural, =0 {No place} one {See the place} other {See # places}}"
   },
   "activites": {
     "title": "All activities",
