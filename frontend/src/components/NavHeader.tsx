@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSession, signOut } from "next-auth/react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Field } from "@/components/ui/Field";
 import { LinkButton } from "@/components/ui/Button";
-import { IconSearch } from "@/components/ui/Icons";
+import { IconSearch, IconChevronDown } from "@/components/ui/Icons";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 /**
@@ -26,21 +26,77 @@ function useNavLinks() {
   return { contentLinks };
 }
 
+/**
+ * Menu compte (→ audit UX 17/09, 7.1 : "le nom n'ouvre rien", tout le bloc "test · Log out"
+ * étant un seul lien qui déconnectait au moindre clic). "Le carnet" est déjà une entrée de nav
+ * à part entière (contentLinks ci-dessus) — ce qui manquait, c'est que "Se déconnecter" ne soit
+ * plus l'action par défaut d'un clic sur son propre nom, mais un item explicite d'un petit menu.
+ */
 function AuthButton({ onClose }: { onClose?: () => void }) {
   const t = useTranslations("nav");
   const { data: session, status } = useSession();
+  const [ouvert, setOuvert] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ouvert) return;
+    const onClickAilleurs = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOuvert(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOuvert(false);
+    };
+    document.addEventListener("mousedown", onClickAilleurs);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onClickAilleurs);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [ouvert]);
 
   if (status === "loading") return null;
 
   if (session) {
     return (
-      <button
-        onClick={() => { signOut(); onClose?.(); }}
-        className="text-sm transition-colors hover:text-white cursor-pointer"
-        style={{ color: "var(--text-muted)" }}
-      >
-        {session.user?.name?.split(" ")[0] ?? "..."} · {t("deconnexion")}
-      </button>
+      <div ref={ref} className="relative">
+        <button
+          type="button"
+          onClick={() => setOuvert((v) => !v)}
+          aria-expanded={ouvert}
+          aria-haspopup="menu"
+          className="flex items-center gap-1 text-sm transition-colors hover:text-white cursor-pointer"
+          style={{ color: "var(--text-muted)" }}
+        >
+          {session.user?.name?.split(" ")[0] ?? "..."}
+          <IconChevronDown className="w-3.5 h-3.5" />
+        </button>
+        {ouvert && (
+          <div
+            role="menu"
+            className="absolute right-0 top-full mt-2 min-w-[180px] rounded-lg border py-1 z-30"
+            style={{ background: "var(--nuit-haute)", borderColor: "var(--line)", boxShadow: "var(--shadow-float)" }}
+          >
+            <Link
+              href="/carnet"
+              role="menuitem"
+              onClick={() => { setOuvert(false); onClose?.(); }}
+              className="block px-3 py-2 text-sm transition-colors hover:bg-white/5"
+              style={{ color: "var(--text)" }}
+            >
+              {t("carnet")}
+            </Link>
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => { signOut(); setOuvert(false); onClose?.(); }}
+              className="w-full text-left px-3 py-2 text-sm transition-colors hover:bg-white/5 cursor-pointer"
+              style={{ color: "var(--text)" }}
+            >
+              {t("deconnexion")}
+            </button>
+          </div>
+        )}
+      </div>
     );
   }
 
