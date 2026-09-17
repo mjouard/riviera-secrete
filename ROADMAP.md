@@ -210,7 +210,14 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 
 - [ ] **M1 · Composeur mobile** — récapitulatif éditable + tiroir filtres, cartes 1 colonne, titres non tronqués, état « Ajouté ✓ » explicite.
 - [ ] **M3 · Explorer mobile** — chips défilantes + bouton « Filtres », liste plein écran, carte flottante « 🗺 Carte ».
-- [ ] **M4 · Fiche lieu mobile** — titre + accroche avant la photo, tableau de métadonnées, une seule barre d'actions.
+- [x] **M4 · Fiche lieu mobile** (fait le 2026-09-17) — bloc commune+titre remonté au-dessus du
+      carrousel sur mobile (`flex-col` + `order-*` responsive, desktop inchangé), rangée
+      Favori/Partager/Ajouter du corps masquée sous 1024px (`hidden lg:flex` — doublon pur avec
+      `LieuMobileActionBar`, qui couvre déjà ces 3 actions ; Google Maps/Waze/Plans restent
+      affichés, non dupliqués eux). `h1` vérifié à 204px sur 812px de viewport (était 454px).
+      La « table de métadonnées compacte » du correctif est restée le flex-wrap existant (3
+      lignes déjà courtes) plutôt qu'un `<table>` littéral — jugé déjà assez compact pour le
+      risque/effort d'une réécriture.
 - [x] **Hero accueil : CTA « Composer » dans le premier écran mobile, header 56 px** (fait le
       2026-09-17) — header mobile 77→56px (`py-1.5`, desktop inchangé via `lg:py-4`), titre du
       hero 32px sur mobile (`sm:text-display` au-dessus de 640px), question « J'ai envie de »
