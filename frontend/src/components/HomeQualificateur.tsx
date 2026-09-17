@@ -69,10 +69,10 @@ export default function HomeQualificateur({ villes, lieuxCount }: { villes: Vill
 
   return (
     <div className="relative z-[2] max-w-xl mx-auto" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.65)" }}>
-      <h1 className="text-display mb-4" style={{ color: "var(--calcaire)" }}>
+      <h1 className="text-[32px] leading-tight sm:text-display mb-3 sm:mb-4" style={{ color: "var(--calcaire)" }}>
         {t("qualifTitre")}
       </h1>
-      <p className="text-body mb-8" style={{ color: "var(--brume)" }}>
+      <p className="text-body mb-5 sm:mb-8" style={{ color: "var(--brume)" }}>
         {t("qualifSousTitre")}
       </p>
 
@@ -117,7 +117,11 @@ export default function HomeQualificateur({ villes, lieuxCount }: { villes: Vill
           )}
         </div>
 
-        <div>
+        {/* Masqué sur mobile (audit UX 17/09, 5.1) : sur un écran de 812px, ces 3 questions
+            repoussaient le bouton "Composer" hors du premier écran. La question reste posable
+            via les mêmes badges sur /composer (ComposerPicker), rien n'est perdu — juste
+            reporté à "l'étape suivante" comme le préconise le correctif. */}
+        <div className="hidden sm:block">
           <p className="text-meta mb-2" style={{ color: "var(--brume)" }}>{t("qualifJAiEnvie")}</p>
           <div className="flex flex-wrap gap-2">
             {ENVIES.map((e) => (
