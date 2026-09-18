@@ -287,21 +287,30 @@ chrome are actually translated so far (`messages/{fr,en}.json`) — every other 
 renders French content under `/en/*`, which is why the root layout marks `/en/*`
 `robots: noindex, follow` until real translated content ships (Phase 1+).
 
-**`/lieux` and `/itineraires` (the full-list pages) were removed on 2026-09-12** — they
-duplicated the homepage's own "Tous les lieux" grid and "Itinéraires" section with no added
-value. Every link that used to point there (hero CTAs, nav, breadcrumbs, `/mes-favoris`'s
-empty state) now points at the homepage's `#lieux`/`#itineraires` anchors instead.
-`/lieux/[slug]` and `/itineraires/[slug]` (the actual detail pages) are untouched.
+**`/lieux` (the full-list page) was removed on 2026-09-12** — it duplicated the homepage's
+own "Tous les lieux" grid with no added value; that link now points at `/explorer` (Lot 4e's
+full browse/filter page, itself created after this removal). `/lieux/[slug]` (the detail
+page) is untouched, still with no list index of its own. **`/itineraires` (the list page)
+was also removed on 2026-09-12 for the same reason, then re-created during Lot 5** ("l'ancre
+`#itineraires` de l'accueil devient une vraie page") — it now has its own filters (zone,
+durée — see `ItinerairesShell.tsx`, ROADMAP § Trimestre) that the homepage anchor doesn't.
+`/mes-favoris` and `/mes-itineraires` were later merged into a single `/carnet` (two tabs,
+`?onglet=favoris|itineraires`, Lot 5) — both old paths now redirect there. `/villes/[slug]`
+was renamed `/communes/[slug]` at the same time (no separate `/villes` or `/communes` index
+either).
 
-Routes under `frontend/src/app/[locale]/`: `/`, `/lieux/[slug]`, `/villes`,
-`/villes/[slug]`, `/itineraires/[slug]`, `/creer-itineraire`, `/mes-itineraires`,
-`/mes-favoris`, `/connexion`, `/confirmer-email`, `/credits`, plus (outside `[locale]`)
-`/api/auth/[...nextauth]` (NextAuth's own route handler). `/mes-favoris` consumes the
-backend's protected favorites API directly (`GET/DELETE /api/favorites` via `authFetch`) —
-logged-out visitors are linked to `/connexion?callbackUrl=…`. Every account-related entry
-point (`NavHeader`, `FavoriteButton`, `creer-itineraire`, `mes-itineraires`, `mes-favoris`)
-links to `/connexion?callbackUrl=…` rather than calling `signIn("google")` directly, so the
-visitor picks Google vs. email/password.
+Routes under `frontend/src/app/[locale]/`: `/`, `/lieux/[slug]`, `/communes/[slug]`,
+`/itineraires`, `/itineraires/[slug]`, `/explorer`, `/composer`, `/creer-itineraire`,
+`/carnet`, `/connexion`, `/inscription`, `/confirmer-email`, `/mot-de-passe-oublie`,
+`/reinitialiser-mot-de-passe`, `/activites`, `/a-propos`, `/credits`, `/mentions-legales`,
+`/confidentialite`, `/i/[id]`, plus (outside `[locale]`) `/api/auth/[...nextauth]`
+(NextAuth's own route handler). `/carnet` consumes the backend's protected favorites/
+itinéraires APIs directly (`GET/DELETE /api/favorites`, full CRUD on
+`/api/my-itineraires`, via `authFetch`) — logged-out visitors are linked to
+`/connexion?callbackUrl=…`. Every account-related entry point (`NavHeader`,
+`FavoriteButton`, `creer-itineraire`, `composer`, `carnet`) links to
+`/connexion?callbackUrl=…` rather than calling `signIn("google")` directly, so the visitor
+picks Google vs. email/password.
 
 - **`/connexion`** — single page toggling between login/register (no separate routes),
   Google button + email/password form, show/hide password, inline errors. Register calls
