@@ -271,7 +271,14 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 - [ ] **M2 · Résultat desktop** — timeline + carte collante côte à côte, sauvegarde « Enregistré ✓ ».
 - [ ] Alerte déjeuner tardif + « Optimiser l'ordre » dans `itineraire-logic.ts`.
 - [ ] **M6 · Mode « Sur place »** — thème clair fort contraste, étape courante développée, corps 18 px.
-- [ ] Export agenda `.ics` (le moteur calcule déjà des horaires).
+- [x] **Export agenda `.ics`** (fait le 2026-09-18) — `lib/ics.ts` réutilise directement
+      `construirePlanning` (mêmes horaires que la timeline, jamais en contradiction), export
+      RFC 5545 valide (échappement, pliage de ligne, heures flottantes). Bouton « 📅 Ajouter à
+      l'agenda » à côté de « Exporter en PDF » sur `ResultsView.tsx` (`/composer`,
+      `/creer-itineraire`) et `ItineraireComposeView.tsx` (`/i/[id]`). Calcul de date testé
+      isolément au navigateur (avance d'un jour par marqueur « sleep ») ; le déclenchement
+      depuis l'UI réelle non vérifié (CORS bloque l'API prod depuis localhost pour
+      `/composer`) — `tsc`/build propres.
 - [x] **Filtres itinéraires prêts** (zone, durée — fait le 2026-09-18) — nouveau
       `ItinerairesShell.tsx` sur `/itineraires` : chips de zone (déduites des lieux de chaque
       étape, un itinéraire n'a pas de région propre) et de durée (réutilise
