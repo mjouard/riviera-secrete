@@ -393,15 +393,27 @@ export default function ResultsView({
         ))}
       </div>
 
-      {/* Map */}
-      {mapStops.length > 0 && (
-        <div className="no-print mb-10">
-          <BuilderMap stops={mapStops} />
+      {/* Programme + carte — deux colonnes desktop (→ audit UX 17/09, 2.1 : "à 1280px, deux
+          tiers de l'écran vides ; la carte arrive dessous en pleine largeur, puis le détail
+          horaire encore plus bas"). Même agencement que ItineraireComposeView.tsx (/i/[id],
+          Lot 4d) — carte collante à gauche (1fr), programme à droite (596px fixe) — plutôt
+          qu'un troisième agencement différent pour une page très proche. Duplicata
+          `print-only` du programme pour la même raison qu'à cet autre endroit : `.no-print`
+          masquerait sinon le programme aussi à l'impression, contraint à sa colonne 1fr par
+          la grille. */}
+      <div className="no-print grid grid-cols-1 lg:grid-cols-[1fr_596px] lg:gap-8">
+        {mapStops.length > 0 && (
+          <div className="mb-10 lg:mb-0 lg:sticky lg:top-[92px] lg:self-start">
+            <BuilderMap stops={mapStops} />
+          </div>
+        )}
+        <div className="min-w-0">
+          <ProgrammeSection days={currentDays} dureeKey={dureeKey} mode={mode} depart={depart} heureDebutMinutes={heureDebutMinutes} />
         </div>
-      )}
-
-      {/* Programme */}
-      <ProgrammeSection days={currentDays} dureeKey={dureeKey} mode={mode} depart={depart} heureDebutMinutes={heureDebutMinutes} />
+      </div>
+      <div className="print-only">
+        <ProgrammeSection days={currentDays} dureeKey={dureeKey} mode={mode} depart={depart} heureDebutMinutes={heureDebutMinutes} />
+      </div>
 
       {/* Booking */}
       <BookingSection days={currentDays} date={date} />
