@@ -26,14 +26,14 @@ type Contenu = { intro: string; maj: string; blocs: Bloc[] };
 const MENTIONS_FR: Contenu = {
   intro:
     "Informations légales relatives au site Riviera Secrète, conformément à la loi pour la confiance dans l'économie numérique (LCEN).",
-  maj: "Dernière mise à jour : 14 septembre 2026.",
+  maj: "Dernière mise à jour : 18 septembre 2026.",
   blocs: [
     {
       titre: "Éditeur du site",
       paragraphes: [
         `Riviera Secrète est un projet éditorial indépendant, sans société d'exploitation ni activité commerciale : le site ne vend rien, n'affiche aucune publicité et ne perçoit aucune commission d'affiliation sur les liens de réservation qu'il propose.`,
-        `Éditeur et directeur de la publication : ${A_COMPLETER}.`,
-        `Contact : ${A_COMPLETER}.`,
+        `Éditeur et directeur de la publication : MJ. Le site est édité à titre non professionnel ; conformément à l'article 6-III-1 de la LCEN, l'identité complète de l'éditeur a été communiquée à l'hébergeur et reste disponible sur réquisition judiciaire.`,
+        `Contact : riviera-secrete@gmail.com.`,
       ],
     },
     {
@@ -60,7 +60,7 @@ const MENTIONS_FR: Contenu = {
     {
       titre: "Signaler une erreur",
       paragraphes: [
-        `Une information périmée, un lieu fermé, une photo mal créditée : ${A_COMPLETER}.`,
+        `Une information périmée, un lieu fermé, une photo mal créditée : écrivez à riviera-secrete@gmail.com.`,
       ],
     },
   ],
@@ -69,14 +69,14 @@ const MENTIONS_FR: Contenu = {
 const MENTIONS_EN: Contenu = {
   intro:
     "Legal information about the Riviera Secrète website, as required by French law (LCEN). The French version is the authoritative one.",
-  maj: "Last updated: 14 September 2026.",
+  maj: "Last updated: 18 September 2026.",
   blocs: [
     {
       titre: "Publisher",
       paragraphes: [
         "Riviera Secrète is an independent editorial project with no operating company and no commercial activity: the site sells nothing, shows no advertising and earns no affiliate commission on the booking links it lists.",
-        `Publisher and editorial director: ${A_COMPLETER}.`,
-        `Contact: ${A_COMPLETER}.`,
+        `Publisher and editorial director: MJ. The site is published on a non-professional basis; under article 6-III-1 of the French LCEN law, the publisher's full identity has been provided to the hosting provider and remains available upon judicial request.`,
+        `Contact: riviera-secrete@gmail.com.`,
       ],
     },
     {
@@ -103,7 +103,7 @@ const MENTIONS_EN: Contenu = {
     {
       titre: "Report an error",
       paragraphes: [
-        `Outdated information, a closed venue, a miscredited photo: ${A_COMPLETER}.`,
+        `Outdated information, a closed venue, a miscredited photo: email riviera-secrete@gmail.com.`,
       ],
     },
   ],
@@ -112,11 +112,11 @@ const MENTIONS_EN: Contenu = {
 const CONFIDENTIALITE_FR: Contenu = {
   intro:
     "Cette page explique quelles données Riviera Secrète collecte, pourquoi, et ce que vous pouvez exiger à leur sujet. Le site fonctionne entièrement sans compte : la création d'un compte ne sert qu'à retrouver vos favoris et vos itinéraires d'un appareil à l'autre.",
-  maj: "Dernière mise à jour : 14 septembre 2026.",
+  maj: "Dernière mise à jour : 18 septembre 2026.",
   blocs: [
     {
       titre: "Responsable du traitement",
-      paragraphes: [`${A_COMPLETER}. Pour toute demande relative à vos données : ${A_COMPLETER}.`],
+      paragraphes: [`MJ, éditeur du site à titre non professionnel. Pour toute demande relative à vos données : riviera-secrete@gmail.com.`],
     },
     {
       titre: "Données collectées et pourquoi",
@@ -180,7 +180,7 @@ const CONFIDENTIALITE_FR: Contenu = {
       titre: "Vos droits",
       paragraphes: [
         "Vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité, de limitation et d'opposition sur vos données. La suppression de votre compte entraîne celle de vos favoris et de vos itinéraires.",
-        `Pour exercer ces droits : ${A_COMPLETER}. Si la réponse ne vous satisfait pas, vous pouvez saisir la CNIL (cnil.fr), 3 place de Fontenoy, 75007 Paris.`,
+        `Pour exercer ces droits : riviera-secrete@gmail.com. Si la réponse ne vous satisfait pas, vous pouvez saisir la CNIL (cnil.fr), 3 place de Fontenoy, 75007 Paris.`,
       ],
     },
   ],
@@ -189,11 +189,11 @@ const CONFIDENTIALITE_FR: Contenu = {
 const CONFIDENTIALITE_EN: Contenu = {
   intro:
     "This page explains what data Riviera Secrète collects, why, and what you can require about it. The site works entirely without an account: creating one only lets you find your favourites and itineraries again from another device. The French version is the authoritative one.",
-  maj: "Last updated: 14 September 2026.",
+  maj: "Last updated: 18 September 2026.",
   blocs: [
     {
       titre: "Data controller",
-      paragraphes: [`${A_COMPLETER}. For any request about your data: ${A_COMPLETER}.`],
+      paragraphes: [`MJ, site publisher on a non-professional basis. For any request about your data: riviera-secrete@gmail.com.`],
     },
     {
       titre: "What is collected and why",
@@ -257,7 +257,7 @@ const CONFIDENTIALITE_EN: Contenu = {
       titre: "Your rights",
       paragraphes: [
         "You have the right to access, rectify, erase, port, restrict and object to the processing of your data. Deleting your account also deletes your favourites and itineraries.",
-        `To exercise these rights: ${A_COMPLETER}. If the answer does not satisfy you, you may lodge a complaint with the CNIL (cnil.fr), 3 place de Fontenoy, 75007 Paris, France.`,
+        `To exercise these rights: riviera-secrete@gmail.com. If the answer does not satisfy you, you may lodge a complaint with the CNIL (cnil.fr), 3 place de Fontenoy, 75007 Paris, France.`,
       ],
     },
   ],
