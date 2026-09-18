@@ -272,8 +272,24 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 - [ ] Alerte déjeuner tardif + « Optimiser l'ordre » dans `itineraire-logic.ts`.
 - [ ] **M6 · Mode « Sur place »** — thème clair fort contraste, étape courante développée, corps 18 px.
 - [ ] Export agenda `.ics` (le moteur calcule déjà des horaires).
-- [ ] Filtres itinéraires prêts (durée, zone, voiture/train).
-- [ ] Menu compte (Carnet, Mes itinéraires, Se déconnecter) + confirmation suppression.
+- [x] **Filtres itinéraires prêts** (zone, durée — fait le 2026-09-18) — nouveau
+      `ItinerairesShell.tsx` sur `/itineraires` : chips de zone (déduites des lieux de chaque
+      étape, un itinéraire n'a pas de région propre) et de durée (réutilise
+      `dureeKeyDepuisBadge`, déjà écrite pour « Partir de cet itinéraire »), générées
+      dynamiquement (seules les valeurs présentes dans les 6 itinéraires s'affichent). Le
+      filtre « voiture/train » du correctif n'est pas fait : `metaPills` ne porte qu'un texte
+      libre de transport, pas un mode fermé, et les 6 itinéraires actuels sont tous en
+      voiture — un vrai filtre demanderait un champ structuré (JSON + entité + migration EF),
+      pas fait dans cette passe. Vérifié au navigateur avec de vraies données (page server
+      component, pas de souci CORS) : filtre + « Tout effacer » fonctionnels, desktop et
+      mobile.
+- [x] **Menu compte** (fait le 2026-09-18) — `AuthButton` (`NavHeader.tsx`) devient un vrai
+      menu déroulant (« Prénom ▾ »), fermé au clic extérieur et à Échap, avec « Le carnet »
+      et « Se déconnecter » comme deux items explicites — plus jamais une déconnexion
+      déclenchée par un simple clic sur son propre nom. « Mes itinéraires » est déjà un
+      onglet de `/carnet` (fusion Lot 5), pas une entrée de menu séparée à ajouter ; la
+      confirmation avant suppression est déjà faite depuis EC-05 (modale `<dialog>` sur
+      `/carnet`). Vérifié au navigateur (session simulée), desktop et mobile (burger).
 
 ### Reliquat des audits UX/UI du 2026-09-14, non couvert par la refonte ci-dessus
 
