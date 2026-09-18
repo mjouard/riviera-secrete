@@ -268,7 +268,16 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 
 #### Trimestre — différencier (maquettes M2, M6)
 
-- [ ] **M2 · Résultat desktop** — timeline + carte collante côte à côte, sauvegarde « Enregistré ✓ ».
+- [x] **M2 · Résultat desktop** (fait le 2026-09-18) — carte + programme détaillé de
+      `ResultsView.tsx` (`/composer`, `/creer-itineraire`) passent en grille 2 colonnes
+      desktop (carte collante à gauche 1fr, programme à droite 596px fixe), même agencement
+      que `ItineraireComposeView.tsx` (`/i/[id]`, déjà fait au Lot 4d) plutôt qu'un troisième
+      agencement différent pour une page très proche ; duplicata `print-only` du programme
+      pour ne pas le laisser contraint à sa colonne 1fr à l'impression. La sauvegarde
+      « Enregistré ✓ » était déjà faite (bandeau `savedBanner` + lien carnet, trouvés déjà en
+      place). Vérifié par `tsc`/build propres et identité de structure avec le code déjà en
+      production sur `/i/[id]` ; rendu réel non vérifié à l'écran (CORS bloque l'API prod
+      depuis localhost pour `/composer`/`/creer-itineraire`).
 - [x] **Alerte déjeuner tardif + « Optimiser l'ordre »** (fait le 2026-09-18) —
       `construirePlanning` expose désormais `heureDejeunerMinutes`/`dejeunerTardif` (≥14h00,
       nouveau `SEUIL_DEJEUNER_TARDIF_MINUTES`) par journée. Nouvelle
