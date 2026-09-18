@@ -269,7 +269,20 @@ Note globale : 5,4/10. Maquettes M1–M6 dans `docs/audit-riviera-secrete.html` 
 #### Trimestre — différencier (maquettes M2, M6)
 
 - [ ] **M2 · Résultat desktop** — timeline + carte collante côte à côte, sauvegarde « Enregistré ✓ ».
-- [ ] Alerte déjeuner tardif + « Optimiser l'ordre » dans `itineraire-logic.ts`.
+- [x] **Alerte déjeuner tardif + « Optimiser l'ordre »** (fait le 2026-09-18) —
+      `construirePlanning` expose désormais `heureDejeunerMinutes`/`dejeunerTardif` (≥14h00,
+      nouveau `SEUIL_DEJEUNER_TARDIF_MINUTES`) par journée. Nouvelle
+      `suggestionEchangeDejeuner()` : recherche locale bornée (échanges adjacents, n-1 essais)
+      de la permutation qui avance le plus le déjeuner — pas un nouvel algorithme de
+      génération. `ResultsView.tsx` affiche un bandeau (même style que l'alerte « journée
+      dense » déjà existante) avec un lien « Inverser X et Y ? » qui réutilise `onMoveStop`
+      (déjà câblé) quand une amélioration existe, rien sinon. Non porté sur
+      `ItineraireComposeView.tsx` (`/i/[id]`) : l'alerte « journée dense » dont celle-ci
+      s'inspire n'y existe pas non plus. Algorithme vérifié isolément au navigateur avec
+      l'exemple exact de l'audit (Èze + Cap Ferrat → 14h55, la bonne permutation trouvée
+      ramène à 13h25) et le cas sans solution (retombe correctement sur « aucune
+      suggestion ») ; le wiring React non vérifié à l'écran réel (CORS) — `tsc`/build
+      propres.
 - [ ] **M6 · Mode « Sur place »** — thème clair fort contraste, étape courante développée, corps 18 px.
 - [x] **Export agenda `.ics`** (fait le 2026-09-18) — `lib/ics.ts` réutilise directement
       `construirePlanning` (mêmes horaires que la timeline, jamais en contradiction), export
