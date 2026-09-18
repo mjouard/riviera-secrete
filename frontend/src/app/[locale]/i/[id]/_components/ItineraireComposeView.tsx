@@ -9,6 +9,7 @@ import { loc, redirectToConnexion } from "@/lib/utils";
 import { api } from "@/lib/api";
 import { oublierEditToken, useEditToken } from "@/lib/itineraire-compose-tokens";
 import { formatDuree, parseVisitMinutes, encodeJours, type DureeKey } from "@/lib/itineraire-logic";
+import { genererIcs, telechargerIcs } from "@/lib/ics";
 import { BADGE_ICONS } from "@/lib/home-data";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
@@ -181,6 +182,17 @@ export default function ItineraireComposeView({
     }
   }
 
+  function exporterIcs() {
+    const contenu = genererIcs({
+      titre: nom,
+      days: workingDays,
+      dureeKey,
+      dateDepart: new Date(),
+      locale,
+    });
+    telechargerIcs(`${nom.replace(/[^\p{L}\p{N}]+/gu, "-").toLowerCase()}.ics`, contenu);
+  }
+
   /**
    * "Garder" = copier cet itinéraire dans le carnet du compte connecté (POST
    * /api/my-itineraires, déjà protégé par JWT) — pas un PATCH sur l'itinéraire composé
@@ -266,6 +278,9 @@ export default function ItineraireComposeView({
               )}
               <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
                 {t("exporterPdf")}
+              </button>
+              <button onClick={exporterIcs} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5 cursor-pointer" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
+                {t("exporterIcs")}
               </button>
               <button
                 onClick={partager}

@@ -6,6 +6,7 @@ import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
 import { api } from "@/lib/api";
 import { construirePlanning, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
+import { genererIcs, telechargerIcs } from "@/lib/ics";
 import { ecrireEditToken } from "@/lib/itineraire-compose-tokens";
 import { BADGE_ICONS } from "@/lib/home-data";
 import ProgrammeSection from "./ProgrammeSection";
@@ -130,6 +131,20 @@ export default function ResultsView({
       setPartageEnCours(false);
     }
   }
+  function exporterIcs() {
+    const contenu = genererIcs({
+      titre,
+      days: currentDays,
+      dureeKey,
+      dateDepart: date ?? new Date(),
+      mode,
+      depart,
+      heureDebutMinutes,
+      locale,
+    });
+    telechargerIcs(`${titre.replace(/[^\p{L}\p{N}]+/gu, "-").toLowerCase()}.ics`, contenu);
+  }
+
   const meta = `${currentDays.length} ${currentDays.length > 1 ? t("jours") : t("jour")} · ${nbLieux} ${nbLieux > 1 ? t("lieuxSuffix") : t("lieu")}`;
 
   return (
@@ -164,6 +179,9 @@ export default function ResultsView({
           </button>
           <button onClick={() => window.print()} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
             {t("exporterPdf")}
+          </button>
+          <button onClick={exporterIcs} className="text-sm px-3 py-2 rounded-lg border transition-colors hover:bg-white/5" style={{ borderColor: "var(--line)", color: "var(--text-muted)" }}>
+            {t("exporterIcs")}
           </button>
           <button
             onClick={() => void partager()}

@@ -165,6 +165,7 @@
     "lieuxSuffix": "places",
     "choisirAutresLieux": "← Choose other places",
     "exporterPdf": "🖨 Export as PDF",
+    "exporterIcs": "📅 Add to calendar",
     "sauvegarder": "Save",
     "modifier": "✏️ Edit",
     "itineraireSauvegarde": "✓ Itinerary saved.",
