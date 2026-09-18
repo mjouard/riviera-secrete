@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import type { Lieu } from "@/lib/types";
 import { loc } from "@/lib/utils";
 import { api } from "@/lib/api";
-import { construirePlanning, formatDuree, formatTime, parseVisitMinutes, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
+import { construirePlanning, formatDuree, formatTime, parseVisitMinutes, suggestionEchangeDejeuner, type DureeKey, type TransportMode } from "@/lib/itineraire-logic";
 import { genererIcs, telechargerIcs } from "@/lib/ics";
 import { ecrireEditToken } from "@/lib/itineraire-compose-tokens";
 import { BADGE_ICONS } from "@/lib/home-data";
@@ -75,6 +75,30 @@ export default function ResultsView({
   const journeesDenses = construirePlanning(currentDays, dureeKey, { mode, depart, heureDebutMinutes }).journees
     .map((j, i) => ({ ...j, numero: i + 1 }))
     .filter((j) => j.finTardive);
+
+  // Déjeuner tardif (→ audit UX 17/09, 2.3) : quand le premier arrêt atteint après 12h30 est
+  // lui-même en retard, la pause se retrouve après 14h sans que rien ne le signale. Le lien
+  // "Inverser X et Y ?" réutilise `onMoveStop`, déjà câblé pour le réordonnancement manuel —
+  // une recherche locale (échanges adjacents), pas un nouvel algorithme de génération.
+  const journeesDejeunerTardif = currentDays
+    .map((jour, dayIndex) => {
+      // Un seul jour tiré du tableau démarre toujours à l'index 0 pour construirePlanning —
+      // reproduire à la main la règle "seul le jour 0 hérite de l'heure de départ choisie,
+      // les suivants repartent à 9h" que la boucle multi-jours applique normalement.
+      const optionsJour = dayIndex === 0 ? { mode, depart, heureDebutMinutes } : { mode };
+      const planning = construirePlanning([jour], dureeKey, optionsJour).journees[0];
+      if (!planning.dejeunerTardif || planning.heureDejeunerMinutes === null) return null;
+      const echangeIndex = suggestionEchangeDejeuner(jour, dureeKey, optionsJour);
+      return {
+        dayIndex,
+        numero: dayIndex + 1,
+        heure: formatTime(planning.heureDejeunerMinutes),
+        echange: echangeIndex !== null
+          ? { stopIndex: echangeIndex, nomA: jour[echangeIndex], nomB: jour[echangeIndex + 1] }
+          : null,
+      };
+    })
+    .filter((j): j is NonNullable<typeof j> => j !== null);
 
   /**
    * Crée (ou met à jour, si déjà fait pendant cette visite) un vrai `/i/[id]` — jusqu'ici,
@@ -228,6 +252,32 @@ export default function ResultsView({
                 ? t("journeeDenseJour", { n: j.numero, fin: formatTime(j.finMinutes) })
                 : t("journeeDense", { fin: formatTime(j.finMinutes) })}
             </p>
+          ))}
+        </div>
+      )}
+
+      {journeesDejeunerTardif.length > 0 && (
+        <div className="no-print mb-6 rounded-xl p-4 text-sm flex flex-col gap-1" style={{ background: "rgba(232,163,61,0.1)", color: "var(--terracotta)" }}>
+          {journeesDejeunerTardif.map((j) => (
+            <div key={j.numero} className="flex flex-wrap items-center gap-x-2">
+              <span>
+                {currentDays.length > 1
+                  ? t("dejeunerTardifJour", { n: j.numero, heure: j.heure })
+                  : t("dejeunerTardif", { heure: j.heure })}
+              </span>
+              {j.echange && (
+                <button
+                  type="button"
+                  onClick={() => onMoveStop(j.dayIndex, j.echange!.stopIndex + 1, -1)}
+                  className="underline font-semibold cursor-pointer"
+                >
+                  {t("optimiserOrdre", {
+                    nomA: loc(locale, j.echange.nomA.nomEn, j.echange.nomA.nom),
+                    nomB: loc(locale, j.echange.nomB.nomEn, j.echange.nomB.nom),
+                  })}
+                </button>
+              )}
+            </div>
           ))}
         </div>
       )}

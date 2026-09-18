@@ -163,6 +163,13 @@ export const DEBUT_JOURNEE_MINUTES = 9 * 60;
 /** Le déjeuner s'insère au premier arrêt atteint après 12h30. */
 export const SEUIL_DEJEUNER_MINUTES = 12 * 60 + 30;
 /**
+ * Au-delà de cette heure, un déjeuner inséré après le premier arrêt qui la dépasse est
+ * considéré "tardif" (→ audit UX 17/09, 2.3 : fenêtre de déjeuner 12h-14h, alerte visible si
+ * la journée déborde de cette fenêtre plutôt que de laisser le moteur insérer la pause sans
+ * le signaler).
+ */
+export const SEUIL_DEJEUNER_TARDIF_MINUTES = 14 * 60;
+/**
  * Au-delà de cette heure, on prévient que la journée est dense.
  * Seuil à l'horloge, pas en dépassement du budget interne.
  */
@@ -179,8 +186,15 @@ export type ElementPlanning =
 export type Planning = {
   /** Le programme à plat, transits et pauses interposés, prêt à rendre. */
   elements: ElementPlanning[];
-  /** Par jour : heure de fin réelle, et si elle déborde sur la soirée. */
-  journees: Array<{ finMinutes: number; finTardive: boolean }>;
+  /** Par jour : heure de fin réelle, si elle déborde sur la soirée, et l'heure à laquelle le
+   * déjeuner a été inséré (`null` si la journée n'a pas de pause déjeuner — demi-journée, ou
+   * dernier arrêt atteint avant même le seuil de midi). */
+  journees: Array<{
+    finMinutes: number;
+    finTardive: boolean;
+    heureDejeunerMinutes: number | null;
+    dejeunerTardif: boolean;
+  }>;
 };
 
 /**
@@ -206,6 +220,7 @@ export function construirePlanning(
 
   days.forEach((day, dayIndex) => {
     let lunchInserted = !meta.lunchBreak;
+    let heureDejeunerMinutes: number | null = null;
     day.forEach((lieu, stopIndex) => {
       if (prevLieu) {
         const transit = travelMinutes(prevLieu, lieu, mode);
@@ -217,6 +232,7 @@ export function construirePlanning(
         timeMinutes += transit;
       }
       if (!lunchInserted && timeMinutes >= SEUIL_DEJEUNER_MINUTES) {
+        heureDejeunerMinutes = timeMinutes;
         elements.push({ type: "lunch" });
         timeMinutes += LUNCH_BREAK_MINUTES;
         lunchInserted = true;
@@ -229,6 +245,8 @@ export function construirePlanning(
     journees.push({
       finMinutes: timeMinutes,
       finTardive: timeMinutes > FIN_JOURNEE_RAISONNABLE_MINUTES,
+      heureDejeunerMinutes,
+      dejeunerTardif: heureDejeunerMinutes !== null && heureDejeunerMinutes >= SEUIL_DEJEUNER_TARDIF_MINUTES,
     });
 
     if (dayIndex < days.length - 1) {
@@ -239,6 +257,37 @@ export function construirePlanning(
   });
 
   return { elements, journees };
+}
+
+/**
+ * « Optimiser l'ordre » (→ audit UX 17/09, 2.3) — cherche, parmi les échanges de deux arrêts
+ * adjacents d'une seule journée, celui qui avance le plus l'heure du déjeuner. Recherche
+ * locale bornée (n-1 essais pour n arrêts), pas un réordonnancement global : le but est de
+ * proposer une correction ciblée et compréhensible (« Inverser Cap Ferrat et Èze ? »), pas de
+ * relancer tout l'algorithme de génération. Retourne l'index du premier des deux arrêts à
+ * échanger (à passer à `onMoveStop(dayIndex, index + 1, -1)`, qui fait déjà l'échange), ou
+ * `null` si aucun échange n'avance le déjeuner ou si la journée n'a pas de déjeuner tardif.
+ */
+export function suggestionEchangeDejeuner(
+  day: Lieu[],
+  dureeKey: DureeKey,
+  options: { mode?: TransportMode; heureDebutMinutes?: number; depart?: { lat: number; lng: number } | null } = {}
+): number | null {
+  const original = construirePlanning([day], dureeKey, options).journees[0];
+  if (!original.dejeunerTardif || original.heureDejeunerMinutes === null) return null;
+
+  let meilleur: { index: number; heureDejeunerMinutes: number } | null = null;
+  for (let i = 0; i < day.length - 1; i++) {
+    const candidat = [...day];
+    [candidat[i], candidat[i + 1]] = [candidat[i + 1], candidat[i]];
+    const heureDejeunerMinutes = construirePlanning([candidat], dureeKey, options).journees[0].heureDejeunerMinutes;
+    if (heureDejeunerMinutes === null) continue;
+    if (!meilleur || heureDejeunerMinutes < meilleur.heureDejeunerMinutes) {
+      meilleur = { index: i, heureDejeunerMinutes };
+    }
+  }
+  if (meilleur && meilleur.heureDejeunerMinutes < original.heureDejeunerMinutes) return meilleur.index;
+  return null;
 }
 
 /**

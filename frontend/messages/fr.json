@@ -205,6 +205,9 @@
     "baseSurAide": "toutes les étapes de l'itinéraire sont conservées, à toi de les réarranger.",
     "journeeDense": "Journée dense : fin estimée vers {fin}.",
     "journeeDenseJour": "Jour {n} — journée dense : fin estimée vers {fin}.",
+    "dejeunerTardif": "Déjeuner tardif (vers {heure}).",
+    "dejeunerTardifJour": "Jour {n} — déjeuner tardif (vers {heure}).",
+    "optimiserOrdre": "Inverser {nomA} et {nomB} ?",
     "partageEnCours": "Partage…"
   },
   "composer": {

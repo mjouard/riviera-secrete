@@ -205,6 +205,9 @@
     "baseSurAide": "every stop from the itinerary is kept — rearrange them as you like.",
     "journeeDense": "Packed day: estimated finish around {fin}.",
     "journeeDenseJour": "Day {n} — packed day: estimated finish around {fin}.",
+    "dejeunerTardif": "Late lunch (around {heure}).",
+    "dejeunerTardifJour": "Day {n} — late lunch (around {heure}).",
+    "optimiserOrdre": "Swap {nomA} and {nomB}?",
     "partageEnCours": "Sharing…"
   },
   "composer": {
