@@ -33,8 +33,9 @@ Fixes appliqués le 2026-09-17 (commits `3f250c7`, `6c21499`).
 - [x] **S2 — `EditToken` comparé par `==`** → `CryptographicOperations.FixedTimeEquals`.
 - [x] **S3 — Headers de sécurité HTTP** — `X-Content-Type-Options`, `X-Frame-Options`,
       `Referrer-Policy` ajoutés via middleware.
-- [ ] **S4 — Confirmer `ASPNETCORE_ENVIRONMENT=Production` sur Railway** — sinon `/api/seed`
-      est accessible en prod.
+- [x] **S4 — Confirmer `ASPNETCORE_ENVIRONMENT=Production` sur Railway** — vérifié 2026-09-19 :
+      variable bien réglée sur le service `api`, et `POST /api/seed` renvoie `404` sur la prod
+      réelle (`https://api-production-19623.up.railway.app`).
 - [x] **S5 — CORS `AllowAnyMethod()`** → `WithMethods("GET","POST","PUT","PATCH","DELETE","OPTIONS")`.
 - [x] **P1 — `AsNoTracking()`** ajouté sur les 6 endpoints de lecture publique.
 - [ ] **P2 — Aucun cache côté API** — `OutputCache` 60 s sur les endpoints publics. Différé :
