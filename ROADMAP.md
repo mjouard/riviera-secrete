@@ -390,9 +390,9 @@ tous faits. Détail dans l'historique git si besoin.
       directeur de publication, adresse de contact. Seul l'éditeur peut les renseigner ;
       l'adresse dépend aussi du domaine.
 - [ ] **Réinitialisation de mot de passe non vérifiée de bout en bout** — le code est en place
-      (`AddPasswordReset`, migration appliquée en prod) mais jamais testé avec un vrai envoi
-      (Resend est en sandbox). Le domaine est maintenant branché — reste à vérifier si Resend a
-      été validé dessus.
+      (`AddPasswordReset`, migration appliquée en prod). Resend est sorti du sandbox
+      (`Resend__FromEmail=no-reply@rivierasecrete.fr`, confirmé 2026-09-19) mais le flow n'a
+      toujours pas été testé avec un vrai envoi de bout en bout.
 - [ ] **Préciser la promesse marketing** — « hors des sentiers battus »/« lieux secrets » est
       contredit par Èze, Monaco, Saint-Tropez, Pampelonne. Piste : « la Côte d'Azur au-delà des
       cartes postales ». Relevé indépendamment par deux audits différents.
@@ -405,19 +405,20 @@ tous faits. Détail dans l'historique git si besoin.
 Connexion Google + email/mot de passe, confirmation d'email, favoris et itinéraires en base
 (migration depuis localStorage) — tous faits.
 
-- [ ] **Confirmation d'email indisponible pour un vrai visiteur** — Resend est en sandbox
-      (`onboarding@resend.dev`), n'envoie qu'à l'adresse du compte Resend. Le domaine
-      (`rivierasecrete.fr`) est acheté (voir "Mise en production réelle") — reste à vérifier le
-      domaine côté Resend pour lever la limite sandbox.
+- [x] **Confirmation d'email indisponible pour un vrai visiteur** — résolu : domaine
+      `rivierasecrete.fr` vérifié sur Resend et sorti du sandbox (`Resend__FromEmail=
+      no-reply@rivierasecrete.fr` en prod, confirmé 2026-09-19). Un vrai visiteur peut
+      maintenant recevoir l'email de confirmation.
 
 ## Mise en production réelle
 
 - [x] Migration Netlify → Vercel, déploiement auto sur push `main`.
 - [x] **Acheter un nom de domaine** — `rivierasecrete.fr` acheté et pointé sur Vercel (constaté
       2026-09-19 : `NEXT_PUBLIC_SITE_URL`, sitemap, canonical/hreflang tournent déjà dessus en
-      prod). Débloque la vérification du domaine sur Resend et le formulaire de contact de
-      `/a-propos` (voir ci-dessous — statut de ces deux étapes non vérifié, à confirmer).
-- [ ] Soumettre `sitemap.xml` dans Google Search Console maintenant que le domaine est en place.
+      prod). A débloqué la vérification du domaine sur Resend (faite) et Search Console (fait) —
+      voir ci-dessous. Le formulaire de contact de `/a-propos` reste, lui, non fait.
+- [x] Soumettre `sitemap.xml` dans Google Search Console — fait (confirmé par l'utilisateur,
+      2026-09-19).
 - [ ] Ajouter le site dans Bing Webmaster Tools.
 - [ ] Minification CSS/JS au build (`esbuild`/`lightningcss`).
 - [ ] Uptime monitor (ex. UptimeRobot gratuit).
