@@ -132,6 +132,28 @@ export default async function RootLayout({
   const t = await getTranslations("footer");
   const tLegal = await getTranslations("legal");
 
+  // Sitelinks search box + knowledge panel — posés une fois ici (pas par page) puisqu'ils
+  // décrivent le site dans son ensemble, pas une page précise. `target` sans `{search_term_string}`
+  // codé côté /explorer serait ignoré par Google : c'est bien le paramètre `q` qu'ExplorerShell lit.
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Riviera Secrète",
+    url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/explorer?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Riviera Secrète",
+    url: SITE_URL,
+    logo: `${SITE_URL}/icons/icon-512.png`,
+  };
+
   return (
     <html
       lang={locale}
@@ -140,6 +162,14 @@ export default async function RootLayout({
       <head>
         <script async src={plausibleScript} />
         <script dangerouslySetInnerHTML={{ __html: plausibleInit }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider>

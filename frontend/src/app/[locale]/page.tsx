@@ -42,7 +42,12 @@ export default async function HomePage({
     getTranslations("home"),
   ]);
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
+  const localePrefix = locale === "en" ? "/en" : "";
 
+  // Pointe direct sur l'URL canonique (commune si ≥2 lieux, sinon le lieu lui-même — même
+  // logique que la redirection /villes/[slug] de next.config.ts) plutôt que sur l'ancienne
+  // URL /villes/[slug], qui existe encore mais ne fait plus que rediriger (308) : éviter aux
+  // moteurs un saut de redirection inutile pour chaque entrée de la liste.
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -50,7 +55,9 @@ export default async function HomePage({
     itemListElement: villes.map((v, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: `${SITE_URL}/villes/${v.slug}`,
+      url: `${SITE_URL}${localePrefix}${
+        v.lieux.length >= 2 ? `/communes/${v.slug}` : `/lieux/${v.lieux[0]?.slug}`
+      }`,
       name: loc(locale, v.nomEn, v.nom),
     })),
   };

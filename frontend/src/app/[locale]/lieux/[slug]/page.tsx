@@ -163,11 +163,29 @@ export default async function LieuPage({
     url: `${SITE_URL}${locale === "en" ? "/en" : ""}/lieux/${lieu.slug}`,
   };
 
+  // Mirroir du fil d'Ariane canonique (celui du fallback Suspense ci-dessous, pas la variante
+  // ?itin= côté client) — la structured data doit correspondre à l'URL canonique, pas à un état
+  // transitoire de navigation.
+  const localePrefix = locale === "en" ? "/en" : "";
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: tCommon("accueil"), item: `${SITE_URL}${localePrefix}/` },
+      { "@type": "ListItem", position: 2, name: villeParentCrumb.label, item: `${SITE_URL}${localePrefix}${villeParentCrumb.href}` },
+      { "@type": "ListItem", position: 3, name: nomVille },
+    ],
+  };
+
   return (
     <article className="max-w-6xl mx-auto px-6 pt-12 pb-28 lg:pb-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(attractionJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Breadcrumb — LieuBreadcrumb lit ?itin= côté client (useSearchParams + Suspense)

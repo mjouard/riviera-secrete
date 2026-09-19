@@ -76,6 +76,7 @@ export default async function CommunePage({
   );
   const lieuBySlug = new Map(lieux.map((l) => [l.slug, l]));
 
+  const localePrefix = locale === "en" ? "/en" : "";
   const heroImage = ville.lieux[0]?.heroImage ?? ville.thumbImage;
   const touristDestinationJsonLd = {
     "@context": "https://schema.org",
@@ -88,7 +89,17 @@ export default async function CommunePage({
       latitude: ville.lat,
       longitude: ville.lng,
     },
-    url: `${SITE_URL}/communes/${ville.slug}`,
+    url: `${SITE_URL}${localePrefix}/communes/${ville.slug}`,
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: tCommon("accueil"), item: `${SITE_URL}${localePrefix}/` },
+      { "@type": "ListItem", position: 2, name: tCommon("lieux"), item: `${SITE_URL}${localePrefix}/explorer` },
+      { "@type": "ListItem", position: 3, name: nom },
+    ],
   };
 
   return (
@@ -96,6 +107,10 @@ export default async function CommunePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(touristDestinationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Breadcrumb — pas de page de liste des communes (supprimée avec /villes), le parent

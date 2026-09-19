@@ -95,8 +95,24 @@ export default async function ItinerairePage({
   const hero = itin.heroImgTag ? parseHeroImgTag(itin.heroImgTag) : null;
   const heroSlides = hero?.srcs.map((src) => ({ src: imgUrl(src), alt: hero.alt })) ?? [];
 
+  const localePrefix = locale === "en" ? "/en" : "";
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: tCommon("accueil"), item: `${SITE_URL}${localePrefix}/` },
+      { "@type": "ListItem", position: 2, name: tCommon("itineraires"), item: `${SITE_URL}${localePrefix}/itineraires` },
+      { "@type": "ListItem", position: 3, name: titre },
+    ],
+  };
+
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
       {/* Hero */}
       {heroSlides.length > 0 && (
         <div className="rounded-2xl overflow-hidden mb-8 aspect-[3/2]">
