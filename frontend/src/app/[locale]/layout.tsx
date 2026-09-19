@@ -113,8 +113,10 @@ export async function generateMetadata({
   };
 }
 
-// Plausible analytics — même domaine que le site statique
-const plausibleScript = "https://plausible.io/js/pa-R_6LcENgDIgoUpT8QUE4g.js";
+// Plausible analytics — site rivierasecrete.fr (2026-09-19). Remplace l'ID de l'ancien
+// site statique (pa-R_6LcENgDIgoUpT8QUE4g), qui traquait le domaine Netlify disparu.
+const plausibleScript = "https://plausible.io/js/pa-s_MeylEhhKEUssFhwqFe3.js";
+const plausibleInit = `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`;
 
 export default async function RootLayout({
   children,
@@ -137,6 +139,7 @@ export default async function RootLayout({
     >
       <head>
         <script async src={plausibleScript} />
+        <script dangerouslySetInnerHTML={{ __html: plausibleInit }} />
       </head>
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider>
