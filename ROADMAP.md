@@ -9,13 +9,11 @@ prérequis satisfaits ou de priorité proche. Détail historique complet dans `g
 
 ## 🔴 Bloquant — action utilisateur
 
-- [ ] **Rotation du mot de passe PostgreSQL de prod.** Il est dans l'historique d'un dépôt
-      **public** (commit `7f25aea`) sur le proxy public Railway : accès `postgres` complet à
-      quiconque lit le dépôt — comptes, hashs, tokens de confirmation en clair. Le retirer du
-      fichier (fait, `7f57c21`) ne suffit pas. Rotation via Railway, puis mise à jour de
-      `ConnectionStrings__DefaultConnection` sur le service `api` et de
-      l'`appsettings.Development.json` local. Inspecter les lignes de `Users` non reconnues.
-      `scripts/sync-coordonnees.sh` relit la chaîne à chaque exécution, restera valable après.
+- [x] **Rotation du mot de passe PostgreSQL de prod** (faite par l'utilisateur, 2026-09-19) —
+      mot de passe tourné via Railway, `ConnectionStrings__DefaultConnection` mis à jour sur
+      le service `api` et redéployé, `appsettings.Development.json` local également mis à
+      jour. L'ancien mot de passe reste dans l'historique git public (commit `7f25aea`) mais
+      n'est plus valide.
 
 ## Backend — dette technique (audit 2026-09-17)
 
